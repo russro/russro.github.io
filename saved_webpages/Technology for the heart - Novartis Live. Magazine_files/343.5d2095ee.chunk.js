@@ -1,0 +1,1 @@
+(this.webpackJsonpescher=this.webpackJsonpescher||[]).push([[343],{1407:function(s,t,e){"use strict";e.r(t),t.default=e.p+"static/media/icon-twitter.a79b555c.svg"}}]);

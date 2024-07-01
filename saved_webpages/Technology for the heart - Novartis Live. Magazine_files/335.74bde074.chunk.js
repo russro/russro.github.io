@@ -1,0 +1,1 @@
+(this.webpackJsonpescher=this.webpackJsonpescher||[]).push([[335],{1402:function(s,e,t){"use strict";t.r(e),e.default=t.p+"static/media/icon-instagram.ee9f000b.svg"}}]);
