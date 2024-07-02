@@ -22,7 +22,7 @@ I like designing and building **end-to-end systems** for <span class="highlight"
 I am currently pursuing a PhD at the University of California, Berkeley within the [Department of Bioengineering](https://bioegrad.berkeley.edu/) advised by [Dr. Reza Abbasi-Asl](https://abbasilab.org/).
 
 In the past, I have...
-* Designed a [high-throughput drug phenotyping system](/portfolio/2022-07_novartis_hts_system/) @ [Novartis](https://www.novartis.com/research-and-development), enhancing their computer vision-based drug screening platform ([article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/technology-for-the-heart)),
+* Designed a [high-throughput screening (HTS) system for phenotyping cardiovascular drugs](/portfolio/2022-07_novartis_hts_system/) @ [Novartis](https://www.novartis.com/research-and-development), enhancing their computer vision-based drug discovery platform ([article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/technology-for-the-heart)),
 * 
 * C
 * [and more...](/portfolio/)
