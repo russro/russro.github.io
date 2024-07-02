@@ -1,6 +1,6 @@
 ---
-title: "Novartis High-Throughput Cardiovascular Phenotyping System"
-excerpt: "I designed and built a solution to scale up automated drug screening experimentation.<br><img src='https://images.prismic.io/novartis-scrollstory/ZlhcoqWtHYXtT7dG_mini-hearts-lab072.jpg?auto=format%2Ccompress&rect=0%2C177%2C3000%2C1688&w=600'>"
+title: "High-Throughput Cardiovascular Phenotyping System @ Novartis"
+excerpt: "I designed and built a solution to scale up automated drug screening experimentation.<br><br><img src='https://images.prismic.io/novartis-scrollstory/ZlhcoqWtHYXtT7dG_mini-hearts-lab072.jpg?auto=format%2Ccompress&rect=0%2C177%2C3000%2C1688&w=600'>"
 collection: portfolio
 ---
 
