@@ -1,6 +1,6 @@
 ---
-title: "High-Throughput Cardiovascular Drug Phenotyping System @ Novartis"
-excerpt: "**Oct 2020 - Jul 2022**<br>I designed and built a system to scale up automated drug screening.<br><img src='https://images.prismic.io/novartis-scrollstory/ZlhcoqWtHYXtT7dG_mini-hearts-lab072.jpg?auto=format%2Ccompress&rect=0%2C177%2C3000%2C1688&w=600'>"
+title: "High-Throughput Screening (HTS) System for Phenotyping Cardiovascular Drugs @ Novartis"
+excerpt: "**Oct 2020 - Jul 2022**<br>I designed, built, and integrated a system to scale up automated cardiovascular drug phenotyping and screening.<br><img src='https://images.prismic.io/novartis-scrollstory/ZlhcoqWtHYXtT7dG_mini-hearts-lab072.jpg?auto=format%2Ccompress&rect=0%2C177%2C3000%2C1688&w=600'>"
 collection: portfolio
 ---
 
