@@ -7,9 +7,15 @@ author_profile: true
 
 {% include base_path %}
 
-
 {% for post in site.portfolio reversed %}
-  <hr>
-  {% include archive-single.html %}
+  <hr style="margin-top: 0px; margin-bottom: 0px;">
+  <div class="portfolio-item">
+    <div class="portfolio-text">
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt }}</p>
+    </div>
+    {% if post.image %}
+      <img src="{{ post.image }}" alt="{{ post.title }}" class="portfolio-image">
+    {% endif %}
+  </div>
 {% endfor %}
-
