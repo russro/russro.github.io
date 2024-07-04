@@ -11,7 +11,7 @@ image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
 
 **Skills Used**: Creo Parametric (3D CAD), Altium Designer (PCB Design CAD), Analog and Digital Circuit Design, Oscilloscope, Arduino, LabVIEW, National Instruments DAQ, Cleanroom Sputter Deposition, Fluorescence Microscopy (Calcium Imaging)
 
-[**Link to article**](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/intro) (*Images and quotes sourced from linked article.*)
+[**Link to article**](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/intro) (*Images and quotes sourced from linked article unless otherwise specified.*)
 
 ## Context:
 ![image of cardiomyocytes on posts]({{ site.baseurl }}/images/portfolio/2022-07_novartis_hts_system/posts.jpg)
