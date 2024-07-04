@@ -23,4 +23,4 @@ The cardiovascular research group at Novartis opted to use 3D organoids (human s
 
 ## Problem:
 
-When I joined the project, scientists were conducting these experiments on 96-well plates (shape: 8 rows by 12 columns), but they were only utilizing 8 of the wells (one column) per plate. This is because the electrical stimulation hardware's physical form factor did not allow for utilizing all the wells of the plate. In other words, their stimulation tool was too big and had too few electrodes.
+When I joined the project, scientists were conducting these experiments on 96-well plates (shape: 8 rows by 12 columns), but they were only utilizing 8 of the wells per plate. This is because the electrical stimulator's form factor did not allow for utilizing all the wells of the plate. In other words, the stimulation tool was too big and had too few electrodes.
