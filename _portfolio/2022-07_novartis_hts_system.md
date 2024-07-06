@@ -1,5 +1,6 @@
 ---
 title: "High-Throughput Screening (HTS) System for Phenotyping Cardiovascular Drugs @ Novartis"
+year: 2022
 excerpt: <b>Oct 2020 - Jul 2022</b><br>I designed, built, and integrated a system to scale up automated cardiovascular drug phenotyping and screening.
 collection: portfolio
 image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
@@ -12,6 +13,8 @@ image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
 **Skills Used**: Creo Parametric (3D CAD), Altium Designer (PCB Design CAD), Analog and Digital Circuit Design, Oscilloscope, Arduino (C++), LabVIEW, National Instruments DAQ, Cleanroom Sputter Deposition, Fluorescence Microscopy (Calcium Imaging)
 
 [**Link to article**](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/intro) (*Images and quotes sourced from linked article unless otherwise specified.*)
+
+**Mentors**: [Christopher Plunkett](https://www.linkedin.com/in/christopher-plunkett-85207664/), [Scott Hammack](https://www.linkedin.com/in/scott-hammack-b247b517/), [Pranjali Beri](https://www.linkedin.com/in/pranjali-beri-02584646/)
 
 ## Context:
 ![image of cardiomyocytes on posts]({{ site.baseurl }}/images/portfolio/2022-07_novartis_hts_system/posts.jpg)
