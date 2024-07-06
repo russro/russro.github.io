@@ -1,18 +1,31 @@
 .portfolio-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    // margin-bottom: 20px;
-  
-    .portfolio-text {
-      flex: 1;
-    }
-  
-    .portfolio-image {
-      width: 265px;
-      height: auto; /* Ensure height adjusts proportionally */
-      object-fit: cover; /* Ensures image covers the entire container */
-      margin-top: 30px;
-    }
+  display: flex;
+  flex-direction: row; /* Default: Side-by-side layout */
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.portfolio-text {
+  flex: 1;
+  text-align: left; /* Center text on smaller screens */
+  margin-bottom: 20px; /* Add some space between text and image */
+}
+
+.portfolio-image {
+  max-width: 265; /* Ensure image doesn't exceed its container width */
+  height: auto; /* Allow image to adjust proportionally */
+  object-fit: cover; /* Ensures image covers the entire container */
+  margin-top: 10px; /* Adjust margin for better spacing */
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+  .portfolio-item {
+    flex-direction: column; /* Stack items vertically on smaller screens */
   }
-   
+
+  .portfolio-text {
+    text-align: left; /* Align text to the left on smaller screens */
+  }
+}
