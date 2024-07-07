@@ -21,7 +21,7 @@ image: '../images/portfolio/2023-05_mitogan/mitogan_realorfake.png'
 
 ## Context:
 
-> "Mitochondria are not just bean-shaped!" 
+> "Mitochondria are not just beans!" 
 > 
 > — Gav Sturm
 
