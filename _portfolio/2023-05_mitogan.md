@@ -54,7 +54,9 @@ Secondly, we wanted to use a **generative model** in order to
 
 <br style="margin-top: -30px;">
 
-We opted to use **Generative Adversarial Networks (GANs)** since the **generator** model is capable of *learning a distribution* of the input features and can be used to *generate synthetic data*. Additionally, we can interpret the **discriminator** model to see what features it found most predictive for classifying between real and fake images. In other words, the <span class="highlight">GAN architecture offers the benefits of a generative model while also allowing for interpretation of geometrical features most important to mitochondria</span>.
+We opted to use **Generative Adversarial Networks (GANs)** since the **generator** model is capable of *learning a distribution* of the input features and can be used to *generate synthetic data*. Additionally, we can interpret the **discriminator** model to see what features it found most predictive for classifying between real and fake images. In other words, the <span class="highlight">GAN architecture offers the benefits of a generative model while also allowing for a degree interpretation of geometrical features most important to mitochondria</span>.
+
+Lastly, prior to training ...
 
 ## Results:
 
