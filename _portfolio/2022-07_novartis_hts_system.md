@@ -16,9 +16,12 @@ image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
 
 **Mentors**: [Christopher Plunkett](https://www.linkedin.com/in/christopher-plunkett-85207664/), [Scott Hammack](https://www.linkedin.com/in/scott-hammack-b247b517/), [Pranjali Beri](https://www.linkedin.com/in/pranjali-beri-02584646/)
 
-## Context:
+<hr>
+
 ![image of cardiomyocytes on posts]({{ site.baseurl }}/images/portfolio/2022-07_novartis_hts_system/posts.jpg)
 <div align="center"><em>Human cardiomyocytes cultured on flexible silicone posts.</em></div>
+
+## Context:
 
 > About a decade ago, the cardiovascular research group at Novartis began investigating a potential drug target for heart failure. But while none of the available methods yielded useful results, a new approach for studying miniature muscles turned out to be a perfect match for what the group needed. The resulting mini-heart platform has since developed into a powerful research tool.
 
