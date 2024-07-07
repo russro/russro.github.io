@@ -8,7 +8,7 @@ image: '../images/portfolio/2023-05_mitogan/mitogan_realorfake.png'
 
 <hr>
 
-**Project Timeline**: Jan 2023 - May 2023 (~5 months)
+**Project Timeline**: Feb 2023 - May 2023 (~4 months)
 
 **Skills Used**: PyTorch, OpenCV, Generative Adversarial Networks (GANs), Image Processing, Edge Detection (Laplace Filtering), Denoising (Non-local Means), Thresholding (Otsu's)
 
@@ -27,7 +27,7 @@ image: '../images/portfolio/2023-05_mitogan/mitogan_realorfake.png'
 
 Mitochondria are organelles with remarkably complex biophysical structures that have poorly understood mechanical behaviors. These subcellular structures have dynamic morphologies that adapt to the many intricate biological processes within the cell. They stretch, elongate, shrink, bend, and even "bead" almost as if they were cells themselves! I joined Gav Sturm for a rotation project in order to help better understand the remarkable dynamics of mitochondria.
 
-Gav ultimately wanted to capture a biophysical model of mitochondrial dynamics *in silico*. We approached the problem using a data-driven approach. In the early stages of the work, Gav researched, developed, and simulated physics-based parametrized models. I joined during the next stages of the work where Gav was considering methods for <span class="highlight">learning the distribution of features</span> most relevant for recapitulating dynamics. Exploring **generative machine learning** methods seemed the most applicable next steps for learning feature space distributions.
+Gav ultimately wanted to capture a biophysical model of mitochondrial dynamics *in silico*. We approached the problem using a data-driven approach. In the early stages of the work, Gav researched, developed, and simulated physics-based parametrized models. Naturally, the next step was to identify the latent parameters undderlying the dynamics of mitochondria. I joined during the next stages of the work. Gav and I brainstormed approaches for <span class="highlight">learning the distribution of features</span> most relevant for recapitulating dynamics, and we deduced that exploring **generative machine learning** methods seemed the most relevant for this application.
 
 ## Problem:
 
@@ -54,11 +54,21 @@ Secondly, we wanted to use a **generative model** in order to
 
 <br style="margin-top: -30px;">
 
-We opted to use **Generative Adversarial Networks (GANs)** since the **generator** model is capable of *learning a distribution* of the input features and can be used to *generate synthetic data*. Additionally, we can interpret the **discriminator** model to see what features it found most predictive for classifying between real and fake images. In other words, the <span class="highlight">GAN architecture offers the benefits of a generative model while also allowing for a degree interpretation of geometrical features most important to mitochondria</span>.
+We opted to use **Generative Adversarial Networks (GANs)** since the **generator** model is capable of *learning a distribution* of the input features and can be used to *generate synthetic data*. Additionally, we can interpret the **discriminator** model to see what features it found most predictive for classifying between real and fake images. In other words, <span class="highlight">the GAN architecture offers both the benefits of learning the features' distributions (*generative*) and interpreting which geometrical features are most important to classifying mitochondria (*discriminative*)</span>.
 
-Lastly, prior to training ...
+Lastly, prior to training, the samples needed to be standardized. I built an image processing pipeline to account for drift across samples and reduce the dimensionality of the input features (reduced dimensionality allows for more sample efficient training). The pipeline is summarized in the following figure:
+
+![image of preprocessing pipeline]({{ site.baseurl }}/images/portfolio/2023-05_mitogan/mitogan_preprocess.png)
+<div align="center"><em>Preprocessing pipeline.</em></div>
 
 ## Results:
+
+To resummarize the objectives, we used GANs in order to
+
+1. capture the distribution of input features within a model,
+2. generate synthetic data for training subsequent models, and
+3. interpret the most salient geometric features for identifying mitochondria.
+
 
 
 
