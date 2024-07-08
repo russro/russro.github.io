@@ -76,7 +76,7 @@ During the rotation, I was able to complete a first pass at 1 and 2 but not 3. I
 * Original dataset: ∼ 600 images; Generated: ∼ 30000; **50x generated**
 * Tested different preprocessing combinations and GAN architectures to identify stable models with lowest collective losses:
 
-![image of loss curves](loss_curves.png)
+![image of loss curves]({{ site.baseurl }}/images/portfolio/2023-05_mitogan/loss_curves.png)
 <div align="center"><em>Loss curves of different preprocessing and architecture combinations.</em></div>
 
 <br style="margin-top: -30px;">
@@ -88,8 +88,8 @@ Notably, GANs are quite unstable. Additionally, there is a chance they may not c
 There are a couple of further analyses that I did not have the chance to conduct:
 
 * The discriminator/classifier still needs to be analyzed for <span class="highlight">identifying salient geometric features</span>.
-* Though many images were generated, the effective number of unique images is likely lower since <span class="highlight">generated images collapsed into several modes</span>. This is likely due to low diversity of cells imaged in the videos. More training data is needed. (When is it not need? Lol.)
-* These days, there might be more powerful and interpretable approaches than using a GAN architecture, such as other **self-supervised learning** approaches.
+* Though many images were generated, the effective number of unique images is likely lower since <span class="highlight">generated images collapsed into several modes</span>. This is likely due to low diversity of cells imaged in the videos. More training data is needed. (When is it not needed? Lol.)
+* These days, there might be more powerful and interpretable methods than using a GAN architecture, such as other **self-supervised learning** approaches.
 
 ![image of revealed mitochondria image identities]({{ site.baseurl }}/images/portfolio/2023-05_mitogan/mitogan_realrevealed.png)
 <div align="center"><em>Did you guess correctly?</em></div>
