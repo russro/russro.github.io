@@ -38,26 +38,19 @@ When I joined the project, scientists were conducting these experiments on 96-we
 
 I proposed redesigning the system by allowing for electrical stimulation in all 96 wells. However, I encountered a few challenges:
 
-**[temporarily redacted]**
-
-<!---
 1. Worst case, the system would only be hooked up to one function generator/stimulator (i.e. <span class="highlight">single-threaded signal</span>).
 2. The previous design shared the signal from the stimulator across all 8 wells (i.e. the wells were stimulated in parallel). I wanted to allow for both voltage and current-clamping for each well, which necessitated that <span class="highlight">each well gets its own independent signal</span>.
 3. All the wells needed to have a **gap** to allow for concurrent imaging and stimulation.
 4. The electrodes needed to be **biocompatible**.
--->
+
 
 <br>
 I designed and built a system that addressed the above concerns by doing the following:
 
-**[temporarily redacted]**
-
-<!---
 1. I used **demultiplexing** (demux) and **solid-state switching** (specifically, triacs) in order to route the single signal from the function generator to each well. The selected circuits allowed for route *switching at fast time scales* (on the order of microseconds).
 2. As stated in 1, I use the demux-triac-switching architecture to route the single signal to each well independently. This allows for <span class="highlight">voltage and current control for each well</span>.
 3. I designed a PCB with a *cutout that allows for a microscope/camera to peer into the wells*.
 4. I used steel bars to shape electrodes then coated them with **platinum** or **gold** in order to be biocompatible with the tissue samples.
--->
 
 ![image of pcb]({{ site.baseurl }}/images/portfolio/2022-07_novartis_hts_system/pcb.avif)
 <div align="center"><em>PCB with gold-coated electrodes.</em></div>
