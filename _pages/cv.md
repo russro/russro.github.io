@@ -7,5 +7,5 @@ redirect_from:
   - /resume
 ---
 
-{% include_relative rendered_cv.html %}
+{% include_relative full_cv.html %}
 
