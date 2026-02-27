@@ -14,9 +14,9 @@ I build **production-grade ML and agentic systems** for <span class="highlight">
 I'm a PhD student at UC Berkeley in the [Department of Bioengineering](https://bioegrad.berkeley.edu/), advised by [Dr. Reza Abbasi-Asl](https://abbasilab.org/) and funded by the [NSF GRFP](https://www.nsfgrfp.org/).
 
 **Current work:**
-* [Clinical trial eligibility research](/portfolio/2025_clintrial_eligibility/): evidence-guided clinical trial design and evolution to optimize patient eligibility accrual across 500K+ trials
-* [AI platform @ FenixCommerce](/portfolio/2025_fenixcommerce_ai/): upgraded and delivered 4 production systems for clients via autonomous agent platform. +25% on-time delivery improvement (relative +60%) on 5.96M orders. $4.93M incremental revenue identified via A/B optimization across 7 retailers (+43% over unoptimized baseline).
-* [Agentic workflow manager](/portfolio/2025_agentic_workflow/): multi-agent orchestration framework that powers both industry work and PhD research. Multi-backend routing, dependency-aware queuing, 30+ concurrent sessions with zero data loss.
+* [Clinical trial eligibility research](/portfolio/2025_clintrial_eligibility/): evidence-guided framework for optimizing patient eligibility criteria across 500K+ trials. NLP pipelines, semantic matching, and LLM classification to measure whether trials adopt published broadening recommendations. *19K+ directive-trial assessments across 658 directives and 4,400+ trials.*
+* [AI platform @ FenixCommerce](/portfolio/2025_fenixcommerce_ai/): upgraded and delivered 4 production ML systems for retail clients, coordinated by an autonomous agent platform. *+25% on-time delivery (relative +60%) on 5.96M orders; $4.93M incremental revenue via A/B optimization across 7 retailers.*
+* [Agentic workflow manager](/portfolio/2025_agentic_workflow/): multi-agent orchestration framework that powers both industry work and PhD research. Multi-backend routing, dependency-aware queuing, fire-and-forget deployment.
 
 **Past work:**
 * [Adversarial robustness of medical LLMs](/portfolio/2024_adversarial_medical_llms/): probing failure modes in clinical text understanding ([arXiv](https://arxiv.org/abs/2402.10527))
