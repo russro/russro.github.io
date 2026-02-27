@@ -67,6 +67,4 @@ I designed and built a system that addressed the above concerns by doing the fol
 ### Organizational Impacts:
 > The success of the platform has also attracted the attention of other cardiovascular research groups in the company. It has since been expanded to more projects, particularly profiling different genetic targets in other cardiovascular diseases such as hypertension or arrhythmias.
 
-> The success of the platform has also attracted the attention of other cardiovascular research groups in the company. It has since been expanded to more projects, particularly profiling different genetic targets in other cardiovascular diseases such as hypertension or arrhythmias. 
-
 
