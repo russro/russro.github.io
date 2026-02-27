@@ -1,7 +1,7 @@
 ---
 title: "Agentic Workflow Manager"
 year: 2025
-excerpt: <b>2025 – present</b><br>Multi-agent orchestration system for research automation. Parallel sub-agents, dependency-aware queuing, and Telegram-based status reporting.
+excerpt: <b>2025 – present</b><br>Multi-agent orchestration framework that powers both industry work and PhD research. Coordinates parallel workstreams, manages task dependencies, and automates deployment.
 collection: portfolio
 ---
 
@@ -9,19 +9,18 @@ collection: portfolio
 
 **Project Timeline**: 2025 – present
 
-**Skills**: Python, tmux, Claude Code, Cursor Agent, Gemini CLI, MCP (Model Context Protocol), Telegram Bot API
+**Skills**: Python, Claude Code, Cursor Agent, Gemini CLI, MCP (Model Context Protocol), Telegram Bot API
 
 <hr>
 
 ## Overview
 
-Multi-agent orchestration system for research automation. Routes tasks across multiple LLM backends, deploys parallel sub-agents with dependency-aware queuing, and reports status via Telegram. Manages 30+ concurrent sessions including GPU jobs, data pipelines, and manuscript prep with zero manual intervention.
+Multi-agent orchestration framework that powers both industry work and PhD research. Coordinates parallel workstreams across multiple AI backends, manages task dependencies, and automates deployment and reporting.
 
 ## Key Components
 
-* **Multi-backend routing**: automatic failover across LLM backends with rate-limit tracking per model
-* **Fire-and-forget deployment**: sub-agents launch in tmux sessions, report back via Telegram on completion
-* **Dependency-aware queuing**: watcher scripts poll for upstream task completion before launching downstream agents
-* **Session handoff**: persistent memory and context recovery across backend switches and manager restarts
-* **Telegram bridge**: bidirectional communication between user and agent manager via REST API + MCP tools
-
+* **Multi-backend coordination**: Routes tasks across multiple AI backends with automatic failover and rate-limit awareness.
+* **Parallel workstream management**: Sub-agents run independently on assigned tasks and report back on completion.
+* **Task dependency management**: Upstream tasks are monitored so downstream work launches automatically when ready.
+* **Session continuity**: Persistent memory and context recovery across backend switches and manager restarts.
+* **Messaging bridge**: Bidirectional communication between the user and agent manager for status updates and task coordination.

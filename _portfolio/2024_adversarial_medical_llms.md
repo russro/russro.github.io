@@ -1,7 +1,7 @@
 ---
 title: "Adversarial Robustness of Medical LLMs"
 year: 2024
-excerpt: <b>2024</b><br>Adversarial entity sampling methods for probing medical LLM failure modes under clinical text distributional shifts.
+excerpt: <b>2024</b><br>Testing how medical AI models fail under challenging clinical scenarios.
 collection: portfolio
 ---
 
@@ -17,5 +17,4 @@ collection: portfolio
 
 ## Overview
 
-Adversarial entity sampling methods for probing medical LLM failure modes under clinical text distributional shifts. Tests how models behave when clinical entities are perturbed in structured and unstructured medical text.
-
+Testing how medical AI models fail under challenging clinical scenarios. Developed methods for systematically probing failure modes when clinical entities are perturbed in medical text, revealing vulnerabilities in models used for clinical decision support.
