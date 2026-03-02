@@ -15,8 +15,8 @@ I'm a PhD student at UC Berkeley in the [Department of Bioengineering](https://b
 
 **Current work:**
 * [Evidence-guided clinical trial design](/portfolio/2025_clintrial_eligibility/): Measuring whether trials adopt published recommendations for broadening patient eligibility across 500K+ trials. *19K+ assessments across 658 recommendations and 4,400+ trials.*
-* [AI platform @ FenixCommerce](/portfolio/2025_fenixcommerce_ai/): Built and delivered 4 production systems for retail clients, coordinated by an autonomous agent platform. *+25% on-time delivery (+60% relative) on 5.96M orders. $4.93M incremental revenue across 7 retailers.*
-* [Agentic workflow manager](/portfolio/2025_agentic_workflow/): Multi-agent orchestration framework that powers both industry work and PhD research. Coordinates parallel workstreams, manages task dependencies, and automates deployment.
+* [AI platform @ FenixCommerce](/portfolio/2025_fenixcommerce_ai/): One engineer + AI agents built and shipped 4 production systems in 14 days — $8M+ in measurable business impact for ~$500 in compute. *450+ experiments, 30K models, 118K+ lines of code.*
+* [Agentic workflow manager](/portfolio/2025_agentic_workflow/): Multi-agent orchestration framework powering both industry and PhD research. Coordinates parallel workstreams, manages task dependencies, and accumulates institutional knowledge across 95+ indexed learnings.
 
 **Past work:**
 * [Adversarial robustness of medical LLMs](/portfolio/2024_adversarial_medical_llms/): Testing how medical AI models fail under challenging clinical scenarios. ([arXiv](https://arxiv.org/abs/2402.10527))
