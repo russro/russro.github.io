@@ -9,7 +9,7 @@ redirect_from:
 
 Hey, I'm Russell.
 
-I build **production-grade ML and agentic systems** for <span class="highlight">NLP</span>, <span class="highlight">retrieval</span>, and <span class="highlight">forecasting</span> in healthcare, pharma, e-commerce, aerospace, and beyond.
+I build **production-grade ML and agentic systems** for <span class="highlight">NLP</span>, <span class="highlight">retrieval</span>, and <span class="highlight">forecasting</span>. I've built for large companies, small teams, and research settings alike. These systems are actively deployed across industries including healthcare, e-commerce, pharma, aerospace, and more.
 
 I'm a PhD student at UC Berkeley in the [Department of Bioengineering](https://bioegrad.berkeley.edu/), advised by [Dr. Reza Abbasi-Asl](https://abbasilab.org/) and funded by the [NSF GRFP](https://www.nsfgrfp.org/).
 
