@@ -5,16 +5,6 @@ excerpt: <b>2024</b><br>Testing how medical AI models fail under challenging cli
 collection: portfolio
 ---
 
-<hr>
+**2024** \| [arXiv: 2402.10527](https://arxiv.org/abs/2402.10527)
 
-**Project Timeline**: 2024
-
-**Skills**: PyTorch, adversarial ML, medical NLP
-
-**Paper**: [arXiv: 2402.10527](https://arxiv.org/abs/2402.10527)
-
-<hr>
-
-## Overview
-
-Testing how medical AI models fail under challenging clinical scenarios. Developed methods for systematically probing failure modes when clinical entities are perturbed in medical text, revealing vulnerabilities in models used for clinical decision support.
+Systematic methods for probing failure modes in medical AI. Perturbing clinical entities in medical text reveals vulnerabilities in models used for clinical decision support.
