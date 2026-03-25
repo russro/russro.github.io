@@ -13,7 +13,6 @@ I build production ML and agentic systems for NLP, retrieval, and forecasting.
 
 **Currently building:**
 * [Evidence-guided clinical trial design](/portfolio/2025_clintrial_eligibility/)
-* [AI platform at FenixCommerce](/portfolio/2025_fenixcommerce_ai/)
 * [Multi-agent orchestration for industry and research](/portfolio/2025_agentic_workflow/)
 
 **Things I've also done:**

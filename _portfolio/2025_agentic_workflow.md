@@ -16,5 +16,3 @@ Multi-agent orchestration framework powering both industry work and PhD research
 - Bidirectional messaging bridge for status and coordination
 
 The system maintains a structured knowledge base that grows across sessions. New agents inherit all prior context.
-
-See [AI Platform @ FenixCommerce](/portfolio/2025_fenixcommerce_ai/) for the production deployment.
