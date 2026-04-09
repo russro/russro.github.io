@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 90</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 90</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. Participants who have PTSD, diagnosed according to the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5), and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. The index traumatic event that led to the develop of PTSD took place &amp;gt; 9 years before screening.
+  2. The index traumatic event occurred before age 16.
+  3. Participants who have experienced a traumatic event within 3 months of screening.
+  4. Participants who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; who have PTSD, diagnosed according to &lt;span class=&quot;diff-del&quot;&gt;the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5),&lt;/span&gt; and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;The index traumatic event that led to the develop of PTSD took place &amp;gt; 9 years before screening.
+  2. The index traumatic event occurred before age 16.
+  3. Participants&lt;/span&gt; who have experienced a traumatic event within 3 months of screening.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial."
+                 data-raw="Inclusion Criteria:Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.Participants who have PTSD, diagnosed according to the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5), and confirmed by the Mini International Neuropsychiatric Interview (MINI).Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.Exclusion Criteria:The index traumatic event that led to the develop of PTSD took place &amp;amp;gt; 9 years before screening.The index traumatic event occurred before age 16.Participants who have experienced a traumatic event within 3 months of screening.Participants who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.">INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. Participants who have PTSD, diagnosed according to the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5), and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. The index traumatic event that led to the develop of PTSD took place &gt; 9 years before screening.
+  2. The index traumatic event occurred before age 16.
+  3. Participants who have experienced a traumatic event within 3 months of screening.
+  4. Participants who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. Subjects who have PTSD, diagnosed according to DSM-5, and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. Subjects who have experienced a traumatic event within 3 months of screening.
+  2. Subjects who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.
+  3. Subjects with PTSD who, in the investigator’s opinion, are considered resistant/refractory to psychotropic treatment by history.
+  4. Subjects who are currently receiving sertraline with adequate dose and duration (&amp;gt; 50 mg/day for a minimum of 8 weeks)."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who have PTSD, diagnosed according to &lt;span class=&quot;diff-add&quot;&gt;DSM-5,&lt;/span&gt; and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who have experienced a traumatic event within 3 months of screening.
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.&lt;span class=&quot;diff-add&quot;&gt;
+  3. Subjects with PTSD who, in the investigator’s opinion, are considered resistant/refractory to psychotropic treatment by history.
+  4. Subjects who are currently receiving sertraline with adequate dose and duration (&amp;gt; 50 mg/day for a minimum of 8 weeks).&lt;/span&gt;"
+                 data-raw="Inclusion Criteria: Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent. Subjects who have PTSD, diagnosed according to DSM-5, and confirmed by the Mini International Neuropsychiatric Interview (MINI). Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening. Exclusion Criteria: Subjects who have experienced a traumatic event within 3 months of screening. Subjects who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial. Subjects with PTSD who, in the investigator’s opinion, are considered resistant/refractory to psychotropic treatment by history. Subjects who are currently receiving sertraline with adequate dose and duration (&amp;gt; 50 mg/day for a minimum of 8 weeks).">INCLUSION CRITERIA
+
+  1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.
+  2. Subjects who have PTSD, diagnosed according to DSM-5, and confirmed by the Mini International Neuropsychiatric Interview (MINI).
+  3. Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.
+
+EXCLUSION CRITERIA
+
+  1. Subjects who have experienced a traumatic event within 3 months of screening.
+  2. Subjects who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.
+  3. Subjects with PTSD who, in the investigator’s opinion, are considered resistant/refractory to psychotropic treatment by history.
+  4. Subjects who are currently receiving sertraline with adequate dose and duration (&gt; 50 mg/day for a minimum of 8 weeks).</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

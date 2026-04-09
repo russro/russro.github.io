@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 123</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 123</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the study:Participant is 18 to 55 years of ageParticipant who has a smart phone and is willing and able to install and use the eDiary.
+  2. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  3. Participant is generally healthy as determined by the InvestigatorParticipant has a Body Mass Index (BMI) of 18.0-30.0 kg/m2If subject is of childbearing potential:Participant has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  4. Participant has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  5. Participant agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+INCLUSION CRITERIA
+
+  1. for Booster Phase - Subjects who meet ALL of the following criteria are eligible for the Booster phase:B1.
+  2. Participant has received complete VLA2001 primary immunization (two vaccinations according to the protocol)B2.
+  3. Participant who has a smart phone and is willing and able to install and use the e-Diary.
+  4. B3.
+  5. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  6. B4.
+  7. Participant is generally healthy as determined by the Investigator&amp;#x27;s clinical judgementB5.
+  8. If a participant is of childbearing potential:Participant has a negative urine pregnancy test at Visit 7 prior to booster vaccination.
+  9. Participant agrees to employ adequate birth control measures up to 3 months after the Booster vaccination.
+
+EXCLUSION CRITERIA
+
+  1. - Participants who meet ANY of the following criteria are NOT eligible for this study:Clinically significant infection or other acute illness, including fever ≥ 38°C within 24 hours prior to the planned study vaccination.
+  2. History of laboratory-confirmed SARS-CoV-2 infection.
+  3. Participant had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  4. Participant has participated in a clinical study involving an investigational SARS-CoV-2 vaccine.
+  5. Participant has an acute or recent infection not due to SARS-CoV-2Participant has a history of SARS-CoV-1 or MERS infection (self-reported)Participant tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  6. Participant has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination.
+  7. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  8. Participants with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;#x27;s clinical judgement.
+  9. Participants with underlying diseases with a high risk of developing severe COVID-19 symptoms if infectedParticipant has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer.
+  10. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled.
+  11. A history of hematologic malignancy is a permanent exclusion.
+  12. Participants with a history of skin cancer must not be vaccinated at the previous tumour site.
+  13. Participant has a known or suspected defect of the immune system, such as Participants with congenital or acquired immune deficiencyParticipant received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study.
+  14. Participant has a history of any vaccine related contraindicating eventParticipant presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  15. Participant is pregnant, has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  16. Participant has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  17. Participant with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venepuncture.
+  18. Participant has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  19. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  20. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&amp;#x27;s ability to complete the study.
+  21. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  22. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  23. Participant is a member of the team conducting the study or in a dependent relationship with one of the study team members.
+
+EXCLUSION CRITERIA
+
+  1. for Booster Phase - Participants who meet ANY of the following criteria are NOT eligible for Booster phase:B1.
+  2. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned Booster vaccination.
+  3. B2.
+  4. Participant has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Booster vaccination (Visit 7).
+  5. B3.
+  6. Participant has received any vaccine within 30 days prior Visit 7, with the exception of the seasonal influenza vaccination.
+  7. Participants will be encouraged to receive this vaccination at least 7 days after their Booster vaccine.
+  8. B4.
+  9. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) that is considered clinically relevant by the Investigator.
+  10. B5.
+  11. Participant has received immuno-suppressive therapy within 4 weeks prior to Visit 7 or is expected to receive immunosuppressive therapy during the study.
+  12. Immunosuppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 7 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs or monoclonal antibodies in the previous 3 years.
+  13. B6.
+  14. Participant has clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  15. B7.
+  16. Participant is pregnant (positive urine pregnancy test at Visit 7, respectively), has plans to become pregnant up to 3 months after the Booster vaccination.
+  17. B8.
+  18. Participant has a rash, dermatological condition that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  19. B9.
+  20. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  21. B10.
+  22. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&amp;#x27;s ability to complete the study.
+  23. B11.
+  24. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  25. B12.
+  26. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 7 or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study."
+                 data-diff="INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the &lt;span class=&quot;diff-del&quot;&gt;study:Participant&lt;/span&gt; is 18 to 55 years of &lt;span class=&quot;diff-del&quot;&gt;ageParticipant&lt;/span&gt; who has a smart phone and is willing and able to install and use the eDiary.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; is generally healthy as determined by the &lt;span class=&quot;diff-del&quot;&gt;InvestigatorParticipant&lt;/span&gt; has a Body Mass Index (BMI) of 18.0-30.0 &lt;span class=&quot;diff-del&quot;&gt;kg/m2If&lt;/span&gt; subject is of childbearing &lt;span class=&quot;diff-del&quot;&gt;potential:Participant&lt;/span&gt; has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+&lt;span class=&quot;diff-del&quot;&gt;INCLUSION CRITERIA
+
+  1. for Booster Phase - Subjects who meet ALL of the following criteria are eligible for the Booster phase:B1.
+  2. Participant has received complete VLA2001 primary immunization (two vaccinations according to the protocol)B2.
+  3. Participant who has a smart phone and is willing and able to install and use the e-Diary.
+  4. B3.
+  5. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  6. B4.
+  7. Participant is generally healthy as determined by the Investigator&amp;#x27;s clinical judgementB5.
+  8. If a participant is of childbearing potential:Participant has a negative urine pregnancy test at Visit 7 prior to booster vaccination.
+  9. Participant agrees to employ adequate birth control measures up to 3 months after the Booster vaccination.
+
+&lt;/span&gt;EXCLUSION CRITERIA
+
+  1. - &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; who meet ANY of the following criteria are NOT eligible for this &lt;span class=&quot;diff-del&quot;&gt;study:Clinically&lt;/span&gt; significant infection or other acute illness, including fever ≥ 38°C within &lt;span class=&quot;diff-del&quot;&gt;24&lt;/span&gt; hours prior to the planned study vaccination.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; History of laboratory-confirmed SARS-CoV-2 infection.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has participated in a clinical study involving an investigational SARS-CoV-2 &lt;span class=&quot;diff-del&quot;&gt;vaccine.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has an acute or recent infection not due to &lt;span class=&quot;diff-del&quot;&gt;SARS-CoV-2Participant&lt;/span&gt; has a history of SARS-CoV-1 or MERS infection &lt;span class=&quot;diff-del&quot;&gt;(self-reported)Participant&lt;/span&gt; tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;#x27;s clinical judgement.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with underlying diseases with a high risk of developing severe COVID-19 symptoms if &lt;span class=&quot;diff-del&quot;&gt;infectedParticipant&lt;/span&gt; has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer.&lt;span class=&quot;diff-del&quot;&gt;
+  10.&lt;/span&gt; If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled.&lt;span class=&quot;diff-del&quot;&gt;
+  11.&lt;/span&gt; A history of hematologic malignancy is a permanent exclusion.&lt;span class=&quot;diff-del&quot;&gt;
+  12.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with a history of skin cancer must not be vaccinated at the previous tumour site.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has a known or suspected defect of the immune system, such as &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with congenital or acquired immune &lt;span class=&quot;diff-del&quot;&gt;deficiencyParticipant&lt;/span&gt; received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has a history of any vaccine related contraindicating &lt;span class=&quot;diff-del&quot;&gt;eventParticipant&lt;/span&gt; presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; is &lt;span class=&quot;diff-del&quot;&gt;pregnant,&lt;/span&gt; has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or &lt;span class=&quot;diff-del&quot;&gt;venepuncture.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has any condition that, in the opinion of the Investigator, may compromise the &lt;span class=&quot;diff-del&quot;&gt;Participant&amp;#x27;s&lt;/span&gt; well-being, might interfere with evaluation of study endpoints, or would limit the &lt;span class=&quot;diff-del&quot;&gt;Participant&amp;#x27;s&lt;/span&gt; ability to complete the study.
+  &lt;span class=&quot;diff-del&quot;&gt;21.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  &lt;span class=&quot;diff-del&quot;&gt;22.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  &lt;span class=&quot;diff-del&quot;&gt;23.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; is a member of the team conducting the study or in a dependent relationship with one of the study team members.&lt;span class=&quot;diff-del&quot;&gt;
+
+EXCLUSION CRITERIA
+
+  1. for Booster Phase - Participants who meet ANY of the following criteria are NOT eligible for Booster phase:B1.
+  2. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned Booster vaccination.
+  3. B2.
+  4. Participant has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Booster vaccination (Visit 7).
+  5. B3.
+  6. Participant has received any vaccine within 30 days prior Visit 7, with the exception of the seasonal influenza vaccination.
+  7. Participants will be encouraged to receive this vaccination at least 7 days after their Booster vaccine.
+  8. B4.
+  9. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) that is considered clinically relevant by the Investigator.
+  10. B5.
+  11. Participant has received immuno-suppressive therapy within 4 weeks prior to Visit 7 or is expected to receive immunosuppressive therapy during the study.
+  12. Immunosuppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 7 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs or monoclonal antibodies in the previous 3 years.
+  13. B6.
+  14. Participant has clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  15. B7.
+  16. Participant is pregnant (positive urine pregnancy test at Visit 7, respectively), has plans to become pregnant up to 3 months after the Booster vaccination.
+  17. B8.
+  18. Participant has a rash, dermatological condition that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  19. B9.
+  20. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  21. B10.
+  22. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&amp;#x27;s ability to complete the study.
+  23. B11.
+  24. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  25. B12.
+  26. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 7 or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria - Subjects who meet ALL of the following criteria are eligible for the study:Participant is 18 to 55 years of ageParticipant who has a smart phone and is willing and able to install and use the eDiary.Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.Participant is generally healthy as determined by the InvestigatorParticipant has a Body Mass Index (BMI) of 18.0-30.0 kg&amp;amp;#x2F;m2If subject is of childbearing potential:Participant has practiced an adequate method of contraception during the 30 days before screening (Visit 0).Participant has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.Participant agrees to employ adequate birth control measures up to Day 106 (Visit 5).Inclusion Criteria for Booster Phase - Subjects who meet ALL of the following criteria are eligible for the Booster phase:B1. Participant has received complete VLA2001 primary immunization (two vaccinations according to the protocol)B2. Participant who has a smart phone and is willing and able to install and use the e-Diary.B3. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.B4. Participant is generally healthy as determined by the Investigator&amp;amp;#x27;s clinical judgementB5. If a participant is of childbearing potential:Participant has a negative urine pregnancy test at Visit 7 prior to booster vaccination.Participant agrees to employ adequate birth control measures up to 3 months after the Booster vaccination.Exclusion criteria - Participants who meet ANY of the following criteria are NOT eligible for this study:Clinically significant infection or other acute illness, including fever ≥ 38°C within 24 hours prior to the planned study vaccination.History of laboratory-confirmed SARS-CoV-2 infection.Participant had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).Participant has participated in a clinical study involving an investigational SARS-CoV-2 vaccine.Participant has an acute or recent infection not due to SARS-CoV-2Participant has a history of SARS-CoV-1 or MERS infection (self-reported)Participant tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).Participant has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination.Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.Participants with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;amp;#x27;s clinical judgement.Participants with underlying diseases with a high risk of developing severe COVID-19 symptoms if infectedParticipant has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled. A history of hematologic malignancy is a permanent exclusion. Participants with a history of skin cancer must not be vaccinated at the previous tumour site.Participant has a known or suspected defect of the immune system, such as Participants with congenital or acquired immune deficiencyParticipant received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study.Participant has a history of any vaccine related contraindicating eventParticipant presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.Participant is pregnant, has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.Participant has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.Participant with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venepuncture.Participant has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&amp;amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&amp;amp;#x27;s ability to complete the study.Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.Participant is a member of the team conducting the study or in a dependent relationship with one of the study team members.Exclusion Criteria for Booster Phase - Participants who meet ANY of the following criteria are NOT eligible for Booster phase:B1. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned Booster vaccination.B2. Participant has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Booster vaccination (Visit 7).B3. Participant has received any vaccine within 30 days prior Visit 7, with the exception of the seasonal influenza vaccination. Participants will be encouraged to receive this vaccination at least 7 days after their Booster vaccine.B4. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) that is considered clinically relevant by the Investigator.B5. Participant has received immuno-suppressive therapy within 4 weeks prior to Visit 7 or is expected to receive immunosuppressive therapy during the study. Immunosuppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg&amp;amp;#x2F;kg&amp;amp;#x2F;day within 4 weeks prior to Visit 7 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs or monoclonal antibodies in the previous 3 years.B6. Participant has clinical conditions representing a contraindication to intramuscular vaccination and blood draws.B7. Participant is pregnant (positive urine pregnancy test at Visit 7, respectively), has plans to become pregnant up to 3 months after the Booster vaccination.B8. Participant has a rash, dermatological condition that would, in the opinion of the Investigator, interfere with injection site reaction rating.B9. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.B10. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&amp;amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&amp;amp;#x27;s ability to complete the study.B11. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).B12. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 7 or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.">INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the study:Participant is 18 to 55 years of ageParticipant who has a smart phone and is willing and able to install and use the eDiary.
+  2. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  3. Participant is generally healthy as determined by the InvestigatorParticipant has a Body Mass Index (BMI) of 18.0-30.0 kg/m2If subject is of childbearing potential:Participant has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  4. Participant has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  5. Participant agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+INCLUSION CRITERIA
+
+  1. for Booster Phase - Subjects who meet ALL of the following criteria are eligible for the Booster phase:B1.
+  2. Participant has received complete VLA2001 primary immunization (two vaccinations according to the protocol)B2.
+  3. Participant who has a smart phone and is willing and able to install and use the e-Diary.
+  4. B3.
+  5. Participant has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  6. B4.
+  7. Participant is generally healthy as determined by the Investigator&#x27;s clinical judgementB5.
+  8. If a participant is of childbearing potential:Participant has a negative urine pregnancy test at Visit 7 prior to booster vaccination.
+  9. Participant agrees to employ adequate birth control measures up to 3 months after the Booster vaccination.
+
+EXCLUSION CRITERIA
+
+  1. - Participants who meet ANY of the following criteria are NOT eligible for this study:Clinically significant infection or other acute illness, including fever ≥ 38°C within 24 hours prior to the planned study vaccination.
+  2. History of laboratory-confirmed SARS-CoV-2 infection.
+  3. Participant had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  4. Participant has participated in a clinical study involving an investigational SARS-CoV-2 vaccine.
+  5. Participant has an acute or recent infection not due to SARS-CoV-2Participant has a history of SARS-CoV-1 or MERS infection (self-reported)Participant tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  6. Participant has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination.
+  7. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  8. Participants with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&#x27;s clinical judgement.
+  9. Participants with underlying diseases with a high risk of developing severe COVID-19 symptoms if infectedParticipant has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer.
+  10. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled.
+  11. A history of hematologic malignancy is a permanent exclusion.
+  12. Participants with a history of skin cancer must not be vaccinated at the previous tumour site.
+  13. Participant has a known or suspected defect of the immune system, such as Participants with congenital or acquired immune deficiencyParticipant received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study.
+  14. Participant has a history of any vaccine related contraindicating eventParticipant presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  15. Participant is pregnant, has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  16. Participant has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  17. Participant with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venepuncture.
+  18. Participant has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  19. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  20. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&#x27;s ability to complete the study.
+  21. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  22. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  23. Participant is a member of the team conducting the study or in a dependent relationship with one of the study team members.
+
+EXCLUSION CRITERIA
+
+  1. for Booster Phase - Participants who meet ANY of the following criteria are NOT eligible for Booster phase:B1.
+  2. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned Booster vaccination.
+  3. B2.
+  4. Participant has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Booster vaccination (Visit 7).
+  5. B3.
+  6. Participant has received any vaccine within 30 days prior Visit 7, with the exception of the seasonal influenza vaccination.
+  7. Participants will be encouraged to receive this vaccination at least 7 days after their Booster vaccine.
+  8. B4.
+  9. Participant has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) that is considered clinically relevant by the Investigator.
+  10. B5.
+  11. Participant has received immuno-suppressive therapy within 4 weeks prior to Visit 7 or is expected to receive immunosuppressive therapy during the study.
+  12. Immunosuppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 7 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs or monoclonal antibodies in the previous 3 years.
+  13. B6.
+  14. Participant has clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  15. B7.
+  16. Participant is pregnant (positive urine pregnancy test at Visit 7, respectively), has plans to become pregnant up to 3 months after the Booster vaccination.
+  17. B8.
+  18. Participant has a rash, dermatological condition that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  19. B9.
+  20. Participant has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  21. B10.
+  22. Participant has any condition that, in the opinion of the Investigator, may compromise the Participant&#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the Participant&#x27;s ability to complete the study.
+  23. B11.
+  24. Participant is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  25. B12.
+  26. Participant has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 7 or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the study:
+  2. Subject is 18 to 55 years of age.
+  3. Subject who has a smart phone and is willing and able to install and use the eDiary.
+  4. Subject has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  5. Subject is generally healthy as determined by the Investigator.
+  6. Subject has a Body Mass Index (BMI) of 18.0-30.0 kg/m².
+  7. If subject is of childbearing potential:
+  8. a. Subject has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  9. b. Subject has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  10. c. Subject agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+EXCLUSION CRITERIA
+
+  1. - Subjects who meet ANY of the following criteria are NOT eligible for this study:
+  2. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned study vaccination.
+  3. History of laboratory-confirmed SARS-CoV-2 infection.
+  4. Subject had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  5. Subject has participated in a clinical study involving an investigational SARS-CoV-2 vaccine or has received or plans to receive a licensed SARS-CoV-2 vaccine during the duration of the study.
+  6. Subject has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Screening Visit (Visit 0).
+  7. Subject has a history of SARS-CoV-1 or MERS infection (self-reported).
+  8. Subject tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  9. Subject has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination. Participants will be encouraged to receive this vaccination at least 7 days after their study vaccine.
+  10. Subject has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  11. Subjects with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;#x27;s clinical judgement.
+  12. Subjects with underlying diseases with a high risk of developing severe COVID-19 symptoms if infected, including those with any of the following risk factors:
+  13. Hypertension.
+  14. Diabetes mellitus.
+  15. Chronic liver disease.
+  16. Chronic pulmonary disease.
+  17. Asthma.
+  18. Current vaping or smoking.
+  19. History of chronic smoking within the prior year.
+  20. Subject has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled. A history of hematologic malignancy is a permanent exclusion. Subjects with a history of skin cancer must not be vaccinated at the previous tumour site.
+  21. Subject has a known or suspected defect of the immune system, such as subjects with congenital or acquired immune deficiency.
+  22. Subject received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study. Immuno-suppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 1 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs/monoclonal antibodies in the previous 3 years.
+  23. Subject has a history of any vaccine related contraindicating event (e.g., anaphylaxis, allergy to components of the candidate vaccine, other known contraindications).
+  24. Subject presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  25. Subject is pregnant (positive serum or urine pregnancy test at screening or Visit 1, respectively), has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  26. Subject has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  27. Subject with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venipuncture.
+  28. Subject has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  29. Subject has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  30. Subject has any condition that, in the opinion of the Investigator, may compromise the subject&amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the subject&amp;#x27;s ability to complete the study.
+  31. Subject is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  32. Subject has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  33. Subject is a member of the team conducting the study or in a dependent relationship with one of the study team members."
+                 data-diff="INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the &lt;span class=&quot;diff-add&quot;&gt;study:
+  2. Subject&lt;/span&gt; is 18 to 55 years of &lt;span class=&quot;diff-add&quot;&gt;age.
+  3. Subject&lt;/span&gt; who has a smart phone and is willing and able to install and use the eDiary.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; is generally healthy as determined by the &lt;span class=&quot;diff-add&quot;&gt;Investigator.
+  6. Subject&lt;/span&gt; has a Body Mass Index (BMI) of 18.0-30.0 &lt;span class=&quot;diff-add&quot;&gt;kg/m².
+  7. If&lt;/span&gt; subject is of childbearing &lt;span class=&quot;diff-add&quot;&gt;potential:
+  8. a. Subject&lt;/span&gt; has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;b. Subject&lt;/span&gt; has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;c. Subject&lt;/span&gt; agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+EXCLUSION CRITERIA
+
+  1. - &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who meet ANY of the following criteria are NOT eligible for this &lt;span class=&quot;diff-add&quot;&gt;study:
+  2. Clinically&lt;/span&gt; significant infection or other acute illness, including fever ≥ 38°C within &lt;span class=&quot;diff-add&quot;&gt;48&lt;/span&gt; hours prior to the planned study vaccination.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; History of laboratory-confirmed SARS-CoV-2 infection.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has participated in a clinical study involving an investigational SARS-CoV-2 &lt;span class=&quot;diff-add&quot;&gt;vaccine or has received or plans to receive a licensed SARS-CoV-2 vaccine during the duration of the study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has an acute or recent infection not due to &lt;span class=&quot;diff-add&quot;&gt;SARS-CoV-2 and is not symptom-free in the week prior to the Screening Visit (Visit 0).
+  7. Subject&lt;/span&gt; has a history of SARS-CoV-1 or MERS infection &lt;span class=&quot;diff-add&quot;&gt;(self-reported).
+  8. Subject&lt;/span&gt; tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination.&lt;span class=&quot;diff-add&quot;&gt; Participants will be encouraged to receive this vaccination at least 7 days after their study vaccine.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;#x27;s clinical judgement.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; with underlying diseases with a high risk of developing severe COVID-19 symptoms if &lt;span class=&quot;diff-add&quot;&gt;infected, including those with any of the following risk factors:
+  13. Hypertension.
+  14. Diabetes mellitus.
+  15. Chronic liver disease.
+  16. Chronic pulmonary disease.
+  17. Asthma.
+  18. Current vaping or smoking.
+  19. History of chronic smoking within the prior year.
+  20. Subject&lt;/span&gt; has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled. A history of hematologic malignancy is a permanent exclusion. &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; with a history of skin cancer must not be vaccinated at the previous tumour site.
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has a known or suspected defect of the immune system, such as &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; with congenital or acquired immune &lt;span class=&quot;diff-add&quot;&gt;deficiency.
+  22. Subject&lt;/span&gt; received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study.&lt;span class=&quot;diff-add&quot;&gt; Immuno-suppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 1 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs/monoclonal antibodies in the previous 3 years.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;23.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has a history of any vaccine related contraindicating &lt;span class=&quot;diff-add&quot;&gt;event (e.g., anaphylaxis, allergy to components of the candidate vaccine, other known contraindications).
+  24. Subject&lt;/span&gt; presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  &lt;span class=&quot;diff-add&quot;&gt;25.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; is &lt;span class=&quot;diff-add&quot;&gt;pregnant (positive serum or urine pregnancy test at screening or Visit 1, respectively),&lt;/span&gt; has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  &lt;span class=&quot;diff-add&quot;&gt;26.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  &lt;span class=&quot;diff-add&quot;&gt;27.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or &lt;span class=&quot;diff-add&quot;&gt;venipuncture.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;28.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  &lt;span class=&quot;diff-add&quot;&gt;29.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;30.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has any condition that, in the opinion of the Investigator, may compromise the &lt;span class=&quot;diff-add&quot;&gt;subject&amp;#x27;s&lt;/span&gt; well-being, might interfere with evaluation of study endpoints, or would limit the &lt;span class=&quot;diff-add&quot;&gt;subject&amp;#x27;s&lt;/span&gt; ability to complete the study.
+  &lt;span class=&quot;diff-add&quot;&gt;31.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  &lt;span class=&quot;diff-add&quot;&gt;32.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  &lt;span class=&quot;diff-add&quot;&gt;33.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; is a member of the team conducting the study or in a dependent relationship with one of the study team members."
+                 data-raw="Inclusion Criteria - Subjects who meet ALL of the following criteria are eligible for the study:
+1. Subject is 18 to 55 years of age.
+2. Subject who has a smart phone and is willing and able to install and use the eDiary.
+3. Subject has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+4. Subject is generally healthy as determined by the Investigator.
+5. Subject has a Body Mass Index (BMI) of 18.0-30.0 kg/m².
+6. If subject is of childbearing potential:
+   a. Subject has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+   b. Subject has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+   c. Subject agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+Exclusion Criteria - Subjects who meet ANY of the following criteria are NOT eligible for this study:
+1. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned study vaccination.
+2. History of laboratory-confirmed SARS-CoV-2 infection.
+3. Subject had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+4. Subject has participated in a clinical study involving an investigational SARS-CoV-2 vaccine or has received or plans to receive a licensed SARS-CoV-2 vaccine during the duration of the study.
+5. Subject has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Screening Visit (Visit 0).
+6. Subject has a history of SARS-CoV-1 or MERS infection (self-reported).
+7. Subject tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+8. Subject has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination. Participants will be encouraged to receive this vaccination at least 7 days after their study vaccine.
+9. Subject has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+10. Subjects with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&amp;#x27;s clinical judgement.
+11. Subjects with underlying diseases with a high risk of developing severe COVID-19 symptoms if infected, including those with any of the following risk factors:
+    - Hypertension.
+    - Diabetes mellitus.
+    - Chronic liver disease.
+    - Chronic pulmonary disease.
+    - Asthma.
+    - Current vaping or smoking.
+    - History of chronic smoking within the prior year.
+12. Subject has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled. A history of hematologic malignancy is a permanent exclusion. Subjects with a history of skin cancer must not be vaccinated at the previous tumour site.
+13. Subject has a known or suspected defect of the immune system, such as subjects with congenital or acquired immune deficiency.
+14. Subject received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study. Immuno-suppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 1 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs/monoclonal antibodies in the previous 3 years.
+15. Subject has a history of any vaccine related contraindicating event (e.g., anaphylaxis, allergy to components of the candidate vaccine, other known contraindications).
+16. Subject presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+17. Subject is pregnant (positive serum or urine pregnancy test at screening or Visit 1, respectively), has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+18. Subject has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+19. Subject with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venipuncture.
+20. Subject has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+21. Subject has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+22. Subject has any condition that, in the opinion of the Investigator, may compromise the subject&amp;#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the subject&amp;#x27;s ability to complete the study.
+23. Subject is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+24. Subject has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+25. Subject is a member of the team conducting the study or in a dependent relationship with one of the study team members.">INCLUSION CRITERIA
+
+  1. - Subjects who meet ALL of the following criteria are eligible for the study:
+  2. Subject is 18 to 55 years of age.
+  3. Subject who has a smart phone and is willing and able to install and use the eDiary.
+  4. Subject has an understanding of the study and its procedures, agrees to its provisions, and voluntarily gives written informed consent prior to any study-related procedures.
+  5. Subject is generally healthy as determined by the Investigator.
+  6. Subject has a Body Mass Index (BMI) of 18.0-30.0 kg/m².
+  7. If subject is of childbearing potential:
+  8. a. Subject has practiced an adequate method of contraception during the 30 days before screening (Visit 0).
+  9. b. Subject has a negative serum or urine pregnancy test at screening (Visit 0) or Visit 1, respectively.
+  10. c. Subject agrees to employ adequate birth control measures up to Day 106 (Visit 5).
+
+EXCLUSION CRITERIA
+
+  1. - Subjects who meet ANY of the following criteria are NOT eligible for this study:
+  2. Clinically significant infection or other acute illness, including fever ≥ 38°C within 48 hours prior to the planned study vaccination.
+  3. History of laboratory-confirmed SARS-CoV-2 infection.
+  4. Subject had close contact to persons with confirmed SARS-CoV-2 infection within 30 days prior to screening (Visit 0).
+  5. Subject has participated in a clinical study involving an investigational SARS-CoV-2 vaccine or has received or plans to receive a licensed SARS-CoV-2 vaccine during the duration of the study.
+  6. Subject has an acute or recent infection not due to SARS-CoV-2 and is not symptom-free in the week prior to the Screening Visit (Visit 0).
+  7. Subject has a history of SARS-CoV-1 or MERS infection (self-reported).
+  8. Subject tests positive for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg) or hepatitis C virus (HCV).
+  9. Subject has received any vaccine within 30 days prior Visit 1 other than the study intervention, with the exception of the seasonal influenza vaccination. Participants will be encouraged to receive this vaccination at least 7 days after their study vaccine.
+  10. Subject has abnormal findings in any required study investigations (including medical history, physical examination, and clinical laboratory) considered clinically relevant by the Investigator.
+  11. Subjects with either medical history of or present acute or progressive, unstable or uncontrolled clinical conditions that pose a risk for participation or completion of the study, based on Investigator&#x27;s clinical judgement.
+  12. Subjects with underlying diseases with a high risk of developing severe COVID-19 symptoms if infected, including those with any of the following risk factors:
+  13. Hypertension.
+  14. Diabetes mellitus.
+  15. Chronic liver disease.
+  16. Chronic pulmonary disease.
+  17. Asthma.
+  18. Current vaping or smoking.
+  19. History of chronic smoking within the prior year.
+  20. Subject has a history of malignancy in the past 5 years other than squamous cell or basal cell skin cancer. If there has been surgical excision or treatment more than 5 years ago that is considered to have achieved a cure, the subject may be enrolled. A history of hematologic malignancy is a permanent exclusion. Subjects with a history of skin cancer must not be vaccinated at the previous tumour site.
+  21. Subject has a known or suspected defect of the immune system, such as subjects with congenital or acquired immune deficiency.
+  22. Subject received immuno-suppressive therapy within 4 weeks prior to Visit 1 or receipt of immunosuppressive therapy is expected during the study. Immuno-suppressive therapy is defined as administration of chronic (longer than 2 weeks) prednisone or equivalent ≥ 0.05 mg/kg/day within 4 weeks prior to Visit 1 (topical and inhaled steroids are allowed), radiation therapy or immunosuppressive cytotoxic drugs/monoclonal antibodies in the previous 3 years.
+  23. Subject has a history of any vaccine related contraindicating event (e.g., anaphylaxis, allergy to components of the candidate vaccine, other known contraindications).
+  24. Subject presents with clinical conditions representing a contraindication to intramuscular vaccination and blood draws.
+  25. Subject is pregnant (positive serum or urine pregnancy test at screening or Visit 1, respectively), has plans to become pregnant up to Day 106 of the study or lactating at the time of enrolment.
+  26. Subject has donated blood, blood fractions or plasma within 4 weeks prior to Visit 1 or received blood-derived products (e.g. plasma) within 12 weeks prior to Visit 1 in this study or plans to donate blood or use blood products during the study.
+  27. Subject with clinically significant bleeding disorder (e.g. factor deficiency, coagulopathy or platelet disorder) or prior history of significant bleeding or bruising following IM injections or venipuncture.
+  28. Subject has a rash, dermatological condition or tattoos that would, in the opinion of the Investigator, interfere with injection site reaction rating.
+  29. Subject has a known or suspected problem with alcohol or drug abuse as determined by the Investigator.
+  30. Subject has any condition that, in the opinion of the Investigator, may compromise the subject&#x27;s well-being, might interfere with evaluation of study endpoints, or would limit the subject&#x27;s ability to complete the study.
+  31. Subject is committed to an institution (by virtue of an order issued either by the judicial or the administrative authorities).
+  32. Subject has participated in another clinical study involving an investigational medicinal product (IMP) or device within 4 weeks prior to Visit 0 (screening) or is scheduled to participate in another clinical study involving an IMP, or device during the course of this study.
+  33. Subject is a member of the team conducting the study or in a dependent relationship with one of the study team members.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

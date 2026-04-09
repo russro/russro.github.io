@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 132</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 132</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Have Crohn&amp;#x27;s disease (CD) or fistulizing Crohn&amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or endoscopy
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;#x27;s Disease (SES-CD)
+  3. Have screening laboratory test results within the protocol specified parametersA female participant of childbearing potential must have a negative urine pregnancy test result at screening and baseline
+  4. Demonstrated intolerance or inadequate response to conventional or to biologic therapy for CD
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate colitis
+  2. Has complications of Crohn&amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestation
+  3. Unstable doses of concomitant Crohn&amp;#x27;s disease therapy
+  4. Receipt of Crohn&amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocol
+  5. Any medical contraindications preventing study participation"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Have Crohn&amp;#x27;s disease (CD) or fistulizing Crohn&amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or &lt;span class=&quot;diff-del&quot;&gt;endoscopy&lt;/span&gt;
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;#x27;s Disease &lt;span class=&quot;diff-del&quot;&gt;(SES-CD)&lt;/span&gt;
+  3. Have screening laboratory test results within the protocol specified &lt;span class=&quot;diff-del&quot;&gt;parametersA&lt;/span&gt; female participant of childbearing potential must have a negative urine pregnancy test result at screening and &lt;span class=&quot;diff-del&quot;&gt;baseline&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Demonstrated intolerance or inadequate response to conventional or &lt;span class=&quot;diff-del&quot;&gt;to &lt;/span&gt;biologic therapy for &lt;span class=&quot;diff-del&quot;&gt;CD&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate &lt;span class=&quot;diff-del&quot;&gt;colitis&lt;/span&gt;
+  2. Has complications of Crohn&amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other &lt;span class=&quot;diff-del&quot;&gt;manifestation&lt;/span&gt;
+  3. Unstable doses of concomitant Crohn&amp;#x27;s disease &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;
+  4. Receipt of Crohn&amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt;
+  5. Any medical contraindications preventing study &lt;span class=&quot;diff-del&quot;&gt;participation&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Have Crohn&amp;amp;#x27;s disease (CD) or fistulizing Crohn&amp;amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and&amp;amp;#x2F;or endoscopyHave moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;amp;#x27;s Disease (SES-CD)Have screening laboratory test results within the protocol specified parametersA female participant of childbearing potential must have a negative urine pregnancy test result at screening and baselineDemonstrated intolerance or inadequate response to conventional or to biologic therapy for CDExclusion Criteria:Current diagnosis of ulcerative colitis or indeterminate colitisHas complications of Crohn&amp;amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestationUnstable doses of concomitant Crohn&amp;amp;#x27;s disease therapyReceipt of Crohn&amp;amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocolAny medical contraindications preventing study participation">INCLUSION CRITERIA
+
+  1. Have Crohn&#x27;s disease (CD) or fistulizing Crohn&#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or endoscopy
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&#x27;s Disease (SES-CD)
+  3. Have screening laboratory test results within the protocol specified parametersA female participant of childbearing potential must have a negative urine pregnancy test result at screening and baseline
+  4. Demonstrated intolerance or inadequate response to conventional or to biologic therapy for CD
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate colitis
+  2. Has complications of Crohn&#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestation
+  3. Unstable doses of concomitant Crohn&#x27;s disease therapy
+  4. Receipt of Crohn&#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocol
+  5. Any medical contraindications preventing study participation</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Have Crohn&amp;#x27;s disease (CD) or fistulizing Crohn&amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or endoscopy.
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;#x27;s Disease (SES-CD).
+  3. Have screening laboratory test results within the protocol specified parameters.
+  4. A female participant of childbearing potential must have a negative urine pregnancy test result at screening and baseline.
+  5. Demonstrated intolerance or inadequate response to conventional or biologic therapy for CD.
+  6. Participants must be able to comply with the study protocol requirements.
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate colitis.
+  2. Has complications of Crohn&amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestation.
+  3. Unstable doses of concomitant Crohn&amp;#x27;s disease therapy.
+  4. Receipt of Crohn&amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocol.
+  5. Prior exposure to p40 inhibitors or p19 inhibitors.
+  6. Any medical contraindications preventing study participation.
+  7. Participants with anticipated events that align with updated protocol guidelines."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Have Crohn&amp;#x27;s disease (CD) or fistulizing Crohn&amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or &lt;span class=&quot;diff-add&quot;&gt;endoscopy.&lt;/span&gt;
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;#x27;s Disease &lt;span class=&quot;diff-add&quot;&gt;(SES-CD).&lt;/span&gt;
+  3. Have screening laboratory test results within the protocol specified &lt;span class=&quot;diff-add&quot;&gt;parameters.
+  4. A&lt;/span&gt; female participant of childbearing potential must have a negative urine pregnancy test result at screening and &lt;span class=&quot;diff-add&quot;&gt;baseline.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Demonstrated intolerance or inadequate response to conventional or biologic therapy for &lt;span class=&quot;diff-add&quot;&gt;CD.
+  6. Participants must be able to comply with the study protocol requirements.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate &lt;span class=&quot;diff-add&quot;&gt;colitis.&lt;/span&gt;
+  2. Has complications of Crohn&amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other &lt;span class=&quot;diff-add&quot;&gt;manifestation.&lt;/span&gt;
+  3. Unstable doses of concomitant Crohn&amp;#x27;s disease &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;
+  4. Receipt of Crohn&amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the &lt;span class=&quot;diff-add&quot;&gt;protocol.&lt;/span&gt;
+  5.&lt;span class=&quot;diff-add&quot;&gt; Prior exposure to p40 inhibitors or p19 inhibitors.
+  6.&lt;/span&gt; Any medical contraindications preventing study &lt;span class=&quot;diff-add&quot;&gt;participation.
+  7. Participants with anticipated events that align with updated protocol guidelines.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+- Have Crohn&amp;#x27;s disease (CD) or fistulizing Crohn&amp;#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or endoscopy.
+- Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&amp;#x27;s Disease (SES-CD).
+- Have screening laboratory test results within the protocol specified parameters.
+- A female participant of childbearing potential must have a negative urine pregnancy test result at screening and baseline.
+- Demonstrated intolerance or inadequate response to conventional or biologic therapy for CD.
+- Participants must be able to comply with the study protocol requirements.
+
+Exclusion Criteria:
+- Current diagnosis of ulcerative colitis or indeterminate colitis.
+- Has complications of Crohn&amp;#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestation.
+- Unstable doses of concomitant Crohn&amp;#x27;s disease therapy.
+- Receipt of Crohn&amp;#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocol.
+- Prior exposure to p40 inhibitors or p19 inhibitors.
+- Any medical contraindications preventing study participation.
+- Participants with anticipated events that align with updated protocol guidelines.">INCLUSION CRITERIA
+
+  1. Have Crohn&#x27;s disease (CD) or fistulizing Crohn&#x27;s disease of at least 3 months duration (defined as a minimum of 12 weeks), with colitis, ileitis, or ileocolitis, confirmed at any time in the past by radiography, histology, and/or endoscopy.
+  2. Have moderate to severe CD as assessed by CDAI, stool frequency (SF), and abdominal pain (AP) scores, and Simple Endoscopic Score for Crohn&#x27;s Disease (SES-CD).
+  3. Have screening laboratory test results within the protocol specified parameters.
+  4. A female participant of childbearing potential must have a negative urine pregnancy test result at screening and baseline.
+  5. Demonstrated intolerance or inadequate response to conventional or biologic therapy for CD.
+  6. Participants must be able to comply with the study protocol requirements.
+
+EXCLUSION CRITERIA
+
+  1. Current diagnosis of ulcerative colitis or indeterminate colitis.
+  2. Has complications of Crohn&#x27;s disease, such as symptomatic strictures or stenoses, short gut syndrome, or any other manifestation.
+  3. Unstable doses of concomitant Crohn&#x27;s disease therapy.
+  4. Receipt of Crohn&#x27;s disease approved biologic agents, investigational agents, or procedures outside of permitted timeframe as specified in the protocol.
+  5. Prior exposure to p40 inhibitors or p19 inhibitors.
+  6. Any medical contraindications preventing study participation.
+  7. Participants with anticipated events that align with updated protocol guidelines.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

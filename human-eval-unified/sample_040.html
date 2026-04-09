@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 40</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 40</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having body weight of ≥50 kilogram (kg) and &amp;lt;100 kgParticipants having a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  3. Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.
+  4. Participants who are female at birth are eligible to participate if at least one of the following conditions applies:Not pregnant or breastfeeding and at least one of the following conditions applies:Is not a participant of childbearing potential (POCBP) or Is a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study.
+  5. The investigator should evaluate the effectiveness of the contraceptive method in relationship to the first dose of study intervention.
+  6. A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  7. The investigator is responsible for review of medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early undetected pregnancy.
+  8. Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention Participants positive for Hepatitis B antigen (HBsAg) are excluded.
+  6. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excludedAny history of a severe allergic reaction with generalized urticaria, angioedema or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that would interfere with assessment of injection sites.
+  8. History of sensitivity to any of the study medications or their components or drugs of their class, or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational Monoclonal antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to first dose of study treatmentPrior exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  13. Where participation in the study would result in donation of blood or blood products in excess of 500 milliliter (mL) within 56 days.
+  14. Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  15. ALT ≥1.5 times the upper limit of normal (ULN).
+  16. Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).
+  17. Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&amp;#x27;s syndrome or asymptomatic gallstones)Corrected QT interval Fridericia&amp;#x27;s formula (QTcF)&amp;gt;450 millisecond (msec) for males and QTcF &amp;gt;470 msec for females.
+  18. The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.
+  19. Grade 4 laboratory abnormalities.
+  20. Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis;
+  21. OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZ Drug Product (EDP)"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having body weight of ≥50 &lt;span class=&quot;diff-del&quot;&gt;kilogram&lt;/span&gt; (kg) and &amp;lt;100 &lt;span class=&quot;diff-del&quot;&gt;kgParticipants&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;having&lt;/span&gt; a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  &lt;span class=&quot;diff-del&quot;&gt;3. Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.
+  &lt;/span&gt;4. Participants who are female at birth are eligible to participate if at least one of the following conditions &lt;span class=&quot;diff-del&quot;&gt;applies:Not&lt;/span&gt; pregnant or breastfeeding and &lt;span class=&quot;diff-del&quot;&gt;at least one of the following conditions applies:Is&lt;/span&gt; not a participant of childbearing potential (POCBP) or &lt;span class=&quot;diff-del&quot;&gt;Is&lt;/span&gt; a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study.&lt;span class=&quot;diff-del&quot;&gt;
+  5.&lt;/span&gt; The investigator should evaluate the effectiveness of the contraceptive method in &lt;span class=&quot;diff-del&quot;&gt;relationship&lt;/span&gt; to the first dose of study intervention.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study &lt;span class=&quot;diff-del&quot;&gt;intervention&lt;/span&gt; All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; The investigator is responsible for &lt;span class=&quot;diff-del&quot;&gt;review of&lt;/span&gt; medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an &lt;span class=&quot;diff-del&quot;&gt;early&lt;/span&gt; undetected pregnancy.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study &lt;span class=&quot;diff-del&quot;&gt;intervention&lt;/span&gt; Participants positive for &lt;span class=&quot;diff-del&quot;&gt;Hepatitis B antigen (HBsAg)&lt;/span&gt; are excluded.&lt;span class=&quot;diff-del&quot;&gt;
+  6.&lt;/span&gt; Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are &lt;span class=&quot;diff-del&quot;&gt;excludedAny&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of a severe allergic reaction with generalized urticaria, &lt;span class=&quot;diff-del&quot;&gt;angioedema&lt;/span&gt; or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that &lt;span class=&quot;diff-del&quot;&gt;would&lt;/span&gt; interfere with &lt;span class=&quot;diff-del&quot;&gt;assessment&lt;/span&gt; of injection &lt;span class=&quot;diff-del&quot;&gt;sites.&lt;/span&gt;
+  8. History of sensitivity to any of the study medications or their components&lt;span class=&quot;diff-del&quot;&gt; or drugs of their class,&lt;/span&gt; or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions &lt;span class=&quot;diff-del&quot;&gt;(including,&lt;/span&gt; but not limited &lt;span class=&quot;diff-del&quot;&gt;to,&lt;/span&gt; erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational &lt;span class=&quot;diff-del&quot;&gt;Monoclonal&lt;/span&gt; antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to first dose of study &lt;span class=&quot;diff-del&quot;&gt;treatmentPrior&lt;/span&gt; exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Where participation in the study would result in donation of blood or blood products in excess of 500 &lt;span class=&quot;diff-del&quot;&gt;milliliter&lt;/span&gt; (mL) within 56 days.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; ALT ≥1.5 times the upper limit of normal (ULN).
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&amp;#x27;s syndrome or asymptomatic gallstones)Corrected&lt;/span&gt; QT interval Fridericia&amp;#x27;s formula &lt;span class=&quot;diff-del&quot;&gt;(QTcF)&amp;gt;450&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;millisecond&lt;/span&gt; (msec) for males and QTcF &amp;gt;470 msec for females.
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; Grade 4 laboratory abnormalities.
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis;&lt;span class=&quot;diff-del&quot;&gt;
+  21.&lt;/span&gt; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in &lt;span class=&quot;diff-del&quot;&gt;ENHANZ&lt;/span&gt; Drug Product &lt;span class=&quot;diff-del&quot;&gt;(EDP)&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the exclusion criteria.Participants having body weight of ≥50 kilogram (kg) and &amp;amp;lt;100 kgParticipants having a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.Participants who are female at birth are eligible to participate if at least one of the following conditions applies:Not pregnant or breastfeeding and at least one of the following conditions applies:Is not a participant of childbearing potential (POCBP) or Is a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relationship to the first dose of study intervention.A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention All participants in the study should be counseled on safer sexual practices including the use and benefit&amp;amp;#x2F;risk of effective barrier methods (e.g., male condom).The investigator is responsible for review of medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early undetected pregnancy.Capable of giving written informed consent.Exclusion Criteria:Hypertension that is not well controlled.History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.Positive human immunodeficiency virus (HIV) antibody test.Positive test result for SARS-CoV-2.Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention Participants positive for Hepatitis B antigen (HBsAg) are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excludedAny history of a severe allergic reaction with generalized urticaria, angioedema or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that would interfere with assessment of injection sites.History of sensitivity to any of the study medications or their components or drugs of their class, or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.Prior receipt of licensed or investigational Monoclonal antibody (Mab).Receipt of any investigational study agent within 28 days prior to first dose of study treatmentPrior exposure to VH3810109 or rHuPH20 in this or another clinical study.Where participation in the study would result in donation of blood or blood products in excess of 500 milliliter (mL) within 56 days.Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.ALT ≥1.5 times the upper limit of normal (ULN).Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;amp;lt;35%).Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&amp;amp;#x27;s syndrome or asymptomatic gallstones)Corrected QT interval Fridericia&amp;amp;#x27;s formula (QTcF)&amp;amp;gt;450 millisecond (msec) for males and QTcF &amp;amp;gt;470 msec for females.The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.Grade 4 laboratory abnormalities.Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZ Drug Product (EDP)">INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having body weight of ≥50 kilogram (kg) and &lt;100 kgParticipants having a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  3. Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.
+  4. Participants who are female at birth are eligible to participate if at least one of the following conditions applies:Not pregnant or breastfeeding and at least one of the following conditions applies:Is not a participant of childbearing potential (POCBP) or Is a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study.
+  5. The investigator should evaluate the effectiveness of the contraceptive method in relationship to the first dose of study intervention.
+  6. A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  7. The investigator is responsible for review of medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early undetected pregnancy.
+  8. Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention Participants positive for Hepatitis B antigen (HBsAg) are excluded.
+  6. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excludedAny history of a severe allergic reaction with generalized urticaria, angioedema or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that would interfere with assessment of injection sites.
+  8. History of sensitivity to any of the study medications or their components or drugs of their class, or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational Monoclonal antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to first dose of study treatmentPrior exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  13. Where participation in the study would result in donation of blood or blood products in excess of 500 milliliter (mL) within 56 days.
+  14. Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  15. ALT ≥1.5 times the upper limit of normal (ULN).
+  16. Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &lt;35%).
+  17. Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&#x27;s syndrome or asymptomatic gallstones)Corrected QT interval Fridericia&#x27;s formula (QTcF)&gt;450 millisecond (msec) for males and QTcF &gt;470 msec for females.
+  18. The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.
+  19. Grade 4 laboratory abnormalities.
+  20. Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis;
+  21. OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZ Drug Product (EDP)</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 5):
+
+INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having a body weight of ≥50 kilograms (kg) and &amp;lt;100 kg.
+  3. Participants with a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  4. Participants who are female at birth are eligible to participate if at least one of the following conditions applies:
+  5. Not pregnant or breastfeeding and are not a participant of childbearing potential (POCBP) or
+  6. Are a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relation to the first dose of study intervention.
+  7. A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention.
+  8. All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  9. The investigator is responsible for reviewing medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early, undetected pregnancy.
+  10. Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention. Participants positive for HBsAg are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excluded.
+  6. History of a severe allergic reaction with generalized urticaria, angioedema, or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos overlying potential injection sites that may interfere with the interpretation of injection site reactions (ISRs) or administration of GSK3810109.
+  8. History of sensitivity to any of the study medications or their components or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including but not limited to erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational monoclonal antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to the first dose of study treatment.
+  13. Prior exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  14. Where participation in the study would result in donation of blood or blood products in excess of 500 milliliters (mL) within 56 days.
+  15. Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  16. ALT ≥1.5 times the upper limit of normal (ULN).
+  17. Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).
+  18. Corrected QT interval Fridericia&amp;#x27;s formula (QTcF) &amp;gt;450 milliseconds (msec) for males and QTcF &amp;gt;470 msec for females.
+  19. The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with the interpretation of ISRs or administration of VH3810109.
+  20. Grade 4 laboratory abnormalities.
+  21. Any other chronic or clinically significant medical condition that in the opinion of the investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZE™ Drug Product (EDP)."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 5):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having &lt;span class=&quot;diff-add&quot;&gt;a &lt;/span&gt;body weight of ≥50 &lt;span class=&quot;diff-add&quot;&gt;kilograms&lt;/span&gt; (kg) and &amp;lt;100 &lt;span class=&quot;diff-add&quot;&gt;kg.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants with&lt;/span&gt; a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  4. Participants who are female at birth are eligible to participate if at least one of the following conditions &lt;span class=&quot;diff-add&quot;&gt;applies:
+  5. Not&lt;/span&gt; pregnant or breastfeeding and &lt;span class=&quot;diff-add&quot;&gt;are&lt;/span&gt; not a participant of childbearing potential (POCBP) or&lt;span class=&quot;diff-add&quot;&gt;
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Are&lt;/span&gt; a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in &lt;span class=&quot;diff-add&quot;&gt;relation&lt;/span&gt; to the first dose of study intervention.
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study &lt;span class=&quot;diff-add&quot;&gt;intervention.
+  8.&lt;/span&gt; All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; The investigator is responsible for &lt;span class=&quot;diff-add&quot;&gt;reviewing&lt;/span&gt; medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an &lt;span class=&quot;diff-add&quot;&gt;early,&lt;/span&gt; undetected pregnancy.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study &lt;span class=&quot;diff-add&quot;&gt;intervention.&lt;/span&gt; Participants positive for &lt;span class=&quot;diff-add&quot;&gt;HBsAg&lt;/span&gt; are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are &lt;span class=&quot;diff-add&quot;&gt;excluded.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; of a severe allergic reaction with generalized urticaria, &lt;span class=&quot;diff-add&quot;&gt;angioedema,&lt;/span&gt; or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos &lt;span class=&quot;diff-add&quot;&gt;overlying potential injection sites &lt;/span&gt;that &lt;span class=&quot;diff-add&quot;&gt;may&lt;/span&gt; interfere with &lt;span class=&quot;diff-add&quot;&gt;the interpretation&lt;/span&gt; of injection &lt;span class=&quot;diff-add&quot;&gt;site reactions (ISRs) or administration of GSK3810109.&lt;/span&gt;
+  8. History of sensitivity to any of the study medications or their components or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions &lt;span class=&quot;diff-add&quot;&gt;(including&lt;/span&gt; but not limited &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational &lt;span class=&quot;diff-add&quot;&gt;monoclonal&lt;/span&gt; antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;first dose of study &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  13. Prior&lt;/span&gt; exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Where participation in the study would result in donation of blood or blood products in excess of 500 &lt;span class=&quot;diff-add&quot;&gt;milliliters&lt;/span&gt; (mL) within 56 days.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; ALT ≥1.5 times the upper limit of normal (ULN).
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Corrected&lt;/span&gt; QT interval Fridericia&amp;#x27;s formula &lt;span class=&quot;diff-add&quot;&gt;(QTcF)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;450 milliseconds&lt;/span&gt; (msec) for males and QTcF &amp;gt;470 msec for females.
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;interpretation of ISRs or administration of VH3810109.
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Grade 4 laboratory abnormalities.
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; Any other chronic or clinically significant medical condition that in the opinion of&lt;span class=&quot;diff-add&quot;&gt; the&lt;/span&gt; investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in &lt;span class=&quot;diff-add&quot;&gt;ENHANZE™&lt;/span&gt; Drug Product &lt;span class=&quot;diff-add&quot;&gt;(EDP).&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 5):
+
+**Inclusion Criteria:**
+
+* Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the exclusion criteria.
+* Participants having a body weight of ≥50 kilograms (kg) and &amp;lt;100 kg.
+* Participants with a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+* Participants who are female at birth are eligible to participate if at least one of the following conditions applies:
+    * Not pregnant or breastfeeding and are not a participant of childbearing potential (POCBP) or
+    * Are a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relation to the first dose of study intervention.
+    * A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention.
+* All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+* The investigator is responsible for reviewing medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early, undetected pregnancy.
+* Capable of giving written informed consent.
+
+**Exclusion Criteria:**
+
+* Hypertension that is not well controlled.
+* History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+* Positive human immunodeficiency virus (HIV) antibody test.
+* Positive test result for SARS-CoV-2.
+* Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention. Participants positive for HBsAg are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excluded.
+* History of a severe allergic reaction with generalized urticaria, angioedema, or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+* The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos overlying potential injection sites that may interfere with the interpretation of injection site reactions (ISRs) or administration of GSK3810109.
+* History of sensitivity to any of the study medications or their components or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+* Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including but not limited to erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+* Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+* Prior receipt of licensed or investigational monoclonal antibody (Mab).
+* Receipt of any investigational study agent within 28 days prior to the first dose of study treatment.
+* Prior exposure to VH3810109 or rHuPH20 in this or another clinical study.
+* Where participation in the study would result in donation of blood or blood products in excess of 500 milliliters (mL) within 56 days.
+* Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+* ALT ≥1.5 times the upper limit of normal (ULN).
+* Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).
+* Corrected QT interval Fridericia&amp;#x27;s formula (QTcF) &amp;gt;450 milliseconds (msec) for males and QTcF &amp;gt;470 msec for females.
+* The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with the interpretation of ISRs or administration of VH3810109.
+* Grade 4 laboratory abnormalities.
+* Any other chronic or clinically significant medical condition that in the opinion of the investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+* Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZE™ Drug Product (EDP).">Amended Eligibility Criteria (Version 5):
+
+INCLUSION CRITERIA
+
+  1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the
+
+EXCLUSION CRITERIA
+
+  1. .
+  2. Participants having a body weight of ≥50 kilograms (kg) and &lt;100 kg.
+  3. Participants with a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.
+  4. Participants who are female at birth are eligible to participate if at least one of the following conditions applies:
+  5. Not pregnant or breastfeeding and are not a participant of childbearing potential (POCBP) or
+  6. Are a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relation to the first dose of study intervention.
+  7. A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention.
+  8. All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).
+  9. The investigator is responsible for reviewing medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early, undetected pregnancy.
+  10. Capable of giving written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Hypertension that is not well controlled.
+  2. History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.
+  3. Positive human immunodeficiency virus (HIV) antibody test.
+  4. Positive test result for SARS-CoV-2.
+  5. Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention. Participants positive for HBsAg are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excluded.
+  6. History of a severe allergic reaction with generalized urticaria, angioedema, or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.
+  7. The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos overlying potential injection sites that may interfere with the interpretation of injection site reactions (ISRs) or administration of GSK3810109.
+  8. History of sensitivity to any of the study medications or their components or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.
+  9. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including but not limited to erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).
+  10. Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.
+  11. Prior receipt of licensed or investigational monoclonal antibody (Mab).
+  12. Receipt of any investigational study agent within 28 days prior to the first dose of study treatment.
+  13. Prior exposure to VH3810109 or rHuPH20 in this or another clinical study.
+  14. Where participation in the study would result in donation of blood or blood products in excess of 500 milliliters (mL) within 56 days.
+  15. Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.
+  16. ALT ≥1.5 times the upper limit of normal (ULN).
+  17. Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &lt;35%).
+  18. Corrected QT interval Fridericia&#x27;s formula (QTcF) &gt;450 milliseconds (msec) for males and QTcF &gt;470 msec for females.
+  19. The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with the interpretation of ISRs or administration of VH3810109.
+  20. Grade 4 laboratory abnormalities.
+  21. Any other chronic or clinically significant medical condition that in the opinion of the investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.
+  22. Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZE™ Drug Product (EDP).</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

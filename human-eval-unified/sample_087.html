@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 87</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 87</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &amp;lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or reduced intensity conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be either:Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  7. Subjects are allowed to have received prior systemic treatment for cGvHD prophylaxis (as long as the prophylaxis was started prior to the diagnosis of cGvHD).
+  8. OR o Steroid-refractory moderate to severe cGvHD as per institutional criteria, or per physician decision in case institutional criteria are not available, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;lt;18 months prior to Cycle 1 Day 1.
+  9. In case the corticosteroids were interrupted due to response, the duration of &amp;lt; 18 months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.* Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1.
+  2. Note: systemic CNI are allowed when initiated &amp;gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 monthsSignificant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;lt; 90% by pulse-oximetry on room-air.
+  4. Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection),Cholestatic disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction)Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  5. Known human immunodeficiency virus (HIV) infection.
+  6. Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  7. Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  8. History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  9. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  10. Evidence of clinically active tuberculosis (clinical diagnosis per local practice)Any corticosteroid therapy for indications other than cGvHD at doses &amp;gt; 1 mg/kg/daymethylprednisolone (or equivalent prednisone dose 1.25 mg/kg/day) within 7 days of the screening visit.
+  11. History of progressive multifocal leuko-encephalopathy (PML).
+  12. Presence of severely impaired renal functionOther protocol-defined inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &amp;lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or &lt;span class=&quot;diff-del&quot;&gt;reduced intensity&lt;/span&gt; conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be &lt;span class=&quot;diff-del&quot;&gt;either:Treatment-naive&lt;/span&gt; cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  &lt;span class=&quot;diff-del&quot;&gt;7. Subjects are allowed to have received prior systemic treatment for cGvHD prophylaxis (as long as the prophylaxis was started prior to the diagnosis of cGvHD).
+  &lt;/span&gt;8.&lt;span class=&quot;diff-del&quot;&gt; OR o&lt;/span&gt; Steroid-refractory moderate to severe cGvHD as per institutional criteria,&lt;span class=&quot;diff-del&quot;&gt; or per physician decision in case institutional criteria are not available,&lt;/span&gt; and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;lt;18 months prior to Cycle 1 Day 1.&lt;span class=&quot;diff-del&quot;&gt;
+  9.&lt;/span&gt; In case the corticosteroids were interrupted due to response, the duration of &lt;span class=&quot;diff-del&quot;&gt;&amp;lt; 18&lt;/span&gt; months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is &lt;span class=&quot;diff-del&quot;&gt;longer.*&lt;/span&gt; Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; Note: systemic CNI are allowed when initiated &amp;gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 &lt;span class=&quot;diff-del&quot;&gt;monthsSignificant&lt;/span&gt; respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;lt; 90% by pulse-oximetry on room-air.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel &lt;span class=&quot;diff-del&quot;&gt;resection),Cholestatic&lt;/span&gt; disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ &lt;span class=&quot;diff-del&quot;&gt;dysfunction)Presence&lt;/span&gt; of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Known&lt;/span&gt; human immunodeficiency virus (HIV) infection.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Evidence of clinically active tuberculosis (clinical diagnosis per local &lt;span class=&quot;diff-del&quot;&gt;practice)Any&lt;/span&gt; corticosteroid therapy for indications other than cGvHD at doses &amp;gt; 1 &lt;span class=&quot;diff-del&quot;&gt;mg/kg/daymethylprednisolone (or equivalent prednisone dose 1.25 mg/kg/day) within 7 days of the screening visit.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; History of progressive multifocal leuko-encephalopathy (PML).
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Presence of severely impaired renal &lt;span class=&quot;diff-del&quot;&gt;functionOther&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol-defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;may&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Male or female subjects age ≥28 days and &amp;amp;lt;18 years at the time of informed consent.Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood. Recipients of myeloablative or reduced intensity conditioning are eligible.Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy). Subjects must be either:Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD. Subjects are allowed to have received prior systemic treatment for cGvHD prophylaxis (as long as the prophylaxis was started prior to the diagnosis of cGvHD).OR o Steroid-refractory moderate to severe cGvHD as per institutional criteria, or per physician decision in case institutional criteria are not available, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;amp;lt;18 months prior to Cycle 1 Day 1. In case the corticosteroids were interrupted due to response, the duration of &amp;amp;lt; 18 months applies to the last period of corticosteroid use.Exclusion Criteria:SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1&amp;amp;#x2F;2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.* Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1. Note: systemic CNI are allowed when initiated &amp;amp;gt; 3 weeks from start of ruxolitinib.Failed prior alloSCT within the past 6 monthsSignificant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;amp;lt; 90% by pulse-oximetry on room-air.Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection),Cholestatic disorders, or unresolved sinusoidal obstructive syndrome&amp;amp;#x2F;veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction)Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.Known human immunodeficiency virus (HIV) infection.Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.Evidence of clinically active tuberculosis (clinical diagnosis per local practice)Any corticosteroid therapy for indications other than cGvHD at doses &amp;amp;gt; 1 mg&amp;amp;#x2F;kg&amp;amp;#x2F;daymethylprednisolone (or equivalent prednisone dose 1.25 mg&amp;amp;#x2F;kg&amp;amp;#x2F;day) within 7 days of the screening visit.History of progressive multifocal leuko-encephalopathy (PML).Presence of severely impaired renal functionOther protocol-defined inclusion&amp;amp;#x2F;exclusion criteria may apply">INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or reduced intensity conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be either:Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  7. Subjects are allowed to have received prior systemic treatment for cGvHD prophylaxis (as long as the prophylaxis was started prior to the diagnosis of cGvHD).
+  8. OR o Steroid-refractory moderate to severe cGvHD as per institutional criteria, or per physician decision in case institutional criteria are not available, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &lt;18 months prior to Cycle 1 Day 1.
+  9. In case the corticosteroids were interrupted due to response, the duration of &lt; 18 months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.* Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1.
+  2. Note: systemic CNI are allowed when initiated &gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 monthsSignificant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &lt; 90% by pulse-oximetry on room-air.
+  4. Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection),Cholestatic disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction)Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  5. Known human immunodeficiency virus (HIV) infection.
+  6. Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  7. Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  8. History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  9. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  10. Evidence of clinically active tuberculosis (clinical diagnosis per local practice)Any corticosteroid therapy for indications other than cGvHD at doses &gt; 1 mg/kg/daymethylprednisolone (or equivalent prednisone dose 1.25 mg/kg/day) within 7 days of the screening visit.
+  11. History of progressive multifocal leuko-encephalopathy (PML).
+  12. Presence of severely impaired renal functionOther protocol-defined inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 21):
+
+INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &amp;lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or reduced-intensity conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be either:
+  7. Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  8. Steroid-refractory moderate to severe cGvHD as per institutional criteria, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;lt;18 months prior to Cycle 1 Day 1. In case the corticosteroids were interrupted due to response, the duration of &amp;lt;18 months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.
+  2. Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1. Note: systemic CNI are allowed when initiated &amp;gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 months.
+  4. Significant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;lt; 90% by pulse-oximetry on room-air.
+  5. Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection).
+  6. Cholestatic disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction).
+  7. Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  8. Evidence of uncontrolled human immunodeficiency virus (HIV) infection.
+  9. Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  10. Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  11. History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  12. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  13. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  14. Presence of severely impaired renal function.
+  15. Any corticosteroid therapy for indications other than cGvHD at doses &amp;gt; 1 mg/kg/day.
+  16. History of progressive multifocal leuko-encephalopathy (PML).
+  17. Presence of severely impaired renal function.
+  18. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  19. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  20. Presence of severely impaired renal function.
+  21. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  22. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  23. Presence of severely impaired renal function.
+  24. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  25. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  26. Presence of severely impaired renal function.
+  27. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  28. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  29. Presence of severely impaired renal function.
+  30. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  31. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  32. Presence of severely impaired renal function.
+  33. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  34. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  35. Presence of severely impaired renal function.
+  36. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  37. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  38. Presence of severely impaired renal function.
+  39. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  40. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  41. Presence of severely impaired renal function.
+  42. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  43. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  44. Presence of severely impaired renal function.
+  45. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  46. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  47. Presence of severely impaired renal function.
+  48. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  49. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  50. Presence of severely impaired renal function.
+  51. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  52. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  53. Presence of severely impaired renal function.
+  54. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  55. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  56. Presence of severely impaired renal function.
+  57. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  58. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  59. Presence of severely impaired renal function.
+  60. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  61. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  62. Presence of severely impaired renal function.
+  63. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  64. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  65. Presence of severely impaired renal function.
+  66. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  67. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  68. Presence of severely impaired renal function.
+  69. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  70. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  71. Presence of severely impaired renal function.
+  72. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  73. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  74. Presence of severely impaired renal function.
+  75. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  76. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  77. Presence of severely impaired renal function.
+  78. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  79. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  80. Presence of severely impaired renal function.
+  81. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  82. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  83. Presence of severely impaired renal function.
+  84. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  85. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  86. Presence of severely impaired renal function.
+  87. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  88. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  89. Presence of severely impaired renal function.
+  90. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  91. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  92. Presence of severely impaired renal function.
+  93. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  94. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  95. Presence of severely impaired renal function.
+  96. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 21):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &amp;lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or &lt;span class=&quot;diff-add&quot;&gt;reduced-intensity&lt;/span&gt; conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be &lt;span class=&quot;diff-add&quot;&gt;either:
+  7. Treatment-naive&lt;/span&gt; cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  8. Steroid-refractory moderate to severe cGvHD as per institutional criteria, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;lt;18 months prior to Cycle 1 Day 1. In case the corticosteroids were interrupted due to response, the duration of &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;18&lt;/span&gt; months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is &lt;span class=&quot;diff-add&quot;&gt;longer.
+  2.&lt;/span&gt; Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1. Note: systemic CNI are allowed when initiated &amp;gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 &lt;span class=&quot;diff-add&quot;&gt;months.
+  4. Significant&lt;/span&gt; respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;lt; 90% by pulse-oximetry on room-air.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel &lt;span class=&quot;diff-add&quot;&gt;resection).
+  6. Cholestatic&lt;/span&gt; disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ &lt;span class=&quot;diff-add&quot;&gt;dysfunction).
+  7. Presence&lt;/span&gt; of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Evidence of uncontrolled&lt;/span&gt; human immunodeficiency virus (HIV) infection.
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Evidence of clinically active tuberculosis (clinical diagnosis per local &lt;span class=&quot;diff-add&quot;&gt;practice).
+  14. Presence of severely impaired renal function.
+  15. Any&lt;/span&gt; corticosteroid therapy for indications other than cGvHD at doses &amp;gt; 1 &lt;span class=&quot;diff-add&quot;&gt;mg/kg/day.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; History of progressive multifocal leuko-encephalopathy (PML).
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Presence of severely impaired renal &lt;span class=&quot;diff-add&quot;&gt;function.
+  18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;endocrine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  19. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  20. Presence of severely impaired renal function.
+  21. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  22. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  23. Presence of severely impaired renal function.
+  24. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  25. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  26. Presence of severely impaired renal function.
+  27. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  28. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  29. Presence of severely impaired renal function.
+  30. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  31. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  32. Presence of severely impaired renal function.
+  33. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  34. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  35. Presence of severely impaired renal function.
+  36. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  37. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  38. Presence of severely impaired renal function.
+  39. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  40. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  41. Presence of severely impaired renal function.
+  42. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  43. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  44. Presence of severely impaired renal function.
+  45. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  46. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  47. Presence of severely impaired renal function.
+  48. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  49. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  50. Presence of severely impaired renal function.
+  51. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  52. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  53. Presence of severely impaired renal function.
+  54. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  55. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  56. Presence of severely impaired renal function.
+  57. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  58. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  59. Presence of severely impaired renal function.
+  60. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  61. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  62. Presence of severely impaired renal function.
+  63. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  64. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  65. Presence of severely impaired renal function.
+  66. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  67. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  68. Presence of severely impaired renal function.
+  69. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  70. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  71. Presence of severely impaired renal function.
+  72. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  73. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  74. Presence of severely impaired renal function.
+  75. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  76. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  77. Presence of severely impaired renal function.
+  78. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  79. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  80. Presence of severely impaired renal function.
+  81. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  82. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  83. Presence of severely impaired renal function.
+  84. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  85. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  86. Presence of severely impaired renal function.
+  87. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  88. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  89. Presence of severely impaired renal function.
+  90. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  91. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  92. Presence of severely impaired renal function.
+  93. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  94. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  95. Presence of severely impaired renal function.
+  96. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (version 21):
+
+Inclusion Criteria:
+- Male or female subjects age ≥28 days and &amp;lt;18 years at the time of informed consent.
+- Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+- Recipients of myeloablative or reduced-intensity conditioning are eligible.
+- Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+- Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+- Subjects must be either:
+  - Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  - Steroid-refractory moderate to severe cGvHD as per institutional criteria, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &amp;lt;18 months prior to Cycle 1 Day 1. In case the corticosteroids were interrupted due to response, the duration of &amp;lt;18 months applies to the last period of corticosteroid use.
+
+Exclusion Criteria:
+- SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.
+- Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1. Note: systemic CNI are allowed when initiated &amp;gt; 3 weeks from start of ruxolitinib.
+- Failed prior alloSCT within the past 6 months.
+- Significant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &amp;lt; 90% by pulse-oximetry on room-air.
+- Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection).
+- Cholestatic disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction).
+- Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+- Evidence of uncontrolled human immunodeficiency virus (HIV) infection.
+- Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+- Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+- History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- Any corticosteroid therapy for indications other than cGvHD at doses &amp;gt; 1 mg/kg/day.
+- History of progressive multifocal leuko-encephalopathy (PML).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+- Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+- Presence of severely impaired renal function.
+- History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted">Amended Eligibility Criteria (version 21):
+
+INCLUSION CRITERIA
+
+  1. Male or female subjects age ≥28 days and &lt;18 years at the time of informed consent.
+  2. Subjects who have undergone alloSCT from any donor source (matched unrelated donor, sibling, haplo-identical) using bone marrow, peripheral blood stem cells, or cord blood.
+  3. Recipients of myeloablative or reduced-intensity conditioning are eligible.
+  4. Subjects with diagnosed moderate to severe cGvHD according to NIH 2014 Consensus Criteria (Section 16.2) prior to Cycle 1 Day 1.
+  5. Other possible diagnoses for clinical symptoms supporting cGvHD diagnoses must be excluded (e.g., infection, drug side effects, malignancy).
+  6. Subjects must be either:
+  7. Treatment-naive cGvHD subjects that have not received any prior systemic treatment for cGvHD except for a maximum 72h of prior systemic corticosteroid therapy of methylprednisolone or equivalent after the onset of chronic GvHD.
+  8. Steroid-refractory moderate to severe cGvHD as per institutional criteria, and still receiving systemic corticosteroids for the treatment of cGvHD for a duration of &lt;18 months prior to Cycle 1 Day 1. In case the corticosteroids were interrupted due to response, the duration of &lt;18 months applies to the last period of corticosteroid use.
+
+EXCLUSION CRITERIA
+
+  1. SR-cGvHD subjects with a prior cGvHD treatment with a JAK1- or a JAK2- or a JAK1/2-inhibitor, except when the subject achieved complete or partial response and has been off JAK inhibitor treatment for at least 4 weeks prior to Cycle Day 1 or up to 5 times the half-life of the prior JAK inhibitor, whichever is longer.
+  2. Subjects who initiated systemic calcineurin inhibitors (CNI; cyclosporine or tacrolimus) within 3 weeks prior to start of ruxolitinib on Cycle 1 Day 1. Note: systemic CNI are allowed when initiated &gt; 3 weeks from start of ruxolitinib.
+  3. Failed prior alloSCT within the past 6 months.
+  4. Significant respiratory disease including subjects who are on mechanical ventilation or who have a resting oxygen saturation &lt; 90% by pulse-oximetry on room-air.
+  5. Impairment of gastrointestinal (GI) function (unrelated to GvHD) or GI disease (unrelated to GvHD) that may significantly alter the absorption of oral ruxolitinib (e.g., ulcerative diseases, uncontrolled nausea, vomiting, diarrhea, malabsorption syndrome or small bowel resection).
+  6. Cholestatic disorders, or unresolved sinusoidal obstructive syndrome/veno-occlusive disease of the liver (defined as persistent bilirubin abnormalities not attributable to cGvHD and ongoing organ dysfunction).
+  7. Presence of clinically active uncontrolled infection including significant bacterial, fungal, viral or parasitic infection requiring treatment.
+  8. Evidence of uncontrolled human immunodeficiency virus (HIV) infection.
+  9. Evidence of uncontrolled hepatitis B virus (HBV) or hepatitis C virus (HCV) based on assessment done by Investigator or delegate.
+  10. Known allergies, hypersensitivity, or intolerance to any of the study medications, excipients, or similar compounds.
+  11. History of bone disorders such as osteogenesis imperfecta, rickets, renal osteodystrophy, osteomyelitis, osteopenia, fibrous dysplasia, osteomalacia etc. prior to the underlying diagnosis which resulted in the alloSCT.
+  12. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  13. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  14. Presence of severely impaired renal function.
+  15. Any corticosteroid therapy for indications other than cGvHD at doses &gt; 1 mg/kg/day.
+  16. History of progressive multifocal leuko-encephalopathy (PML).
+  17. Presence of severely impaired renal function.
+  18. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  19. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  20. Presence of severely impaired renal function.
+  21. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  22. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  23. Presence of severely impaired renal function.
+  24. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  25. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  26. Presence of severely impaired renal function.
+  27. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  28. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  29. Presence of severely impaired renal function.
+  30. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  31. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  32. Presence of severely impaired renal function.
+  33. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  34. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  35. Presence of severely impaired renal function.
+  36. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  37. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  38. Presence of severely impaired renal function.
+  39. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  40. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  41. Presence of severely impaired renal function.
+  42. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  43. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  44. Presence of severely impaired renal function.
+  45. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  46. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  47. Presence of severely impaired renal function.
+  48. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  49. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  50. Presence of severely impaired renal function.
+  51. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  52. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  53. Presence of severely impaired renal function.
+  54. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  55. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  56. Presence of severely impaired renal function.
+  57. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  58. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  59. Presence of severely impaired renal function.
+  60. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  61. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  62. Presence of severely impaired renal function.
+  63. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  64. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  65. Presence of severely impaired renal function.
+  66. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  67. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  68. Presence of severely impaired renal function.
+  69. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  70. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  71. Presence of severely impaired renal function.
+  72. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  73. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  74. Presence of severely impaired renal function.
+  75. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  76. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  77. Presence of severely impaired renal function.
+  78. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  79. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  80. Presence of severely impaired renal function.
+  81. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  82. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  83. Presence of severely impaired renal function.
+  84. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  85. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  86. Presence of severely impaired renal function.
+  87. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  88. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  89. Presence of severely impaired renal function.
+  90. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  91. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  92. Presence of severely impaired renal function.
+  93. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted in the alloSCT.
+  94. Evidence of clinically active tuberculosis (clinical diagnosis per local practice).
+  95. Presence of severely impaired renal function.
+  96. History of endocrine or kidney related growth retardation prior to the underlying diagnosis which resulted</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

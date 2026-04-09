@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 61</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 61</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. This study has two cohorts: A Mild Cognitive Impairment (MCI)/Dementia cohort and a non-dementia cohort.
+  2. MCI/Dementia cohort:Age 65 or greaterDiagnosis of MCI or dementia from International Classification of Diseases ICD-9 and ICD-10 codesAt least one other chronic conditionFive or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit)Non-dementia cohort:Age 75 or olderNo MCI or dementia diagnosisAt least two chronic conditions documented5 or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit).
+  3. Care partners:Family or other companions age 21 years or greater who regularly help the patient with managing medicationsThe patient can identify a care partner who assists with medication management to complete the enrollment dyad.
+  4. Patient or care partner must be able to hear well enough to participate in interviews on the telephone.
+  5. Patient agrees to answer &amp;quot;Older Adult Screening Questions&amp;quot; as detailed on the Patient Screening Script.
+  6. Patient&amp;#x27;s care partner must be willing to participate in the study with the patient and answer the FCMAHS at the baseline visit and at the 3-month visit.
+  7. Primary care physicians:• All primary care physicians at the pilot site will be included.
+
+EXCLUSION CRITERIA
+
+  1. Patient/Care partner dyads:Individuals residing in long term care facilities or enrolled in hospice care at baseline will be excluded.
+  2. The patient does not have a care partner that assists with medication management.
+  3. The patient takes 4 or fewer different medications for all his/her health needsThe patient declines to identify his/her care partnerFor the MCI/Dementia cohort: Answers all memory questions correctly, thus receiving a score of &amp;quot;0&amp;quot; for the screening assessmentIf the patient has a designated Legal Authorized Representative (LAR) but the patient&amp;#x27;s LAR is unreachable or declines to have the patient involved in the study.
+  4. The care partner declines to participate in the study as part of the patient/care partner dyad.
+  5. Primary care physicians:• Physicians who only provide urgent care will be excluded."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  &lt;/span&gt;1. &lt;span class=&quot;diff-del&quot;&gt;This study has two cohorts: A Mild Cognitive Impairment (MCI)/Dementia cohort&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;non-dementia&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cohort.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;MCI/Dementia&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cohort:Age&lt;/span&gt; 65 or &lt;span class=&quot;diff-del&quot;&gt;greaterDiagnosis of&lt;/span&gt; MCI or dementia from &lt;span class=&quot;diff-del&quot;&gt;International Classification of Diseases &lt;/span&gt;ICD-9 and ICD-10 &lt;span class=&quot;diff-del&quot;&gt;codesAt&lt;/span&gt; least one other chronic &lt;span class=&quot;diff-del&quot;&gt;conditionFive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;chronic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medications&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;include&lt;/span&gt; all &lt;span class=&quot;diff-del&quot;&gt;prescription&lt;/span&gt; and over-the-counter medications, both scheduled and as &lt;span class=&quot;diff-del&quot;&gt;needed)Have&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care physician at&lt;/span&gt; the pilot &lt;span class=&quot;diff-del&quot;&gt;clinic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has enrolled in the studyHave a routine, scheduled&lt;/span&gt; visit with a primary care physician during the pilot study &lt;span class=&quot;diff-del&quot;&gt;period&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(not&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;an urgent, acute&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;pre-op&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;visit)Non-dementia&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cohort:Age&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;75&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;olderNo&lt;/span&gt; MCI or dementia &lt;span class=&quot;diff-del&quot;&gt;diagnosisAt&lt;/span&gt; least &lt;span class=&quot;diff-del&quot;&gt;two&lt;/span&gt; chronic &lt;span class=&quot;diff-del&quot;&gt;conditions&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;documented5&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;chronic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medications&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;include&lt;/span&gt; all &lt;span class=&quot;diff-del&quot;&gt;prescription&lt;/span&gt; and over-the-counter medications, both scheduled and as &lt;span class=&quot;diff-del&quot;&gt;needed)Have&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care physician at&lt;/span&gt; the pilot &lt;span class=&quot;diff-del&quot;&gt;clinic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has enrolled in the studyHave a routine, scheduled&lt;/span&gt; visit with a primary care physician during the pilot study &lt;span class=&quot;diff-del&quot;&gt;period (not an urgent, acute or pre-op visit).
+  3. &lt;/span&gt;Care &lt;span class=&quot;diff-del&quot;&gt;partners:Family&lt;/span&gt; or other companions age 21 years or &lt;span class=&quot;diff-del&quot;&gt;greater&lt;/span&gt; who regularly help the patient with managing &lt;span class=&quot;diff-del&quot;&gt;medicationsThe&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;identify a care partner who assists with medication management to complete&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;enrollment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dyad.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;able&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hear&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;well&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enough&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participate&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in interviews&lt;/span&gt; on the &lt;span class=&quot;diff-del&quot;&gt;telephone.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;agrees&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;quot;Older&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Adult&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Questions&amp;quot;&lt;/span&gt; as &lt;span class=&quot;diff-del&quot;&gt;detailed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Script.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&amp;#x27;s&lt;/span&gt; care &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must be willing to participate in&lt;/span&gt; the study &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; the patient &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;answer&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;FCMAHS at the baseline visit&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;3-month&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;visit.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Primary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physicians:•&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;All&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;primary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physicians&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pilot&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;site&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;will&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;included.&lt;/span&gt;
+
+&lt;span class=&quot;diff-del&quot;&gt;EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient/Care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dyads:Individuals&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;residing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;term&lt;/span&gt; care facilities or &lt;span class=&quot;diff-del&quot;&gt;enrolled in &lt;/span&gt;hospice care at &lt;span class=&quot;diff-del&quot;&gt;baseline&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;will&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;excluded.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have&lt;/span&gt; a care &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;assists&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; medication management.&lt;span class=&quot;diff-del&quot;&gt;
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;4&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;fewer&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;different&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medications&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;his/her health needsThe patient declines to identify his/her care partnerFor&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;MCI/Dementia&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cohort:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Answers&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;questions&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;correctly,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;thus&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receiving&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;score&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;&amp;quot;0&amp;quot;&lt;/span&gt; for the &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;assessmentIf&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;designated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Legal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Authorized Representative (LAR) but the patient&amp;#x27;s LAR is unreachable or declines to have the patient involved&lt;/span&gt; in the &lt;span class=&quot;diff-del&quot;&gt;study.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;declines&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participate&lt;/span&gt; in the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;part&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;patient/care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dyad.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Primary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physicians:•&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Physicians&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;provide&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;urgent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;care&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;will&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;excluded.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:This study has two cohorts: A Mild Cognitive Impairment (MCI)&amp;amp;#x2F;Dementia cohort and a non-dementia cohort.MCI&amp;amp;#x2F;Dementia cohort:Age 65 or greaterDiagnosis of MCI or dementia from International Classification of Diseases ICD-9 and ICD-10 codesAt least one other chronic conditionFive or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit)Non-dementia cohort:Age 75 or olderNo MCI or dementia diagnosisAt least two chronic conditions documented5 or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit).Care partners:Family or other companions age 21 years or greater who regularly help the patient with managing medicationsThe patient can identify a care partner who assists with medication management to complete the enrollment dyad.Patient or care partner must be able to hear well enough to participate in interviews on the telephone.Patient agrees to answer &amp;amp;quot;Older Adult Screening Questions&amp;amp;quot; as detailed on the Patient Screening Script.Patient&amp;amp;#x27;s care partner must be willing to participate in the study with the patient and answer the FCMAHS at the baseline visit and at the 3-month visit.Primary care physicians:• All primary care physicians at the pilot site will be included.Exclusion Criteria:Patient&amp;amp;#x2F;Care partner dyads:Individuals residing in long term care facilities or enrolled in hospice care at baseline will be excluded.The patient does not have a care partner that assists with medication management.The patient takes 4 or fewer different medications for all his&amp;amp;#x2F;her health needsThe patient declines to identify his&amp;amp;#x2F;her care partnerFor the MCI&amp;amp;#x2F;Dementia cohort: Answers all memory questions correctly, thus receiving a score of &amp;amp;quot;0&amp;amp;quot; for the screening assessmentIf the patient has a designated Legal Authorized Representative (LAR) but the patient&amp;amp;#x27;s LAR is unreachable or declines to have the patient involved in the study.The care partner declines to participate in the study as part of the patient&amp;amp;#x2F;care partner dyad.Primary care physicians:• Physicians who only provide urgent care will be excluded.">INCLUSION CRITERIA
+
+  1. This study has two cohorts: A Mild Cognitive Impairment (MCI)/Dementia cohort and a non-dementia cohort.
+  2. MCI/Dementia cohort:Age 65 or greaterDiagnosis of MCI or dementia from International Classification of Diseases ICD-9 and ICD-10 codesAt least one other chronic conditionFive or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit)Non-dementia cohort:Age 75 or olderNo MCI or dementia diagnosisAt least two chronic conditions documented5 or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit).
+  3. Care partners:Family or other companions age 21 years or greater who regularly help the patient with managing medicationsThe patient can identify a care partner who assists with medication management to complete the enrollment dyad.
+  4. Patient or care partner must be able to hear well enough to participate in interviews on the telephone.
+  5. Patient agrees to answer &quot;Older Adult Screening Questions&quot; as detailed on the Patient Screening Script.
+  6. Patient&#x27;s care partner must be willing to participate in the study with the patient and answer the FCMAHS at the baseline visit and at the 3-month visit.
+  7. Primary care physicians:• All primary care physicians at the pilot site will be included.
+
+EXCLUSION CRITERIA
+
+  1. Patient/Care partner dyads:Individuals residing in long term care facilities or enrolled in hospice care at baseline will be excluded.
+  2. The patient does not have a care partner that assists with medication management.
+  3. The patient takes 4 or fewer different medications for all his/her health needsThe patient declines to identify his/her care partnerFor the MCI/Dementia cohort: Answers all memory questions correctly, thus receiving a score of &quot;0&quot; for the screening assessmentIf the patient has a designated Legal Authorized Representative (LAR) but the patient&#x27;s LAR is unreachable or declines to have the patient involved in the study.
+  4. The care partner declines to participate in the study as part of the patient/care partner dyad.
+  5. Primary care physicians:• Physicians who only provide urgent care will be excluded.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Eligibility Criteria for the Pilot Trial
+
+1. Patient and Care Partner Dyad
+
+a. Eligibility Criteria
+Age: 65 or older.
+Diagnosis: MCI or dementia from ICD-9 and ICD-10 codes.
+Chronic Conditions: At least one other chronic condition documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+b. Eligibility Criteria for the MCI/Dementia Cohort
+Age: 65 or older.
+Diagnosis: MCI or dementia from ICD-9 and ICD-10 codes.
+Chronic Conditions: At least one other chronic condition documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+c. Eligibility Criteria for the Non-Dementia Cohort
+Age: 75 or older.
+No MCI or dementia diagnosis.
+Chronic Conditions: At least two chronic conditions documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+2. Drug/ Substance/ Device
+
+a. Rationale for Choosing the Drug and Dose
+FDA Approved Drugs: Only selected for non-FDA approved indications or if doses or routes of administration or participant populations are changed.
+Non-FDA Approved Indications: Not available for FDA approval.
+
+b. Justification and Safety Information
+Indications: Non-FDA approved indications.
+Dosages: Based on clinical guidelines and patient preference.
+Routes of Administration: Oral, intravenous, subcutaneous, etc.
+Participant Populations: Long-term care facilities or hospice care at baseline.
+
+3. Study Statistics
+
+a. Primary Outcome Variable
+Feasibility and Acceptability of the Interventions Among Patients, Care Partners, Clinicians
+Secondary Outcomes Variables
+Proportion of patients who deprescribe 1+ medicine
+Proportion of patients who add 1+ new medicine
+Clinical documentation of deprescribing
+Clinical documentation of a discussion about medication appropriateness, safety or effectiveness (yes/possible vs. no/absent)
+
+b. Secondary Outcomes Variables
+Prevalence of Deprescribing
+Proportion of Patients Who Add New Medicines
+Clinical Documentation of Deprescribing
+Discussion about Medication Appropriateness, Safety, or Effectiveness
+
+4. Risks
+
+a. Medical Risks
+Procedure Details: Detailed list of procedures, major and minor risks, and expected frequency.
+Steps Taken to Minimize Risks: Emphasis on shared-decision-making between patients, care partners, and their primary care physician.
+Plan for Reporting Unanticipated Problems: Immediate reporting to the Principal Investigator (Dr. Green).
+
+b. Steps Taken to Minimize Risks
+Emphasis on Shared-Decision-Making Between Patients, Care Partners, and Their Primary Care Physician
+Patient-Centered Education: Encouraging dialogue about medication management.
+Use of Language and Approaches for Discussing Deprescribing: Recommended by patients and care partners.
+
+c. Plan for Reporting Unanticipated Problems or Study Deviations
+Introduction of Gift Cards: $25 gift cards for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift cards for participating in the 30-45 minute debriefing interviews.
+
+d. Legal Risks
+Risk of Breach of Confidentiality: Small risk of breach of confidentiality.
+
+5. Benefits
+
+a. Probable Benefits for the Participant and Society
+Patient-Centered, Clinician-Guided Deprescribing: Safe and effective method for older patients.
+Improved Outcomes for Older Individuals with Cognitive Impairment: Taking more medications is associated with greater risk of adverse drug events, drug interactions, treatment burden, and cognitive changes from medication side effects.
+Educational Brochure: Provides information on optimal medication management and increases patient/care partner engagement in deprescribing.
+
+b. Potential Benefits for Society
+Improvement in Health Outcomes: Improved health outcomes for older individuals with cognitive impairment.
+Enhanced Quality of Life: Increased quality of life for patients with cognitive impairment and MCC.
+Reduced Healthcare Costs: Reduced healthcare costs for patients with cognitive impairment and MCC.
+
+6. Payment and Remuneration
+
+a. Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol
+Participants: $25 gift card for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+7. Costs
+
+a. Cost of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+8. Costs
+
+b. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+9. Costs
+
+c. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+10. Payments and Remuneration
+
+a. Detail Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol
+Participants: $25 gift card for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+This revised eligibility criteria incorporates the evidence provided, ensuring clinical accuracy and relevance while adhering to the original version."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Criteria for the Pilot Trial
+
+&lt;/span&gt;1. &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;Care&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Partner&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Dyad
+
+a.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Criteria
+Age:&lt;/span&gt; 65 or &lt;span class=&quot;diff-add&quot;&gt;older.
+Diagnosis:&lt;/span&gt; MCI or dementia from ICD-9 and ICD-10 &lt;span class=&quot;diff-add&quot;&gt;codes.
+Chronic Conditions: At&lt;/span&gt; least one other chronic &lt;span class=&quot;diff-add&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;documented&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;problem&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;list.
+Medication&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;List: Documentation of&lt;/span&gt; all &lt;span class=&quot;diff-add&quot;&gt;prescriptions&lt;/span&gt; and over-the-counter medications, both scheduled and as &lt;span class=&quot;diff-add&quot;&gt;needed.
+Primary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Care&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Physician:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;At&lt;/span&gt; the pilot &lt;span class=&quot;diff-add&quot;&gt;clinic.
+Routine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Scheduled&lt;/span&gt; visit with a primary care physician during the pilot study &lt;span class=&quot;diff-add&quot;&gt;period.
+Care&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Partners:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Family&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;companions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;21 years&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;older who regularly help the patient with managing medications.
+
+b. Eligibility Criteria for the MCI/Dementia Cohort
+Age: 65 or older.
+Diagnosis:&lt;/span&gt; MCI or dementia &lt;span class=&quot;diff-add&quot;&gt;from ICD-9 and ICD-10 codes.
+Chronic Conditions: At&lt;/span&gt; least &lt;span class=&quot;diff-add&quot;&gt;one other&lt;/span&gt; chronic &lt;span class=&quot;diff-add&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;documented&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;problem&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;list.
+Medication&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;List:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Documentation of&lt;/span&gt; all &lt;span class=&quot;diff-add&quot;&gt;prescriptions&lt;/span&gt; and over-the-counter medications, both scheduled and as &lt;span class=&quot;diff-add&quot;&gt;needed.
+Primary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Care&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Physician:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;At&lt;/span&gt; the pilot &lt;span class=&quot;diff-add&quot;&gt;clinic.
+Routine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Scheduled&lt;/span&gt; visit with a primary care physician during the pilot study &lt;span class=&quot;diff-add&quot;&gt;period.
+&lt;/span&gt;Care &lt;span class=&quot;diff-add&quot;&gt;Partners: Family&lt;/span&gt; or other companions age 21 years or &lt;span class=&quot;diff-add&quot;&gt;older&lt;/span&gt; who regularly help the patient with managing &lt;span class=&quot;diff-add&quot;&gt;medications.
+
+c.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Criteria&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;Non-Dementia&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Cohort
+Age:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;75&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;older.
+No&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;MCI&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;dementia&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;diagnosis.
+Chronic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;At&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;chronic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;documented&lt;/span&gt; on the &lt;span class=&quot;diff-add&quot;&gt;problem&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;list.
+Medication&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;List:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Documentation&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;prescriptions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;over-the-counter medications, both scheduled and&lt;/span&gt; as &lt;span class=&quot;diff-add&quot;&gt;needed.
+Primary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Care Physician: At&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;pilot&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clinic.
+Routine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Scheduled visit with a primary&lt;/span&gt; care &lt;span class=&quot;diff-add&quot;&gt;physician&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;pilot &lt;/span&gt;study &lt;span class=&quot;diff-add&quot;&gt;period.
+Care Partners: Family or other companions age 21 years or older who regularly help&lt;/span&gt; the patient &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;managing medications.
+
+2. Drug/ Substance/ Device
+
+a. Rationale for Choosing&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;Drug&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;Dose
+FDA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Approved&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Drugs:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Only&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;selected&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;non-FDA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;approved&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;indications&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;doses&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;routes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;administration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participant populations are changed.
+Non-FDA Approved Indications: Not available for FDA approval.&lt;/span&gt;
+
+&lt;span class=&quot;diff-add&quot;&gt;b.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Justification&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Safety&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Information
+Indications:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Non-FDA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;approved&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;indications.
+Dosages:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Based on clinical guidelines and patient preference.
+Routes of Administration: Oral, intravenous, subcutaneous, etc.
+Participant Populations: Long-term&lt;/span&gt; care facilities or hospice care at &lt;span class=&quot;diff-add&quot;&gt;baseline.
+
+3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Statistics
+
+a.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Primary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Outcome&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Variable
+Feasibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acceptability&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of the Interventions Among Patients, Care Partners, Clinicians
+Secondary Outcomes Variables
+Proportion of patients who deprescribe 1+ medicine
+Proportion of patients who add 1+ new medicine
+Clinical documentation of deprescribing
+Clinical documentation of&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;discussion about medication appropriateness, safety or effectiveness (yes/possible vs. no/absent)
+
+b. Secondary Outcomes Variables
+Prevalence of Deprescribing
+Proportion of Patients Who Add New Medicines
+Clinical Documentation of Deprescribing
+Discussion about Medication Appropriateness, Safety, or Effectiveness
+
+4. Risks
+
+a. Medical Risks
+Procedure Details: Detailed list of procedures, major and minor risks, and expected frequency.
+Steps Taken to Minimize Risks: Emphasis on shared-decision-making between patients, &lt;/span&gt;care &lt;span class=&quot;diff-add&quot;&gt;partners,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;their&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;primary care physician.
+Plan for Reporting Unanticipated Problems: Immediate reporting to the Principal Investigator (Dr. Green).
+
+b. Steps Taken to Minimize Risks
+Emphasis on Shared-Decision-Making Between Patients, Care Partners, and Their Primary Care Physician
+Patient-Centered Education: Encouraging dialogue about&lt;/span&gt; medication management.&lt;span class=&quot;diff-add&quot;&gt;
+Use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Language&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Approaches for Discussing Deprescribing: Recommended by patients and care partners.
+
+c. Plan for Reporting Unanticipated Problems&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;Study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Deviations
+Introduction&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of Gift Cards: $25 gift cards&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;participating&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;45-60&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;debriefing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interview.
+Clinicians,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Residents,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Assistants:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;$25&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;gift&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;cards for participating in the 30-45 minute debriefing interviews.
+
+d. Legal Risks
+Risk&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Breach of Confidentiality: Small risk of breach of confidentiality.
+
+5. Benefits
+
+a. Probable Benefits&lt;/span&gt; for the &lt;span class=&quot;diff-add&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and Society
+Patient-Centered, Clinician-Guided Deprescribing: Safe and effective method for older patients.
+Improved Outcomes for Older Individuals with Cognitive Impairment: Taking more medications is associated with greater risk of adverse drug events, drug interactions, treatment burden, and cognitive changes from medication side effects.
+Educational Brochure: Provides information on optimal medication management and increases patient/care partner engagement in deprescribing.
+
+b. Potential Benefits for Society
+Improvement in Health Outcomes: Improved health outcomes for older individuals with cognitive impairment.
+Enhanced Quality of Life: Increased quality of life for patients with cognitive impairment and MCC.
+Reduced Healthcare Costs: Reduced healthcare costs for patients with cognitive impairment and MCC.
+
+6. Payment and Remuneration
+
+a. Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;Protocol
+Participants:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;$25&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;gift&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;card&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participating&lt;/span&gt; in the &lt;span class=&quot;diff-add&quot;&gt;45-60&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;debriefing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interview.
+Clinicians,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Residents,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical Assistants: $25 gift card for participating&lt;/span&gt; in the &lt;span class=&quot;diff-add&quot;&gt;30-45&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;debriefing interviews.
+
+7. Costs
+
+a. Cost&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+8. Costs
+
+b. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+9. Costs
+
+c. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+10. Payments and Remuneration
+
+a. Detail Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing &lt;/span&gt;the &lt;span class=&quot;diff-add&quot;&gt;Protocol
+Participants:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;$25&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;gift&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;card&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participating&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;45-60&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;debriefing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interview.
+Clinicians,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Residents,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical Assistants: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+This revised eligibility criteria incorporates the evidence provided, ensuring clinical accuracy and relevance while adhering to the original version.&lt;/span&gt;"
+                 data-raw="**Eligibility Criteria for the Pilot Trial**
+
+### **1. Patient and Care Partner Dyad**
+
+#### **a. Eligibility Criteria**
+- **Age**: 65 or older.
+- **Diagnosis**: MCI or dementia from ICD-9 and ICD-10 codes.
+- **Chronic Conditions**: At least one other chronic condition documented on the problem list.
+- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+- **Primary Care Physician**: At the pilot clinic.
+- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.
+- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+#### **b. Eligibility Criteria for the MCI/Dementia Cohort**
+- **Age**: 65 or older.
+- **Diagnosis**: MCI or dementia from ICD-9 and ICD-10 codes.
+- **Chronic Conditions**: At least one other chronic condition documented on the problem list.
+- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+- **Primary Care Physician**: At the pilot clinic.
+- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.
+- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+#### **c. Eligibility Criteria for the Non-Dementia Cohort**
+- **Age**: 75 or older.
+- **No MCI or dementia diagnosis**.
+- **Chronic Conditions**: At least two chronic conditions documented on the problem list.
+- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+- **Primary Care Physician**: At the pilot clinic.
+- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.
+- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+### **2. Drug/ Substance/ Device**
+
+#### **a. Rationale for Choosing the Drug and Dose**
+- **FDA Approved Drugs**: Only selected for non-FDA approved indications or if doses or routes of administration or participant populations are changed.
+- **Non-FDA Approved Indications**: Not available for FDA approval.
+
+#### **b. Justification and Safety Information**
+- **Indications**: Non-FDA approved indications.
+- **Dosages**: Based on clinical guidelines and patient preference.
+- **Routes of Administration**: Oral, intravenous, subcutaneous, etc.
+- **Participant Populations**: Long-term care facilities or hospice care at baseline.
+
+### **3. Study Statistics**
+
+#### **a. Primary Outcome Variable**
+- **Feasibility and Acceptability of the Interventions Among Patients, Care Partners, Clinicians**
+- **Secondary Outcomes Variables**
+    - Proportion of patients who deprescribe 1+ medicine
+    - Proportion of patients who add 1+ new medicine
+    - Clinical documentation of deprescribing
+    - Clinical documentation of a discussion about medication appropriateness, safety or effectiveness (yes/possible vs. no/absent)
+
+#### **b. Secondary Outcomes Variables**
+- **Prevalence of Deprescribing**
+- **Proportion of Patients Who Add New Medicines**
+- **Clinical Documentation of Deprescribing**
+- **Discussion about Medication Appropriateness, Safety, or Effectiveness**
+
+### **4. Risks**
+
+#### **a. Medical Risks**
+- **Procedure Details**: Detailed list of procedures, major and minor risks, and expected frequency.
+- **Steps Taken to Minimize Risks**: Emphasis on shared-decision-making between patients, care partners, and their primary care physician.
+- **Plan for Reporting Unanticipated Problems**: Immediate reporting to the Principal Investigator (Dr. Green).
+
+#### **b. Steps Taken to Minimize Risks**
+- **Emphasis on Shared-Decision-Making Between Patients, Care Partners, and Their Primary Care Physician**
+- **Patient-Centered Education**: Encouraging dialogue about medication management.
+- **Use of Language and Approaches for Discussing Deprescribing**: Recommended by patients and care partners.
+
+#### **c. Plan for Reporting Unanticipated Problems or Study Deviations**
+- **Introduction of Gift Cards**: $25 gift cards for participating in the 45-60 minute debriefing interview.
+- **Clinicians, Residents, and Medical Assistants**: $25 gift cards for participating in the 30-45 minute debriefing interviews.
+
+#### **d. Legal Risks**
+- **Risk of Breach of Confidentiality**: Small risk of breach of confidentiality.
+
+### **5. Benefits**
+
+#### **a. Probable Benefits for the Participant and Society**
+- **Patient-Centered, Clinician-Guided Deprescribing**: Safe and effective method for older patients.
+- **Improved Outcomes for Older Individuals with Cognitive Impairment**: Taking more medications is associated with greater risk of adverse drug events, drug interactions, treatment burden, and cognitive changes from medication side effects.
+- **Educational Brochure**: Provides information on optimal medication management and increases patient/care partner engagement in deprescribing.
+
+#### **b. Potential Benefits for Society**
+- **Improvement in Health Outcomes**: Improved health outcomes for older individuals with cognitive impairment.
+- **Enhanced Quality of Life**: Increased quality of life for patients with cognitive impairment and MCC.
+- **Reduced Healthcare Costs**: Reduced healthcare costs for patients with cognitive impairment and MCC.
+
+### **6. Payment and Remuneration**
+
+#### **a. Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol**
+- **Participants**: $25 gift card for participating in the 45-60 minute debriefing interview.
+- **Clinicians, Residents, and Medical Assistants**: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+### **7. Costs**
+
+#### **a. Cost of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**
+- **No Cost to Participants**.
+
+### **8. Costs**
+
+#### **b. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**
+- **No Cost to Participants**.
+
+### **9. Costs**
+
+#### **c. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**
+- **No Cost to Participants**.
+
+### **10. Payments and Remuneration**
+
+#### **a. Detail Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol**
+- **Participants**: $25 gift card for participating in the 45-60 minute debriefing interview.
+- **Clinicians, Residents, and Medical Assistants**: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+This revised eligibility criteria incorporates the evidence provided, ensuring clinical accuracy and relevance while adhering to the original version.">Eligibility Criteria for the Pilot Trial
+
+1. Patient and Care Partner Dyad
+
+a. Eligibility Criteria
+Age: 65 or older.
+Diagnosis: MCI or dementia from ICD-9 and ICD-10 codes.
+Chronic Conditions: At least one other chronic condition documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+b. Eligibility Criteria for the MCI/Dementia Cohort
+Age: 65 or older.
+Diagnosis: MCI or dementia from ICD-9 and ICD-10 codes.
+Chronic Conditions: At least one other chronic condition documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+c. Eligibility Criteria for the Non-Dementia Cohort
+Age: 75 or older.
+No MCI or dementia diagnosis.
+Chronic Conditions: At least two chronic conditions documented on the problem list.
+Medication List: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.
+Primary Care Physician: At the pilot clinic.
+Routine Visit: Scheduled visit with a primary care physician during the pilot study period.
+Care Partners: Family or other companions age 21 years or older who regularly help the patient with managing medications.
+
+2. Drug/ Substance/ Device
+
+a. Rationale for Choosing the Drug and Dose
+FDA Approved Drugs: Only selected for non-FDA approved indications or if doses or routes of administration or participant populations are changed.
+Non-FDA Approved Indications: Not available for FDA approval.
+
+b. Justification and Safety Information
+Indications: Non-FDA approved indications.
+Dosages: Based on clinical guidelines and patient preference.
+Routes of Administration: Oral, intravenous, subcutaneous, etc.
+Participant Populations: Long-term care facilities or hospice care at baseline.
+
+3. Study Statistics
+
+a. Primary Outcome Variable
+Feasibility and Acceptability of the Interventions Among Patients, Care Partners, Clinicians
+Secondary Outcomes Variables
+Proportion of patients who deprescribe 1+ medicine
+Proportion of patients who add 1+ new medicine
+Clinical documentation of deprescribing
+Clinical documentation of a discussion about medication appropriateness, safety or effectiveness (yes/possible vs. no/absent)
+
+b. Secondary Outcomes Variables
+Prevalence of Deprescribing
+Proportion of Patients Who Add New Medicines
+Clinical Documentation of Deprescribing
+Discussion about Medication Appropriateness, Safety, or Effectiveness
+
+4. Risks
+
+a. Medical Risks
+Procedure Details: Detailed list of procedures, major and minor risks, and expected frequency.
+Steps Taken to Minimize Risks: Emphasis on shared-decision-making between patients, care partners, and their primary care physician.
+Plan for Reporting Unanticipated Problems: Immediate reporting to the Principal Investigator (Dr. Green).
+
+b. Steps Taken to Minimize Risks
+Emphasis on Shared-Decision-Making Between Patients, Care Partners, and Their Primary Care Physician
+Patient-Centered Education: Encouraging dialogue about medication management.
+Use of Language and Approaches for Discussing Deprescribing: Recommended by patients and care partners.
+
+c. Plan for Reporting Unanticipated Problems or Study Deviations
+Introduction of Gift Cards: $25 gift cards for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift cards for participating in the 30-45 minute debriefing interviews.
+
+d. Legal Risks
+Risk of Breach of Confidentiality: Small risk of breach of confidentiality.
+
+5. Benefits
+
+a. Probable Benefits for the Participant and Society
+Patient-Centered, Clinician-Guided Deprescribing: Safe and effective method for older patients.
+Improved Outcomes for Older Individuals with Cognitive Impairment: Taking more medications is associated with greater risk of adverse drug events, drug interactions, treatment burden, and cognitive changes from medication side effects.
+Educational Brochure: Provides information on optimal medication management and increases patient/care partner engagement in deprescribing.
+
+b. Potential Benefits for Society
+Improvement in Health Outcomes: Improved health outcomes for older individuals with cognitive impairment.
+Enhanced Quality of Life: Increased quality of life for patients with cognitive impairment and MCC.
+Reduced Healthcare Costs: Reduced healthcare costs for patients with cognitive impairment and MCC.
+
+6. Payment and Remuneration
+
+a. Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol
+Participants: $25 gift card for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+7. Costs
+
+a. Cost of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+8. Costs
+
+b. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+9. Costs
+
+c. Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them
+No Cost to Participants.
+
+10. Payments and Remuneration
+
+a. Detail Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol
+Participants: $25 gift card for participating in the 45-60 minute debriefing interview.
+Clinicians, Residents, and Medical Assistants: $25 gift card for participating in the 30-45 minute debriefing interviews.
+
+This revised eligibility criteria incorporates the evidence provided, ensuring clinical accuracy and relevance while adhering to the original version.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

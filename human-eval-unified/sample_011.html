@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 11</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 11</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Definite or probable PBC diagnosis (consistent with American Association for the Study of Liver Diseases [AASLD] and the European Association for the Study of the Liver [EASL] practice guidelines;
+  2. Lindor 2009;
+  3. EASL 2009), as demonstrated by the presence of ≥2 of the following 3 diagnostic factors:History of elevated Alkaline phosphatase levels for at least 6 months prior to Day 0Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (&amp;lt;1:80) PBC-specific antibodies (anti-GP210 and/or anti-SP100 and/or antibodies against the major M2 components [PDC-E2, 2-oxo-glutaric acid dehydrogenase complex])Liver biopsy consistent with PBCA mean total bilirubin &amp;gt;ULN and ≤5x ULN and/or a mean ALP &amp;gt;3x ULNAge ≥18 yearsEither is not taking UDCA (no UDCA dose in the past ≥3 months) or has been taking UDCA for at least 12 months with a stable dose for ≥3 months prior to Day 0Contraception: Female subjects of childbearing potential must use ≥1 effective method of contraception during the trial and until 30 days following the last dose of investigational product.
+  4. Effective methods of contraception are considered to be:Hormonal (e.g. contraceptive pill, patch, intramuscular implant or injection; orDouble barrier method, i.e. (a) condom (male or female) or (b) diaphragm, with spermicide; orIntrauterine device (IUD); orVasectomy (partner); orAbstinence, if in line with the preferred and usual lifestyle of the subjectMust provide written informed consent and agree to comply with the study protocol
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver diseases including:Hepatitis C virus infectionActive Hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitorPrimary sclerosing cholangitis (PSC)Alcoholic liver diseaseDefinite autoimmune liver disease or overlap hepatitisNonalcoholic steatohepatitis (NASH)Gilbert&amp;#x27;s SyndromePresence of clinical complications of PBC or clinically significant hepatic decompensation, including:History of liver transplant, current placement on a liver transplant list, or current Model of End Stage Liver Disease (MELD) score &amp;gt;12.
+  2. Subjects who are placed on a transplant list despite a relatively early disease stage (for example per regional guidelines) may be eligible as long as they do not meet any of the other
+
+EXCLUSION CRITERIA
+
+  1. Cirrhosis with complications, including history (within the past 12 months) or presence of:Variceal bleedUncontrolled ascitesEncephalopathySpontaneous bacterial peritonitisKnown or suspected HCCPrior transjugular intrahepatic portosystemic shunt procedureHepatorenal syndrome (type I or II) or screening (Visit 1 or 2) serum creatinine &amp;gt;2 mg/dL (178 μmol/L)Mean total bilirubin &amp;gt;5x ULNSubjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these proceduresOther medical conditions that may diminish life expectancy, including known cancers (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphocytic leukemia)If female: plans to become pregnant, known pregnancy or a positive urine pregnancy test (confirmed by a positive serum pregnancy test), or lactatingKnown history of human immunodeficiency virus infectionMedical conditions that may cause nonhepatic increases in ALP (eg, Paget&amp;#x27;s disease or fractures within 3 months prior to Day 0)Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the studyHistory of alcohol abuse or other substance abuse within 1 year prior to Day 0Participation in another investigational product, biologic, or medical device study within 30 days prior to Screening.
+  2. Participation in a previous study of OCA is allowed with 3 months washout prior to enrollment in this studyMental instability or incompetence, such that the validity of informed consent or ability to be compliant with the study is uncertainHistory of known or suspected clinically significant hypersensitivity to OCA or any of its componentsUDCA naïve (unless contraindicated)"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Definite or probable PBC &lt;span class=&quot;diff-del&quot;&gt;diagnosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(consistent&lt;/span&gt; with American Association for the Study of Liver Diseases &lt;span class=&quot;diff-del&quot;&gt;[AASLD]&lt;/span&gt; and the European Association for the Study of the Liver &lt;span class=&quot;diff-del&quot;&gt;[EASL]&lt;/span&gt; practice &lt;span class=&quot;diff-del&quot;&gt;guidelines;
+  2. Lindor 2009;&lt;/span&gt;
+  3. &lt;span class=&quot;diff-del&quot;&gt;EASL 2009), as demonstrated&lt;/span&gt; by the presence of ≥2 of the following 3 diagnostic &lt;span class=&quot;diff-del&quot;&gt;factors:History&lt;/span&gt; of elevated &lt;span class=&quot;diff-del&quot;&gt;Alkaline&lt;/span&gt; phosphatase levels for at least 6 &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior to Day 0Positive&lt;/span&gt; antimitochondrial antibody (AMA) titer or if AMA negative or in low titer &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;1:80)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;PBC-specific&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;antibodies&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(anti-GP210&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;anti-SP100&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;antibodies&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;against&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the major M2 components [PDC-E2, 2-oxo-glutaric acid dehydrogenase complex])Liver&lt;/span&gt; biopsy consistent with &lt;span class=&quot;diff-del&quot;&gt;PBCA&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mean&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bilirubin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;ULN&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and ≤5x ULN and/or a mean ALP &amp;gt;3x ULNAge ≥18 yearsEither&lt;/span&gt; is not taking UDCA &lt;span class=&quot;diff-del&quot;&gt;(no&lt;/span&gt; UDCA dose in the past &lt;span class=&quot;diff-del&quot;&gt;≥3&lt;/span&gt; months) or has been taking UDCA for at least 12 months with &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; stable dose for ≥3 months prior to Day &lt;span class=&quot;diff-del&quot;&gt;0Contraception:&lt;/span&gt; Female subjects &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;childbearing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;potential&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; use ≥1 effective method of contraception during the &lt;span class=&quot;diff-del&quot;&gt;trial&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;until&lt;/span&gt; 30 days &lt;span class=&quot;diff-del&quot;&gt;following&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;last dose&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;investigational&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;product.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Effective&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;methods&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;contraception&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are considered to be:Hormonal (e.g. contraceptive pill, patch, intramuscular implant or injection; orDouble barrier method, i.e. (a) condom (male or female) or (b) diaphragm, with spermicide; orIntrauterine device (IUD); orVasectomy (partner); orAbstinence, if in line with the preferred and usual lifestyle of the subjectMust&lt;/span&gt; provide written informed consent and agree to comply with the study &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver &lt;span class=&quot;diff-del&quot;&gt;diseases&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;including:Hepatitis&lt;/span&gt; C virus &lt;span class=&quot;diff-del&quot;&gt;infectionActive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Hepatitis&lt;/span&gt; B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical &lt;span class=&quot;diff-del&quot;&gt;monitorPrimary&lt;/span&gt; sclerosing &lt;span class=&quot;diff-del&quot;&gt;cholangitis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(PSC)Alcoholic&lt;/span&gt; liver &lt;span class=&quot;diff-del&quot;&gt;diseaseDefinite&lt;/span&gt; autoimmune liver disease or overlap &lt;span class=&quot;diff-del&quot;&gt;hepatitisNonalcoholic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;steatohepatitis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(NASH)Gilbert&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;SyndromePresence&lt;/span&gt; of clinical complications of PBC or clinically significant hepatic &lt;span class=&quot;diff-del&quot;&gt;decompensation,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;including:History&lt;/span&gt; of liver transplant, current placement on a liver transplant list, or current &lt;span class=&quot;diff-del&quot;&gt;Model of End Stage Liver Disease (MELD)&lt;/span&gt; score &amp;gt;12.
+  &lt;span class=&quot;diff-del&quot;&gt;2. Subjects who are placed on a transplant list despite a relatively early disease stage (for example per regional guidelines) may be eligible as long as they do not meet any of the other
+
+EXCLUSION CRITERIA
+
+  1.&lt;/span&gt; Cirrhosis with complications, including history (within the past 12 months) or presence &lt;span class=&quot;diff-del&quot;&gt;of:Variceal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bleedUncontrolled&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ascitesEncephalopathySpontaneous&lt;/span&gt; bacterial &lt;span class=&quot;diff-del&quot;&gt;peritonitisKnown&lt;/span&gt; or suspected &lt;span class=&quot;diff-del&quot;&gt;HCCPrior&lt;/span&gt; transjugular intrahepatic portosystemic shunt &lt;span class=&quot;diff-del&quot;&gt;procedureHepatorenal&lt;/span&gt; syndrome (type I or II) or screening &lt;span class=&quot;diff-del&quot;&gt;(Visit 1 or 2) &lt;/span&gt;serum creatinine &amp;gt;2 mg/dL (178 &lt;span class=&quot;diff-del&quot;&gt;μmol/L)Mean&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;total bilirubin &amp;gt;5x ULNSubjects&lt;/span&gt; who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these &lt;span class=&quot;diff-del&quot;&gt;proceduresOther&lt;/span&gt; medical conditions that may diminish life &lt;span class=&quot;diff-del&quot;&gt;expectancy,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;including known cancers&lt;/span&gt; (except carcinomas in situ or other stable, relatively benign conditions such as chronic &lt;span class=&quot;diff-del&quot;&gt;lymphocytic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;leukemia)If&lt;/span&gt; female: plans to become pregnant, known &lt;span class=&quot;diff-del&quot;&gt;pregnancy&lt;/span&gt; or&lt;span class=&quot;diff-del&quot;&gt; a&lt;/span&gt; positive urine pregnancy test (confirmed by a &lt;span class=&quot;diff-del&quot;&gt;positive &lt;/span&gt;serum pregnancy &lt;span class=&quot;diff-del&quot;&gt;test),&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;lactatingKnown&lt;/span&gt; history of human immunodeficiency virus &lt;span class=&quot;diff-del&quot;&gt;infectionMedical&lt;/span&gt; conditions that may cause nonhepatic increases in ALP &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; Paget&amp;#x27;s disease or fractures within 3 &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior to Day 0)Other&lt;/span&gt; clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the &lt;span class=&quot;diff-del&quot;&gt;studyHistory&lt;/span&gt; of alcohol abuse or other substance abuse within 1 year prior to Day &lt;span class=&quot;diff-del&quot;&gt;0Participation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;another&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;investigational&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;product,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;biologic,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;days prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;Screening.
+  2. Participation in a previous study of OCA is allowed with 3 months washout prior to enrollment in this studyMental instability or incompetence, such that &lt;/span&gt;the &lt;span class=&quot;diff-del&quot;&gt;validity&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;informed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ability&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;compliant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with the study is uncertainHistory of known or suspected clinically significant hypersensitivity to OCA or any of its componentsUDCA naïve (unless contraindicated)&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Definite or probable PBC diagnosis (consistent with American Association for the Study of Liver Diseases [AASLD] and the European Association for the Study of the Liver [EASL] practice guidelines; Lindor 2009; EASL 2009), as demonstrated by the presence of ≥2 of the following 3 diagnostic factors:History of elevated Alkaline phosphatase levels for at least 6 months prior to Day 0Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (&amp;amp;lt;1:80) PBC-specific antibodies (anti-GP210 and&amp;amp;#x2F;or anti-SP100 and&amp;amp;#x2F;or antibodies against the major M2 components [PDC-E2, 2-oxo-glutaric acid dehydrogenase complex])Liver biopsy consistent with PBCA mean total bilirubin &amp;amp;gt;ULN and ≤5x ULN and&amp;amp;#x2F;or a mean ALP &amp;amp;gt;3x ULNAge ≥18 yearsEither is not taking UDCA (no UDCA dose in the past ≥3 months) or has been taking UDCA for at least 12 months with a stable dose for ≥3 months prior to Day 0Contraception: Female subjects of childbearing potential must use ≥1 effective method of contraception during the trial and until 30 days following the last dose of investigational product. Effective methods of contraception are considered to be:Hormonal (e.g. contraceptive pill, patch, intramuscular implant or injection; orDouble barrier method, i.e. (a) condom (male or female) or (b) diaphragm, with spermicide; orIntrauterine device (IUD); orVasectomy (partner); orAbstinence, if in line with the preferred and usual lifestyle of the subjectMust provide written informed consent and agree to comply with the study protocolExclusion Criteria:History or presence of other concomitant liver diseases including:Hepatitis C virus infectionActive Hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitorPrimary sclerosing cholangitis (PSC)Alcoholic liver diseaseDefinite autoimmune liver disease or overlap hepatitisNonalcoholic steatohepatitis (NASH)Gilbert&amp;amp;#x27;s SyndromePresence of clinical complications of PBC or clinically significant hepatic decompensation, including:History of liver transplant, current placement on a liver transplant list, or current Model of End Stage Liver Disease (MELD) score &amp;amp;gt;12. Subjects who are placed on a transplant list despite a relatively early disease stage (for example per regional guidelines) may be eligible as long as they do not meet any of the other exclusion criteriaCirrhosis with complications, including history (within the past 12 months) or presence of:Variceal bleedUncontrolled ascitesEncephalopathySpontaneous bacterial peritonitisKnown or suspected HCCPrior transjugular intrahepatic portosystemic shunt procedureHepatorenal syndrome (type I or II) or screening (Visit 1 or 2) serum creatinine &amp;amp;gt;2 mg&amp;amp;#x2F;dL (178 μmol&amp;amp;#x2F;L)Mean total bilirubin &amp;amp;gt;5x ULNSubjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these proceduresOther medical conditions that may diminish life expectancy, including known cancers (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphocytic leukemia)If female: plans to become pregnant, known pregnancy or a positive urine pregnancy test (confirmed by a positive serum pregnancy test), or lactatingKnown history of human immunodeficiency virus infectionMedical conditions that may cause nonhepatic increases in ALP (eg, Paget&amp;amp;#x27;s disease or fractures within 3 months prior to Day 0)Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the studyHistory of alcohol abuse or other substance abuse within 1 year prior to Day 0Participation in another investigational product, biologic, or medical device study within 30 days prior to Screening. Participation in a previous study of OCA is allowed with 3 months washout prior to enrollment in this studyMental instability or incompetence, such that the validity of informed consent or ability to be compliant with the study is uncertainHistory of known or suspected clinically significant hypersensitivity to OCA or any of its componentsUDCA naïve (unless contraindicated)">INCLUSION CRITERIA
+
+  1. Definite or probable PBC diagnosis (consistent with American Association for the Study of Liver Diseases [AASLD] and the European Association for the Study of the Liver [EASL] practice guidelines;
+  2. Lindor 2009;
+  3. EASL 2009), as demonstrated by the presence of ≥2 of the following 3 diagnostic factors:History of elevated Alkaline phosphatase levels for at least 6 months prior to Day 0Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (&lt;1:80) PBC-specific antibodies (anti-GP210 and/or anti-SP100 and/or antibodies against the major M2 components [PDC-E2, 2-oxo-glutaric acid dehydrogenase complex])Liver biopsy consistent with PBCA mean total bilirubin &gt;ULN and ≤5x ULN and/or a mean ALP &gt;3x ULNAge ≥18 yearsEither is not taking UDCA (no UDCA dose in the past ≥3 months) or has been taking UDCA for at least 12 months with a stable dose for ≥3 months prior to Day 0Contraception: Female subjects of childbearing potential must use ≥1 effective method of contraception during the trial and until 30 days following the last dose of investigational product.
+  4. Effective methods of contraception are considered to be:Hormonal (e.g. contraceptive pill, patch, intramuscular implant or injection; orDouble barrier method, i.e. (a) condom (male or female) or (b) diaphragm, with spermicide; orIntrauterine device (IUD); orVasectomy (partner); orAbstinence, if in line with the preferred and usual lifestyle of the subjectMust provide written informed consent and agree to comply with the study protocol
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver diseases including:Hepatitis C virus infectionActive Hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitorPrimary sclerosing cholangitis (PSC)Alcoholic liver diseaseDefinite autoimmune liver disease or overlap hepatitisNonalcoholic steatohepatitis (NASH)Gilbert&#x27;s SyndromePresence of clinical complications of PBC or clinically significant hepatic decompensation, including:History of liver transplant, current placement on a liver transplant list, or current Model of End Stage Liver Disease (MELD) score &gt;12.
+  2. Subjects who are placed on a transplant list despite a relatively early disease stage (for example per regional guidelines) may be eligible as long as they do not meet any of the other
+
+EXCLUSION CRITERIA
+
+  1. Cirrhosis with complications, including history (within the past 12 months) or presence of:Variceal bleedUncontrolled ascitesEncephalopathySpontaneous bacterial peritonitisKnown or suspected HCCPrior transjugular intrahepatic portosystemic shunt procedureHepatorenal syndrome (type I or II) or screening (Visit 1 or 2) serum creatinine &gt;2 mg/dL (178 μmol/L)Mean total bilirubin &gt;5x ULNSubjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these proceduresOther medical conditions that may diminish life expectancy, including known cancers (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphocytic leukemia)If female: plans to become pregnant, known pregnancy or a positive urine pregnancy test (confirmed by a positive serum pregnancy test), or lactatingKnown history of human immunodeficiency virus infectionMedical conditions that may cause nonhepatic increases in ALP (eg, Paget&#x27;s disease or fractures within 3 months prior to Day 0)Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the studyHistory of alcohol abuse or other substance abuse within 1 year prior to Day 0Participation in another investigational product, biologic, or medical device study within 30 days prior to Screening.
+  2. Participation in a previous study of OCA is allowed with 3 months washout prior to enrollment in this studyMental instability or incompetence, such that the validity of informed consent or ability to be compliant with the study is uncertainHistory of known or suspected clinically significant hypersensitivity to OCA or any of its componentsUDCA naïve (unless contraindicated)</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for Obeticholic Acid (OCA) Trial (Version 33)
+
+Based on the provided information from the Clinical Study Protocol 747-302, the amended eligibility criteria for the Obeticholic Acid (OCA) trial (Version 33) are as follows:
+
+INCLUSION CRITERIA
+
+  1. Definite or probable PBC diagnosis:
+  2. Consistent with American Association for the Study of Liver Diseases (AASLD) and the European Association for the Study of the Liver (EASL) practice guidelines.
+  3. Demonstrated by the presence of ≥2 of the following 3 diagnostic factors:
+  4. History of elevated alkaline phosphatase (ALP) levels for at least 6 months.
+  5. Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (ULN and ≤3x ULN or an ALP &amp;gt;5x ULN).
+  6. Liver biopsy consistent with PBC.
+  7. Age ≥ 18 years:
+  8. Either is not taking UDCA (UDCA naïve or no UDCA dose in the past 3 months) or has been taking UDCA for at least 12 months with an approved, stable dose for ≥3 months prior to Day 0:
+  9. Contraception:
+  10. Female subjects must be postmenopausal, surgically sterile, or if premenopausal (and not surgically sterile), be prepared to use ≥1 effective (≤1% failure rate) method of contraception during the study and for 30 days after the end of treatment visit.
+  11. Written informed consent:
+  12. Subjects must provide written informed consent and agree to comply with the study protocol.
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver diseases:
+  2. Hepatitis C virus infection.
+  3. Active hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitor.
+  4. Primary sclerosing cholangitis.
+  5. Alcoholic liver disease.
+  6. Definite autoimmune liver disease or overlap hepatitis.
+  7. Nonalcoholic steatohepatitis.
+  8. Gilbert’s Syndrome.
+  9. Presence of clinical complications of PBC or clinically significant hepatic decompensation:
+  10. History of liver transplant, current placement on a liver transplant list, or current MELD score &amp;gt;12.
+  11. Cirrhosis with complications, including history (within the past 12 months) or presence of:
+  12. Variceal bleed.
+  13. Uncontrolled ascites.
+  14. Encephalopathy.
+  15. Spontaneous bacterial peritonitis.
+  16. Known or suspected hepatocellular carcinoma.
+  17. Prior transjugular intrahepatic portosystemic shunt procedure.
+  18. Hepatorenal syndrome (type I or II) or screening serum creatinine &amp;gt;2 mg/dL (178 μmol/L).
+  19. Subjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these procedures:
+  20. Other medical conditions that may diminish life expectancy:
+  21. Cancer (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphatic leukemia).
+  22. If female: plans to become pregnant, known pregnancy, or positive urine pregnancy test (confirmed by a serum pregnancy test).
+  23. If male: history of human immunodeficiency virus infection.
+  24. Medical conditions that may cause nonhepatic increases in ALP (e.g., Paget&amp;#x27;s disease or fractures within 3 months).
+  25. Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the study.
+  26. History of alcohol abuse or other substance abuse within 1 year prior to Day 0.
+  27. Note:** This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details and specific inclusion/
+
+EXCLUSION CRITERIA
+
+  1. ."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for Obeticholic Acid (OCA) Trial (Version 33)
+
+Based on the provided information from the Clinical Study Protocol 747-302, the amended eligibility criteria for the Obeticholic Acid (OCA) trial (Version 33) are as follows:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Definite or probable PBC &lt;span class=&quot;diff-add&quot;&gt;diagnosis:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Consistent&lt;/span&gt; with American Association for the Study of Liver Diseases &lt;span class=&quot;diff-add&quot;&gt;(AASLD)&lt;/span&gt; and the European Association for the Study of the Liver &lt;span class=&quot;diff-add&quot;&gt;(EASL)&lt;/span&gt; practice &lt;span class=&quot;diff-add&quot;&gt;guidelines.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-add&quot;&gt;Demonstrated&lt;/span&gt; by the presence of ≥2 of the following 3 diagnostic &lt;span class=&quot;diff-add&quot;&gt;factors:
+  4. History&lt;/span&gt; of elevated &lt;span class=&quot;diff-add&quot;&gt;alkaline&lt;/span&gt; phosphatase&lt;span class=&quot;diff-add&quot;&gt; (ALP)&lt;/span&gt; levels for at least 6 &lt;span class=&quot;diff-add&quot;&gt;months.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Positive&lt;/span&gt; antimitochondrial antibody (AMA) titer or if AMA negative or in low titer &lt;span class=&quot;diff-add&quot;&gt;(ULN&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≤3x&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ULN&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ALP&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;5x&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ULN).
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Liver&lt;/span&gt; biopsy consistent with &lt;span class=&quot;diff-add&quot;&gt;PBC.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Age&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;years:
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Either&lt;/span&gt; is not taking UDCA &lt;span class=&quot;diff-add&quot;&gt;(UDCA naïve or no&lt;/span&gt; UDCA dose in the past &lt;span class=&quot;diff-add&quot;&gt;3&lt;/span&gt; months) or has been taking UDCA for at least 12 months with &lt;span class=&quot;diff-add&quot;&gt;an approved,&lt;/span&gt; stable dose for ≥3 months prior to Day &lt;span class=&quot;diff-add&quot;&gt;0:
+  9. Contraception:
+  10.&lt;/span&gt; Female subjects &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;postmenopausal,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;surgically sterile, or if premenopausal (and not surgically sterile), be prepared to&lt;/span&gt; use ≥1 effective&lt;span class=&quot;diff-add&quot;&gt; (≤1% failure rate)&lt;/span&gt; method of contraception during the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; 30 days &lt;span class=&quot;diff-add&quot;&gt;after&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;end&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visit.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Written&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;informed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;consent:
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; provide written informed consent and agree to comply with the study &lt;span class=&quot;diff-add&quot;&gt;protocol.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver &lt;span class=&quot;diff-add&quot;&gt;diseases:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Hepatitis&lt;/span&gt; C virus &lt;span class=&quot;diff-add&quot;&gt;infection.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Active hepatitis&lt;/span&gt; B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical &lt;span class=&quot;diff-add&quot;&gt;monitor.
+  4. Primary&lt;/span&gt; sclerosing &lt;span class=&quot;diff-add&quot;&gt;cholangitis.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Alcoholic&lt;/span&gt; liver &lt;span class=&quot;diff-add&quot;&gt;disease.
+  6. Definite&lt;/span&gt; autoimmune liver disease or overlap &lt;span class=&quot;diff-add&quot;&gt;hepatitis.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Nonalcoholic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;steatohepatitis.
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Gilbert’s Syndrome.
+  9. Presence&lt;/span&gt; of clinical complications of PBC or clinically significant hepatic &lt;span class=&quot;diff-add&quot;&gt;decompensation:
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; of liver transplant, current placement on a liver transplant list, or current &lt;span class=&quot;diff-add&quot;&gt;MELD&lt;/span&gt; score &amp;gt;12.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Cirrhosis with complications, including history (within the past 12 months) or presence &lt;span class=&quot;diff-add&quot;&gt;of:
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Variceal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;bleed.
+  13. Uncontrolled ascites.
+  14. Encephalopathy.
+  15. Spontaneous&lt;/span&gt; bacterial &lt;span class=&quot;diff-add&quot;&gt;peritonitis.
+  16. Known&lt;/span&gt; or suspected &lt;span class=&quot;diff-add&quot;&gt;hepatocellular carcinoma.
+  17. Prior&lt;/span&gt; transjugular intrahepatic portosystemic shunt &lt;span class=&quot;diff-add&quot;&gt;procedure.
+  18. Hepatorenal&lt;/span&gt; syndrome (type I or II) or screening serum creatinine &amp;gt;2 mg/dL (178 &lt;span class=&quot;diff-add&quot;&gt;μmol/L).
+  19.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these &lt;span class=&quot;diff-add&quot;&gt;procedures:
+  20. Other&lt;/span&gt; medical conditions that may diminish life &lt;span class=&quot;diff-add&quot;&gt;expectancy:
+  21.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Cancer&lt;/span&gt; (except carcinomas in situ or other stable, relatively benign conditions such as chronic &lt;span class=&quot;diff-add&quot;&gt;lymphatic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;leukemia).
+  22. If&lt;/span&gt; female: plans to become pregnant, known &lt;span class=&quot;diff-add&quot;&gt;pregnancy,&lt;/span&gt; or positive urine pregnancy test (confirmed by a serum pregnancy &lt;span class=&quot;diff-add&quot;&gt;test).
+  23.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;If&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;male:&lt;/span&gt; history of human immunodeficiency virus &lt;span class=&quot;diff-add&quot;&gt;infection.
+  24. Medical&lt;/span&gt; conditions that may cause nonhepatic increases in ALP &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; Paget&amp;#x27;s disease or fractures within 3 &lt;span class=&quot;diff-add&quot;&gt;months).
+  25.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the &lt;span class=&quot;diff-add&quot;&gt;study.
+  26. History&lt;/span&gt; of alcohol abuse or other substance abuse within 1 year prior to Day &lt;span class=&quot;diff-add&quot;&gt;0.
+  27.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note:**&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;summary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;amended&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Please&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;refer&lt;/span&gt; to the &lt;span class=&quot;diff-add&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;complete&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;details&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;specific&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for Obeticholic Acid (OCA) Trial (Version 33)
+
+Based on the provided information from the Clinical Study Protocol 747-302, the amended eligibility criteria for the Obeticholic Acid (OCA) trial (Version 33) are as follows:
+
+**Inclusion Criteria:**
+
+1. **Definite or probable PBC diagnosis:**  
+    * Consistent with American Association for the Study of Liver Diseases (AASLD) and the European Association for the Study of the Liver (EASL) practice guidelines.
+    * Demonstrated by the presence of ≥2 of the following 3 diagnostic factors:
+        * History of elevated alkaline phosphatase (ALP) levels for at least 6 months.
+        * Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (ULN and ≤3x ULN or an ALP &amp;gt;5x ULN).
+        * Liver biopsy consistent with PBC.
+2. **Age ≥ 18 years:**
+3. **Either is not taking UDCA (UDCA naïve or no UDCA dose in the past 3 months) or has been taking UDCA for at least 12 months with an approved, stable dose for ≥3 months prior to Day 0:**
+4. **Contraception:**
+    * Female subjects must be postmenopausal, surgically sterile, or if premenopausal (and not surgically sterile), be prepared to use ≥1 effective (≤1% failure rate) method of contraception during the study and for 30 days after the end of treatment visit.
+5. **Written informed consent:**
+    * Subjects must provide written informed consent and agree to comply with the study protocol.
+
+**Exclusion Criteria:**
+
+1. **History or presence of other concomitant liver diseases:**
+    * Hepatitis C virus infection.
+    * Active hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitor.
+    * Primary sclerosing cholangitis.
+    * Alcoholic liver disease.
+    * Definite autoimmune liver disease or overlap hepatitis.
+    * Nonalcoholic steatohepatitis.
+    * Gilbert’s Syndrome.
+2. **Presence of clinical complications of PBC or clinically significant hepatic decompensation:**
+    * History of liver transplant, current placement on a liver transplant list, or current MELD score &amp;gt;12.
+    * Cirrhosis with complications, including history (within the past 12 months) or presence of:
+        * Variceal bleed.
+        * Uncontrolled ascites.
+        * Encephalopathy.
+        * Spontaneous bacterial peritonitis.
+    * Known or suspected hepatocellular carcinoma.
+    * Prior transjugular intrahepatic portosystemic shunt procedure.
+    * Hepatorenal syndrome (type I or II) or screening serum creatinine &amp;gt;2 mg/dL (178 μmol/L).
+3. **Subjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these procedures:**
+4. **Other medical conditions that may diminish life expectancy:**
+    *  Cancer (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphatic leukemia).
+    *  If female: plans to become pregnant, known pregnancy, or positive urine pregnancy test (confirmed by a serum pregnancy test).
+    *  If male: history of human immunodeficiency virus infection.
+    *  Medical conditions that may cause nonhepatic increases in ALP (e.g., Paget&amp;#x27;s disease or fractures within 3 months).
+    *  Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the study.
+    *  History of alcohol abuse or other substance abuse within 1 year prior to Day 0.
+
+**Note:** This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details and specific inclusion/exclusion criteria.">Amended Eligibility Criteria for Obeticholic Acid (OCA) Trial (Version 33)
+
+Based on the provided information from the Clinical Study Protocol 747-302, the amended eligibility criteria for the Obeticholic Acid (OCA) trial (Version 33) are as follows:
+
+INCLUSION CRITERIA
+
+  1. Definite or probable PBC diagnosis:
+  2. Consistent with American Association for the Study of Liver Diseases (AASLD) and the European Association for the Study of the Liver (EASL) practice guidelines.
+  3. Demonstrated by the presence of ≥2 of the following 3 diagnostic factors:
+  4. History of elevated alkaline phosphatase (ALP) levels for at least 6 months.
+  5. Positive antimitochondrial antibody (AMA) titer or if AMA negative or in low titer (ULN and ≤3x ULN or an ALP &gt;5x ULN).
+  6. Liver biopsy consistent with PBC.
+  7. Age ≥ 18 years:
+  8. Either is not taking UDCA (UDCA naïve or no UDCA dose in the past 3 months) or has been taking UDCA for at least 12 months with an approved, stable dose for ≥3 months prior to Day 0:
+  9. Contraception:
+  10. Female subjects must be postmenopausal, surgically sterile, or if premenopausal (and not surgically sterile), be prepared to use ≥1 effective (≤1% failure rate) method of contraception during the study and for 30 days after the end of treatment visit.
+  11. Written informed consent:
+  12. Subjects must provide written informed consent and agree to comply with the study protocol.
+
+EXCLUSION CRITERIA
+
+  1. History or presence of other concomitant liver diseases:
+  2. Hepatitis C virus infection.
+  3. Active hepatitis B infection; however, subjects who have seroconverted (hepatitis B surface antigen and hepatitis B e antigen negative) may be included in this study after consultation with the medical monitor.
+  4. Primary sclerosing cholangitis.
+  5. Alcoholic liver disease.
+  6. Definite autoimmune liver disease or overlap hepatitis.
+  7. Nonalcoholic steatohepatitis.
+  8. Gilbert’s Syndrome.
+  9. Presence of clinical complications of PBC or clinically significant hepatic decompensation:
+  10. History of liver transplant, current placement on a liver transplant list, or current MELD score &gt;12.
+  11. Cirrhosis with complications, including history (within the past 12 months) or presence of:
+  12. Variceal bleed.
+  13. Uncontrolled ascites.
+  14. Encephalopathy.
+  15. Spontaneous bacterial peritonitis.
+  16. Known or suspected hepatocellular carcinoma.
+  17. Prior transjugular intrahepatic portosystemic shunt procedure.
+  18. Hepatorenal syndrome (type I or II) or screening serum creatinine &gt;2 mg/dL (178 μmol/L).
+  19. Subjects who have undergone gastric bypass procedures (gastric lap band is acceptable) or ileal resection or plan to undergo either of these procedures:
+  20. Other medical conditions that may diminish life expectancy:
+  21. Cancer (except carcinomas in situ or other stable, relatively benign conditions such as chronic lymphatic leukemia).
+  22. If female: plans to become pregnant, known pregnancy, or positive urine pregnancy test (confirmed by a serum pregnancy test).
+  23. If male: history of human immunodeficiency virus infection.
+  24. Medical conditions that may cause nonhepatic increases in ALP (e.g., Paget&#x27;s disease or fractures within 3 months).
+  25. Other clinically significant medical conditions that are not well controlled or for which medication needs are anticipated to change during the study.
+  26. History of alcohol abuse or other substance abuse within 1 year prior to Day 0.
+  27. Note:** This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details and specific inclusion/
+
+EXCLUSION CRITERIA
+
+  1. .</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

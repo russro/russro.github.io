@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 102</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 102</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Part A and C:Overtly healthy as determined by medical evaluationTo qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;#x27;s biological parents and all of the participant&amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in JapanTo qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in China
+  2. Have a body mass index of 18.0 to 32.0 kilograms per square meter (kg/m²), inclusive
+  3. Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in part A and CPart B:Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of Dermatology
+  4. Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapy
+  5. Have a body mass index of 18.0 to 38.0 kilograms per square meter (kg/m²), inclusive
+  6. Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential and women of childbearing potential may participate in part B
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or lactating
+  2. Participants who have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette- Guérin within 35 days of screening
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugs
+  4. Have a known history of diabetes
+  5. Have fasting glucose level of ≥126 milligrams per deciliter (mg/dL) and glycated hemoglobin ≥6.5 percent (%) and/or taking anti-diabetes medications at screening
+  6. Have known history of osteoporosis"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Part A and &lt;span class=&quot;diff-del&quot;&gt;C:Overtly&lt;/span&gt; healthy as determined by medical &lt;span class=&quot;diff-del&quot;&gt;evaluationTo&lt;/span&gt; qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;#x27;s biological parents and all of the participant&amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in &lt;span class=&quot;diff-del&quot;&gt;JapanTo&lt;/span&gt; qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in &lt;span class=&quot;diff-del&quot;&gt;China&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Have a body mass index of 18.0 to 32.0 kilograms per square meter (kg/m²), &lt;span class=&quot;diff-del&quot;&gt;inclusive&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in &lt;span class=&quot;diff-del&quot;&gt;part&lt;/span&gt; A and &lt;span class=&quot;diff-del&quot;&gt;CPart&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;B:Participants&lt;/span&gt; who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of &lt;span class=&quot;diff-del&quot;&gt;Dermatology&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Have a body mass index of 18.0 to 38.0 kilograms per square meter (kg/m²), &lt;span class=&quot;diff-del&quot;&gt;inclusive&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing &lt;span class=&quot;diff-del&quot;&gt;potential&lt;/span&gt; and women of childbearing potential may participate in &lt;span class=&quot;diff-del&quot;&gt;part&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;B&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or &lt;span class=&quot;diff-del&quot;&gt;lactating&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participants who have&lt;/span&gt; received live vaccine(s) (including attenuated live vaccines) or Bacillus &lt;span class=&quot;diff-del&quot;&gt;Calmette- Guérin&lt;/span&gt; within 35 days of &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt;
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription &lt;span class=&quot;diff-del&quot;&gt;drugs&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Have a known&lt;/span&gt; history of &lt;span class=&quot;diff-del&quot;&gt;diabetes&lt;/span&gt;
+  5. &lt;span class=&quot;diff-del&quot;&gt;Have fasting&lt;/span&gt; glucose level of ≥126 &lt;span class=&quot;diff-del&quot;&gt;milligrams per deciliter (mg/dL)&lt;/span&gt; and glycated hemoglobin &lt;span class=&quot;diff-del&quot;&gt;≥6.5 percent (%)&lt;/span&gt; and/or taking anti-diabetes medications at &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;Have known&lt;/span&gt; history of &lt;span class=&quot;diff-del&quot;&gt;osteoporosis&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Part A and C:Overtly healthy as determined by medical evaluationTo qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;amp;#x27;s biological parents and all of the participant&amp;amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in JapanTo qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in ChinaHave a body mass index of 18.0 to 32.0 kilograms per square meter (kg&amp;amp;#x2F;m²), inclusiveMale participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in part A and CPart B:Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of DermatologyHave a history, documented by a physician and&amp;amp;#x2F;or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapyHave a body mass index of 18.0 to 38.0 kilograms per square meter (kg&amp;amp;#x2F;m²), inclusiveMale participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential and women of childbearing potential may participate in part BExclusion Criteria:Women who are pregnant and&amp;amp;#x2F;or lactatingParticipants who have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette- Guérin within 35 days of screeningHave a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugsHave a known history of diabetesHave fasting glucose level of ≥126 milligrams per deciliter (mg&amp;amp;#x2F;dL) and glycated hemoglobin ≥6.5 percent (%) and&amp;amp;#x2F;or taking anti-diabetes medications at screeningHave known history of osteoporosis">INCLUSION CRITERIA
+
+  1. Part A and C:Overtly healthy as determined by medical evaluationTo qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&#x27;s biological parents and all of the participant&#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in JapanTo qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&#x27;s biological grandparents must be of exclusive Chinese descent and born in China
+  2. Have a body mass index of 18.0 to 32.0 kilograms per square meter (kg/m²), inclusive
+  3. Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in part A and CPart B:Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of Dermatology
+  4. Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapy
+  5. Have a body mass index of 18.0 to 38.0 kilograms per square meter (kg/m²), inclusive
+  6. Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential and women of childbearing potential may participate in part B
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or lactating
+  2. Participants who have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette- Guérin within 35 days of screening
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugs
+  4. Have a known history of diabetes
+  5. Have fasting glucose level of ≥126 milligrams per deciliter (mg/dL) and glycated hemoglobin ≥6.5 percent (%) and/or taking anti-diabetes medications at screening
+  6. Have known history of osteoporosis</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 2):
+
+INCLUSION CRITERIA
+
+  1. Part A and C:
+  2. Overtly healthy as determined by medical evaluation.
+  3. To qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;#x27;s biological parents and all of the participant&amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in Japan.
+  4. To qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in China.
+  5. Have a body mass index (BMI) of 18.0 to 32.0 kilograms per square meter (kg/m²), inclusive.
+  6. Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in Part A and C.
+  7. Part B:
+  8. Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of Dermatology.
+  9. Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapy.
+  10. Have a body mass index (BMI) of 18.0 to 38.0 kilograms per square meter (kg/m²), inclusive.
+  11. Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential, and women of childbearing potential who agree to use highly effective methods of contraception or practice abstinence may participate in Part B.
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or lactating.
+  2. Have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette-Guérin within 35 days of screening.
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugs.
+  4. Known history of diabetes.
+  5. Fasting glucose level of ≥126 mg/dL and glycated hemoglobin ≥6.5% and/or taking anti-diabetes medications at screening.
+  6. Known history of osteoporosis.
+  7. ---
+  8. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to reflect the amendments, particularly the addition of criteria related to diabetes and osteoporosis, as well as clarifications on the definition of childbearing potential and contraception methods."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 2):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Part A and &lt;span class=&quot;diff-add&quot;&gt;C:
+  2. Overtly&lt;/span&gt; healthy as determined by medical &lt;span class=&quot;diff-add&quot;&gt;evaluation.
+  3. To&lt;/span&gt; qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;#x27;s biological parents and all of the participant&amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in &lt;span class=&quot;diff-add&quot;&gt;Japan.
+  4. To&lt;/span&gt; qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in &lt;span class=&quot;diff-add&quot;&gt;China.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Have a body mass index&lt;span class=&quot;diff-add&quot;&gt; (BMI)&lt;/span&gt; of 18.0 to 32.0 kilograms per square meter (kg/m²), &lt;span class=&quot;diff-add&quot;&gt;inclusive.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in &lt;span class=&quot;diff-add&quot;&gt;Part&lt;/span&gt; A and &lt;span class=&quot;diff-add&quot;&gt;C.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Part B:
+  8. Participants&lt;/span&gt; who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of &lt;span class=&quot;diff-add&quot;&gt;Dermatology.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Have a body mass index&lt;span class=&quot;diff-add&quot;&gt; (BMI)&lt;/span&gt; of 18.0 to 38.0 kilograms per square meter (kg/m²), &lt;span class=&quot;diff-add&quot;&gt;inclusive.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing &lt;span class=&quot;diff-add&quot;&gt;potential,&lt;/span&gt; and women of childbearing potential &lt;span class=&quot;diff-add&quot;&gt;who agree to use highly effective methods of contraception or practice abstinence &lt;/span&gt;may participate in &lt;span class=&quot;diff-add&quot;&gt;Part&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;B.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or &lt;span class=&quot;diff-add&quot;&gt;lactating.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Have&lt;/span&gt; received live vaccine(s) (including attenuated live vaccines) or Bacillus &lt;span class=&quot;diff-add&quot;&gt;Calmette-Guérin&lt;/span&gt; within 35 days of &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription &lt;span class=&quot;diff-add&quot;&gt;drugs.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; history of &lt;span class=&quot;diff-add&quot;&gt;diabetes.&lt;/span&gt;
+  5. &lt;span class=&quot;diff-add&quot;&gt;Fasting&lt;/span&gt; glucose level of ≥126 &lt;span class=&quot;diff-add&quot;&gt;mg/dL&lt;/span&gt; and glycated hemoglobin &lt;span class=&quot;diff-add&quot;&gt;≥6.5%&lt;/span&gt; and/or taking anti-diabetes medications at &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; history of &lt;span class=&quot;diff-add&quot;&gt;osteoporosis.
+  7. ---
+  8. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to reflect the amendments, particularly the addition of criteria related to diabetes and osteoporosis, as well as clarifications on the definition of childbearing potential and contraception methods.&lt;/span&gt;"
+                 data-raw="**Amended Eligibility Criteria (Version 2):**
+
+### Inclusion Criteria:
+
+**Part A and C:**
+- Overtly healthy as determined by medical evaluation.
+- To qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&amp;#x27;s biological parents and all of the participant&amp;#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in Japan.
+- To qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&amp;#x27;s biological grandparents must be of exclusive Chinese descent and born in China.
+- Have a body mass index (BMI) of 18.0 to 32.0 kilograms per square meter (kg/m²), inclusive.
+- Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in Part A and C.
+
+**Part B:**
+- Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of Dermatology.
+- Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapy.
+- Have a body mass index (BMI) of 18.0 to 38.0 kilograms per square meter (kg/m²), inclusive.
+- Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential, and women of childbearing potential who agree to use highly effective methods of contraception or practice abstinence may participate in Part B.
+
+### Exclusion Criteria:
+
+- Women who are pregnant and/or lactating.
+- Have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette-Guérin within 35 days of screening.
+- Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugs.
+- Known history of diabetes.
+- Fasting glucose level of ≥126 mg/dL and glycated hemoglobin ≥6.5% and/or taking anti-diabetes medications at screening.
+- Known history of osteoporosis.
+
+---
+
+**Note:** The inclusion and exclusion criteria have been updated to reflect the amendments, particularly the addition of criteria related to diabetes and osteoporosis, as well as clarifications on the definition of childbearing potential and contraception methods.">Amended Eligibility Criteria (Version 2):
+
+INCLUSION CRITERIA
+
+  1. Part A and C:
+  2. Overtly healthy as determined by medical evaluation.
+  3. To qualify as Japanese for the purpose of this study, the participant must be first generation Japanese, defined as the participant&#x27;s biological parents and all of the participant&#x27;s biological grandparents must be of exclusive Japanese descent, and must have been born in Japan.
+  4. To qualify as Chinese for the purpose of this study, the participant must be, at a minimum, third-generation Chinese, defined as all 4 of the participant&#x27;s biological grandparents must be of exclusive Chinese descent and born in China.
+  5. Have a body mass index (BMI) of 18.0 to 32.0 kilograms per square meter (kg/m²), inclusive.
+  6. Male participants who agree to use highly effective or effective methods of contraception and women not of childbearing potential may participate in Part A and C.
+  7. Part B:
+  8. Participants who have a diagnosis of atopic dermatitis at least 12 months prior to screening as defined by the American Academy of Dermatology.
+  9. Have a history, documented by a physician and/or investigator, of inadequate response to existing topical medications within 6 months preceding screening, or participants who failed systemic therapies intended to treat atopic dermatitis or a history of intolerance to topical therapy.
+  10. Have a body mass index (BMI) of 18.0 to 38.0 kilograms per square meter (kg/m²), inclusive.
+  11. Male participants who agree to use highly effective or effective methods of contraception, women not of childbearing potential, and women of childbearing potential who agree to use highly effective methods of contraception or practice abstinence may participate in Part B.
+
+EXCLUSION CRITERIA
+
+  1. Women who are pregnant and/or lactating.
+  2. Have received live vaccine(s) (including attenuated live vaccines) or Bacillus Calmette-Guérin within 35 days of screening.
+  3. Have a history or presence of multiple or severe allergies or an anaphylactic reaction to prescription or nonprescription drugs.
+  4. Known history of diabetes.
+  5. Fasting glucose level of ≥126 mg/dL and glycated hemoglobin ≥6.5% and/or taking anti-diabetes medications at screening.
+  6. Known history of osteoporosis.
+  7. ---
+  8. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to reflect the amendments, particularly the addition of criteria related to diabetes and osteoporosis, as well as clarifications on the definition of childbearing potential and contraception methods.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

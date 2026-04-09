@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 135</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 135</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. 1) Male or female ≥ 18 years of age. 2) Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;quot;more than one affected relative&amp;quot; criterion).3) Clinically meaningful response to Levodopa (L-Dopa).
+  2. Subjects with or without well defined &amp;quot;OFF&amp;quot; episodes, as determined by the Investigator will be allowed.4) Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least 3 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1).
+  3. Subjects receiving L-Dopa/carbidopa 3 times a day must also be on stable treatment with adjunctive PD medication regimens.
+  4. These regimens bust me maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).5) No planned medication change(s) or surgical intervention anticipated during the course of study.6) the subject must be able to have a drug withdrawal induced &amp;quot;OFF&amp;quot; episode.7) Stage III or less on the modified Hoehn and Yahr scale in the &amp;quot;ON&amp;quot; state.8) Mini-Mental State Examination (MMSE) score &amp;gt; 21.9) If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:Oral contraceptiveContraceptive patchBarrier (diaphragm, sponge or condom) plus spermicidal preparationsIntrauterine contraceptive systemLevonorgestrel implantMedroxyprogesterone acetate contraceptive injectionComplete abstinence from sexual intercourse;
+  5. Hormonal vaginal contraceptive ring; orSurgical sterilization or partner sterile (must have documented proof).10)Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration11)Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.12)Able to understand the consent form, and to provide written informed consent.13)Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary parkinsonismNausea associated with the use of dopamine agonists that requires treatment with an antiemetic.
+  2. Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  3. Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1).
+  4. Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-13077.
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-13077.
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer.
+  12. Pituitary tumors of any duration are excluded.
+  13. Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities ,myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  14. Male subjects with a screening corrected QT interval using Fridericia&amp;#x27;s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms.
+  15. Eligibility will be based on the core laboratory ECG interpretation report.
+  16. HR at screening &amp;lt; 45 bpm or &amp;gt; 100 bpm.
+  17. QRS duration at screening &amp;gt;120 msPR interval at screening &amp;gt;200 ms.
+  18. Subjects with a history of cataplexy, unexplained syncope or seizures.
+  19. Family history of sudden cardiac death.
+  20. Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  21. Current use of any concomitant mediations that prolong the QT/QTc interval.
+  22. Refer to https://crediblemeds.org for listing.
+  23. History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  24. Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  25. Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  26. Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  27. Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson&amp;#x27;s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  28. History of clinically significant impulse control disorder(s).
+  29. Dementia that precludes providing informed consent or would interfere with participation in the study.
+  30. Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;quot;yes&amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  31. Donation of blood plasma in the 30 days prior to first dosing."
+                 data-diff="INCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-del&quot;&gt; 1)&lt;/span&gt; Male or female ≥ 18 years of age.&lt;span class=&quot;diff-del&quot;&gt; 2)&lt;/span&gt; Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;quot;more than one affected relative&amp;quot; &lt;span class=&quot;diff-del&quot;&gt;criterion).3)&lt;/span&gt; Clinically meaningful response to Levodopa &lt;span class=&quot;diff-del&quot;&gt;(L-Dopa).
+  2. Subjects&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;without&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;well defined&lt;/span&gt; &amp;quot;OFF&amp;quot; episodes, as determined by the &lt;span class=&quot;diff-del&quot;&gt;Investigator will be allowed.4)&lt;/span&gt; Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1).&lt;span class=&quot;diff-del&quot;&gt;
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Subjects receiving L-Dopa/carbidopa 3 times a day must also be on stable treatment with adjunctive&lt;/span&gt; PD medication &lt;span class=&quot;diff-del&quot;&gt;regimens.
+  4. These &lt;/span&gt;regimens &lt;span class=&quot;diff-del&quot;&gt;bust&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;me&lt;/span&gt; maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit &lt;span class=&quot;diff-del&quot;&gt;(SV1).5)&lt;/span&gt; No planned medication change(s) or surgical intervention anticipated during the course of &lt;span class=&quot;diff-del&quot;&gt;study.6)&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;able&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have a drug withdrawal induced &amp;quot;OFF&amp;quot; episode.7)&lt;/span&gt; Stage III or less on the modified Hoehn and Yahr scale in the &amp;quot;ON&amp;quot; &lt;span class=&quot;diff-del&quot;&gt;state.8)&lt;/span&gt; Mini-Mental State Examination (MMSE) score &amp;gt; &lt;span class=&quot;diff-del&quot;&gt;21.9)&lt;/span&gt; If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug &lt;span class=&quot;diff-del&quot;&gt;administration:Oral&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;contraceptiveContraceptive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patchBarrier&lt;/span&gt; (diaphragm, sponge or condom) plus spermicidal &lt;span class=&quot;diff-del&quot;&gt;preparationsIntrauterine&lt;/span&gt; contraceptive &lt;span class=&quot;diff-del&quot;&gt;systemLevonorgestrel&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;implantMedroxyprogesterone&lt;/span&gt; acetate contraceptive &lt;span class=&quot;diff-del&quot;&gt;injectionComplete&lt;/span&gt; abstinence from sexual &lt;span class=&quot;diff-del&quot;&gt;intercourse;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Hormonal vaginal contraceptive &lt;span class=&quot;diff-del&quot;&gt;ring;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;orSurgical&lt;/span&gt; sterilization or partner sterile (must have documented &lt;span class=&quot;diff-del&quot;&gt;proof).10)Male&lt;/span&gt; subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug &lt;span class=&quot;diff-del&quot;&gt;administration11)Willing&lt;/span&gt; and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the &lt;span class=&quot;diff-del&quot;&gt;study.12)Able&lt;/span&gt; to understand the consent form, and to provide written informed &lt;span class=&quot;diff-del&quot;&gt;consent.13)Must&lt;/span&gt; be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary &lt;span class=&quot;diff-del&quot;&gt;parkinsonismNausea&lt;/span&gt; associated with the use of dopamine agonists that requires treatment with an &lt;span class=&quot;diff-del&quot;&gt;antiemetic.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1).&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to &lt;span class=&quot;diff-del&quot;&gt;APL-13077.&lt;/span&gt;
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of &lt;span class=&quot;diff-del&quot;&gt;APL-13077.&lt;/span&gt;
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer.&lt;span class=&quot;diff-del&quot;&gt;
+  12.&lt;/span&gt; Pituitary tumors of any duration are excluded.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart &lt;span class=&quot;diff-del&quot;&gt;abnormalities&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;,myocardial&lt;/span&gt; infarction, presence or history of a pacemaker, or any abnormality of the &lt;span class=&quot;diff-del&quot;&gt;ECG&lt;/span&gt; that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Male subjects with a screening corrected QT interval using &lt;span class=&quot;diff-del&quot;&gt;Fridericia&amp;#x27;s&lt;/span&gt; formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms.&lt;span class=&quot;diff-del&quot;&gt;
+  15.&lt;/span&gt; Eligibility will be based on the core laboratory ECG interpretation report.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; HR at screening &amp;lt; 45 bpm or &amp;gt; 100 bpm.
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; QRS duration at screening &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;120&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;msPR&lt;/span&gt; interval at screening &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;200&lt;/span&gt; ms.
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; Subjects with a history of cataplexy, unexplained syncope or seizures.
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; Family history of sudden cardiac death.
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  &lt;span class=&quot;diff-del&quot;&gt;21.&lt;/span&gt; Current use of any concomitant mediations that prolong the QT/QTc interval.&lt;span class=&quot;diff-del&quot;&gt;
+  22.&lt;/span&gt; Refer to https://crediblemeds.org for listing.
+  &lt;span class=&quot;diff-del&quot;&gt;23.&lt;/span&gt; History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  &lt;span class=&quot;diff-del&quot;&gt;24.&lt;/span&gt; Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;25.&lt;/span&gt; Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  &lt;span class=&quot;diff-del&quot;&gt;26.&lt;/span&gt; Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  &lt;span class=&quot;diff-del&quot;&gt;27.&lt;/span&gt; Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including &lt;span class=&quot;diff-del&quot;&gt;Parkinson&amp;#x27;s&lt;/span&gt; disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  &lt;span class=&quot;diff-del&quot;&gt;28.&lt;/span&gt; History of clinically significant impulse control disorder(s).
+  &lt;span class=&quot;diff-del&quot;&gt;29.&lt;/span&gt; Dementia that precludes providing informed consent or would interfere with participation in the study.
+  &lt;span class=&quot;diff-del&quot;&gt;30.&lt;/span&gt; Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;quot;yes&amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  &lt;span class=&quot;diff-del&quot;&gt;31.&lt;/span&gt; Donation of blood plasma in the 30 days prior to first dosing."
+                 data-raw="Inclusion Criteria:1) Male or female ≥ 18 years of age. 2) Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;amp;quot;more than one affected relative&amp;amp;quot; criterion).3) Clinically meaningful response to Levodopa (L-Dopa). Subjects with or without well defined &amp;amp;quot;OFF&amp;amp;quot; episodes, as determined by the Investigator will be allowed.4) Receiving stable doses of L-Dopa&amp;amp;#x2F;carbidopa (immediate or sustained release) administered at least 3 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1). Subjects receiving L-Dopa&amp;amp;#x2F;carbidopa 3 times a day must also be on stable treatment with adjunctive PD medication regimens. These regimens bust me maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).5) No planned medication change(s) or surgical intervention anticipated during the course of study.6) the subject must be able to have a drug withdrawal induced &amp;amp;quot;OFF&amp;amp;quot; episode.7) Stage III or less on the modified Hoehn and Yahr scale in the &amp;amp;quot;ON&amp;amp;quot; state.8) Mini-Mental State Examination (MMSE) score &amp;amp;gt; 21.9) If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:Oral contraceptiveContraceptive patchBarrier (diaphragm, sponge or condom) plus spermicidal preparationsIntrauterine contraceptive systemLevonorgestrel implantMedroxyprogesterone acetate contraceptive injectionComplete abstinence from sexual intercourse;Hormonal vaginal contraceptive ring; orSurgical sterilization or partner sterile (must have documented proof).10)Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration11)Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.12)Able to understand the consent form, and to provide written informed consent.13)Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.Exclusion Criteria:Atypical or secondary parkinsonismNausea associated with the use of dopamine agonists that requires treatment with an antiemetic.Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa&amp;amp;#x2F;Duopa.Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1). Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).Female who is pregnant or lactating.Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-13077.Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-13077.Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).Drug or alcohol dependency in the past 12 months.Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer. Pituitary tumors of any duration are excluded.Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities ,myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.Male subjects with a screening corrected QT interval using Fridericia&amp;amp;#x27;s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms. Eligibility will be based on the core laboratory ECG interpretation report.HR at screening &amp;amp;lt; 45 bpm or &amp;amp;gt; 100 bpm.QRS duration at screening &amp;amp;gt;120 msPR interval at screening &amp;amp;gt;200 ms.Subjects with a history of cataplexy, unexplained syncope or seizures.Family history of sudden cardiac death.Heart failure (NYHA Class II or greater) and&amp;amp;#x2F;or a myocardial infarction.Current use of any concomitant mediations that prolong the QT&amp;amp;#x2F;QTc interval. Refer to https:&amp;amp;#x2F;&amp;amp;#x2F;crediblemeds.org for listing.History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson&amp;amp;#x27;s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.History of clinically significant impulse control disorder(s).Dementia that precludes providing informed consent or would interfere with participation in the study.Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;amp;quot;yes&amp;amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.Donation of blood plasma in the 30 days prior to first dosing.">INCLUSION CRITERIA
+
+  1. 1) Male or female ≥ 18 years of age. 2) Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &quot;more than one affected relative&quot; criterion).3) Clinically meaningful response to Levodopa (L-Dopa).
+  2. Subjects with or without well defined &quot;OFF&quot; episodes, as determined by the Investigator will be allowed.4) Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least 3 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1).
+  3. Subjects receiving L-Dopa/carbidopa 3 times a day must also be on stable treatment with adjunctive PD medication regimens.
+  4. These regimens bust me maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).5) No planned medication change(s) or surgical intervention anticipated during the course of study.6) the subject must be able to have a drug withdrawal induced &quot;OFF&quot; episode.7) Stage III or less on the modified Hoehn and Yahr scale in the &quot;ON&quot; state.8) Mini-Mental State Examination (MMSE) score &gt; 21.9) If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:Oral contraceptiveContraceptive patchBarrier (diaphragm, sponge or condom) plus spermicidal preparationsIntrauterine contraceptive systemLevonorgestrel implantMedroxyprogesterone acetate contraceptive injectionComplete abstinence from sexual intercourse;
+  5. Hormonal vaginal contraceptive ring; orSurgical sterilization or partner sterile (must have documented proof).10)Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration11)Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.12)Able to understand the consent form, and to provide written informed consent.13)Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary parkinsonismNausea associated with the use of dopamine agonists that requires treatment with an antiemetic.
+  2. Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  3. Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1).
+  4. Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-13077.
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-13077.
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer.
+  12. Pituitary tumors of any duration are excluded.
+  13. Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities ,myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  14. Male subjects with a screening corrected QT interval using Fridericia&#x27;s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms.
+  15. Eligibility will be based on the core laboratory ECG interpretation report.
+  16. HR at screening &lt; 45 bpm or &gt; 100 bpm.
+  17. QRS duration at screening &gt;120 msPR interval at screening &gt;200 ms.
+  18. Subjects with a history of cataplexy, unexplained syncope or seizures.
+  19. Family history of sudden cardiac death.
+  20. Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  21. Current use of any concomitant mediations that prolong the QT/QTc interval.
+  22. Refer to https://crediblemeds.org for listing.
+  23. History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  24. Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  25. Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  26. Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  27. Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson&#x27;s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  28. History of clinically significant impulse control disorder(s).
+  29. Dementia that precludes providing informed consent or would interfere with participation in the study.
+  30. Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &quot;yes&quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  31. Donation of blood plasma in the 30 days prior to first dosing.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female ≥ 18 years of age.
+  2. Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;quot;more than one affected relative&amp;quot; criterion).
+  3. Clinically meaningful response to Levodopa (L-Dopa) with well-defined early morning &amp;quot;OFF&amp;quot; episodes, as determined by the Investigator.
+  4. Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least 4 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1). Adjunctive PD medication regimens must be maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).
+  5. No planned medication change(s) or surgical intervention anticipated during the course of study.
+  6. Patients must experience at least one well-defined &amp;quot;OFF&amp;quot; episode per day with a total daily &amp;quot;OFF&amp;quot; time duration of ≥ 2 hours during the waking day, based on patient self-assessment.
+  7. Stage III or less on the modified Hoehn and Yahr scale in the &amp;quot;ON&amp;quot; state.
+  8. Mini-Mental State Examination (MMSE) score &amp;gt; 25.
+  9. If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:
+  10. Oral contraceptive
+  11. Contraceptive patch
+  12. Barrier (diaphragm, sponge or condom) plus spermicidal preparations
+  13. Intrauterine contraceptive system
+  14. Levonorgestrel implant
+  15. Medroxyprogesterone acetate contraceptive injection
+  16. Complete abstinence from sexual intercourse
+  17. Hormonal vaginal contraceptive ring
+  18. Surgical sterilization or partner sterile (must have documented proof).
+  19. Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration.
+  20. Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.
+  21. Able to understand the consent form, and to provide written informed consent.
+  22. Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary parkinsonism.
+  2. Nausea associated with the use of dopamine agonists that requires treatment with an anti-emetic.
+  3. Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  4. Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1). Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-130277.
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-130277.
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer. Pituitary tumors of any duration are excluded.
+  12. Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities, myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG, that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  13. Male subjects with a screening corrected QT interval using Fridericia’s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms. Eligibility will be based on the core laboratory ECG interpretation report.
+  14. HR at screening &amp;lt; 45 bpm or &amp;gt; 100 bpm.
+  15. QRS duration at screening &amp;gt; 120 ms.
+  16. PR interval at screening &amp;gt; 200 ms.
+  17. Subjects with a history of cataplexy, unexplained syncope or seizures.
+  18. Family history of sudden cardiac death.
+  19. Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  20. Current use of any concomitant mediations that prolong the QT/QTc interval. Refer to https://crediblemeds.org for listing.
+  21. History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  22. Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  23. Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  24. Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  25. Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson’s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  26. History of clinically significant impulse control disorder(s).
+  27. Dementia that precludes providing informed consent or would interfere with participation in the study.
+  28. Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;quot;yes&amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  29. Donation of blood or plasma in the 30 days prior to first dosing."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female ≥ 18 years of age.&lt;span class=&quot;diff-add&quot;&gt;
+  2.&lt;/span&gt; Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;quot;more than one affected relative&amp;quot; &lt;span class=&quot;diff-add&quot;&gt;criterion).
+  3.&lt;/span&gt; Clinically meaningful response to Levodopa &lt;span class=&quot;diff-add&quot;&gt;(L-Dopa)&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;well-defined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;early&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;morning&lt;/span&gt; &amp;quot;OFF&amp;quot; episodes, as determined by the &lt;span class=&quot;diff-add&quot;&gt;Investigator.
+  4.&lt;/span&gt; Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least &lt;span class=&quot;diff-add&quot;&gt;4&lt;/span&gt; times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1). &lt;span class=&quot;diff-add&quot;&gt;Adjunctive&lt;/span&gt; PD medication regimens &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit &lt;span class=&quot;diff-add&quot;&gt;(SV1).
+  5.&lt;/span&gt; No planned medication change(s) or surgical intervention anticipated during the course of &lt;span class=&quot;diff-add&quot;&gt;study.
+  6. Patients must experience at least one well-defined &amp;quot;OFF&amp;quot; episode per day with a total daily &amp;quot;OFF&amp;quot; time duration of ≥ 2 hours during&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;waking&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;day,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;based&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;patient&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;self-assessment.
+  7.&lt;/span&gt; Stage III or less on the modified Hoehn and Yahr scale in the &amp;quot;ON&amp;quot; &lt;span class=&quot;diff-add&quot;&gt;state.
+  8.&lt;/span&gt; Mini-Mental State Examination (MMSE) score &amp;gt; &lt;span class=&quot;diff-add&quot;&gt;25.
+  9.&lt;/span&gt; If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug &lt;span class=&quot;diff-add&quot;&gt;administration:
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Oral&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;contraceptive
+  11. Contraceptive patch
+  12. Barrier&lt;/span&gt; (diaphragm, sponge or condom) plus spermicidal &lt;span class=&quot;diff-add&quot;&gt;preparations
+  13. Intrauterine&lt;/span&gt; contraceptive &lt;span class=&quot;diff-add&quot;&gt;system
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Levonorgestrel implant
+  15. Medroxyprogesterone&lt;/span&gt; acetate contraceptive &lt;span class=&quot;diff-add&quot;&gt;injection
+  16. Complete&lt;/span&gt; abstinence from sexual &lt;span class=&quot;diff-add&quot;&gt;intercourse&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Hormonal vaginal contraceptive &lt;span class=&quot;diff-add&quot;&gt;ring
+  18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Surgical&lt;/span&gt; sterilization or partner sterile (must have documented &lt;span class=&quot;diff-add&quot;&gt;proof).
+  19. Male&lt;/span&gt; subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug &lt;span class=&quot;diff-add&quot;&gt;administration.
+  20. Willing&lt;/span&gt; and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the &lt;span class=&quot;diff-add&quot;&gt;study.
+  21. Able&lt;/span&gt; to understand the consent form, and to provide written informed &lt;span class=&quot;diff-add&quot;&gt;consent.
+  22. Must&lt;/span&gt; be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary &lt;span class=&quot;diff-add&quot;&gt;parkinsonism.
+  2. Nausea&lt;/span&gt; associated with the use of dopamine agonists that requires treatment with an &lt;span class=&quot;diff-add&quot;&gt;anti-emetic.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1). Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to &lt;span class=&quot;diff-add&quot;&gt;APL-130277.&lt;/span&gt;
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of &lt;span class=&quot;diff-add&quot;&gt;APL-130277.&lt;/span&gt;
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer. Pituitary tumors of any duration are excluded.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart &lt;span class=&quot;diff-add&quot;&gt;abnormalities,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;myocardial&lt;/span&gt; infarction, presence or history of a pacemaker, or any abnormality of the &lt;span class=&quot;diff-add&quot;&gt;ECG,&lt;/span&gt; that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Male subjects with a screening corrected QT interval using &lt;span class=&quot;diff-add&quot;&gt;Fridericia’s&lt;/span&gt; formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms. Eligibility will be based on the core laboratory ECG interpretation report.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; HR at screening &amp;lt; 45 bpm or &amp;gt; 100 bpm.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; QRS duration at screening &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;120 ms.
+  16. PR&lt;/span&gt; interval at screening &lt;span class=&quot;diff-add&quot;&gt;&amp;gt; 200&lt;/span&gt; ms.
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Subjects with a history of cataplexy, unexplained syncope or seizures.
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; Family history of sudden cardiac death.
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Current use of any concomitant mediations that prolong the QT/QTc interval. Refer to https://crediblemeds.org for listing.
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;23.&lt;/span&gt; Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  &lt;span class=&quot;diff-add&quot;&gt;24.&lt;/span&gt; Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  &lt;span class=&quot;diff-add&quot;&gt;25.&lt;/span&gt; Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including &lt;span class=&quot;diff-add&quot;&gt;Parkinson’s&lt;/span&gt; disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  &lt;span class=&quot;diff-add&quot;&gt;26.&lt;/span&gt; History of clinically significant impulse control disorder(s).
+  &lt;span class=&quot;diff-add&quot;&gt;27.&lt;/span&gt; Dementia that precludes providing informed consent or would interfere with participation in the study.
+  &lt;span class=&quot;diff-add&quot;&gt;28.&lt;/span&gt; Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;quot;yes&amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  &lt;span class=&quot;diff-add&quot;&gt;29.&lt;/span&gt; Donation of blood&lt;span class=&quot;diff-add&quot;&gt; or&lt;/span&gt; plasma in the 30 days prior to first dosing."
+                 data-raw="Inclusion Criteria:
+1) Male or female ≥ 18 years of age.
+2) Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &amp;quot;more than one affected relative&amp;quot; criterion).
+3) Clinically meaningful response to Levodopa (L-Dopa) with well-defined early morning &amp;quot;OFF&amp;quot; episodes, as determined by the Investigator.
+4) Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least 4 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1). Adjunctive PD medication regimens must be maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).
+5) No planned medication change(s) or surgical intervention anticipated during the course of study.
+6) Patients must experience at least one well-defined &amp;quot;OFF&amp;quot; episode per day with a total daily &amp;quot;OFF&amp;quot; time duration of ≥ 2 hours during the waking day, based on patient self-assessment.
+7) Stage III or less on the modified Hoehn and Yahr scale in the &amp;quot;ON&amp;quot; state.
+8) Mini-Mental State Examination (MMSE) score &amp;gt; 25.
+9) If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:
+   - Oral contraceptive
+   - Contraceptive patch
+   - Barrier (diaphragm, sponge or condom) plus spermicidal preparations
+   - Intrauterine contraceptive system
+   - Levonorgestrel implant
+   - Medroxyprogesterone acetate contraceptive injection
+   - Complete abstinence from sexual intercourse
+   - Hormonal vaginal contraceptive ring
+   - Surgical sterilization or partner sterile (must have documented proof).
+10) Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration.
+11) Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.
+12) Able to understand the consent form, and to provide written informed consent.
+13) Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+Exclusion Criteria:
+1) Atypical or secondary parkinsonism.
+2) Nausea associated with the use of dopamine agonists that requires treatment with an anti-emetic.
+3) Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+4) Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1). Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+5) Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+6) Female who is pregnant or lactating.
+7) Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-130277.
+8) Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-130277.
+9) Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+10) Drug or alcohol dependency in the past 12 months.
+11) Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer. Pituitary tumors of any duration are excluded.
+12) Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities, myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG, that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+13) Male subjects with a screening corrected QT interval using Fridericia’s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms. Eligibility will be based on the core laboratory ECG interpretation report.
+14) HR at screening &amp;lt; 45 bpm or &amp;gt; 100 bpm.
+15) QRS duration at screening &amp;gt; 120 ms.
+16) PR interval at screening &amp;gt; 200 ms.
+17) Subjects with a history of cataplexy, unexplained syncope or seizures.
+18) Family history of sudden cardiac death.
+19) Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+20) Current use of any concomitant mediations that prolong the QT/QTc interval. Refer to https://crediblemeds.org for listing.
+21) History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+22) Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+23) Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+24) Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+25) Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson’s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+26) History of clinically significant impulse control disorder(s).
+27) Dementia that precludes providing informed consent or would interfere with participation in the study.
+28) Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &amp;quot;yes&amp;quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+29) Donation of blood or plasma in the 30 days prior to first dosing.">INCLUSION CRITERIA
+
+  1. Male or female ≥ 18 years of age.
+  2. Clinical diagnosis of Idiopathic PD, consistent with UK Brain Bank Criteria (excluding the &quot;more than one affected relative&quot; criterion).
+  3. Clinically meaningful response to Levodopa (L-Dopa) with well-defined early morning &quot;OFF&quot; episodes, as determined by the Investigator.
+  4. Receiving stable doses of L-Dopa/carbidopa (immediate or sustained release) administered at least 4 times per day OR Rytary™ administered 3 times per day, for at least 4 weeks before the initial Screening Visit (SV1). Adjunctive PD medication regimens must be maintained at a stable dose for at least 4 weeks prior to the initial Screening Visit (SV1) with the exception that MAO-B inhibitors must be maintained at a stable level for at least 8 weeks prior to the initial Screening Visit (SV1).
+  5. No planned medication change(s) or surgical intervention anticipated during the course of study.
+  6. Patients must experience at least one well-defined &quot;OFF&quot; episode per day with a total daily &quot;OFF&quot; time duration of ≥ 2 hours during the waking day, based on patient self-assessment.
+  7. Stage III or less on the modified Hoehn and Yahr scale in the &quot;ON&quot; state.
+  8. Mini-Mental State Examination (MMSE) score &gt; 25.
+  9. If female and of childbearing potential, must agree to use one of the following methods of birth control throughout the study and until at least 30 days after final drug administration:
+  10. Oral contraceptive
+  11. Contraceptive patch
+  12. Barrier (diaphragm, sponge or condom) plus spermicidal preparations
+  13. Intrauterine contraceptive system
+  14. Levonorgestrel implant
+  15. Medroxyprogesterone acetate contraceptive injection
+  16. Complete abstinence from sexual intercourse
+  17. Hormonal vaginal contraceptive ring
+  18. Surgical sterilization or partner sterile (must have documented proof).
+  19. Male subjects must be either surgically sterile, agree to be sexually abstinent or use a barrier method of birth control (e.g., condom) from first study drug administration until at least 30 days after final drug administration.
+  20. Willing and able to comply with scheduled visits, treatment plan, laboratory tests, and other study-related procedures to complete the study.
+  21. Able to understand the consent form, and to provide written informed consent.
+  22. Must be approved as a satisfactory candidate by the Enrollment Authorization Committee (EAC) and the Sponsor.
+
+EXCLUSION CRITERIA
+
+  1. Atypical or secondary parkinsonism.
+  2. Nausea associated with the use of dopamine agonists that requires treatment with an anti-emetic.
+  3. Previous treatment with any of the following: a neurosurgical procedure for PD; continuous subcutaneous (s.c.) apomorphine infusion; or Duodopa/Duopa.
+  4. Treatment with any form of s.c. apomorphine within 7 days prior to the initial Screening Visit (SV1). Subjects that stopped s.c. apomorphine for any reason other than systemic safety concerns or lack of efficacy may be considered.
+  5. Contraindications to moxifloxacin or APOKYN®, or hypersensitivity to apomorphine hydrochloride or any macrolide antibiotic or any of the ingredients of APOKYN® (notably sodium metabisulfite).
+  6. Female who is pregnant or lactating.
+  7. Participation in a clinical trial within 30 days prior to the initial Screening Visit (SV1), with the exception of clinical studies related to APL-130277.
+  8. Receipt of any investigational (i.e., unapproved) medication within 30 days prior to the initial Screening Visit (SV1), with the exception of APL-130277.
+  9. Any selective 5HT3 antagonists (i.e., ondansetron, granisetron, dolasetron, palonosetron, alosetron), dopamine antagonists (including Tigan [trimethobenzamide] and domperidone, but excluding quetiapine or clozapine) or dopamine depleting agents within 30 days prior to initial Screening Visit (SV1).
+  10. Drug or alcohol dependency in the past 12 months.
+  11. Subject has a history of malignancy within 5 years prior to SV1, except for adequately treated basal cell or squamous cell skin cancer or in situ cervical cancer. Pituitary tumors of any duration are excluded.
+  12. Documented abnormalities with ECGs including, arrhythmias, clinically meaningful interval irregularities, structural heart abnormalities, myocardial infarction, presence or history of a pacemaker, or any abnormality of the ECG, that in the opinion of the Investigator, would interfere with the ability to measure the QT interval, or correct the QT interval for heart rate.
+  13. Male subjects with a screening corrected QT interval using Fridericia’s formula (QTcF) of ≥ 450 ms; female subjects with a screening QT interval ≥ 470 ms. Eligibility will be based on the core laboratory ECG interpretation report.
+  14. HR at screening &lt; 45 bpm or &gt; 100 bpm.
+  15. QRS duration at screening &gt; 120 ms.
+  16. PR interval at screening &gt; 200 ms.
+  17. Subjects with a history of cataplexy, unexplained syncope or seizures.
+  18. Family history of sudden cardiac death.
+  19. Heart failure (NYHA Class II or greater) and/or a myocardial infarction.
+  20. Current use of any concomitant mediations that prolong the QT/QTc interval. Refer to https://crediblemeds.org for listing.
+  21. History of additional risk factors for TdP (i.e., heart failure, hypokalemia, family history of Long QT Syndrome).
+  22. Clinically significant medical, surgical, or laboratory abnormality in the opinion of the Investigator.
+  23. Subject has a positive screening laboratory test result for human immunodeficiency virus (HIV).
+  24. Subject has a positive screening laboratory test result for hepatitis B surface antigen or hepatitis C antibodies and has liver function test results at screening above the ULN for the reference laboratory.
+  25. Major psychiatric disorder including, but not limited to, dementia, bipolar disorder, psychosis (including Parkinson’s disease psychosis), or any disorder that, in the opinion of the Investigator, requires ongoing treatment that would make study participation unsafe or make treatment compliance difficult.
+  26. History of clinically significant impulse control disorder(s).
+  27. Dementia that precludes providing informed consent or would interfere with participation in the study.
+  28. Current suicidal ideation within one year prior to the second Screening Visit (SV2) as evidenced by answering &quot;yes&quot; to Questions 4 or 5 on the suicidal ideation portion of the Columbia-Suicide Severity Rating Scale (C-SSRS) or attempted suicide within the last 5 years.
+  29. Donation of blood or plasma in the 30 days prior to first dosing.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

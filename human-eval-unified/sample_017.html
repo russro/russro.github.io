@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 17</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 17</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Any of the following hematologic malignancies:Acute myeloid leukemia (AML) in first cytomorphological remission (&amp;lt; 5% blasts in the bone marrow) with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remissionAcute lymphoblastic leukemia (ALL) in first or higher remission (&amp;lt; 5% blasts in the bone marrow)Myelodysplastic syndrome (MDS): transfusion-dependent (requiring at least one transfusion per month), or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk groupClinical justification of allogeneic stem cell transplantation where a suitable HLA matched sibling or unrelated donor is unavailable in a timely manner.
+  2. An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation.
+  3. Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donorAvailability of a related haploidentical donor with ≥ 4/8 but &amp;lt; 7/8, or ≥ 5/10 but &amp;lt; 9/10 matches at the HLA-A, -B, -C, -DRB1, and/or -DQB1 loci, as determined by high resolution human leukocyte antigen (HLA)-typingKarnofsky Performance Status (KPS) ≥ 70%Male or female, age ≥ 18 years and ≤ 70 years.
+  4. Patients aged ≥ 65 years must have a Sorror score ≤ 3Availability of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulationsFor females of childbearing potential who are sexually active and males who have sexual contact with a female of childbearing potential: willingness to use of reliable methods of contraception (oral contraceptives, intrauterine device, hormone implants, contraceptive injection or abstinence) during study participationGiven written informed consent (patient and donor)
+
+EXCLUSION CRITERIA
+
+  1. Availability of a suitable HLA-matched sibling or unrelated donor in a donor search
+  2. Prior allogeneic hematopoietic stem cell transplantation
+  3. Diffusing capacity for carbon monoxide (hemoglobin corrected DLCO) &amp;lt; 50% predicted
+  4. Left ventricular ejection fraction &amp;lt; 45% (evaluated by echocardiogram or MUGA scan)
+  5. Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal (CTCAE grade 2)
+  6. Bilirubin &amp;gt; 1.5 × upper limit of normal (CTCAE grade 2)
+  7. Creatinine clearance &amp;lt; 50 ml/min (calculated or measured)
+  8. Positive pregnancy test or breastfeeding of patient or donor (women of childbearing age only)
+  9. Estimated probability of surviving less than 3 months
+  10. Known allergy to any of the components of ATIR101 (e.g., dimethyl sulfoxide)
+  11. Known hypersensitivity to cyclophosphamide or any of its metabolites
+  12. Any contraindication for GVHD prophylaxis with mycophenolate mofetil, cyclosporine A, or tacrolimus
+  13. Known presence of HLA antibodies against the non-shared donor haplotype
+  14. Positive human immunodeficiency virus (HIV) test
+  15. Positive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)
+  16. Any other condition that, in the opinion of the investigator, makes the patient or donor ineligible for the study"
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the following hematologic malignancies:Acute&lt;/span&gt; myeloid leukemia (AML) in first cytomorphological remission&lt;span class=&quot;diff-del&quot;&gt; (&amp;lt; 5% blasts in the bone marrow)&lt;/span&gt; with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological &lt;span class=&quot;diff-del&quot;&gt;remissionAcute&lt;/span&gt; lymphoblastic leukemia (ALL) in first or higher &lt;span class=&quot;diff-del&quot;&gt;remission&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;5%&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;blasts&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in the bone marrow)Myelodysplastic syndrome (MDS):&lt;/span&gt; transfusion-dependent (requiring at least one transfusion per &lt;span class=&quot;diff-del&quot;&gt;month),&lt;/span&gt; or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk &lt;span class=&quot;diff-del&quot;&gt;groupClinical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;justification&lt;/span&gt; of&lt;span class=&quot;diff-del&quot;&gt; allogeneic stem cell transplantation where&lt;/span&gt; a suitable &lt;span class=&quot;diff-del&quot;&gt;HLA&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;matched&lt;/span&gt; sibling or unrelated &lt;span class=&quot;diff-del&quot;&gt;donor is unavailable in a timely manner.
+  2. An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation.
+  3. Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donorAvailability of a related haploidentical donor&lt;/span&gt; with ≥ 4/8 &lt;span class=&quot;diff-del&quot;&gt;but&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;lt; 7/8, or ≥ 5/10 but &amp;lt; 9/10 matches&lt;/span&gt; at the HLA-A, -B, -C, -DRB1, &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; -DQB1 &lt;span class=&quot;diff-del&quot;&gt;loci,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;determined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;high resolution human leukocyte antigen (HLA)-typingKarnofsky Performance Status (KPS)&lt;/span&gt; ≥ &lt;span class=&quot;diff-del&quot;&gt;70%Male&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;female,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt; ≥ &lt;span class=&quot;diff-del&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;≤&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Patients aged ≥ 65 years must have a Sorror score ≤ &lt;span class=&quot;diff-del&quot;&gt;3Availability&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulationsFor females&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;sexually&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;active&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;males&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have&lt;/span&gt; sexual contact with a female of childbearing &lt;span class=&quot;diff-del&quot;&gt;potential:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;willingness to&lt;/span&gt; use&lt;span class=&quot;diff-del&quot;&gt; of&lt;/span&gt; reliable methods of &lt;span class=&quot;diff-del&quot;&gt;contraception (oral contraceptives, intrauterine device, hormone implants, contraceptive injection or abstinence) during study participationGiven written informed consent (patient and donor)&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Availability of a suitable HLA-matched sibling or unrelated donor in a donor search
+  2. Prior&lt;/span&gt; allogeneic hematopoietic stem cell transplantation
+  &lt;span class=&quot;diff-del&quot;&gt;3. Diffusing capacity for carbon monoxide (hemoglobin corrected DLCO) &amp;lt; 50% predicted
+  4.&lt;/span&gt; Left ventricular ejection fraction &amp;lt; &lt;span class=&quot;diff-del&quot;&gt;45%&lt;/span&gt; (evaluated by echocardiogram or &lt;span class=&quot;diff-del&quot;&gt;MUGA scan)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal &lt;span class=&quot;diff-del&quot;&gt;(CTCAE grade 2)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6. Bilirubin &amp;gt; 1.5 × upper limit of normal (CTCAE grade 2)
+  7.&lt;/span&gt; Creatinine clearance &amp;lt; 50 &lt;span class=&quot;diff-del&quot;&gt;ml/min (calculated or measured)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Positive pregnancy &lt;span class=&quot;diff-del&quot;&gt;test or breastfeeding of patient or donor (women of childbearing age only)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9. Estimated probability of surviving less than 3 months
+  10.&lt;/span&gt; Known allergy to any &lt;span class=&quot;diff-del&quot;&gt;of the components&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;ATIR101&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(e.g.,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dimethyl sulfoxide)
+  11. Known&lt;/span&gt; hypersensitivity to cyclophosphamide or any of its &lt;span class=&quot;diff-del&quot;&gt;metabolites&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Any contraindication for GVHD prophylaxis with mycophenolate mofetil, cyclosporine A, or tacrolimus
+  13. Known presence&lt;/span&gt; of HLA antibodies against the non-shared donor &lt;span class=&quot;diff-del&quot;&gt;haplotype&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Positive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;human immunodeficiency virus (HIV) test
+  15. Positive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)
+  16. Any other condition&lt;/span&gt; that, in the opinion of the investigator, &lt;span class=&quot;diff-del&quot;&gt;makes&lt;/span&gt; the patient&lt;span class=&quot;diff-del&quot;&gt; or donor&lt;/span&gt; ineligible for the study"
+                 data-raw="Inclusion Criteria:Any of the following hematologic malignancies:Acute myeloid leukemia (AML) in first cytomorphological remission (&amp;amp;lt; 5% blasts in the bone marrow) with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remissionAcute lymphoblastic leukemia (ALL) in first or higher remission (&amp;amp;lt; 5% blasts in the bone marrow)Myelodysplastic syndrome (MDS): transfusion-dependent (requiring at least one transfusion per month), or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk groupClinical justification of allogeneic stem cell transplantation where a suitable HLA matched sibling or unrelated donor is unavailable in a timely manner. An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation. Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donorAvailability of a related haploidentical donor with ≥ 4&amp;amp;#x2F;8 but &amp;amp;lt; 7&amp;amp;#x2F;8, or ≥ 5&amp;amp;#x2F;10 but &amp;amp;lt; 9&amp;amp;#x2F;10 matches at the HLA-A, -B, -C, -DRB1, and&amp;amp;#x2F;or -DQB1 loci, as determined by high resolution human leukocyte antigen (HLA)-typingKarnofsky Performance Status (KPS) ≥ 70%Male or female, age ≥ 18 years and ≤ 70 years. Patients aged ≥ 65 years must have a Sorror score ≤ 3Availability of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulationsFor females of childbearing potential who are sexually active and males who have sexual contact with a female of childbearing potential: willingness to use of reliable methods of contraception (oral contraceptives, intrauterine device, hormone implants, contraceptive injection or abstinence) during study participationGiven written informed consent (patient and donor)Exclusion Criteria:Availability of a suitable HLA-matched sibling or unrelated donor in a donor searchPrior allogeneic hematopoietic stem cell transplantationDiffusing capacity for carbon monoxide (hemoglobin corrected DLCO) &amp;amp;lt; 50% predictedLeft ventricular ejection fraction &amp;amp;lt; 45% (evaluated by echocardiogram or MUGA scan)Aspartate aminotransferase (AST) and&amp;amp;#x2F;or alanine aminotransferase (ALT) &amp;amp;gt; 2.5 × upper limit of normal (CTCAE grade 2)Bilirubin &amp;amp;gt; 1.5 × upper limit of normal (CTCAE grade 2)Creatinine clearance &amp;amp;lt; 50 ml&amp;amp;#x2F;min (calculated or measured)Positive pregnancy test or breastfeeding of patient or donor (women of childbearing age only)Estimated probability of surviving less than 3 monthsKnown allergy to any of the components of ATIR101 (e.g., dimethyl sulfoxide)Known hypersensitivity to cyclophosphamide or any of its metabolitesAny contraindication for GVHD prophylaxis with mycophenolate mofetil, cyclosporine A, or tacrolimusKnown presence of HLA antibodies against the non-shared donor haplotypePositive human immunodeficiency virus (HIV) testPositive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)Any other condition that, in the opinion of the investigator, makes the patient or donor ineligible for the study">INCLUSION CRITERIA
+
+  1. Any of the following hematologic malignancies:Acute myeloid leukemia (AML) in first cytomorphological remission (&lt; 5% blasts in the bone marrow) with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remissionAcute lymphoblastic leukemia (ALL) in first or higher remission (&lt; 5% blasts in the bone marrow)Myelodysplastic syndrome (MDS): transfusion-dependent (requiring at least one transfusion per month), or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk groupClinical justification of allogeneic stem cell transplantation where a suitable HLA matched sibling or unrelated donor is unavailable in a timely manner.
+  2. An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation.
+  3. Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donorAvailability of a related haploidentical donor with ≥ 4/8 but &lt; 7/8, or ≥ 5/10 but &lt; 9/10 matches at the HLA-A, -B, -C, -DRB1, and/or -DQB1 loci, as determined by high resolution human leukocyte antigen (HLA)-typingKarnofsky Performance Status (KPS) ≥ 70%Male or female, age ≥ 18 years and ≤ 70 years.
+  4. Patients aged ≥ 65 years must have a Sorror score ≤ 3Availability of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulationsFor females of childbearing potential who are sexually active and males who have sexual contact with a female of childbearing potential: willingness to use of reliable methods of contraception (oral contraceptives, intrauterine device, hormone implants, contraceptive injection or abstinence) during study participationGiven written informed consent (patient and donor)
+
+EXCLUSION CRITERIA
+
+  1. Availability of a suitable HLA-matched sibling or unrelated donor in a donor search
+  2. Prior allogeneic hematopoietic stem cell transplantation
+  3. Diffusing capacity for carbon monoxide (hemoglobin corrected DLCO) &lt; 50% predicted
+  4. Left ventricular ejection fraction &lt; 45% (evaluated by echocardiogram or MUGA scan)
+  5. Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &gt; 2.5 × upper limit of normal (CTCAE grade 2)
+  6. Bilirubin &gt; 1.5 × upper limit of normal (CTCAE grade 2)
+  7. Creatinine clearance &lt; 50 ml/min (calculated or measured)
+  8. Positive pregnancy test or breastfeeding of patient or donor (women of childbearing age only)
+  9. Estimated probability of surviving less than 3 months
+  10. Known allergy to any of the components of ATIR101 (e.g., dimethyl sulfoxide)
+  11. Known hypersensitivity to cyclophosphamide or any of its metabolites
+  12. Any contraindication for GVHD prophylaxis with mycophenolate mofetil, cyclosporine A, or tacrolimus
+  13. Known presence of HLA antibodies against the non-shared donor haplotype
+  14. Positive human immunodeficiency virus (HIV) test
+  15. Positive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)
+  16. Any other condition that, in the opinion of the investigator, makes the patient or donor ineligible for the study</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria for Version 4 of Clinical Trial Protocol CR-AIR-009
+
+Based on the provided text from the protocol, here are the modified eligibility criteria for Version 4 of the CR-AIR-009 clinical trial, incorporating the evidence and considerations from the protocol:
+
+INCLUSION CRITERIA
+
+  1. Hematologic Malignancy:
+  2. Acute myeloid leukemia (AML) in first cytomorphological remission with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remission.
+  3. Acute lymphoblastic leukemia (ALL) in first or higher remission.
+  4. Myelodysplastic syndromes (MDS) requiring transfusion-dependent treatment (requiring at least one transfusion per month) or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk group.
+  5. Age: 18 years or older.
+  6. Karnofsky Performance Status (KPS): ≥ 70%.
+  7. Transplantation Eligibility:
+  8. Availability of a suitable haploidentical donor (HLA-matched sibling or unrelated donor) with ≥ 4/8 HLA matching at the HLA-A, -B, -C, -DRB1, and -DQB1 loci.
+  9. A donor match of ≥ 4/8 HLA matching is required for haploidentical HSCT.
+  10. A donor match of ≥ 5/8 HLA matching is required for haploidentical HSCT with post-transplant cyclophosphamide.
+  11. Other Considerations:
+  12. Patients aged ≥ 65 years must have a Sorror score ≤ 3.
+  13. Females of childbearing potential must use reliable methods of contraception during study participation.
+  14. Males with sexual contact with a female of childbearing potential must use reliable methods of contraception.
+
+EXCLUSION CRITERIA
+
+  1. Previous allogeneic hematopoietic stem cell transplantation (HSCT).
+  2. Left ventricular ejection fraction (LVEF) &amp;lt; 50% (evaluated by echocardiogram or MUGA).
+  3. Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal (ULN).
+  4. Creatinine clearance &amp;lt; 50 ml/min.
+  5. Positive pregnancy test.
+  6. Known allergy to any component of ATIR101.
+  7. History of hypersensitivity to cyclophosphamide or any of its metabolites.
+  8. Presence of HLA antibodies against the non-shared donor haplotype.
+  9. Other conditions that, in the opinion of the investigator, make the patient ineligible for the study.
+  10. Important Notes:
+  11. Version 4 Considerations: The provided text does not explicitly state the specific changes from Version 3. However, the
+
+INCLUSION CRITERIA
+
+  1. have been updated to reflect the current understanding of the study population and the inclusion of specific age and performance status criteria.
+  2. Specifics: The exact wording of the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may vary depending on the specific version of the protocol.
+  2. Clinical Relevance: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. are crucial for ensuring the safety and efficacy of the study. They help to select patients who are most likely to benefit from the treatment and minimize the risk of adverse events.
+  2. Further Information:** For a complete understanding of the eligibility criteria, it is essential to refer to the full protocol document."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Eligibility Criteria for Version 4 of Clinical Trial Protocol CR-AIR-009
+
+Based on the provided text from the protocol, here are the modified eligibility criteria for Version 4 of the CR-AIR-009 clinical trial, incorporating the evidence and considerations from the protocol:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Hematologic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Malignancy:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acute&lt;/span&gt; myeloid leukemia (AML) in first cytomorphological remission with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological &lt;span class=&quot;diff-add&quot;&gt;remission.
+  3. Acute&lt;/span&gt; lymphoblastic leukemia (ALL) in first or higher &lt;span class=&quot;diff-add&quot;&gt;remission.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Myelodysplastic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;syndromes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(MDS)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;requiring&lt;/span&gt; transfusion-dependent&lt;span class=&quot;diff-add&quot;&gt; treatment&lt;/span&gt; (requiring at least one transfusion per &lt;span class=&quot;diff-add&quot;&gt;month)&lt;/span&gt; or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk &lt;span class=&quot;diff-add&quot;&gt;group.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Age: 18 years or older.
+  6. Karnofsky Performance Status (KPS): ≥ 70%.
+  7. Transplantation Eligibility:
+  8. Availability&lt;/span&gt; of a suitable &lt;span class=&quot;diff-add&quot;&gt;haploidentical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;donor (HLA-matched&lt;/span&gt; sibling or unrelated &lt;span class=&quot;diff-add&quot;&gt;donor)&lt;/span&gt; with ≥ 4/8 &lt;span class=&quot;diff-add&quot;&gt;HLA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;matching&lt;/span&gt; at the HLA-A, -B, -C, -DRB1, &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; -DQB1 &lt;span class=&quot;diff-add&quot;&gt;loci.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;donor&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; ≥ &lt;span class=&quot;diff-add&quot;&gt;4/8&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HLA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;matching&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is required for haploidentical HSCT.
+  10. A donor match of&lt;/span&gt; ≥ &lt;span class=&quot;diff-add&quot;&gt;5/8&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HLA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;matching&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;required&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for haploidentical HSCT with post-transplant cyclophosphamide.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11. Other Considerations:
+  12.&lt;/span&gt; Patients aged ≥ 65 years must have a Sorror score ≤ &lt;span class=&quot;diff-add&quot;&gt;3.
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Females&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;reliable&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;methods&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;contraception&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study participation.
+  14. Males with&lt;/span&gt; sexual contact with a female of childbearing &lt;span class=&quot;diff-add&quot;&gt;potential&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; use reliable methods of &lt;span class=&quot;diff-add&quot;&gt;contraception.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; allogeneic hematopoietic stem cell transplantation&lt;span class=&quot;diff-add&quot;&gt; (HSCT).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; Left ventricular ejection fraction &lt;span class=&quot;diff-add&quot;&gt;(LVEF) &lt;/span&gt;&amp;lt; &lt;span class=&quot;diff-add&quot;&gt;50%&lt;/span&gt; (evaluated by echocardiogram or &lt;span class=&quot;diff-add&quot;&gt;MUGA).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal &lt;span class=&quot;diff-add&quot;&gt;(ULN).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Creatinine clearance &amp;lt; 50 &lt;span class=&quot;diff-add&quot;&gt;ml/min.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Positive pregnancy &lt;span class=&quot;diff-add&quot;&gt;test.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Known allergy to any &lt;span class=&quot;diff-add&quot;&gt;component&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;ATIR101.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; hypersensitivity to cyclophosphamide or any of its &lt;span class=&quot;diff-add&quot;&gt;metabolites.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Presence&lt;/span&gt; of HLA antibodies against the non-shared donor &lt;span class=&quot;diff-add&quot;&gt;haplotype.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions&lt;/span&gt; that, in the opinion of the investigator, &lt;span class=&quot;diff-add&quot;&gt;make&lt;/span&gt; the patient ineligible for the &lt;span class=&quot;diff-add&quot;&gt;study.
+  10. Important Notes:
+  11. Version 4 Considerations: The provided text does not explicitly state the specific changes from Version 3. However, the
+
+INCLUSION CRITERIA
+
+  1. have been updated to reflect the current understanding of the &lt;/span&gt;study&lt;span class=&quot;diff-add&quot;&gt; population and the inclusion of specific age and performance status criteria.
+  2. Specifics: The exact wording of the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may vary depending on the specific version of the protocol.
+  2. Clinical Relevance: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. are crucial for ensuring the safety and efficacy of the study. They help to select patients who are most likely to benefit from the treatment and minimize the risk of adverse events.
+  2. Further Information:** For a complete understanding of the eligibility criteria, it is essential to refer to the full protocol document.&lt;/span&gt;"
+                 data-raw="##  Modified Eligibility Criteria for Version 4 of Clinical Trial Protocol CR-AIR-009
+
+Based on the provided text from the protocol, here are the modified eligibility criteria for Version 4 of the CR-AIR-009 clinical trial, incorporating the evidence and considerations from the protocol:
+
+**Inclusion Criteria:**
+
+* **Hematologic Malignancy:**  
+    * Acute myeloid leukemia (AML) in first cytomorphological remission with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remission.
+    * Acute lymphoblastic leukemia (ALL) in first or higher remission.
+    * Myelodysplastic syndromes (MDS) requiring transfusion-dependent treatment (requiring at least one transfusion per month) or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk group.
+* **Age:** 18 years or older.
+* **Karnofsky Performance Status (KPS):** ≥ 70%.
+* **Transplantation Eligibility:**
+    * Availability of a suitable haploidentical donor (HLA-matched sibling or unrelated donor) with ≥ 4/8 HLA matching at the HLA-A, -B, -C, -DRB1, and -DQB1 loci.
+    *  A donor match of ≥ 4/8 HLA matching is required for haploidentical HSCT.
+    *  A donor match of ≥ 5/8 HLA matching is required for haploidentical HSCT with post-transplant cyclophosphamide.
+* **Other Considerations:**
+    *  Patients aged ≥ 65 years must have a Sorror score ≤ 3.
+    *  Females of childbearing potential must use reliable methods of contraception during study participation.
+    *  Males with sexual contact with a female of childbearing potential must use reliable methods of contraception.
+
+**Exclusion Criteria:**
+
+*  Previous allogeneic hematopoietic stem cell transplantation (HSCT).
+*  Left ventricular ejection fraction (LVEF) &amp;lt; 50% (evaluated by echocardiogram or MUGA).
+*  Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal (ULN).
+*  Creatinine clearance &amp;lt; 50 ml/min.
+*  Positive pregnancy test.
+*  Known allergy to any component of ATIR101.
+*  History of hypersensitivity to cyclophosphamide or any of its metabolites.
+*  Presence of HLA antibodies against the non-shared donor haplotype.
+*  Other conditions that, in the opinion of the investigator, make the patient ineligible for the study.
+
+
+**Important Notes:**
+
+* **Version 4 Considerations:** The provided text does not explicitly state the specific changes from Version 3. However, the inclusion criteria have been updated to reflect the current understanding of the study population and the inclusion of specific age and performance status criteria. 
+* **Specifics:** The exact wording of the inclusion and exclusion criteria may vary depending on the specific version of the protocol. 
+* **Clinical Relevance:** The inclusion and exclusion criteria are crucial for ensuring the safety and efficacy of the study. They help to select patients who are most likely to benefit from the treatment and minimize the risk of adverse events. 
+* **Further Information:** For a complete understanding of the eligibility criteria, it is essential to refer to the full protocol document.">Modified Eligibility Criteria for Version 4 of Clinical Trial Protocol CR-AIR-009
+
+Based on the provided text from the protocol, here are the modified eligibility criteria for Version 4 of the CR-AIR-009 clinical trial, incorporating the evidence and considerations from the protocol:
+
+INCLUSION CRITERIA
+
+  1. Hematologic Malignancy:
+  2. Acute myeloid leukemia (AML) in first cytomorphological remission with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remission.
+  3. Acute lymphoblastic leukemia (ALL) in first or higher remission.
+  4. Myelodysplastic syndromes (MDS) requiring transfusion-dependent treatment (requiring at least one transfusion per month) or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk group.
+  5. Age: 18 years or older.
+  6. Karnofsky Performance Status (KPS): ≥ 70%.
+  7. Transplantation Eligibility:
+  8. Availability of a suitable haploidentical donor (HLA-matched sibling or unrelated donor) with ≥ 4/8 HLA matching at the HLA-A, -B, -C, -DRB1, and -DQB1 loci.
+  9. A donor match of ≥ 4/8 HLA matching is required for haploidentical HSCT.
+  10. A donor match of ≥ 5/8 HLA matching is required for haploidentical HSCT with post-transplant cyclophosphamide.
+  11. Other Considerations:
+  12. Patients aged ≥ 65 years must have a Sorror score ≤ 3.
+  13. Females of childbearing potential must use reliable methods of contraception during study participation.
+  14. Males with sexual contact with a female of childbearing potential must use reliable methods of contraception.
+
+EXCLUSION CRITERIA
+
+  1. Previous allogeneic hematopoietic stem cell transplantation (HSCT).
+  2. Left ventricular ejection fraction (LVEF) &lt; 50% (evaluated by echocardiogram or MUGA).
+  3. Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &gt; 2.5 × upper limit of normal (ULN).
+  4. Creatinine clearance &lt; 50 ml/min.
+  5. Positive pregnancy test.
+  6. Known allergy to any component of ATIR101.
+  7. History of hypersensitivity to cyclophosphamide or any of its metabolites.
+  8. Presence of HLA antibodies against the non-shared donor haplotype.
+  9. Other conditions that, in the opinion of the investigator, make the patient ineligible for the study.
+  10. Important Notes:
+  11. Version 4 Considerations: The provided text does not explicitly state the specific changes from Version 3. However, the
+
+INCLUSION CRITERIA
+
+  1. have been updated to reflect the current understanding of the study population and the inclusion of specific age and performance status criteria.
+  2. Specifics: The exact wording of the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may vary depending on the specific version of the protocol.
+  2. Clinical Relevance: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. are crucial for ensuring the safety and efficacy of the study. They help to select patients who are most likely to benefit from the treatment and minimize the risk of adverse events.
+  2. Further Information:** For a complete understanding of the eligibility criteria, it is essential to refer to the full protocol document.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

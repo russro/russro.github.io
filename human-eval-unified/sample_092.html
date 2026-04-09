@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 92</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 92</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &amp;gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.
+  2. PD-L1 expression by immunohistochemistry in &amp;lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease.
+  3. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  4. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion.
+  5. Highly effective contraception are defined in the protocol.
+  6. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal
+
+EXCLUSION CRITERIA
+
+  1. Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.
+  2. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments"
+                 data-diff="Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; 18 &lt;span class=&quot;diff-del&quot;&gt;years-oldEastern&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Cooperative Oncology Group (ECOG)&lt;/span&gt; performance status&lt;span class=&quot;diff-del&quot;&gt; (PS)&lt;/span&gt; 0 or 1 at study &lt;span class=&quot;diff-del&quot;&gt;entryLife&lt;/span&gt; expectancy of at least 3 &lt;span class=&quot;diff-del&quot;&gt;monthsHistologically&lt;/span&gt; confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or &lt;span class=&quot;diff-del&quot;&gt;other)Stage&lt;/span&gt; IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative &lt;span class=&quot;diff-del&quot;&gt;intent.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; PD-L1 expression by immunohistochemistry in &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;&lt;/span&gt; 50% of tumor &lt;span class=&quot;diff-del&quot;&gt;cellsPatients&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must be chemotherapy-naïve&lt;/span&gt; for the advanced stage of the disease.&lt;span class=&quot;diff-del&quot;&gt;
+  3.&lt;/span&gt; Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study &lt;span class=&quot;diff-del&quot;&gt;treatmentAdequate&lt;/span&gt; hematological, hepatic, and renal &lt;span class=&quot;diff-del&quot;&gt;functionsWomen&lt;/span&gt; of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study &lt;span class=&quot;diff-del&quot;&gt;drugWOCBP&lt;/span&gt; must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months &lt;span class=&quot;diff-del&quot;&gt;posttreatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;completion.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Highly effective contraception are defined in the &lt;span class=&quot;diff-del&quot;&gt;protocol.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study &lt;span class=&quot;diff-del&quot;&gt;drug (s)&lt;/span&gt; plus 5 half-lives of study &lt;span class=&quot;diff-del&quot;&gt;drug (s)&lt;/span&gt; plus 90 days for a total of 7 months post-treatment &lt;span class=&quot;diff-del&quot;&gt;completionPrincipal&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Patients having &lt;span class=&quot;diff-del&quot;&gt;central&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;nervous&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;system (CNS) metastasesPatients with pericardial effusionPrior&lt;/span&gt; exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte &lt;span class=&quot;diff-del&quot;&gt;antigen- 4&lt;/span&gt; antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint &lt;span class=&quot;diff-del&quot;&gt;pathwaysPatients&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior&lt;/span&gt; history of other malignancy except basal cell carcinoma of the skin, cervical &lt;span class=&quot;diff-del&quot;&gt;intra epithelial&lt;/span&gt; neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 &lt;span class=&quot;diff-del&quot;&gt;yearsPatients&lt;/span&gt; with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study &lt;span class=&quot;diff-del&quot;&gt;treatmentPatients&lt;/span&gt; with an active, known or suspected autoimmune &lt;span class=&quot;diff-del&quot;&gt;diseasePatient&lt;/span&gt; with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary &lt;span class=&quot;diff-del&quot;&gt;toxicityPatients&lt;/span&gt; with grade ≥ 2 &lt;span class=&quot;diff-del&quot;&gt;neuropathySigns&lt;/span&gt; or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic &lt;span class=&quot;diff-del&quot;&gt;therapyPositive&lt;/span&gt; serology for HIV or &lt;span class=&quot;diff-del&quot;&gt;hepatitis C virus (HCV);&lt;/span&gt; presence in the serum of the antigens &lt;span class=&quot;diff-del&quot;&gt;hepatitis B (HBs)&lt;/span&gt; at &lt;span class=&quot;diff-del&quot;&gt;baselinePatient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.
+  2. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant&lt;/span&gt; or nursing (lactating) &lt;span class=&quot;diff-del&quot;&gt;womenPatients&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with an organ allograftAny&lt;/span&gt; known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug &lt;span class=&quot;diff-del&quot;&gt;componentsParticipation&lt;/span&gt; in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments"
+                 data-raw="Principal Inclusion Criteria:Female or male patients age &amp;amp;gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.PD-L1 expression by immunohistochemistry in &amp;amp;lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and&amp;amp;#x2F;or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion. Highly effective contraception are defined in the protocol.Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal Exclusion Criteria:Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments">Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.
+  2. PD-L1 expression by immunohistochemistry in &lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease.
+  3. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  4. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion.
+  5. Highly effective contraception are defined in the protocol.
+  6. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal
+
+EXCLUSION CRITERIA
+
+  1. Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.
+  2. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria:
+
+Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age ≥ 18 years-old
+  2. ECOG performance status 0 or 1 at study entry
+  3. Life expectancy of at least 3 months
+  4. Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+  5. Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+  6. PD-L1 expression by immunohistochemistry in ≤ 50% of tumor cells
+  7. Chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  8. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+  9. Adequate hematological, hepatic, and renal functions
+  10. Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+  11. WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+  12. Highly effective contraception are defined in the protocol
+  13. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug(s) plus 90 days for a total of 7 months post-treatment completion
+
+EXCLUSION CRITERIA
+
+  1. Patients having CNS metastases
+  2. Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+  3. Prior history of other malignancy except basal cell carcinoma of the skin, cervical intraepithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+  4. Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+  5. Patients with an active, known or suspected autoimmune disease
+  6. Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+  7. Patient with grade ≥ 2 neuropathy
+  8. Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+  9. Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+  10. Pregnant or nursing (lactating) women
+  11. Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+  12. Participation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments
+  13. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to align with the new evidence, particularly regarding the PD-L1 expression threshold and the requirement for chemotherapy-naïvity.
+  2. The rest of the criteria remain unchanged."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria:
+
+&lt;/span&gt;Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 18 &lt;span class=&quot;diff-add&quot;&gt;years-old
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ECOG&lt;/span&gt; performance status 0 or 1 at study &lt;span class=&quot;diff-add&quot;&gt;entry
+  3. Life&lt;/span&gt; expectancy of at least 3 &lt;span class=&quot;diff-add&quot;&gt;months
+  4. Histologically&lt;/span&gt; confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or &lt;span class=&quot;diff-add&quot;&gt;other)
+  5. Stage&lt;/span&gt; IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative &lt;span class=&quot;diff-add&quot;&gt;intent&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; PD-L1 expression by immunohistochemistry in &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 50% of tumor &lt;span class=&quot;diff-add&quot;&gt;cells
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Chemotherapy-naïve&lt;/span&gt; for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study &lt;span class=&quot;diff-add&quot;&gt;treatment
+  9. Adequate&lt;/span&gt; hematological, hepatic, and renal &lt;span class=&quot;diff-add&quot;&gt;functions
+  10. Women&lt;/span&gt; of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study &lt;span class=&quot;diff-add&quot;&gt;drug
+  11. WOCBP&lt;/span&gt; must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months &lt;span class=&quot;diff-add&quot;&gt;post-treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;completion&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Highly effective contraception are defined in the &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study &lt;span class=&quot;diff-add&quot;&gt;drug(s)&lt;/span&gt; plus 5 half-lives of study &lt;span class=&quot;diff-add&quot;&gt;drug(s)&lt;/span&gt; plus 90 days for a total of 7 months post-treatment &lt;span class=&quot;diff-add&quot;&gt;completion&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Patients having &lt;span class=&quot;diff-add&quot;&gt;CNS&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;metastases
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Prior&lt;/span&gt; exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte &lt;span class=&quot;diff-add&quot;&gt;antigen-4&lt;/span&gt; antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint &lt;span class=&quot;diff-add&quot;&gt;pathways
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Prior&lt;/span&gt; history of other malignancy except basal cell carcinoma of the skin, cervical &lt;span class=&quot;diff-add&quot;&gt;intraepithelial&lt;/span&gt; neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 &lt;span class=&quot;diff-add&quot;&gt;years
+  4. Patients&lt;/span&gt; with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study &lt;span class=&quot;diff-add&quot;&gt;treatment
+  5. Patients&lt;/span&gt; with an active, known or suspected autoimmune &lt;span class=&quot;diff-add&quot;&gt;disease
+  6. Patient&lt;/span&gt; with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary &lt;span class=&quot;diff-add&quot;&gt;toxicity
+  7. Patient&lt;/span&gt; with grade ≥ 2 &lt;span class=&quot;diff-add&quot;&gt;neuropathy
+  8. Signs&lt;/span&gt; or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic &lt;span class=&quot;diff-add&quot;&gt;therapy
+  9. Positive&lt;/span&gt; serology for HIV or &lt;span class=&quot;diff-add&quot;&gt;HCV;&lt;/span&gt; presence in the serum of the antigens &lt;span class=&quot;diff-add&quot;&gt;HBs&lt;/span&gt; at &lt;span class=&quot;diff-add&quot;&gt;baseline
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Pregnant&lt;/span&gt; or nursing (lactating) &lt;span class=&quot;diff-add&quot;&gt;women
+  11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Any&lt;/span&gt; known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug &lt;span class=&quot;diff-add&quot;&gt;components
+  12. Participation&lt;/span&gt; in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments&lt;span class=&quot;diff-add&quot;&gt;
+  13. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to align with the new evidence, particularly regarding the PD-L1 expression threshold and the requirement for chemotherapy-naïvity.
+  2. The rest of the criteria remain unchanged.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria:
+
+Principal Inclusion Criteria:
+- Female or male patients age ≥ 18 years-old
+- ECOG performance status 0 or 1 at study entry
+- Life expectancy of at least 3 months
+- Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+- Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+- PD-L1 expression by immunohistochemistry in ≤ 50% of tumor cells
+- Chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+- At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+- Adequate hematological, hepatic, and renal functions
+- Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+- WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+- Highly effective contraception are defined in the protocol
+- Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug(s) plus 90 days for a total of 7 months post-treatment completion
+
+Exclusion Criteria:
+- Patients having CNS metastases
+- Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+- Prior history of other malignancy except basal cell carcinoma of the skin, cervical intraepithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+- Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+- Patients with an active, known or suspected autoimmune disease
+- Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+- Patient with grade ≥ 2 neuropathy
+- Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+- Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+- Pregnant or nursing (lactating) women
+- Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+- Participation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments
+
+Note: The inclusion and exclusion criteria have been updated to align with the new evidence, particularly regarding the PD-L1 expression threshold and the requirement for chemotherapy-naïvity. The rest of the criteria remain unchanged.">Amended Eligibility Criteria:
+
+Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age ≥ 18 years-old
+  2. ECOG performance status 0 or 1 at study entry
+  3. Life expectancy of at least 3 months
+  4. Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+  5. Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+  6. PD-L1 expression by immunohistochemistry in ≤ 50% of tumor cells
+  7. Chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  8. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+  9. Adequate hematological, hepatic, and renal functions
+  10. Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+  11. WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+  12. Highly effective contraception are defined in the protocol
+  13. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug(s) plus 90 days for a total of 7 months post-treatment completion
+
+EXCLUSION CRITERIA
+
+  1. Patients having CNS metastases
+  2. Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+  3. Prior history of other malignancy except basal cell carcinoma of the skin, cervical intraepithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+  4. Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+  5. Patients with an active, known or suspected autoimmune disease
+  6. Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+  7. Patient with grade ≥ 2 neuropathy
+  8. Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+  9. Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+  10. Pregnant or nursing (lactating) women
+  11. Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+  12. Participation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments
+  13. Note: The inclusion and
+
+EXCLUSION CRITERIA
+
+  1. have been updated to align with the new evidence, particularly regarding the PD-L1 expression threshold and the requirement for chemotherapy-naïvity.
+  2. The rest of the criteria remain unchanged.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

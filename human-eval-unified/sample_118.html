@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 118</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 118</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed and radiographically measurable adenocarcinoma of the colon or rectum that is metastatic and/or unresectable; subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), and an anti-PD-1 monoclonal antibody (nivolumab or pembrolizumab) if tumor has deficient mismatch repair proteins or is MSI-High, or contraindication to such treatment(s)Molecular testing result from Clinical Laboratory Improvement Act (CLIA)-certified laboratory confirming that the tumor tissue has at least one of the following:HER2 overexpression (3+ immunohistochemistry [IHC]);
+  2. Note: HER2 2+ IHC is eligible if the tumor is amplified by fluorescence in situ hybridization (FISH)HER2 (ERBB2) amplification by in situ hybridization assay (FISH or chromogenic in situ hybridization [CISH] signal ratio &amp;gt;= 2.0 or gene copy number &amp;gt; 6)HER2 (ERBB2) amplification by CLIA-certified next generation sequencing (NGS) sequencing assayRAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissueAt least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiationEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2Life expectancy greater than 3 monthsAbsolute neutrophil count (ANC) &amp;gt;= 1000/mm^3 obtained =&amp;lt; 7 days prior to registrationPlatelet count &amp;gt;= 75,000/mm^3 obtained =&amp;lt; 7 days prior to registrationHemoglobin &amp;gt;= 8.0 g/dL obtained =&amp;lt; 7 days prior to registrationTotal bilirubin =&amp;lt; 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;lt; 3 x ULN and normal aspartate aminotransferase (AST)/alanine aminotransferase (ALT) are eligible, obtained =&amp;lt; 7 days prior to registrationAST and ALT =&amp;lt; 2.5 x ULN (=&amp;lt; 5 x ULN if liver metastases are present) obtained =&amp;lt; 7 days prior to registrationCalculated creatinine clearance must be &amp;gt;= 50 ml/min using the Cockcroft-Gault formula obtained =&amp;lt; 7 days prior to registrationInternational normalized ratio (INR) and activated partial thromboplastin time (aPTT) =&amp;lt; 1.5 X ULN unless on medication known to alter INR and/or aPTTLeft ventricular ejection fraction (LVEF) &amp;gt;= 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented =&amp;lt; 28 days prior to registrationWomen of child bearing potential and male partners of women of child bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administrationNote: women of childbearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy) or are not postmenopausal; postmenopause is defined as amenorrhea &amp;gt;= 12 consecutive monthsNegative serum pregnancy test done =&amp;lt; 7 days prior to registration for women of childbearing potential onlyCapable of understanding and complying with the protocol requirements and has signed the informed consent documentWilling to return to enrolling institution for follow-up (during the active monitoring phase of the study)Willing to provide mandatory tissue and blood samples for correlative research purposes
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer =&amp;lt; 21 days prior to registration
+  2. Prior anti-HER2 targeting therapy
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study requirements
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) =&amp;lt; grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to =&amp;lt; grade 2; congestive heart failure (CHF) must have been =&amp;lt; grade 1 in severity at the time of occurrence and must have resolved completely prior to registration
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;gt; 150 mm Hg and/or diastolic blood pressure &amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHFAny of the following:Pregnant women
+  6. Nursing women
+  7. Men or women of childbearing potential who are unwilling to employ adequate contraception
+  8. Patient with known active central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days)
+  9. Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medications
+  10. Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatment
+  11. Major surgical procedure, open biopsy, or significant traumatic injury =&amp;lt; 28 days prior to registration (=&amp;lt; 56 days for hepatectomy, open thoracotomy, major neurosurgery) or anticipation of need for major surgical procedure during the course of the study
+  12. Serious, non-healing wound, ulcer, or bone fracture
+  13. History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery =&amp;lt; 6 months prior to registration
+  14. Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapyNOTE: patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trial
+  15. Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatment
+  16. Known chronic liver disease, autoimmune hepatitis, or sclerosing cholangitis
+  17. Receiving any other investigational agent which would be considered as a treatment for the primary neoplasm
+  18. Other active malignancy =&amp;lt; 2 years prior to registration which required systemic treatmentEXCEPTIONS: non-melanotic skin cancer or carcinoma-in-situ of the cervixCo-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimens
+  19. Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed&lt;span class=&quot;diff-del&quot;&gt; and radiographically measurable&lt;/span&gt; adenocarcinoma of the colon or rectum that is metastatic and/or &lt;span class=&quot;diff-del&quot;&gt;unresectable;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subjects&lt;/span&gt; must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), &lt;span class=&quot;diff-del&quot;&gt;and an anti-PD-1 monoclonal antibody (nivolumab &lt;/span&gt;or &lt;span class=&quot;diff-del&quot;&gt;pembrolizumab) if tumor has deficient mismatch repair proteins or is MSI-High, or&lt;/span&gt; contraindication to such &lt;span class=&quot;diff-del&quot;&gt;treatment(s)Molecular&lt;/span&gt; testing result from &lt;span class=&quot;diff-del&quot;&gt;Clinical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Laboratory Improvement Act (CLIA)-certified&lt;/span&gt; laboratory confirming that the tumor tissue has at least one of the &lt;span class=&quot;diff-del&quot;&gt;following:HER2&lt;/span&gt; overexpression (3+ immunohistochemistry &lt;span class=&quot;diff-del&quot;&gt;[IHC]);&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2. Note:&lt;/span&gt; HER2 2+ IHC is eligible if the tumor is amplified by &lt;span class=&quot;diff-del&quot;&gt;fluorescence&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in situ hybridization (FISH)HER2 (ERBB2) amplification by in situ hybridization assay (FISH or chromogenic in situ hybridization [CISH] signal&lt;/span&gt; ratio &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 2.0 or gene copy number &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;6)HER2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ERBB2)&lt;/span&gt; amplification by CLIA-certified next generation sequencing (NGS) sequencing &lt;span class=&quot;diff-del&quot;&gt;assayRAS&lt;/span&gt; (KRAS and NRAS) wild-type in primary or metastatic tumor &lt;span class=&quot;diff-del&quot;&gt;tissueAt&lt;/span&gt; least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the &lt;span class=&quot;diff-del&quot;&gt;radiationEastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or &lt;span class=&quot;diff-del&quot;&gt;2Life&lt;/span&gt; expectancy greater than 3 &lt;span class=&quot;diff-del&quot;&gt;monthsAbsolute&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;neutrophil&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ANC)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1000/mm^3&lt;/span&gt; obtained&lt;span class=&quot;diff-del&quot;&gt; =&amp;lt;&lt;/span&gt; 7 days prior to &lt;span class=&quot;diff-del&quot;&gt;registrationPlatelet&lt;/span&gt; count &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;75,000/mm^3&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;obtained&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;days&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;registrationHemoglobin &amp;gt;=&lt;/span&gt; 8.0 g/dL &lt;span class=&quot;diff-del&quot;&gt;obtained&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt; 7 days prior to registrationTotal&lt;/span&gt; bilirubin &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;lt; &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; x ULN and normal &lt;span class=&quot;diff-del&quot;&gt;aspartate aminotransferase (AST)/alanine aminotransferase (ALT)&lt;/span&gt; are &lt;span class=&quot;diff-del&quot;&gt;eligible,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;obtained =&amp;lt; 7 days prior to registrationAST&lt;/span&gt; and ALT &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 2.5 x ULN &lt;span class=&quot;diff-del&quot;&gt;(=&amp;lt;&lt;/span&gt; 5 x ULN if liver metastases are present) &lt;span class=&quot;diff-del&quot;&gt;obtained&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt; 7 days prior to registrationCalculated&lt;/span&gt; creatinine clearance &lt;span class=&quot;diff-del&quot;&gt;must be &amp;gt;=&lt;/span&gt; 50 &lt;span class=&quot;diff-del&quot;&gt;ml/min&lt;/span&gt; using the Cockcroft-Gault formula &lt;span class=&quot;diff-del&quot;&gt;obtained&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt; 7 days prior to registrationInternational&lt;/span&gt; normalized ratio (INR) and activated partial thromboplastin time (aPTT) &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 1.5 &lt;span class=&quot;diff-del&quot;&gt;X&lt;/span&gt; ULN unless on medication known to alter INR and/or &lt;span class=&quot;diff-del&quot;&gt;aPTTLeft&lt;/span&gt; ventricular ejection fraction (LVEF) &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 28 days prior to &lt;span class=&quot;diff-del&quot;&gt;registrationWomen&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;child bearing&lt;/span&gt; potential and male partners of women of &lt;span class=&quot;diff-del&quot;&gt;child bearing&lt;/span&gt; potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug &lt;span class=&quot;diff-del&quot;&gt;administrationNote:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;women&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;childbearing&lt;/span&gt; potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral &lt;span class=&quot;diff-del&quot;&gt;oophorectomy)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or are not postmenopausal; postmenopause&lt;/span&gt; is defined as amenorrhea &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 12 consecutive &lt;span class=&quot;diff-del&quot;&gt;monthsNegative&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;serum pregnancy test done =&amp;lt; 7 days prior to registration for women of childbearing potential onlyCapable&lt;/span&gt; of understanding and complying with the protocol requirements and has signed the informed consent &lt;span class=&quot;diff-del&quot;&gt;documentWilling&lt;/span&gt; to return to enrolling institution for follow-up (during the active monitoring phase of the &lt;span class=&quot;diff-del&quot;&gt;study)Willing&lt;/span&gt; to provide mandatory tissue and blood samples for correlative research &lt;span class=&quot;diff-del&quot;&gt;purposes&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 21 days prior to &lt;span class=&quot;diff-del&quot;&gt;registration&lt;/span&gt;
+  2. Prior anti-HER2 targeting &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study &lt;span class=&quot;diff-del&quot;&gt;requirements&lt;/span&gt;
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; grade 2; congestive heart failure (CHF) must have been &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; grade 1 in severity at the time of occurrence and must have resolved completely prior to &lt;span class=&quot;diff-del&quot;&gt;registration&lt;/span&gt;
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;gt; 150 mm Hg and/or diastolic blood pressure &amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic &lt;span class=&quot;diff-del&quot;&gt;CHFAny&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;following:Pregnant&lt;/span&gt; women
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Nursing women
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Men or women of &lt;span class=&quot;diff-del&quot;&gt;childbearing&lt;/span&gt; potential who are unwilling to employ adequate contraception
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Patient with known&lt;span class=&quot;diff-del&quot;&gt; active&lt;/span&gt; central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 &lt;span class=&quot;diff-del&quot;&gt;days)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of &lt;span class=&quot;diff-del&quot;&gt;medications&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Major surgical procedure, open biopsy, or significant traumatic injury &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 28 days prior to registration &lt;span class=&quot;diff-del&quot;&gt;(=&amp;lt;&lt;/span&gt; 56 days for hepatectomy, open thoracotomy, major &lt;span class=&quot;diff-del&quot;&gt;neurosurgery)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or anticipation&lt;/span&gt; of need for major surgical procedure during the course of the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Serious, non-healing wound, ulcer, or bone &lt;span class=&quot;diff-del&quot;&gt;fracture&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 6 months prior to &lt;span class=&quot;diff-del&quot;&gt;registration&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral &lt;span class=&quot;diff-del&quot;&gt;therapyNOTE:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patients&lt;/span&gt; known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this &lt;span class=&quot;diff-del&quot;&gt;trial&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Known chronic liver disease, autoimmune hepatitis, or sclerosing &lt;span class=&quot;diff-del&quot;&gt;cholangitis&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; Receiving any other investigational agent which would be considered as a treatment for the primary &lt;span class=&quot;diff-del&quot;&gt;neoplasm&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; Other active malignancy &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;&lt;/span&gt; 2 years prior to registration which required systemic &lt;span class=&quot;diff-del&quot;&gt;treatmentEXCEPTIONS:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;non-melanotic&lt;/span&gt; skin cancer or carcinoma-in-situ of the &lt;span class=&quot;diff-del&quot;&gt;cervixCo-morbid&lt;/span&gt; systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed &lt;span class=&quot;diff-del&quot;&gt;regimens&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or &lt;span class=&quot;diff-del&quot;&gt;designee&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Histologically and&amp;amp;#x2F;or cytologically confirmed and radiographically measurable adenocarcinoma of the colon or rectum that is metastatic and&amp;amp;#x2F;or unresectable; subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), and an anti-PD-1 monoclonal antibody (nivolumab or pembrolizumab) if tumor has deficient mismatch repair proteins or is MSI-High, or contraindication to such treatment(s)Molecular testing result from Clinical Laboratory Improvement Act (CLIA)-certified laboratory confirming that the tumor tissue has at least one of the following:HER2 overexpression (3+ immunohistochemistry [IHC]); Note: HER2 2+ IHC is eligible if the tumor is amplified by fluorescence in situ hybridization (FISH)HER2 (ERBB2) amplification by in situ hybridization assay (FISH or chromogenic in situ hybridization [CISH] signal ratio &amp;amp;gt;= 2.0 or gene copy number &amp;amp;gt; 6)HER2 (ERBB2) amplification by CLIA-certified next generation sequencing (NGS) sequencing assayRAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissueAt least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiationEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2Life expectancy greater than 3 monthsAbsolute neutrophil count (ANC) &amp;amp;gt;= 1000&amp;amp;#x2F;mm^3 obtained =&amp;amp;lt; 7 days prior to registrationPlatelet count &amp;amp;gt;= 75,000&amp;amp;#x2F;mm^3 obtained =&amp;amp;lt; 7 days prior to registrationHemoglobin &amp;amp;gt;= 8.0 g&amp;amp;#x2F;dL obtained =&amp;amp;lt; 7 days prior to registrationTotal bilirubin =&amp;amp;lt; 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;amp;lt; 3 x ULN and normal aspartate aminotransferase (AST)&amp;amp;#x2F;alanine aminotransferase (ALT) are eligible, obtained =&amp;amp;lt; 7 days prior to registrationAST and ALT =&amp;amp;lt; 2.5 x ULN (=&amp;amp;lt; 5 x ULN if liver metastases are present) obtained =&amp;amp;lt; 7 days prior to registrationCalculated creatinine clearance must be &amp;amp;gt;= 50 ml&amp;amp;#x2F;min using the Cockcroft-Gault formula obtained =&amp;amp;lt; 7 days prior to registrationInternational normalized ratio (INR) and activated partial thromboplastin time (aPTT) =&amp;amp;lt; 1.5 X ULN unless on medication known to alter INR and&amp;amp;#x2F;or aPTTLeft ventricular ejection fraction (LVEF) &amp;amp;gt;= 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented =&amp;amp;lt; 28 days prior to registrationWomen of child bearing potential and male partners of women of child bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administrationNote: women of childbearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy) or are not postmenopausal; postmenopause is defined as amenorrhea &amp;amp;gt;= 12 consecutive monthsNegative serum pregnancy test done =&amp;amp;lt; 7 days prior to registration for women of childbearing potential onlyCapable of understanding and complying with the protocol requirements and has signed the informed consent documentWilling to return to enrolling institution for follow-up (during the active monitoring phase of the study)Willing to provide mandatory tissue and blood samples for correlative research purposesExclusion Criteria:Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer =&amp;amp;lt; 21 days prior to registrationPrior anti-HER2 targeting therapyUncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness&amp;amp;#x2F;social situations that would limit compliance with study requirementsNot recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) =&amp;amp;lt; grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to =&amp;amp;lt; grade 2; congestive heart failure (CHF) must have been =&amp;amp;lt; grade 1 in severity at the time of occurrence and must have resolved completely prior to registrationClinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;amp;gt; 150 mm Hg and&amp;amp;#x2F;or diastolic blood pressure &amp;amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHFAny of the following:Pregnant womenNursing womenMen or women of childbearing potential who are unwilling to employ adequate contraceptionPatient with known active central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days)Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medicationsUse of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatmentMajor surgical procedure, open biopsy, or significant traumatic injury =&amp;amp;lt; 28 days prior to registration (=&amp;amp;lt; 56 days for hepatectomy, open thoracotomy, major neurosurgery) or anticipation of need for major surgical procedure during the course of the studySerious, non-healing wound, ulcer, or bone fractureHistory of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery =&amp;amp;lt; 6 months prior to registrationImmunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapyNOTE: patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trialAcute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatmentKnown chronic liver disease, autoimmune hepatitis, or sclerosing cholangitisReceiving any other investigational agent which would be considered as a treatment for the primary neoplasmOther active malignancy =&amp;amp;lt; 2 years prior to registration which required systemic treatmentEXCEPTIONS: non-melanotic skin cancer or carcinoma-in-situ of the cervixCo-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimensUnable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee">INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed and radiographically measurable adenocarcinoma of the colon or rectum that is metastatic and/or unresectable; subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), and an anti-PD-1 monoclonal antibody (nivolumab or pembrolizumab) if tumor has deficient mismatch repair proteins or is MSI-High, or contraindication to such treatment(s)Molecular testing result from Clinical Laboratory Improvement Act (CLIA)-certified laboratory confirming that the tumor tissue has at least one of the following:HER2 overexpression (3+ immunohistochemistry [IHC]);
+  2. Note: HER2 2+ IHC is eligible if the tumor is amplified by fluorescence in situ hybridization (FISH)HER2 (ERBB2) amplification by in situ hybridization assay (FISH or chromogenic in situ hybridization [CISH] signal ratio &gt;= 2.0 or gene copy number &gt; 6)HER2 (ERBB2) amplification by CLIA-certified next generation sequencing (NGS) sequencing assayRAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissueAt least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiationEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2Life expectancy greater than 3 monthsAbsolute neutrophil count (ANC) &gt;= 1000/mm^3 obtained =&lt; 7 days prior to registrationPlatelet count &gt;= 75,000/mm^3 obtained =&lt; 7 days prior to registrationHemoglobin &gt;= 8.0 g/dL obtained =&lt; 7 days prior to registrationTotal bilirubin =&lt; 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &lt; 3 x ULN and normal aspartate aminotransferase (AST)/alanine aminotransferase (ALT) are eligible, obtained =&lt; 7 days prior to registrationAST and ALT =&lt; 2.5 x ULN (=&lt; 5 x ULN if liver metastases are present) obtained =&lt; 7 days prior to registrationCalculated creatinine clearance must be &gt;= 50 ml/min using the Cockcroft-Gault formula obtained =&lt; 7 days prior to registrationInternational normalized ratio (INR) and activated partial thromboplastin time (aPTT) =&lt; 1.5 X ULN unless on medication known to alter INR and/or aPTTLeft ventricular ejection fraction (LVEF) &gt;= 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented =&lt; 28 days prior to registrationWomen of child bearing potential and male partners of women of child bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administrationNote: women of childbearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy) or are not postmenopausal; postmenopause is defined as amenorrhea &gt;= 12 consecutive monthsNegative serum pregnancy test done =&lt; 7 days prior to registration for women of childbearing potential onlyCapable of understanding and complying with the protocol requirements and has signed the informed consent documentWilling to return to enrolling institution for follow-up (during the active monitoring phase of the study)Willing to provide mandatory tissue and blood samples for correlative research purposes
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer =&lt; 21 days prior to registration
+  2. Prior anti-HER2 targeting therapy
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study requirements
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) =&lt; grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to =&lt; grade 2; congestive heart failure (CHF) must have been =&lt; grade 1 in severity at the time of occurrence and must have resolved completely prior to registration
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &gt; 150 mm Hg and/or diastolic blood pressure &gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHFAny of the following:Pregnant women
+  6. Nursing women
+  7. Men or women of childbearing potential who are unwilling to employ adequate contraception
+  8. Patient with known active central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days)
+  9. Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medications
+  10. Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatment
+  11. Major surgical procedure, open biopsy, or significant traumatic injury =&lt; 28 days prior to registration (=&lt; 56 days for hepatectomy, open thoracotomy, major neurosurgery) or anticipation of need for major surgical procedure during the course of the study
+  12. Serious, non-healing wound, ulcer, or bone fracture
+  13. History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery =&lt; 6 months prior to registration
+  14. Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapyNOTE: patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trial
+  15. Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatment
+  16. Known chronic liver disease, autoimmune hepatitis, or sclerosing cholangitis
+  17. Receiving any other investigational agent which would be considered as a treatment for the primary neoplasm
+  18. Other active malignancy =&lt; 2 years prior to registration which required systemic treatmentEXCEPTIONS: non-melanotic skin cancer or carcinoma-in-situ of the cervixCo-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimens
+  19. Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the supporting evidence provided, here are the amended eligibility criteria for version 15:
+
+INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed adenocarcinoma of the colon or rectum that is metastatic and/or unresectable.
+  2. Subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, and an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), or have contraindication to such treatment.
+  3. Molecular testing result from a CLIA-certified laboratory confirming that the tumor tissue has at least one of the following:
+  4. HER2 overexpression (3+ immunohistochemistry [IHC])
+  5. HER2 2+ IHC is eligible if the tumor is amplified by FISH (signal ratio ≥ 2.0 or gene copy number ≥ 6)
+  6. HER2 amplification by CLIA-certified next generation sequencing (NGS) sequencing assay
+  7. RAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissue
+  8. At least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiation.
+  9. Eastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2.
+  10. Life expectancy greater than 3 months, in the opinion of the investigator.
+  11. Have adequate hematological, hepatic, renal, coagulation, and cardiac function as defined below, obtained 7 days prior to the first study treatment:
+  12. Hematological:
+  13. Absolute neutrophil count (ANC) ≥ 1000/µL
+  14. Platelet count ≥ 75,000/µL
+  15. Hemoglobin ≥ 8.0 g/dL
+  16. Hepatic:
+  17. Total bilirubin ≤ 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;lt; 2 x ULN and normal AST/ALT are eligible.
+  18. AST and ALT ≤ 2.5 x ULN (≤ 5 x ULN if liver metastases are present)
+  19. Renal:
+  20. Calculated creatinine clearance ≥ 50 mL/min using the Cockcroft-Gault formula
+  21. Coagulation:
+  22. International normalized ratio (INR) and activated partial thromboplastin time (aPTT) ≤ 1.5 x ULN unless on medication known to alter INR and/or aPTT
+  23. Cardiac:
+  24. Left ventricular ejection fraction (LVEF) ≥ 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented ≤ 28 days prior to registration
+  25. Women of child-bearing potential and male partners of women of child-bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administration.
+  26. Note: Women of child-bearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy). Postmenopause is defined as amenorrhea ≥ 12 consecutive months.
+  27. Capable of understanding and complying with the protocol requirements and has signed the informed consent document.
+  28. Willing to return to enrolling institution for follow-up (during the active monitoring phase of the study).
+  29. Willing to provide mandatory tissue and blood samples for correlative research purposes.
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer within 21 days prior to registration.
+  2. Prior anti-HER2 targeting therapy.
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study requirements.
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) ≤ grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to ≤ grade 2; congestive heart failure (CHF) must have been ≤ grade 1 in severity at the time of occurrence and must have resolved completely prior to registration.
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;gt; 150 mm Hg and/or diastolic blood pressure &amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHF.
+  6. Any of the following:
+  7. Pregnant women
+  8. Nursing women
+  9. Men or women of child-bearing potential who are unwilling to employ adequate contraception
+  10. Patient with known central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days).
+  11. Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medications.
+  12. Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatment.
+  13. Major surgical procedure, open biopsy, or significant traumatic injury &amp;lt; 28 days prior to registration (≤ 56 days for hepatectomy, open thoracotomy, major neurosurgery).
+  14. Anticipation of need for major surgical procedure during the course of the study.
+  15. Serious, non-healing wound, ulcer, or bone fracture.
+  16. History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery &amp;lt; 6 months prior to registration.
+  17. Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapy.
+  18. Note: Patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trial.
+  19. Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatment.
+  20. Known chronic liver disease, autoimmune hepatitis, or sclerosing cholangitis.
+  21. Receiving any other investigational agent which would be considered as a treatment for the primary neoplasm.
+  22. Other active malignancy &amp;lt; 2 years prior to registration which required systemic treatment.
+  23. Exception: Non-melanotic skin cancer or carcinoma-in-situ of the cervix.
+  24. Co-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimens.
+  25. Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the supporting evidence provided, here are the amended eligibility criteria for version 15:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed adenocarcinoma of the colon or rectum that is metastatic and/or &lt;span class=&quot;diff-add&quot;&gt;unresectable.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, &lt;span class=&quot;diff-add&quot;&gt;and &lt;/span&gt;an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), or &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; contraindication to such &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  3. Molecular&lt;/span&gt; testing result from &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CLIA-certified&lt;/span&gt; laboratory confirming that the tumor tissue has at least one of the &lt;span class=&quot;diff-add&quot;&gt;following:
+  4. HER2&lt;/span&gt; overexpression (3+ immunohistochemistry &lt;span class=&quot;diff-add&quot;&gt;[IHC])&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; HER2 2+ IHC is eligible if the tumor is amplified by &lt;span class=&quot;diff-add&quot;&gt;FISH&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(signal&lt;/span&gt; ratio &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 2.0 or gene copy number &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;6)
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HER2&lt;/span&gt; amplification by CLIA-certified next generation sequencing (NGS) sequencing &lt;span class=&quot;diff-add&quot;&gt;assay
+  7. RAS&lt;/span&gt; (KRAS and NRAS) wild-type in primary or metastatic tumor &lt;span class=&quot;diff-add&quot;&gt;tissue
+  8. At&lt;/span&gt; least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the &lt;span class=&quot;diff-add&quot;&gt;radiation.
+  9. Eastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or &lt;span class=&quot;diff-add&quot;&gt;2.
+  10. Life&lt;/span&gt; expectancy greater than 3 &lt;span class=&quot;diff-add&quot;&gt;months,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;opinion&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the investigator.
+  11. Have adequate hematological, hepatic, renal, coagulation, and cardiac function as defined below,&lt;/span&gt; obtained 7 days prior to &lt;span class=&quot;diff-add&quot;&gt;the first study treatment:
+  12. Hematological:
+  13. Absolute neutrophil&lt;/span&gt; count &lt;span class=&quot;diff-add&quot;&gt;(ANC)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1000/µL
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Platelet&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;75,000/µL
+  15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Hemoglobin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 8.0 g/dL&lt;span class=&quot;diff-add&quot;&gt;
+  16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Hepatic:
+  17.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Total&lt;/span&gt; bilirubin &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;lt; &lt;span class=&quot;diff-add&quot;&gt;2&lt;/span&gt; x ULN and normal &lt;span class=&quot;diff-add&quot;&gt;AST/ALT&lt;/span&gt; are &lt;span class=&quot;diff-add&quot;&gt;eligible.
+  18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;AST&lt;/span&gt; and ALT &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 2.5 x ULN &lt;span class=&quot;diff-add&quot;&gt;(≤&lt;/span&gt; 5 x ULN if liver metastases are present)&lt;span class=&quot;diff-add&quot;&gt;
+  19.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Renal:
+  20.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Calculated&lt;/span&gt; creatinine clearance &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 50 &lt;span class=&quot;diff-add&quot;&gt;mL/min&lt;/span&gt; using the Cockcroft-Gault formula&lt;span class=&quot;diff-add&quot;&gt;
+  21.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Coagulation:
+  22.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;International&lt;/span&gt; normalized ratio (INR) and activated partial thromboplastin time (aPTT) &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 1.5 &lt;span class=&quot;diff-add&quot;&gt;x&lt;/span&gt; ULN unless on medication known to alter INR and/or &lt;span class=&quot;diff-add&quot;&gt;aPTT
+  23. Cardiac:
+  24. Left&lt;/span&gt; ventricular ejection fraction (LVEF) &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 28 days prior to &lt;span class=&quot;diff-add&quot;&gt;registration
+  25. Women&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;child-bearing&lt;/span&gt; potential and male partners of women of &lt;span class=&quot;diff-add&quot;&gt;child-bearing&lt;/span&gt; potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug &lt;span class=&quot;diff-add&quot;&gt;administration.
+  26.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note: Women&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;child-bearing&lt;/span&gt; potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral &lt;span class=&quot;diff-add&quot;&gt;oophorectomy).&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Postmenopause&lt;/span&gt; is defined as amenorrhea &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 12 consecutive &lt;span class=&quot;diff-add&quot;&gt;months.
+  27.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Capable&lt;/span&gt; of understanding and complying with the protocol requirements and has signed the informed consent &lt;span class=&quot;diff-add&quot;&gt;document.
+  28. Willing&lt;/span&gt; to return to enrolling institution for follow-up (during the active monitoring phase of the &lt;span class=&quot;diff-add&quot;&gt;study).
+  29. Willing&lt;/span&gt; to provide mandatory tissue and blood samples for correlative research &lt;span class=&quot;diff-add&quot;&gt;purposes.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer &lt;span class=&quot;diff-add&quot;&gt;within&lt;/span&gt; 21 days prior to &lt;span class=&quot;diff-add&quot;&gt;registration.&lt;/span&gt;
+  2. Prior anti-HER2 targeting &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study &lt;span class=&quot;diff-add&quot;&gt;requirements.&lt;/span&gt;
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; grade 2; congestive heart failure (CHF) must have been &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; grade 1 in severity at the time of occurrence and must have resolved completely prior to &lt;span class=&quot;diff-add&quot;&gt;registration.&lt;/span&gt;
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;gt; 150 mm Hg and/or diastolic blood pressure &amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic &lt;span class=&quot;diff-add&quot;&gt;CHF.
+  6. Any&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;following:
+  7. Pregnant&lt;/span&gt; women
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Nursing women
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Men or women of &lt;span class=&quot;diff-add&quot;&gt;child-bearing&lt;/span&gt; potential who are unwilling to employ adequate contraception
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Patient with known central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 &lt;span class=&quot;diff-add&quot;&gt;days).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of &lt;span class=&quot;diff-add&quot;&gt;medications.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study &lt;span class=&quot;diff-add&quot;&gt;treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Major surgical procedure, open biopsy, or significant traumatic injury &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;&lt;/span&gt; 28 days prior to registration &lt;span class=&quot;diff-add&quot;&gt;(≤&lt;/span&gt; 56 days for hepatectomy, open thoracotomy, major &lt;span class=&quot;diff-add&quot;&gt;neurosurgery).
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Anticipation&lt;/span&gt; of need for major surgical procedure during the course of the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Serious, non-healing wound, ulcer, or bone &lt;span class=&quot;diff-add&quot;&gt;fracture.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;&lt;/span&gt; 6 months prior to &lt;span class=&quot;diff-add&quot;&gt;registration.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral &lt;span class=&quot;diff-add&quot;&gt;therapy.
+  18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note: Patients&lt;/span&gt; known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this &lt;span class=&quot;diff-add&quot;&gt;trial.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing &lt;span class=&quot;diff-add&quot;&gt;treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Known chronic liver disease, autoimmune hepatitis, or sclerosing &lt;span class=&quot;diff-add&quot;&gt;cholangitis.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; Receiving any other investigational agent which would be considered as a treatment for the primary &lt;span class=&quot;diff-add&quot;&gt;neoplasm.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; Other active malignancy &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;&lt;/span&gt; 2 years prior to registration which required systemic &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  23.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Exception: Non-melanotic&lt;/span&gt; skin cancer or carcinoma-in-situ of the &lt;span class=&quot;diff-add&quot;&gt;cervix.
+  24. Co-morbid&lt;/span&gt; systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed &lt;span class=&quot;diff-add&quot;&gt;regimens.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;25.&lt;/span&gt; Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or &lt;span class=&quot;diff-add&quot;&gt;designee.&lt;/span&gt;"
+                 data-raw="Based on the supporting evidence provided, here are the amended eligibility criteria for version 15:
+
+**Inclusion Criteria:**
+
+1. **Histologically and/or cytologically confirmed adenocarcinoma of the colon or rectum that is metastatic and/or unresectable.**
+2. **Subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, and an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), or have contraindication to such treatment.**
+3. **Molecular testing result from a CLIA-certified laboratory confirming that the tumor tissue has at least one of the following:**
+   - HER2 overexpression (3+ immunohistochemistry [IHC])
+   - HER2 2+ IHC is eligible if the tumor is amplified by FISH (signal ratio ≥ 2.0 or gene copy number ≥ 6)
+   - HER2 amplification by CLIA-certified next generation sequencing (NGS) sequencing assay
+   - RAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissue
+4. **At least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiation.**
+5. **Eastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2.**
+6. **Life expectancy greater than 3 months, in the opinion of the investigator.**
+7. **Have adequate hematological, hepatic, renal, coagulation, and cardiac function as defined below, obtained 7 days prior to the first study treatment:**
+   - **Hematological:**
+     - Absolute neutrophil count (ANC) ≥ 1000/µL
+     - Platelet count ≥ 75,000/µL
+     - Hemoglobin ≥ 8.0 g/dL
+   - **Hepatic:**
+     - Total bilirubin ≤ 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &amp;lt; 2 x ULN and normal AST/ALT are eligible.
+     - AST and ALT ≤ 2.5 x ULN (≤ 5 x ULN if liver metastases are present)
+   - **Renal:**
+     - Calculated creatinine clearance ≥ 50 mL/min using the Cockcroft-Gault formula
+   - **Coagulation:**
+     - International normalized ratio (INR) and activated partial thromboplastin time (aPTT) ≤ 1.5 x ULN unless on medication known to alter INR and/or aPTT
+   - **Cardiac:**
+     - Left ventricular ejection fraction (LVEF) ≥ 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented ≤ 28 days prior to registration
+8. **Women of child-bearing potential and male partners of women of child-bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administration.**
+   - **Note:** Women of child-bearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy). Postmenopause is defined as amenorrhea ≥ 12 consecutive months.
+9. **Capable of understanding and complying with the protocol requirements and has signed the informed consent document.**
+10. **Willing to return to enrolling institution for follow-up (during the active monitoring phase of the study).**
+11. **Willing to provide mandatory tissue and blood samples for correlative research purposes.**
+
+**Exclusion Criteria:**
+
+1. **Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer within 21 days prior to registration.**
+2. **Prior anti-HER2 targeting therapy.**
+3. **Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study requirements.**
+4. **Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) ≤ grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to ≤ grade 2; congestive heart failure (CHF) must have been ≤ grade 1 in severity at the time of occurrence and must have resolved completely prior to registration.**
+5. **Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &amp;gt; 150 mm Hg and/or diastolic blood pressure &amp;gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHF.**
+6. **Any of the following:**
+   - Pregnant women
+   - Nursing women
+   - Men or women of child-bearing potential who are unwilling to employ adequate contraception
+7. **Patient with known central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days).**
+8. **Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medications.**
+9. **Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatment.**
+10. **Major surgical procedure, open biopsy, or significant traumatic injury &amp;lt; 28 days prior to registration (≤ 56 days for hepatectomy, open thoracotomy, major neurosurgery).**
+11. **Anticipation of need for major surgical procedure during the course of the study.**
+12. **Serious, non-healing wound, ulcer, or bone fracture.**
+13. **History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery &amp;lt; 6 months prior to registration.**
+14. **Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapy.**
+   - **Note:** Patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trial.
+15. **Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatment.**
+16. **Known chronic liver disease, autoimmune hepatitis, or sclerosing cholangitis.**
+17. **Receiving any other investigational agent which would be considered as a treatment for the primary neoplasm.**
+18. **Other active malignancy &amp;lt; 2 years prior to registration which required systemic treatment.**
+   - **Exception:** Non-melanotic skin cancer or carcinoma-in-situ of the cervix.
+19. **Co-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimens.**
+20. **Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee.**">Based on the supporting evidence provided, here are the amended eligibility criteria for version 15:
+
+INCLUSION CRITERIA
+
+  1. Histologically and/or cytologically confirmed adenocarcinoma of the colon or rectum that is metastatic and/or unresectable.
+  2. Subjects must have been treated with a fluoropyrimidine (e.g., 5-fluorouracil or capecitabine), oxaliplatin, irinotecan, and an anti-VEGF monoclonal antibody (bevacizumab, ramucirumab, or ziv-aflibercept), or have contraindication to such treatment.
+  3. Molecular testing result from a CLIA-certified laboratory confirming that the tumor tissue has at least one of the following:
+  4. HER2 overexpression (3+ immunohistochemistry [IHC])
+  5. HER2 2+ IHC is eligible if the tumor is amplified by FISH (signal ratio ≥ 2.0 or gene copy number ≥ 6)
+  6. HER2 amplification by CLIA-certified next generation sequencing (NGS) sequencing assay
+  7. RAS (KRAS and NRAS) wild-type in primary or metastatic tumor tissue
+  8. At least one site of disease that is measurable by Response Evaluation Criteria in Solid Tumors (RECIST) criteria that has not been previously irradiated; if the patient has had previous radiation to the target lesion(s), there must be evidence of progression since the radiation.
+  9. Eastern Cooperative Oncology Group (ECOG) performance status (PS) of 0, 1, or 2.
+  10. Life expectancy greater than 3 months, in the opinion of the investigator.
+  11. Have adequate hematological, hepatic, renal, coagulation, and cardiac function as defined below, obtained 7 days prior to the first study treatment:
+  12. Hematological:
+  13. Absolute neutrophil count (ANC) ≥ 1000/µL
+  14. Platelet count ≥ 75,000/µL
+  15. Hemoglobin ≥ 8.0 g/dL
+  16. Hepatic:
+  17. Total bilirubin ≤ 1.5 x upper limit of normal (ULN); patients with known history of Gilbert syndrome and total bilirubin &lt; 2 x ULN and normal AST/ALT are eligible.
+  18. AST and ALT ≤ 2.5 x ULN (≤ 5 x ULN if liver metastases are present)
+  19. Renal:
+  20. Calculated creatinine clearance ≥ 50 mL/min using the Cockcroft-Gault formula
+  21. Coagulation:
+  22. International normalized ratio (INR) and activated partial thromboplastin time (aPTT) ≤ 1.5 x ULN unless on medication known to alter INR and/or aPTT
+  23. Cardiac:
+  24. Left ventricular ejection fraction (LVEF) ≥ 50% as assessed by echocardiogram (ECHO) or multiple-gated acquisition scan (MUGA) documented ≤ 28 days prior to registration
+  25. Women of child-bearing potential and male partners of women of child-bearing potential must agree to use two medically accepted methods of contraception, one of them being a barrier method during the study and for 7 months after the last study drug administration.
+  26. Note: Women of child-bearing potential include women who have experienced menarche and who have not undergone successful surgical sterilization (hysterectomy, bilateral tubal ligation, or bilateral oophorectomy). Postmenopause is defined as amenorrhea ≥ 12 consecutive months.
+  27. Capable of understanding and complying with the protocol requirements and has signed the informed consent document.
+  28. Willing to return to enrolling institution for follow-up (during the active monitoring phase of the study).
+  29. Willing to provide mandatory tissue and blood samples for correlative research purposes.
+
+EXCLUSION CRITERIA
+
+  1. Radiation therapy, hormonal therapy, biologic therapy, experimental therapy, or chemotherapy for cancer within 21 days prior to registration.
+  2. Prior anti-HER2 targeting therapy.
+  3. Uncontrolled intercurrent illness including, but not limited to, ongoing or active infection, symptomatic congestive heart failure, unstable angina pectoris, cardiac arrhythmia, or psychiatric illness/social situations that would limit compliance with study requirements.
+  4. Not recovered to baseline or Common Terminology Criteria for Adverse Events (CTCAE) ≤ grade 1 from toxicity due to all prior therapies except alopecia and neuropathy; alopecia and neuropathy must have resolved to ≤ grade 2; congestive heart failure (CHF) must have been ≤ grade 1 in severity at the time of occurrence and must have resolved completely prior to registration.
+  5. Clinically significant cardiac disease such as history of ventricular arrhythmia requiring therapy, currently uncontrolled hypertension (defined as persistent systolic blood pressure &gt; 150 mm Hg and/or diastolic blood pressure &gt; 100 mm Hg on antihypertensive medications), or any history of symptomatic CHF.
+  6. Any of the following:
+  7. Pregnant women
+  8. Nursing women
+  9. Men or women of child-bearing potential who are unwilling to employ adequate contraception
+  10. Patient with known central nervous system (CNS) metastasis (radiated or resected lesions are permitted, provided the lesions are fully treated and inactive, patient is asymptomatic, and no steroids have been administered for at least 30 days).
+  11. Inability to swallow pills or any significant gastrointestinal disease which would preclude the adequate oral absorption of medications.
+  12. Use of a strong CYP3A4 inducer or inhibitor, or strong CYP2C8 inducer or inhibitor within 3 elimination half-lives of the inhibitor or inducer prior to first dose of study treatment.
+  13. Major surgical procedure, open biopsy, or significant traumatic injury &lt; 28 days prior to registration (≤ 56 days for hepatectomy, open thoracotomy, major neurosurgery).
+  14. Anticipation of need for major surgical procedure during the course of the study.
+  15. Serious, non-healing wound, ulcer, or bone fracture.
+  16. History of myocardial infarction, unstable angina, cardiac or other vascular stenting, angioplasty, or cardiac surgery &lt; 6 months prior to registration.
+  17. Immunocompromised patients and patients known to be human immunodeficiency virus (HIV) positive and currently receiving antiretroviral therapy.
+  18. Note: Patients known to be HIV positive, but without clinical evidence of an immunocompromised state, are eligible for this trial.
+  19. Acute or chronic active hepatitis B or C infection, or other serious chronic infection requiring ongoing treatment.
+  20. Known chronic liver disease, autoimmune hepatitis, or sclerosing cholangitis.
+  21. Receiving any other investigational agent which would be considered as a treatment for the primary neoplasm.
+  22. Other active malignancy &lt; 2 years prior to registration which required systemic treatment.
+  23. Exception: Non-melanotic skin cancer or carcinoma-in-situ of the cervix.
+  24. Co-morbid systemic illnesses or other severe concurrent disease which, in the judgment of the local investigator, would make the patient inappropriate for entry into this study or interfere significantly with the proper assessment of safety and toxicity of the prescribed regimens.
+  25. Unable or unwilling to abide by the study protocol or cooperate fully with the investigator or designee.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 86</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 86</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the following:antinuclear antibody(ANA)+ (titer &amp;gt;= 1:80).anti-dsDNA+.anti-Smith+.
+  3. SLEDAI-2K &amp;gt;= 6 despite background therapy as reported and independently adjudicated (clinical score &amp;gt;= 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. Physician&amp;#x27;s Global Assessment (PhGA) &amp;gt;= 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&amp;lt;=20 mg), azathioprine (&amp;lt;= 150 mg), mycophenolate (&amp;lt;2 g), leflunomide (&amp;lt;=20 mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) (&amp;lt;=20 mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the &lt;span class=&quot;diff-del&quot;&gt;following:antinuclear&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;antibody(ANA)+&lt;/span&gt; (titer &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1:80).anti-dsDNA+.anti-Smith+.&lt;/span&gt;
+  3. SLEDAI-2K &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 6 despite background therapy as reported and independently adjudicated (clinical score &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. &lt;span class=&quot;diff-del&quot;&gt;Physician&amp;#x27;s&lt;/span&gt; Global Assessment (PhGA) &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;=20&lt;/span&gt; mg), azathioprine &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;=&lt;/span&gt; 150 mg), mycophenolate &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;2&lt;/span&gt; g), leflunomide &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;=20&lt;/span&gt; mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;=20&lt;/span&gt; mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization."
+                 data-raw="Inclusion Criteria:Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.At Screening, must have at least one of the following:antinuclear antibody(ANA)+ (titer &amp;amp;gt;= 1:80).anti-dsDNA+.anti-Smith+.SLEDAI-2K &amp;amp;gt;= 6 despite background therapy as reported and independently adjudicated (clinical score &amp;amp;gt;= 4, excluding lupus headache and&amp;amp;#x2F;or organic brain syndrome) at Screening.If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.Score must be re-confirmed at the Baseline visit.Physician&amp;amp;#x27;s Global Assessment (PhGA) &amp;amp;gt;= 1 during screening period.Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&amp;amp;lt;=20 mg), azathioprine (&amp;amp;lt;= 150 mg), mycophenolate (&amp;amp;lt;2 g), leflunomide (&amp;amp;lt;=20 mg), cyclosporine, tacrolimus, and&amp;amp;#x2F;or methotrexate (MTX) (&amp;amp;lt;=20 mg).No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.Exclusion Criteria:Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization.">INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the following:antinuclear antibody(ANA)+ (titer &gt;= 1:80).anti-dsDNA+.anti-Smith+.
+  3. SLEDAI-2K &gt;= 6 despite background therapy as reported and independently adjudicated (clinical score &gt;= 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. Physician&#x27;s Global Assessment (PhGA) &gt;= 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&lt;=20 mg), azathioprine (&lt;= 150 mg), mycophenolate (&lt;2 g), leflunomide (&lt;=20 mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) (&lt;=20 mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the following: antinuclear antibody (ANA)+ (titer ≥ 1:80). anti-dsDNA+. anti-Smith+.
+  3. SLEDAI-2K ≥ 6 despite background therapy as reported and independently adjudicated (clinical score ≥ 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. Physician’s Global Assessment (PhGA) ≥ 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&amp;lt; 20 mg), azathioprine (&amp;lt; 150 mg), mycophenolate (&amp;lt; 2 g), leflunomide (&amp;lt; 20 mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) (&amp;lt; 20 mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the &lt;span class=&quot;diff-add&quot;&gt;following:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;antinuclear antibody (ANA)+&lt;/span&gt; (titer &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1:80). anti-dsDNA+. anti-Smith+.&lt;/span&gt;
+  3. SLEDAI-2K &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 6 despite background therapy as reported and independently adjudicated (clinical score &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. &lt;span class=&quot;diff-add&quot;&gt;Physician’s&lt;/span&gt; Global Assessment (PhGA) &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) &lt;span class=&quot;diff-add&quot;&gt;(&amp;lt; 20&lt;/span&gt; mg), azathioprine &lt;span class=&quot;diff-add&quot;&gt;(&amp;lt;&lt;/span&gt; 150 mg), mycophenolate &lt;span class=&quot;diff-add&quot;&gt;(&amp;lt; 2&lt;/span&gt; g), leflunomide &lt;span class=&quot;diff-add&quot;&gt;(&amp;lt; 20&lt;/span&gt; mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) &lt;span class=&quot;diff-add&quot;&gt;(&amp;lt; 20&lt;/span&gt; mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization."
+                 data-raw="Inclusion Criteria: Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion. At Screening, must have at least one of the following: antinuclear antibody (ANA)+ (titer ≥ 1:80). anti-dsDNA+. anti-Smith+. SLEDAI-2K ≥ 6 despite background therapy as reported and independently adjudicated (clinical score ≥ 4, excluding lupus headache and/or organic brain syndrome) at Screening. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication. Score must be re-confirmed at the Baseline visit. Physician’s Global Assessment (PhGA) ≥ 1 during screening period. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&amp;lt; 20 mg), azathioprine (&amp;lt; 150 mg), mycophenolate (&amp;lt; 2 g), leflunomide (&amp;lt; 20 mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) (&amp;lt; 20 mg). No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials. Exclusion Criteria: Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization.">INCLUSION CRITERIA
+
+  1. Participant has clinical diagnosis of SLE at least 24 weeks prior to screening, meeting at least 4 of the 11 revised Criteria for Classification of SLE according to the 1997 Update of the 1982 American College of Rheumatology (ACR) OR meeting at least 4 of the 2012 SLICC classification criteria, including at least 1 clinical criterion and 1 immunologic criterion.
+  2. At Screening, must have at least one of the following: antinuclear antibody (ANA)+ (titer ≥ 1:80). anti-dsDNA+. anti-Smith+.
+  3. SLEDAI-2K ≥ 6 despite background therapy as reported and independently adjudicated (clinical score ≥ 4, excluding lupus headache and/or organic brain syndrome) at Screening.
+  4. If 4 points of the required entry points are for arthritis, there must also be a minimum of 3 tender and 3 swollen joints.
+  5. If participant has rash and PI considers it to be attributable to SLE, participant must consent to skin photograph collection for adjudication.
+  6. Score must be re-confirmed at the Baseline visit.
+  7. Physician’s Global Assessment (PhGA) ≥ 1 during screening period.
+  8. Must be on background treatment, stable for 30 days, at Baseline and throughout the study with antimalarial(s), prednisone (or prednisone equivalent) (&lt; 20 mg), azathioprine (&lt; 150 mg), mycophenolate (&lt; 2 g), leflunomide (&lt; 20 mg), cyclosporine, tacrolimus, and/or methotrexate (MTX) (&lt; 20 mg).
+  9. No combinations of the above with immunomodulators other than prednisone (or equivalents) and antimalarials.
+
+EXCLUSION CRITERIA
+
+  1. Participant using intravenous (IV) or intramuscular (IM) corticosteroids greater than or equal to a 40 mg prednisone-equivalent bolus within 30 days of planned randomization.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

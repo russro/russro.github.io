@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 152</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 152</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than 1 year and 11 months old,, at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)History of excessive stool retentionHistory of painful or hard bowel movements (BMs)History of large-diameter stoolsPresence of a large fecal mass in the rectumLAR/Parent/Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has history of:Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsyCystic fibrosisHypothyroidism that is untreated or treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)Down&amp;#x27;s syndrome or any other chromosomal disorderActive anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary).
+  4. However, if in the investigator&amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;#x27;s Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  5. Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)Intestinal nerve or muscle disorders (e.g., Hirschprung disease, visceral myopathies, visceral neuropathies)Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)Lead toxicity, hypercalcemiaInflammatory bowel diseaseLactose intolerance that is associated with symptoms which could confound the assessments in this studyHistory of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3).
+  6. A complete remission is defined as the disappearance of all signs of cancer in response to treatment)"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;year&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and 11 months old,,&lt;/span&gt; at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the &lt;span class=&quot;diff-del&quot;&gt;following:2&lt;/span&gt; or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 &lt;span class=&quot;diff-del&quot;&gt;hours)History&lt;/span&gt; of excessive stool &lt;span class=&quot;diff-del&quot;&gt;retentionHistory&lt;/span&gt; of painful or hard bowel movements &lt;span class=&quot;diff-del&quot;&gt;(BMs)History&lt;/span&gt; of large-diameter &lt;span class=&quot;diff-del&quot;&gt;stoolsPresence&lt;/span&gt; of a large fecal mass in the &lt;span class=&quot;diff-del&quot;&gt;rectumLAR/Parent/Guardian&lt;/span&gt; is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has history &lt;span class=&quot;diff-del&quot;&gt;of:Celiac&lt;/span&gt; disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic &lt;span class=&quot;diff-del&quot;&gt;biopsyCystic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;fibrosisHypothyroidism&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;untreated&lt;/span&gt; or treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit &lt;span class=&quot;diff-del&quot;&gt;1)Down&amp;#x27;s&lt;/span&gt; syndrome or any other chromosomal &lt;span class=&quot;diff-del&quot;&gt;disorderActive&lt;/span&gt; anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary).&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; However, if in the investigator&amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;#x27;s Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced &lt;span class=&quot;diff-del&quot;&gt;anus)Intestinal&lt;/span&gt; nerve or muscle disorders (e.g., &lt;span class=&quot;diff-del&quot;&gt;Hirschprung&lt;/span&gt; disease, visceral myopathies, visceral &lt;span class=&quot;diff-del&quot;&gt;neuropathies)Neuropathic&lt;/span&gt; conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord &lt;span class=&quot;diff-del&quot;&gt;trauma)Lead&lt;/span&gt; toxicity, &lt;span class=&quot;diff-del&quot;&gt;hypercalcemiaInflammatory&lt;/span&gt; bowel &lt;span class=&quot;diff-del&quot;&gt;diseaseLactose&lt;/span&gt; intolerance that is associated with symptoms which could confound the assessments in this &lt;span class=&quot;diff-del&quot;&gt;studyHistory&lt;/span&gt; of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3).&lt;span class=&quot;diff-del&quot;&gt;
+  6.&lt;/span&gt; A complete remission is defined as the disappearance of all signs of cancer in response to &lt;span class=&quot;diff-del&quot;&gt;treatment)&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Individuals must be 6 months to less than 1 year and 11 months old,, at the time the legally authorized representative (LAR)&amp;amp;#x2F;parent&amp;amp;#x2F;guardian signs the informed consent in alignment with local requirements.The LAR&amp;amp;#x2F;parent&amp;amp;#x2F;guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.Participant meets Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)History of excessive stool retentionHistory of painful or hard bowel movements (BMs)History of large-diameter stoolsPresence of a large fecal mass in the rectumLAR&amp;amp;#x2F;Parent&amp;amp;#x2F;Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.Exclusion Criteria:Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.Participant has history of:Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsyCystic fibrosisHypothyroidism that is untreated or treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)Down&amp;amp;#x27;s syndrome or any other chromosomal disorderActive anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain&amp;amp;#x2F;crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary). However, if in the investigator&amp;amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;amp;#x27;s Rome IV FC criteria, the subject would not be eligible to participate in the study.Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)Intestinal nerve or muscle disorders (e.g., Hirschprung disease, visceral myopathies, visceral neuropathies)Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)Lead toxicity, hypercalcemiaInflammatory bowel diseaseLactose intolerance that is associated with symptoms which could confound the assessments in this studyHistory of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment&amp;amp;#x2F;randomization (Visit 3). A complete remission is defined as the disappearance of all signs of cancer in response to treatment)">INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than 1 year and 11 months old,, at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)History of excessive stool retentionHistory of painful or hard bowel movements (BMs)History of large-diameter stoolsPresence of a large fecal mass in the rectumLAR/Parent/Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has history of:Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsyCystic fibrosisHypothyroidism that is untreated or treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)Down&#x27;s syndrome or any other chromosomal disorderActive anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary).
+  4. However, if in the investigator&#x27;s opinion, an anal fissure(s) may be the primary cause of participant&#x27;s Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  5. Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)Intestinal nerve or muscle disorders (e.g., Hirschprung disease, visceral myopathies, visceral neuropathies)Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)Lead toxicity, hypercalcemiaInflammatory bowel diseaseLactose intolerance that is associated with symptoms which could confound the assessments in this studyHistory of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3).
+  6. A complete remission is defined as the disappearance of all signs of cancer in response to treatment)</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 43)
+
+INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than 2 years old at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets modified Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:
+  4. 2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)
+  5. History of excessive volitional stool retention
+  6. History of painful or hard bowel movements (BMs)
+  7. History of large-diameter stools
+  8. Presence of a large fecal mass in the rectum
+  9. LAR/Parent/Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+  10. Participants aged 6 months to less than 2 years must have a weight-for-height/length ratio that is within the normal range for their age.
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has a history of:
+  4. Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsy
+  5. Cystic fibrosis
+  6. Untreated hypothyroidism or hypothyroidism treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)
+  7. Down&amp;#x27;s syndrome or any other chromosomal disorder
+  8. Active anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary). However, if in the investigator&amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;#x27;s modified Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  9. Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)
+  10. Intestinal nerve or muscle disorders (e.g., Hirschsprung disease, visceral myopathies, visceral neuropathies)
+  11. Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)
+  12. Lead toxicity, hypercalcemia
+  13. Neurodevelopmental disabilities of the LAR/Parent/Guardian/Caregiver who will be completing the eDiary producing a cognitive delay that precludes comprehension and completion of the daily eDiary or other study-related questionnaires.
+  14. Inflammatory bowel disease
+  15. Lactose intolerance that is associated with symptoms which could confound the assessments in this study
+  16. History of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3). A complete remission is defined as the disappearance of all signs of cancer in response to treatment)."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 43)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than &lt;span class=&quot;diff-add&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;old&lt;/span&gt; at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets &lt;span class=&quot;diff-add&quot;&gt;modified &lt;/span&gt;Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the &lt;span class=&quot;diff-add&quot;&gt;following:
+  4. 2&lt;/span&gt; or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 &lt;span class=&quot;diff-add&quot;&gt;hours)
+  5. History&lt;/span&gt; of excessive &lt;span class=&quot;diff-add&quot;&gt;volitional &lt;/span&gt;stool &lt;span class=&quot;diff-add&quot;&gt;retention
+  6. History&lt;/span&gt; of painful or hard bowel movements &lt;span class=&quot;diff-add&quot;&gt;(BMs)
+  7. History&lt;/span&gt; of large-diameter &lt;span class=&quot;diff-add&quot;&gt;stools
+  8. Presence&lt;/span&gt; of a large fecal mass in the &lt;span class=&quot;diff-add&quot;&gt;rectum
+  9. LAR/Parent/Guardian&lt;/span&gt; is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.&lt;span class=&quot;diff-add&quot;&gt;
+  10. Participants aged 6 months to less than 2 years must have a weight-for-height/length ratio that is within the normal range for their age.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has &lt;span class=&quot;diff-add&quot;&gt;a &lt;/span&gt;history &lt;span class=&quot;diff-add&quot;&gt;of:
+  4. Celiac&lt;/span&gt; disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic &lt;span class=&quot;diff-add&quot;&gt;biopsy
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Cystic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;fibrosis
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Untreated&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;hypothyroidism&lt;/span&gt; or&lt;span class=&quot;diff-add&quot;&gt; hypothyroidism&lt;/span&gt; treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit &lt;span class=&quot;diff-add&quot;&gt;1)
+  7. Down&amp;#x27;s&lt;/span&gt; syndrome or any other chromosomal &lt;span class=&quot;diff-add&quot;&gt;disorder
+  8. Active&lt;/span&gt; anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary). However, if in the investigator&amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;#x27;s &lt;span class=&quot;diff-add&quot;&gt;modified &lt;/span&gt;Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced &lt;span class=&quot;diff-add&quot;&gt;anus)
+  10. Intestinal&lt;/span&gt; nerve or muscle disorders (e.g., &lt;span class=&quot;diff-add&quot;&gt;Hirschsprung&lt;/span&gt; disease, visceral myopathies, visceral &lt;span class=&quot;diff-add&quot;&gt;neuropathies)
+  11. Neuropathic&lt;/span&gt; conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord &lt;span class=&quot;diff-add&quot;&gt;trauma)
+  12. Lead&lt;/span&gt; toxicity, &lt;span class=&quot;diff-add&quot;&gt;hypercalcemia
+  13. Neurodevelopmental disabilities of the LAR/Parent/Guardian/Caregiver who will be completing the eDiary producing a cognitive delay that precludes comprehension and completion of the daily eDiary or other study-related questionnaires.
+  14. Inflammatory&lt;/span&gt; bowel &lt;span class=&quot;diff-add&quot;&gt;disease
+  15. Lactose&lt;/span&gt; intolerance that is associated with symptoms which could confound the assessments in this &lt;span class=&quot;diff-add&quot;&gt;study
+  16. History&lt;/span&gt; of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3). A complete remission is defined as the disappearance of all signs of cancer in response to &lt;span class=&quot;diff-add&quot;&gt;treatment).&lt;/span&gt;"
+                 data-raw="**Amended Eligibility Criteria (version 43)**
+
+**Inclusion Criteria:**
+- Individuals must be 6 months to less than 2 years old at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+- The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+- Participant meets modified Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:
+  - 2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)
+  - History of excessive volitional stool retention
+  - History of painful or hard bowel movements (BMs)
+  - History of large-diameter stools
+  - Presence of a large fecal mass in the rectum
+- LAR/Parent/Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+- Participants aged 6 months to less than 2 years must have a weight-for-height/length ratio that is within the normal range for their age.
+
+**Exclusion Criteria:**
+- Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+- History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&amp;#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+- Participant has a history of:
+  - Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsy
+  - Cystic fibrosis
+  - Untreated hypothyroidism or hypothyroidism treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)
+  - Down&amp;#x27;s syndrome or any other chromosomal disorder
+  - Active anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary). However, if in the investigator&amp;#x27;s opinion, an anal fissure(s) may be the primary cause of participant&amp;#x27;s modified Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  - Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)
+  - Intestinal nerve or muscle disorders (e.g., Hirschsprung disease, visceral myopathies, visceral neuropathies)
+  - Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)
+  - Lead toxicity, hypercalcemia
+  - Neurodevelopmental disabilities of the LAR/Parent/Guardian/Caregiver who will be completing the eDiary producing a cognitive delay that precludes comprehension and completion of the daily eDiary or other study-related questionnaires.
+  - Inflammatory bowel disease
+  - Lactose intolerance that is associated with symptoms which could confound the assessments in this study
+  - History of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3). A complete remission is defined as the disappearance of all signs of cancer in response to treatment).">Amended Eligibility Criteria (version 43)
+
+INCLUSION CRITERIA
+
+  1. Individuals must be 6 months to less than 2 years old at the time the legally authorized representative (LAR)/parent/guardian signs the informed consent in alignment with local requirements.
+  2. The LAR/parent/guardian who will be completing the electronic diary (eDiary) is able to read and understand the assessments in the eDiary device and must undergo training.
+  3. Participant meets modified Rome IV criteria for functional constipation (FC): for at least 1 month before Screening (Visit 1), the participant must meet 2 or more of the following:
+  4. 2 or fewer defecations per week (with each defecation occurring in the absence of any laxative, suppository, or enema use during the preceding 24 hours)
+  5. History of excessive volitional stool retention
+  6. History of painful or hard bowel movements (BMs)
+  7. History of large-diameter stools
+  8. Presence of a large fecal mass in the rectum
+  9. LAR/Parent/Guardian is willing to discontinue any laxatives used before the Preintervention Visit in favor of the protocol-permitted rescue medicine.
+  10. Participants aged 6 months to less than 2 years must have a weight-for-height/length ratio that is within the normal range for their age.
+
+EXCLUSION CRITERIA
+
+  1. Participant has conditions that could interfere with drug absorption, including, but not limited to, short bowel syndrome.
+  2. History of clinically significant medical conditions or any other reason that the investigator determines would interfere with the individual&#x27;s participation in this study or would make the participant an unsuitable candidate to receive study drug.
+  3. Participant has a history of:
+  4. Celiac disease, or positive serological test for celiac disease or the condition is suspected but has not been ruled out by endoscopic biopsy
+  5. Cystic fibrosis
+  6. Untreated hypothyroidism or hypothyroidism treated with thyroid hormone at a dose that has not been stable for at least 3 months prior to Screening (Visit 1)
+  7. Down&#x27;s syndrome or any other chromosomal disorder
+  8. Active anal fissure (investigator has confirmed an active anal fissure and participant reports known anal fissure symptoms [i.e., streaks of blood on the stool or on diaper or toilet paper and pain/crying with bowel movement within 2 weeks prior to Screening]). (Note: Anal fissures that have resolved at least 2 weeks prior to screening would not be exclusionary). However, if in the investigator&#x27;s opinion, an anal fissure(s) may be the primary cause of participant&#x27;s modified Rome IV FC criteria, the subject would not be eligible to participate in the study.
+  9. Anatomic malformations (e.g., imperforate anus, anal stenosis, anterior displaced anus)
+  10. Intestinal nerve or muscle disorders (e.g., Hirschsprung disease, visceral myopathies, visceral neuropathies)
+  11. Neuropathic conditions (e.g., spinal cord abnormalities, neurofibromatosis, tethered cord, spinal cord trauma)
+  12. Lead toxicity, hypercalcemia
+  13. Neurodevelopmental disabilities of the LAR/Parent/Guardian/Caregiver who will be completing the eDiary producing a cognitive delay that precludes comprehension and completion of the daily eDiary or other study-related questionnaires.
+  14. Inflammatory bowel disease
+  15. Lactose intolerance that is associated with symptoms which could confound the assessments in this study
+  16. History of cancer. (Note: Participants with a history of cancer are allowed provided that the malignancy has been in a complete remission before enrollment/randomization (Visit 3). A complete remission is defined as the disappearance of all signs of cancer in response to treatment).</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

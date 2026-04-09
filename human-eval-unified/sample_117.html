@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 117</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 117</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)];age 21-65 years, inclusive, at the time of consent;
+  2. T1D duration &amp;gt; 1 year;detectable fasting C-peptide as per the result of screening laboratory measurement;current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  3. HbA1c value &amp;gt;7.5% as per the result of screening laboratory measurement;evidence of IR based on a total daily insulin dose &amp;gt;0.8 U/kg/day;subject is overweight or obese as per body mass index (BMI) of between 24-33 kg/m2, inclusive;ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;provision of signed informed consent prior of any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. use of a &amp;quot;closed loop system&amp;quot; for integrated glucose reading/insulin infusion;known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;use of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of T1D;treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;gt;50 mg/day)];use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;evidence of QTcF &amp;gt;470 msec and a history of significant cardiovascular disease/abnormality;any condition, including unstable diet and disordered eating behaviour, that in the judgment of the investigator will adversely affect patient&amp;#x27;s safety or the completion of the protocol or otherwise confound study outcome;pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; unwillingness to use effective contraceptive measures up to 2 months following trial discharge (all participants);clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;history of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;hypoalbuminemia (serum albumin &amp;lt;3 g/dL);hepatic dysfunction defined by increased ALT/AST &amp;gt; 3 x upper limit of normal (ULN) and increased total bilirubin &amp;gt; 3 mg/dL [&amp;gt;51.3 μmol/L];moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL/min/1.73 m2 as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;a condition already known which interferes with the ability to accurately determine glycated HbA1c;significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion)."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;clinical&lt;/span&gt; diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 &lt;span class=&quot;diff-del&quot;&gt;(ZnT8)];age&lt;/span&gt; 21-65 years, inclusive, at the time of consent;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; T1D duration &amp;gt; 1 &lt;span class=&quot;diff-del&quot;&gt;year;detectable&lt;/span&gt; fasting C-peptide as per the result of screening laboratory &lt;span class=&quot;diff-del&quot;&gt;measurement;current&lt;/span&gt; insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the &lt;span class=&quot;diff-del&quot;&gt;trial;routine&lt;/span&gt; use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; HbA1c value &amp;gt;7.5% as per the result of screening laboratory &lt;span class=&quot;diff-del&quot;&gt;measurement;evidence&lt;/span&gt; of IR based on a total daily insulin dose &amp;gt;0.8 &lt;span class=&quot;diff-del&quot;&gt;U/kg/day;subject&lt;/span&gt; is overweight or obese as per body mass index (BMI) of between 24-33 &lt;span class=&quot;diff-del&quot;&gt;kg/m2,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inclusive;ability&lt;/span&gt; to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial &lt;span class=&quot;diff-del&quot;&gt;staff;provision&lt;/span&gt; of signed informed consent prior &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;use&lt;/span&gt; of a &amp;quot;closed loop system&amp;quot; for integrated glucose reading/insulin &lt;span class=&quot;diff-del&quot;&gt;infusion;known&lt;/span&gt; or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be &lt;span class=&quot;diff-del&quot;&gt;excluded;use&lt;/span&gt; of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;#x27;s standard of &lt;span class=&quot;diff-del&quot;&gt;care;use&lt;/span&gt; of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;#x27;s standard of &lt;span class=&quot;diff-del&quot;&gt;care;use&lt;/span&gt; of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of &lt;span class=&quot;diff-del&quot;&gt;T1D;treatment&lt;/span&gt; with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;gt;50 &lt;span class=&quot;diff-del&quot;&gt;mg/day)];use&lt;/span&gt; of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, &lt;span class=&quot;diff-del&quot;&gt;niacin;evidence&lt;/span&gt; of QTcF &amp;gt;470 msec and a history of significant cardiovascular &lt;span class=&quot;diff-del&quot;&gt;disease/abnormality;any&lt;/span&gt; condition, including unstable diet and disordered eating &lt;span class=&quot;diff-del&quot;&gt;behaviour,&lt;/span&gt; that in the judgment of the investigator will adversely affect patient&amp;#x27;s safety or the completion of the protocol or otherwise confound study &lt;span class=&quot;diff-del&quot;&gt;outcome;pregnancy&lt;/span&gt; (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; &lt;span class=&quot;diff-del&quot;&gt;unwillingness&lt;/span&gt; to use effective contraceptive measures up to 2 months following trial discharge (all &lt;span class=&quot;diff-del&quot;&gt;participants);clinical&lt;/span&gt; diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal &lt;span class=&quot;diff-del&quot;&gt;range;history&lt;/span&gt; of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 &lt;span class=&quot;diff-del&quot;&gt;months;hypoalbuminemia&lt;/span&gt; (serum albumin &amp;lt;3 &lt;span class=&quot;diff-del&quot;&gt;g/dL);hepatic&lt;/span&gt; dysfunction defined by increased ALT/AST &lt;span class=&quot;diff-del&quot;&gt;&amp;gt; 3&lt;/span&gt; x upper limit of normal (ULN) and increased total bilirubin &lt;span class=&quot;diff-del&quot;&gt;&amp;gt; 3&lt;/span&gt; mg/dL [&amp;gt;51.3 &lt;span class=&quot;diff-del&quot;&gt;μmol/L];moderate&lt;/span&gt; to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL/min/1.73 &lt;span class=&quot;diff-del&quot;&gt;m2&lt;/span&gt; as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine &lt;span class=&quot;diff-del&quot;&gt;equation;past&lt;/span&gt; (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune &lt;span class=&quot;diff-del&quot;&gt;response;a&lt;/span&gt; condition already known which interferes with the ability to accurately determine glycated &lt;span class=&quot;diff-del&quot;&gt;HbA1c;significant&lt;/span&gt; systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion)."
+                 data-raw="Inclusion Criteria:clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)];age 21-65 years, inclusive, at the time of consent;T1D duration &amp;amp;gt; 1 year;detectable fasting C-peptide as per the result of screening laboratory measurement;current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;HbA1c value &amp;amp;gt;7.5% as per the result of screening laboratory measurement;evidence of IR based on a total daily insulin dose &amp;amp;gt;0.8 U&amp;amp;#x2F;kg&amp;amp;#x2F;day;subject is overweight or obese as per body mass index (BMI) of between 24-33 kg&amp;amp;#x2F;m2, inclusive;ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;provision of signed informed consent prior of any study-related procedure not part of standard medical care.Exclusion Criteria:use of a &amp;amp;quot;closed loop system&amp;amp;quot; for integrated glucose reading&amp;amp;#x2F;insulin infusion;known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;amp;#x27;s standard of care;use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;amp;#x27;s standard of care;use of a medication such as stimulants, antidepressants and&amp;amp;#x2F;or psychotropic agents that could affect weight gain or glycemic control of T1D;treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;amp;gt;50 mg&amp;amp;#x2F;day)];use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;evidence of QTcF &amp;amp;gt;470 msec and a history of significant cardiovascular disease&amp;amp;#x2F;abnormality;any condition, including unstable diet and disordered eating behaviour, that in the judgment of the investigator will adversely affect patient&amp;amp;#x27;s safety or the completion of the protocol or otherwise confound study outcome;pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; unwillingness to use effective contraceptive measures up to 2 months following trial discharge (all participants);clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;history of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;hypoalbuminemia (serum albumin &amp;amp;lt;3 g&amp;amp;#x2F;dL);hepatic dysfunction defined by increased ALT&amp;amp;#x2F;AST &amp;amp;gt; 3 x upper limit of normal (ULN) and increased total bilirubin &amp;amp;gt; 3 mg&amp;amp;#x2F;dL [&amp;amp;gt;51.3 μmol&amp;amp;#x2F;L];moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;amp;lt;60 mL&amp;amp;#x2F;min&amp;amp;#x2F;1.73 m2 as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;a condition already known which interferes with the ability to accurately determine glycated HbA1c;significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).">INCLUSION CRITERIA
+
+  1. clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)];age 21-65 years, inclusive, at the time of consent;
+  2. T1D duration &gt; 1 year;detectable fasting C-peptide as per the result of screening laboratory measurement;current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  3. HbA1c value &gt;7.5% as per the result of screening laboratory measurement;evidence of IR based on a total daily insulin dose &gt;0.8 U/kg/day;subject is overweight or obese as per body mass index (BMI) of between 24-33 kg/m2, inclusive;ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;provision of signed informed consent prior of any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. use of a &quot;closed loop system&quot; for integrated glucose reading/insulin infusion;known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&#x27;s standard of care;use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&#x27;s standard of care;use of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of T1D;treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&gt;50 mg/day)];use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;evidence of QTcF &gt;470 msec and a history of significant cardiovascular disease/abnormality;any condition, including unstable diet and disordered eating behaviour, that in the judgment of the investigator will adversely affect patient&#x27;s safety or the completion of the protocol or otherwise confound study outcome;pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; unwillingness to use effective contraceptive measures up to 2 months following trial discharge (all participants);clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;history of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;hypoalbuminemia (serum albumin &lt;3 g/dL);hepatic dysfunction defined by increased ALT/AST &gt; 3 x upper limit of normal (ULN) and increased total bilirubin &gt; 3 mg/dL [&gt;51.3 μmol/L];moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &lt;60 mL/min/1.73 m2 as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;a condition already known which interferes with the ability to accurately determine glycated HbA1c;significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the supporting evidence provided, here are the amended eligibility criteria for version 6:
+
+INCLUSION CRITERIA
+
+  1. Clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)];
+  2. Age 21-65 years, inclusive, at the time of consent;
+  3. T1D duration &amp;gt; 1 year;
+  4. Detectable fasting C-peptide (≥ 0.02 nmol/L) as per the result of screening laboratory measurement;
+  5. Current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;
+  6. Routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  7. HbA1c value &amp;gt;7.5% as per the result of screening laboratory measurement;
+  8. Evidence of IR based on a total daily insulin dose &amp;gt;0.8 U/kg/day;
+  9. Subject is overweight or obese as per body mass index (BMI) of between 24-33 kg/m², inclusive;
+  10. Ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;
+  11. Provision of signed informed consent prior to any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. Use of a &amp;quot;closed loop system&amp;quot; for integrated glucose reading/insulin infusion;
+  2. Known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;
+  3. Use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;
+  4. Use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;
+  5. Use of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of T1D;
+  6. Treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;gt;50 mg/day)];
+  7. Use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;
+  8. Evidence of QTcF &amp;gt;470 msec and a history of significant cardiovascular disease/abnormality;
+  9. Any condition, including unstable diet and disordered eating behavior, that in the judgment of the investigator will adversely affect patient&amp;#x27;s safety or the completion of the protocol or otherwise confound study outcome;
+  10. Pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; women of child-bearing potential and fertile men who do not agree to use effective contraceptive measures up to 2 months following trial discharge (all participants);
+  11. Clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;
+  12. History of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;
+  13. Hypoalbuminemia (serum albumin &amp;lt;3 g/dL);
+  14. Hepatic dysfunction defined by increased ALT/AST &amp;gt;3 x upper limit of normal (ULN) and increased total bilirubin &amp;gt;3 mg/dL [&amp;gt;51.3 μmol/L];
+  15. Moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL/min/1.73 m² as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;
+  16. Past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;
+  17. Any condition already known which interferes with the ability to accurately determine glycated HbA1c;
+  18. Significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).
+  19. These amendments incorporate the evidence provided while maintaining clinical accuracy and relevance."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the supporting evidence provided, here are the amended eligibility criteria for version 6:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Clinical&lt;/span&gt; diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 &lt;span class=&quot;diff-add&quot;&gt;(ZnT8)];
+  2. Age&lt;/span&gt; 21-65 years, inclusive, at the time of consent;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; T1D duration &amp;gt; 1 &lt;span class=&quot;diff-add&quot;&gt;year;
+  4. Detectable&lt;/span&gt; fasting C-peptide&lt;span class=&quot;diff-add&quot;&gt; (≥ 0.02 nmol/L)&lt;/span&gt; as per the result of screening laboratory &lt;span class=&quot;diff-add&quot;&gt;measurement;
+  5. Current&lt;/span&gt; insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the &lt;span class=&quot;diff-add&quot;&gt;trial;
+  6. Routine&lt;/span&gt; use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; HbA1c value &amp;gt;7.5% as per the result of screening laboratory &lt;span class=&quot;diff-add&quot;&gt;measurement;
+  8. Evidence&lt;/span&gt; of IR based on a total daily insulin dose &amp;gt;0.8 &lt;span class=&quot;diff-add&quot;&gt;U/kg/day;
+  9. Subject&lt;/span&gt; is overweight or obese as per body mass index (BMI) of between 24-33 &lt;span class=&quot;diff-add&quot;&gt;kg/m²,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inclusive;
+  10. Ability&lt;/span&gt; to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial &lt;span class=&quot;diff-add&quot;&gt;staff;
+  11. Provision&lt;/span&gt; of signed informed consent prior &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Use&lt;/span&gt; of a &amp;quot;closed loop system&amp;quot; for integrated glucose reading/insulin &lt;span class=&quot;diff-add&quot;&gt;infusion;
+  2. Known&lt;/span&gt; or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be &lt;span class=&quot;diff-add&quot;&gt;excluded;
+  3. Use&lt;/span&gt; of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;#x27;s standard of &lt;span class=&quot;diff-add&quot;&gt;care;
+  4. Use&lt;/span&gt; of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;#x27;s standard of &lt;span class=&quot;diff-add&quot;&gt;care;
+  5. Use&lt;/span&gt; of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of &lt;span class=&quot;diff-add&quot;&gt;T1D;
+  6. Treatment&lt;/span&gt; with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;gt;50 &lt;span class=&quot;diff-add&quot;&gt;mg/day)];
+  7. Use&lt;/span&gt; of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, &lt;span class=&quot;diff-add&quot;&gt;niacin;
+  8. Evidence&lt;/span&gt; of QTcF &amp;gt;470 msec and a history of significant cardiovascular &lt;span class=&quot;diff-add&quot;&gt;disease/abnormality;
+  9. Any&lt;/span&gt; condition, including unstable diet and disordered eating &lt;span class=&quot;diff-add&quot;&gt;behavior,&lt;/span&gt; that in the judgment of the investigator will adversely affect patient&amp;#x27;s safety or the completion of the protocol or otherwise confound study &lt;span class=&quot;diff-add&quot;&gt;outcome;
+  10. Pregnancy&lt;/span&gt; (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; &lt;span class=&quot;diff-add&quot;&gt;women of child-bearing potential and fertile men who do not agree&lt;/span&gt; to use effective contraceptive measures up to 2 months following trial discharge (all &lt;span class=&quot;diff-add&quot;&gt;participants);
+  11. Clinical&lt;/span&gt; diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal &lt;span class=&quot;diff-add&quot;&gt;range;
+  12. History&lt;/span&gt; of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 &lt;span class=&quot;diff-add&quot;&gt;months;
+  13. Hypoalbuminemia&lt;/span&gt; (serum albumin &amp;lt;3 &lt;span class=&quot;diff-add&quot;&gt;g/dL);
+  14. Hepatic&lt;/span&gt; dysfunction defined by increased ALT/AST &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;3&lt;/span&gt; x upper limit of normal (ULN) and increased total bilirubin &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;3&lt;/span&gt; mg/dL [&amp;gt;51.3 &lt;span class=&quot;diff-add&quot;&gt;μmol/L];
+  15. Moderate&lt;/span&gt; to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL/min/1.73 &lt;span class=&quot;diff-add&quot;&gt;m²&lt;/span&gt; as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine &lt;span class=&quot;diff-add&quot;&gt;equation;
+  16. Past&lt;/span&gt; (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune &lt;span class=&quot;diff-add&quot;&gt;response;
+  17. Any&lt;/span&gt; condition already known which interferes with the ability to accurately determine glycated &lt;span class=&quot;diff-add&quot;&gt;HbA1c;
+  18. Significant&lt;/span&gt; systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).&lt;span class=&quot;diff-add&quot;&gt;
+  19. These amendments incorporate the evidence provided while maintaining clinical accuracy and relevance.&lt;/span&gt;"
+                 data-raw="Based on the supporting evidence provided, here are the amended eligibility criteria for version 6:
+
+**Inclusion Criteria:**
+1. Clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)]; 
+2. Age 21-65 years, inclusive, at the time of consent;
+3. T1D duration &amp;gt; 1 year;
+4. Detectable fasting C-peptide (≥ 0.02 nmol/L) as per the result of screening laboratory measurement;
+5. Current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;
+6. Routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+7. HbA1c value &amp;gt;7.5% as per the result of screening laboratory measurement;
+8. Evidence of IR based on a total daily insulin dose &amp;gt;0.8 U/kg/day;
+9. Subject is overweight or obese as per body mass index (BMI) of between 24-33 kg/m², inclusive;
+10. Ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;
+11. Provision of signed informed consent prior to any study-related procedure not part of standard medical care.
+
+**Exclusion Criteria:**
+1. Use of a &amp;quot;closed loop system&amp;quot; for integrated glucose reading/insulin infusion;
+2. Known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;
+3. Use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;
+4. Use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&amp;#x27;s standard of care;
+5. Use of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of T1D;
+6. Treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&amp;gt;50 mg/day)];
+7. Use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;
+8. Evidence of QTcF &amp;gt;470 msec and a history of significant cardiovascular disease/abnormality;
+9. Any condition, including unstable diet and disordered eating behavior, that in the judgment of the investigator will adversely affect patient&amp;#x27;s safety or the completion of the protocol or otherwise confound study outcome;
+10. Pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; women of child-bearing potential and fertile men who do not agree to use effective contraceptive measures up to 2 months following trial discharge (all participants);
+11. Clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;
+12. History of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;
+13. Hypoalbuminemia (serum albumin &amp;lt;3 g/dL);
+14. Hepatic dysfunction defined by increased ALT/AST &amp;gt;3 x upper limit of normal (ULN) and increased total bilirubin &amp;gt;3 mg/dL [&amp;gt;51.3 μmol/L];
+15. Moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL/min/1.73 m² as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;
+16. Past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;
+17. Any condition already known which interferes with the ability to accurately determine glycated HbA1c;
+18. Significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).
+
+These amendments incorporate the evidence provided while maintaining clinical accuracy and relevance.">Based on the supporting evidence provided, here are the amended eligibility criteria for version 6:
+
+INCLUSION CRITERIA
+
+  1. Clinical diagnosis of autoimmune T1D as documented by positive T1D-related autoantibodies [the presence of at least one or more of Insulin autoantibodies (IAA), Anti-GAD (GAD65), Anti-IA2 (IA2), Zinc Transporter 8 (ZnT8)];
+  2. Age 21-65 years, inclusive, at the time of consent;
+  3. T1D duration &gt; 1 year;
+  4. Detectable fasting C-peptide (≥ 0.02 nmol/L) as per the result of screening laboratory measurement;
+  5. Current insulin standard of care (ISOC), either established use of an insulin pump (closed loop system excluded) or a stable dose level and dose frequency for the last two months prior to screening, with no plans to switch the modality of insulin administration during the trial;
+  6. Routine use of a self-owned (if applicable) Continuous Glucose Monitoring (CGM) system that can record glucose concentrations continuously for at least 7 days;
+  7. HbA1c value &gt;7.5% as per the result of screening laboratory measurement;
+  8. Evidence of IR based on a total daily insulin dose &gt;0.8 U/kg/day;
+  9. Subject is overweight or obese as per body mass index (BMI) of between 24-33 kg/m², inclusive;
+  10. Ability to comply with all protocol procedures for the duration of the study, including scheduled follow-up visits and examinations, and willing to be contacted by clinical trial staff;
+  11. Provision of signed informed consent prior to any study-related procedure not part of standard medical care.
+
+EXCLUSION CRITERIA
+
+  1. Use of a &quot;closed loop system&quot; for integrated glucose reading/insulin infusion;
+  2. Known or suspected hypersensitivity to the active pharmaceutical ingredient, non-steroidal anti-inflammatory drugs or any excipient of the investigational medicinal products (e.g. lactose and croscarmellose) as well as patients with congenital lactase deficiency, galactosaemia or glucose-galactose intolerance will have to be excluded;
+  3. Use of non-insulin medications for adjunctive blood glucose control (e.g: antidiabetic agents such as metformin, sulfonylureas, glinides, thiazolidinediones, exenatide, liraglutide, DPP-IV inhibitors, SGLT-2 inhibitors or amylin) within one month of randomization as well as required in the participant&#x27;s standard of care;
+  4. Use of medications for weight reduction such as: Belviq (lorcaserin), Qsymia (Phentermine + topiramate), Orlistat (xenical) within one month of randomization as well as required in the participant&#x27;s standard of care;
+  5. Use of a medication such as stimulants, antidepressants and/or psychotropic agents that could affect weight gain or glycemic control of T1D;
+  6. Treatment with drugs metabolized by CYP2C9 with a narrow therapeutic index [i.e., phenytoin, warfarin, and high dose of amitriptyline (&gt;50 mg/day)];
+  7. Use of angiotensin-converting enzyme inhibitors, interferons, quinidine antimalarial drugs, lithium, niacin;
+  8. Evidence of QTcF &gt;470 msec and a history of significant cardiovascular disease/abnormality;
+  9. Any condition, including unstable diet and disordered eating behavior, that in the judgment of the investigator will adversely affect patient&#x27;s safety or the completion of the protocol or otherwise confound study outcome;
+  10. Pregnancy (subjects of child-bearing potential) based on serum test (quantitative beta hCG) at screening; women of child-bearing potential and fertile men who do not agree to use effective contraceptive measures up to 2 months following trial discharge (all participants);
+  11. Clinical diagnosis of celiac disease that is in poor control as defined by most recent tissue transglutaminase (tTG) that is in the abnormal range;
+  12. History of ≥1 Diabetic Ketoacidosis (DKA) events in the past 6 months;
+  13. Hypoalbuminemia (serum albumin &lt;3 g/dL);
+  14. Hepatic dysfunction defined by increased ALT/AST &gt;3 x upper limit of normal (ULN) and increased total bilirubin &gt;3 mg/dL [&gt;51.3 μmol/L];
+  15. Moderate to severe renal impairment calculated by estimated Glomerular Filtration Rate (eGFR) &lt;60 mL/min/1.73 m² as determined using Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) creatinine equation;
+  16. Past (within 1 month prior to screening) or current administration of any immunosuppressive medications (including oral or systemically injected steroids) and use of any investigational agents, including any agents that impact the immune response;
+  17. Any condition already known which interferes with the ability to accurately determine glycated HbA1c;
+  18. Significant systemic infection during the 4 weeks before the 1st dose of study drug (e.g., infection requiring hospitalization, major surgery, or i.v. antibiotics to resolve; other infections, e.g., bronchitis, sinusitis, localized cellulitis, candidiasis, or urinary tract infections, must be assessed on a case-by-case basis by the investigator regarding whether they are serious enough to warrant exclusion).
+  19. These amendments incorporate the evidence provided while maintaining clinical accuracy and relevance.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 116</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 116</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Subjects who, in the opinion of the investigator, can and will comply with the requirements of the protocol.
+  2. Written informed consent obtained from the subject prior to performing any study specific procedure, as per local regulations.
+  3. A healthy pregnant woman between, and including, 18 and 45 years of age at the time of screening.
+  4. Pregnant subjects at 27 0/2-36 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vac-cination (Visit 1), as established by ultrasound examination.
+  5. Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  6. No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  7. Nuchal translucency scan, serum testing and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  8. Willing to have the infant born immunised with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  9. Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. Subjects diagnosed with multiple pregnancies (twins, triplets etc.).
+  2. Previous vaccination containing diphtheria, tetanus or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3. Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of early onset (&amp;lt;34 weeks of gestation) of eclampsia/pre-eclampsia in previous pregnancy.
+  6. History of major congenital anomalies in previous pregnancies.
+  7. Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe.
+  9. Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine.
+  10. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent.
+  11. Inhaled and topical steroids are allowed.
+  12. Administration of long-acting immune-modifying drugs at any time during the study period.
+  13. Planned administration/administration of a vaccine not foreseen by the study protocol in the period within the period starting 30 days before and 30 days after the dose of vaccine with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  14. Concurrently participating in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or a non-investigational vaccine/product (pharmaceutical product or device).
+  15. Serious underlying medical condition [e.g., immunosuppressive disease or therapy, human immunodeficiency virus infection, collagen vascular disease, epilepsy, diabetes mellitus, chronic hypertension, moderate to severe asthma, lung/heart disease, liver/kidney disease, infections including TORCHES (toxoplasmosis, rubella, cytomegalovirus, herpes simplex, syphilis) infections].
+  16. History of an encephalopathy of unknown aetiology, occurring within 7 days following previous vaccination with pertussis containing vaccine.
+  17. History of transient thrombocytopenia or neurological complications (for convulsions or hypotonic-hyporesponsive episodes) following an earlier immunisation against diphtheria and/or tetanusSignificant mental illness (e.g. schizophrenia, psychosis and major depression).
+  18. Family history (first degree relatives only) of congenital anomalies, recurrent pregnancy losses (two or more consecutive losses) and unexplained neonatal death(s) in the subject.
+  19. Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  20. History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  21. History of febrile illness within the past 72 hours.
+  22. History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  23. Anything that would prevent subject from completing the study or put the subject at risk, as determined by the investigator.
+  24. Acute disease and/or fever at the time of enrolment.
+  25. Fever is defined as temperature ≥37.5°C/99.5°F for oral, axillary or tympanic route, or ≥38.0°C /100.4°F on rectal route.
+  26. Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  27. Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  28. History of chronic excessive alcohol consumption and/or drug abuse."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;opinion of the investigator, can and will comply with the requirements of the protocol.
+  2. Written informed consent obtained from the subject prior to performing any study specific procedure, as per local regulations.
+  3. A healthy pregnant woman&lt;/span&gt; between, and including, 18 and 45 years of age at the time of screening.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Pregnant subjects at 27 &lt;span class=&quot;diff-del&quot;&gt;0/2-36&lt;/span&gt; 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of &lt;span class=&quot;diff-del&quot;&gt;vac-cination&lt;/span&gt; (Visit 1), as established by ultrasound examination.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Nuchal translucency scan, serum &lt;span class=&quot;diff-del&quot;&gt;testing&lt;/span&gt; and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Willing to have the infant born &lt;span class=&quot;diff-del&quot;&gt;immunised&lt;/span&gt; with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. Subjects diagnosed with multiple pregnancies (twins, &lt;span class=&quot;diff-del&quot;&gt;triplets&lt;/span&gt; etc.).
+  2. Previous vaccination containing diphtheria, &lt;span class=&quot;diff-del&quot;&gt;tetanus&lt;/span&gt; or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3. Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of early onset (&amp;lt;34 weeks of gestation) of &lt;span class=&quot;diff-del&quot;&gt;eclampsia/pre-eclampsia&lt;/span&gt; in previous pregnancy.
+  6. History of major congenital anomalies in previous pregnancies.
+  7. Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. &lt;span class=&quot;diff-del&quot;&gt;Any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medical condition that in the judgment&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;the investigator would make intramuscular injection unsafe.
+  9.&lt;/span&gt; Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine.&lt;span class=&quot;diff-del&quot;&gt;
+  10.&lt;/span&gt; For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent.&lt;span class=&quot;diff-del&quot;&gt;
+  11.&lt;/span&gt; Inhaled and topical steroids are allowed.
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Administration of long-acting immune-modifying drugs at any time during the study period.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Planned &lt;span class=&quot;diff-del&quot;&gt;administration/administration&lt;/span&gt; of a vaccine not foreseen by the study protocol in&lt;span class=&quot;diff-del&quot;&gt; the period within&lt;/span&gt; the period starting 30 days before and 30 days after the dose of &lt;span class=&quot;diff-del&quot;&gt;vaccine&lt;/span&gt; with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Concurrently&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participating&lt;/span&gt; in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or &lt;span class=&quot;diff-del&quot;&gt;a &lt;/span&gt;non-investigational vaccine/product (pharmaceutical product or device).
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Serious&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;underlying&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;condition [e.g., immunosuppressive disease or therapy, human immunodeficiency virus infection, collagen vascular disease, epilepsy, diabetes mellitus, chronic hypertension, moderate to severe asthma, lung/heart disease, liver/kidney disease, infections including TORCHES (toxoplasmosis, rubella, cytomegalovirus, herpes simplex, syphilis) infections].
+  16. History of an encephalopathy of unknown aetiology, occurring within 7 days following previous vaccination with pertussis containing vaccine.
+  17. History of transient thrombocytopenia or neurological complications (for convulsions or hypotonic-hyporesponsive episodes) following an earlier immunisation against diphtheria and/or tetanusSignificant mental illness (e.g. schizophrenia, psychosis and major depression).
+  18. Family history (first degree relatives only) of congenital anomalies, recurrent pregnancy losses (two or more consecutive losses) and unexplained neonatal death(s) in the subject.
+  19.&lt;/span&gt; Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  &lt;span class=&quot;diff-del&quot;&gt;21.&lt;/span&gt; History of &lt;span class=&quot;diff-del&quot;&gt;febrile illness&lt;/span&gt; within the past 72 hours.
+  &lt;span class=&quot;diff-del&quot;&gt;22.&lt;/span&gt; History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  &lt;span class=&quot;diff-del&quot;&gt;23.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Anything&lt;/span&gt; that would prevent subject from completing the study or put the subject at &lt;span class=&quot;diff-del&quot;&gt;risk,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;determined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;investigator.
+  24.&lt;/span&gt; Acute disease and/or fever at the time of enrolment.&lt;span class=&quot;diff-del&quot;&gt;
+  25.&lt;/span&gt; Fever is defined as temperature ≥37.5°C/99.5°F for oral, &lt;span class=&quot;diff-del&quot;&gt;axillary&lt;/span&gt; or tympanic route, or &lt;span class=&quot;diff-del&quot;&gt;≥38.0°C&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;/100.4°F on&lt;/span&gt; rectal route.
+  &lt;span class=&quot;diff-del&quot;&gt;26.&lt;/span&gt; Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;27.&lt;/span&gt; Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  &lt;span class=&quot;diff-del&quot;&gt;28.&lt;/span&gt; History of chronic excessive alcohol consumption and/or drug abuse."
+                 data-raw="Inclusion Criteria:Subjects who, in the opinion of the investigator, can and will comply with the requirements of the protocol.Written informed consent obtained from the subject prior to performing any study specific procedure, as per local regulations.A healthy pregnant woman between, and including, 18 and 45 years of age at the time of screening.Pregnant subjects at 27 0&amp;amp;#x2F;2-36 6&amp;amp;#x2F;7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vac-cination (Visit 1), as established by ultrasound examination.Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.Nuchal translucency scan, serum testing and any other prenatal tests, if conducted, should suggest normal pregnancy.Willing to have the infant born immunised with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.Subjects who do not plan to give their child for adoption or place the child in care.Exclusion Criteria:Subjects diagnosed with multiple pregnancies (twins, triplets etc.).Previous vaccination containing diphtheria, tetanus or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.History of early onset (&amp;amp;lt;34 weeks of gestation) of eclampsia&amp;amp;#x2F;pre-eclampsia in previous pregnancy.History of major congenital anomalies in previous pregnancies.Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe.Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine. For corticosteroids, this will mean prednisone ≥ 20 mg&amp;amp;#x2F;day, or equivalent. Inhaled and topical steroids are allowed.Administration of long-acting immune-modifying drugs at any time during the study period.Planned administration&amp;amp;#x2F;administration of a vaccine not foreseen by the study protocol in the period within the period starting 30 days before and 30 days after the dose of vaccine with the exception of seasonal influenza vaccine that can be administered anytime during the study period.Concurrently participating in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or a non-investigational vaccine&amp;amp;#x2F;product (pharmaceutical product or device).Serious underlying medical condition [e.g., immunosuppressive disease or therapy, human immunodeficiency virus infection, collagen vascular disease, epilepsy, diabetes mellitus, chronic hypertension, moderate to severe asthma, lung&amp;amp;#x2F;heart disease, liver&amp;amp;#x2F;kidney disease, infections including TORCHES (toxoplasmosis, rubella, cytomegalovirus, herpes simplex, syphilis) infections].History of an encephalopathy of unknown aetiology, occurring within 7 days following previous vaccination with pertussis containing vaccine.History of transient thrombocytopenia or neurological complications (for convulsions or hypotonic-hyporesponsive episodes) following an earlier immunisation against diphtheria and&amp;amp;#x2F;or tetanusSignificant mental illness (e.g. schizophrenia, psychosis and major depression).Family history (first degree relatives only) of congenital anomalies, recurrent pregnancy losses (two or more consecutive losses) and unexplained neonatal death(s) in the subject.Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.History of febrile illness within the past 72 hours.History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.Anything that would prevent subject from completing the study or put the subject at risk, as determined by the investigator.Acute disease and&amp;amp;#x2F;or fever at the time of enrolment.Fever is defined as temperature ≥37.5°C&amp;amp;#x2F;99.5°F for oral, axillary or tympanic route, or ≥38.0°C &amp;amp;#x2F;100.4°F on rectal route.Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.Administration of immunoglobulins and&amp;amp;#x2F;or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.History of chronic excessive alcohol consumption and&amp;amp;#x2F;or drug abuse.">INCLUSION CRITERIA
+
+  1. Subjects who, in the opinion of the investigator, can and will comply with the requirements of the protocol.
+  2. Written informed consent obtained from the subject prior to performing any study specific procedure, as per local regulations.
+  3. A healthy pregnant woman between, and including, 18 and 45 years of age at the time of screening.
+  4. Pregnant subjects at 27 0/2-36 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vac-cination (Visit 1), as established by ultrasound examination.
+  5. Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  6. No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  7. Nuchal translucency scan, serum testing and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  8. Willing to have the infant born immunised with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  9. Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. Subjects diagnosed with multiple pregnancies (twins, triplets etc.).
+  2. Previous vaccination containing diphtheria, tetanus or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3. Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of early onset (&lt;34 weeks of gestation) of eclampsia/pre-eclampsia in previous pregnancy.
+  6. History of major congenital anomalies in previous pregnancies.
+  7. Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe.
+  9. Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine.
+  10. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent.
+  11. Inhaled and topical steroids are allowed.
+  12. Administration of long-acting immune-modifying drugs at any time during the study period.
+  13. Planned administration/administration of a vaccine not foreseen by the study protocol in the period within the period starting 30 days before and 30 days after the dose of vaccine with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  14. Concurrently participating in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or a non-investigational vaccine/product (pharmaceutical product or device).
+  15. Serious underlying medical condition [e.g., immunosuppressive disease or therapy, human immunodeficiency virus infection, collagen vascular disease, epilepsy, diabetes mellitus, chronic hypertension, moderate to severe asthma, lung/heart disease, liver/kidney disease, infections including TORCHES (toxoplasmosis, rubella, cytomegalovirus, herpes simplex, syphilis) infections].
+  16. History of an encephalopathy of unknown aetiology, occurring within 7 days following previous vaccination with pertussis containing vaccine.
+  17. History of transient thrombocytopenia or neurological complications (for convulsions or hypotonic-hyporesponsive episodes) following an earlier immunisation against diphtheria and/or tetanusSignificant mental illness (e.g. schizophrenia, psychosis and major depression).
+  18. Family history (first degree relatives only) of congenital anomalies, recurrent pregnancy losses (two or more consecutive losses) and unexplained neonatal death(s) in the subject.
+  19. Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  20. History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  21. History of febrile illness within the past 72 hours.
+  22. History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  23. Anything that would prevent subject from completing the study or put the subject at risk, as determined by the investigator.
+  24. Acute disease and/or fever at the time of enrolment.
+  25. Fever is defined as temperature ≥37.5°C/99.5°F for oral, axillary or tympanic route, or ≥38.0°C /100.4°F on rectal route.
+  26. Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  27. Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  28. History of chronic excessive alcohol consumption and/or drug abuse.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the provided evidence and the need to maintain clinical accuracy and relevance, here are the amended eligibility criteria for version 2:
+
+INCLUSION CRITERIA
+
+  1. Healthy Pregnant Women: Pregnant women between, and including, 18 and 45 years of age at the time of screening.
+  2. Gestational Age: Pregnant subjects at 27 0/2 to 36 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vaccination (Visit 1), as established by ultrasound examination.
+  3. No High Risk for Complications: Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  4. No Significant Foetal Abnormalities: No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  5. Normal Pregnancy Indicators: Nuchal translucency scan, serum testing, and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  6. Willingness to Immunize Infant: Willing to have the infant born immunized with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  7. No Plans for Adoption or Care Placement: Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. Multiple Pregnancies: Subjects diagnosed with multiple pregnancies (twins, triplets, etc.).
+  2. Previous Vaccination with Diphtheria, Tetanus, or Pertussis Antigens: Previous vaccination containing diphtheria, tetanus, or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3. Medical or Obstetric Conditions: Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational Diabetes: Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of Eclampsia or Pre-eclampsia: History of early onset (&amp;lt;34 weeks of gestation) of eclampsia or pre-eclampsia in previous pregnancy.
+  6. History of Major Congenital Anomalies: History of major congenital anomalies in previous pregnancies.
+  7. Use of Investigational or Non-Registered Products: Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. Chronic Administration of Immunosuppressants: Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent. Inhaled and topical steroids are allowed.
+  9. Long-Acting Immune-Modifying Drugs: Administration of long-acting immune-modifying drugs at any time during the study period.
+  10. Unforeseen Vaccinations: Planned administration or administration of a vaccine not foreseen by the study protocol in the period starting 30 days before and 30 days after the dose of vaccine, with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  11. Concurrent Participation in Other Studies: Concurrent participation in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or non-investigational vaccine/product (pharmaceutical product or device).
+  12. Severe Underlying Medical Conditions: Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  13. History of Pertussis Vaccination: History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  14. Recent Fever: History of fever within the past 72 hours.
+  15. History of Pertussis: History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  16. Conditions Preventing Study Completion or Putting the Subject at Risk: Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe or would prevent the subject from completing the study or put the subject at risk.
+  17. Acute Disease or Fever at Enrollment: Acute disease and/or fever at the time of enrolment. Fever is defined as temperature ≥37.5°C/99.5°F for oral, axillary, or tympanic route, or ≥38.0°C/100.4°F for rectal route.
+  18. Minor Illness Without Fever: Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  19. Administration of Immunoglobulins or Blood Products: Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  20. Alcohol or Drug Abuse: History of chronic excessive alcohol consumption and/or drug abuse.
+  21. These criteria ensure that the study maintains a balance between safety and the scientific objectives, while adhering to the latest evidence and guidelines."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the provided evidence and the need to maintain clinical accuracy and relevance, here are the amended eligibility criteria for version 2:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Healthy&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Pregnant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Women:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Pregnant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;women&lt;/span&gt; between, and including, 18 and 45 years of age at the time of screening.
+  &lt;span class=&quot;diff-add&quot;&gt;2. Gestational Age:&lt;/span&gt; Pregnant subjects at 27 &lt;span class=&quot;diff-add&quot;&gt;0/2 to 36&lt;/span&gt; 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of &lt;span class=&quot;diff-add&quot;&gt;vaccination&lt;/span&gt; (Visit 1), as established by ultrasound examination.
+  &lt;span class=&quot;diff-add&quot;&gt;3. No High Risk for Complications:&lt;/span&gt; Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  &lt;span class=&quot;diff-add&quot;&gt;4. No Significant Foetal Abnormalities:&lt;/span&gt; No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  &lt;span class=&quot;diff-add&quot;&gt;5. Normal Pregnancy Indicators:&lt;/span&gt; Nuchal translucency scan, serum &lt;span class=&quot;diff-add&quot;&gt;testing,&lt;/span&gt; and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  &lt;span class=&quot;diff-add&quot;&gt;6. Willingness to Immunize Infant:&lt;/span&gt; Willing to have the infant born &lt;span class=&quot;diff-add&quot;&gt;immunized&lt;/span&gt; with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  &lt;span class=&quot;diff-add&quot;&gt;7. No Plans for Adoption or Care Placement:&lt;/span&gt; Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Multiple Pregnancies: &lt;/span&gt;Subjects diagnosed with multiple pregnancies (twins, &lt;span class=&quot;diff-add&quot;&gt;triplets,&lt;/span&gt; etc.).
+  2.&lt;span class=&quot;diff-add&quot;&gt; Previous Vaccination with Diphtheria, Tetanus, or Pertussis Antigens:&lt;/span&gt; Previous vaccination containing diphtheria, &lt;span class=&quot;diff-add&quot;&gt;tetanus,&lt;/span&gt; or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3.&lt;span class=&quot;diff-add&quot;&gt; Medical or Obstetric Conditions:&lt;/span&gt; Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational &lt;span class=&quot;diff-add&quot;&gt;Diabetes: Gestational &lt;/span&gt;diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of &lt;span class=&quot;diff-add&quot;&gt;Eclampsia or Pre-eclampsia: History of &lt;/span&gt;early onset (&amp;lt;34 weeks of gestation) of &lt;span class=&quot;diff-add&quot;&gt;eclampsia or pre-eclampsia&lt;/span&gt; in previous pregnancy.
+  6.&lt;span class=&quot;diff-add&quot;&gt; History of Major Congenital Anomalies:&lt;/span&gt; History of major congenital anomalies in previous pregnancies.
+  7.&lt;span class=&quot;diff-add&quot;&gt; Use of Investigational or Non-Registered Products:&lt;/span&gt; Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. &lt;span class=&quot;diff-add&quot;&gt;Chronic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Administration&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Immunosuppressants:&lt;/span&gt; Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent. Inhaled and topical steroids are allowed.
+  &lt;span class=&quot;diff-add&quot;&gt;9. Long-Acting Immune-Modifying Drugs:&lt;/span&gt; Administration of long-acting immune-modifying drugs at any time during the study period.
+  &lt;span class=&quot;diff-add&quot;&gt;10. Unforeseen Vaccinations:&lt;/span&gt; Planned &lt;span class=&quot;diff-add&quot;&gt;administration or administration&lt;/span&gt; of a vaccine not foreseen by the study protocol in the period starting 30 days before and 30 days after the dose of &lt;span class=&quot;diff-add&quot;&gt;vaccine,&lt;/span&gt; with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Concurrent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participation in Other Studies: Concurrent participation&lt;/span&gt; in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or non-investigational vaccine/product (pharmaceutical product or device).
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Severe&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Underlying&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions:&lt;/span&gt; Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  &lt;span class=&quot;diff-add&quot;&gt;13. History of Pertussis Vaccination:&lt;/span&gt; History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  &lt;span class=&quot;diff-add&quot;&gt;14. Recent Fever:&lt;/span&gt; History of &lt;span class=&quot;diff-add&quot;&gt;fever&lt;/span&gt; within the past 72 hours.
+  &lt;span class=&quot;diff-add&quot;&gt;15. History of Pertussis:&lt;/span&gt; History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions Preventing Study Completion or Putting the Subject at Risk: Any medical condition&lt;/span&gt; that&lt;span class=&quot;diff-add&quot;&gt; in the judgment of the investigator would make intramuscular injection unsafe or&lt;/span&gt; would prevent&lt;span class=&quot;diff-add&quot;&gt; the&lt;/span&gt; subject from completing the study or put the subject at &lt;span class=&quot;diff-add&quot;&gt;risk.
+  17.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Disease&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Fever&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at Enrollment:&lt;/span&gt; Acute disease and/or fever at the time of enrolment. Fever is defined as temperature ≥37.5°C/99.5°F for oral, &lt;span class=&quot;diff-add&quot;&gt;axillary,&lt;/span&gt; or tympanic route, or &lt;span class=&quot;diff-add&quot;&gt;≥38.0°C/100.4°F&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; rectal route.
+  &lt;span class=&quot;diff-add&quot;&gt;18. Minor Illness Without Fever:&lt;/span&gt; Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;19. Administration of Immunoglobulins or Blood Products:&lt;/span&gt; Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  &lt;span class=&quot;diff-add&quot;&gt;20. Alcohol or Drug Abuse:&lt;/span&gt; History of chronic excessive alcohol consumption and/or drug abuse.&lt;span class=&quot;diff-add&quot;&gt;
+  21. These criteria ensure that the study maintains a balance between safety and the scientific objectives, while adhering to the latest evidence and guidelines.&lt;/span&gt;"
+                 data-raw="Based on the provided evidence and the need to maintain clinical accuracy and relevance, here are the amended eligibility criteria for version 2:
+
+### Inclusion Criteria
+
+1. **Healthy Pregnant Women**: Pregnant women between, and including, 18 and 45 years of age at the time of screening.
+2. **Gestational Age**: Pregnant subjects at 27 0/2 to 36 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vaccination (Visit 1), as established by ultrasound examination.
+3. **No High Risk for Complications**: Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+4. **No Significant Foetal Abnormalities**: No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+5. **Normal Pregnancy Indicators**: Nuchal translucency scan, serum testing, and any other prenatal tests, if conducted, should suggest normal pregnancy.
+6. **Willingness to Immunize Infant**: Willing to have the infant born immunized with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+7. **No Plans for Adoption or Care Placement**: Subjects who do not plan to give their child for adoption or place the child in care.
+
+### Exclusion Criteria
+
+1. **Multiple Pregnancies**: Subjects diagnosed with multiple pregnancies (twins, triplets, etc.).
+2. **Previous Vaccination with Diphtheria, Tetanus, or Pertussis Antigens**: Previous vaccination containing diphtheria, tetanus, or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+3. **Medical or Obstetric Conditions**: Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+4. **Gestational Diabetes**: Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+5. **History of Eclampsia or Pre-eclampsia**: History of early onset (&amp;lt;34 weeks of gestation) of eclampsia or pre-eclampsia in previous pregnancy.
+6. **History of Major Congenital Anomalies**: History of major congenital anomalies in previous pregnancies.
+7. **Use of Investigational or Non-Registered Products**: Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+8. **Chronic Administration of Immunosuppressants**: Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent. Inhaled and topical steroids are allowed.
+9. **Long-Acting Immune-Modifying Drugs**: Administration of long-acting immune-modifying drugs at any time during the study period.
+10. **Unforeseen Vaccinations**: Planned administration or administration of a vaccine not foreseen by the study protocol in the period starting 30 days before and 30 days after the dose of vaccine, with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+11. **Concurrent Participation in Other Studies**: Concurrent participation in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or non-investigational vaccine/product (pharmaceutical product or device).
+12. **Severe Underlying Medical Conditions**: Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+13. **History of Pertussis Vaccination**: History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+14. **Recent Fever**: History of fever within the past 72 hours.
+15. **History of Pertussis**: History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+16. **Conditions Preventing Study Completion or Putting the Subject at Risk**: Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe or would prevent the subject from completing the study or put the subject at risk.
+17. **Acute Disease or Fever at Enrollment**: Acute disease and/or fever at the time of enrolment. Fever is defined as temperature ≥37.5°C/99.5°F for oral, axillary, or tympanic route, or ≥38.0°C/100.4°F for rectal route.
+18. **Minor Illness Without Fever**: Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+19. **Administration of Immunoglobulins or Blood Products**: Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+20. **Alcohol or Drug Abuse**: History of chronic excessive alcohol consumption and/or drug abuse.
+
+These criteria ensure that the study maintains a balance between safety and the scientific objectives, while adhering to the latest evidence and guidelines.">Based on the provided evidence and the need to maintain clinical accuracy and relevance, here are the amended eligibility criteria for version 2:
+
+INCLUSION CRITERIA
+
+  1. Healthy Pregnant Women: Pregnant women between, and including, 18 and 45 years of age at the time of screening.
+  2. Gestational Age: Pregnant subjects at 27 0/2 to 36 6/7 weeks (completed 27 weeks but not 37 weeks) of gestation at the time of vaccination (Visit 1), as established by ultrasound examination.
+  3. No High Risk for Complications: Not at high risk for complications, as determined by the obstetrical algorithm for identification of eligible subjects and the Obstetrical Risk Assessment Form.
+  4. No Significant Foetal Abnormalities: No significant foetal abnormalities, as observed by the level II ultrasound testing conducted after 18 weeks of gestation.
+  5. Normal Pregnancy Indicators: Nuchal translucency scan, serum testing, and any other prenatal tests, if conducted, should suggest normal pregnancy.
+  6. Willingness to Immunize Infant: Willing to have the infant born immunized with Infanrix hexa and Prevenar 13, as per national recommendations, in the follow-up clinical studies DTPA (BOOSTRIX)-048 PRI and DTPA (BOOSTRIX)-049 BST: 048.
+  7. No Plans for Adoption or Care Placement: Subjects who do not plan to give their child for adoption or place the child in care.
+
+EXCLUSION CRITERIA
+
+  1. Multiple Pregnancies: Subjects diagnosed with multiple pregnancies (twins, triplets, etc.).
+  2. Previous Vaccination with Diphtheria, Tetanus, or Pertussis Antigens: Previous vaccination containing diphtheria, tetanus, or pertussis antigens or diphtheria and tetanus toxoids at any time during the current pregnancy.
+  3. Medical or Obstetric Conditions: Women with co-morbid medical or obstetric conditions that in the opinion of the investigator have the potential to complicate the pregnancy course and outcomes.
+  4. Gestational Diabetes: Gestational diabetes as determined by glucose tolerance test conducted after 20 weeks of gestation, as per local recommendations of the country.
+  5. History of Eclampsia or Pre-eclampsia: History of early onset (&lt;34 weeks of gestation) of eclampsia or pre-eclampsia in previous pregnancy.
+  6. History of Major Congenital Anomalies: History of major congenital anomalies in previous pregnancies.
+  7. Use of Investigational or Non-Registered Products: Use of any investigational or non-registered product (drug or vaccine) other than the study vaccine anytime during the current pregnancy or planned use during the study period.
+  8. Chronic Administration of Immunosuppressants: Chronic administration of immunosuppressants or other immune-modifying drugs during the period starting six months prior to the first vaccine. For corticosteroids, this will mean prednisone ≥ 20 mg/day, or equivalent. Inhaled and topical steroids are allowed.
+  9. Long-Acting Immune-Modifying Drugs: Administration of long-acting immune-modifying drugs at any time during the study period.
+  10. Unforeseen Vaccinations: Planned administration or administration of a vaccine not foreseen by the study protocol in the period starting 30 days before and 30 days after the dose of vaccine, with the exception of seasonal influenza vaccine that can be administered anytime during the study period.
+  11. Concurrent Participation in Other Studies: Concurrent participation in another clinical study, at any time during the study period, in which the subject has been or will be exposed to an investigational or non-investigational vaccine/product (pharmaceutical product or device).
+  12. Severe Underlying Medical Conditions: Any confirmed or suspected immunosuppressive or immunodeficient condition, based on medical history and physical examination (no laboratory testing required).
+  13. History of Pertussis Vaccination: History of any reaction or hypersensitivity likely to be exacerbated by any component of the vaccine.
+  14. Recent Fever: History of fever within the past 72 hours.
+  15. History of Pertussis: History of physician-diagnosed or laboratory-confirmed pertussis within the past five years.
+  16. Conditions Preventing Study Completion or Putting the Subject at Risk: Any medical condition that in the judgment of the investigator would make intramuscular injection unsafe or would prevent the subject from completing the study or put the subject at risk.
+  17. Acute Disease or Fever at Enrollment: Acute disease and/or fever at the time of enrolment. Fever is defined as temperature ≥37.5°C/99.5°F for oral, axillary, or tympanic route, or ≥38.0°C/100.4°F for rectal route.
+  18. Minor Illness Without Fever: Subjects with a minor illness (such as mild diarrhoea, mild upper respiratory infection) without fever may be enrolled at the discretion of the investigator.
+  19. Administration of Immunoglobulins or Blood Products: Administration of immunoglobulins and/or any blood products within the 3 months preceding the dose of study vaccine, or planned administration during the study period, with the exception of anti-D (Rh)-immunoglobulin.
+  20. Alcohol or Drug Abuse: History of chronic excessive alcohol consumption and/or drug abuse.
+  21. These criteria ensure that the study maintains a balance between safety and the scientific objectives, while adhering to the latest evidence and guidelines.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

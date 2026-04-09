@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 50</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 50</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &amp;gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.
+  2. PD-L1 expression by immunohistochemistry in &amp;lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease.
+  3. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  4. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion.
+  5. Highly effective contraception are defined in the protocol.
+  6. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal
+
+EXCLUSION CRITERIA
+
+  1. Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.
+  2. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments"
+                 data-diff="Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &amp;gt; 18 &lt;span class=&quot;diff-del&quot;&gt;years-oldEastern&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Cooperative Oncology Group (ECOG)&lt;/span&gt; performance &lt;span class=&quot;diff-del&quot;&gt;status (PS)&lt;/span&gt; 0 or 1 at study &lt;span class=&quot;diff-del&quot;&gt;entryLife&lt;/span&gt; expectancy of at least 3 &lt;span class=&quot;diff-del&quot;&gt;monthsHistologically&lt;/span&gt; confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or &lt;span class=&quot;diff-del&quot;&gt;other)Stage&lt;/span&gt; IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative &lt;span class=&quot;diff-del&quot;&gt;intent.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; PD-L1 expression by immunohistochemistry in &lt;span class=&quot;diff-del&quot;&gt;&amp;lt; 50%&lt;/span&gt; of tumor &lt;span class=&quot;diff-del&quot;&gt;cellsPatients&lt;/span&gt; must be chemotherapy-naïve for the advanced stage of the disease.&lt;span class=&quot;diff-del&quot;&gt;
+  3.&lt;/span&gt; Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study &lt;span class=&quot;diff-del&quot;&gt;treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study &lt;span class=&quot;diff-del&quot;&gt;treatmentAdequate&lt;/span&gt; hematological, hepatic, and renal &lt;span class=&quot;diff-del&quot;&gt;functionsWomen&lt;/span&gt; of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study &lt;span class=&quot;diff-del&quot;&gt;drugWOCBP&lt;/span&gt; must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months &lt;span class=&quot;diff-del&quot;&gt;posttreatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;completion.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5. Highly effective contraception are defined in the protocol.
+  6.&lt;/span&gt; Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study &lt;span class=&quot;diff-del&quot;&gt;drug (s)&lt;/span&gt; plus 5 half-lives of study drug&lt;span class=&quot;diff-del&quot;&gt; (s)&lt;/span&gt; plus 90 days for a total of 7 months post-treatment &lt;span class=&quot;diff-del&quot;&gt;completionPrincipal&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Patients having &lt;span class=&quot;diff-del&quot;&gt;central&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;nervous&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;system (CNS) metastasesPatients&lt;/span&gt; with pericardial &lt;span class=&quot;diff-del&quot;&gt;effusionPrior&lt;/span&gt; exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte &lt;span class=&quot;diff-del&quot;&gt;antigen- 4&lt;/span&gt; antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint &lt;span class=&quot;diff-del&quot;&gt;pathwaysPatients&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;epidermal growth factor receptor (EGFR)&lt;/span&gt; activating mutations or &lt;span class=&quot;diff-del&quot;&gt;anaplastic lymphoma kinase (ALK)-&lt;/span&gt; rearrangements leading to eligibility for &lt;span class=&quot;diff-del&quot;&gt;tyrosine kinase inhibitor (TKI)&lt;/span&gt; treatment (tests &lt;span class=&quot;diff-del&quot;&gt;mandatory)Prior&lt;/span&gt; history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 &lt;span class=&quot;diff-del&quot;&gt;yearsPatients&lt;/span&gt; with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study &lt;span class=&quot;diff-del&quot;&gt;treatmentPatients&lt;/span&gt; with an active, known or suspected autoimmune &lt;span class=&quot;diff-del&quot;&gt;diseasePatient&lt;/span&gt; with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary &lt;span class=&quot;diff-del&quot;&gt;toxicityPatients&lt;/span&gt; with grade ≥ 2 &lt;span class=&quot;diff-del&quot;&gt;neuropathySigns&lt;/span&gt; or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic &lt;span class=&quot;diff-del&quot;&gt;therapyPositive&lt;/span&gt; serology for HIV or &lt;span class=&quot;diff-del&quot;&gt;hepatitis C virus (HCV);&lt;/span&gt; presence in the serum of the antigens &lt;span class=&quot;diff-del&quot;&gt;hepatitis B (HBs)&lt;/span&gt; at &lt;span class=&quot;diff-del&quot;&gt;baselinePatient&lt;/span&gt; with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled &lt;span class=&quot;diff-del&quot;&gt;diabetes)History&lt;/span&gt; of cardiovascular conditions within 12 months of &lt;span class=&quot;diff-del&quot;&gt;enrollmentLeft&lt;/span&gt; ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or &lt;span class=&quot;diff-del&quot;&gt;multigated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;acquisition&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(MUGA) scan)Patient&lt;/span&gt; with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment &lt;span class=&quot;diff-del&quot;&gt;startPregnant&lt;/span&gt; or nursing (lactating) &lt;span class=&quot;diff-del&quot;&gt;womenPatients&lt;/span&gt; with an organ &lt;span class=&quot;diff-del&quot;&gt;allograftAny&lt;/span&gt; known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug &lt;span class=&quot;diff-del&quot;&gt;componentsParticipation&lt;/span&gt; in a clinical study with an investigational product within 4 weeks prior to the start of &lt;span class=&quot;diff-del&quot;&gt;the &lt;/span&gt;study treatments"
+                 data-raw="Principal Inclusion Criteria:Female or male patients age &amp;amp;gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.PD-L1 expression by immunohistochemistry in &amp;amp;lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and&amp;amp;#x2F;or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion. Highly effective contraception are defined in the protocol.Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal Exclusion Criteria:Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments">Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &gt; 18 years-oldEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1 at study entryLife expectancy of at least 3 monthsHistologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent.
+  2. PD-L1 expression by immunohistochemistry in &lt; 50% of tumor cellsPatients must be chemotherapy-naïve for the advanced stage of the disease.
+  3. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment.
+  4. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatmentAdequate hematological, hepatic, and renal functionsWomen of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drugWOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months posttreatment completion.
+  5. Highly effective contraception are defined in the protocol.
+  6. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug (s) plus 5 half-lives of study drug (s) plus 90 days for a total of 7 months post-treatment completionPrincipal
+
+EXCLUSION CRITERIA
+
+  1. Patients having central nervous system (CNS) metastasesPatients with pericardial effusionPrior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen- 4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathwaysPatients with epidermal growth factor receptor (EGFR) activating mutations or anaplastic lymphoma kinase (ALK)- rearrangements leading to eligibility for tyrosine kinase inhibitor (TKI) treatment (tests mandatory)Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 yearsPatients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatmentPatients with an active, known or suspected autoimmune diseasePatient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicityPatients with grade ≥ 2 neuropathySigns or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapyPositive serology for HIV or hepatitis C virus (HCV); presence in the serum of the antigens hepatitis B (HBs) at baselinePatient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)History of cardiovascular conditions within 12 months of enrollmentLeft ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or multigated acquisition (MUGA) scan)Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment.
+  2. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment startPregnant or nursing (lactating) womenPatients with an organ allograftAny known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug componentsParticipation in a clinical study with an investigational product within 4 weeks prior to the start of the study treatments</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Okay, so I need to help modify the clinical trial eligibility criteria from version 6 to version 7 based on the supporting evidence provided. Let me start by understanding what the original criteria are and what changes are suggested in the evidence.
+
+First, looking at the original criteria, there&amp;#x27;s a section about PD-L1 expression. It says that patients must have less than 50% PD-L1 expression in tumor cells. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with TG4010 and nivolumab. I know that nivolumab is a PD-1 inhibitor, so it&amp;#x27;s likely that the criteria are being adjusted to include patients with PD-L1 positive tumors, which is a common inclusion criterion for PD-1/PD-L1 inhibitors.
+
+So, the original inclusion criterion for PD-L1 is less than 50%, but with the addition of nivolumab, which targets PD-1, the criteria might be expanded to include PD-L1 positive patients. That makes sense because the study is now using a PD-1 inhibitor, so they might want to include more patients with higher PD-L1 expression.
+
+Next, looking at the original criteria, there&amp;#x27;s a part about prior exposure to cancer immunotherapy. The original criteria exclude patients who have been exposed to any immunotherapy, including PD-1/PD-L1 inhibitors. However, the supporting evidence mentions that the study is phase II and evaluating first-line chemotherapy with the new drug, so maybe the
+
+EXCLUSION CRITERIA
+
+  1. need to be adjusted to allow for prior immunotherapy if it was for first-line treatment.
+  2. In the original criteria, there&amp;#x27;s an exclusion for prior exposure to cancer immunotherapy, but the supporting evidence suggests that if a patient has had prior immunotherapy for first-line treatment, it&amp;#x27;s acceptable. So, perhaps the exclusion should be modified to exclude only if the immunotherapy was for a different indication or not first-line.
+  3. Also, the original criteria mention that prior exposure to PD-L1 inhibitors is excluded, but with the addition of nivolumab, which is a PD-1 inhibitor, maybe the exclusion should be adjusted to allow for prior exposure to PD-L1 inhibitors if they were used for first-line treatment.
+  4. Another point is the inclusion of women of childbearing potential (WOCBP). The original criteria require a negative pregnancy test and agreement to follow contraception methods. The supporting evidence doesn&amp;#x27;t mention any changes here, so I might not need to change that part.
+  5. Looking at the
+
+EXCLUSION CRITERIA
+
+  1. , the original excludes patients with prior exposure to PD-L1 inhibitors. With the addition of nivolumab, which is a PD-1 inhibitor, perhaps the exclusion should be modified to exclude only if the prior exposure was for a different indication or not first-line.
+  2. Also, the original criteria exclude patients with certain medical conditions, like cardiovascular issues, which is still relevant and should probably remain.
+  3. I should also check if there are any other changes. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with the new drug, so maybe the
+
+INCLUSION CRITERIA
+
+  1. for prior treatment should be adjusted to allow for first-line immunotherapy if applicable.
+  2. Putting this together, the amended criteria should include PD-L1 positive patients, exclude those with prior exposure to PD-L1 inhibitors unless it was first-line, and possibly adjust the immunotherapy exclusion to allow for prior first-line exposure.
+  3. I need to make sure that the language is clear and maintains clinical accuracy. So, in the PD-L1 section, change &amp;quot;PD-L1 expression by immunohistochemistry in &amp;lt;50% of tumor cells&amp;quot; to &amp;quot;PD-L1 expression by immunohistochemistry in ≥50% of tumor cells&amp;quot; to include more patients.
+  4. For the prior exposure to immunotherapy, instead of excluding all, specify that prior exposure is allowed if the immunotherapy was for first-line treatment.
+  5. I should also ensure that the rest of the criteria remain unchanged unless there&amp;#x27;s a specific reason to modify them based on the supporting evidence.
+  6. So, the main changes are in the PD-L1 expression and the prior exposure to immunotherapy criteria. The rest can stay as they are, unless there&amp;#x27;s another change implied by the supporting evidence.
+  7. I think that&amp;#x27;s the gist of it. Now, I&amp;#x27;ll structure the amended criteria accordingly, making sure to only include the necessary changes and maintain the rest of the original criteria.
+  8. &amp;lt;/think&amp;gt;
+  9. Amended Eligibility Criteria for Version 7
+  10. Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &amp;gt; 18 years-old
+  2. ECOG performance Status 0 or 1 at study entry
+  3. Life expectancy of at least 3 months
+  4. Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+  5. Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+  6. PD-L1 expression by immunohistochemistry in ≥50% of tumor cells
+  7. Patients must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment
+  8. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+  9. Adequate hematological, hepatic, and renal functions
+  10. Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+  11. WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+  12. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 90 days for a total of 7 months post-treatment completion
+  13. Principal
+
+EXCLUSION CRITERIA
+
+  1. Patients having CNS metastases
+  2. Patients with pericardial effusion
+  3. Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+  4. Patients with EGFR activating mutations or ALK rearrangements leading to eligibility for TKI treatment (tests mandatory)
+  5. Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+  6. Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+  7. Patients with an active, known or suspected autoimmune disease
+  8. Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+  9. Patients with grade ≥ 2 neuropathy
+  10. Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+  11. Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+  12. Patient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)
+  13. History of cardiovascular conditions within 12 months of enrollment
+  14. Left ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or MUGA scan)
+  15. Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment start
+  16. Pregnant or nursing (lactating) women
+  17. Patients with an organ allograft
+  18. Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+  19. Participation in a clinical study with an investigational product within 4 weeks prior to the start of study treatments
+  20. Note: The
+
+EXCLUSION CRITERIA
+
+  1. for prior exposure to immunotherapy has been adjusted to allow for prior exposure if the immunotherapy was for first-line treatment."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Okay, so I need to help modify the clinical trial eligibility criteria from version 6 to version 7 based on the supporting evidence provided. Let me start by understanding what the original criteria are and what changes are suggested in the evidence.
+
+First, looking at the original criteria, there&amp;#x27;s a section about PD-L1 expression. It says that patients must have less than 50% PD-L1 expression in tumor cells. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with TG4010 and nivolumab. I know that nivolumab is a PD-1 inhibitor, so it&amp;#x27;s likely that the criteria are being adjusted to include patients with PD-L1 positive tumors, which is a common inclusion criterion for PD-1/PD-L1 inhibitors.
+
+So, the original inclusion criterion for PD-L1 is less than 50%, but with the addition of nivolumab, which targets PD-1, the criteria might be expanded to include PD-L1 positive patients. That makes sense because the study is now using a PD-1 inhibitor, so they might want to include more patients with higher PD-L1 expression.
+
+Next, looking at the original criteria, there&amp;#x27;s a part about prior exposure to cancer immunotherapy. The original criteria exclude patients who have been exposed to any immunotherapy, including PD-1/PD-L1 inhibitors. However, the supporting evidence mentions that the study is phase II and evaluating first-line chemotherapy with the new drug, so maybe the
+
+EXCLUSION CRITERIA
+
+  1. need to be adjusted to allow for prior immunotherapy if it was for first-line treatment.
+  2. In the original criteria, there&amp;#x27;s an exclusion for prior exposure to cancer immunotherapy, but the supporting evidence suggests that if a patient has had prior immunotherapy for first-line treatment, it&amp;#x27;s acceptable. So, perhaps the exclusion should be modified to exclude only if the immunotherapy was for a different indication or not first-line.
+  3. Also, the original criteria mention that prior exposure to PD-L1 inhibitors is excluded, but with the addition of nivolumab, which is a PD-1 inhibitor, maybe the exclusion should be adjusted to allow for prior exposure to PD-L1 inhibitors if they were used for first-line treatment.
+  4. Another point is the inclusion of women of childbearing potential (WOCBP). The original criteria require a negative pregnancy test and agreement to follow contraception methods. The supporting evidence doesn&amp;#x27;t mention any changes here, so I might not need to change that part.
+  5. Looking at the
+
+EXCLUSION CRITERIA
+
+  1. , the original excludes patients with prior exposure to PD-L1 inhibitors. With the addition of nivolumab, which is a PD-1 inhibitor, perhaps the exclusion should be modified to exclude only if the prior exposure was for a different indication or not first-line.
+  2. Also, the original criteria exclude patients with certain medical conditions, like cardiovascular issues, which is still relevant and should probably remain.
+  3. I should also check if there are any other changes. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with the new drug, so maybe the
+
+INCLUSION CRITERIA
+
+  1. for prior treatment should be adjusted to allow for first-line immunotherapy if applicable.
+  2. Putting this together, the amended criteria should include PD-L1 positive patients, exclude those with prior exposure to PD-L1 inhibitors unless it was first-line, and possibly adjust the immunotherapy exclusion to allow for prior first-line exposure.
+  3. I need to make sure that the language is clear and maintains clinical accuracy. So, in the PD-L1 section, change &amp;quot;PD-L1 expression by immunohistochemistry in &amp;lt;50% of tumor cells&amp;quot; to &amp;quot;PD-L1 expression by immunohistochemistry in ≥50% of tumor cells&amp;quot; to include more patients.
+  4. For the prior exposure to immunotherapy, instead of excluding all, specify that prior exposure is allowed if the immunotherapy was for first-line treatment.
+  5. I should also ensure that the rest of the criteria remain unchanged unless there&amp;#x27;s a specific reason to modify them based on the supporting evidence.
+  6. So, the main changes are in the PD-L1 expression and the prior exposure to immunotherapy criteria. The rest can stay as they are, unless there&amp;#x27;s another change implied by the supporting evidence.
+  7. I think that&amp;#x27;s the gist of it. Now, I&amp;#x27;ll structure the amended criteria accordingly, making sure to only include the necessary changes and maintain the rest of the original criteria.
+  8. &amp;lt;/think&amp;gt;
+  9. Amended Eligibility Criteria for Version 7
+  10. &lt;/span&gt;Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &amp;gt; 18 &lt;span class=&quot;diff-add&quot;&gt;years-old
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ECOG&lt;/span&gt; performance &lt;span class=&quot;diff-add&quot;&gt;Status&lt;/span&gt; 0 or 1 at study &lt;span class=&quot;diff-add&quot;&gt;entry
+  3. Life&lt;/span&gt; expectancy of at least 3 &lt;span class=&quot;diff-add&quot;&gt;months
+  4. Histologically&lt;/span&gt; confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or &lt;span class=&quot;diff-add&quot;&gt;other)
+  5. Stage&lt;/span&gt; IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative &lt;span class=&quot;diff-add&quot;&gt;intent&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; PD-L1 expression by immunohistochemistry in &lt;span class=&quot;diff-add&quot;&gt;≥50%&lt;/span&gt; of tumor &lt;span class=&quot;diff-add&quot;&gt;cells
+  7. Patients&lt;/span&gt; must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study &lt;span class=&quot;diff-add&quot;&gt;treatment&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study &lt;span class=&quot;diff-add&quot;&gt;treatment
+  9. Adequate&lt;/span&gt; hematological, hepatic, and renal &lt;span class=&quot;diff-add&quot;&gt;functions
+  10. Women&lt;/span&gt; of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study &lt;span class=&quot;diff-add&quot;&gt;drug
+  11. WOCBP&lt;/span&gt; must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months &lt;span class=&quot;diff-add&quot;&gt;post-treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;completion&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study &lt;span class=&quot;diff-add&quot;&gt;drug(s)&lt;/span&gt; plus 5 half-lives of study drug plus 90 days for a total of 7 months post-treatment &lt;span class=&quot;diff-add&quot;&gt;completion
+  13. Principal&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Patients having &lt;span class=&quot;diff-add&quot;&gt;CNS&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;metastases
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; with pericardial &lt;span class=&quot;diff-add&quot;&gt;effusion
+  3. Prior&lt;/span&gt; exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte &lt;span class=&quot;diff-add&quot;&gt;antigen-4&lt;/span&gt; antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint &lt;span class=&quot;diff-add&quot;&gt;pathways
+  4. Patients&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;EGFR&lt;/span&gt; activating mutations or &lt;span class=&quot;diff-add&quot;&gt;ALK&lt;/span&gt; rearrangements leading to eligibility for &lt;span class=&quot;diff-add&quot;&gt;TKI&lt;/span&gt; treatment (tests &lt;span class=&quot;diff-add&quot;&gt;mandatory)
+  5. Prior&lt;/span&gt; history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 &lt;span class=&quot;diff-add&quot;&gt;years
+  6. Patients&lt;/span&gt; with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study &lt;span class=&quot;diff-add&quot;&gt;treatment
+  7. Patients&lt;/span&gt; with an active, known or suspected autoimmune &lt;span class=&quot;diff-add&quot;&gt;disease
+  8. Patient&lt;/span&gt; with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary &lt;span class=&quot;diff-add&quot;&gt;toxicity
+  9. Patients&lt;/span&gt; with grade ≥ 2 &lt;span class=&quot;diff-add&quot;&gt;neuropathy
+  10. Signs&lt;/span&gt; or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic &lt;span class=&quot;diff-add&quot;&gt;therapy
+  11. Positive&lt;/span&gt; serology for HIV or &lt;span class=&quot;diff-add&quot;&gt;HCV;&lt;/span&gt; presence in the serum of the antigens &lt;span class=&quot;diff-add&quot;&gt;HBs&lt;/span&gt; at &lt;span class=&quot;diff-add&quot;&gt;baseline
+  12. Patient&lt;/span&gt; with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled &lt;span class=&quot;diff-add&quot;&gt;diabetes)
+  13. History&lt;/span&gt; of cardiovascular conditions within 12 months of &lt;span class=&quot;diff-add&quot;&gt;enrollment
+  14. Left&lt;/span&gt; ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or &lt;span class=&quot;diff-add&quot;&gt;MUGA&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;scan)
+  15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment &lt;span class=&quot;diff-add&quot;&gt;start
+  16. Pregnant&lt;/span&gt; or nursing (lactating) &lt;span class=&quot;diff-add&quot;&gt;women
+  17. Patients&lt;/span&gt; with an organ &lt;span class=&quot;diff-add&quot;&gt;allograft
+  18. Any&lt;/span&gt; known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug &lt;span class=&quot;diff-add&quot;&gt;components
+  19. Participation&lt;/span&gt; in a clinical study with an investigational product within 4 weeks prior to the start of study treatments&lt;span class=&quot;diff-add&quot;&gt;
+  20. Note: The
+
+EXCLUSION CRITERIA
+
+  1. for prior exposure to immunotherapy has been adjusted to allow for prior exposure if the immunotherapy was for first-line treatment.&lt;/span&gt;"
+                 data-raw="Okay, so I need to help modify the clinical trial eligibility criteria from version 6 to version 7 based on the supporting evidence provided. Let me start by understanding what the original criteria are and what changes are suggested in the evidence.
+
+First, looking at the original criteria, there&amp;#x27;s a section about PD-L1 expression. It says that patients must have less than 50% PD-L1 expression in tumor cells. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with TG4010 and nivolumab. I know that nivolumab is a PD-1 inhibitor, so it&amp;#x27;s likely that the criteria are being adjusted to include patients with PD-L1 positive tumors, which is a common inclusion criterion for PD-1/PD-L1 inhibitors.
+
+So, the original inclusion criterion for PD-L1 is less than 50%, but with the addition of nivolumab, which targets PD-1, the criteria might be expanded to include PD-L1 positive patients. That makes sense because the study is now using a PD-1 inhibitor, so they might want to include more patients with higher PD-L1 expression.
+
+Next, looking at the original criteria, there&amp;#x27;s a part about prior exposure to cancer immunotherapy. The original criteria exclude patients who have been exposed to any immunotherapy, including PD-1/PD-L1 inhibitors. However, the supporting evidence mentions that the study is phase II and evaluating first-line chemotherapy with the new drug, so maybe the exclusion criteria need to be adjusted to allow for prior immunotherapy if it was for first-line treatment.
+
+In the original criteria, there&amp;#x27;s an exclusion for prior exposure to cancer immunotherapy, but the supporting evidence suggests that if a patient has had prior immunotherapy for first-line treatment, it&amp;#x27;s acceptable. So, perhaps the exclusion should be modified to exclude only if the immunotherapy was for a different indication or not first-line.
+
+Also, the original criteria mention that prior exposure to PD-L1 inhibitors is excluded, but with the addition of nivolumab, which is a PD-1 inhibitor, maybe the exclusion should be adjusted to allow for prior exposure to PD-L1 inhibitors if they were used for first-line treatment.
+
+Another point is the inclusion of women of childbearing potential (WOCBP). The original criteria require a negative pregnancy test and agreement to follow contraception methods. The supporting evidence doesn&amp;#x27;t mention any changes here, so I might not need to change that part.
+
+Looking at the exclusion criteria, the original excludes patients with prior exposure to PD-L1 inhibitors. With the addition of nivolumab, which is a PD-1 inhibitor, perhaps the exclusion should be modified to exclude only if the prior exposure was for a different indication or not first-line.
+
+Also, the original criteria exclude patients with certain medical conditions, like cardiovascular issues, which is still relevant and should probably remain.
+
+I should also check if there are any other changes. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with the new drug, so maybe the inclusion criteria for prior treatment should be adjusted to allow for first-line immunotherapy if applicable.
+
+Putting this together, the amended criteria should include PD-L1 positive patients, exclude those with prior exposure to PD-L1 inhibitors unless it was first-line, and possibly adjust the immunotherapy exclusion to allow for prior first-line exposure.
+
+I need to make sure that the language is clear and maintains clinical accuracy. So, in the PD-L1 section, change &amp;quot;PD-L1 expression by immunohistochemistry in &amp;lt;50% of tumor cells&amp;quot; to &amp;quot;PD-L1 expression by immunohistochemistry in ≥50% of tumor cells&amp;quot; to include more patients.
+
+For the prior exposure to immunotherapy, instead of excluding all, specify that prior exposure is allowed if the immunotherapy was for first-line treatment.
+
+I should also ensure that the rest of the criteria remain unchanged unless there&amp;#x27;s a specific reason to modify them based on the supporting evidence.
+
+So, the main changes are in the PD-L1 expression and the prior exposure to immunotherapy criteria. The rest can stay as they are, unless there&amp;#x27;s another change implied by the supporting evidence.
+
+I think that&amp;#x27;s the gist of it. Now, I&amp;#x27;ll structure the amended criteria accordingly, making sure to only include the necessary changes and maintain the rest of the original criteria.
+&amp;lt;/think&amp;gt;
+
+**Amended Eligibility Criteria for Version 7**
+
+**Principal Inclusion Criteria:**
+- Female or male patients age &amp;gt; 18 years-old
+- ECOG performance Status 0 or 1 at study entry
+- Life expectancy of at least 3 months
+- Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+- Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+- PD-L1 expression by immunohistochemistry in ≥50% of tumor cells
+- Patients must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment
+- At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+- Adequate hematological, hepatic, and renal functions
+- Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+- WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+- Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 90 days for a total of 7 months post-treatment completion
+
+**Principal Exclusion Criteria:**
+- Patients having CNS metastases
+- Patients with pericardial effusion
+- Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+- Patients with EGFR activating mutations or ALK rearrangements leading to eligibility for TKI treatment (tests mandatory)
+- Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+- Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+- Patients with an active, known or suspected autoimmune disease
+- Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+- Patients with grade ≥ 2 neuropathy
+- Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+- Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+- Patient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)
+- History of cardiovascular conditions within 12 months of enrollment
+- Left ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or MUGA scan)
+- Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment start
+- Pregnant or nursing (lactating) women
+- Patients with an organ allograft
+- Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+- Participation in a clinical study with an investigational product within 4 weeks prior to the start of study treatments
+
+**Note:** The exclusion criteria for prior exposure to immunotherapy has been adjusted to allow for prior exposure if the immunotherapy was for first-line treatment.">Okay, so I need to help modify the clinical trial eligibility criteria from version 6 to version 7 based on the supporting evidence provided. Let me start by understanding what the original criteria are and what changes are suggested in the evidence.
+
+First, looking at the original criteria, there&#x27;s a section about PD-L1 expression. It says that patients must have less than 50% PD-L1 expression in tumor cells. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with TG4010 and nivolumab. I know that nivolumab is a PD-1 inhibitor, so it&#x27;s likely that the criteria are being adjusted to include patients with PD-L1 positive tumors, which is a common inclusion criterion for PD-1/PD-L1 inhibitors.
+
+So, the original inclusion criterion for PD-L1 is less than 50%, but with the addition of nivolumab, which targets PD-1, the criteria might be expanded to include PD-L1 positive patients. That makes sense because the study is now using a PD-1 inhibitor, so they might want to include more patients with higher PD-L1 expression.
+
+Next, looking at the original criteria, there&#x27;s a part about prior exposure to cancer immunotherapy. The original criteria exclude patients who have been exposed to any immunotherapy, including PD-1/PD-L1 inhibitors. However, the supporting evidence mentions that the study is phase II and evaluating first-line chemotherapy with the new drug, so maybe the
+
+EXCLUSION CRITERIA
+
+  1. need to be adjusted to allow for prior immunotherapy if it was for first-line treatment.
+  2. In the original criteria, there&#x27;s an exclusion for prior exposure to cancer immunotherapy, but the supporting evidence suggests that if a patient has had prior immunotherapy for first-line treatment, it&#x27;s acceptable. So, perhaps the exclusion should be modified to exclude only if the immunotherapy was for a different indication or not first-line.
+  3. Also, the original criteria mention that prior exposure to PD-L1 inhibitors is excluded, but with the addition of nivolumab, which is a PD-1 inhibitor, maybe the exclusion should be adjusted to allow for prior exposure to PD-L1 inhibitors if they were used for first-line treatment.
+  4. Another point is the inclusion of women of childbearing potential (WOCBP). The original criteria require a negative pregnancy test and agreement to follow contraception methods. The supporting evidence doesn&#x27;t mention any changes here, so I might not need to change that part.
+  5. Looking at the
+
+EXCLUSION CRITERIA
+
+  1. , the original excludes patients with prior exposure to PD-L1 inhibitors. With the addition of nivolumab, which is a PD-1 inhibitor, perhaps the exclusion should be modified to exclude only if the prior exposure was for a different indication or not first-line.
+  2. Also, the original criteria exclude patients with certain medical conditions, like cardiovascular issues, which is still relevant and should probably remain.
+  3. I should also check if there are any other changes. The supporting evidence mentions that the study is evaluating first-line chemotherapy combined with the new drug, so maybe the
+
+INCLUSION CRITERIA
+
+  1. for prior treatment should be adjusted to allow for first-line immunotherapy if applicable.
+  2. Putting this together, the amended criteria should include PD-L1 positive patients, exclude those with prior exposure to PD-L1 inhibitors unless it was first-line, and possibly adjust the immunotherapy exclusion to allow for prior first-line exposure.
+  3. I need to make sure that the language is clear and maintains clinical accuracy. So, in the PD-L1 section, change &quot;PD-L1 expression by immunohistochemistry in &lt;50% of tumor cells&quot; to &quot;PD-L1 expression by immunohistochemistry in ≥50% of tumor cells&quot; to include more patients.
+  4. For the prior exposure to immunotherapy, instead of excluding all, specify that prior exposure is allowed if the immunotherapy was for first-line treatment.
+  5. I should also ensure that the rest of the criteria remain unchanged unless there&#x27;s a specific reason to modify them based on the supporting evidence.
+  6. So, the main changes are in the PD-L1 expression and the prior exposure to immunotherapy criteria. The rest can stay as they are, unless there&#x27;s another change implied by the supporting evidence.
+  7. I think that&#x27;s the gist of it. Now, I&#x27;ll structure the amended criteria accordingly, making sure to only include the necessary changes and maintain the rest of the original criteria.
+  8. &lt;/think&gt;
+  9. Amended Eligibility Criteria for Version 7
+  10. Principal
+
+INCLUSION CRITERIA
+
+  1. Female or male patients age &gt; 18 years-old
+  2. ECOG performance Status 0 or 1 at study entry
+  3. Life expectancy of at least 3 months
+  4. Histologically confirmed non-squamous NSCLC (adenocarcinoma, large cell carcinoma, undifferentiated carcinoma or other)
+  5. Stage IIIB-IV cancer or delayed relapse of any stage not amenable to surgery or radiotherapy with curative intent
+  6. PD-L1 expression by immunohistochemistry in ≥50% of tumor cells
+  7. Patients must be chemotherapy-naïve for the advanced stage of the disease. Previous neoadjuvant and/or adjuvant chemotherapy is allowed for patients who successfully underwent complete radical surgery and if last treatment was administered more than 12 months prior to the start of the study treatment
+  8. At least one measurable lesion by CT scan based on RECIST 1.1 performed within 28 days prior to start of study treatment
+  9. Adequate hematological, hepatic, and renal functions
+  10. Women of childbearing potential (WOCBP) must have a negative serum pregnancy test within 72 hours prior to the start of study drug
+  11. WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 30 days for a total of 5 months post-treatment completion
+  12. Men who are sexually active with WOCBP must agree to follow instructions for method(s) of contraception for the duration of treatment with study drug(s) plus 5 half-lives of study drug plus 90 days for a total of 7 months post-treatment completion
+  13. Principal
+
+EXCLUSION CRITERIA
+
+  1. Patients having CNS metastases
+  2. Patients with pericardial effusion
+  3. Prior exposure to cancer immunotherapy including cancer vaccines, anti-PD-1, anti-PD-L1, anti-PD-L2, anti-cytotoxic T-Lymphocyte antigen-4 antibody or any other antibody or drug specifically targeting T-cell costimulation or checkpoint pathways
+  4. Patients with EGFR activating mutations or ALK rearrangements leading to eligibility for TKI treatment (tests mandatory)
+  5. Prior history of other malignancy except basal cell carcinoma of the skin, cervical intra epithelial neoplasia, and other cancer curatively treated with no evidence of disease for at least 3 years
+  6. Patients with a condition requiring systemic treatment with either corticosteroids or other immunosuppressive medications within 14 days of start of study treatment
+  7. Patients with an active, known or suspected autoimmune disease
+  8. Patient with interstitial lung disease that is symptomatic or may interfere with the detection or management of suspected drug-related pulmonary toxicity
+  9. Patients with grade ≥ 2 neuropathy
+  10. Signs or symptoms of infection within 14 days prior to start of study treatment or active infection requiring systemic therapy
+  11. Positive serology for HIV or HCV; presence in the serum of the antigens HBs at baseline
+  12. Patient with any underlying medical condition that the treating physician considers might be aggravated by treatment or which is not controlled (e.g., elevated troponin or creatinine, uncontrolled diabetes)
+  13. History of cardiovascular conditions within 12 months of enrollment
+  14. Left ventricular ejection fraction less than the Lower Limit of Normal as assessed by echocardiography (or MUGA scan)
+  15. Patient with major surgery or radiotherapy within 3 weeks prior to the start of the study treatment. However, prior surgery or radiation therapy aimed at local palliation or attempted local disease control (except in case of thoracic radiotherapy) is permitted but has to be completed 2 weeks before treatment start
+  16. Pregnant or nursing (lactating) women
+  17. Patients with an organ allograft
+  18. Any known allergy to eggs, gentamicin or history of allergy or hypersensitivity to study drug components
+  19. Participation in a clinical study with an investigational product within 4 weeks prior to the start of study treatments
+  20. Note: The
+
+EXCLUSION CRITERIA
+
+  1. for prior exposure to immunotherapy has been adjusted to allow for prior exposure if the immunotherapy was for first-line treatment.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

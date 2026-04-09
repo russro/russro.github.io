@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 136</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 136</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and &amp;lt;18 years-of-age at the time of signature of the consent/assent.
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST v1.1 or INRCExisting biomarker profile (tumor tissue or plasma) reported from a local test obtained in a certified lab per institutional guidelines:Available tumor tissueAbility to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  6. Ability to swallow and retain oral medications.
+  7. Acceptable organ function at screeningAcceptable blood counts at screeningNegative pregnancy test (serum or urine) for females of childbearing potential at Screening and prior to first study drug.
+  8. Females who are not of childbearing potential are defined as 1) prior to onset of menses 2) documented infertility.
+  9. Resolution of all toxicities of prior treatment or surgery.
+  10. Male patients with female partners of childbearing potential and females of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug.
+  11. Male patients must also refrain from donating sperm during their participation in the study and for 3 months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as transfusion dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. Known hypersensitivity to any of the ingredients of RP-3500.
+  5. Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction or other reasons which, in the investigator&amp;#x27;s opinion, could compromise the patient&amp;#x27;s safety.
+  6. Uncontrolled, symptomatic brain metastases.
+  7. Uncontrolled high blood pressurePatients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  8. Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  9. History or presence of an abnormal ECG that is clinically significant in the investigator&amp;#x27;s opinion.
+  10. History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndromeCurrent treatment with medications that are well-known to prolong the QT intervalHistory of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;18&lt;/span&gt; years-of-age at the time of signature of the &lt;span class=&quot;diff-del&quot;&gt;consent/assent.&lt;/span&gt;
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST &lt;span class=&quot;diff-del&quot;&gt;v1.1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or INRCExisting&lt;/span&gt; biomarker profile (tumor tissue or plasma) reported from a local test obtained in a certified lab per institutional &lt;span class=&quot;diff-del&quot;&gt;guidelines:Available&lt;/span&gt; tumor &lt;span class=&quot;diff-del&quot;&gt;tissueAbility&lt;/span&gt; to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Ability to swallow and retain oral medications.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Acceptable organ function at &lt;span class=&quot;diff-del&quot;&gt;screeningAcceptable&lt;/span&gt; blood counts at &lt;span class=&quot;diff-del&quot;&gt;screeningNegative&lt;/span&gt; pregnancy test (serum or urine) for &lt;span class=&quot;diff-del&quot;&gt;females&lt;/span&gt; of childbearing potential at Screening and prior to first study drug.&lt;span class=&quot;diff-del&quot;&gt;
+  8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Females&lt;/span&gt; who are not of childbearing potential &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; defined as 1) &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;onset&lt;/span&gt; of menses 2) documented infertility.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Resolution of all toxicities of prior treatment or surgery.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Male patients with female partners of childbearing potential and &lt;span class=&quot;diff-del&quot;&gt;females&lt;/span&gt; of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug.&lt;span class=&quot;diff-del&quot;&gt;
+  11.&lt;/span&gt; Male patients must also refrain from donating sperm during their participation in the study and for &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as &lt;span class=&quot;diff-del&quot;&gt;transfusion dependent&lt;/span&gt; anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. Known hypersensitivity to any of the ingredients of RP-3500.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction or other reasons which, in the &lt;span class=&quot;diff-del&quot;&gt;investigator&amp;#x27;s&lt;/span&gt; opinion, could compromise the &lt;span class=&quot;diff-del&quot;&gt;patient&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;safety.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Uncontrolled, symptomatic brain metastases.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Uncontrolled high blood &lt;span class=&quot;diff-del&quot;&gt;pressurePatients&lt;/span&gt; with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; History or presence of an abnormal ECG that is clinically significant in the investigator&amp;#x27;s opinion.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT &lt;span class=&quot;diff-del&quot;&gt;syndromeCurrent&lt;/span&gt; treatment with medications that are well-known to prolong the QT &lt;span class=&quot;diff-del&quot;&gt;intervalHistory&lt;/span&gt; of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) &lt;span class=&quot;diff-del&quot;&gt;diagnosis&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.Male or female and &amp;amp;lt;18 years-of-age at the time of signature of the consent&amp;amp;#x2F;assent.Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.Histologically confirmed solid tumors resistant or refractory to standard treatment and&amp;amp;#x2F;or patients who are intolerant to standard therapy.Measurable disease as per RECIST v1.1 or INRCExisting biomarker profile (tumor tissue or plasma) reported from a local test obtained in a certified lab per institutional guidelines:Available tumor tissueAbility to comply with the protocol and study procedures detailed in the Schedule of Assessments.Ability to swallow and retain oral medications.Acceptable organ function at screeningAcceptable blood counts at screeningNegative pregnancy test (serum or urine) for females of childbearing potential at Screening and prior to first study drug. Females who are not of childbearing potential are defined as 1) prior to onset of menses 2) documented infertility.Resolution of all toxicities of prior treatment or surgery.Male patients with female partners of childbearing potential and females of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug. Male patients must also refrain from donating sperm during their participation in the study and for 3 months following last dose of study drug.Exclusion Criteria:Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.History or current condition (such as transfusion dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;amp;#x27;s participation for the full duration of the study treatment.Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.Known hypersensitivity to any of the ingredients of RP-3500.Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction or other reasons which, in the investigator&amp;amp;#x27;s opinion, could compromise the patient&amp;amp;#x27;s safety.Uncontrolled, symptomatic brain metastases.Uncontrolled high blood pressurePatients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).History or presence of an abnormal ECG that is clinically significant in the investigator&amp;amp;#x27;s opinion.History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndromeCurrent treatment with medications that are well-known to prolong the QT intervalHistory of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis">INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and &lt;18 years-of-age at the time of signature of the consent/assent.
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST v1.1 or INRCExisting biomarker profile (tumor tissue or plasma) reported from a local test obtained in a certified lab per institutional guidelines:Available tumor tissueAbility to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  6. Ability to swallow and retain oral medications.
+  7. Acceptable organ function at screeningAcceptable blood counts at screeningNegative pregnancy test (serum or urine) for females of childbearing potential at Screening and prior to first study drug.
+  8. Females who are not of childbearing potential are defined as 1) prior to onset of menses 2) documented infertility.
+  9. Resolution of all toxicities of prior treatment or surgery.
+  10. Male patients with female partners of childbearing potential and females of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug.
+  11. Male patients must also refrain from donating sperm during their participation in the study and for 3 months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as transfusion dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. Known hypersensitivity to any of the ingredients of RP-3500.
+  5. Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction or other reasons which, in the investigator&#x27;s opinion, could compromise the patient&#x27;s safety.
+  6. Uncontrolled, symptomatic brain metastases.
+  7. Uncontrolled high blood pressurePatients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  8. Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  9. History or presence of an abnormal ECG that is clinically significant in the investigator&#x27;s opinion.
+  10. History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndromeCurrent treatment with medications that are well-known to prolong the QT intervalHistory of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and ≥18 years-of-age at the time of signature of the ICF.
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST v1.1.
+  6. Existing biomarker profile (tumor tissue or plasma) reported from a local test obtained in a CAP/CLIA, ISO, or equivalent certified lab per institutional guidelines:
+  7. Modules 1, 3, 4: Documented and confirmed by central review of local NGS reports by PODS Group, deleterious or likely deleterious genomic alterations for at least 1 of the following genes: ATM, ATRIP, BRCA1, BRCA2, CDK12, CHTF8, FZR1, MRE11, NBN, PALB2, RAD17, RAD50, RAD51B/C/D, REV3L, RNAseH2A, RNAseH2B, SETD2, or other genes agreed upon between the Sponsor and Investigator.
+  8. Module 2 only:
+  9. ARM1: ER+/HER2- breast, ampullary, pancreas, prostate, bile duct, and gastroesophageal junction tumors with likely pathogenic/pathogenic gATM mutations.
+  10. ARM 2: Leiomyosarcoma tumors with RNASEH2 loss or deleterious or likely deleterious BRCA2 mutations.
+  11. ARM 3: Tumors with other ATRi sensitizing biomarkers: ATRIP, CHTF8, FZR1, MRE11, NBN, RAD17, RAD50, RAD51B/C/D, REV3L, SETD2, and other genes agreed upon between the Sponsor and Investigator.
+  12. Available tumor tissue or willingness to have a biopsy performed to obtain tissue.
+  13. Ability to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  14. Ability to swallow and retain oral medications.
+  15. Acceptable organ function at screening.
+  16. Acceptable blood counts at screening.
+  17. Negative pregnancy test (serum or urine) for women of childbearing potential at Screening and prior to first study drug. Women who are not of childbearing potential is defined as 1) adequate time with absence of menses (period) or 2) documented infertility.
+  18. Resolution of all toxicities of prior treatment or surgery.
+  19. Male patients with female partners of childbearing potential and women of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug. Male patients must also refrain from donating sperm during their participation in the study and for 6 months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as transfusion-dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. Module 4 only: Prior therapy with a gemcitabine-containing regimen as the most recent prior line of therapy (prior gemcitabine is allowed if there is at least one intervening therapy).
+  5. Known hypersensitivity to any of the ingredients of RP-3500.
+  6. Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction (such as coagulopathy, encephalopathy or ascites requiring drainage within 4 weeks prior to enrollment) or other reasons which, in the Investigator’s opinion, could compromise the patient’s safety, or interfere with or compromise the integrity of the study outcomes.
+  7. Uncontrolled, symptomatic brain metastases.
+  8. Uncontrolled high blood pressure.
+  9. Patients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  10. Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  11. History or presence of an abnormal ECG that is clinically significant in the investigator&amp;#x27;s opinion.
+  12. History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndrome).
+  13. Current treatment with medications that are well-known to prolong the QT interval.
+  14. History of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and &lt;span class=&quot;diff-add&quot;&gt;≥18&lt;/span&gt; years-of-age at the time of signature of the &lt;span class=&quot;diff-add&quot;&gt;ICF.&lt;/span&gt;
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST &lt;span class=&quot;diff-add&quot;&gt;v1.1.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Existing&lt;/span&gt; biomarker profile (tumor tissue or plasma) reported from a local test obtained in a &lt;span class=&quot;diff-add&quot;&gt;CAP/CLIA, ISO, or equivalent &lt;/span&gt;certified lab per institutional &lt;span class=&quot;diff-add&quot;&gt;guidelines:
+  7. Modules 1, 3, 4: Documented and confirmed by central review of local NGS reports by PODS Group, deleterious or likely deleterious genomic alterations for at least 1 of the following genes: ATM, ATRIP, BRCA1, BRCA2, CDK12, CHTF8, FZR1, MRE11, NBN, PALB2, RAD17, RAD50, RAD51B/C/D, REV3L, RNAseH2A, RNAseH2B, SETD2, or other genes agreed upon between the Sponsor and Investigator.
+  8. Module 2 only:
+  9. ARM1: ER+/HER2- breast, ampullary, pancreas, prostate, bile duct, and gastroesophageal junction tumors with likely pathogenic/pathogenic gATM mutations.
+  10. ARM 2: Leiomyosarcoma tumors with RNASEH2 loss or deleterious or likely deleterious BRCA2 mutations.
+  11. ARM 3: Tumors with other ATRi sensitizing biomarkers: ATRIP, CHTF8, FZR1, MRE11, NBN, RAD17, RAD50, RAD51B/C/D, REV3L, SETD2, and other genes agreed upon between the Sponsor and Investigator.
+  12. Available&lt;/span&gt; tumor &lt;span class=&quot;diff-add&quot;&gt;tissue or willingness to have a biopsy performed to obtain tissue.
+  13. Ability&lt;/span&gt; to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Ability to swallow and retain oral medications.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Acceptable organ function at &lt;span class=&quot;diff-add&quot;&gt;screening.
+  16. Acceptable&lt;/span&gt; blood counts at &lt;span class=&quot;diff-add&quot;&gt;screening.
+  17. Negative&lt;/span&gt; pregnancy test (serum or urine) for &lt;span class=&quot;diff-add&quot;&gt;women&lt;/span&gt; of childbearing potential at Screening and prior to first study drug. &lt;span class=&quot;diff-add&quot;&gt;Women&lt;/span&gt; who are not of childbearing potential &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; defined as 1) &lt;span class=&quot;diff-add&quot;&gt;adequate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with absence&lt;/span&gt; of menses&lt;span class=&quot;diff-add&quot;&gt; (period) or&lt;/span&gt; 2) documented infertility.
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; Resolution of all toxicities of prior treatment or surgery.
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Male patients with female partners of childbearing potential and &lt;span class=&quot;diff-add&quot;&gt;women&lt;/span&gt; of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug. Male patients must also refrain from donating sperm during their participation in the study and for &lt;span class=&quot;diff-add&quot;&gt;6&lt;/span&gt; months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as &lt;span class=&quot;diff-add&quot;&gt;transfusion-dependent&lt;/span&gt; anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. &lt;span class=&quot;diff-add&quot;&gt;Module 4 only: Prior therapy with a gemcitabine-containing regimen as the most recent prior line of therapy (prior gemcitabine is allowed if there is at least one intervening therapy).
+  5. &lt;/span&gt;Known hypersensitivity to any of the ingredients of RP-3500.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction &lt;span class=&quot;diff-add&quot;&gt;(such as coagulopathy, encephalopathy or ascites requiring drainage within 4 weeks prior to enrollment) &lt;/span&gt;or other reasons which, in the &lt;span class=&quot;diff-add&quot;&gt;Investigator’s&lt;/span&gt; opinion, could compromise the &lt;span class=&quot;diff-add&quot;&gt;patient’s&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;safety, or interfere with or compromise the integrity of the study outcomes.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Uncontrolled, symptomatic brain metastases.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Uncontrolled high blood &lt;span class=&quot;diff-add&quot;&gt;pressure.
+  9. Patients&lt;/span&gt; with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; History or presence of an abnormal ECG that is clinically significant in the investigator&amp;#x27;s opinion.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT &lt;span class=&quot;diff-add&quot;&gt;syndrome).
+  13. Current&lt;/span&gt; treatment with medications that are well-known to prolong the QT &lt;span class=&quot;diff-add&quot;&gt;interval.
+  14. History&lt;/span&gt; of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) &lt;span class=&quot;diff-add&quot;&gt;diagnosis.&lt;/span&gt;"
+                 data-raw="**Inclusion Criteria:**
+
+1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+2. Male or female and ≥18 years-of-age at the time of signature of the ICF.
+3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+5. Measurable disease as per RECIST v1.1.
+6. Existing biomarker profile (tumor tissue or plasma) reported from a local test obtained in a CAP/CLIA, ISO, or equivalent certified lab per institutional guidelines:
+   - Modules 1, 3, 4: Documented and confirmed by central review of local NGS reports by PODS Group, deleterious or likely deleterious genomic alterations for at least 1 of the following genes: ATM, ATRIP, BRCA1, BRCA2, CDK12, CHTF8, FZR1, MRE11, NBN, PALB2, RAD17, RAD50, RAD51B/C/D, REV3L, RNAseH2A, RNAseH2B, SETD2, or other genes agreed upon between the Sponsor and Investigator.
+   - Module 2 only:
+     - ARM1: ER+/HER2- breast, ampullary, pancreas, prostate, bile duct, and gastroesophageal junction tumors with likely pathogenic/pathogenic gATM mutations.
+     - ARM 2: Leiomyosarcoma tumors with RNASEH2 loss or deleterious or likely deleterious BRCA2 mutations.
+     - ARM 3: Tumors with other ATRi sensitizing biomarkers: ATRIP, CHTF8, FZR1, MRE11, NBN, RAD17, RAD50, RAD51B/C/D, REV3L, SETD2, and other genes agreed upon between the Sponsor and Investigator.
+7. Available tumor tissue or willingness to have a biopsy performed to obtain tissue.
+8. Ability to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+9. Ability to swallow and retain oral medications.
+10. Acceptable organ function at screening.
+11. Acceptable blood counts at screening.
+12. Negative pregnancy test (serum or urine) for women of childbearing potential at Screening and prior to first study drug. Women who are not of childbearing potential is defined as 1) adequate time with absence of menses (period) or 2) documented infertility.
+13. Resolution of all toxicities of prior treatment or surgery.
+14. Male patients with female partners of childbearing potential and women of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug. Male patients must also refrain from donating sperm during their participation in the study and for 6 months following last dose of study drug.
+
+**Exclusion Criteria:**
+
+1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+2. History or current condition (such as transfusion-dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&amp;#x27;s participation for the full duration of the study treatment.
+3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+   - Module 4 only: Prior therapy with a gemcitabine-containing regimen as the most recent prior line of therapy (prior gemcitabine is allowed if there is at least one intervening therapy).
+4. Known hypersensitivity to any of the ingredients of RP-3500.
+5. Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction (such as coagulopathy, encephalopathy or ascites requiring drainage within 4 weeks prior to enrollment) or other reasons which, in the Investigator’s opinion, could compromise the patient’s safety, or interfere with or compromise the integrity of the study outcomes.
+6. Uncontrolled, symptomatic brain metastases.
+7. Uncontrolled high blood pressure.
+8. Patients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+9. Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+10. History or presence of an abnormal ECG that is clinically significant in the investigator&amp;#x27;s opinion.
+11. History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndrome).
+12. Current treatment with medications that are well-known to prolong the QT interval.
+13. History of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis.">INCLUSION CRITERIA
+
+  1. Written informed consent, according to local guidelines, signed and dated by the patient or legal guardian prior to the performance of any study-specific procedures, sampling, or analyses.
+  2. Male or female and ≥18 years-of-age at the time of signature of the ICF.
+  3. Eastern Cooperative Oncology Group (ECOG) Performance Status score of 0 or 1.
+  4. Histologically confirmed solid tumors resistant or refractory to standard treatment and/or patients who are intolerant to standard therapy.
+  5. Measurable disease as per RECIST v1.1.
+  6. Existing biomarker profile (tumor tissue or plasma) reported from a local test obtained in a CAP/CLIA, ISO, or equivalent certified lab per institutional guidelines:
+  7. Modules 1, 3, 4: Documented and confirmed by central review of local NGS reports by PODS Group, deleterious or likely deleterious genomic alterations for at least 1 of the following genes: ATM, ATRIP, BRCA1, BRCA2, CDK12, CHTF8, FZR1, MRE11, NBN, PALB2, RAD17, RAD50, RAD51B/C/D, REV3L, RNAseH2A, RNAseH2B, SETD2, or other genes agreed upon between the Sponsor and Investigator.
+  8. Module 2 only:
+  9. ARM1: ER+/HER2- breast, ampullary, pancreas, prostate, bile duct, and gastroesophageal junction tumors with likely pathogenic/pathogenic gATM mutations.
+  10. ARM 2: Leiomyosarcoma tumors with RNASEH2 loss or deleterious or likely deleterious BRCA2 mutations.
+  11. ARM 3: Tumors with other ATRi sensitizing biomarkers: ATRIP, CHTF8, FZR1, MRE11, NBN, RAD17, RAD50, RAD51B/C/D, REV3L, SETD2, and other genes agreed upon between the Sponsor and Investigator.
+  12. Available tumor tissue or willingness to have a biopsy performed to obtain tissue.
+  13. Ability to comply with the protocol and study procedures detailed in the Schedule of Assessments.
+  14. Ability to swallow and retain oral medications.
+  15. Acceptable organ function at screening.
+  16. Acceptable blood counts at screening.
+  17. Negative pregnancy test (serum or urine) for women of childbearing potential at Screening and prior to first study drug. Women who are not of childbearing potential is defined as 1) adequate time with absence of menses (period) or 2) documented infertility.
+  18. Resolution of all toxicities of prior treatment or surgery.
+  19. Male patients with female partners of childbearing potential and women of childbearing potential must follow a contraception method (oral contraceptives allowed) during their participation in the study and for at least 6 months following last dose of study drug. Male patients must also refrain from donating sperm during their participation in the study and for 6 months following last dose of study drug.
+
+EXCLUSION CRITERIA
+
+  1. Chemotherapy, small molecule anticancer or biologic anticancer therapy given within 14 days prior to first dose of study drug.
+  2. History or current condition (such as transfusion-dependent anemia or thrombocytopenia), therapy, or laboratory abnormality that might confound the study results, or interfere with the patient&#x27;s participation for the full duration of the study treatment.
+  3. Prior therapy with an ATR or DNA-dependent protein kinase (DNA-PK) inhibitor.
+  4. Module 4 only: Prior therapy with a gemcitabine-containing regimen as the most recent prior line of therapy (prior gemcitabine is allowed if there is at least one intervening therapy).
+  5. Known hypersensitivity to any of the ingredients of RP-3500.
+  6. Life-threatening illness, medical condition, active uncontrolled infection, or organ system dysfunction (such as coagulopathy, encephalopathy or ascites requiring drainage within 4 weeks prior to enrollment) or other reasons which, in the Investigator’s opinion, could compromise the patient’s safety, or interfere with or compromise the integrity of the study outcomes.
+  7. Uncontrolled, symptomatic brain metastases.
+  8. Uncontrolled high blood pressure.
+  9. Patients with active, uncontrolled bacterial, fungal, or viral infection, including hepatitis B virus (HBV), hepatitis C virus (HCV), known human immunodeficiency virus (HIV) or acquired immunodeficiency syndrome (AIDS) related illness.
+  10. Moderate or severe hepatic impairment (ie, Child-Pugh class B or C).
+  11. History or presence of an abnormal ECG that is clinically significant in the investigator&#x27;s opinion.
+  12. History of ventricular dysrhythmias or risk factors such as structural heart disease, coronary heart disease (clinically significant electrolyte abnormalities or family history of sudden unexplained death or long QT syndrome).
+  13. Current treatment with medications that are well-known to prolong the QT interval.
+  14. History of myelodysplastic syndrome (MDS) or acute myeloid leukemia (AML) diagnosis.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

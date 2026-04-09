@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 8</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 8</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female participants age ≥ 18 years of age at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.
+  5. Human leukocyte antigen (HLA)-A*0201 positive.
+  6. ECOG Performance Status of 0 or 1 at Screening.
+  7. Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Participants with any out-of-range laboratory values.
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.
+  8. Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  9. Malignant disease, other than that being treated in this study.
+  10. Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.
+  11. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  12. Pregnant, likely to become pregnant, or lactating women."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt; ≥ 18 years of age at the time of informed consent.
+  2. &lt;span class=&quot;diff-del&quot;&gt;Ability to provide and understand written informed consent prior to any study procedures.
+  3. &lt;/span&gt;Histologically or cytologically confirmed diagnosis of metastatic uveal &lt;span class=&quot;diff-del&quot;&gt;melanoma (mUM).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Surgically sterile &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; of child-bearing potential who agree to use highly effective&lt;span class=&quot;diff-del&quot;&gt; methods of&lt;/span&gt; contraception during study dosing and for 6 months after last dose of study drug.
+  5.&lt;span class=&quot;diff-del&quot;&gt; Human leukocyte antigen (HLA)-A*0201 positive.
+  6.&lt;/span&gt; ECOG Performance Status of 0 or 1 &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening.&lt;/span&gt;
+  7. &lt;span class=&quot;diff-del&quot;&gt;Phase 2 will include participants&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;previously&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treated&lt;/span&gt; uveal melanoma in the metastatic &lt;span class=&quot;diff-del&quot;&gt;setting.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) &lt;span class=&quot;diff-del&quot;&gt;metastases, or CNS metastases that require doses of corticosteroids.&lt;/span&gt;
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with any out-of-range laboratory &lt;span class=&quot;diff-del&quot;&gt;values.&lt;/span&gt;
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B &lt;span class=&quot;diff-del&quot;&gt;virus&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(HBV)&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;hepatitis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;virus&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(HCV)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;infection&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;institutional&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receiving&lt;/span&gt; systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study &lt;span class=&quot;diff-del&quot;&gt;drugs in the opinion of the investigator.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Malignant disease, other than that being treated in this study.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Any medical condition &lt;span class=&quot;diff-del&quot;&gt;that would,&lt;/span&gt; in the investigator&amp;#x27;s judgment, prevent participation in the clinical study &lt;span class=&quot;diff-del&quot;&gt;due&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;safety&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;concerns,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;compliance&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clinical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study procedures or interpretation of study results.
+  11. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;ototoxicity,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;which&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  12. Pregnant, likely to become pregnant, or lactating women.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Male or female participants age ≥ 18 years of age at the time of informed consent.Ability to provide and understand written informed consent prior to any study procedures.Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.Human leukocyte antigen (HLA)-A*0201 positive.ECOG Performance Status of 0 or 1 at Screening.Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.Exclusion Criteria:Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.Participants with any out-of-range laboratory values.Clinically significant cardiac disease or impaired cardiac function.Active infection requiring systemic antibiotic therapy.Known history of HIV infection.Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.Malignant disease, other than that being treated in this study.Any medical condition that would, in the investigator&amp;amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.Pregnant, likely to become pregnant, or lactating women.">INCLUSION CRITERIA
+
+  1. Male or female participants age ≥ 18 years of age at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.
+  5. Human leukocyte antigen (HLA)-A*0201 positive.
+  6. ECOG Performance Status of 0 or 1 at Screening.
+  7. Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Participants with any out-of-range laboratory values.
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.
+  8. Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  9. Malignant disease, other than that being treated in this study.
+  10. Any medical condition that would, in the investigator&#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.
+  11. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  12. Pregnant, likely to become pregnant, or lactating women.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for Version 34 of ClinicalTrials.gov:
+
+INCLUSION CRITERIA
+
+  1. Male or female patients aged ≥ 18 years of age at the time of informed consent.
+  2. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma.
+  3. Surgically sterile patients or patients of child-bearing potential who agree to use highly effective contraception during study dosing and for 6 months after last dose of study drug.
+  4. Ability to provide and understand written informed consent prior to any study procedures.
+  5. ECOG Performance Status of 0 or 1.
+  6. Prior treatment for metastatic uveal melanoma with a maximum of 2 prior lines of therapy, including up to 1 prior line of liver-directed therapy (LDT).
+  7. Patients with prior treatment for metastatic uveal melanoma in the metastatic setting are eligible for this study.
+  8. Patients with prior treatment for metastatic uveal melanoma in the first-line setting are eligible for this study.
+  9. Patients with prior treatment for metastatic uveal melanoma in the second-line setting are eligible for this study.
+  10. Patients with prior treatment for metastatic uveal melanoma in the third-line setting are eligible for this study.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Patients with any out-of-range laboratory values (e.g., elevated liver enzymes, creatinine, or potassium).
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B or C infection, requiring treatment.
+  8. Pregnancy, or likely to become pregnant, or lactating women.
+  9. Patients with any other medical condition that, in the investigator&amp;#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.
+  10. Patients who have received systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drug.
+  11. Malignant disease, other than that being treated in this study.
+  12. Any other medical condition that, in the investigator&amp;#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.
+  13. Note: This is a summary of the amended eligibility criteria based on the provided text. Please refer to the full protocol for complete details and specific inclusion/
+
+EXCLUSION CRITERIA
+
+  1. ."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for Version 34 of ClinicalTrials.gov:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male or female &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;aged&lt;/span&gt; ≥ 18 years of age at the time of informed consent.
+  2. Histologically or cytologically confirmed diagnosis of metastatic uveal &lt;span class=&quot;diff-add&quot;&gt;melanoma.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Surgically sterile &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; of child-bearing potential who agree to use highly effective contraception during study dosing and for 6 months after last dose of study drug.
+  &lt;span class=&quot;diff-add&quot;&gt;4. Ability to provide and understand written informed consent prior to any study procedures.
+  &lt;/span&gt;5. ECOG Performance Status of 0 or &lt;span class=&quot;diff-add&quot;&gt;1.
+  6. Prior treatment for metastatic uveal melanoma with a maximum of 2 prior lines of therapy, including up to &lt;/span&gt;1 &lt;span class=&quot;diff-add&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;line of liver-directed therapy (LDT).&lt;/span&gt;
+  7. &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;treatment for metastatic&lt;/span&gt; uveal melanoma in the metastatic &lt;span class=&quot;diff-add&quot;&gt;setting are eligible for this study.
+  8. Patients with prior treatment for metastatic uveal melanoma in the first-line setting are eligible for this study.
+  9. Patients with prior treatment for metastatic uveal melanoma in the second-line setting are eligible for this study.
+  10. Patients with prior treatment for metastatic uveal melanoma in the third-line setting are eligible for this study.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) &lt;span class=&quot;diff-add&quot;&gt;metastases.&lt;/span&gt;
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; with any out-of-range laboratory &lt;span class=&quot;diff-add&quot;&gt;values (e.g., elevated liver enzymes, creatinine, or potassium).&lt;/span&gt;
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;C infection, requiring treatment.
+  8. Pregnancy,&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;likely&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;become&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;pregnant,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;lactating&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;women.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patients with any other medical condition that, in the investigator&amp;#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;who have received&lt;/span&gt; systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study &lt;span class=&quot;diff-add&quot;&gt;drug.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Malignant disease, other than that being treated in this study.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Any&lt;span class=&quot;diff-add&quot;&gt; other&lt;/span&gt; medical condition &lt;span class=&quot;diff-add&quot;&gt;that,&lt;/span&gt; in the investigator&amp;#x27;s judgment,&lt;span class=&quot;diff-add&quot;&gt; would&lt;/span&gt; prevent participation in the clinical study &lt;span class=&quot;diff-add&quot;&gt;or compromise the safety of the patient.
+  13. Note: This is a summary of the amended eligibility criteria based on the provided text. Please refer&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;complete&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;details&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;specific&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for Version 34 of ClinicalTrials.gov:
+
+**Inclusion Criteria:**
+
+* **Male or female patients aged ≥ 18 years of age at the time of informed consent.**
+* **Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma.**
+* **Surgically sterile patients or patients of child-bearing potential who agree to use highly effective contraception during study dosing and for 6 months after last dose of study drug.**
+* **Ability to provide and understand written informed consent prior to any study procedures.**
+* **ECOG Performance Status of 0 or 1.**
+* **Prior treatment for metastatic uveal melanoma with a maximum of 2 prior lines of therapy, including up to 1 prior line of liver-directed therapy (LDT).**
+* **Patients with prior treatment for metastatic uveal melanoma in the metastatic setting are eligible for this study.**
+* **Patients with prior treatment for metastatic uveal melanoma in the first-line setting are eligible for this study.**
+* **Patients with prior treatment for metastatic uveal melanoma in the second-line setting are eligible for this study.**
+* **Patients with prior treatment for metastatic uveal melanoma in the third-line setting are eligible for this study.**
+
+**Exclusion Criteria:**
+
+* **Presence of symptomatic or untreated central nervous system (CNS) metastases.**
+* **History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.**
+* **Patients with any out-of-range laboratory values (e.g., elevated liver enzymes, creatinine, or potassium).**
+* **Clinically significant cardiac disease or impaired cardiac function.**
+* **Active infection requiring systemic antibiotic therapy.**
+* **Known history of HIV infection.**
+* **Active hepatitis B or C infection, requiring treatment.**
+* **Pregnancy, or likely to become pregnant, or lactating women.**
+* **Patients with any other medical condition that, in the investigator&amp;#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.**
+* **Patients who have received systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drug.**
+* **Malignant disease, other than that being treated in this study.**
+* **Any other medical condition that, in the investigator&amp;#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.**
+
+
+**Note:** This is a summary of the amended eligibility criteria based on the provided text. Please refer to the full protocol for complete details and specific inclusion/exclusion criteria.">Amended Eligibility Criteria for Version 34 of ClinicalTrials.gov:
+
+INCLUSION CRITERIA
+
+  1. Male or female patients aged ≥ 18 years of age at the time of informed consent.
+  2. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma.
+  3. Surgically sterile patients or patients of child-bearing potential who agree to use highly effective contraception during study dosing and for 6 months after last dose of study drug.
+  4. Ability to provide and understand written informed consent prior to any study procedures.
+  5. ECOG Performance Status of 0 or 1.
+  6. Prior treatment for metastatic uveal melanoma with a maximum of 2 prior lines of therapy, including up to 1 prior line of liver-directed therapy (LDT).
+  7. Patients with prior treatment for metastatic uveal melanoma in the metastatic setting are eligible for this study.
+  8. Patients with prior treatment for metastatic uveal melanoma in the first-line setting are eligible for this study.
+  9. Patients with prior treatment for metastatic uveal melanoma in the second-line setting are eligible for this study.
+  10. Patients with prior treatment for metastatic uveal melanoma in the third-line setting are eligible for this study.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Patients with any out-of-range laboratory values (e.g., elevated liver enzymes, creatinine, or potassium).
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B or C infection, requiring treatment.
+  8. Pregnancy, or likely to become pregnant, or lactating women.
+  9. Patients with any other medical condition that, in the investigator&#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.
+  10. Patients who have received systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drug.
+  11. Malignant disease, other than that being treated in this study.
+  12. Any other medical condition that, in the investigator&#x27;s judgment, would prevent participation in the clinical study or compromise the safety of the patient.
+  13. Note: This is a summary of the amended eligibility criteria based on the provided text. Please refer to the full protocol for complete details and specific inclusion/
+
+EXCLUSION CRITERIA
+
+  1. .</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

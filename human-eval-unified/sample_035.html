@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 35</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 35</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Signed informed consent&amp;lt;18 years of age (at the time of signing informed consent)
+  2. Completed CLCZ696B2319E1 study and safely enrolled
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during CLCZ696B2319E1 study
+  2. Renal vascular hypertension (including renal artery stenosis)
+  3. History of angioedema
+  4. Having parents or legal guardians who do not give consent or allow the child to give assent, or inability of patient or the parents/legal guardians to follow instructions or comply with follow-up procedures
+  5. Any medical condition(s) that may put the patient at risk in the Investigator&amp;#x27;s opinion or that the Investigator deems unsuitable for the study"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Signed informed &lt;span class=&quot;diff-del&quot;&gt;consent&amp;lt;18&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(at&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;time of signing informed consent)&lt;/span&gt;
+  2. Completed &lt;span class=&quot;diff-del&quot;&gt;CLCZ696B2319E1&lt;/span&gt; study and safely &lt;span class=&quot;diff-del&quot;&gt;enrolled&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during &lt;span class=&quot;diff-del&quot;&gt;CLCZ696B2319E1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt;
+  2. Renal vascular hypertension (including renal artery &lt;span class=&quot;diff-del&quot;&gt;stenosis)&lt;/span&gt;
+  3. History of &lt;span class=&quot;diff-del&quot;&gt;angioedema&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Having parents&lt;/span&gt; or legal guardians who do not give consent or allow the child to give assent, or inability of patient or the parents/legal guardians to follow instructions or comply with follow-up &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt;
+  5. Any medical condition(s) that may put the patient at risk in the &lt;span class=&quot;diff-del&quot;&gt;Investigator&amp;#x27;s&lt;/span&gt; opinion or that the Investigator deems unsuitable for the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Signed informed consent&amp;amp;lt;18 years of age (at the time of signing informed consent)Completed CLCZ696B2319E1 study and safely enrolledExclusion Criteria:Permanently discontinued the study treatment during CLCZ696B2319E1 studyRenal vascular hypertension (including renal artery stenosis)History of angioedemaHaving parents or legal guardians who do not give consent or allow the child to give assent, or inability of patient or the parents&amp;amp;#x2F;legal guardians to follow instructions or comply with follow-up proceduresAny medical condition(s) that may put the patient at risk in the Investigator&amp;amp;#x27;s opinion or that the Investigator deems unsuitable for the study">INCLUSION CRITERIA
+
+  1. Signed informed consent&lt;18 years of age (at the time of signing informed consent)
+  2. Completed CLCZ696B2319E1 study and safely enrolled
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during CLCZ696B2319E1 study
+  2. Renal vascular hypertension (including renal artery stenosis)
+  3. History of angioedema
+  4. Having parents or legal guardians who do not give consent or allow the child to give assent, or inability of patient or the parents/legal guardians to follow instructions or comply with follow-up procedures
+  5. Any medical condition(s) that may put the patient at risk in the Investigator&#x27;s opinion or that the Investigator deems unsuitable for the study</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 6)
+
+INCLUSION CRITERIA
+
+  1. Signed informed consent and assent (if applicable) obtained prior to participation in the study.
+  2. Male or female, inpatient or outpatient, and aged ≥ 1 year.
+  3. Completed the PANORAMA-HF OLE study (CLCZ696B2319E1) and safely enrolled.
+  4. Systolic blood pressure (SBP) ≥ the calculated 5th percentile SBP for age as described in Appendix 7.
+  5. No conditions that preclude continuation according to the Investigator’s judgment, including hypotension.
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during the PANORAMA-HF OLE study.
+  2. Renal vascular hypertension (including renal artery stenosis).
+  3. History of angioedema.
+  4. Parents or legal guardians who do not give consent or allow the child to give assent, or inability of the patient or the parents/legal guardians to follow instructions or comply with follow-up procedures.
+  5. Any medical condition(s) that may put the patient at risk in the Investigator’s opinion or that the Investigator deems unsuitable for the study."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 6)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Signed informed &lt;span class=&quot;diff-add&quot;&gt;consent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;assent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(if&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;applicable) obtained prior to participation in&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Male or female, inpatient or outpatient, and aged ≥ 1 year.
+  3. &lt;/span&gt;Completed &lt;span class=&quot;diff-add&quot;&gt;the PANORAMA-HF OLE&lt;/span&gt; study&lt;span class=&quot;diff-add&quot;&gt; (CLCZ696B2319E1)&lt;/span&gt; and safely &lt;span class=&quot;diff-add&quot;&gt;enrolled.
+  4. Systolic blood pressure (SBP) ≥ the calculated 5th percentile SBP for age as described in Appendix 7.
+  5. No conditions that preclude continuation according to the Investigator’s judgment, including hypotension.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;PANORAMA-HF OLE study.&lt;/span&gt;
+  2. Renal vascular hypertension (including renal artery &lt;span class=&quot;diff-add&quot;&gt;stenosis).&lt;/span&gt;
+  3. History of &lt;span class=&quot;diff-add&quot;&gt;angioedema.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-add&quot;&gt;Parents&lt;/span&gt; or legal guardians who do not give consent or allow the child to give assent, or inability of &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;patient or the parents/legal guardians to follow instructions or comply with follow-up &lt;span class=&quot;diff-add&quot;&gt;procedures.&lt;/span&gt;
+  5. Any medical condition(s) that may put the patient at risk in the &lt;span class=&quot;diff-add&quot;&gt;Investigator’s&lt;/span&gt; opinion or that the Investigator deems unsuitable for the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 6)
+
+**Inclusion Criteria:**
+
+* Signed informed consent and assent (if applicable) obtained prior to participation in the study.
+* Male or female, inpatient or outpatient, and aged ≥ 1 year.
+* Completed the PANORAMA-HF OLE study (CLCZ696B2319E1) and safely enrolled.
+*  Systolic blood pressure (SBP) ≥ the calculated 5th percentile SBP for age as described in Appendix 7.
+* No conditions that preclude continuation according to the Investigator’s judgment, including hypotension.
+
+**Exclusion Criteria:**
+
+* Permanently discontinued the study treatment during the PANORAMA-HF OLE study.
+* Renal vascular hypertension (including renal artery stenosis).
+* History of angioedema.
+* Parents or legal guardians who do not give consent or allow the child to give assent, or inability of the patient or the parents/legal guardians to follow instructions or comply with follow-up procedures.
+* Any medical condition(s) that may put the patient at risk in the Investigator’s opinion or that the Investigator deems unsuitable for the study.">Amended Eligibility Criteria (Version 6)
+
+INCLUSION CRITERIA
+
+  1. Signed informed consent and assent (if applicable) obtained prior to participation in the study.
+  2. Male or female, inpatient or outpatient, and aged ≥ 1 year.
+  3. Completed the PANORAMA-HF OLE study (CLCZ696B2319E1) and safely enrolled.
+  4. Systolic blood pressure (SBP) ≥ the calculated 5th percentile SBP for age as described in Appendix 7.
+  5. No conditions that preclude continuation according to the Investigator’s judgment, including hypotension.
+
+EXCLUSION CRITERIA
+
+  1. Permanently discontinued the study treatment during the PANORAMA-HF OLE study.
+  2. Renal vascular hypertension (including renal artery stenosis).
+  3. History of angioedema.
+  4. Parents or legal guardians who do not give consent or allow the child to give assent, or inability of the patient or the parents/legal guardians to follow instructions or comply with follow-up procedures.
+  5. Any medical condition(s) that may put the patient at risk in the Investigator’s opinion or that the Investigator deems unsuitable for the study.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

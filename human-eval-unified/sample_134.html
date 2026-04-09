@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 134</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 134</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory CLLRequiring treatment per modified International Workshop on CLL (IWCLL) 2008 criteria; adults without radiographically measureable disease (defined as ≥ 1 lesion &amp;gt; 1.5 cm in diameter as assessed by computed tomography (CT) or magnetic resonance imaging (MRI)) must have bone marrow evaluation at screening
+  2. Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of CLLCreatinine clearance (CrCl) ≥ 50 mL/min
+  3. Total bilirubin ≤ 1.5× institutional upper limit of normal (ULN) unless attributed to Gilbert&amp;#x27;s syndrome and aspartate transaminase (AST)/alanine transaminase (ALT) ≤ 2.5×ULNEastern Cooperative Oncology Group (ECOG) Performance Status (PS) ≤ 2
+  4. Absence of active human immunodeficiency virus (HIV), hepatitis B virus (HBV) infection, and hepatitis C virus (HCV) infection
+  5. Satisfies the following criteria:For females of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in the study protocol
+  6. Males of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in the study protocol
+  7. Able to comply with study procedures and restrictions
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&amp;#x27;s transformation, prolymphocytic leukemia)Known central nervous system (CNS) involvementProgression on treatment with any inhibitor of Bruton&amp;#x27;s tyrosine kinase (BTK), spleen tyrosine kinase (SYK), phosphatidylinositol 3-kinase (PI3K), B-cell lymphoma 2 (BCL-2), or obinutuzumab.
+  2. The treatment and disease response history of participants with prior treatment with agents in these classes should be reviewed by the sponsor or the German CLL Study Group office prior to enrollment to clarify sensitivity to these treatmentsAny treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatmentParticipation on a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillanceDiagnosis of or concern for progressive multifocal leukoencephalopathyHistory of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapyActive infection requiring systemic therapyPregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy)Active autoimmune disease or the need for higher than prednisone 10 mg daily unless for management of CLL symptomsHistory of stroke or intracranial hemorrhage within 12 months of randomization; participants requiring therapeutic anticoagulation for any indication should be discussed with the German CLL Study Group (GCLLSG) cooperating physician and/or medical monitor prior to screeningAnticipated chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoidedRequirement for proton pump inhibitor (PPI) therapyDemonstration of corrected QT (QTc) interval &amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT intervalNote: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory &lt;span class=&quot;diff-del&quot;&gt;CLLRequiring&lt;/span&gt; treatment per modified &lt;span class=&quot;diff-del&quot;&gt;International Workshop on CLL (IWCLL)&lt;/span&gt; 2008 &lt;span class=&quot;diff-del&quot;&gt;criteria;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;adults&lt;/span&gt; without radiographically &lt;span class=&quot;diff-del&quot;&gt;measureable&lt;/span&gt; disease (defined as ≥ 1 lesion &amp;gt; 1.5 cm in diameter as assessed by &lt;span class=&quot;diff-del&quot;&gt;computed tomography (CT)&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;magnetic resonance imaging (MRI))&lt;/span&gt; must have bone marrow evaluation at &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of &lt;span class=&quot;diff-del&quot;&gt;CLLCreatinine&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clearance&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(CrCl)&lt;/span&gt; ≥ 50 mL/min
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Total&lt;/span&gt; bilirubin ≤ 1.5× institutional &lt;span class=&quot;diff-del&quot;&gt;upper limit of normal (ULN)&lt;/span&gt; unless attributed to Gilbert&amp;#x27;s syndrome and &lt;span class=&quot;diff-del&quot;&gt;aspartate transaminase (AST)/alanine transaminase (ALT)&lt;/span&gt; ≤ &lt;span class=&quot;diff-del&quot;&gt;2.5×ULNEastern&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Cooperative&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Oncology&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Group&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ECOG)&lt;/span&gt; Performance Status (PS) ≤ &lt;span class=&quot;diff-del&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Absence of active &lt;span class=&quot;diff-del&quot;&gt;human immunodeficiency virus (HIV), hepatitis B virus (HBV) infection, and hepatitis C virus (HCV)&lt;/span&gt; infection
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Satisfies the following &lt;span class=&quot;diff-del&quot;&gt;criteria:For&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;females&lt;/span&gt; of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol
+  6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Males&lt;/span&gt; of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; study &lt;span class=&quot;diff-del&quot;&gt;protocol
+  7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Able&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;comply&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; study &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;restrictions&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&amp;#x27;s transformation, prolymphocytic &lt;span class=&quot;diff-del&quot;&gt;leukemia)Known&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;central&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;nervous&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;system&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(CNS) involvementProgression&lt;/span&gt; on treatment with any inhibitor of &lt;span class=&quot;diff-del&quot;&gt;Bruton&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;tyrosine&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;kinase&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(BTK), spleen tyrosine kinase (SYK), phosphatidylinositol 3-kinase (PI3K), B-cell lymphoma 2 (BCL-2),&lt;/span&gt; or obinutuzumab.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; The treatment and disease response history of &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; with prior treatment with agents in these classes should be reviewed by the sponsor or the &lt;span class=&quot;diff-del&quot;&gt;German&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CLL Study Group&lt;/span&gt; office prior to enrollment to clarify sensitivity to these &lt;span class=&quot;diff-del&quot;&gt;treatmentsAny&lt;/span&gt; treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study &lt;span class=&quot;diff-del&quot;&gt;treatmentParticipation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing &lt;span class=&quot;diff-del&quot;&gt;surveillanceDiagnosis&lt;/span&gt; of or concern for progressive multifocal &lt;span class=&quot;diff-del&quot;&gt;leukoencephalopathyHistory&lt;/span&gt; of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study &lt;span class=&quot;diff-del&quot;&gt;therapyActive&lt;/span&gt; infection requiring systemic &lt;span class=&quot;diff-del&quot;&gt;therapyPregnant&lt;/span&gt; or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during &lt;span class=&quot;diff-del&quot;&gt;therapy)Active&lt;/span&gt; autoimmune disease or &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;need&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; higher than prednisone 10 mg &lt;span class=&quot;diff-del&quot;&gt;daily&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;unless&lt;/span&gt; for management of CLL &lt;span class=&quot;diff-del&quot;&gt;symptomsHistory&lt;/span&gt; of stroke or intracranial hemorrhage within 12 months of &lt;span class=&quot;diff-del&quot;&gt;randomization;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; requiring therapeutic anticoagulation for any indication should be discussed with the &lt;span class=&quot;diff-del&quot;&gt;German&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CLL Study Group (GCLLSG) cooperating&lt;/span&gt; physician and/or medical monitor prior to &lt;span class=&quot;diff-del&quot;&gt;screeningAnticipated&lt;/span&gt; chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be &lt;span class=&quot;diff-del&quot;&gt;avoidedRequirement&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;proton&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pump&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inhibitor (PPI) therapyDemonstration&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;corrected QT (QTc)&lt;/span&gt; interval &amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT &lt;span class=&quot;diff-del&quot;&gt;intervalNote:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;may&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Key Inclusion Criteria:Documentation of relapsed or refractory CLLRequiring treatment per modified International Workshop on CLL (IWCLL) 2008 criteria; adults without radiographically measureable disease (defined as ≥ 1 lesion &amp;amp;gt; 1.5 cm in diameter as assessed by computed tomography (CT) or magnetic resonance imaging (MRI)) must have bone marrow evaluation at screeningAdequate hematologic function: platelet count ≥ 50 × 10^9&amp;amp;#x2F;L, neutrophil count ≥ 1 × 10^9&amp;amp;#x2F;L, hemoglobin ≥ 8 g&amp;amp;#x2F;dL unless lower values are directly attributable to documented bone marrow burden of CLLCreatinine clearance (CrCl) ≥ 50 mL&amp;amp;#x2F;minTotal bilirubin ≤ 1.5× institutional upper limit of normal (ULN) unless attributed to Gilbert&amp;amp;#x27;s syndrome and aspartate transaminase (AST)&amp;amp;#x2F;alanine transaminase (ALT) ≤ 2.5×ULNEastern Cooperative Oncology Group (ECOG) Performance Status (PS) ≤ 2Absence of active human immunodeficiency virus (HIV), hepatitis B virus (HBV) infection, and hepatitis C virus (HCV) infectionSatisfies the following criteria:For females of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in the study protocolMales of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in the study protocolAble to comply with study procedures and restrictionsKey Exclusion Criteria:Known transformation of CLL (ie, Richter&amp;amp;#x27;s transformation, prolymphocytic leukemia)Known central nervous system (CNS) involvementProgression on treatment with any inhibitor of Bruton&amp;amp;#x27;s tyrosine kinase (BTK), spleen tyrosine kinase (SYK), phosphatidylinositol 3-kinase (PI3K), B-cell lymphoma 2 (BCL-2), or obinutuzumab. The treatment and disease response history of participants with prior treatment with agents in these classes should be reviewed by the sponsor or the German CLL Study Group office prior to enrollment to clarify sensitivity to these treatmentsAny treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatmentParticipation on a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillanceDiagnosis of or concern for progressive multifocal leukoencephalopathyHistory of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapyActive infection requiring systemic therapyPregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy)Active autoimmune disease or the need for higher than prednisone 10 mg daily unless for management of CLL symptomsHistory of stroke or intracranial hemorrhage within 12 months of randomization; participants requiring therapeutic anticoagulation for any indication should be discussed with the German CLL Study Group (GCLLSG) cooperating physician and&amp;amp;#x2F;or medical monitor prior to screeningAnticipated chronic use of strong CYP3A4&amp;amp;#x2F;CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoidedRequirement for proton pump inhibitor (PPI) therapyDemonstration of corrected QT (QTc) interval &amp;amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT intervalNote: Other protocol defined Inclusion&amp;amp;#x2F;Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory CLLRequiring treatment per modified International Workshop on CLL (IWCLL) 2008 criteria; adults without radiographically measureable disease (defined as ≥ 1 lesion &gt; 1.5 cm in diameter as assessed by computed tomography (CT) or magnetic resonance imaging (MRI)) must have bone marrow evaluation at screening
+  2. Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of CLLCreatinine clearance (CrCl) ≥ 50 mL/min
+  3. Total bilirubin ≤ 1.5× institutional upper limit of normal (ULN) unless attributed to Gilbert&#x27;s syndrome and aspartate transaminase (AST)/alanine transaminase (ALT) ≤ 2.5×ULNEastern Cooperative Oncology Group (ECOG) Performance Status (PS) ≤ 2
+  4. Absence of active human immunodeficiency virus (HIV), hepatitis B virus (HBV) infection, and hepatitis C virus (HCV) infection
+  5. Satisfies the following criteria:For females of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in the study protocol
+  6. Males of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in the study protocol
+  7. Able to comply with study procedures and restrictions
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&#x27;s transformation, prolymphocytic leukemia)Known central nervous system (CNS) involvementProgression on treatment with any inhibitor of Bruton&#x27;s tyrosine kinase (BTK), spleen tyrosine kinase (SYK), phosphatidylinositol 3-kinase (PI3K), B-cell lymphoma 2 (BCL-2), or obinutuzumab.
+  2. The treatment and disease response history of participants with prior treatment with agents in these classes should be reviewed by the sponsor or the German CLL Study Group office prior to enrollment to clarify sensitivity to these treatmentsAny treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatmentParticipation on a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillanceDiagnosis of or concern for progressive multifocal leukoencephalopathyHistory of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapyActive infection requiring systemic therapyPregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy)Active autoimmune disease or the need for higher than prednisone 10 mg daily unless for management of CLL symptomsHistory of stroke or intracranial hemorrhage within 12 months of randomization; participants requiring therapeutic anticoagulation for any indication should be discussed with the German CLL Study Group (GCLLSG) cooperating physician and/or medical monitor prior to screeningAnticipated chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoidedRequirement for proton pump inhibitor (PPI) therapyDemonstration of corrected QT (QTc) interval &gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT intervalNote: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 28):
+
+INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory CLL requiring treatment per modified IWCLL 2008 criteria.
+  2. Adults without radiographically measurable disease (defined as ≥ 1 lesion &amp;gt; 1.5 cm in diameter as assessed by CT or MRI) must have bone marrow evaluation at screening.
+  3. Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of CLL.
+  4. Adequate renal function: CrCl ≥ 50 mL/min calculated by the modified Cockroft-Gault formula or from a 24h urine collection.
+  5. Adequate liver function: total bilirubin ≤ 1.5× institutional ULN unless attributed to Gilbert&amp;#x27;s syndrome and AST/ALT ≤ 2.5×ULN.
+  6. Male or female ≥ 18 years of age.
+  7. ECOG Performance Status (PS) ≤ 2.
+  8. Absence of active HBV infection (serological testing within 6 weeks prior to randomization or enrollment with the following results: HBsAg negative AND anti-HBcAb negative, or if anti-HBcAb positive, HBV DNA PCR negative).
+  9. HCV Ab negative or if Ab positive, negative HCV RNA PCR within 6 weeks prior to randomization or enrollment.
+  10. Negative testing for HIV within 6 weeks prior to randomization or enrollment.
+  11. Satisfies the following criteria:
+  12. For female subjects of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in Appendix 4.
+  13. Male subjects of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in Appendix 4.
+  14. Ability and willingness to provide written informed consent and adhere to protocol requirements including study visit schedule, drug administration plan, imaging studies, laboratory testing, other study procedures, and restrictions.
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&amp;#x27;s transformation, prolymphocytic leukemia).
+  2. Known CNS involvement.
+  3. Progression on treatment with any inhibitor of BTK, SYK, PI3K, BCL-2, or obinutuzumab. The treatment and disease response history of subjects with prior treatment with agents in these classes should be reviewed by the sponsor or the GCLLSG study office prior to enrollment to clarify sensitivity to these treatments.
+  4. Any treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatment.
+  5. Participation in a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillance.
+  6. Diagnosis of or concern for progressive multifocal leukoencephalopathy.
+  7. History of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapy.
+  8. Active infection requiring systemic therapy.
+  9. Pregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy).
+  10. Active autoimmune disease including autoimmune hemolytic anemia or idiopathic thrombocytopenic purpura requiring a higher corticosteroid equivalent than prednisone 10 mg daily. Higher doses of corticosteroids prescribed for any indication must be stopped &amp;gt; 14 days prior to randomization or enrollment; exceptions may be made for corticosteroids prescribed specifically for management of CLL symptoms after discussion with the study medical monitor.
+  11. Diagnosis of inflammatory bowel disease or ongoing symptomatic pneumonitis.
+  12. History of stroke or intracranial hemorrhage within 12 months of randomization or enrollment; subjects requiring therapeutic anticoagulation for any indication should be discussed with the GCLLSG coordinating physician and/or medical monitor prior to screening.
+  13. Legal incapacity, prisoners or subjects institutionalized by regulatory or court order, or any individual in dependence to study sponsor or any investigator.
+  14. Anticipated chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoided.
+  15. Requirement for PPI therapy.
+  16. Demonstration of QTc interval &amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT interval.
+  17. Known hypersensitivity to obinutuzumab, entospletinib, tirabrutinib, or any of the excipients."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 28):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory &lt;span class=&quot;diff-add&quot;&gt;CLL requiring&lt;/span&gt; treatment per modified &lt;span class=&quot;diff-add&quot;&gt;IWCLL&lt;/span&gt; 2008 &lt;span class=&quot;diff-add&quot;&gt;criteria.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Adults&lt;/span&gt; without radiographically &lt;span class=&quot;diff-add&quot;&gt;measurable&lt;/span&gt; disease (defined as ≥ 1 lesion &amp;gt; 1.5 cm in diameter as assessed by &lt;span class=&quot;diff-add&quot;&gt;CT&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;MRI)&lt;/span&gt; must have bone marrow evaluation at &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of &lt;span class=&quot;diff-add&quot;&gt;CLL.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Adequate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;renal function: CrCl&lt;/span&gt; ≥ 50 mL/min&lt;span class=&quot;diff-add&quot;&gt; calculated by the modified Cockroft-Gault formula or from a 24h urine collection.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Adequate liver function: total&lt;/span&gt; bilirubin ≤ 1.5× institutional &lt;span class=&quot;diff-add&quot;&gt;ULN&lt;/span&gt; unless attributed to Gilbert&amp;#x27;s syndrome and &lt;span class=&quot;diff-add&quot;&gt;AST/ALT&lt;/span&gt; ≤ &lt;span class=&quot;diff-add&quot;&gt;2.5×ULN.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Male&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;female&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥ 18 years of age.
+  7. ECOG&lt;/span&gt; Performance Status (PS) ≤ &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Absence of active &lt;span class=&quot;diff-add&quot;&gt;HBV&lt;/span&gt; infection&lt;span class=&quot;diff-add&quot;&gt; (serological testing within 6 weeks prior to randomization or enrollment with the following results: HBsAg negative AND anti-HBcAb negative, or if anti-HBcAb positive, HBV DNA PCR negative).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9. HCV Ab negative or if Ab positive, negative HCV RNA PCR within 6 weeks prior to randomization or enrollment.
+  10. Negative testing for HIV within 6 weeks prior to randomization or enrollment.
+  11.&lt;/span&gt; Satisfies the following &lt;span class=&quot;diff-add&quot;&gt;criteria:
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;For female subjects&lt;/span&gt; of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in &lt;span class=&quot;diff-add&quot;&gt;Appendix&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;4.
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Male&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in &lt;span class=&quot;diff-add&quot;&gt;Appendix 4.
+  14. Ability and willingness to provide written informed consent and adhere to protocol requirements including&lt;/span&gt; study &lt;span class=&quot;diff-add&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;schedule,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drug&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;administration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;plan, imaging studies, laboratory testing, other&lt;/span&gt; study &lt;span class=&quot;diff-add&quot;&gt;procedures,&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;restrictions.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&amp;#x27;s transformation, prolymphocytic &lt;span class=&quot;diff-add&quot;&gt;leukemia).
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CNS&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;involvement.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Progression&lt;/span&gt; on treatment with any inhibitor of &lt;span class=&quot;diff-add&quot;&gt;BTK,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;SYK,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;PI3K,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;BCL-2,&lt;/span&gt; or obinutuzumab. The treatment and disease response history of &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; with prior treatment with agents in these classes should be reviewed by the sponsor or the &lt;span class=&quot;diff-add&quot;&gt;GCLLSG&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; office prior to enrollment to clarify sensitivity to these &lt;span class=&quot;diff-add&quot;&gt;treatments.
+  4. Any&lt;/span&gt; treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participation in&lt;/span&gt; a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing &lt;span class=&quot;diff-add&quot;&gt;surveillance.
+  6. Diagnosis&lt;/span&gt; of or concern for progressive multifocal &lt;span class=&quot;diff-add&quot;&gt;leukoencephalopathy.
+  7. History&lt;/span&gt; of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study &lt;span class=&quot;diff-add&quot;&gt;therapy.
+  8. Active&lt;/span&gt; infection requiring systemic &lt;span class=&quot;diff-add&quot;&gt;therapy.
+  9. Pregnant&lt;/span&gt; or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during &lt;span class=&quot;diff-add&quot;&gt;therapy).
+  10. Active&lt;/span&gt; autoimmune disease &lt;span class=&quot;diff-add&quot;&gt;including autoimmune hemolytic anemia &lt;/span&gt;or &lt;span class=&quot;diff-add&quot;&gt;idiopathic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;thrombocytopenic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;purpura requiring a&lt;/span&gt; higher&lt;span class=&quot;diff-add&quot;&gt; corticosteroid equivalent&lt;/span&gt; than prednisone 10 mg &lt;span class=&quot;diff-add&quot;&gt;daily.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Higher doses of corticosteroids prescribed for any indication must be stopped &amp;gt; 14 days prior to randomization or enrollment; exceptions may be made for corticosteroids prescribed specifically&lt;/span&gt; for management of CLL &lt;span class=&quot;diff-add&quot;&gt;symptoms after discussion with the study medical monitor.
+  11. Diagnosis of inflammatory bowel disease or ongoing symptomatic pneumonitis.
+  12. History&lt;/span&gt; of stroke or intracranial hemorrhage within 12 months of &lt;span class=&quot;diff-add&quot;&gt;randomization&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or enrollment; subjects&lt;/span&gt; requiring therapeutic anticoagulation for any indication should be discussed with the &lt;span class=&quot;diff-add&quot;&gt;GCLLSG&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;coordinating&lt;/span&gt; physician and/or medical monitor prior to &lt;span class=&quot;diff-add&quot;&gt;screening.
+  13. Legal incapacity, prisoners or subjects institutionalized by regulatory or court order, or any individual in dependence to study sponsor or any investigator.
+  14. Anticipated&lt;/span&gt; chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be &lt;span class=&quot;diff-add&quot;&gt;avoided.
+  15. Requirement&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;PPI&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;therapy.
+  16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Demonstration&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;QTc&lt;/span&gt; interval &amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT &lt;span class=&quot;diff-add&quot;&gt;interval.
+  17.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;hypersensitivity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;obinutuzumab,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;entospletinib,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;tirabrutinib,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or any of the excipients.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (version 28):
+
+Key Inclusion Criteria:
+- Documentation of relapsed or refractory CLL requiring treatment per modified IWCLL 2008 criteria.
+- Adults without radiographically measurable disease (defined as ≥ 1 lesion &amp;gt; 1.5 cm in diameter as assessed by CT or MRI) must have bone marrow evaluation at screening.
+- Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of CLL.
+- Adequate renal function: CrCl ≥ 50 mL/min calculated by the modified Cockroft-Gault formula or from a 24h urine collection.
+- Adequate liver function: total bilirubin ≤ 1.5× institutional ULN unless attributed to Gilbert&amp;#x27;s syndrome and AST/ALT ≤ 2.5×ULN.
+- Male or female ≥ 18 years of age.
+- ECOG Performance Status (PS) ≤ 2.
+- Absence of active HBV infection (serological testing within 6 weeks prior to randomization or enrollment with the following results: HBsAg negative AND anti-HBcAb negative, or if anti-HBcAb positive, HBV DNA PCR negative).
+- HCV Ab negative or if Ab positive, negative HCV RNA PCR within 6 weeks prior to randomization or enrollment.
+- Negative testing for HIV within 6 weeks prior to randomization or enrollment.
+- Satisfies the following criteria:
+  - For female subjects of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in Appendix 4.
+  - Male subjects of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in Appendix 4.
+- Ability and willingness to provide written informed consent and adhere to protocol requirements including study visit schedule, drug administration plan, imaging studies, laboratory testing, other study procedures, and restrictions.
+
+Key Exclusion Criteria:
+- Known transformation of CLL (ie, Richter&amp;#x27;s transformation, prolymphocytic leukemia).
+- Known CNS involvement.
+- Progression on treatment with any inhibitor of BTK, SYK, PI3K, BCL-2, or obinutuzumab. The treatment and disease response history of subjects with prior treatment with agents in these classes should be reviewed by the sponsor or the GCLLSG study office prior to enrollment to clarify sensitivity to these treatments.
+- Any treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatment.
+- Participation in a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillance.
+- Diagnosis of or concern for progressive multifocal leukoencephalopathy.
+- History of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapy.
+- Active infection requiring systemic therapy.
+- Pregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy).
+- Active autoimmune disease including autoimmune hemolytic anemia or idiopathic thrombocytopenic purpura requiring a higher corticosteroid equivalent than prednisone 10 mg daily. Higher doses of corticosteroids prescribed for any indication must be stopped &amp;gt; 14 days prior to randomization or enrollment; exceptions may be made for corticosteroids prescribed specifically for management of CLL symptoms after discussion with the study medical monitor.
+- Diagnosis of inflammatory bowel disease or ongoing symptomatic pneumonitis.
+- History of stroke or intracranial hemorrhage within 12 months of randomization or enrollment; subjects requiring therapeutic anticoagulation for any indication should be discussed with the GCLLSG coordinating physician and/or medical monitor prior to screening.
+- Legal incapacity, prisoners or subjects institutionalized by regulatory or court order, or any individual in dependence to study sponsor or any investigator.
+- Anticipated chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoided.
+- Requirement for PPI therapy.
+- Demonstration of QTc interval &amp;gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT interval.
+- Known hypersensitivity to obinutuzumab, entospletinib, tirabrutinib, or any of the excipients.">Amended Eligibility Criteria (version 28):
+
+INCLUSION CRITERIA
+
+  1. Documentation of relapsed or refractory CLL requiring treatment per modified IWCLL 2008 criteria.
+  2. Adults without radiographically measurable disease (defined as ≥ 1 lesion &gt; 1.5 cm in diameter as assessed by CT or MRI) must have bone marrow evaluation at screening.
+  3. Adequate hematologic function: platelet count ≥ 50 × 10^9/L, neutrophil count ≥ 1 × 10^9/L, hemoglobin ≥ 8 g/dL unless lower values are directly attributable to documented bone marrow burden of CLL.
+  4. Adequate renal function: CrCl ≥ 50 mL/min calculated by the modified Cockroft-Gault formula or from a 24h urine collection.
+  5. Adequate liver function: total bilirubin ≤ 1.5× institutional ULN unless attributed to Gilbert&#x27;s syndrome and AST/ALT ≤ 2.5×ULN.
+  6. Male or female ≥ 18 years of age.
+  7. ECOG Performance Status (PS) ≤ 2.
+  8. Absence of active HBV infection (serological testing within 6 weeks prior to randomization or enrollment with the following results: HBsAg negative AND anti-HBcAb negative, or if anti-HBcAb positive, HBV DNA PCR negative).
+  9. HCV Ab negative or if Ab positive, negative HCV RNA PCR within 6 weeks prior to randomization or enrollment.
+  10. Negative testing for HIV within 6 weeks prior to randomization or enrollment.
+  11. Satisfies the following criteria:
+  12. For female subjects of childbearing potential, willingness to abstain from sexual intercourse or use a protocol-specified method of contraception as described in Appendix 4.
+  13. Male subjects of reproductive potential who engage in sexual intercourse must agree to use protocol-specified method(s) of contraception as described in Appendix 4.
+  14. Ability and willingness to provide written informed consent and adhere to protocol requirements including study visit schedule, drug administration plan, imaging studies, laboratory testing, other study procedures, and restrictions.
+
+EXCLUSION CRITERIA
+
+  1. Known transformation of CLL (ie, Richter&#x27;s transformation, prolymphocytic leukemia).
+  2. Known CNS involvement.
+  3. Progression on treatment with any inhibitor of BTK, SYK, PI3K, BCL-2, or obinutuzumab. The treatment and disease response history of subjects with prior treatment with agents in these classes should be reviewed by the sponsor or the GCLLSG study office prior to enrollment to clarify sensitivity to these treatments.
+  4. Any treatment for CLL other than corticosteroids for symptomatic management within 28 days of the start of study treatment.
+  5. Participation in a concurrent therapeutic clinical trial unless all treatment is complete with only ongoing surveillance.
+  6. Diagnosis of or concern for progressive multifocal leukoencephalopathy.
+  7. History of myelodysplastic syndrome or another malignancy other than CLL, except for the following: any malignancy that has been in complete remission for 3 years, adequately treated local basal cell or squamous cell carcinoma of the skin, cervical carcinoma in situ, superficial bladder cancer, asymptomatic prostate cancer without known metastatic disease and with no requirement for therapy or requiring only hormonal therapy and with normal prostate-specific antigen for ≥1 year prior to start of study therapy.
+  8. Active infection requiring systemic therapy.
+  9. Pregnant or nursing women (a negative pregnancy test is required for all women of childbearing potential within 7 days before start of treatment and monthly during therapy).
+  10. Active autoimmune disease including autoimmune hemolytic anemia or idiopathic thrombocytopenic purpura requiring a higher corticosteroid equivalent than prednisone 10 mg daily. Higher doses of corticosteroids prescribed for any indication must be stopped &gt; 14 days prior to randomization or enrollment; exceptions may be made for corticosteroids prescribed specifically for management of CLL symptoms after discussion with the study medical monitor.
+  11. Diagnosis of inflammatory bowel disease or ongoing symptomatic pneumonitis.
+  12. History of stroke or intracranial hemorrhage within 12 months of randomization or enrollment; subjects requiring therapeutic anticoagulation for any indication should be discussed with the GCLLSG coordinating physician and/or medical monitor prior to screening.
+  13. Legal incapacity, prisoners or subjects institutionalized by regulatory or court order, or any individual in dependence to study sponsor or any investigator.
+  14. Anticipated chronic use of strong CYP3A4/CYP2C9 inducers, moderate CYP2C9 inducers, or strong P-gp inducers while on study; use within 2 weeks of first dose of study treatment should be avoided.
+  15. Requirement for PPI therapy.
+  16. Demonstration of QTc interval &gt; 450 milliseconds or requirement for ongoing treatment with concomitant medications that prolong the QT interval.
+  17. Known hypersensitivity to obinutuzumab, entospletinib, tirabrutinib, or any of the excipients.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

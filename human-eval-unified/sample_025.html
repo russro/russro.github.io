@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 25</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 25</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. In the opinion of the investigator or sub-investigator, the participant is capable of understanding and complying with protocol requirements.
+  2. The participant signs and dates a written, informed consent form prior to the initiation of any study procedures.
+  3. The participant suffers from recurrent MDD as the primary diagnosis according to Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision (DSM-IV-TR) criteria (classification code 296.3x).
+  4. The participant is a man or a woman aged 20 to 75 years (both inclusive) at the time of informed consent.
+  5. The reported duration of the current major depressive episode is 3 to 12 months (both inclusive) at the start of screening period.
+  6. The participant has a MADRS total score ≥26, Hamilton Depression Rating Scale (HAM-D17) total score ≥18, and Clinical global impression scale-Severity (CGI-S) score ≥4 at the start of screening period, at the start of placebo lead-in period and at the start of double-blind treatment period.
+  7. A female participant of childbearing potential who is sexually active with a nonsterilized male partner agrees to use routinely adequate contraception from signing of informed consent to the end of the follow-up period.
+
+EXCLUSION CRITERIA
+
+  1. The participant has any following current or past history of psychiatric disorder and/or neurological disorder:Any current psychiatric disorder other than MDD as defined by DSM-IV-TR (To be assessed by Mini International Neuropsychiatric Interview: MINI).
+  2. A participant who exhibits symptoms of anxiety is eligible unless the participant fulfills the diagnostic criteria for a current anxiety disorder per DSM-IV-TR.
+  3. Current diagnosis or history of manic, mixed or hypomanic episode, MDD with psychotic features, schizophrenia or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by DSM-IV-TR.
+  4. Current diagnosis or history of any substance-related disorder (except nicotine and caffeine-related disorders) as defined by DSM-IV-TR.
+  5. The participant with a positive urine drug screening result at the start of screening period or the start of placebo lead-in period.
+  6. In case that a participant showed positive test result at the start of screening period because the test was conducted before washout of pretreatment drug, the participant is eligible as long as he/she shows negative result at the start of placebo lead-in period.
+  7. Presence or history of any clinically significant neurological disorder (including epilepsy).
+  8. Any neurodegenerative disorder (e.g.
+  9. Alzheimer&amp;#x27;s disease, Parkinson&amp;#x27;s disease, multiple sclerosis, Huntington&amp;#x27;s disease).
+  10. Any DSM-IV-TR axis II disorder.
+  11. The participant has the current or previous major depressive episode which was considered by the investigator or sub-investigator to have been resistant to 2 or more adequate antidepressants treatments of at least 6 weeks duration each at sufficient doses.
+  12. The participant has received any augmentation therapy (e.g. lithium, T3/T4, lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of other antidepressant, etc.) for the current major depressive episode.
+  13. In the opinion of the investigator or sub-investigator, the participant has experienced significant number of major depressive episodes in the past, and is suspected of disease other than MDD.
+  14. In the opinion of the investigator or sub-investigator, the participant has experienced the first major depressive episode at his/her young age, and is suspected of disease other than MDD.
+  15. The participant has a MADRS total score at the start of double-blind treatment period that has improved or aggravated by 25% or more from the score at the start of placebo lead-in period.
+  16. The participant is significantly non-compliant with the study drug in the placebo lead-in period; e.g., not taking the study drug for 6 or more consecutive days.
+  17. The participant has received electroconvulsive therapy, vagus nerve stimulation, or repetitive transcranial magnetic stimulation therapy within 6 months prior to the screening period, or plans to initiate such therapy during the study.
+  18. The participant is receiving cognitive-behavioral therapy or psychotherapy at the time of informed consent, or plans to initiate such therapy during the study.
+  19. The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS at the start of screening period, at the start of placebo lead-in period or at the start of double-blind treatment period, or has attempted suicide within 6 months prior to the start of screening period.
+  20. The participant has experienced any environmental change (e.g. temporary retirement, returnment, change of residence) considered by the investigator or sub-investigator to have the potential to impact on the efficacy evaluation, or plans such environmental changes during the study.
+  21. The participant is currently receiving drug therapy for thyroid dysfunction.
+  22. The participant is currently receiving hormonal therapy for gynecological disease.
+  23. The participant has taken excluded medications during the protocol-specified period, or will require to take excluded medications during the study.
+  24. The participant has previously received vortioxetine.
+  25. The participant has received study drug in a previous clinical study of Lu AA21004 (including this study).
+  26. The participant has a clinically significant chronic liver disease.
+  27. The participant has a history of severe allergy or hypersensitivity to drugs.
+  28. The participant has a clinically significant unstable illness, for example, liver disorder or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue disorders, eye disorders, or metabolic disturbance.
+  29. The participant has clinically significant abnormal vital signs as determined by the investigator or sub-investigator at the start of screening period, placebo lead-in period, or double-blind treatment period.
+  30. The participant has clinically significant abnormal electrocardiogram (ECG) as determined by the investigator or sub-investigator, at the start of the screening period, at the start of placebo lead-in period, or at the start of double-blind treatment period.
+  31. The participant has clinically significant abnormal findings of clinical laboratory tests as determined by the investigator or sub-investigator, or has alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &amp;gt;2 × ULN at the start of screening period or at the start of placebo lead-in period.
+  32. If female, the participant is pregnant or lactating.
+  33. The participant has a disease or takes medications that could, in the opinion of the investigator or sub-investigator, interfere with the evaluation of the safety, tolerability, or efficacy.
+  34. The participant is, in the opinion of the investigator or sub-investigator, unsuitable for this study for any other reason."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;In the opinion of the investigator or sub-investigator, the participant is capable of understanding and complying with protocol requirements.
+  2. &lt;/span&gt;The participant &lt;span class=&quot;diff-del&quot;&gt;signs and dates&lt;/span&gt; a&lt;span class=&quot;diff-del&quot;&gt; written, informed consent form prior to the initiation of any study procedures.
+  3. The participant suffers from recurrent MDD as the&lt;/span&gt; primary diagnosis according to &lt;span class=&quot;diff-del&quot;&gt;Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision (DSM-IV-TR)&lt;/span&gt; criteria (classification code 296.3x).
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; The participant is a man or a woman aged 20 &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; 75 years (both &lt;span class=&quot;diff-del&quot;&gt;inclusive) at the time of informed consent.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; The reported duration of the current major depressive episode is &lt;span class=&quot;diff-del&quot;&gt;3 to 12&lt;/span&gt; months &lt;span class=&quot;diff-del&quot;&gt;(both&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inclusive)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at the start of screening period.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; The participant has a MADRS total score ≥26, &lt;span class=&quot;diff-del&quot;&gt;Hamilton Depression Rating Scale (HAM-D17)&lt;/span&gt; total score ≥18, and Clinical &lt;span class=&quot;diff-del&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;impression&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;scale-Severity&lt;/span&gt; (CGI-S) score &lt;span class=&quot;diff-del&quot;&gt;≥4 at the start of screening period, at the start of placebo lead-in period and at the start of double-blind treatment period.
+  7. A female participant of childbearing potential who is sexually active with a nonsterilized male partner agrees to use routinely adequate contraception from signing of informed consent to the end of the follow-up period.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. The participant has any following current or past history of psychiatric disorder and/or neurological &lt;span class=&quot;diff-del&quot;&gt;disorder:Any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;current&lt;/span&gt; psychiatric disorder other than MDD as defined by DSM-IV-TR &lt;span class=&quot;diff-del&quot;&gt;(To&lt;/span&gt; be assessed &lt;span class=&quot;diff-del&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Mini&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;International&lt;/span&gt; Neuropsychiatric &lt;span class=&quot;diff-del&quot;&gt;Interview:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;MINI).
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;exhibits&lt;/span&gt; symptoms &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;anxiety&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;eligible unless&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;fulfills&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnostic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;criteria&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;current&lt;/span&gt; anxiety disorder &lt;span class=&quot;diff-del&quot;&gt;per&lt;/span&gt; DSM-IV-TR.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnosis or history of manic, mixed&lt;/span&gt; or hypomanic episode, MDD with psychotic features, &lt;span class=&quot;diff-del&quot;&gt;schizophrenia&lt;/span&gt; or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by DSM-IV-TR.
+  4. &lt;span class=&quot;diff-del&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnosis or history of any substance-related&lt;/span&gt; disorder (except nicotine and caffeine-related disorders) as defined by DSM-IV-TR.
+  5. The participant &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; a positive urine drug screening &lt;span class=&quot;diff-del&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at the start of screening period or the start of placebo lead-in period.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;In&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;participant showed positive test result at the start of screening period because the test was conducted before washout of pretreatment drug, the participant is eligible as long as he/she shows negative result at the start of placebo lead-in period.
+  7. Presence&lt;/span&gt; or history of&lt;span class=&quot;diff-del&quot;&gt; any&lt;/span&gt; clinically significant neurological disorder (including epilepsy).
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Any&lt;/span&gt; neurodegenerative disorder &lt;span class=&quot;diff-del&quot;&gt;(e.g.
+  9.&lt;/span&gt; Alzheimer&amp;#x27;s disease, Parkinson&amp;#x27;s disease, multiple sclerosis, Huntington&amp;#x27;s disease).
+  &lt;span class=&quot;diff-del&quot;&gt;10. Any DSM-IV-TR axis II disorder.
+  11.&lt;/span&gt; The participant has &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;previous&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;major&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;depressive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;episode&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;which&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;was&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;considered by the investigator or sub-investigator to have been resistant&lt;/span&gt; to 2 or more adequate &lt;span class=&quot;diff-del&quot;&gt;antidepressants&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatments&lt;/span&gt; of at least 6 weeks duration each at sufficient &lt;span class=&quot;diff-del&quot;&gt;doses.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; The participant has received any &lt;span class=&quot;diff-del&quot;&gt;augmentation &lt;/span&gt;therapy &lt;span class=&quot;diff-del&quot;&gt;(e.g.&lt;/span&gt; lithium, T3/T4, &lt;span class=&quot;diff-del&quot;&gt;lamotrigine,&lt;/span&gt; sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of &lt;span class=&quot;diff-del&quot;&gt;other &lt;/span&gt;antidepressant, etc.) &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; the current major depressive episode.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;In the opinion of the investigator or sub-investigator, the&lt;/span&gt; participant has &lt;span class=&quot;diff-del&quot;&gt;experienced&lt;/span&gt; significant number of major depressive episodes in the &lt;span class=&quot;diff-del&quot;&gt;past,&lt;/span&gt; and is suspected of disease other than MDD.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;In the opinion of the investigator or sub-investigator, the&lt;/span&gt; participant has &lt;span class=&quot;diff-del&quot;&gt;experienced&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;first&lt;/span&gt; major depressive episode at &lt;span class=&quot;diff-del&quot;&gt;his/her&lt;/span&gt; young &lt;span class=&quot;diff-del&quot;&gt;age,&lt;/span&gt; and is suspected of disease other than MDD.
+  &lt;span class=&quot;diff-del&quot;&gt;15. The participant has a MADRS total score at the start of double-blind treatment period that has improved or aggravated by 25% or more from the score at the start of placebo lead-in period.
+  16. The participant is significantly non-compliant with the study drug in the placebo lead-in period; e.g., not taking the study drug for 6 or more consecutive days.
+  17. The participant has received electroconvulsive therapy, vagus nerve stimulation, or repetitive transcranial magnetic stimulation therapy within 6 months prior to the screening period, or plans to initiate such therapy during the study.
+  18. The participant is receiving cognitive-behavioral therapy or psychotherapy at the time of informed consent, or plans to initiate such therapy during the study.
+  19.&lt;/span&gt; The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the &lt;span class=&quot;diff-del&quot;&gt;MADRS at the start of screening period, at the start of placebo lead-in period or at the start of double-blind treatment period,&lt;/span&gt; or has attempted suicide within 6 months prior to the start of &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; period.
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; The participant has experienced any environmental change &lt;span class=&quot;diff-del&quot;&gt;(e.g.&lt;/span&gt; temporary retirement, returnment, change of &lt;span class=&quot;diff-del&quot;&gt;residence)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;considered&lt;/span&gt; by the investigator&lt;span class=&quot;diff-del&quot;&gt; or sub-investigator&lt;/span&gt; to have the potential to impact on the efficacy &lt;span class=&quot;diff-del&quot;&gt;evaluation, or plans such environmental changes during the study.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;21. The participant is currently receiving drug therapy for thyroid dysfunction.
+  22. The participant is currently receiving hormonal therapy for gynecological disease.
+  23. The participant has taken excluded medications during the protocol-specified period, or will require to take excluded medications during the study.
+  24. The participant has previously received vortioxetine.
+  25. The participant has received study drug in a previous clinical study of Lu AA21004 (including this study).
+  26. The participant has a clinically significant chronic liver disease.
+  27. The participant has a history of severe allergy or hypersensitivity to drugs.
+  28.&lt;/span&gt; The participant has a clinically significant unstable illness, for example, &lt;span class=&quot;diff-del&quot;&gt;liver&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disorder&lt;/span&gt; or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous &lt;span class=&quot;diff-del&quot;&gt;tissue&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disorders, eye disorders,&lt;/span&gt; or metabolic disturbance.
+  &lt;span class=&quot;diff-del&quot;&gt;29.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clinically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;significant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;abnormal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;vital&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;signs&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;determined&lt;/span&gt; by the &lt;span class=&quot;diff-del&quot;&gt;investigator or sub-investigator at the start of screening period, placebo lead-in period, or double-blind treatment period.
+  30. The participant has clinically significant abnormal electrocardiogram (ECG) as determined by the investigator or sub-investigator, at the start of the screening period, at the start of placebo lead-in period, or at the start of double-blind treatment period.
+  31. The participant has clinically significant abnormal findings of clinical laboratory tests as determined by the investigator or sub-investigator, or has alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &amp;gt;2 × ULN at the start of screening period or at the start of placebo lead-in period.
+  32. If female, the participant is pregnant or lactating.
+  33. The participant has a disease or takes medications that could, in the opinion of the investigator or sub-investigator, interfere with the evaluation of the safety, tolerability, or efficacy.
+  34. The participant is, in the opinion of the investigator or sub-investigator, unsuitable&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;any other reason.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:In the opinion of the investigator or sub-investigator, the participant is capable of understanding and complying with protocol requirements.The participant signs and dates a written, informed consent form prior to the initiation of any study procedures.The participant suffers from recurrent MDD as the primary diagnosis according to Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision (DSM-IV-TR) criteria (classification code 296.3x).The participant is a man or a woman aged 20 to 75 years (both inclusive) at the time of informed consent.The reported duration of the current major depressive episode is 3 to 12 months (both inclusive) at the start of screening period.The participant has a MADRS total score ≥26, Hamilton Depression Rating Scale (HAM-D17) total score ≥18, and Clinical global impression scale-Severity (CGI-S) score ≥4 at the start of screening period, at the start of placebo lead-in period and at the start of double-blind treatment period.A female participant of childbearing potential who is sexually active with a nonsterilized male partner agrees to use routinely adequate contraception from signing of informed consent to the end of the follow-up period.Exclusion Criteria:The participant has any following current or past history of psychiatric disorder and&amp;amp;#x2F;or neurological disorder:Any current psychiatric disorder other than MDD as defined by DSM-IV-TR (To be assessed by Mini International Neuropsychiatric Interview: MINI). A participant who exhibits symptoms of anxiety is eligible unless the participant fulfills the diagnostic criteria for a current anxiety disorder per DSM-IV-TR.Current diagnosis or history of manic, mixed or hypomanic episode, MDD with psychotic features, schizophrenia or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by DSM-IV-TR.Current diagnosis or history of any substance-related disorder (except nicotine and caffeine-related disorders) as defined by DSM-IV-TR.The participant with a positive urine drug screening result at the start of screening period or the start of placebo lead-in period. In case that a participant showed positive test result at the start of screening period because the test was conducted before washout of pretreatment drug, the participant is eligible as long as he&amp;amp;#x2F;she shows negative result at the start of placebo lead-in period.Presence or history of any clinically significant neurological disorder (including epilepsy).Any neurodegenerative disorder (e.g. Alzheimer&amp;amp;#x27;s disease, Parkinson&amp;amp;#x27;s disease, multiple sclerosis, Huntington&amp;amp;#x27;s disease).Any DSM-IV-TR axis II disorder.The participant has the current or previous major depressive episode which was considered by the investigator or sub-investigator to have been resistant to 2 or more adequate antidepressants treatments of at least 6 weeks duration each at sufficient doses.The participant has received any augmentation therapy (e.g. lithium, T3&amp;amp;#x2F;T4, lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of other antidepressant, etc.) for the current major depressive episode.In the opinion of the investigator or sub-investigator, the participant has experienced significant number of major depressive episodes in the past, and is suspected of disease other than MDD.In the opinion of the investigator or sub-investigator, the participant has experienced the first major depressive episode at his&amp;amp;#x2F;her young age, and is suspected of disease other than MDD.The participant has a MADRS total score at the start of double-blind treatment period that has improved or aggravated by 25% or more from the score at the start of placebo lead-in period.The participant is significantly non-compliant with the study drug in the placebo lead-in period; e.g., not taking the study drug for 6 or more consecutive days.The participant has received electroconvulsive therapy, vagus nerve stimulation, or repetitive transcranial magnetic stimulation therapy within 6 months prior to the screening period, or plans to initiate such therapy during the study.The participant is receiving cognitive-behavioral therapy or psychotherapy at the time of informed consent, or plans to initiate such therapy during the study.The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS at the start of screening period, at the start of placebo lead-in period or at the start of double-blind treatment period, or has attempted suicide within 6 months prior to the start of screening period.The participant has experienced any environmental change (e.g. temporary retirement, returnment, change of residence) considered by the investigator or sub-investigator to have the potential to impact on the efficacy evaluation, or plans such environmental changes during the study.The participant is currently receiving drug therapy for thyroid dysfunction.The participant is currently receiving hormonal therapy for gynecological disease.The participant has taken excluded medications during the protocol-specified period, or will require to take excluded medications during the study.The participant has previously received vortioxetine.The participant has received study drug in a previous clinical study of Lu AA21004 (including this study).The participant has a clinically significant chronic liver disease.The participant has a history of severe allergy or hypersensitivity to drugs.The participant has a clinically significant unstable illness, for example, liver disorder or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue disorders, eye disorders, or metabolic disturbance.The participant has clinically significant abnormal vital signs as determined by the investigator or sub-investigator at the start of screening period, placebo lead-in period, or double-blind treatment period.The participant has clinically significant abnormal electrocardiogram (ECG) as determined by the investigator or sub-investigator, at the start of the screening period, at the start of placebo lead-in period, or at the start of double-blind treatment period.The participant has clinically significant abnormal findings of clinical laboratory tests as determined by the investigator or sub-investigator, or has alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &amp;amp;gt;2 × ULN at the start of screening period or at the start of placebo lead-in period.If female, the participant is pregnant or lactating.The participant has a disease or takes medications that could, in the opinion of the investigator or sub-investigator, interfere with the evaluation of the safety, tolerability, or efficacy.The participant is, in the opinion of the investigator or sub-investigator, unsuitable for this study for any other reason.">INCLUSION CRITERIA
+
+  1. In the opinion of the investigator or sub-investigator, the participant is capable of understanding and complying with protocol requirements.
+  2. The participant signs and dates a written, informed consent form prior to the initiation of any study procedures.
+  3. The participant suffers from recurrent MDD as the primary diagnosis according to Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision (DSM-IV-TR) criteria (classification code 296.3x).
+  4. The participant is a man or a woman aged 20 to 75 years (both inclusive) at the time of informed consent.
+  5. The reported duration of the current major depressive episode is 3 to 12 months (both inclusive) at the start of screening period.
+  6. The participant has a MADRS total score ≥26, Hamilton Depression Rating Scale (HAM-D17) total score ≥18, and Clinical global impression scale-Severity (CGI-S) score ≥4 at the start of screening period, at the start of placebo lead-in period and at the start of double-blind treatment period.
+  7. A female participant of childbearing potential who is sexually active with a nonsterilized male partner agrees to use routinely adequate contraception from signing of informed consent to the end of the follow-up period.
+
+EXCLUSION CRITERIA
+
+  1. The participant has any following current or past history of psychiatric disorder and/or neurological disorder:Any current psychiatric disorder other than MDD as defined by DSM-IV-TR (To be assessed by Mini International Neuropsychiatric Interview: MINI).
+  2. A participant who exhibits symptoms of anxiety is eligible unless the participant fulfills the diagnostic criteria for a current anxiety disorder per DSM-IV-TR.
+  3. Current diagnosis or history of manic, mixed or hypomanic episode, MDD with psychotic features, schizophrenia or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by DSM-IV-TR.
+  4. Current diagnosis or history of any substance-related disorder (except nicotine and caffeine-related disorders) as defined by DSM-IV-TR.
+  5. The participant with a positive urine drug screening result at the start of screening period or the start of placebo lead-in period.
+  6. In case that a participant showed positive test result at the start of screening period because the test was conducted before washout of pretreatment drug, the participant is eligible as long as he/she shows negative result at the start of placebo lead-in period.
+  7. Presence or history of any clinically significant neurological disorder (including epilepsy).
+  8. Any neurodegenerative disorder (e.g.
+  9. Alzheimer&#x27;s disease, Parkinson&#x27;s disease, multiple sclerosis, Huntington&#x27;s disease).
+  10. Any DSM-IV-TR axis II disorder.
+  11. The participant has the current or previous major depressive episode which was considered by the investigator or sub-investigator to have been resistant to 2 or more adequate antidepressants treatments of at least 6 weeks duration each at sufficient doses.
+  12. The participant has received any augmentation therapy (e.g. lithium, T3/T4, lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of other antidepressant, etc.) for the current major depressive episode.
+  13. In the opinion of the investigator or sub-investigator, the participant has experienced significant number of major depressive episodes in the past, and is suspected of disease other than MDD.
+  14. In the opinion of the investigator or sub-investigator, the participant has experienced the first major depressive episode at his/her young age, and is suspected of disease other than MDD.
+  15. The participant has a MADRS total score at the start of double-blind treatment period that has improved or aggravated by 25% or more from the score at the start of placebo lead-in period.
+  16. The participant is significantly non-compliant with the study drug in the placebo lead-in period; e.g., not taking the study drug for 6 or more consecutive days.
+  17. The participant has received electroconvulsive therapy, vagus nerve stimulation, or repetitive transcranial magnetic stimulation therapy within 6 months prior to the screening period, or plans to initiate such therapy during the study.
+  18. The participant is receiving cognitive-behavioral therapy or psychotherapy at the time of informed consent, or plans to initiate such therapy during the study.
+  19. The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS at the start of screening period, at the start of placebo lead-in period or at the start of double-blind treatment period, or has attempted suicide within 6 months prior to the start of screening period.
+  20. The participant has experienced any environmental change (e.g. temporary retirement, returnment, change of residence) considered by the investigator or sub-investigator to have the potential to impact on the efficacy evaluation, or plans such environmental changes during the study.
+  21. The participant is currently receiving drug therapy for thyroid dysfunction.
+  22. The participant is currently receiving hormonal therapy for gynecological disease.
+  23. The participant has taken excluded medications during the protocol-specified period, or will require to take excluded medications during the study.
+  24. The participant has previously received vortioxetine.
+  25. The participant has received study drug in a previous clinical study of Lu AA21004 (including this study).
+  26. The participant has a clinically significant chronic liver disease.
+  27. The participant has a history of severe allergy or hypersensitivity to drugs.
+  28. The participant has a clinically significant unstable illness, for example, liver disorder or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue disorders, eye disorders, or metabolic disturbance.
+  29. The participant has clinically significant abnormal vital signs as determined by the investigator or sub-investigator at the start of screening period, placebo lead-in period, or double-blind treatment period.
+  30. The participant has clinically significant abnormal electrocardiogram (ECG) as determined by the investigator or sub-investigator, at the start of the screening period, at the start of placebo lead-in period, or at the start of double-blind treatment period.
+  31. The participant has clinically significant abnormal findings of clinical laboratory tests as determined by the investigator or sub-investigator, or has alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &gt;2 × ULN at the start of screening period or at the start of placebo lead-in period.
+  32. If female, the participant is pregnant or lactating.
+  33. The participant has a disease or takes medications that could, in the opinion of the investigator or sub-investigator, interfere with the evaluation of the safety, tolerability, or efficacy.
+  34. The participant is, in the opinion of the investigator or sub-investigator, unsuitable for this study for any other reason.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 29):
+
+INCLUSION CRITERIA
+
+  1. The participant has a primary diagnosis of recurrent major depressive disorder (MDD) according to DSM-IV-TR criteria (classification code 296.3x).
+  2. The participant is a man or a woman aged between 20 and 75 years (both inclusive).
+  3. The reported duration of the participant&amp;#x27;s current major depressive episode is ≥3 months and ≤12 months.
+  4. The participant has a MADRS total score ≥26, HAM-D17 total score ≥18, and a Clinical Global Impression-Severity of Illness (CGI-S) score ≥4.
+
+EXCLUSION CRITERIA
+
+  1. The participant has any of the following current or past history of psychiatric disorder and/or neurological disorder:
+  2. Any psychiatric disorder other than MDD as defined by the DSM-IV-TR (to be assessed using the Mini-International Neuropsychiatric Interview (M.I.N.I.)). However, participants with anxiety symptoms can be included in the study as long as they are not diagnosed with an anxiety disorder as defined by the DSM-IV-TR.
+  3. Manic, mixed, or hypomanic episode, MDD with psychotic features, schizophrenia, or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by the DSM-IV-TR.
+  4. Substance-induced mood disorder (except nicotine and caffeine-related disorders) as defined by the DSM-IV-TR.
+  5. The participant has a positive urine drug screening test result.
+  6. The participant has a current or history of clinically significant neurological disorder (including epilepsy).
+  7. The participant has a neurodegenerative disorder (e.g., Alzheimer&amp;#x27;s disease, Parkinson&amp;#x27;s disease, multiple sclerosis, Huntington&amp;#x27;s disease).
+  8. The participant has any DSM-IV-TR Axis II disorder.
+  9. The participant has not responded to 2 or more adequate trials of antidepressant treatment (treatments of at least 6 weeks duration each at sufficient doses).
+  10. The participant has received any therapy (e.g., lithium, T3/T4, Lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of antidepressant, etc.) to enhance the drug effect on the current major depressive episode.
+  11. The participant has shown a significant number of major depressive episodes in the past and is suspected of having a disease other than MDD.
+  12. The participant has started to experience a major depressive episode at a young age and is suspected of having a disease other than MDD.
+  13. The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS, or has attempted suicide within 6 months prior to the start of the Screening period.
+  14. The participant has experienced or will experience during the study any environmental change (e.g., temporary retirement, returnment, change of residence, etc.) that is determined by the investigator to have the potential to impact on the efficacy evaluation.
+  15. The participant has a clinically significant unstable illness, for example, hepatic impairment or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue, eye, or metabolic disturbance.
+  16. Changes Made:
+  17. Replaced &amp;quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&amp;quot; with &amp;quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&amp;quot; for consistency.
+  18. Removed unnecessary repetition of &amp;quot;as defined by the DSM-IV-TR&amp;quot; for clarity.
+  19. Consolidated similar
+
+EXCLUSION CRITERIA
+
+  1. for conciseness."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 29):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. The participant &lt;span class=&quot;diff-add&quot;&gt;has&lt;/span&gt; a primary diagnosis &lt;span class=&quot;diff-add&quot;&gt;of recurrent major depressive disorder (MDD) &lt;/span&gt;according to &lt;span class=&quot;diff-add&quot;&gt;DSM-IV-TR&lt;/span&gt; criteria (classification code 296.3x).
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; The participant is a man or a woman aged &lt;span class=&quot;diff-add&quot;&gt;between &lt;/span&gt;20 &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; 75 years (both &lt;span class=&quot;diff-add&quot;&gt;inclusive).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; The reported duration of the &lt;span class=&quot;diff-add&quot;&gt;participant&amp;#x27;s &lt;/span&gt;current major depressive episode is &lt;span class=&quot;diff-add&quot;&gt;≥3&lt;/span&gt; months &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≤12&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;months.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; The participant has a MADRS total score ≥26, &lt;span class=&quot;diff-add&quot;&gt;HAM-D17&lt;/span&gt; total score ≥18, and &lt;span class=&quot;diff-add&quot;&gt;a &lt;/span&gt;Clinical &lt;span class=&quot;diff-add&quot;&gt;Global&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Impression-Severity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of Illness&lt;/span&gt; (CGI-S) score &lt;span class=&quot;diff-add&quot;&gt;≥4.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. The participant has any&lt;span class=&quot;diff-add&quot;&gt; of the&lt;/span&gt; following current or past history of psychiatric disorder and/or neurological &lt;span class=&quot;diff-add&quot;&gt;disorder:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Any&lt;/span&gt; psychiatric disorder other than MDD as defined by &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;DSM-IV-TR &lt;span class=&quot;diff-add&quot;&gt;(to&lt;/span&gt; be assessed &lt;span class=&quot;diff-add&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Mini-International&lt;/span&gt; Neuropsychiatric &lt;span class=&quot;diff-add&quot;&gt;Interview&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(M.I.N.I.)).&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;However,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;anxiety&lt;/span&gt; symptoms &lt;span class=&quot;diff-add&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;included&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;they&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;diagnosed with an&lt;/span&gt; anxiety disorder &lt;span class=&quot;diff-add&quot;&gt;as defined by the&lt;/span&gt; DSM-IV-TR.
+  3. &lt;span class=&quot;diff-add&quot;&gt;Manic,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mixed,&lt;/span&gt; or hypomanic episode, MDD with psychotic features, &lt;span class=&quot;diff-add&quot;&gt;schizophrenia,&lt;/span&gt; or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;DSM-IV-TR.
+  4. &lt;span class=&quot;diff-add&quot;&gt;Substance-induced&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mood&lt;/span&gt; disorder (except nicotine and caffeine-related disorders) as defined by &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;DSM-IV-TR.
+  5. The participant &lt;span class=&quot;diff-add&quot;&gt;has&lt;/span&gt; a positive urine drug screening &lt;span class=&quot;diff-add&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;result.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;has&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;current&lt;/span&gt; or history of clinically significant neurological disorder (including epilepsy).
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The participant has a&lt;/span&gt; neurodegenerative disorder &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; Alzheimer&amp;#x27;s disease, Parkinson&amp;#x27;s disease, multiple sclerosis, Huntington&amp;#x27;s disease).
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; The participant has &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;DSM-IV-TR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Axis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;II&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;disorder.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;responded&lt;/span&gt; to 2 or more adequate &lt;span class=&quot;diff-add&quot;&gt;trials&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of antidepressant treatment (treatments&lt;/span&gt; of at least 6 weeks duration each at sufficient &lt;span class=&quot;diff-add&quot;&gt;doses).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; The participant has received any therapy &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; lithium, T3/T4, &lt;span class=&quot;diff-add&quot;&gt;Lamotrigine,&lt;/span&gt; sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of antidepressant, etc.) &lt;span class=&quot;diff-add&quot;&gt;to enhance the drug effect on&lt;/span&gt; the current major depressive episode.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; participant has &lt;span class=&quot;diff-add&quot;&gt;shown a&lt;/span&gt; significant number of major depressive episodes in the &lt;span class=&quot;diff-add&quot;&gt;past&lt;/span&gt; and is suspected of &lt;span class=&quot;diff-add&quot;&gt;having a &lt;/span&gt;disease other than MDD.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; participant has &lt;span class=&quot;diff-add&quot;&gt;started&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;experience a&lt;/span&gt; major depressive episode at &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; young &lt;span class=&quot;diff-add&quot;&gt;age&lt;/span&gt; and is suspected of &lt;span class=&quot;diff-add&quot;&gt;having a &lt;/span&gt;disease other than MDD.
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the &lt;span class=&quot;diff-add&quot;&gt;MADRS,&lt;/span&gt; or has attempted suicide within 6 months prior to the start of &lt;span class=&quot;diff-add&quot;&gt;the Screening&lt;/span&gt; period.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; The participant has experienced &lt;span class=&quot;diff-add&quot;&gt;or will experience during the study &lt;/span&gt;any environmental change &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; temporary retirement, returnment, change of &lt;span class=&quot;diff-add&quot;&gt;residence,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;etc.) that is determined&lt;/span&gt; by the investigator to have the potential to impact on the efficacy &lt;span class=&quot;diff-add&quot;&gt;evaluation.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; The participant has a clinically significant unstable illness, for example, &lt;span class=&quot;diff-add&quot;&gt;hepatic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;impairment&lt;/span&gt; or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous &lt;span class=&quot;diff-add&quot;&gt;tissue,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eye,&lt;/span&gt; or metabolic disturbance.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Changes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Made:
+  17.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Replaced&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;quot;Mini-International&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Neuropsychiatric&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Interview&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(M.I.N.I.)&amp;quot;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;quot;Mini-International&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Neuropsychiatric Interview (M.I.N.I.)&amp;quot; for consistency.
+  18. Removed unnecessary repetition of &amp;quot;as defined&lt;/span&gt; by the &lt;span class=&quot;diff-add&quot;&gt;DSM-IV-TR&amp;quot;&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;clarity.
+  19.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Consolidated similar
+
+EXCLUSION CRITERIA
+
+  1.&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;conciseness.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 29):
+
+**Inclusion Criteria:**
+
+* The participant has a primary diagnosis of recurrent major depressive disorder (MDD) according to DSM-IV-TR criteria (classification code 296.3x).
+* The participant is a man or a woman aged between 20 and 75 years (both inclusive).
+* The reported duration of the participant&amp;#x27;s current major depressive episode is ≥3 months and ≤12 months.
+* The participant has a MADRS total score ≥26, HAM-D17 total score ≥18, and a Clinical Global Impression-Severity of Illness (CGI-S) score ≥4.
+
+**Exclusion Criteria:**
+
+* The participant has any of the following current or past history of psychiatric disorder and/or neurological disorder:
+    * Any psychiatric disorder other than MDD as defined by the DSM-IV-TR (to be assessed using the Mini-International Neuropsychiatric Interview (M.I.N.I.)). However, participants with anxiety symptoms can be included in the study as long as they are not diagnosed with an anxiety disorder as defined by the DSM-IV-TR.
+    * Manic, mixed, or hypomanic episode, MDD with psychotic features, schizophrenia, or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by the DSM-IV-TR.
+    * Substance-induced mood disorder (except nicotine and caffeine-related disorders) as defined by the DSM-IV-TR.
+* The participant has a positive urine drug screening test result.
+* The participant has a current or history of clinically significant neurological disorder (including epilepsy).
+* The participant has a neurodegenerative disorder (e.g., Alzheimer&amp;#x27;s disease, Parkinson&amp;#x27;s disease, multiple sclerosis, Huntington&amp;#x27;s disease).
+* The participant has any DSM-IV-TR Axis II disorder.
+* The participant has not responded to 2 or more adequate trials of antidepressant treatment (treatments of at least 6 weeks duration each at sufficient doses).
+* The participant has received any therapy (e.g., lithium, T3/T4, Lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of antidepressant, etc.) to enhance the drug effect on the current major depressive episode.
+* The participant has shown a significant number of major depressive episodes in the past and is suspected of having a disease other than MDD.
+* The participant has started to experience a major depressive episode at a young age and is suspected of having a disease other than MDD.
+* The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS, or has attempted suicide within 6 months prior to the start of the Screening period.
+* The participant has experienced or will experience during the study any environmental change (e.g., temporary retirement, returnment, change of residence, etc.) that is determined by the investigator to have the potential to impact on the efficacy evaluation.
+* The participant has a clinically significant unstable illness, for example, hepatic impairment or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue, eye, or metabolic disturbance.
+
+
+
+**Changes Made:**
+
+* Replaced &amp;quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&amp;quot; with &amp;quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&amp;quot; for consistency.
+* Removed unnecessary repetition of &amp;quot;as defined by the DSM-IV-TR&amp;quot; for clarity.
+* Consolidated similar exclusion criteria for conciseness.">Amended Eligibility Criteria (Version 29):
+
+INCLUSION CRITERIA
+
+  1. The participant has a primary diagnosis of recurrent major depressive disorder (MDD) according to DSM-IV-TR criteria (classification code 296.3x).
+  2. The participant is a man or a woman aged between 20 and 75 years (both inclusive).
+  3. The reported duration of the participant&#x27;s current major depressive episode is ≥3 months and ≤12 months.
+  4. The participant has a MADRS total score ≥26, HAM-D17 total score ≥18, and a Clinical Global Impression-Severity of Illness (CGI-S) score ≥4.
+
+EXCLUSION CRITERIA
+
+  1. The participant has any of the following current or past history of psychiatric disorder and/or neurological disorder:
+  2. Any psychiatric disorder other than MDD as defined by the DSM-IV-TR (to be assessed using the Mini-International Neuropsychiatric Interview (M.I.N.I.)). However, participants with anxiety symptoms can be included in the study as long as they are not diagnosed with an anxiety disorder as defined by the DSM-IV-TR.
+  3. Manic, mixed, or hypomanic episode, MDD with psychotic features, schizophrenia, or any other psychotic disorder (including substance-related mental disorders, or mental disorders due to a general medical condition) as defined by the DSM-IV-TR.
+  4. Substance-induced mood disorder (except nicotine and caffeine-related disorders) as defined by the DSM-IV-TR.
+  5. The participant has a positive urine drug screening test result.
+  6. The participant has a current or history of clinically significant neurological disorder (including epilepsy).
+  7. The participant has a neurodegenerative disorder (e.g., Alzheimer&#x27;s disease, Parkinson&#x27;s disease, multiple sclerosis, Huntington&#x27;s disease).
+  8. The participant has any DSM-IV-TR Axis II disorder.
+  9. The participant has not responded to 2 or more adequate trials of antidepressant treatment (treatments of at least 6 weeks duration each at sufficient doses).
+  10. The participant has received any therapy (e.g., lithium, T3/T4, Lamotrigine, sodium valproate, carbamazepine, additional atypical antipsychotic, or concomitant use of antidepressant, etc.) to enhance the drug effect on the current major depressive episode.
+  11. The participant has shown a significant number of major depressive episodes in the past and is suspected of having a disease other than MDD.
+  12. The participant has started to experience a major depressive episode at a young age and is suspected of having a disease other than MDD.
+  13. The participant is at significant risk of suicide or has a score ≥5 on Item 10 (suicidal thoughts) of the MADRS, or has attempted suicide within 6 months prior to the start of the Screening period.
+  14. The participant has experienced or will experience during the study any environmental change (e.g., temporary retirement, returnment, change of residence, etc.) that is determined by the investigator to have the potential to impact on the efficacy evaluation.
+  15. The participant has a clinically significant unstable illness, for example, hepatic impairment or renal insufficiency, or a cardiovascular, pulmonary, gastrointestinal, endocrine, neurological, rheumatologic, immunologic, infectious, neoplastic, skin and subcutaneous tissue, eye, or metabolic disturbance.
+  16. Changes Made:
+  17. Replaced &quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&quot; with &quot;Mini-International Neuropsychiatric Interview (M.I.N.I.)&quot; for consistency.
+  18. Removed unnecessary repetition of &quot;as defined by the DSM-IV-TR&quot; for clarity.
+  19. Consolidated similar
+
+EXCLUSION CRITERIA
+
+  1. for conciseness.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

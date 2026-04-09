@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 83</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 83</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. To be eligible for study entry, all patients must satisfy all of the following criteria at screening:Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drugMust have written informed consent provided by a legal guardian and assent (if needed)Must have a documented history of ASD according to or consistent with the ICD-10 or DSM-5/4 criteria, or neurodevelopmental disabilities caused by neurogenetic diseases (i.e., Smith-Magenis syndrome, Angelman syndrome, Bourneville&amp;#x27;s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community pediatrician or pediatric neurologist or other health care professionals experienced in the diagnosis who took into account early developmental history and school records.
+  2. Must have current sleep problems including: a minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep AND/OR ≥0.5 hour sleep latency from light off in 3 out of 5 nights based on parent reports and patient medical history. (The maintenance and latency problems do not necessarily have to be in the same 3 nights of the week.)May be on a stable dose of non-excluded medication for 3 months, including anti- epileptics, anti-depressants (selective serotonin reuptake inhibitor [SSRIs]), stimulants, all mood changing drugs and β-blockers. (Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep)The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  3. After completing 4 weeks of sleep hygiene training (for those who need it) and 2 weeks of placebo run-in, patients will be eligible to continue the study if they comply with the following:Continue to fulfill sleep problem criteria (see Inclusion Criterion 4) based on the completed Sleep and Nap Diary entered into the electronic case report formParents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights).
+  4. Compliance means that in at least 5 out of 7 nights per week (total of 2 weeks before each scheduled visit) the parents complete the diary pages with all mandatory questionsContinue to fulfil all other eligibility criteria
+
+EXCLUSION CRITERIA
+
+  1. Children who meet any of the following criteria will be excluded from participating in the study:Have had treatment with any form of melatonin within 2 weeks prior to Visit 1
+  2. Have a known allergy to melatonin or lactose
+  3. Have a known moderate to severe sleep apnea
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep disturbances
+  5. Did not respond to previous Circadin® therapy based on past medical history records in the last 2 years
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit 1 (Section 7.1)
+  7. Are females of child-bearing potential that are not using contraceptives and/or breastfeeding and that are sexually active (Abstinence is an acceptable method of contraception.)
+  8. Pregnant females
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study (this does not include patients who participated in the Phase I PK study who can be already included in the study)
+  10. Children with known renal or hepatic insufficiency"
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;To be eligible for study entry, all patients must satisfy all of the following criteria at screening:Must&lt;/span&gt; be children 2 to 17.5 years of age at Visit 2 who comply with taking the study &lt;span class=&quot;diff-del&quot;&gt;drugMust&lt;/span&gt; have written informed consent provided by a legal guardian and assent (if &lt;span class=&quot;diff-del&quot;&gt;needed)Must&lt;/span&gt; have a documented history of ASD according to &lt;span class=&quot;diff-del&quot;&gt;or consistent with the &lt;/span&gt;ICD-10 or &lt;span class=&quot;diff-del&quot;&gt;DSM-5/4 criteria,&lt;/span&gt; or neurodevelopmental disabilities caused by neurogenetic diseases &lt;span class=&quot;diff-del&quot;&gt;(i.e.,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Smith-Magenis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;syndrome,&lt;/span&gt; Angelman syndrome, &lt;span class=&quot;diff-del&quot;&gt;Bourneville&amp;#x27;s&lt;/span&gt; disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community &lt;span class=&quot;diff-del&quot;&gt;pediatrician&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;pediatric&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;neurologist or other health care professionals experienced in the diagnosis&lt;/span&gt; who took into account early developmental history and school records.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Must have current sleep problems including: &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep &lt;span class=&quot;diff-del&quot;&gt;AND/OR&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;≥0.5&lt;/span&gt; hour sleep latency from light off in 3 out of 5 &lt;span class=&quot;diff-del&quot;&gt;nights&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;based on parent reports and patient medical history. (The maintenance and latency problems do not necessarily have to be in the same 3 nights of the week.)May&lt;/span&gt; be on a stable dose of non-excluded medication for 3 months, including &lt;span class=&quot;diff-del&quot;&gt;anti- epileptics,&lt;/span&gt; anti-depressants &lt;span class=&quot;diff-del&quot;&gt;(selective serotonin reuptake inhibitor [SSRIs]),&lt;/span&gt; stimulants, all mood changing drugs and β-blockers. &lt;span class=&quot;diff-del&quot;&gt;(Only&lt;/span&gt; morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed &lt;span class=&quot;diff-del&quot;&gt;sleep)The&lt;/span&gt; sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; After completing 4 weeks of sleep hygiene training &lt;span class=&quot;diff-del&quot;&gt;(for those who need it) &lt;/span&gt;and 2 weeks of &lt;span class=&quot;diff-del&quot;&gt;placebo &lt;/span&gt;run-in, &lt;span class=&quot;diff-del&quot;&gt;patients&lt;/span&gt; will be eligible to continue the study if they comply with the &lt;span class=&quot;diff-del&quot;&gt;following:Continue&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;fulfill&lt;/span&gt; sleep problem criteria (see Inclusion Criterion &lt;span class=&quot;diff-del&quot;&gt;4)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;based on the completed Sleep and Nap Diary entered into the electronic case report formParents&lt;/span&gt; demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights).&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Compliance means that in at least 5 out of 7 nights per week (total of 2 weeks before each scheduled visit) the parents complete the diary pages with all mandatory questionsContinue&lt;/span&gt; to fulfil all other eligibility &lt;span class=&quot;diff-del&quot;&gt;criteria&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Children who meet any of the following criteria will be excluded from participating in the study:Have&lt;/span&gt; had treatment with any form of melatonin within 2 weeks prior to Visit &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt;
+  2. Have a known allergy to melatonin or &lt;span class=&quot;diff-del&quot;&gt;lactose&lt;/span&gt;
+  3. Have a known moderate to severe sleep &lt;span class=&quot;diff-del&quot;&gt;apnea&lt;/span&gt;
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep &lt;span class=&quot;diff-del&quot;&gt;disturbances&lt;/span&gt;
+  5. Did not respond to previous &lt;span class=&quot;diff-del&quot;&gt;Circadin®&lt;/span&gt; therapy based on past medical history records in the last 2 &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt;
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit &lt;span class=&quot;diff-del&quot;&gt;1 (Section 7.1)&lt;/span&gt;
+  7. Are females of child-bearing potential that are not using &lt;span class=&quot;diff-del&quot;&gt;contraceptives and/or breastfeeding and that are sexually active (Abstinence is an acceptable method of contraception.)&lt;/span&gt;
+  8. Pregnant &lt;span class=&quot;diff-del&quot;&gt;females&lt;/span&gt;
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the &lt;span class=&quot;diff-del&quot;&gt;study (this does not include patients who participated in the Phase I PK study who can be already included in the study)&lt;/span&gt;
+  10. Children with known renal or hepatic &lt;span class=&quot;diff-del&quot;&gt;insufficiency&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:To be eligible for study entry, all patients must satisfy all of the following criteria at screening:Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drugMust have written informed consent provided by a legal guardian and assent (if needed)Must have a documented history of ASD according to or consistent with the ICD-10 or DSM-5&amp;amp;#x2F;4 criteria, or neurodevelopmental disabilities caused by neurogenetic diseases (i.e., Smith-Magenis syndrome, Angelman syndrome, Bourneville&amp;amp;#x27;s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community pediatrician or pediatric neurologist or other health care professionals experienced in the diagnosis who took into account early developmental history and school records.Must have current sleep problems including: a minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep AND&amp;amp;#x2F;OR ≥0.5 hour sleep latency from light off in 3 out of 5 nights based on parent reports and patient medical history. (The maintenance and latency problems do not necessarily have to be in the same 3 nights of the week.)May be on a stable dose of non-excluded medication for 3 months, including anti- epileptics, anti-depressants (selective serotonin reuptake inhibitor [SSRIs]), stimulants, all mood changing drugs and β-blockers. (Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep)The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.After completing 4 weeks of sleep hygiene training (for those who need it) and 2 weeks of placebo run-in, patients will be eligible to continue the study if they comply with the following:Continue to fulfill sleep problem criteria (see Inclusion Criterion 4) based on the completed Sleep and Nap Diary entered into the electronic case report formParents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights). Compliance means that in at least 5 out of 7 nights per week (total of 2 weeks before each scheduled visit) the parents complete the diary pages with all mandatory questionsContinue to fulfil all other eligibility criteriaExclusion Criteria:Children who meet any of the following criteria will be excluded from participating in the study:Have had treatment with any form of melatonin within 2 weeks prior to Visit 1Have a known allergy to melatonin or lactoseHave a known moderate to severe sleep apneaHave an untreated medical&amp;amp;#x2F;ineffectively treated&amp;amp;#x2F;psychological condition that may be the etiology of sleep disturbancesDid not respond to previous Circadin® therapy based on past medical history records in the last 2 yearsAre taking or have been taking prohibited medication within 2 weeks prior to Visit 1 (Section 7.1)Are females of child-bearing potential that are not using contraceptives and&amp;amp;#x2F;or breastfeeding and that are sexually active (Abstinence is an acceptable method of contraception.)Pregnant femalesAre currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study (this does not include patients who participated in the Phase I PK study who can be already included in the study)Children with known renal or hepatic insufficiency">INCLUSION CRITERIA
+
+  1. To be eligible for study entry, all patients must satisfy all of the following criteria at screening:Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drugMust have written informed consent provided by a legal guardian and assent (if needed)Must have a documented history of ASD according to or consistent with the ICD-10 or DSM-5/4 criteria, or neurodevelopmental disabilities caused by neurogenetic diseases (i.e., Smith-Magenis syndrome, Angelman syndrome, Bourneville&#x27;s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community pediatrician or pediatric neurologist or other health care professionals experienced in the diagnosis who took into account early developmental history and school records.
+  2. Must have current sleep problems including: a minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep AND/OR ≥0.5 hour sleep latency from light off in 3 out of 5 nights based on parent reports and patient medical history. (The maintenance and latency problems do not necessarily have to be in the same 3 nights of the week.)May be on a stable dose of non-excluded medication for 3 months, including anti- epileptics, anti-depressants (selective serotonin reuptake inhibitor [SSRIs]), stimulants, all mood changing drugs and β-blockers. (Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep)The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  3. After completing 4 weeks of sleep hygiene training (for those who need it) and 2 weeks of placebo run-in, patients will be eligible to continue the study if they comply with the following:Continue to fulfill sleep problem criteria (see Inclusion Criterion 4) based on the completed Sleep and Nap Diary entered into the electronic case report formParents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights).
+  4. Compliance means that in at least 5 out of 7 nights per week (total of 2 weeks before each scheduled visit) the parents complete the diary pages with all mandatory questionsContinue to fulfil all other eligibility criteria
+
+EXCLUSION CRITERIA
+
+  1. Children who meet any of the following criteria will be excluded from participating in the study:Have had treatment with any form of melatonin within 2 weeks prior to Visit 1
+  2. Have a known allergy to melatonin or lactose
+  3. Have a known moderate to severe sleep apnea
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep disturbances
+  5. Did not respond to previous Circadin® therapy based on past medical history records in the last 2 years
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit 1 (Section 7.1)
+  7. Are females of child-bearing potential that are not using contraceptives and/or breastfeeding and that are sexually active (Abstinence is an acceptable method of contraception.)
+  8. Pregnant females
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study (this does not include patients who participated in the Phase I PK study who can be already included in the study)
+  10. Children with known renal or hepatic insufficiency</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drug.
+  2. Must have written informed consent provided by a legal guardian and assent (if needed).
+  3. Must have a documented history of ASD according to ICD-10 or DSM-5 or neurodevelopmental disabilities caused by neurogenetic diseases (Smith-Magenis syndrome [SMS], Angelman syndrome, Bourneville’s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community paediatrician or paediatric neurologist, who took into account early developmental history and school records.
+  4. Must have current sleep problems including: A minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep with more than 0.5 hour sleep latency from light off in 3 out of 5 nights.
+  5. May be on a stable dose of non-excluded medication for 3 months, including anti-epileptics, anti-depressants (SSRIs), stimulants, all mood changing drugs and β-blockers. Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep.
+  6. The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  7. After completing 4 weeks of sleep hygiene training and 2 weeks of run-in, children will be eligible to continue the study if they comply with the following: Continue to fulfil sleep problem criteria (see Inclusion Criterion 4). Parents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights). Continue to fulfil all other eligibility criteria.
+
+EXCLUSION CRITERIA
+
+  1. Have had treatment with any form of melatonin within 2 weeks prior to Visit 1.
+  2. Have a known allergy to melatonin or lactose.
+  3. Have a known moderate to severe sleep apnea.
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep disturbances.
+  5. Did not respond to previous Circadin therapy based on past medical history records in the last 2 years.
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit 1.
+  7. Are females of child-bearing potential that are not using contraceptives.
+  8. Pregnant females.
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study.
+  10. Children with known renal or hepatic insufficiency."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Must&lt;/span&gt; be children 2 to 17.5 years of age at Visit 2 who comply with taking the study &lt;span class=&quot;diff-add&quot;&gt;drug.
+  2. Must&lt;/span&gt; have written informed consent provided by a legal guardian and assent (if &lt;span class=&quot;diff-add&quot;&gt;needed).
+  3. Must&lt;/span&gt; have a documented history of ASD according to ICD-10 or &lt;span class=&quot;diff-add&quot;&gt;DSM-5&lt;/span&gt; or neurodevelopmental disabilities caused by neurogenetic diseases &lt;span class=&quot;diff-add&quot;&gt;(Smith-Magenis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;syndrome&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;[SMS],&lt;/span&gt; Angelman syndrome, &lt;span class=&quot;diff-add&quot;&gt;Bourneville’s&lt;/span&gt; disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community &lt;span class=&quot;diff-add&quot;&gt;paediatrician&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;paediatric&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;neurologist,&lt;/span&gt; who took into account early developmental history and school records.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Must have current sleep problems including: &lt;span class=&quot;diff-add&quot;&gt;A&lt;/span&gt; minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;more than 0.5&lt;/span&gt; hour sleep latency from light off in 3 out of 5 &lt;span class=&quot;diff-add&quot;&gt;nights.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;May&lt;/span&gt; be on a stable dose of non-excluded medication for 3 months, including &lt;span class=&quot;diff-add&quot;&gt;anti-epileptics,&lt;/span&gt; anti-depressants &lt;span class=&quot;diff-add&quot;&gt;(SSRIs),&lt;/span&gt; stimulants, all mood changing drugs and β-blockers. &lt;span class=&quot;diff-add&quot;&gt;Only&lt;/span&gt; morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed &lt;span class=&quot;diff-add&quot;&gt;sleep.
+  6. The&lt;/span&gt; sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; After completing 4 weeks of sleep hygiene training and 2 weeks of run-in, &lt;span class=&quot;diff-add&quot;&gt;children&lt;/span&gt; will be eligible to continue the study if they comply with the &lt;span class=&quot;diff-add&quot;&gt;following: Continue&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;fulfil&lt;/span&gt; sleep problem criteria (see Inclusion Criterion &lt;span class=&quot;diff-add&quot;&gt;4).&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Parents&lt;/span&gt; demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights). &lt;span class=&quot;diff-add&quot;&gt;Continue&lt;/span&gt; to fulfil all other eligibility &lt;span class=&quot;diff-add&quot;&gt;criteria.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Have&lt;/span&gt; had treatment with any form of melatonin within 2 weeks prior to Visit &lt;span class=&quot;diff-add&quot;&gt;1.&lt;/span&gt;
+  2. Have a known allergy to melatonin or &lt;span class=&quot;diff-add&quot;&gt;lactose.&lt;/span&gt;
+  3. Have a known moderate to severe sleep &lt;span class=&quot;diff-add&quot;&gt;apnea.&lt;/span&gt;
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep &lt;span class=&quot;diff-add&quot;&gt;disturbances.&lt;/span&gt;
+  5. Did not respond to previous &lt;span class=&quot;diff-add&quot;&gt;Circadin&lt;/span&gt; therapy based on past medical history records in the last 2 &lt;span class=&quot;diff-add&quot;&gt;years.&lt;/span&gt;
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit &lt;span class=&quot;diff-add&quot;&gt;1.&lt;/span&gt;
+  7. Are females of child-bearing potential that are not using &lt;span class=&quot;diff-add&quot;&gt;contraceptives.&lt;/span&gt;
+  8. Pregnant &lt;span class=&quot;diff-add&quot;&gt;females.&lt;/span&gt;
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  10. Children with known renal or hepatic &lt;span class=&quot;diff-add&quot;&gt;insufficiency.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+- Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drug.
+- Must have written informed consent provided by a legal guardian and assent (if needed).
+- Must have a documented history of ASD according to ICD-10 or DSM-5 or neurodevelopmental disabilities caused by neurogenetic diseases (Smith-Magenis syndrome [SMS], Angelman syndrome, Bourneville’s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community paediatrician or paediatric neurologist, who took into account early developmental history and school records.
+- Must have current sleep problems including: A minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep with more than 0.5 hour sleep latency from light off in 3 out of 5 nights.
+- May be on a stable dose of non-excluded medication for 3 months, including anti-epileptics, anti-depressants (SSRIs), stimulants, all mood changing drugs and β-blockers. Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep.
+- The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+- After completing 4 weeks of sleep hygiene training and 2 weeks of run-in, children will be eligible to continue the study if they comply with the following: Continue to fulfil sleep problem criteria (see Inclusion Criterion 4). Parents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights). Continue to fulfil all other eligibility criteria.
+
+Exclusion Criteria:
+- Have had treatment with any form of melatonin within 2 weeks prior to Visit 1.
+- Have a known allergy to melatonin or lactose.
+- Have a known moderate to severe sleep apnea.
+- Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep disturbances.
+- Did not respond to previous Circadin therapy based on past medical history records in the last 2 years.
+- Are taking or have been taking prohibited medication within 2 weeks prior to Visit 1.
+- Are females of child-bearing potential that are not using contraceptives.
+- Pregnant females.
+- Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study.
+- Children with known renal or hepatic insufficiency.">INCLUSION CRITERIA
+
+  1. Must be children 2 to 17.5 years of age at Visit 2 who comply with taking the study drug.
+  2. Must have written informed consent provided by a legal guardian and assent (if needed).
+  3. Must have a documented history of ASD according to ICD-10 or DSM-5 or neurodevelopmental disabilities caused by neurogenetic diseases (Smith-Magenis syndrome [SMS], Angelman syndrome, Bourneville’s disease [tuberous sclerosis]) as confirmed by case note review showing that diagnosis was reached through assessment by a community paediatrician or paediatric neurologist, who took into account early developmental history and school records.
+  4. Must have current sleep problems including: A minimum of 3 months of impaired sleep defined as ≤6 hours of continuous sleep with more than 0.5 hour sleep latency from light off in 3 out of 5 nights.
+  5. May be on a stable dose of non-excluded medication for 3 months, including anti-epileptics, anti-depressants (SSRIs), stimulants, all mood changing drugs and β-blockers. Only morning administration of β-blockers is allowed since β-blockers at night have the potential to reduce endogenous melatonin levels and might cause disturbed sleep.
+  6. The sleep disturbance is not due to the direct physiological effects of any concomitant medications such as SSRIs, stimulants, etc.
+  7. After completing 4 weeks of sleep hygiene training and 2 weeks of run-in, children will be eligible to continue the study if they comply with the following: Continue to fulfil sleep problem criteria (see Inclusion Criterion 4). Parents demonstrate compliance in Sleep and Nap Diary completion (5 out of 7 nights). Continue to fulfil all other eligibility criteria.
+
+EXCLUSION CRITERIA
+
+  1. Have had treatment with any form of melatonin within 2 weeks prior to Visit 1.
+  2. Have a known allergy to melatonin or lactose.
+  3. Have a known moderate to severe sleep apnea.
+  4. Have an untreated medical/ineffectively treated/psychological condition that may be the etiology of sleep disturbances.
+  5. Did not respond to previous Circadin therapy based on past medical history records in the last 2 years.
+  6. Are taking or have been taking prohibited medication within 2 weeks prior to Visit 1.
+  7. Are females of child-bearing potential that are not using contraceptives.
+  8. Pregnant females.
+  9. Are currently participating in a clinical trial or have participated in a clinical trial involving medicinal product within the last 3 months prior to the study.
+  10. Children with known renal or hepatic insufficiency.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 67</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 67</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Patients with moderate to severe and end stage renal impairment or dialysis, scheduled for a contrast enhanced MRI with DOTAREM
+
+EXCLUSION CRITERIA
+
+  1. Patient who has received a Gadolinium Based Contrast Agent within the past 12 months prior to inclusion in this study except if the GBCA received is Dotarem"
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patients&lt;/span&gt; with moderate to severe &lt;span class=&quot;diff-del&quot;&gt;and end stage &lt;/span&gt;renal impairment &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dialysis,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;scheduled&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;contrast&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enhanced&lt;/span&gt; MRI &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;DOTAREM
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has received a Gadolinium Based Contrast Agent within&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;past 12 months prior to inclusion&lt;/span&gt; in this study &lt;span class=&quot;diff-del&quot;&gt;except&lt;/span&gt; if the &lt;span class=&quot;diff-del&quot;&gt;GBCA&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;received&lt;/span&gt; is &lt;span class=&quot;diff-del&quot;&gt;Dotarem&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Patients with moderate to severe and end stage renal impairment or dialysis, scheduled for a contrast enhanced MRI with DOTAREMExclusion Criteria:Patient who has received a Gadolinium Based Contrast Agent within the past 12 months prior to inclusion in this study except if the GBCA received is Dotarem">INCLUSION CRITERIA
+
+  1. Patients with moderate to severe and end stage renal impairment or dialysis, scheduled for a contrast enhanced MRI with DOTAREM
+
+EXCLUSION CRITERIA
+
+  1. Patient who has received a Gadolinium Based Contrast Agent within the past 12 months prior to inclusion in this study except if the GBCA received is Dotarem</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria:
+
+Study Design and Methods:
+The study is designed as a prospective transversal observational study with longitudinal safety follow-ups. The primary objective is to estimate the incidence of NSF in patients with moderate to severe renal impairment following DOTAREM® administration. Secondary objectives include collecting data on the general safety profile of DOTAREM®, MRI indication, and conditions of use/administration of the product in this specific population of patients. Additionally, efficacy data will be recorded and described.
+
+Safety Follow-Up and Procedures for Reporting Serious Adverse Events (SAE):
+For any patient included in this study, the radiologist will notify any adverse event occurring during the MRI examination or during the time of usual follow-up post DOTAREM® administration. A Serious Adverse Event (SAE) is any untoward medical occurrence or effect that at any dose:  
+Results in death  
+Is life-threatening  
+Requires hospitalization or prolongation of existing inpatients&amp;#x27; hospitalization,  
+Results in persistent or significant disability or incapacity  
+Is a congenital anomaly or birth defect  
+Is medically significant  
+
+Statistics / Data Analysis:
+Quantitative variables will be summarized in tables including sample sizes, means, standard deviations and extreme values as well as medians and percentiles when appropriate. Qualitative variables will be described in terms of frequencies and percentages of the number of individuals considered.
+
+Population Definitions:
+All-included-Patients (AIP):  
+Includes all patients enrolled in the study and having a questionnaire partially or fully filled in.
+Used for describing demographic data and medical history of patients and the indication for MRI.
+
+Safety Population (SP):  
+Includes all patients exposed to the contrast product and having received at least one injection of contrast agent, regardless of the quantity.
+Described for all safety parameters, administration modalities, adverse events and laboratory data.
+
+Efficacy Population (EP):  
+Includes all patients who have been imaged and who have an available diagnostic assessment.
+Described for image quality and diagnostic quality.
+
+Data Analysis:
+All the data will be collected in electronic format.
+Any electronic database provided will be compatible with an SAS format for statistical analysis.
+The following section summarizes the statistical analysis method which will be fully described in the Statistical Analysis Plan.
+
+Potential Number of Patients Lost to Follow-Up:
+The potential number of patients lost to follow-up was estimated by considering that a loss of 10% of the sample size would be acceptable (100 subjects), corresponding to a minimum observable frequency of 0.111%. If the number of patients lost to follow-up exceeds 100 subjects, the protocol will be amended to revise the sample size.
+
+Information About the Study Results:
+The study report will include all the study analysis performed and will be provided to the participating investigators if needed.
+
+Publication Requirements:
+The study data are the exclusive property of the Sponsor. No data can be published by the physician without prior approval by the Sponsor in writing. The modalities concerning the publications and the presentations about the study results will be defined by the Sponsor.
+
+References:
+1. Christopher U. Herborn, Elmar Honold, Michael Wolf, Jörn Kemper, Sonja Kinner, Gerhard Adam and Jörg Barkhausen: Clinical Safety and diagnostic value of the Gadolinium chelate Gadoterate Meglumine (Gd-DOTA). Inves Radiol 2007;42: 58-62
+2. Henrik S. Thomsen: How to avoid CIN: guidelines from the european society of urogenital radiology. Nephrol Dial Transplant 2005;20[suppl 1]: i18-i22
+3. Ihsan Ergün, Kenan Keven, Irfan Uruç, Yakup Ekmekçi, Basol Canbakan, Ilhan Erden, Oktay Karatan: The safety of gadolinium in patients with stage 3 and 4 renal failure. Nephrol Dial Transplant 2006; 21:697-700
+4. Phillip H. Kuo, Emmanuel Kanal, Ali K. Abu-Alfa, Shawn E. Cowper: Gadolinium-based MR Contrast Agents and Nephrogenic Systemic Fibrosis. Radiology online January 9, 2007, 10.1148/radiol.2423061640
+5. K. Morcos: Nephrogenic systemic fibrosis following the administration of extracellular gadolinium based contrast agents: is the stability of the contrast agent molecule an important factor in the pathogenesis of this condition? The British Journal of Radiology DOI:10.1259/bjr/17111243
+6. Cowper SE, Robin HS, Steinberg SM, Su LD, Gupta S, LeBoit PE (2000). &amp;quot;Scleromyxoedema-like cutaneous diseases in renal-dialysis patients&amp;quot;. Lancet 356 (9234): 1000–1.
+7. Grobner T (2006). &amp;quot;Gadolinium--a specific trigger for the development of nephrogenic fibrosing dermopathy and nephrogenic systemic fibrosis?&amp;quot;. Nephrol. Dial. Transplant. 8 Marckmann P, Skov L, Rossen K, et al (2006). &amp;quot;Nephrogenic systemic fibrosis: suspected causative role of gadodiamide used for contrast-enhanced magnetic resonance imaging&amp;quot;. J. Am. Soc. Nephrol. 17 (9): 2359–62.
+8. Nephrogenic fibrosing dermopathy associated with exposure to gadolinium-containing contrast agents--St. Louis, Missouri, 2002-2006&amp;quot;. MMWR Morb. Mortal. Wkly. Rep. 56 (7): 137–41.
+9. 2007"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Criteria:
+
+Study Design and Methods:
+The study is designed as a prospective transversal observational study with longitudinal safety follow-ups. The primary objective is to estimate the incidence of NSF in patients&lt;/span&gt; with moderate to severe renal impairment &lt;span class=&quot;diff-add&quot;&gt;following&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;DOTAREM®&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;administration.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Secondary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;objectives&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;collecting data on the general safety profile of DOTAREM®,&lt;/span&gt; MRI &lt;span class=&quot;diff-add&quot;&gt;indication,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use/administration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;product&lt;/span&gt; in this &lt;span class=&quot;diff-add&quot;&gt;specific population of patients. Additionally, efficacy data will be recorded and described.
+
+Safety Follow-Up and Procedures for Reporting Serious Adverse Events (SAE):
+For any patient included in this study, the radiologist will notify any adverse event occurring during the MRI examination or during the time of usual follow-up post DOTAREM® administration. A Serious Adverse Event (SAE) is any untoward medical occurrence or effect that at any dose:  
+Results in death  
+Is life-threatening  
+Requires hospitalization or prolongation of existing inpatients&amp;#x27; hospitalization,  
+Results in persistent or significant disability or incapacity  
+Is a congenital anomaly or birth defect  
+Is medically significant  
+
+Statistics / Data Analysis:
+Quantitative variables will be summarized in tables including sample sizes, means, standard deviations and extreme values as well as medians and percentiles when appropriate. Qualitative variables will be described in terms of frequencies and percentages of the number of individuals considered.
+
+Population Definitions:
+All-included-Patients (AIP):  
+Includes all patients enrolled in the &lt;/span&gt;study &lt;span class=&quot;diff-add&quot;&gt;and having a questionnaire partially or fully filled in.
+Used for describing demographic data and medical history of patients and the indication for MRI.
+
+Safety Population (SP):  
+Includes all patients exposed to the contrast product and having received at least one injection of contrast agent, regardless of the quantity.
+Described for all safety parameters, administration modalities, adverse events and laboratory data.
+
+Efficacy Population (EP):  
+Includes all patients who have been imaged and who have an available diagnostic assessment.
+Described for image quality and diagnostic quality.
+
+Data Analysis:
+All the data will be collected in electronic format.
+Any electronic database provided will be compatible with an SAS format for statistical analysis.
+The following section summarizes the statistical analysis method which will be fully described in the Statistical Analysis Plan.
+
+Potential Number of Patients Lost to Follow-Up:
+The potential number of patients lost to follow-up was estimated by considering that a loss of 10% of the sample size would be acceptable (100 subjects), corresponding to a minimum observable frequency of 0.111%. If the number of patients lost to follow-up exceeds 100 subjects, the protocol will be amended to revise the sample size.
+
+Information About the Study Results:
+The study report will include all the study analysis performed and will be provided to the participating investigators&lt;/span&gt; if &lt;span class=&quot;diff-add&quot;&gt;needed.
+
+Publication Requirements:
+The study data are &lt;/span&gt;the &lt;span class=&quot;diff-add&quot;&gt;exclusive&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;property of the Sponsor. No data can be published by the physician without prior approval by the Sponsor in writing. The modalities concerning the publications and the presentations about the study results will be defined by the Sponsor.
+
+References:
+1. Christopher U. Herborn, Elmar Honold, Michael Wolf, Jörn Kemper, Sonja Kinner, Gerhard Adam and Jörg Barkhausen: Clinical Safety and diagnostic value of the Gadolinium chelate Gadoterate Meglumine (Gd-DOTA). Inves Radiol 2007;42: 58-62
+2. Henrik S. Thomsen: How to avoid CIN: guidelines from the european society of urogenital radiology. Nephrol Dial Transplant 2005;20[suppl 1]: i18-i22
+3. Ihsan Ergün, Kenan Keven, Irfan Uruç, Yakup Ekmekçi, Basol Canbakan, Ilhan Erden, Oktay Karatan: The safety of gadolinium in patients with stage 3 and 4 renal failure. Nephrol Dial Transplant 2006; 21:697-700
+4. Phillip H. Kuo, Emmanuel Kanal, Ali K. Abu-Alfa, Shawn E. Cowper: Gadolinium-based MR Contrast Agents and Nephrogenic Systemic Fibrosis. Radiology online January 9, 2007, 10.1148/radiol.2423061640
+5. K. Morcos: Nephrogenic systemic fibrosis following the administration of extracellular gadolinium based contrast agents:&lt;/span&gt; is &lt;span class=&quot;diff-add&quot;&gt;the stability of the contrast agent molecule an important factor in the pathogenesis of this condition? The British Journal of Radiology DOI:10.1259/bjr/17111243
+6. Cowper SE, Robin HS, Steinberg SM, Su LD, Gupta S, LeBoit PE (2000). &amp;quot;Scleromyxoedema-like cutaneous diseases in renal-dialysis patients&amp;quot;. Lancet 356 (9234): 1000–1.
+7. Grobner T (2006). &amp;quot;Gadolinium--a specific trigger for the development of nephrogenic fibrosing dermopathy and nephrogenic systemic fibrosis?&amp;quot;. Nephrol. Dial. Transplant. 8 Marckmann P, Skov L, Rossen K, et al (2006). &amp;quot;Nephrogenic systemic fibrosis: suspected causative role of gadodiamide used for contrast-enhanced magnetic resonance imaging&amp;quot;. J. Am. Soc. Nephrol. 17 (9): 2359–62.
+8. Nephrogenic fibrosing dermopathy associated with exposure to gadolinium-containing contrast agents--St. Louis, Missouri, 2002-2006&amp;quot;. MMWR Morb. Mortal. Wkly. Rep. 56 (7): 137–41.
+9. 2007&lt;/span&gt;"
+                 data-raw="**Modified Eligibility Criteria:**
+
+### **Study Design and Methods:**
+The study is designed as a prospective transversal observational study with longitudinal safety follow-ups. The primary objective is to estimate the incidence of NSF in patients with moderate to severe renal impairment following DOTAREM® administration. Secondary objectives include collecting data on the general safety profile of DOTAREM®, MRI indication, and conditions of use/administration of the product in this specific population of patients. Additionally, efficacy data will be recorded and described.
+
+### **Safety Follow-Up and Procedures for Reporting Serious Adverse Events (SAE):**
+For any patient included in this study, the radiologist will notify any adverse event occurring during the MRI examination or during the time of usual follow-up post DOTAREM® administration. A Serious Adverse Event (SAE) is any untoward medical occurrence or effect that at any dose:  
+- Results in death  
+- Is life-threatening  
+- Requires hospitalization or prolongation of existing inpatients&amp;#x27; hospitalization,  
+- Results in persistent or significant disability or incapacity  
+- Is a congenital anomaly or birth defect  
+- Is medically significant  
+
+### **Statistics / Data Analysis:**
+Quantitative variables will be summarized in tables including sample sizes, means, standard deviations and extreme values as well as medians and percentiles when appropriate. Qualitative variables will be described in terms of frequencies and percentages of the number of individuals considered.
+
+### **Population Definitions:**
+All-included-Patients (AIP):  
+- Includes all patients enrolled in the study and having a questionnaire partially or fully filled in.
+- Used for describing demographic data and medical history of patients and the indication for MRI.
+
+Safety Population (SP):  
+- Includes all patients exposed to the contrast product and having received at least one injection of contrast agent, regardless of the quantity.
+- Described for all safety parameters, administration modalities, adverse events and laboratory data.
+
+Efficacy Population (EP):  
+- Includes all patients who have been imaged and who have an available diagnostic assessment.
+- Described for image quality and diagnostic quality.
+
+### **Data Analysis:**
+- All the data will be collected in electronic format.
+- Any electronic database provided will be compatible with an SAS format for statistical analysis.
+- The following section summarizes the statistical analysis method which will be fully described in the Statistical Analysis Plan.
+
+### **Potential Number of Patients Lost to Follow-Up:**
+The potential number of patients lost to follow-up was estimated by considering that a loss of 10% of the sample size would be acceptable (100 subjects), corresponding to a minimum observable frequency of 0.111%. If the number of patients lost to follow-up exceeds 100 subjects, the protocol will be amended to revise the sample size.
+
+### **Information About the Study Results:**
+The study report will include all the study analysis performed and will be provided to the participating investigators if needed.
+
+### **Publication Requirements:**
+The study data are the exclusive property of the Sponsor. No data can be published by the physician without prior approval by the Sponsor in writing. The modalities concerning the publications and the presentations about the study results will be defined by the Sponsor.
+
+### **References:**
+1. **Christopher U. Herborn, Elmar Honold, Michael Wolf, Jörn Kemper, Sonja Kinner, Gerhard Adam and Jörg Barkhausen:** Clinical Safety and diagnostic value of the Gadolinium chelate Gadoterate Meglumine (Gd-DOTA). Inves Radiol 2007;42: 58-62
+2. **Henrik S. Thomsen:** How to avoid CIN: guidelines from the european society of urogenital radiology. Nephrol Dial Transplant 2005;20[suppl 1]: i18-i22
+3. **Ihsan Ergün, Kenan Keven, Irfan Uruç, Yakup Ekmekçi, Basol Canbakan, Ilhan Erden, Oktay Karatan:** The safety of gadolinium in patients with stage 3 and 4 renal failure. Nephrol Dial Transplant 2006; 21:697-700
+4. **Phillip H. Kuo, Emmanuel Kanal, Ali K. Abu-Alfa, Shawn E. Cowper:** Gadolinium-based MR Contrast Agents and Nephrogenic Systemic Fibrosis. Radiology online January 9, 2007, 10.1148/radiol.2423061640
+5. **K. Morcos:** Nephrogenic systemic fibrosis following the administration of extracellular gadolinium based contrast agents: is the stability of the contrast agent molecule an important factor in the pathogenesis of this condition? The British Journal of Radiology DOI:10.1259/bjr/17111243
+6. **Cowper SE, Robin HS, Steinberg SM, Su LD, Gupta S, LeBoit PE (2000). &amp;quot;Scleromyxoedema-like cutaneous diseases in renal-dialysis patients&amp;quot;. Lancet 356 (9234): 1000–1.**
+7. **Grobner T (2006). &amp;quot;Gadolinium--a specific trigger for the development of nephrogenic fibrosing dermopathy and nephrogenic systemic fibrosis?&amp;quot;. Nephrol. Dial. Transplant. 8 Marckmann P, Skov L, Rossen K, et al (2006). &amp;quot;Nephrogenic systemic fibrosis: suspected causative role of gadodiamide used for contrast-enhanced magnetic resonance imaging&amp;quot;. J. Am. Soc. Nephrol. 17 (9): 2359–62.**
+8. **Nephrogenic fibrosing dermopathy associated with exposure to gadolinium-containing contrast agents--St. Louis, Missouri, 2002-2006&amp;quot;. MMWR Morb. Mortal. Wkly. Rep. 56 (7): 137–41.**
+9. **2007**">Modified Eligibility Criteria:
+
+Study Design and Methods:
+The study is designed as a prospective transversal observational study with longitudinal safety follow-ups. The primary objective is to estimate the incidence of NSF in patients with moderate to severe renal impairment following DOTAREM® administration. Secondary objectives include collecting data on the general safety profile of DOTAREM®, MRI indication, and conditions of use/administration of the product in this specific population of patients. Additionally, efficacy data will be recorded and described.
+
+Safety Follow-Up and Procedures for Reporting Serious Adverse Events (SAE):
+For any patient included in this study, the radiologist will notify any adverse event occurring during the MRI examination or during the time of usual follow-up post DOTAREM® administration. A Serious Adverse Event (SAE) is any untoward medical occurrence or effect that at any dose:  
+Results in death  
+Is life-threatening  
+Requires hospitalization or prolongation of existing inpatients&#x27; hospitalization,  
+Results in persistent or significant disability or incapacity  
+Is a congenital anomaly or birth defect  
+Is medically significant  
+
+Statistics / Data Analysis:
+Quantitative variables will be summarized in tables including sample sizes, means, standard deviations and extreme values as well as medians and percentiles when appropriate. Qualitative variables will be described in terms of frequencies and percentages of the number of individuals considered.
+
+Population Definitions:
+All-included-Patients (AIP):  
+Includes all patients enrolled in the study and having a questionnaire partially or fully filled in.
+Used for describing demographic data and medical history of patients and the indication for MRI.
+
+Safety Population (SP):  
+Includes all patients exposed to the contrast product and having received at least one injection of contrast agent, regardless of the quantity.
+Described for all safety parameters, administration modalities, adverse events and laboratory data.
+
+Efficacy Population (EP):  
+Includes all patients who have been imaged and who have an available diagnostic assessment.
+Described for image quality and diagnostic quality.
+
+Data Analysis:
+All the data will be collected in electronic format.
+Any electronic database provided will be compatible with an SAS format for statistical analysis.
+The following section summarizes the statistical analysis method which will be fully described in the Statistical Analysis Plan.
+
+Potential Number of Patients Lost to Follow-Up:
+The potential number of patients lost to follow-up was estimated by considering that a loss of 10% of the sample size would be acceptable (100 subjects), corresponding to a minimum observable frequency of 0.111%. If the number of patients lost to follow-up exceeds 100 subjects, the protocol will be amended to revise the sample size.
+
+Information About the Study Results:
+The study report will include all the study analysis performed and will be provided to the participating investigators if needed.
+
+Publication Requirements:
+The study data are the exclusive property of the Sponsor. No data can be published by the physician without prior approval by the Sponsor in writing. The modalities concerning the publications and the presentations about the study results will be defined by the Sponsor.
+
+References:
+1. Christopher U. Herborn, Elmar Honold, Michael Wolf, Jörn Kemper, Sonja Kinner, Gerhard Adam and Jörg Barkhausen: Clinical Safety and diagnostic value of the Gadolinium chelate Gadoterate Meglumine (Gd-DOTA). Inves Radiol 2007;42: 58-62
+2. Henrik S. Thomsen: How to avoid CIN: guidelines from the european society of urogenital radiology. Nephrol Dial Transplant 2005;20[suppl 1]: i18-i22
+3. Ihsan Ergün, Kenan Keven, Irfan Uruç, Yakup Ekmekçi, Basol Canbakan, Ilhan Erden, Oktay Karatan: The safety of gadolinium in patients with stage 3 and 4 renal failure. Nephrol Dial Transplant 2006; 21:697-700
+4. Phillip H. Kuo, Emmanuel Kanal, Ali K. Abu-Alfa, Shawn E. Cowper: Gadolinium-based MR Contrast Agents and Nephrogenic Systemic Fibrosis. Radiology online January 9, 2007, 10.1148/radiol.2423061640
+5. K. Morcos: Nephrogenic systemic fibrosis following the administration of extracellular gadolinium based contrast agents: is the stability of the contrast agent molecule an important factor in the pathogenesis of this condition? The British Journal of Radiology DOI:10.1259/bjr/17111243
+6. Cowper SE, Robin HS, Steinberg SM, Su LD, Gupta S, LeBoit PE (2000). &quot;Scleromyxoedema-like cutaneous diseases in renal-dialysis patients&quot;. Lancet 356 (9234): 1000–1.
+7. Grobner T (2006). &quot;Gadolinium--a specific trigger for the development of nephrogenic fibrosing dermopathy and nephrogenic systemic fibrosis?&quot;. Nephrol. Dial. Transplant. 8 Marckmann P, Skov L, Rossen K, et al (2006). &quot;Nephrogenic systemic fibrosis: suspected causative role of gadodiamide used for contrast-enhanced magnetic resonance imaging&quot;. J. Am. Soc. Nephrol. 17 (9): 2359–62.
+8. Nephrogenic fibrosing dermopathy associated with exposure to gadolinium-containing contrast agents--St. Louis, Missouri, 2002-2006&quot;. MMWR Morb. Mortal. Wkly. Rep. 56 (7): 137–41.
+9. 2007</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

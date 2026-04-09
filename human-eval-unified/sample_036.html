@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 36</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 36</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. For VMMC clients:are at least 18 years of age or over
+  2. Possession of own phone at enrollment
+  3. Willing to respond to daily text
+  4. Provides contact details (phone, address)
+  5. Undergoes surgical MCWilling to follow NDoH VMMC protocolsNo interoperative AEInformed consent
+  6. Receives confirmed 2wT enrollment text.
+
+EXCLUSION CRITERIA
+
+  1. For VMMC clients:Not meeting above requirements
+  2. Men without cell phones
+  3. Men who chose Pre
+  4. Pex device-based VMMCInter-operative AE during VMMCNo informed consent"
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; For VMMC &lt;span class=&quot;diff-del&quot;&gt;clients:are&lt;/span&gt; at least 18 years of age or &lt;span class=&quot;diff-del&quot;&gt;over
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Possession&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;own&lt;/span&gt; phone at enrollment&lt;span class=&quot;diff-del&quot;&gt;
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Willing&lt;/span&gt; to respond to daily text&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Provides&lt;/span&gt; contact details &lt;span class=&quot;diff-del&quot;&gt;(phone,&lt;/span&gt; address)&lt;span class=&quot;diff-del&quot;&gt;
+  5. Undergoes&lt;/span&gt; surgical &lt;span class=&quot;diff-del&quot;&gt;MCWilling&lt;/span&gt; to follow NDoH VMMC &lt;span class=&quot;diff-del&quot;&gt;protocolsNo&lt;/span&gt; interoperative &lt;span class=&quot;diff-del&quot;&gt;AEInformed&lt;/span&gt; consent&lt;span class=&quot;diff-del&quot;&gt;
+  6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Receives&lt;/span&gt; confirmed 2wT enrollment &lt;span class=&quot;diff-del&quot;&gt;text.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. For VMMC &lt;span class=&quot;diff-del&quot;&gt;clients:Not&lt;/span&gt; meeting above requirements
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Men without cell phones
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Men who chose &lt;span class=&quot;diff-del&quot;&gt;Pre
+  4. Pex&lt;/span&gt; device-based &lt;span class=&quot;diff-del&quot;&gt;VMMCInter-operative&lt;/span&gt; AE during &lt;span class=&quot;diff-del&quot;&gt;VMMCNo&lt;/span&gt; informed consent"
+                 data-raw="Inclusion Criteria:For VMMC clients:are at least 18 years of age or overPossession of own phone at enrollmentWilling to respond to daily textProvides contact details (phone, address)Undergoes surgical MCWilling to follow NDoH VMMC protocolsNo interoperative AEInformed consentReceives confirmed 2wT enrollment text.Exclusion Criteria:For VMMC clients:Not meeting above requirementsMen without cell phonesMen who chose PrePex device-based VMMCInter-operative AE during VMMCNo informed consent">INCLUSION CRITERIA
+
+  1. For VMMC clients:are at least 18 years of age or over
+  2. Possession of own phone at enrollment
+  3. Willing to respond to daily text
+  4. Provides contact details (phone, address)
+  5. Undergoes surgical MCWilling to follow NDoH VMMC protocolsNo interoperative AEInformed consent
+  6. Receives confirmed 2wT enrollment text.
+
+EXCLUSION CRITERIA
+
+  1. For VMMC clients:Not meeting above requirements
+  2. Men without cell phones
+  3. Men who chose Pre
+  4. Pex device-based VMMCInter-operative AE during VMMCNo informed consent</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 9)
+
+For VMMC Clients:
+
+ Are at least 18 years of age or older
+ Possess a functioning cell phone at enrollment
+ Are willing to respond to daily text messages
+ Provide contact details (phone number, address)
+ Undergo surgical VMMC
+ Are willing to follow NDoH VMMC protocols
+ Have not experienced an interoperative AE during VMMC
+ Provide informed consent
+ Receive a confirmed 2wT enrollment text message
+
+For Healthcare Workers/Key Informants:
+
+ Are employees at the site/VMMC providers at the site or NDoH VMMC district level
+ Are at least 18 years of age or older
+ Provide healthcare services to patients as part of the VMMC programs
+ Are able to provide written informed consent
+ Are willing to participate
+ Are willing to be recorded
+
+EXCLUSION CRITERIA
+
+  1. For VMMC Clients:
+  2. Not meeting the above requirements
+  3. Men without cell phones
+  4. Men who chose PrePex device-based VMMC
+  5. Inter-operative AE during VMMC
+  6. Lack of informed consent
+  7. For Healthcare Workers/Key Informants:
+  8. Not willing to participate
+  9. Not willing to be recorded
+  10. Lack of informed consent"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Criteria (Version 9)
+
+&lt;/span&gt;For VMMC &lt;span class=&quot;diff-add&quot;&gt;Clients:
+
+ Are&lt;/span&gt; at least 18 years of age or &lt;span class=&quot;diff-add&quot;&gt;older
+ Possess&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;functioning&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;cell&lt;/span&gt; phone at enrollment&lt;span class=&quot;diff-add&quot;&gt;
+ Are&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;willing&lt;/span&gt; to respond to daily text &lt;span class=&quot;diff-add&quot;&gt;messages
+ Provide&lt;/span&gt; contact details &lt;span class=&quot;diff-add&quot;&gt;(phone number,&lt;/span&gt; address)&lt;span class=&quot;diff-add&quot;&gt;
+ Undergo&lt;/span&gt; surgical &lt;span class=&quot;diff-add&quot;&gt;VMMC
+ Are willing&lt;/span&gt; to follow NDoH VMMC &lt;span class=&quot;diff-add&quot;&gt;protocols
+ Have not experienced an&lt;/span&gt; interoperative &lt;span class=&quot;diff-add&quot;&gt;AE during VMMC
+ Provide informed&lt;/span&gt; consent&lt;span class=&quot;diff-add&quot;&gt;
+ Receive&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; confirmed 2wT enrollment &lt;span class=&quot;diff-add&quot;&gt;text message
+
+For Healthcare Workers/Key Informants:
+
+ Are employees at the site/VMMC providers at the site or NDoH VMMC district level
+ Are at least 18 years of age or older
+ Provide healthcare services to patients as part of the VMMC programs
+ Are able to provide written informed consent
+ Are willing to participate
+ Are willing to be recorded&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. For VMMC &lt;span class=&quot;diff-add&quot;&gt;Clients:
+  2. Not&lt;/span&gt; meeting&lt;span class=&quot;diff-add&quot;&gt; the&lt;/span&gt; above requirements
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Men without cell phones
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Men who chose &lt;span class=&quot;diff-add&quot;&gt;PrePex&lt;/span&gt; device-based &lt;span class=&quot;diff-add&quot;&gt;VMMC
+  5. Inter-operative&lt;/span&gt; AE during &lt;span class=&quot;diff-add&quot;&gt;VMMC
+  6. Lack of&lt;/span&gt; informed consent&lt;span class=&quot;diff-add&quot;&gt;
+  7. For Healthcare Workers/Key Informants:
+  8. Not willing to participate
+  9. Not willing to be recorded
+  10. Lack of informed consent&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 9)
+
+**For VMMC Clients:**
+
+* Are at least 18 years of age or older
+* Possess a functioning cell phone at enrollment
+* Are willing to respond to daily text messages
+* Provide contact details (phone number, address)
+* Undergo surgical VMMC
+* Are willing to follow NDoH VMMC protocols
+* Have not experienced an interoperative AE during VMMC
+* Provide informed consent
+* Receive a confirmed 2wT enrollment text message
+
+**For Healthcare Workers/Key Informants:**
+
+* Are employees at the site/VMMC providers at the site or NDoH VMMC district level
+* Are at least 18 years of age or older
+* Provide healthcare services to patients as part of the VMMC programs
+* Are able to provide written informed consent
+* Are willing to participate
+* Are willing to be recorded
+
+
+**Exclusion Criteria:**
+
+* **For VMMC Clients:**
+    * Not meeting the above requirements
+    * Men without cell phones
+    * Men who chose PrePex device-based VMMC
+    * Inter-operative AE during VMMC
+    * Lack of informed consent
+* **For Healthcare Workers/Key Informants:**
+    * Not willing to participate
+    * Not willing to be recorded
+    * Lack of informed consent">Amended Eligibility Criteria (Version 9)
+
+For VMMC Clients:
+
+ Are at least 18 years of age or older
+ Possess a functioning cell phone at enrollment
+ Are willing to respond to daily text messages
+ Provide contact details (phone number, address)
+ Undergo surgical VMMC
+ Are willing to follow NDoH VMMC protocols
+ Have not experienced an interoperative AE during VMMC
+ Provide informed consent
+ Receive a confirmed 2wT enrollment text message
+
+For Healthcare Workers/Key Informants:
+
+ Are employees at the site/VMMC providers at the site or NDoH VMMC district level
+ Are at least 18 years of age or older
+ Provide healthcare services to patients as part of the VMMC programs
+ Are able to provide written informed consent
+ Are willing to participate
+ Are willing to be recorded
+
+EXCLUSION CRITERIA
+
+  1. For VMMC Clients:
+  2. Not meeting the above requirements
+  3. Men without cell phones
+  4. Men who chose PrePex device-based VMMC
+  5. Inter-operative AE during VMMC
+  6. Lack of informed consent
+  7. For Healthcare Workers/Key Informants:
+  8. Not willing to participate
+  9. Not willing to be recorded
+  10. Lack of informed consent</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 23</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 23</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participant has cancer
+  2. Participant is treated with an oral or injectable Food and Drug Administration (FDA)-approved EGFRi or MEKi therapy
+  3. Participant has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per common terminology criteria for adverse events (CTCAE) version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+
+EXCLUSION CRITERIA
+
+  1. Participant has infected EGFRi/MEKi-associated acneiform rash according to investigator&amp;#x27;s evaluation.
+  2. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has cancer
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; is treated with an oral or injectable &lt;span class=&quot;diff-del&quot;&gt;Food and Drug Administration (FDA)-approved&lt;/span&gt; EGFRi or MEKi therapy
+  3. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per &lt;span class=&quot;diff-del&quot;&gt;common&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;terminology criteria for adverse events (CTCAE) version&lt;/span&gt; 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has infected EGFRi/MEKi-associated acneiform rash according to &lt;span class=&quot;diff-del&quot;&gt;investigator&amp;#x27;s&lt;/span&gt; evaluation.
+  2. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-raw="Inclusion Criteria:Participant has cancerParticipant is treated with an oral or injectable Food and Drug Administration (FDA)-approved EGFRi or MEKi therapyParticipant has EGFRi&amp;amp;#x2F;MEKi-related acneiform rash of Grade ≥ 2 as per common terminology criteria for adverse events (CTCAE) version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.Exclusion Criteria:Participant has infected EGFRi&amp;amp;#x2F;MEKi-associated acneiform rash according to investigator&amp;amp;#x27;s evaluation.Note: Other protocol defined Inclusion&amp;amp;#x2F;Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Participant has cancer
+  2. Participant is treated with an oral or injectable Food and Drug Administration (FDA)-approved EGFRi or MEKi therapy
+  3. Participant has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per common terminology criteria for adverse events (CTCAE) version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+
+EXCLUSION CRITERIA
+
+  1. Participant has infected EGFRi/MEKi-associated acneiform rash according to investigator&#x27;s evaluation.
+  2. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Subject has cancer
+  2. Subject is treated with an oral or injectable FDA-approved EGFRi or MEKi therapy
+  3. Subject has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per CTCAE Version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+  4. Subject is screened for inclusion.
+
+EXCLUSION CRITERIA
+
+  1. Subject has infected EGFRi/MEKi-associated acneiform rash according to Investigator&amp;#x27;s evaluation.
+  2. Subject is unable to comply with study procedures due to COVID-19 related center closures.
+  3. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has cancer
+  2. &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; is treated with an oral or injectable &lt;span class=&quot;diff-add&quot;&gt;FDA-approved&lt;/span&gt; EGFRi or MEKi therapy
+  3. &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per &lt;span class=&quot;diff-add&quot;&gt;CTCAE&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Version&lt;/span&gt; 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.&lt;span class=&quot;diff-add&quot;&gt;
+  4. Subject is screened for inclusion.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; has infected EGFRi/MEKi-associated acneiform rash according to &lt;span class=&quot;diff-add&quot;&gt;Investigator&amp;#x27;s&lt;/span&gt; evaluation.
+  2.&lt;span class=&quot;diff-add&quot;&gt; Subject is unable to comply with study procedures due to COVID-19 related center closures.
+  3.&lt;/span&gt; Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-raw="Inclusion Criteria:
+Subject has cancer
+Subject is treated with an oral or injectable FDA-approved EGFRi or MEKi therapy
+Subject has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per CTCAE Version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+Subject is screened for inclusion.
+
+Exclusion Criteria:
+Subject has infected EGFRi/MEKi-associated acneiform rash according to Investigator&amp;#x27;s evaluation.
+Subject is unable to comply with study procedures due to COVID-19 related center closures. 
+Note: Other protocol defined Inclusion/Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Subject has cancer
+  2. Subject is treated with an oral or injectable FDA-approved EGFRi or MEKi therapy
+  3. Subject has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per CTCAE Version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.
+  4. Subject is screened for inclusion.
+
+EXCLUSION CRITERIA
+
+  1. Subject has infected EGFRi/MEKi-associated acneiform rash according to Investigator&#x27;s evaluation.
+  2. Subject is unable to comply with study procedures due to COVID-19 related center closures.
+  3. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

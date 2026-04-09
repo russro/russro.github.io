@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 12</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 12</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Patient had to provide written informed consent prior to the conduct of any study-related procedures.
+  2. Male or female, 18-55 years of age, inclusive.
+  3. Patients with a diagnosis of moderate or severe opioid use disorder (DSM-V) who were physically dependent on intravenous (IV) or insufflated opioids, and who were willing to undergo short-term BPN treatment.
+  4. Self-reported opioid-use of a minimum of 21 days in the 30 days prior to Screening.
+  5. Positive UDS for opioids at Screening or at check-in.
+  6. If UDS was not positive, patients had to present with physical signs of withdrawal, as determined by the Investigator.
+  7. The Investigator may have administered a naloxone challenge, in order to confirm opioid dependence at the Investigator&amp;#x27;s discretion.
+  8. Female patients of childbearing potential had to be willing to use a reliable method of contraception during the entire study (Screening Visit to Follow-up Phone Call).
+  9. Female patients of non-childbearing potential were surgically sterile (i.e., had undergone complete hysterectomy, bilateral oophorectomy, or tubal ligation) or in a menopausal state (at least 1 year without menses), as confirmed by follicle stimulating hormone (FSH) levels.
+  10. Male patients with female partners of childbearing potential had to agree to use a reliable method of contraception from Screening Visit through at least 3 months after the last dose of study drug.
+  11. Male patients also must have agreed not to donate sperm during the study through at least 3 months after the last dose of study drug.
+  12. Were willing and able to comply with the study requirements (including blood sampling), complete study assessments, visit the clinic, and remain confined in the CRU for up to 25 consecutive days.
+
+EXCLUSION CRITERIA
+
+  1. History or presence of any clinically significant psychiatric, endocrine, hematologic, hepatic, immunologic, metabolic, urologic, pulmonary, neurologic, dermatologic, renal, or other major disease or illness at Screening, which in the opinion of the Investigator would have jeopardized the safety of the patient or the validity of the study results.
+  2. Opioid-dependent patients who were actively seeking treatment for their moderate to severe opioid use disorder.
+  3. Patients with positive UDS for BPN, barbiturates, or methadone or breath alcohol on the day of check-in to the CRU.
+  4. Aspartate aminotransferase (AST) levels &amp;gt;3 X the upper limit of normal, alanine aminotransferase (ALT) levels &amp;gt;3 X the upper limit of normal, total bilirubin &amp;gt;1.5 X the upper limit of normal, or creatinine &amp;gt;1.5 X the upper limit of normal on the Screening laboratory assessments and at inpatient check-in, or other clinically significant laboratory abnormalities, which in the opinion of the Investigator may have prevented the patient from safely participating in study.
+  5. Any clinically significant abnormality on the basis of medical history, vital signs, physical examination, 12-lead electrocardiogram ([ECG], QTcF ≥450 msec for males or ≥470 msec for females), and laboratory evaluation (including hematology, clinical chemistry, urinalysis, and serology [optional]) at Screening, in the opinion of the Investigator.
+  6. Significant symptoms, medical conditions, or other circumstances which, in the opinion of the Investigator, would have precluded compliance with the protocol, adequate cooperation in the study or obtaining informed consent, or may have prevented the patient from safely participating in study (including, but not limited to, the risks described as precautions, warnings, and contraindications in the current version of the Investigator&amp;#x27;s Brochure for CAM2038).
+  7. Patients were carefully screened to exclude individuals presenting with a clinically significant history of seizure disorders, history of asthma or other respiratory disorders, head injury, hypertension, or personal history of cardiovascular disease or clinically significant ECG abnormalities.
+  8. Current diagnosis of Acquired Immune Deficiency Syndrome.
+  9. Current diagnosis of chronic pain requiring opioids for treatment.
+  10. Patients who met the criteria for a diagnosis of moderate or severe substance use disorder according to DSM-V criteria for any other substances other than opioids, caffeine, or tobacco.
+  11. Pregnant or lactating, or planned to become pregnant during the study.
+  12. Clinically significant history of or current evidence of suicidal ideation or active suicidal behavior as based on the Columbia-Suicide Severity Rating Scale (C-SSRS; grade 4 or 5).
+  13. Hypersensitivity or allergy to BPN or other opioids or excipients of CAM2038.
+  14. Intolerance to venipuncture and/or difficulty with venous access, as per the judgment of the Investigator/research staff.
+  15. Patient was using an investigational drug or monoamine oxidase inhibitor or had used such within the last 30 days (or 5 times the half-life of the drug, if known and longer) prior to first drug administration in the Qualification Phase (i.e., IR morphine sulfate).
+  16. Required current use of agents that were strong inhibitors or inducers of cytochrome P450 3A4 (CYP3A4), such as some azole antifungals (e.g., ketoconazole), macrolide antibiotics (e.g., clarithromycin), or protease inhibitors (e.g., ritonavir, indinavir, and saquinavir).
+  17. If the patient was currently on probation or had any pending legal action that could have prohibited participation or compliance in the study.
+  18. A patient who, in the opinion of the Investigator, was considered unsuitable or unlikely to comply with the study protocol for any reason."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;provide written informed consent prior to the conduct of any study-related procedures.
+  2. Male or female, 18-55 years of age, inclusive.
+  3. Patients with&lt;/span&gt; a diagnosis of moderate &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; severe opioid use disorder &lt;span class=&quot;diff-del&quot;&gt;(DSM-V)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;were&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dependent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;intravenous (IV) or insufflated opioids, and who were willing to undergo short-term BPN treatment.
+  4. Self-reported opioid-use of&lt;/span&gt; a minimum of 21 days in the 30 days prior to &lt;span class=&quot;diff-del&quot;&gt;Screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Positive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;UDS&lt;/span&gt; for opioids at &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;check-in.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;If&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;UDS&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;was not positive, patients had to&lt;/span&gt; present with physical signs of &lt;span class=&quot;diff-del&quot;&gt;withdrawal, as determined by the Investigator.
+  7. The Investigator may have administered a naloxone challenge, in order to confirm &lt;/span&gt;opioid &lt;span class=&quot;diff-del&quot;&gt;dependence&lt;/span&gt; at &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Investigator&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;discretion.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Female&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patients&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-del&quot;&gt;had to&lt;/span&gt; be willing to use a reliable method of contraception &lt;span class=&quot;diff-del&quot;&gt;during&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;entire&lt;/span&gt; study &lt;span class=&quot;diff-del&quot;&gt;(Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Visit&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;Follow-up&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Phone&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Call).&lt;/span&gt;
+  9. &lt;span class=&quot;diff-del&quot;&gt;Female&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patients&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;non-childbearing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;potential&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;were&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;surgically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;sterile&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(i.e.,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;undergone&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;complete hysterectomy, bilateral oophorectomy, or tubal ligation) or in a menopausal state (at least 1 year without menses), as confirmed by follicle stimulating hormone (FSH) levels.&lt;/span&gt;
+  10. &lt;span class=&quot;diff-del&quot;&gt;Male&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patients with female partners&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;agree&lt;/span&gt; to use a reliable method of contraception &lt;span class=&quot;diff-del&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Visit&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;through&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;after&lt;/span&gt; the last &lt;span class=&quot;diff-del&quot;&gt;dose&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of study drug.&lt;/span&gt;
+  11. &lt;span class=&quot;diff-del&quot;&gt;Male&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patients&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;also&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; have &lt;span class=&quot;diff-del&quot;&gt;agreed not to donate sperm during the study through at least 3 months after the last dose of study drug.
+  12. Were willing and able to comply with the study requirements (including blood sampling), complete study assessments, visit the clinic, and remain confined in the CRU for up to 25 consecutive days.
+
+EXCLUSION CRITERIA
+
+  1. History or presence of any clinically significant psychiatric, endocrine, hematologic, hepatic, immunologic, metabolic, urologic, pulmonary, neurologic, dermatologic, renal, or other major disease or illness at Screening, which in the opinion of the Investigator would have jeopardized the safety of the patient or the validity of the study results.
+  2. Opioid-dependent patients who were actively seeking treatment for their moderate to severe opioid use disorder.
+  3. Patients with positive UDS for BPN, barbiturates, or methadone or breath&lt;/span&gt; alcohol&lt;span class=&quot;diff-del&quot;&gt; on the day of check-in to the CRU.
+  4. Aspartate aminotransferase (AST) levels &amp;gt;3 X the upper limit of normal, alanine aminotransferase (ALT) levels &amp;gt;3 X the upper limit of normal, total bilirubin &amp;gt;1.5 X the upper limit of normal, or creatinine &amp;gt;1.5 X the upper limit of normal on the Screening laboratory assessments and at inpatient check-in, or other clinically significant laboratory abnormalities, which in the opinion of the Investigator may have prevented the patient from safely participating in study.
+  5. Any clinically significant abnormality on the basis of medical history, vital signs, physical examination, 12-lead electrocardiogram ([ECG], QTcF ≥450 msec for males or ≥470 msec for females), and laboratory evaluation (including hematology, clinical chemistry, urinalysis, and serology [optional]) at Screening, in the opinion of the Investigator.
+  6. Significant symptoms, medical conditions, or other circumstances which, in the opinion of the Investigator, would have precluded compliance with the protocol, adequate cooperation in the study or obtaining informed consent, or may have prevented the patient from safely participating in study (including, but not limited to, the risks described as precautions, warnings, and contraindications in the current version of the Investigator&amp;#x27;s Brochure for CAM2038).
+  7. Patients were carefully screened to exclude individuals presenting with a clinically significant history of seizure disorders, history of asthma or other respiratory disorders, head injury, hypertension, or personal history of cardiovascular disease or clinically significant ECG abnormalities.
+  8. Current diagnosis of Acquired Immune Deficiency Syndrome.
+  9. Current diagnosis of chronic pain requiring opioids for treatment.
+  10. Patients who met the criteria for a diagnosis of moderate or severe substance use disorder according to DSM-V criteria for any other substances other than opioids, caffeine, or tobacco.
+  11. Pregnant or lactating, or planned to become pregnant during the study.
+  12. Clinically significant history of or current evidence of suicidal ideation or active suicidal behavior as based on the Columbia-Suicide Severity Rating Scale (C-SSRS; grade 4 or 5).
+  13. Hypersensitivity or allergy to BPN or other opioids or excipients of CAM2038.
+  14. Intolerance to venipuncture and/or difficulty with venous access, as per the judgment of the Investigator/research staff.
+  15. Patient was using an investigational drug or monoamine oxidase inhibitor or had used such&lt;/span&gt; within the last 30 &lt;span class=&quot;diff-del&quot;&gt;days&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;times&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;half-life&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;drug,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;known&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;longer) prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;first drug administration in &lt;/span&gt;the &lt;span class=&quot;diff-del&quot;&gt;Qualification Phase (i.e., IR morphine sulfate).
+  16. Required current use of agents that were strong inhibitors or inducers of cytochrome P450 3A4 (CYP3A4), such as some azole antifungals (e.g., ketoconazole), macrolide antibiotics (e.g., clarithromycin), or protease inhibitors (e.g., ritonavir, indinavir, and saquinavir).
+  17. If the patient was currently on probation or had any pending legal action that could have prohibited participation or compliance in the study.
+  18. A patient who, in the opinion of the Investigator, was considered unsuitable or unlikely to comply with the study&lt;/span&gt; protocol for &lt;span class=&quot;diff-del&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;reason.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Patient had to provide written informed consent prior to the conduct of any study-related procedures.Male or female, 18-55 years of age, inclusive.Patients with a diagnosis of moderate or severe opioid use disorder (DSM-V) who were physically dependent on intravenous (IV) or insufflated opioids, and who were willing to undergo short-term BPN treatment.Self-reported opioid-use of a minimum of 21 days in the 30 days prior to Screening.Positive UDS for opioids at Screening or at check-in. If UDS was not positive, patients had to present with physical signs of withdrawal, as determined by the Investigator. The Investigator may have administered a naloxone challenge, in order to confirm opioid dependence at the Investigator&amp;amp;#x27;s discretion.Female patients of childbearing potential had to be willing to use a reliable method of contraception during the entire study (Screening Visit to Follow-up Phone Call).Female patients of non-childbearing potential were surgically sterile (i.e., had undergone complete hysterectomy, bilateral oophorectomy, or tubal ligation) or in a menopausal state (at least 1 year without menses), as confirmed by follicle stimulating hormone (FSH) levels.Male patients with female partners of childbearing potential had to agree to use a reliable method of contraception from Screening Visit through at least 3 months after the last dose of study drug. Male patients also must have agreed not to donate sperm during the study through at least 3 months after the last dose of study drug.Were willing and able to comply with the study requirements (including blood sampling), complete study assessments, visit the clinic, and remain confined in the CRU for up to 25 consecutive days.Exclusion Criteria:History or presence of any clinically significant psychiatric, endocrine, hematologic, hepatic, immunologic, metabolic, urologic, pulmonary, neurologic, dermatologic, renal, or other major disease or illness at Screening, which in the opinion of the Investigator would have jeopardized the safety of the patient or the validity of the study results.Opioid-dependent patients who were actively seeking treatment for their moderate to severe opioid use disorder.Patients with positive UDS for BPN, barbiturates, or methadone or breath alcohol on the day of check-in to the CRU.Aspartate aminotransferase (AST) levels &amp;amp;gt;3 X the upper limit of normal, alanine aminotransferase (ALT) levels &amp;amp;gt;3 X the upper limit of normal, total bilirubin &amp;amp;gt;1.5 X the upper limit of normal, or creatinine &amp;amp;gt;1.5 X the upper limit of normal on the Screening laboratory assessments and at inpatient check-in, or other clinically significant laboratory abnormalities, which in the opinion of the Investigator may have prevented the patient from safely participating in study.Any clinically significant abnormality on the basis of medical history, vital signs, physical examination, 12-lead electrocardiogram ([ECG], QTcF ≥450 msec for males or ≥470 msec for females), and laboratory evaluation (including hematology, clinical chemistry, urinalysis, and serology [optional]) at Screening, in the opinion of the Investigator.Significant symptoms, medical conditions, or other circumstances which, in the opinion of the Investigator, would have precluded compliance with the protocol, adequate cooperation in the study or obtaining informed consent, or may have prevented the patient from safely participating in study (including, but not limited to, the risks described as precautions, warnings, and contraindications in the current version of the Investigator&amp;amp;#x27;s Brochure for CAM2038).Patients were carefully screened to exclude individuals presenting with a clinically significant history of seizure disorders, history of asthma or other respiratory disorders, head injury, hypertension, or personal history of cardiovascular disease or clinically significant ECG abnormalities.Current diagnosis of Acquired Immune Deficiency Syndrome.Current diagnosis of chronic pain requiring opioids for treatment.Patients who met the criteria for a diagnosis of moderate or severe substance use disorder according to DSM-V criteria for any other substances other than opioids, caffeine, or tobacco.Pregnant or lactating, or planned to become pregnant during the study.Clinically significant history of or current evidence of suicidal ideation or active suicidal behavior as based on the Columbia-Suicide Severity Rating Scale (C-SSRS; grade 4 or 5).Hypersensitivity or allergy to BPN or other opioids or excipients of CAM2038.Intolerance to venipuncture and&amp;amp;#x2F;or difficulty with venous access, as per the judgment of the Investigator&amp;amp;#x2F;research staff.Patient was using an investigational drug or monoamine oxidase inhibitor or had used such within the last 30 days (or 5 times the half-life of the drug, if known and longer) prior to first drug administration in the Qualification Phase (i.e., IR morphine sulfate).Required current use of agents that were strong inhibitors or inducers of cytochrome P450 3A4 (CYP3A4), such as some azole antifungals (e.g., ketoconazole), macrolide antibiotics (e.g., clarithromycin), or protease inhibitors (e.g., ritonavir, indinavir, and saquinavir).If the patient was currently on probation or had any pending legal action that could have prohibited participation or compliance in the study.A patient who, in the opinion of the Investigator, was considered unsuitable or unlikely to comply with the study protocol for any reason.">INCLUSION CRITERIA
+
+  1. Patient had to provide written informed consent prior to the conduct of any study-related procedures.
+  2. Male or female, 18-55 years of age, inclusive.
+  3. Patients with a diagnosis of moderate or severe opioid use disorder (DSM-V) who were physically dependent on intravenous (IV) or insufflated opioids, and who were willing to undergo short-term BPN treatment.
+  4. Self-reported opioid-use of a minimum of 21 days in the 30 days prior to Screening.
+  5. Positive UDS for opioids at Screening or at check-in.
+  6. If UDS was not positive, patients had to present with physical signs of withdrawal, as determined by the Investigator.
+  7. The Investigator may have administered a naloxone challenge, in order to confirm opioid dependence at the Investigator&#x27;s discretion.
+  8. Female patients of childbearing potential had to be willing to use a reliable method of contraception during the entire study (Screening Visit to Follow-up Phone Call).
+  9. Female patients of non-childbearing potential were surgically sterile (i.e., had undergone complete hysterectomy, bilateral oophorectomy, or tubal ligation) or in a menopausal state (at least 1 year without menses), as confirmed by follicle stimulating hormone (FSH) levels.
+  10. Male patients with female partners of childbearing potential had to agree to use a reliable method of contraception from Screening Visit through at least 3 months after the last dose of study drug.
+  11. Male patients also must have agreed not to donate sperm during the study through at least 3 months after the last dose of study drug.
+  12. Were willing and able to comply with the study requirements (including blood sampling), complete study assessments, visit the clinic, and remain confined in the CRU for up to 25 consecutive days.
+
+EXCLUSION CRITERIA
+
+  1. History or presence of any clinically significant psychiatric, endocrine, hematologic, hepatic, immunologic, metabolic, urologic, pulmonary, neurologic, dermatologic, renal, or other major disease or illness at Screening, which in the opinion of the Investigator would have jeopardized the safety of the patient or the validity of the study results.
+  2. Opioid-dependent patients who were actively seeking treatment for their moderate to severe opioid use disorder.
+  3. Patients with positive UDS for BPN, barbiturates, or methadone or breath alcohol on the day of check-in to the CRU.
+  4. Aspartate aminotransferase (AST) levels &gt;3 X the upper limit of normal, alanine aminotransferase (ALT) levels &gt;3 X the upper limit of normal, total bilirubin &gt;1.5 X the upper limit of normal, or creatinine &gt;1.5 X the upper limit of normal on the Screening laboratory assessments and at inpatient check-in, or other clinically significant laboratory abnormalities, which in the opinion of the Investigator may have prevented the patient from safely participating in study.
+  5. Any clinically significant abnormality on the basis of medical history, vital signs, physical examination, 12-lead electrocardiogram ([ECG], QTcF ≥450 msec for males or ≥470 msec for females), and laboratory evaluation (including hematology, clinical chemistry, urinalysis, and serology [optional]) at Screening, in the opinion of the Investigator.
+  6. Significant symptoms, medical conditions, or other circumstances which, in the opinion of the Investigator, would have precluded compliance with the protocol, adequate cooperation in the study or obtaining informed consent, or may have prevented the patient from safely participating in study (including, but not limited to, the risks described as precautions, warnings, and contraindications in the current version of the Investigator&#x27;s Brochure for CAM2038).
+  7. Patients were carefully screened to exclude individuals presenting with a clinically significant history of seizure disorders, history of asthma or other respiratory disorders, head injury, hypertension, or personal history of cardiovascular disease or clinically significant ECG abnormalities.
+  8. Current diagnosis of Acquired Immune Deficiency Syndrome.
+  9. Current diagnosis of chronic pain requiring opioids for treatment.
+  10. Patients who met the criteria for a diagnosis of moderate or severe substance use disorder according to DSM-V criteria for any other substances other than opioids, caffeine, or tobacco.
+  11. Pregnant or lactating, or planned to become pregnant during the study.
+  12. Clinically significant history of or current evidence of suicidal ideation or active suicidal behavior as based on the Columbia-Suicide Severity Rating Scale (C-SSRS; grade 4 or 5).
+  13. Hypersensitivity or allergy to BPN or other opioids or excipients of CAM2038.
+  14. Intolerance to venipuncture and/or difficulty with venous access, as per the judgment of the Investigator/research staff.
+  15. Patient was using an investigational drug or monoamine oxidase inhibitor or had used such within the last 30 days (or 5 times the half-life of the drug, if known and longer) prior to first drug administration in the Qualification Phase (i.e., IR morphine sulfate).
+  16. Required current use of agents that were strong inhibitors or inducers of cytochrome P450 3A4 (CYP3A4), such as some azole antifungals (e.g., ketoconazole), macrolide antibiotics (e.g., clarithromycin), or protease inhibitors (e.g., ritonavir, indinavir, and saquinavir).
+  17. If the patient was currently on probation or had any pending legal action that could have prohibited participation or compliance in the study.
+  18. A patient who, in the opinion of the Investigator, was considered unsuitable or unlikely to comply with the study protocol for any reason.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for CAM2038 Clinical Trial (Version 3)
+
+INCLUSION CRITERIA
+
+  1. Diagnosis: Subjects must have a diagnosis of moderate to severe opioid use disorder (DSM-V criteria).
+  2. Opioid Use: Subjects must have a minimum of 21 days of opioid use in the 30 days prior to screening.
+  3. Urine Drug Screen: Subjects must have a positive urine drug screen for opioids at screening.
+  4. Physical Signs of Withdrawal: Subjects must present with physical signs of opioid withdrawal at screening or check-in.
+  5. Age: Subjects must be 18 years of age or older.
+  6. Childbearing Potential: Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study (screening visit to follow-up phone call).
+  7. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  8. Vital Signs: Subjects must have normal vital signs (within normal limits) at screening and check-in.
+  9. ECG: Subjects must have an ECG performed at screening and Day 7.
+  10. FSH: Females of childbearing potential must have a FSH test at screening.
+  11. Smoking: Subjects must abstain from smoking for at least 30 minutes prior to hydromorphone dosing and be allowed to smoke at short breaks (5-10 minutes) at the discretion of the CRU staff.
+  12. Nicotine Use: Subjects may use a nicotine-containing transdermal system as needed, at the discretion of the investigator.
+  13. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  14. Treatment History: Subjects must have a history of opioid use disorder and be willing to participate in the study.
+  15. Mental Health: Subjects must have a mental health history that does not preclude participation in the study.
+  16. Physical Examination: Subjects must have a physical examination that does not preclude participation in the study.
+  17. Laboratory Tests: Subjects must have laboratory tests that do not preclude participation in the study.
+
+EXCLUSION CRITERIA
+
+  1. Opioid Dependent: Subjects who are actively seeking treatment for their opioid use disorder.
+  2. Positive Urine Drug Screen for Buprenorphine, Alcohol, Barbiturates, Benzodiazepines, or Methadone: Subjects with a positive urine drug screen for buprenorphine, alcohol, barbiturates, benzodiazepines, or methadone at screening or check-in.
+  3. Aspartate Aminotransferase (AST), Alanine Aminotransferase (ALT), Total Bilirubin, Creatinine: Subjects with elevated levels of AST, ALT, total bilirubin, or creatinine at screening or check-in.
+  4. QTc: Subjects with a QTc of greater than 450 msec at screening.
+  5. Severe Medical Conditions: Subjects with severe medical conditions that may interfere with the study.
+  6. Pregnancy: Females of childbearing potential must be surgically sterile.
+  7. Contraceptive Use: Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study.
+  8. Smoking: Subjects who smoke cigarettes or use other tobacco products.
+  9. Nicotine Use: Subjects who use nicotine-containing products.
+  10. Recent Surgery: Subjects who have had surgery within the last 6 months.
+  11. Recent Alcohol Use: Subjects who have used alcohol within the last 30 days.
+  12. Recent Drug Use: Subjects who have used other drugs within the last 30 days.
+  13. Mental Health Conditions: Subjects with mental health conditions that may interfere with the study.
+  14. Physical Examination: Subjects with physical conditions that may interfere with the study.
+  15. Laboratory Tests: Subjects with laboratory test results that may interfere with the study.
+  16. Note: This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for CAM2038 Clinical Trial (Version 3)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Diagnosis:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; a diagnosis of moderate &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; severe opioid use disorder &lt;span class=&quot;diff-add&quot;&gt;(DSM-V&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria).
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Opioid&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Use:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; a minimum of 21 days&lt;span class=&quot;diff-add&quot;&gt; of opioid use&lt;/span&gt; in the 30 days prior to &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Urine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Drug Screen: Subjects must have a positive urine drug screen&lt;/span&gt; for opioids at &lt;span class=&quot;diff-add&quot;&gt;screening.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Physical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Signs&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Withdrawal:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; present with physical signs of opioid &lt;span class=&quot;diff-add&quot;&gt;withdrawal&lt;/span&gt; at &lt;span class=&quot;diff-add&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;check-in.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Age:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects must be 18 years of age or older.
+  6. Childbearing Potential: Females&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; be willing to use a reliable method of contraception &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;duration of the&lt;/span&gt; study &lt;span class=&quot;diff-add&quot;&gt;(screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visit&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;follow-up&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;phone&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;call).
+  7. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  8. Vital Signs: Subjects must have normal vital signs (within normal limits) at screening and check-in.&lt;/span&gt;
+  9. &lt;span class=&quot;diff-add&quot;&gt;ECG:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ECG&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;performed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Day&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt;
+  10. &lt;span class=&quot;diff-add&quot;&gt;FSH:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Females&lt;/span&gt; of childbearing potential &lt;span class=&quot;diff-add&quot;&gt;must have a FSH test at screening.
+  11. Smoking: Subjects must abstain from smoking for at least 30 minutes prior&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;hydromorphone dosing and be allowed to smoke at short breaks (5-10 minutes) at the discretion of the CRU staff.
+  12. Nicotine Use: Subjects may use a nicotine-containing transdermal system as needed, at the discretion of the investigator.
+  13. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  14. Treatment History: Subjects must have a history of opioid use disorder and be willing to participate in the study.
+  15. Mental Health: Subjects must have a mental health history that does not preclude participation in the study.
+  16. Physical Examination: Subjects must have a physical examination that does not preclude participation in the study.
+  17. Laboratory Tests: Subjects must have laboratory tests that do not preclude participation in the study.
+
+EXCLUSION CRITERIA
+
+  1. Opioid Dependent: Subjects who are actively seeking treatment for their opioid use disorder.
+  2. Positive Urine Drug Screen for Buprenorphine, Alcohol, Barbiturates, Benzodiazepines, or Methadone: Subjects with a positive urine drug screen for buprenorphine, alcohol, barbiturates, benzodiazepines, or methadone at screening or check-in.
+  3. Aspartate Aminotransferase (AST), Alanine Aminotransferase (ALT), Total Bilirubin, Creatinine: Subjects with elevated levels of AST, ALT, total bilirubin, or creatinine at screening or check-in.
+  4. QTc: Subjects with a QTc of greater than 450 msec at screening.
+  5. Severe Medical Conditions: Subjects with severe medical conditions that may interfere with the study.
+  6. Pregnancy: Females of childbearing potential must be surgically sterile.
+  7. Contraceptive Use: Females of childbearing potential must be willing&lt;/span&gt; to use a reliable method of contraception &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study.
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Smoking:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;who smoke cigarettes or use other tobacco products.
+  9. Nicotine Use: Subjects who use nicotine-containing products.
+  10. Recent Surgery: Subjects who have had surgery within&lt;/span&gt; the last &lt;span class=&quot;diff-add&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;months.&lt;/span&gt;
+  11. &lt;span class=&quot;diff-add&quot;&gt;Recent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Alcohol&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Use:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects who&lt;/span&gt; have &lt;span class=&quot;diff-add&quot;&gt;used&lt;/span&gt; alcohol within the last 30 &lt;span class=&quot;diff-add&quot;&gt;days.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Recent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Drug&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Use: Subjects who have used other drugs within&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;last 30 days.
+  13. Mental Health Conditions: Subjects with mental health conditions that may interfere with the study.
+  14. Physical Examination: Subjects with physical conditions that may interfere with the study.
+  15. Laboratory Tests: Subjects with laboratory test results that may interfere with the study.
+  16. Note: This is a summary&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;amended&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Please&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;refer&lt;/span&gt; to the &lt;span class=&quot;diff-add&quot;&gt;full&lt;/span&gt; protocol for &lt;span class=&quot;diff-add&quot;&gt;complete&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;details.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for CAM2038 Clinical Trial (Version 3)
+
+**Inclusion Criteria:**
+
+* **Diagnosis:**  Subjects must have a diagnosis of moderate to severe opioid use disorder (DSM-V criteria).
+* **Opioid Use:**  Subjects must have a minimum of 21 days of opioid use in the 30 days prior to screening.
+* **Urine Drug Screen:**  Subjects must have a positive urine drug screen for opioids at screening.
+* **Physical Signs of Withdrawal:**  Subjects must present with physical signs of opioid withdrawal at screening or check-in.
+* **Age:**  Subjects must be 18 years of age or older.
+* **Childbearing Potential:**  Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study (screening visit to follow-up phone call).
+* **Medical History:**  Subjects must have a medical history that does not preclude participation in the study.
+* **Vital Signs:**  Subjects must have normal vital signs (within normal limits) at screening and check-in.
+* **ECG:**  Subjects must have an ECG performed at screening and Day 7.
+* **FSH:**  Females of childbearing potential must have a FSH test at screening.
+* **Smoking:**  Subjects must abstain from smoking for at least 30 minutes prior to hydromorphone dosing and be allowed to smoke at short breaks (5-10 minutes) at the discretion of the CRU staff.
+* **Nicotine Use:**  Subjects may use a nicotine-containing transdermal system as needed, at the discretion of the investigator.
+* **Medical History:**  Subjects must have a medical history that does not preclude participation in the study.
+* **Treatment History:**  Subjects must have a history of opioid use disorder and be willing to participate in the study.
+* **Mental Health:**  Subjects must have a mental health history that does not preclude participation in the study.
+* **Physical Examination:**  Subjects must have a physical examination that does not preclude participation in the study.
+* **Laboratory Tests:**  Subjects must have laboratory tests that do not preclude participation in the study.
+
+**Exclusion Criteria:**
+
+* **Opioid Dependent:**  Subjects who are actively seeking treatment for their opioid use disorder.
+* **Positive Urine Drug Screen for Buprenorphine, Alcohol, Barbiturates, Benzodiazepines, or Methadone:**  Subjects with a positive urine drug screen for buprenorphine, alcohol, barbiturates, benzodiazepines, or methadone at screening or check-in.
+* **Aspartate Aminotransferase (AST), Alanine Aminotransferase (ALT), Total Bilirubin, Creatinine:**  Subjects with elevated levels of AST, ALT, total bilirubin, or creatinine at screening or check-in.
+* **QTc:**  Subjects with a QTc of greater than 450 msec at screening.
+* **Severe Medical Conditions:**  Subjects with severe medical conditions that may interfere with the study.
+* **Pregnancy:**  Females of childbearing potential must be surgically sterile.
+* **Contraceptive Use:**  Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study.
+* **Smoking:**  Subjects who smoke cigarettes or use other tobacco products.
+* **Nicotine Use:**  Subjects who use nicotine-containing products.
+* **Recent Surgery:**  Subjects who have had surgery within the last 6 months.
+* **Recent Alcohol Use:**  Subjects who have used alcohol within the last 30 days.
+* **Recent Drug Use:**  Subjects who have used other drugs within the last 30 days.
+* **Mental Health Conditions:**  Subjects with mental health conditions that may interfere with the study.
+* **Physical Examination:**  Subjects with physical conditions that may interfere with the study.
+* **Laboratory Tests:**  Subjects with laboratory test results that may interfere with the study.
+
+
+**Note:** This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details.">Amended Eligibility Criteria for CAM2038 Clinical Trial (Version 3)
+
+INCLUSION CRITERIA
+
+  1. Diagnosis: Subjects must have a diagnosis of moderate to severe opioid use disorder (DSM-V criteria).
+  2. Opioid Use: Subjects must have a minimum of 21 days of opioid use in the 30 days prior to screening.
+  3. Urine Drug Screen: Subjects must have a positive urine drug screen for opioids at screening.
+  4. Physical Signs of Withdrawal: Subjects must present with physical signs of opioid withdrawal at screening or check-in.
+  5. Age: Subjects must be 18 years of age or older.
+  6. Childbearing Potential: Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study (screening visit to follow-up phone call).
+  7. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  8. Vital Signs: Subjects must have normal vital signs (within normal limits) at screening and check-in.
+  9. ECG: Subjects must have an ECG performed at screening and Day 7.
+  10. FSH: Females of childbearing potential must have a FSH test at screening.
+  11. Smoking: Subjects must abstain from smoking for at least 30 minutes prior to hydromorphone dosing and be allowed to smoke at short breaks (5-10 minutes) at the discretion of the CRU staff.
+  12. Nicotine Use: Subjects may use a nicotine-containing transdermal system as needed, at the discretion of the investigator.
+  13. Medical History: Subjects must have a medical history that does not preclude participation in the study.
+  14. Treatment History: Subjects must have a history of opioid use disorder and be willing to participate in the study.
+  15. Mental Health: Subjects must have a mental health history that does not preclude participation in the study.
+  16. Physical Examination: Subjects must have a physical examination that does not preclude participation in the study.
+  17. Laboratory Tests: Subjects must have laboratory tests that do not preclude participation in the study.
+
+EXCLUSION CRITERIA
+
+  1. Opioid Dependent: Subjects who are actively seeking treatment for their opioid use disorder.
+  2. Positive Urine Drug Screen for Buprenorphine, Alcohol, Barbiturates, Benzodiazepines, or Methadone: Subjects with a positive urine drug screen for buprenorphine, alcohol, barbiturates, benzodiazepines, or methadone at screening or check-in.
+  3. Aspartate Aminotransferase (AST), Alanine Aminotransferase (ALT), Total Bilirubin, Creatinine: Subjects with elevated levels of AST, ALT, total bilirubin, or creatinine at screening or check-in.
+  4. QTc: Subjects with a QTc of greater than 450 msec at screening.
+  5. Severe Medical Conditions: Subjects with severe medical conditions that may interfere with the study.
+  6. Pregnancy: Females of childbearing potential must be surgically sterile.
+  7. Contraceptive Use: Females of childbearing potential must be willing to use a reliable method of contraception for the duration of the study.
+  8. Smoking: Subjects who smoke cigarettes or use other tobacco products.
+  9. Nicotine Use: Subjects who use nicotine-containing products.
+  10. Recent Surgery: Subjects who have had surgery within the last 6 months.
+  11. Recent Alcohol Use: Subjects who have used alcohol within the last 30 days.
+  12. Recent Drug Use: Subjects who have used other drugs within the last 30 days.
+  13. Mental Health Conditions: Subjects with mental health conditions that may interfere with the study.
+  14. Physical Examination: Subjects with physical conditions that may interfere with the study.
+  15. Laboratory Tests: Subjects with laboratory test results that may interfere with the study.
+  16. Note: This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 120</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 120</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available (Group 1) and post-menopausal women with advanced stage estrogen receptor positive breast cancer who are candidates for exemestane or fulvestrant (Group 2).
+  2. Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1Adequate organ function defined as follows:Hematologic: Platelets ≥ 100 x 10^9/L;
+  3. Hemoglobin ≥ 9.0 g/ dL;
+  4. Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit)Hepatic: Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  5. Total or conjugated bilirubin ≤ 1.5 x ULNRenal: Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the cockcroft-gault methodCoagulation: International Normalized Ratio (INR) ≤ 1.2
+
+EXCLUSION CRITERIA
+
+  1. Known brain metastasis or leptomeningeal diseaseMyocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (ie, larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of first dose of study drugHistory of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;gt; 450 ms for males and &amp;gt; 470 ms for females).
+  2. Individuals who screen-fail due to this criterion are not eligible to be re-screenedClinically significant bleeding within 28 days of study Day 1Known human immunodeficiency virus (HIV) infectionHBsAG positiveHepatitis C virus (HCV) antibody positiveNo active anticoagulation within 7 days of study Day 1; including acetylsalicylic acid, low molecular weight heparin, or warfarin."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is &lt;span class=&quot;diff-del&quot;&gt;available&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(Group&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1)&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;post-menopausal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;women&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;advanced&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;stage&lt;/span&gt; estrogen receptor positive &lt;span class=&quot;diff-del&quot;&gt;breast&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cancer&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;candidates&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;exemestane&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;fulvestrant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(Group&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;2).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ &lt;span class=&quot;diff-del&quot;&gt;1Adequate&lt;/span&gt; organ function defined as &lt;span class=&quot;diff-del&quot;&gt;follows:Hematologic:&lt;/span&gt; Platelets ≥ 100 x 10^9/L;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Hemoglobin ≥ 9.0 &lt;span class=&quot;diff-del&quot;&gt;g/ dL;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening &lt;span class=&quot;diff-del&quot;&gt;visit)Hepatic:&lt;/span&gt; Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Total or conjugated bilirubin ≤ 1.5 x &lt;span class=&quot;diff-del&quot;&gt;ULNRenal:&lt;/span&gt; Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the &lt;span class=&quot;diff-del&quot;&gt;cockcroft-gault&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;methodCoagulation:&lt;/span&gt; International Normalized Ratio (INR) ≤ &lt;span class=&quot;diff-del&quot;&gt;1.2&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Known brain metastasis or leptomeningeal &lt;span class=&quot;diff-del&quot;&gt;diseaseMyocardial&lt;/span&gt; infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day &lt;span class=&quot;diff-del&quot;&gt;1Major&lt;/span&gt; surgery, defined as any surgical procedure that involves general anesthesia and a significant incision &lt;span class=&quot;diff-del&quot;&gt;(ie,&lt;/span&gt; larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of first dose of study &lt;span class=&quot;diff-del&quot;&gt;drugHistory&lt;/span&gt; of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;gt; 450 ms for males and &amp;gt; 470 ms for females).&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Individuals&lt;/span&gt; who screen-fail due to this criterion are not eligible to be &lt;span class=&quot;diff-del&quot;&gt;re-screenedClinically&lt;/span&gt; significant bleeding within 28 days of study Day &lt;span class=&quot;diff-del&quot;&gt;1Known&lt;/span&gt; human immunodeficiency virus (HIV) &lt;span class=&quot;diff-del&quot;&gt;infectionHBsAG&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;positiveHepatitis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;virus (HCV)&lt;/span&gt; antibody &lt;span class=&quot;diff-del&quot;&gt;positiveNo&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;active&lt;/span&gt; anticoagulation within 7 days of study Day &lt;span class=&quot;diff-del&quot;&gt;1;&lt;/span&gt; including acetylsalicylic acid, low molecular weight heparin, or warfarin."
+                 data-raw="Inclusion Criteria:Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available (Group 1) and post-menopausal women with advanced stage estrogen receptor positive breast cancer who are candidates for exemestane or fulvestrant (Group 2).Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1Adequate organ function defined as follows:Hematologic: Platelets ≥ 100 x 10^9&amp;amp;#x2F;L; Hemoglobin ≥ 9.0 g&amp;amp;#x2F; dL; Absolute neutrophil count (ANC) ≥ 1.5 x 10^9&amp;amp;#x2F;L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit)Hepatic: Aspartate transaminase (AST) &amp;amp;#x2F; Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN); Total or conjugated bilirubin ≤ 1.5 x ULNRenal: Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml&amp;amp;#x2F;min as calculated by the cockcroft-gault methodCoagulation: International Normalized Ratio (INR) ≤ 1.2Exclusion Criteria:Known brain metastasis or leptomeningeal diseaseMyocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (ie, larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of first dose of study drugHistory of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;amp;gt; 450 ms for males and &amp;amp;gt; 470 ms for females). Individuals who screen-fail due to this criterion are not eligible to be re-screenedClinically significant bleeding within 28 days of study Day 1Known human immunodeficiency virus (HIV) infectionHBsAG positiveHepatitis C virus (HCV) antibody positiveNo active anticoagulation within 7 days of study Day 1; including acetylsalicylic acid, low molecular weight heparin, or warfarin.">INCLUSION CRITERIA
+
+  1. Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available (Group 1) and post-menopausal women with advanced stage estrogen receptor positive breast cancer who are candidates for exemestane or fulvestrant (Group 2).
+  2. Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1Adequate organ function defined as follows:Hematologic: Platelets ≥ 100 x 10^9/L;
+  3. Hemoglobin ≥ 9.0 g/ dL;
+  4. Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit)Hepatic: Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  5. Total or conjugated bilirubin ≤ 1.5 x ULNRenal: Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the cockcroft-gault methodCoagulation: International Normalized Ratio (INR) ≤ 1.2
+
+EXCLUSION CRITERIA
+
+  1. Known brain metastasis or leptomeningeal diseaseMyocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (ie, larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of first dose of study drugHistory of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&gt; 450 ms for males and &gt; 470 ms for females).
+  2. Individuals who screen-fail due to this criterion are not eligible to be re-screenedClinically significant bleeding within 28 days of study Day 1Known human immunodeficiency virus (HIV) infectionHBsAG positiveHepatitis C virus (HCV) antibody positiveNo active anticoagulation within 7 days of study Day 1; including acetylsalicylic acid, low molecular weight heparin, or warfarin.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the supporting evidence provided, here are the amended eligibility criteria for version 11:
+
+INCLUSION CRITERIA
+
+  1. Male or female ≥18 years of age. Subjects in Group 2 must be female.
+  2. Group 1: Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available.
+  3. Group 2: Histologically or cytologically confirmed breast cancer with evidence of metastatic or locally advanced disease not amenable to resection or radiation therapy with curative intent and who have progressed during treatment with at least one prior hormonal therapy. Prior chemotherapy for advanced/metastatic disease is allowed.
+  4. Documentation of estrogen receptor (ER) positive (≥ 1% positive stained cells by local standards) based on the most recent tumor biopsy, unless bone-only disease.
+  5. Documented HER2-negative tumor based on local testing on most recent tumor biopsy (immunohistochemistry score 0/1+ or negative by in situ hybridization HER2/CP17 ratio &amp;lt; 1).
+  6. Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1.
+  7. Adequate organ function defined as follows:
+  8. Hematologic:
+  9. Platelets ≥ 100 x 10^9/L;
+  10. Hemoglobin ≥ 9.0 g/dL;
+  11. Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit). Patients in the Group 3 lymphoma expansion may be enrolled with an ANC of ≥ 1.0 x 10^9/L; Platelets ≥ 75 x 10^9/L.
+  12. Hepatic:
+  13. Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  14. Total or conjugated bilirubin ≤ 1.5 x ULN.
+  15. Renal:
+  16. Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the Cockcroft-Gault method.
+  17. Coagulation: International Normalized Ratio (INR) ≤ 1.2.
+  18. Negative serum pregnancy test for female subjects (Appendix 7).
+  19. Male subjects and female subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified methods of contraception as described in Appendix 7.
+  20. Females who are nursing must agree to discontinue nursing before the first dose of GS-5829.
+  21. Able and willing to provide written informed consent to participate in the study.
+
+EXCLUSION CRITERIA
+
+  1. History or evidence of clinically significant disorder, condition, or disease that, in the opinion of the Investigator or Medical Monitor, would pose a risk to subject safety or interfere with the study evaluations, procedures, or completion.
+  2. Pregnant.
+  3. Known brain metastasis or leptomeningeal disease.
+  4. Uncontrolled intercurrent illness including, but not limited to, active uncontrolled infection, active or chronic bleeding event within 28 days prior to first dose of study drug, uncontrolled cardiac arrhythmia, or psychiatric illness/social situation that would limit compliance with study requirements as judged by the treating physician.
+  5. Myocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1.
+  6. Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (i.e., larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of the first dose of study drug.
+  7. Impairment of gastrointestinal (GI) function or GI disease that may significantly alter the absorption of GS-5829, including any unresolved nausea, vomiting, or diarrhea that is Common Terminology Criteria for Adverse Events (CTCAE) Grade &amp;gt; 1.
+  8. Minor surgical procedure(s) within 7 days of enrollment or randomization, or not yet recovered from prior minor surgery (placement of central venous access device, fine needle aspiration, or endoscopic biliary stent ≥ 1 day before enrollment or randomization is acceptable).
+  9. Anti-tumor therapy (chemotherapy, antibody therapy, molecular targeted therapy) within 21 days or 5 half-lives, whichever is longer, of study drug dosing (6 weeks for nitrosoureas, mitomycin C, or molecular agents with t½ &amp;gt; 10 days); concurrent use of hormone therapy for prostate cancer is permitted, and concurrent use of exemestane or fulvestrant (and goserelin for pre/perimenopausal breast cancer as per
+
+INCLUSION CRITERIA
+
+  1. c.iv) for subjects enrolled in Group 2 (advanced breast cancer) is permitted.
+  2. History of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;gt; 450 ms for males and &amp;gt; 470 ms for females). Subjects who screen-fail due to this criterion are not eligible to be re-screened.
+  3. Prior exposure to bromodomain (BET) inhibitors.
+  4. Clinically significant bleeding within 28 days of study Day 1.
+  5. Known human immunodeficiency virus (HIV) infection.
+  6. HBsAg positive.
+  7. HCV antibody positive.
+  8. Use of moderate/strong cytochrome P450 (CYP)3A4 inhibitors or moderate/strong CYP3A4 inducers within 2 weeks prior to the first dose of study drug.
+  9. Evidence of bleeding diathesis.
+  10. History of hemoptysis of ≥ 2.5 mL/1 teaspoon within 6 months of study Day 1.
+  11. History of high-grade esophageal or gastric varices.
+  12. No anticoagulation therapy within 7 days of study Day 1, including acetylsalicylic acid, low molecular weight heparin, or warfarin."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the supporting evidence provided, here are the amended eligibility criteria for version 11:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-add&quot;&gt; Male or female ≥18 years of age. Subjects in Group 2 must be female.
+  2. Group 1:&lt;/span&gt; Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is &lt;span class=&quot;diff-add&quot;&gt;available.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Group&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;2: Histologically or cytologically confirmed breast cancer with evidence of metastatic or locally advanced disease not amenable to resection or radiation therapy with curative intent&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have progressed during treatment&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;least one prior hormonal therapy. Prior chemotherapy for advanced/metastatic disease is allowed.
+  4. Documentation of&lt;/span&gt; estrogen receptor &lt;span class=&quot;diff-add&quot;&gt;(ER) &lt;/span&gt;positive &lt;span class=&quot;diff-add&quot;&gt;(≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1%&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positive&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;stained&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;cells&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;local standards) based on the most recent tumor biopsy, unless bone-only disease.
+  5. Documented HER2-negative tumor based on local testing on most recent tumor biopsy (immunohistochemistry score 0/1+&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;negative&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in situ hybridization HER2/CP17 ratio &amp;lt; 1).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ &lt;span class=&quot;diff-add&quot;&gt;1.
+  7. Adequate&lt;/span&gt; organ function defined as &lt;span class=&quot;diff-add&quot;&gt;follows:
+  8. Hematologic:
+  9.&lt;/span&gt; Platelets ≥ 100 x 10^9/L;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Hemoglobin ≥ 9.0 &lt;span class=&quot;diff-add&quot;&gt;g/dL;&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening &lt;span class=&quot;diff-add&quot;&gt;visit). Patients in the Group 3 lymphoma expansion may be enrolled with an ANC of ≥ 1.0 x 10^9/L; Platelets ≥ 75 x 10^9/L.
+  12. Hepatic:
+  13.&lt;/span&gt; Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Total or conjugated bilirubin ≤ 1.5 x &lt;span class=&quot;diff-add&quot;&gt;ULN.
+  15. Renal:
+  16.&lt;/span&gt; Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the &lt;span class=&quot;diff-add&quot;&gt;Cockcroft-Gault&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;method.
+  17. Coagulation:&lt;/span&gt; International Normalized Ratio (INR) ≤ &lt;span class=&quot;diff-add&quot;&gt;1.2.
+  18. Negative serum pregnancy test for female subjects (Appendix 7).
+  19. Male subjects and female subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified methods of contraception as described in Appendix 7.
+  20. Females who are nursing must agree to discontinue nursing before the first dose of GS-5829.
+  21. Able and willing to provide written informed consent to participate in the study.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-add&quot;&gt; History or evidence of clinically significant disorder, condition, or disease that, in the opinion of the Investigator or Medical Monitor, would pose a risk to subject safety or interfere with the study evaluations, procedures, or completion.
+  2. Pregnant.
+  3.&lt;/span&gt; Known brain metastasis or leptomeningeal &lt;span class=&quot;diff-add&quot;&gt;disease.
+  4. Uncontrolled intercurrent illness including, but not limited to, active uncontrolled infection, active or chronic bleeding event within 28 days prior to first dose of study drug, uncontrolled cardiac arrhythmia, or psychiatric illness/social situation that would limit compliance with study requirements as judged by the treating physician.
+  5. Myocardial&lt;/span&gt; infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day &lt;span class=&quot;diff-add&quot;&gt;1.
+  6. Major&lt;/span&gt; surgery, defined as any surgical procedure that involves general anesthesia and a significant incision &lt;span class=&quot;diff-add&quot;&gt;(i.e.,&lt;/span&gt; larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;first dose of study &lt;span class=&quot;diff-add&quot;&gt;drug.
+  7. Impairment of gastrointestinal (GI) function or GI disease that may significantly alter the absorption of GS-5829, including any unresolved nausea, vomiting, or diarrhea that is Common Terminology Criteria for Adverse Events (CTCAE) Grade &amp;gt; 1.
+  8. Minor surgical procedure(s) within 7 days of enrollment or randomization, or not yet recovered from prior minor surgery (placement of central venous access device, fine needle aspiration, or endoscopic biliary stent ≥ 1 day before enrollment or randomization is acceptable).
+  9. Anti-tumor therapy (chemotherapy, antibody therapy, molecular targeted therapy) within 21 days or 5 half-lives, whichever is longer, of study drug dosing (6 weeks for nitrosoureas, mitomycin C, or molecular agents with t½ &amp;gt; 10 days); concurrent use of hormone therapy for prostate cancer is permitted, and concurrent use of exemestane or fulvestrant (and goserelin for pre/perimenopausal breast cancer as per
+
+INCLUSION CRITERIA
+
+  1. c.iv) for subjects enrolled in Group 2 (advanced breast cancer) is permitted.
+  2. History&lt;/span&gt; of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;gt; 450 ms for males and &amp;gt; 470 ms for females). &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; who screen-fail due to this criterion are not eligible to be &lt;span class=&quot;diff-add&quot;&gt;re-screened.
+  3. Prior exposure to bromodomain (BET) inhibitors.
+  4. Clinically&lt;/span&gt; significant bleeding within 28 days of study Day &lt;span class=&quot;diff-add&quot;&gt;1.
+  5. Known&lt;/span&gt; human immunodeficiency virus (HIV) &lt;span class=&quot;diff-add&quot;&gt;infection.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HBsAg&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positive.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HCV&lt;/span&gt; antibody &lt;span class=&quot;diff-add&quot;&gt;positive.
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Use of moderate/strong cytochrome P450 (CYP)3A4 inhibitors or moderate/strong CYP3A4 inducers within 2 weeks prior to the first dose of study drug.
+  9. Evidence of bleeding diathesis.
+  10. History of hemoptysis of ≥ 2.5 mL/1 teaspoon within 6 months of study Day 1.
+  11. History of high-grade esophageal or gastric varices.
+  12. No&lt;/span&gt; anticoagulation&lt;span class=&quot;diff-add&quot;&gt; therapy&lt;/span&gt; within 7 days of study Day &lt;span class=&quot;diff-add&quot;&gt;1,&lt;/span&gt; including acetylsalicylic acid, low molecular weight heparin, or warfarin."
+                 data-raw="Based on the supporting evidence provided, here are the amended eligibility criteria for version 11:
+
+**Inclusion Criteria:**
+1. Male or female ≥18 years of age. Subjects in Group 2 must be female.
+2. Group 1: Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available.
+3. Group 2: Histologically or cytologically confirmed breast cancer with evidence of metastatic or locally advanced disease not amenable to resection or radiation therapy with curative intent and who have progressed during treatment with at least one prior hormonal therapy. Prior chemotherapy for advanced/metastatic disease is allowed.
+   - Documentation of estrogen receptor (ER) positive (≥ 1% positive stained cells by local standards) based on the most recent tumor biopsy, unless bone-only disease.
+   - Documented HER2-negative tumor based on local testing on most recent tumor biopsy (immunohistochemistry score 0/1+ or negative by in situ hybridization HER2/CP17 ratio &amp;lt; 1).
+4. Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1.
+5. Adequate organ function defined as follows:
+   - Hematologic: 
+     - Platelets ≥ 100 x 10^9/L; 
+     - Hemoglobin ≥ 9.0 g/dL; 
+     - Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit). Patients in the Group 3 lymphoma expansion may be enrolled with an ANC of ≥ 1.0 x 10^9/L; Platelets ≥ 75 x 10^9/L.
+   - Hepatic: 
+     - Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+     - Total or conjugated bilirubin ≤ 1.5 x ULN.
+   - Renal: 
+     - Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the Cockcroft-Gault method.
+6. Coagulation: International Normalized Ratio (INR) ≤ 1.2.
+7. Negative serum pregnancy test for female subjects (Appendix 7).
+8. Male subjects and female subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified methods of contraception as described in Appendix 7.
+9. Females who are nursing must agree to discontinue nursing before the first dose of GS-5829.
+10. Able and willing to provide written informed consent to participate in the study.
+
+**Exclusion Criteria:**
+1. History or evidence of clinically significant disorder, condition, or disease that, in the opinion of the Investigator or Medical Monitor, would pose a risk to subject safety or interfere with the study evaluations, procedures, or completion.
+2. Pregnant.
+3. Known brain metastasis or leptomeningeal disease.
+4. Uncontrolled intercurrent illness including, but not limited to, active uncontrolled infection, active or chronic bleeding event within 28 days prior to first dose of study drug, uncontrolled cardiac arrhythmia, or psychiatric illness/social situation that would limit compliance with study requirements as judged by the treating physician.
+5. Myocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &amp;gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1.
+6. Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (i.e., larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of the first dose of study drug.
+7. Impairment of gastrointestinal (GI) function or GI disease that may significantly alter the absorption of GS-5829, including any unresolved nausea, vomiting, or diarrhea that is Common Terminology Criteria for Adverse Events (CTCAE) Grade &amp;gt; 1.
+8. Minor surgical procedure(s) within 7 days of enrollment or randomization, or not yet recovered from prior minor surgery (placement of central venous access device, fine needle aspiration, or endoscopic biliary stent ≥ 1 day before enrollment or randomization is acceptable).
+9. Anti-tumor therapy (chemotherapy, antibody therapy, molecular targeted therapy) within 21 days or 5 half-lives, whichever is longer, of study drug dosing (6 weeks for nitrosoureas, mitomycin C, or molecular agents with t½ &amp;gt; 10 days); concurrent use of hormone therapy for prostate cancer is permitted, and concurrent use of exemestane or fulvestrant (and goserelin for pre/perimenopausal breast cancer as per inclusion criteria 2.c.iv) for subjects enrolled in Group 2 (advanced breast cancer) is permitted.
+10. History of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&amp;gt; 450 ms for males and &amp;gt; 470 ms for females). Subjects who screen-fail due to this criterion are not eligible to be re-screened.
+11. Prior exposure to bromodomain (BET) inhibitors.
+12. Clinically significant bleeding within 28 days of study Day 1.
+13. Known human immunodeficiency virus (HIV) infection.
+14. HBsAg positive.
+15. HCV antibody positive.
+16. Use of moderate/strong cytochrome P450 (CYP)3A4 inhibitors or moderate/strong CYP3A4 inducers within 2 weeks prior to the first dose of study drug.
+17. Evidence of bleeding diathesis.
+18. History of hemoptysis of ≥ 2.5 mL/1 teaspoon within 6 months of study Day 1.
+19. History of high-grade esophageal or gastric varices.
+20. No anticoagulation therapy within 7 days of study Day 1, including acetylsalicylic acid, low molecular weight heparin, or warfarin.">Based on the supporting evidence provided, here are the amended eligibility criteria for version 11:
+
+INCLUSION CRITERIA
+
+  1. Male or female ≥18 years of age. Subjects in Group 2 must be female.
+  2. Group 1: Histologically or cytologically confirmed advanced malignant solid tumor or lymphoma that is refractory to or intolerant of standard therapy or for which no standard therapy is available.
+  3. Group 2: Histologically or cytologically confirmed breast cancer with evidence of metastatic or locally advanced disease not amenable to resection or radiation therapy with curative intent and who have progressed during treatment with at least one prior hormonal therapy. Prior chemotherapy for advanced/metastatic disease is allowed.
+  4. Documentation of estrogen receptor (ER) positive (≥ 1% positive stained cells by local standards) based on the most recent tumor biopsy, unless bone-only disease.
+  5. Documented HER2-negative tumor based on local testing on most recent tumor biopsy (immunohistochemistry score 0/1+ or negative by in situ hybridization HER2/CP17 ratio &lt; 1).
+  6. Eastern Cooperative Oncology Group (ECOG) Performance Status of ≤ 1.
+  7. Adequate organ function defined as follows:
+  8. Hematologic:
+  9. Platelets ≥ 100 x 10^9/L;
+  10. Hemoglobin ≥ 9.0 g/dL;
+  11. Absolute neutrophil count (ANC) ≥ 1.5 x 10^9/L (without platelet transfusion or any growth factors within previous 7 days of the hematologic laboratory values obtained at screening visit). Patients in the Group 3 lymphoma expansion may be enrolled with an ANC of ≥ 1.0 x 10^9/L; Platelets ≥ 75 x 10^9/L.
+  12. Hepatic:
+  13. Aspartate transaminase (AST) / Alanine transaminase (ALT) ≤ 2.5 x upper limit of normal (ULN) (if liver metastases are present, ≤ 5 x ULN);
+  14. Total or conjugated bilirubin ≤ 1.5 x ULN.
+  15. Renal:
+  16. Serum creatinine ≤ 1.5 x ULN or creatinine clearance (CrCl) ≥ 60 ml/min as calculated by the Cockcroft-Gault method.
+  17. Coagulation: International Normalized Ratio (INR) ≤ 1.2.
+  18. Negative serum pregnancy test for female subjects (Appendix 7).
+  19. Male subjects and female subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified methods of contraception as described in Appendix 7.
+  20. Females who are nursing must agree to discontinue nursing before the first dose of GS-5829.
+  21. Able and willing to provide written informed consent to participate in the study.
+
+EXCLUSION CRITERIA
+
+  1. History or evidence of clinically significant disorder, condition, or disease that, in the opinion of the Investigator or Medical Monitor, would pose a risk to subject safety or interfere with the study evaluations, procedures, or completion.
+  2. Pregnant.
+  3. Known brain metastasis or leptomeningeal disease.
+  4. Uncontrolled intercurrent illness including, but not limited to, active uncontrolled infection, active or chronic bleeding event within 28 days prior to first dose of study drug, uncontrolled cardiac arrhythmia, or psychiatric illness/social situation that would limit compliance with study requirements as judged by the treating physician.
+  5. Myocardial infarction, symptomatic congestive heart failure (New York Heart Association Classification &gt; Class II), unstable angina, or serious uncontrolled cardiac arrhythmia within the last 6 months of study Day 1.
+  6. Major surgery, defined as any surgical procedure that involves general anesthesia and a significant incision (i.e., larger than what is required for placement of central venous access, percutaneous feeding tube, or biopsy) within 28 days of the first dose of study drug.
+  7. Impairment of gastrointestinal (GI) function or GI disease that may significantly alter the absorption of GS-5829, including any unresolved nausea, vomiting, or diarrhea that is Common Terminology Criteria for Adverse Events (CTCAE) Grade &gt; 1.
+  8. Minor surgical procedure(s) within 7 days of enrollment or randomization, or not yet recovered from prior minor surgery (placement of central venous access device, fine needle aspiration, or endoscopic biliary stent ≥ 1 day before enrollment or randomization is acceptable).
+  9. Anti-tumor therapy (chemotherapy, antibody therapy, molecular targeted therapy) within 21 days or 5 half-lives, whichever is longer, of study drug dosing (6 weeks for nitrosoureas, mitomycin C, or molecular agents with t½ &gt; 10 days); concurrent use of hormone therapy for prostate cancer is permitted, and concurrent use of exemestane or fulvestrant (and goserelin for pre/perimenopausal breast cancer as per
+
+INCLUSION CRITERIA
+
+  1. c.iv) for subjects enrolled in Group 2 (advanced breast cancer) is permitted.
+  2. History of long QT syndrome or whose corrected QT interval (QTc) measured (Fridericia method) at screening is prolonged (&gt; 450 ms for males and &gt; 470 ms for females). Subjects who screen-fail due to this criterion are not eligible to be re-screened.
+  3. Prior exposure to bromodomain (BET) inhibitors.
+  4. Clinically significant bleeding within 28 days of study Day 1.
+  5. Known human immunodeficiency virus (HIV) infection.
+  6. HBsAg positive.
+  7. HCV antibody positive.
+  8. Use of moderate/strong cytochrome P450 (CYP)3A4 inhibitors or moderate/strong CYP3A4 inducers within 2 weeks prior to the first dose of study drug.
+  9. Evidence of bleeding diathesis.
+  10. History of hemoptysis of ≥ 2.5 mL/1 teaspoon within 6 months of study Day 1.
+  11. History of high-grade esophageal or gastric varices.
+  12. No anticoagulation therapy within 7 days of study Day 1, including acetylsalicylic acid, low molecular weight heparin, or warfarin.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

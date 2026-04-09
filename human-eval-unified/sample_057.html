@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 57</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 57</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Patient (adult or pediatric) is ≥ 2 years of age
+  2. Patient has a physician confirmed/documented diagnosis of PROSPatient has a documented evidence of a mutation in the PIK3CA gene
+  3. Patient&amp;#x27;s condition was assessed by the treating physician as severe or life threatening and treatment was deemed necessary
+  4. Patient has been treated with at least one dose of alpelisib, initiated on or before 23-Sep-2019 (i.e. at least 24 weeks before the cut-off date of the 09-Mar-2020)
+  5. Patient has medical chart history available during enrollment in the Novartis MAPPatient (or parent/guardian in case of pediatric patient) consented to participate in the study (as required by local ethics regulations)
+
+INCLUSION CRITERIA
+
+  1. for MAP enrollment (assessed at the time of alpelisib initiation)"
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient (adult or pediatric) is ≥ 2 years&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;age
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physician&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;confirmed/documented&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;PROSPatient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has a documented evidence of a mutation in the PIK3CA gene
+  3. Patient&amp;#x27;s condition&lt;/span&gt; was &lt;span class=&quot;diff-del&quot;&gt;assessed&lt;/span&gt; by the &lt;span class=&quot;diff-del&quot;&gt;treating&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physician&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;severe&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or life threatening&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;was&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;deemed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;necessary
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patient&lt;/span&gt; has been &lt;span class=&quot;diff-del&quot;&gt;treated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with at least one dose of alpelisib, initiated on or before 23-Sep-2019 (i.e. at least 24 weeks before the cut-off date of the 09-Mar-2020)
+  5. Patient has medical chart history available during enrollment in&lt;/span&gt; the Novartis &lt;span class=&quot;diff-del&quot;&gt;MAPPatient&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;parent/guardian&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pediatric&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patient)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consented&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;participate&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; the study &lt;span class=&quot;diff-del&quot;&gt;(as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;required&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ethics&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;regulations)
+
+INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for MAP enrollment (assessed at&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;alpelisib initiation)&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Patient (adult or pediatric) is ≥ 2 years of agePatient has a physician confirmed&amp;amp;#x2F;documented diagnosis of PROSPatient has a documented evidence of a mutation in the PIK3CA genePatient&amp;amp;#x27;s condition was assessed by the treating physician as severe or life threatening and treatment was deemed necessaryPatient has been treated with at least one dose of alpelisib, initiated on or before 23-Sep-2019 (i.e. at least 24 weeks before the cut-off date of the 09-Mar-2020)Patient has medical chart history available during enrollment in the Novartis MAPPatient (or parent&amp;amp;#x2F;guardian in case of pediatric patient) consented to participate in the study (as required by local ethics regulations) Inclusion criteria for MAP enrollment (assessed at the time of alpelisib initiation)">INCLUSION CRITERIA
+
+  1. Patient (adult or pediatric) is ≥ 2 years of age
+  2. Patient has a physician confirmed/documented diagnosis of PROSPatient has a documented evidence of a mutation in the PIK3CA gene
+  3. Patient&#x27;s condition was assessed by the treating physician as severe or life threatening and treatment was deemed necessary
+  4. Patient has been treated with at least one dose of alpelisib, initiated on or before 23-Sep-2019 (i.e. at least 24 weeks before the cut-off date of the 09-Mar-2020)
+  5. Patient has medical chart history available during enrollment in the Novartis MAPPatient (or parent/guardian in case of pediatric patient) consented to participate in the study (as required by local ethics regulations)
+
+INCLUSION CRITERIA
+
+  1. for MAP enrollment (assessed at the time of alpelisib initiation)</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean=". European Journal of Oncology; 65(6):1120–1129. 11. Ethical review and approval This study protocol was reviewed and approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards (IRB) at each participating site. The study protocol has been approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards at each participating site. 12. Changes to the protocol This protocol is subject to modification as necessary during the study period, and written modifications will be available on the study&amp;#x27;s website. 10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.1"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;European&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Journal&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Oncology;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;65(6):1120–1129.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Ethical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;review&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;approval&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt; was &lt;span class=&quot;diff-add&quot;&gt;reviewed and approved&lt;/span&gt; by the &lt;span class=&quot;diff-add&quot;&gt;Novartis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Internal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Review&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Committee&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(IRC)&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;relevant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;institutional&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;review&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;boards (IRB) at each participating site. The study protocol&lt;/span&gt; has been &lt;span class=&quot;diff-add&quot;&gt;approved&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; the Novartis &lt;span class=&quot;diff-add&quot;&gt;Internal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Review&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Committee&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(IRC)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;relevant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;institutional&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;review boards at each participating site. 12. Changes&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol This protocol is subject to modification as necessary during&lt;/span&gt; the study &lt;span class=&quot;diff-add&quot;&gt;period,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;written&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;modifications&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;will&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;available&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;website.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.1&lt;/span&gt;"
+                 data-raw=". European Journal of Oncology; 65(6):1120–1129. 11. Ethical review and approval This study protocol was reviewed and approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards (IRB) at each participating site. The study protocol has been approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards at each participating site. 12. Changes to the protocol This protocol is subject to modification as necessary during the study period, and written modifications will be available on the study&amp;#x27;s website. 10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.1">. European Journal of Oncology; 65(6):1120–1129. 11. Ethical review and approval This study protocol was reviewed and approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards (IRB) at each participating site. The study protocol has been approved by the Novartis Internal Review Committee (IRC) and the relevant institutional review boards at each participating site. 12. Changes to the protocol This protocol is subject to modification as necessary during the study period, and written modifications will be available on the study&#x27;s website. 10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.1</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 138</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 138</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female participants age ≥ 18 years of age at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.
+  5. Human leukocyte antigen (HLA)-A*0201 positive.
+  6. ECOG Performance Status of 0 or 1 at Screening.
+  7. Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Participants with any out-of-range laboratory values.
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.
+  8. Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  9. Malignant disease, other than that being treated in this study.
+  10. Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.
+  11. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  12. Pregnant, likely to become pregnant, or lactating women."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; age ≥ 18 years&lt;span class=&quot;diff-del&quot;&gt; of age&lt;/span&gt; at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study &lt;span class=&quot;diff-del&quot;&gt;drug.&lt;/span&gt;
+  5. Human leukocyte antigen &lt;span class=&quot;diff-del&quot;&gt;(HLA)-A*0201&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;positive.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; ECOG Performance Status of 0 or 1 at Screening.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Phase 2 will &lt;span class=&quot;diff-del&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;previously&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;uveal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;melanoma&lt;/span&gt; in the metastatic &lt;span class=&quot;diff-del&quot;&gt;setting.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of &lt;span class=&quot;diff-del&quot;&gt;corticosteroids.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with any out-of-range laboratory &lt;span class=&quot;diff-del&quot;&gt;values.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Clinically significant cardiac disease or impaired cardiac &lt;span class=&quot;diff-del&quot;&gt;function.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Active infection requiring systemic antibiotic therapy.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Known history of HIV infection.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Malignant disease, other than that being treated in this study.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt; or interpretation of study results.
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral &lt;span class=&quot;diff-del&quot;&gt;neuropathy&lt;/span&gt; and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Pregnant, likely to become pregnant, or lactating women."
+                 data-raw="Inclusion Criteria:Male or female participants age ≥ 18 years of age at the time of informed consent.Ability to provide and understand written informed consent prior to any study procedures.Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.Human leukocyte antigen (HLA)-A*0201 positive.ECOG Performance Status of 0 or 1 at Screening.Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.Exclusion Criteria:Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.Participants with any out-of-range laboratory values.Clinically significant cardiac disease or impaired cardiac function.Active infection requiring systemic antibiotic therapy.Known history of HIV infection.Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.Malignant disease, other than that being treated in this study.Any medical condition that would, in the investigator&amp;amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.Pregnant, likely to become pregnant, or lactating women.">INCLUSION CRITERIA
+
+  1. Male or female participants age ≥ 18 years of age at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.
+  5. Human leukocyte antigen (HLA)-A*0201 positive.
+  6. ECOG Performance Status of 0 or 1 at Screening.
+  7. Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.
+
+EXCLUSION CRITERIA
+
+  1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.
+  2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  3. Participants with any out-of-range laboratory values.
+  4. Clinically significant cardiac disease or impaired cardiac function.
+  5. Active infection requiring systemic antibiotic therapy.
+  6. Known history of HIV infection.
+  7. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.
+  8. Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  9. Malignant disease, other than that being treated in this study.
+  10. Any medical condition that would, in the investigator&#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.
+  11. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  12. Pregnant, likely to become pregnant, or lactating women.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria (version 34):
+
+INCLUSION CRITERIA
+
+  1. Male or female patients age ≥ 18 years at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile patients or patients of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after the last dose of study drug, consistent with Clinical Trial Facilitation Group recommendations.
+  5. Life expectancy of &amp;gt; 3 months as estimated by the investigator.
+  6. Human leukocyte antigen (HLA)-A0201 positive by central assay.
+  7. ECOG Performance Status of 0 or 1 at Screening.
+  8. Patients must have measurable disease according to RECIST v.1.1 criteria in the Phase 2 dose expansion cohorts.
+  9. Phase 1 dose escalation cohorts only: any prior therapy is acceptable.
+  10. Phase 2 dose expansion cohorts:
+  11. Cohort A: Patients will have experienced disease progression with 1 systemic treatment regimen containing a checkpoint inhibitor, including either a CTLA4 inhibitor (ipilimumab or tremelimumab) and/or a PD-1/PD-L1 inhibitor. Any prior liver-directed therapy (LDT) is acceptable in this cohort.
+  12. Cohort B: Patients will have experienced disease progression with 1 or 2 prior lines of therapy in the metastatic or advanced setting including chemotherapy, immunotherapy, or targeted therapy. Only a single line of local LDT is allowed. Prior checkpoint inhibitor therapy is acceptable but not required in this cohort.
+  13. All other relevant medical conditions must be well-managed and stable, in the opinion of the investigator, for at least 28 days prior to first administration of study drug.
+
+EXCLUSION CRITERIA
+
+  1. **
+  2. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids within the prior 3 weeks to Study Day 1. Asymptomatic and adequately treated CNS metastases are not exclusionary.
+  3. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  4. Patient with any out-of-range laboratory values defined as:
+  5. Serum creatinine &amp;gt; 1.5 x upper limit of normal (ULN) and/or creatinine clearance &amp;lt; 60 mL/min.
+  6. Total bilirubin &amp;gt; 1.5 x ULN, except for patients with Gilbert’s syndrome who are excluded if total bilirubin &amp;gt; 3.0 x ULN or direct bilirubin &amp;gt; 1.5 x ULN.
+  7. Alanine aminotransferase (ALT) &amp;gt; 3 x ULN.
+  8. Aspartate aminotransferase (AST) &amp;gt; 3 x ULN.
+  9. Absolute neutrophil count &amp;lt; 1.5 x 10^9/L.
+  10. Phase 1 dose escalation only: Presence of high tumor burden, defined as liver replacement of &amp;gt; 60% hepatic organ volume with tumor.
+  11. Clinically significant cardiac disease or impaired cardiac function, including any of the following:
+  12. Clinically significant and/or uncontrolled heart disease such as congestive heart failure (New York Heart Association grade ≥ 2), uncontrolled hypertension, or clinically significant arrhythmia currently requiring medical treatment.
+  13. QTc &amp;gt; 470 msec on screening electrocardiogram (ECG) or congenital long QT syndrome.
+  14. Acute myocardial infarction or unstable angina pectoris &amp;lt; 3 months prior to study entry.
+  15. Active infection requiring systemic antibiotic therapy.
+  16. Known history of HIV infection.
+  17. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol. Screening for HIV and Hepatitis B and C will be done if required by local regulations.
+  18. Patients receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  19. Malignant disease, other than that being treated in this study.
+  20. Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent the patient&amp;#x27;s participation in the clinical study due to safety concerns, compliance with clinical study procedures, or interpretation of study results.
+  21. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy, and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  22. Pregnant, likely to become pregnant, or lactating women."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Eligibility Criteria (version 34):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male or female &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; age ≥ 18 years at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;last dose of study &lt;span class=&quot;diff-add&quot;&gt;drug, consistent with Clinical Trial Facilitation Group recommendations.&lt;/span&gt;
+  5.&lt;span class=&quot;diff-add&quot;&gt; Life expectancy of &amp;gt; 3 months as estimated by the investigator.
+  6.&lt;/span&gt; Human leukocyte antigen &lt;span class=&quot;diff-add&quot;&gt;(HLA)-A0201&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positive by central assay.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; ECOG Performance Status of 0 or 1 at Screening.
+  &lt;span class=&quot;diff-add&quot;&gt;8. Patients must have measurable disease according to RECIST v.1.1 criteria in the&lt;/span&gt; Phase 2 &lt;span class=&quot;diff-add&quot;&gt;dose expansion cohorts.
+  9. Phase 1 dose escalation cohorts only: any prior therapy is acceptable.
+  10. Phase 2 dose expansion cohorts:
+  11. Cohort A: Patients &lt;/span&gt;will &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;experienced disease progression&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;systemic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;regimen containing a checkpoint inhibitor, including either a CTLA4 inhibitor (ipilimumab or tremelimumab) and/or a PD-1/PD-L1 inhibitor. Any prior liver-directed therapy (LDT) is acceptable in this cohort.
+  12. Cohort B: Patients will have experienced disease progression with 1 or 2 prior lines of therapy&lt;/span&gt; in the metastatic &lt;span class=&quot;diff-add&quot;&gt;or advanced setting including chemotherapy, immunotherapy, or targeted therapy. Only a single line of local LDT is allowed. Prior checkpoint inhibitor therapy is acceptable but not required in this cohort.
+  13. All other relevant medical conditions must be well-managed and stable, in the opinion of the investigator, for at least 28 days prior to first administration of study drug.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-add&quot;&gt; **
+  2.&lt;/span&gt; Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of &lt;span class=&quot;diff-add&quot;&gt;corticosteroids within the prior 3 weeks to Study Day 1. Asymptomatic and adequately treated CNS metastases are not exclusionary.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; with any out-of-range laboratory &lt;span class=&quot;diff-add&quot;&gt;values defined as:&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5. Serum creatinine &amp;gt; 1.5 x upper limit of normal (ULN) and/or creatinine clearance &amp;lt; 60 mL/min.
+  6. Total bilirubin &amp;gt; 1.5 x ULN, except for patients with Gilbert’s syndrome who are excluded if total bilirubin &amp;gt; 3.0 x ULN or direct bilirubin &amp;gt; 1.5 x ULN.
+  7. Alanine aminotransferase (ALT) &amp;gt; 3 x ULN.
+  8. Aspartate aminotransferase (AST) &amp;gt; 3 x ULN.
+  9. Absolute neutrophil count &amp;lt; 1.5 x 10^9/L.
+  10. Phase 1 dose escalation only: Presence of high tumor burden, defined as liver replacement of &amp;gt; 60% hepatic organ volume with tumor.
+  11.&lt;/span&gt; Clinically significant cardiac disease or impaired cardiac &lt;span class=&quot;diff-add&quot;&gt;function, including any of the following:&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12. Clinically significant and/or uncontrolled heart disease such as congestive heart failure (New York Heart Association grade ≥ 2), uncontrolled hypertension, or clinically significant arrhythmia currently requiring medical treatment.
+  13. QTc &amp;gt; 470 msec on screening electrocardiogram (ECG) or congenital long QT syndrome.
+  14. Acute myocardial infarction or unstable angina pectoris &amp;lt; 3 months prior to study entry.
+  15.&lt;/span&gt; Active infection requiring systemic antibiotic therapy.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; Known history of HIV infection.
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.&lt;span class=&quot;diff-add&quot;&gt; Screening for HIV and Hepatitis B and C will be done if required by local regulations.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Malignant disease, other than that being treated in this study.
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent&lt;span class=&quot;diff-add&quot;&gt; the patient&amp;#x27;s&lt;/span&gt; participation in the clinical study due to safety concerns, compliance with clinical study &lt;span class=&quot;diff-add&quot;&gt;procedures,&lt;/span&gt; or interpretation of study results.
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral &lt;span class=&quot;diff-add&quot;&gt;neuropathy,&lt;/span&gt; and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; Pregnant, likely to become pregnant, or lactating women."
+                 data-raw="**Modified Eligibility Criteria (version 34):**
+
+**Inclusion Criteria:**
+1. Male or female patients age ≥ 18 years at the time of informed consent.
+2. Ability to provide and understand written informed consent prior to any study procedures.
+3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+4. Surgically sterile patients or patients of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after the last dose of study drug, consistent with Clinical Trial Facilitation Group recommendations.
+5. Life expectancy of &amp;gt; 3 months as estimated by the investigator.
+6. Human leukocyte antigen (HLA)-A*0201 positive by central assay.
+7. ECOG Performance Status of 0 or 1 at Screening.
+8. Patients must have measurable disease according to RECIST v.1.1 criteria in the Phase 2 dose expansion cohorts.
+9. Phase 1 dose escalation cohorts only: any prior therapy is acceptable.
+10. Phase 2 dose expansion cohorts:
+   - Cohort A: Patients will have experienced disease progression with 1 systemic treatment regimen containing a checkpoint inhibitor, including either a CTLA4 inhibitor (ipilimumab or tremelimumab) and/or a PD-1/PD-L1 inhibitor. Any prior liver-directed therapy (LDT) is acceptable in this cohort.
+   - Cohort B: Patients will have experienced disease progression with 1 or 2 prior lines of therapy in the metastatic or advanced setting including chemotherapy, immunotherapy, or targeted therapy. Only a single line of local LDT is allowed. Prior checkpoint inhibitor therapy is acceptable but not required in this cohort.
+11. All other relevant medical conditions must be well-managed and stable, in the opinion of the investigator, for at least 28 days prior to first administration of study drug.
+
+**Exclusion Criteria:**
+1. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids within the prior 3 weeks to Study Day 1. Asymptomatic and adequately treated CNS metastases are not exclusionary.
+2. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+3. Patient with any out-of-range laboratory values defined as:
+   - Serum creatinine &amp;gt; 1.5 x upper limit of normal (ULN) and/or creatinine clearance &amp;lt; 60 mL/min.
+   - Total bilirubin &amp;gt; 1.5 x ULN, except for patients with Gilbert’s syndrome who are excluded if total bilirubin &amp;gt; 3.0 x ULN or direct bilirubin &amp;gt; 1.5 x ULN.
+   - Alanine aminotransferase (ALT) &amp;gt; 3 x ULN.
+   - Aspartate aminotransferase (AST) &amp;gt; 3 x ULN.
+   - Absolute neutrophil count &amp;lt; 1.5 x 10^9/L.
+4. Phase 1 dose escalation only: Presence of high tumor burden, defined as liver replacement of &amp;gt; 60% hepatic organ volume with tumor.
+5. Clinically significant cardiac disease or impaired cardiac function, including any of the following:
+   - Clinically significant and/or uncontrolled heart disease such as congestive heart failure (New York Heart Association grade ≥ 2), uncontrolled hypertension, or clinically significant arrhythmia currently requiring medical treatment.
+   - QTc &amp;gt; 470 msec on screening electrocardiogram (ECG) or congenital long QT syndrome.
+   - Acute myocardial infarction or unstable angina pectoris &amp;lt; 3 months prior to study entry.
+6. Active infection requiring systemic antibiotic therapy.
+7. Known history of HIV infection.
+8. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol. Screening for HIV and Hepatitis B and C will be done if required by local regulations.
+9. Patients receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+10. Malignant disease, other than that being treated in this study.
+11. Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent the patient&amp;#x27;s participation in the clinical study due to safety concerns, compliance with clinical study procedures, or interpretation of study results.
+12. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy, and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+13. Pregnant, likely to become pregnant, or lactating women.">Modified Eligibility Criteria (version 34):
+
+INCLUSION CRITERIA
+
+  1. Male or female patients age ≥ 18 years at the time of informed consent.
+  2. Ability to provide and understand written informed consent prior to any study procedures.
+  3. Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).
+  4. Surgically sterile patients or patients of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after the last dose of study drug, consistent with Clinical Trial Facilitation Group recommendations.
+  5. Life expectancy of &gt; 3 months as estimated by the investigator.
+  6. Human leukocyte antigen (HLA)-A0201 positive by central assay.
+  7. ECOG Performance Status of 0 or 1 at Screening.
+  8. Patients must have measurable disease according to RECIST v.1.1 criteria in the Phase 2 dose expansion cohorts.
+  9. Phase 1 dose escalation cohorts only: any prior therapy is acceptable.
+  10. Phase 2 dose expansion cohorts:
+  11. Cohort A: Patients will have experienced disease progression with 1 systemic treatment regimen containing a checkpoint inhibitor, including either a CTLA4 inhibitor (ipilimumab or tremelimumab) and/or a PD-1/PD-L1 inhibitor. Any prior liver-directed therapy (LDT) is acceptable in this cohort.
+  12. Cohort B: Patients will have experienced disease progression with 1 or 2 prior lines of therapy in the metastatic or advanced setting including chemotherapy, immunotherapy, or targeted therapy. Only a single line of local LDT is allowed. Prior checkpoint inhibitor therapy is acceptable but not required in this cohort.
+  13. All other relevant medical conditions must be well-managed and stable, in the opinion of the investigator, for at least 28 days prior to first administration of study drug.
+
+EXCLUSION CRITERIA
+
+  1. **
+  2. Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids within the prior 3 weeks to Study Day 1. Asymptomatic and adequately treated CNS metastases are not exclusionary.
+  3. History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.
+  4. Patient with any out-of-range laboratory values defined as:
+  5. Serum creatinine &gt; 1.5 x upper limit of normal (ULN) and/or creatinine clearance &lt; 60 mL/min.
+  6. Total bilirubin &gt; 1.5 x ULN, except for patients with Gilbert’s syndrome who are excluded if total bilirubin &gt; 3.0 x ULN or direct bilirubin &gt; 1.5 x ULN.
+  7. Alanine aminotransferase (ALT) &gt; 3 x ULN.
+  8. Aspartate aminotransferase (AST) &gt; 3 x ULN.
+  9. Absolute neutrophil count &lt; 1.5 x 10^9/L.
+  10. Phase 1 dose escalation only: Presence of high tumor burden, defined as liver replacement of &gt; 60% hepatic organ volume with tumor.
+  11. Clinically significant cardiac disease or impaired cardiac function, including any of the following:
+  12. Clinically significant and/or uncontrolled heart disease such as congestive heart failure (New York Heart Association grade ≥ 2), uncontrolled hypertension, or clinically significant arrhythmia currently requiring medical treatment.
+  13. QTc &gt; 470 msec on screening electrocardiogram (ECG) or congenital long QT syndrome.
+  14. Acute myocardial infarction or unstable angina pectoris &lt; 3 months prior to study entry.
+  15. Active infection requiring systemic antibiotic therapy.
+  16. Known history of HIV infection.
+  17. Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol. Screening for HIV and Hepatitis B and C will be done if required by local regulations.
+  18. Patients receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.
+  19. Malignant disease, other than that being treated in this study.
+  20. Any medical condition that would, in the investigator&#x27;s judgment, prevent the patient&#x27;s participation in the clinical study due to safety concerns, compliance with clinical study procedures, or interpretation of study results.
+  21. Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy, and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.
+  22. Pregnant, likely to become pregnant, or lactating women.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

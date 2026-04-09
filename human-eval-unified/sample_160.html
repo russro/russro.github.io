@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 160</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 160</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Parts A/B:Had onset of neurological symptoms prior to 15 years of age
+  2. Has confirmed diagnosis of NPC1 determined by either:two NPC1 mutationspositive filipin staining and at least one NPC1 mutationvertical supranuclear gaze palsy (VSNGP) in combination with either: one NPC1 mutation, OR positive filipin staining or oxysterol levels consistent with NPC disease and no Niemann-Pick Type C2 (NPC2) Disease mutations
+  3. Adult participant or parent/guardian has provided written informed consent, with assent collected from minors of appropriate ageIs able to undergo a lumbar puncture (LP) and IT drug administration under conscious sedation or general anesthesia
+  4. Has an NPC Clinical Severity Scale Score of 1 through 4, inclusive, in two or more of the following components: ambulation, fine motor skills, or swallowing; and has a score of 0 through 4 on the cognition component
+  5. Has a total NPC Clinical Severity Scale Score of 10 or greaterIf taking miglustat, must have been on a stable dose for past 6-8 weeks and be willing to remain on a stable doseIf participant has seizures, they have been adequately controlled for 3 months without changing dose or regimen
+  6. Has agreed to discontinue all non-prescription supplements at least 1 month prior to first dose (Study Day 0)
+  7. Has agreed to discontinue any other investigational treatments for NPC including vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0)If of child-bearing potential (not surgically sterile), agrees to use a medically acceptable method continuously, until at least 30 days after participation in the study
+
+EXCLUSION CRITERIA
+
+  1. Has
+
+EXCLUSION CRITERIA
+
+  1. as assessed by NPC Clinical Severity Scale:Unable to walk, wheelchair dependent (ambulation NPC score=5)Has need for a nasogastric tube to overcome swallowing difficulties (swallowing NPC score=5) unless used for supplemental feeding or administering medicationsevere dysmetria (fine motor score =5) orminimal cognitive function (cognition NPC score=5)Weighs less than 15 kgHas had prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0, or has had any prior intrathecal (IT) administration of HP-β-CDIs taking antipsychotics for treatment of psychosis; use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude participation in this trialHas a history of hypersensitivity reactions to any product containing HP-β-CDHas a spinal deformity that could impact the ability to perform a lumbar punctureHas had a skin infection in the lumbar region within 2 months of study entryHas neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9/LHas thrombocytopenia (platelet count of less than 75 X 10^9/L)Has activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorderHas had status epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be quantifiedHas evidence of either obstructive hydrocephalus or normal pressure hydrocephalusHas recently used anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  2. Is unable to comply with the study procedures or has a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Parts &lt;span class=&quot;diff-del&quot;&gt;A/B:Had&lt;/span&gt; onset of neurological symptoms prior to 15 years of &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has confirmed&lt;/span&gt; diagnosis of NPC1 determined by &lt;span class=&quot;diff-del&quot;&gt;either:two&lt;/span&gt; NPC1 &lt;span class=&quot;diff-del&quot;&gt;mutationspositive&lt;/span&gt; filipin staining and at least one NPC1 &lt;span class=&quot;diff-del&quot;&gt;mutationvertical&lt;/span&gt; supranuclear gaze palsy (VSNGP) in combination with either: &lt;span class=&quot;diff-del&quot;&gt;one&lt;/span&gt; NPC1 mutation, &lt;span class=&quot;diff-del&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;positive&lt;/span&gt; filipin staining or oxysterol levels consistent with &lt;span class=&quot;diff-del&quot;&gt;NPC&lt;/span&gt; disease and no &lt;span class=&quot;diff-del&quot;&gt;Niemann-Pick&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;C2 (NPC2) Disease mutations
+  3. Adult participant&lt;/span&gt; or parent/guardian &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;provided&lt;/span&gt; written informed consent,&lt;span class=&quot;diff-del&quot;&gt; with&lt;/span&gt; assent &lt;span class=&quot;diff-del&quot;&gt;collected&lt;/span&gt; from &lt;span class=&quot;diff-del&quot;&gt;minors&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;appropriate ageIs able&lt;/span&gt; to undergo a lumbar puncture (LP) and IT drug administration under &lt;span class=&quot;diff-del&quot;&gt;conscious&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;sedation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; general &lt;span class=&quot;diff-del&quot;&gt;anesthesia&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;NPC Clinical Severity Scale Score&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; through 4, inclusive, in two or more of the following components: ambulation, fine motor skills, or &lt;span class=&quot;diff-del&quot;&gt;swallowing;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has a&lt;/span&gt; score&lt;span class=&quot;diff-del&quot;&gt; of 0 through 4 on the cognition component
+  5. Has a total NPC Clinical Severity Scale Score&lt;/span&gt; of 10 or &lt;span class=&quot;diff-del&quot;&gt;greaterIf&lt;/span&gt; taking miglustat, must have been on a stable dose for past &lt;span class=&quot;diff-del&quot;&gt;6-8&lt;/span&gt; weeks and be willing to remain on a stable &lt;span class=&quot;diff-del&quot;&gt;doseIf participant has seizures, they have been adequately controlled&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;without&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;changing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dose&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;regimen&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has agreed&lt;/span&gt; to discontinue all &lt;span class=&quot;diff-del&quot;&gt;non-prescription&lt;/span&gt; supplements at least 1 month prior to first dose (Study Day &lt;span class=&quot;diff-del&quot;&gt;0)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has agreed&lt;/span&gt; to discontinue any other investigational treatments for NPC &lt;span class=&quot;diff-del&quot;&gt;including&lt;/span&gt; vorinostat or arimoclomol at least 3 months prior to first dose (Study Day &lt;span class=&quot;diff-del&quot;&gt;0)If&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;child-bearing&lt;/span&gt; potential (not surgically &lt;span class=&quot;diff-del&quot;&gt;sterile),&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;agrees to&lt;/span&gt; use a medically acceptable method &lt;span class=&quot;diff-del&quot;&gt;continuously,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;until&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;least&lt;/span&gt; 30 days after participation in the study
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Has&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. as assessed by &lt;span class=&quot;diff-del&quot;&gt;NPC&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Clinical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Severity Scale:Unable&lt;/span&gt; to walk, wheelchair dependent (ambulation &lt;span class=&quot;diff-del&quot;&gt;NPC&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;score=5)Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;need&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; a nasogastric tube &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;overcome&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;swallowing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;difficulties&lt;/span&gt; (swallowing &lt;span class=&quot;diff-del&quot;&gt;NPC&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;score=5)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;used&lt;/span&gt; for supplemental feeding or &lt;span class=&quot;diff-del&quot;&gt;administering&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medicationsevere&lt;/span&gt; dysmetria (fine motor score &lt;span class=&quot;diff-del&quot;&gt;=5)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;orminimal&lt;/span&gt; cognitive function (cognition &lt;span class=&quot;diff-del&quot;&gt;NPC&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;score=5)Weighs&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;less&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; 15 &lt;span class=&quot;diff-del&quot;&gt;kgHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had prior&lt;/span&gt; treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day &lt;span class=&quot;diff-del&quot;&gt;0,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has had any&lt;/span&gt; prior &lt;span class=&quot;diff-del&quot;&gt;intrathecal (IT)&lt;/span&gt; administration of &lt;span class=&quot;diff-del&quot;&gt;HP-β-CDIs&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;taking&lt;/span&gt; antipsychotics for treatment of &lt;span class=&quot;diff-del&quot;&gt;psychosis;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;use&lt;/span&gt; of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude &lt;span class=&quot;diff-del&quot;&gt;participation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; this &lt;span class=&quot;diff-del&quot;&gt;trialHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a history&lt;/span&gt; of hypersensitivity reactions to any product containing &lt;span class=&quot;diff-del&quot;&gt;HP-β-CDHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;spinal&lt;/span&gt; deformity that could impact the ability to perform a lumbar &lt;span class=&quot;diff-del&quot;&gt;punctureHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had a skin&lt;/span&gt; infection in the lumbar region within 2 months of study &lt;span class=&quot;diff-del&quot;&gt;entryHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;neutropenia,&lt;/span&gt; defined as an absolute neutrophil count (ANC) of less than 1.5 X &lt;span class=&quot;diff-del&quot;&gt;10^9/LHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;thrombocytopenia&lt;/span&gt; (platelet count of less than 75 X &lt;span class=&quot;diff-del&quot;&gt;10^9/L)Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;activated&lt;/span&gt; partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding &lt;span class=&quot;diff-del&quot;&gt;disorderHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had status&lt;/span&gt; epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be &lt;span class=&quot;diff-del&quot;&gt;quantifiedHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;evidence&lt;/span&gt; of&lt;span class=&quot;diff-del&quot;&gt; either&lt;/span&gt; obstructive hydrocephalus or normal pressure &lt;span class=&quot;diff-del&quot;&gt;hydrocephalusHas&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;recently&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;used&lt;/span&gt; anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Is&lt;/span&gt; unable to comply with the study procedures or &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of &lt;span class=&quot;diff-del&quot;&gt;participation&lt;/span&gt;"
+                 data-raw="Key Inclusion Criteria:Parts A&amp;amp;#x2F;B:Had onset of neurological symptoms prior to 15 years of ageHas confirmed diagnosis of NPC1 determined by either:two NPC1 mutationspositive filipin staining and at least one NPC1 mutationvertical supranuclear gaze palsy (VSNGP) in combination with either: one NPC1 mutation, OR positive filipin staining or oxysterol levels consistent with NPC disease and no Niemann-Pick Type C2 (NPC2) Disease mutationsAdult participant or parent&amp;amp;#x2F;guardian has provided written informed consent, with assent collected from minors of appropriate ageIs able to undergo a lumbar puncture (LP) and IT drug administration under conscious sedation or general anesthesiaHas an NPC Clinical Severity Scale Score of 1 through 4, inclusive, in two or more of the following components: ambulation, fine motor skills, or swallowing; and has a score of 0 through 4 on the cognition componentHas a total NPC Clinical Severity Scale Score of 10 or greaterIf taking miglustat, must have been on a stable dose for past 6-8 weeks and be willing to remain on a stable doseIf participant has seizures, they have been adequately controlled for 3 months without changing dose or regimenHas agreed to discontinue all non-prescription supplements at least 1 month prior to first dose (Study Day 0)Has agreed to discontinue any other investigational treatments for NPC including vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0)If of child-bearing potential (not surgically sterile), agrees to use a medically acceptable method continuously, until at least 30 days after participation in the studyKey Exclusion Criteria:Has exclusion criteria as assessed by NPC Clinical Severity Scale:Unable to walk, wheelchair dependent (ambulation NPC score=5)Has need for a nasogastric tube to overcome swallowing difficulties (swallowing NPC score=5) unless used for supplemental feeding or administering medicationsevere dysmetria (fine motor score =5) orminimal cognitive function (cognition NPC score=5)Weighs less than 15 kgHas had prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0, or has had any prior intrathecal (IT) administration of HP-β-CDIs taking antipsychotics for treatment of psychosis; use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude participation in this trialHas a history of hypersensitivity reactions to any product containing HP-β-CDHas a spinal deformity that could impact the ability to perform a lumbar punctureHas had a skin infection in the lumbar region within 2 months of study entryHas neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9&amp;amp;#x2F;LHas thrombocytopenia (platelet count of less than 75 X 10^9&amp;amp;#x2F;L)Has activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorderHas had status epilepticus occurring within 3 months of screening and&amp;amp;#x2F;or seizure frequency that cannot be quantifiedHas evidence of either obstructive hydrocephalus or normal pressure hydrocephalusHas recently used anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].Is unable to comply with the study procedures or has a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation">INCLUSION CRITERIA
+
+  1. Parts A/B:Had onset of neurological symptoms prior to 15 years of age
+  2. Has confirmed diagnosis of NPC1 determined by either:two NPC1 mutationspositive filipin staining and at least one NPC1 mutationvertical supranuclear gaze palsy (VSNGP) in combination with either: one NPC1 mutation, OR positive filipin staining or oxysterol levels consistent with NPC disease and no Niemann-Pick Type C2 (NPC2) Disease mutations
+  3. Adult participant or parent/guardian has provided written informed consent, with assent collected from minors of appropriate ageIs able to undergo a lumbar puncture (LP) and IT drug administration under conscious sedation or general anesthesia
+  4. Has an NPC Clinical Severity Scale Score of 1 through 4, inclusive, in two or more of the following components: ambulation, fine motor skills, or swallowing; and has a score of 0 through 4 on the cognition component
+  5. Has a total NPC Clinical Severity Scale Score of 10 or greaterIf taking miglustat, must have been on a stable dose for past 6-8 weeks and be willing to remain on a stable doseIf participant has seizures, they have been adequately controlled for 3 months without changing dose or regimen
+  6. Has agreed to discontinue all non-prescription supplements at least 1 month prior to first dose (Study Day 0)
+  7. Has agreed to discontinue any other investigational treatments for NPC including vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0)If of child-bearing potential (not surgically sterile), agrees to use a medically acceptable method continuously, until at least 30 days after participation in the study
+
+EXCLUSION CRITERIA
+
+  1. Has
+
+EXCLUSION CRITERIA
+
+  1. as assessed by NPC Clinical Severity Scale:Unable to walk, wheelchair dependent (ambulation NPC score=5)Has need for a nasogastric tube to overcome swallowing difficulties (swallowing NPC score=5) unless used for supplemental feeding or administering medicationsevere dysmetria (fine motor score =5) orminimal cognitive function (cognition NPC score=5)Weighs less than 15 kgHas had prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0, or has had any prior intrathecal (IT) administration of HP-β-CDIs taking antipsychotics for treatment of psychosis; use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude participation in this trialHas a history of hypersensitivity reactions to any product containing HP-β-CDHas a spinal deformity that could impact the ability to perform a lumbar punctureHas had a skin infection in the lumbar region within 2 months of study entryHas neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9/LHas thrombocytopenia (platelet count of less than 75 X 10^9/L)Has activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorderHas had status epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be quantifiedHas evidence of either obstructive hydrocephalus or normal pressure hydrocephalusHas recently used anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  2. Is unable to comply with the study procedures or has a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 40)
+
+INCLUSION CRITERIA
+
+  1. Parts A and B:
+  2. Male or female subjects, 4 to 21 years of age at time of screening, with onset of neurological symptoms prior to 15 years of age.
+  3. Confirmed diagnosis of NPC1 determined by one of the following:
+  4. a. Two NPC1 mutations;
+  5. b. Positive filipin staining or oxysterol testing and at least one NPC1 mutation;
+  6. c. Vertical supranuclear gaze palsy (VSNGP) in combination with either:
+  7. i. One NPC1 mutation, or
+  8. ii. Positive filipin staining or oxysterol levels consistent with NPC1 disease and no NPC2 mutations.
+  9. Subject or parent/guardian must provide written informed consent to participate in the study. In addition to parental consent, assent to participate must also be sought from minor children.
+  10. Ability to undergo a lumbar puncture (LP) and IT drug administration under monitored anesthesia care (conscious sedation) or, if medically necessary, general anesthesia.
+  11. An NPC-SS score of 0 through 4, inclusive, on the cognition component, and 1 through 4 in two or more of the following components: ambulation, fine motor skills, or swallowing.
+  12. Total NPC-SS score of 10 or greater.
+  13. Subjects with adequately controlled seizures may qualify for enrollment. Subjects with a history of seizures should have a stable pattern of seizure activity and be on a stable dose and regimen of antiepileptic medication during the 3 months prior to screening without change in dose or regimen up to and including Study Day 0.
+  14. If taking miglustat, must have been on a stable dose for the past 6 to 8 weeks and be willing to remain on a stable dose for the duration of participation in Parts A and B of the study. Alternatively, subjects may elect to discontinue miglustat use and be eligible for trial entry after undergoing a minimum 6-week washout period prior to Study Day 0.
+  15. Agree to discontinue all nonprescription supplements such as coenzyme Q10, curcumin, cinnamon, fish oil supplements, high-dose vitamin D (&amp;gt; 500 mIU/day), N-acetylcysteine, acetylleucine, or gingko biloba at least 1 month prior to first dose (Study Day 0). Note: Daily administration of an age-appropriate multivitamin is allowed.
+  16. Agree to discontinue any other investigational treatments for NPC including, for example, vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0).
+  17. Females of childbearing potential (not surgically sterile) must use a medically acceptable method of contraception and must agree to continue use of this method for the duration of the study and for 30 days after participation in the study. Acceptable methods of contraception include barrier method with spermicide, intrauterine device, steroidal contraceptive in conjunction with a barrier method, or abstinence.
+  18. Subject or caregiver must possess the ability, per the investigator, to understand and comply with protocol requirements including clinical outcome measurements and instructions for the entire duration of the study.
+  19. Caregiver, parent, guardian, or responsible adult must be able and willing to accompany the subject to study visits.
+
+EXCLUSION CRITERIA
+
+  1. 1.
+
+EXCLUSION CRITERIA
+
+  1. as assessed by NPC-SS:
+  2. a. Unable to walk, wheelchair dependent (ambulation score = 5).
+  3. b. Needs a nasogastric tube or gastric tube for all feedings (swallowing score = 5). Note: Nasogastric or gastric tube use for supplemental feeding or medication administration is permitted and will not exclude a subject from this trial.
+  4. c. Severe dysmetria (fine motor score = 5).
+  5. d. Minimal cognitive function (cognition score = 5).
+  6. Body weight &amp;lt; 15 kg.
+  7. Prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0. Note: Any prior IT administration of HP-β-CD will exclude a subject from enrollment.
+  8. Subjects on antipsychotics for treatment of psychosis. Note: Use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude a subject from this trial.
+  9. History of hypersensitivity reactions to any product containing 2-hydroxypropyl-β-cyclodextrin (HP-β-CD).
+  10. Spinal deformity that could impact the ability to perform a lumbar puncture.
+  11. Skin infection in the lumbar region within 2 months of study entry.
+  12. Neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9/L.
+  13. Thrombocytopenia (platelet count of less than 75 X 10^9/L).
+  14. Activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorder.
+  15. Status epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be quantified.
+  16. Evidence of obstructive hydrocephalus or normal pressure hydrocephalus.
+  17. Recent use of anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  18. Subjects unable to comply with the study procedures or with a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 40)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Parts &lt;span class=&quot;diff-add&quot;&gt;A and B:
+  2. Male or female subjects, 4 to 21 years of age at time of screening, with&lt;/span&gt; onset of neurological symptoms prior to 15 years of &lt;span class=&quot;diff-add&quot;&gt;age.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Confirmed&lt;/span&gt; diagnosis of NPC1 determined by &lt;span class=&quot;diff-add&quot;&gt;one of the following:
+  4. a. Two&lt;/span&gt; NPC1 &lt;span class=&quot;diff-add&quot;&gt;mutations;
+  5. b. Positive&lt;/span&gt; filipin staining&lt;span class=&quot;diff-add&quot;&gt; or oxysterol testing&lt;/span&gt; and at least one NPC1 &lt;span class=&quot;diff-add&quot;&gt;mutation;
+  6. c. Vertical&lt;/span&gt; supranuclear gaze palsy (VSNGP) in combination with either:&lt;span class=&quot;diff-add&quot;&gt;
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;i. One&lt;/span&gt; NPC1 mutation, &lt;span class=&quot;diff-add&quot;&gt;or
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ii. Positive&lt;/span&gt; filipin staining or oxysterol levels consistent with &lt;span class=&quot;diff-add&quot;&gt;NPC1&lt;/span&gt; disease and no &lt;span class=&quot;diff-add&quot;&gt;NPC2&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mutations.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subject&lt;/span&gt; or parent/guardian &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;provide&lt;/span&gt; written informed &lt;span class=&quot;diff-add&quot;&gt;consent to participate in the study. In addition to parental &lt;/span&gt;consent, assent &lt;span class=&quot;diff-add&quot;&gt;to participate must also be sought&lt;/span&gt; from &lt;span class=&quot;diff-add&quot;&gt;minor&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;children.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Ability&lt;/span&gt; to undergo a lumbar puncture (LP) and IT drug administration under &lt;span class=&quot;diff-add&quot;&gt;monitored&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;anesthesia&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;care (conscious sedation) or, if medically necessary,&lt;/span&gt; general &lt;span class=&quot;diff-add&quot;&gt;anesthesia.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;An&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;NPC-SS&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;score&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;0&lt;/span&gt; through 4, inclusive,&lt;span class=&quot;diff-add&quot;&gt; on the cognition component, and 1 through 4&lt;/span&gt; in two or more of the following components: ambulation, fine motor skills, or &lt;span class=&quot;diff-add&quot;&gt;swallowing.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Total&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;NPC-SS&lt;/span&gt; score of 10 or &lt;span class=&quot;diff-add&quot;&gt;greater.
+  13. Subjects with adequately controlled seizures may qualify for enrollment. Subjects with a history of seizures should have a stable pattern of seizure activity and be on a stable dose and regimen of antiepileptic medication during the 3 months prior to screening without change in dose or regimen up to and including Study Day 0.
+  14. If&lt;/span&gt; taking miglustat, must have been on a stable dose for &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;past &lt;span class=&quot;diff-add&quot;&gt;6 to 8&lt;/span&gt; weeks and be willing to remain on a stable &lt;span class=&quot;diff-add&quot;&gt;dose&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participation&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Parts&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;A and B of the study. Alternatively, subjects may elect to discontinue miglustat use and be eligible for trial entry after undergoing a minimum 6-week washout period prior to Study Day 0.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Agree&lt;/span&gt; to discontinue all &lt;span class=&quot;diff-add&quot;&gt;nonprescription&lt;/span&gt; supplements&lt;span class=&quot;diff-add&quot;&gt; such as coenzyme Q10, curcumin, cinnamon, fish oil supplements, high-dose vitamin D (&amp;gt; 500 mIU/day), N-acetylcysteine, acetylleucine, or gingko biloba&lt;/span&gt; at least 1 month prior to first dose (Study Day &lt;span class=&quot;diff-add&quot;&gt;0). Note: Daily administration of an age-appropriate multivitamin is allowed.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Agree&lt;/span&gt; to discontinue any other investigational treatments for NPC &lt;span class=&quot;diff-add&quot;&gt;including, for example,&lt;/span&gt; vorinostat or arimoclomol at least 3 months prior to first dose (Study Day &lt;span class=&quot;diff-add&quot;&gt;0).
+  17. Females&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;childbearing&lt;/span&gt; potential (not surgically &lt;span class=&quot;diff-add&quot;&gt;sterile)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; use a medically acceptable method &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;contraception&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must agree to continue use of this method for the duration of the study and for&lt;/span&gt; 30 days after participation in the &lt;span class=&quot;diff-add&quot;&gt;study. Acceptable methods of contraception include barrier method with spermicide, intrauterine device, steroidal contraceptive in conjunction with a barrier method, or abstinence.
+  18. Subject or caregiver must possess the ability, per the investigator, to understand and comply with protocol requirements including clinical outcome measurements and instructions for the entire duration of the study.
+  19. Caregiver, parent, guardian, or responsible adult must be able and willing to accompany the subject to &lt;/span&gt;study&lt;span class=&quot;diff-add&quot;&gt; visits.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;1.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. as assessed by &lt;span class=&quot;diff-add&quot;&gt;NPC-SS:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Unable&lt;/span&gt; to walk, wheelchair dependent (ambulation &lt;span class=&quot;diff-add&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5).
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;b. Needs&lt;/span&gt; a nasogastric tube &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;gastric&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;tube&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for all feedings&lt;/span&gt; (swallowing &lt;span class=&quot;diff-add&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5).&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note: Nasogastric or gastric tube use&lt;/span&gt; for supplemental feeding or &lt;span class=&quot;diff-add&quot;&gt;medication&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;administration is permitted and will not exclude a subject from this trial.
+  4. c. Severe&lt;/span&gt; dysmetria (fine motor score &lt;span class=&quot;diff-add&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5).
+  5. d. Minimal&lt;/span&gt; cognitive function (cognition &lt;span class=&quot;diff-add&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5).
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Body weight &amp;lt;&lt;/span&gt; 15 &lt;span class=&quot;diff-add&quot;&gt;kg.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Prior&lt;/span&gt; treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day &lt;span class=&quot;diff-add&quot;&gt;0.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Any&lt;/span&gt; prior &lt;span class=&quot;diff-add&quot;&gt;IT&lt;/span&gt; administration of &lt;span class=&quot;diff-add&quot;&gt;HP-β-CD&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;will exclude a subject from enrollment.
+  8. Subjects on&lt;/span&gt; antipsychotics for treatment of &lt;span class=&quot;diff-add&quot;&gt;psychosis.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Note: Use&lt;/span&gt; of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;subject from&lt;/span&gt; this &lt;span class=&quot;diff-add&quot;&gt;trial.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; of hypersensitivity reactions to any product containing &lt;span class=&quot;diff-add&quot;&gt;2-hydroxypropyl-β-cyclodextrin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(HP-β-CD).
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Spinal&lt;/span&gt; deformity that could impact the ability to perform a lumbar &lt;span class=&quot;diff-add&quot;&gt;puncture.
+  11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Skin&lt;/span&gt; infection in the lumbar region within 2 months of study &lt;span class=&quot;diff-add&quot;&gt;entry.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Neutropenia,&lt;/span&gt; defined as an absolute neutrophil count (ANC) of less than 1.5 X &lt;span class=&quot;diff-add&quot;&gt;10^9/L.
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Thrombocytopenia&lt;/span&gt; (platelet count of less than 75 X &lt;span class=&quot;diff-add&quot;&gt;10^9/L).
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Activated&lt;/span&gt; partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding &lt;span class=&quot;diff-add&quot;&gt;disorder.
+  15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Status&lt;/span&gt; epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be &lt;span class=&quot;diff-add&quot;&gt;quantified.
+  16.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Evidence&lt;/span&gt; of obstructive hydrocephalus or normal pressure &lt;span class=&quot;diff-add&quot;&gt;hydrocephalus.
+  17.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Recent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use of&lt;/span&gt; anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; unable to comply with the study procedures or &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of &lt;span class=&quot;diff-add&quot;&gt;participation.&lt;/span&gt;"
+                 data-raw="**Amended Eligibility Criteria (version 40)**
+
+**Key Inclusion Criteria: Parts A and B:**
+1. Male or female subjects, 4 to 21 years of age at time of screening, with onset of neurological symptoms prior to 15 years of age.
+2. Confirmed diagnosis of NPC1 determined by one of the following:
+   a. Two NPC1 mutations;
+   b. Positive filipin staining or oxysterol testing and at least one NPC1 mutation;
+   c. Vertical supranuclear gaze palsy (VSNGP) in combination with either:
+      i. One NPC1 mutation, or
+      ii. Positive filipin staining or oxysterol levels consistent with NPC1 disease and no NPC2 mutations.
+3. Subject or parent/guardian must provide written informed consent to participate in the study. In addition to parental consent, assent to participate must also be sought from minor children.
+4. Ability to undergo a lumbar puncture (LP) and IT drug administration under monitored anesthesia care (conscious sedation) or, if medically necessary, general anesthesia.
+5. An NPC-SS score of 0 through 4, inclusive, on the cognition component, and 1 through 4 in two or more of the following components: ambulation, fine motor skills, or swallowing.
+6. Total NPC-SS score of 10 or greater.
+7. Subjects with adequately controlled seizures may qualify for enrollment. Subjects with a history of seizures should have a stable pattern of seizure activity and be on a stable dose and regimen of antiepileptic medication during the 3 months prior to screening without change in dose or regimen up to and including Study Day 0.
+8. If taking miglustat, must have been on a stable dose for the past 6 to 8 weeks and be willing to remain on a stable dose for the duration of participation in Parts A and B of the study. Alternatively, subjects may elect to discontinue miglustat use and be eligible for trial entry after undergoing a minimum 6-week washout period prior to Study Day 0.
+9. Agree to discontinue all nonprescription supplements such as coenzyme Q10, curcumin, cinnamon, fish oil supplements, high-dose vitamin D (&amp;gt; 500 mIU/day), N-acetylcysteine, acetylleucine, or gingko biloba at least 1 month prior to first dose (Study Day 0). Note: Daily administration of an age-appropriate multivitamin is allowed.
+10. Agree to discontinue any other investigational treatments for NPC including, for example, vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0).
+11. Females of childbearing potential (not surgically sterile) must use a medically acceptable method of contraception and must agree to continue use of this method for the duration of the study and for 30 days after participation in the study. Acceptable methods of contraception include barrier method with spermicide, intrauterine device, steroidal contraceptive in conjunction with a barrier method, or abstinence.
+12. Subject or caregiver must possess the ability, per the investigator, to understand and comply with protocol requirements including clinical outcome measurements and instructions for the entire duration of the study.
+13. Caregiver, parent, guardian, or responsible adult must be able and willing to accompany the subject to study visits.
+
+**Key Exclusion Criteria:**
+1. Exclusion criteria as assessed by NPC-SS:
+   a. Unable to walk, wheelchair dependent (ambulation score = 5).
+   b. Needs a nasogastric tube or gastric tube for all feedings (swallowing score = 5). Note: Nasogastric or gastric tube use for supplemental feeding or medication administration is permitted and will not exclude a subject from this trial.
+   c. Severe dysmetria (fine motor score = 5).
+   d. Minimal cognitive function (cognition score = 5).
+2. Body weight &amp;lt; 15 kg.
+3. Prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0. Note: Any prior IT administration of HP-β-CD will exclude a subject from enrollment.
+4. Subjects on antipsychotics for treatment of psychosis. Note: Use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude a subject from this trial.
+5. History of hypersensitivity reactions to any product containing 2-hydroxypropyl-β-cyclodextrin (HP-β-CD).
+6. Spinal deformity that could impact the ability to perform a lumbar puncture.
+7. Skin infection in the lumbar region within 2 months of study entry.
+8. Neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9/L.
+9. Thrombocytopenia (platelet count of less than 75 X 10^9/L).
+10. Activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &amp;gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorder.
+11. Status epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be quantified.
+12. Evidence of obstructive hydrocephalus or normal pressure hydrocephalus.
+13. Recent use of anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+14. Subjects unable to comply with the study procedures or with a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation.">Amended Eligibility Criteria (version 40)
+
+INCLUSION CRITERIA
+
+  1. Parts A and B:
+  2. Male or female subjects, 4 to 21 years of age at time of screening, with onset of neurological symptoms prior to 15 years of age.
+  3. Confirmed diagnosis of NPC1 determined by one of the following:
+  4. a. Two NPC1 mutations;
+  5. b. Positive filipin staining or oxysterol testing and at least one NPC1 mutation;
+  6. c. Vertical supranuclear gaze palsy (VSNGP) in combination with either:
+  7. i. One NPC1 mutation, or
+  8. ii. Positive filipin staining or oxysterol levels consistent with NPC1 disease and no NPC2 mutations.
+  9. Subject or parent/guardian must provide written informed consent to participate in the study. In addition to parental consent, assent to participate must also be sought from minor children.
+  10. Ability to undergo a lumbar puncture (LP) and IT drug administration under monitored anesthesia care (conscious sedation) or, if medically necessary, general anesthesia.
+  11. An NPC-SS score of 0 through 4, inclusive, on the cognition component, and 1 through 4 in two or more of the following components: ambulation, fine motor skills, or swallowing.
+  12. Total NPC-SS score of 10 or greater.
+  13. Subjects with adequately controlled seizures may qualify for enrollment. Subjects with a history of seizures should have a stable pattern of seizure activity and be on a stable dose and regimen of antiepileptic medication during the 3 months prior to screening without change in dose or regimen up to and including Study Day 0.
+  14. If taking miglustat, must have been on a stable dose for the past 6 to 8 weeks and be willing to remain on a stable dose for the duration of participation in Parts A and B of the study. Alternatively, subjects may elect to discontinue miglustat use and be eligible for trial entry after undergoing a minimum 6-week washout period prior to Study Day 0.
+  15. Agree to discontinue all nonprescription supplements such as coenzyme Q10, curcumin, cinnamon, fish oil supplements, high-dose vitamin D (&gt; 500 mIU/day), N-acetylcysteine, acetylleucine, or gingko biloba at least 1 month prior to first dose (Study Day 0). Note: Daily administration of an age-appropriate multivitamin is allowed.
+  16. Agree to discontinue any other investigational treatments for NPC including, for example, vorinostat or arimoclomol at least 3 months prior to first dose (Study Day 0).
+  17. Females of childbearing potential (not surgically sterile) must use a medically acceptable method of contraception and must agree to continue use of this method for the duration of the study and for 30 days after participation in the study. Acceptable methods of contraception include barrier method with spermicide, intrauterine device, steroidal contraceptive in conjunction with a barrier method, or abstinence.
+  18. Subject or caregiver must possess the ability, per the investigator, to understand and comply with protocol requirements including clinical outcome measurements and instructions for the entire duration of the study.
+  19. Caregiver, parent, guardian, or responsible adult must be able and willing to accompany the subject to study visits.
+
+EXCLUSION CRITERIA
+
+  1. 1.
+
+EXCLUSION CRITERIA
+
+  1. as assessed by NPC-SS:
+  2. a. Unable to walk, wheelchair dependent (ambulation score = 5).
+  3. b. Needs a nasogastric tube or gastric tube for all feedings (swallowing score = 5). Note: Nasogastric or gastric tube use for supplemental feeding or medication administration is permitted and will not exclude a subject from this trial.
+  4. c. Severe dysmetria (fine motor score = 5).
+  5. d. Minimal cognitive function (cognition score = 5).
+  6. Body weight &lt; 15 kg.
+  7. Prior treatment with intravenous 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) for NPC1 disease, unless the subject has undergone a minimum 3-month washout period prior to Study Day 0. Note: Any prior IT administration of HP-β-CD will exclude a subject from enrollment.
+  8. Subjects on antipsychotics for treatment of psychosis. Note: Use of antipsychotic medication for treatment of other disorders (e.g., Attention Deficit Hyperactivity Disorder) will not exclude a subject from this trial.
+  9. History of hypersensitivity reactions to any product containing 2-hydroxypropyl-β-cyclodextrin (HP-β-CD).
+  10. Spinal deformity that could impact the ability to perform a lumbar puncture.
+  11. Skin infection in the lumbar region within 2 months of study entry.
+  12. Neutropenia, defined as an absolute neutrophil count (ANC) of less than 1.5 X 10^9/L.
+  13. Thrombocytopenia (platelet count of less than 75 X 10^9/L).
+  14. Activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by &gt; 1.5 times the upper limit of normal (ULN) or known history of a bleeding disorder.
+  15. Status epilepticus occurring within 3 months of screening and/or seizure frequency that cannot be quantified.
+  16. Evidence of obstructive hydrocephalus or normal pressure hydrocephalus.
+  17. Recent use of anticoagulants [in past 2 weeks prior to first dose (Study Day 0); re: lumbar puncture safety].
+  18. Subjects unable to comply with the study procedures or with a clinical disease or laboratory abnormality that in the opinion of the investigator would potentially increase the risk of participation.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

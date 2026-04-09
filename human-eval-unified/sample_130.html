@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 130</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 130</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced RCCCandidate for partial or complete nephrectomy as part of treatment plan.
+  2. Measurable disease per RECIST version 1.1.
+  3. ECOG performance status 0 or 1.
+  4. Adequate bone marrow and organ function.
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune or immunocompromising conditions.
+  6. Uncontrolled hypertension."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced &lt;span class=&quot;diff-del&quot;&gt;RCCCandidate&lt;/span&gt; for partial or complete nephrectomy as part of treatment plan.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Measurable disease per RECIST version 1.1.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ECOG&lt;/span&gt; performance status 0 or 1.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Adequate bone marrow and organ &lt;span class=&quot;diff-del&quot;&gt;function.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune or immunocompromising &lt;span class=&quot;diff-del&quot;&gt;conditions.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Uncontrolled &lt;span class=&quot;diff-del&quot;&gt;hypertension.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Imaging results consistent with locally-advanced RCCCandidate for partial or complete nephrectomy as part of treatment plan.Measurable disease per RECIST version 1.1.ECOG performance status 0 or 1.Adequate bone marrow and organ function.Exclusion Criteria:Prior systemic anti-tumor treatment for RCC.Patients who are receiving any other investigational agents.Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.Inability to undergo baseline tumor biopsy.Active or prior documented autoimmune or immunocompromising conditions.Uncontrolled hypertension.">INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced RCCCandidate for partial or complete nephrectomy as part of treatment plan.
+  2. Measurable disease per RECIST version 1.1.
+  3. ECOG performance status 0 or 1.
+  4. Adequate bone marrow and organ function.
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune or immunocompromising conditions.
+  6. Uncontrolled hypertension.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced RCC without evidence of metastatic disease and absence of adjacent organ invasion or retroperitoneal adenopathy (cT2-T3b, N0, M0).
+  2. Candidate for partial or complete nephrectomy that extirpates all tumor tissue as part of treatment plan.
+  3. Measurable disease as per RECIST version 1.1.
+  4. Eastern Cooperative Oncology Group (ECOG) performance status 0 or 1.
+  5. Adequate bone marrow and organ function demonstrated by:
+  6. a. Absolute neutrophil count ≥ 1,000/mm3 (≥ 1.0 × 10^9/L);
+  7. b. Platelet count ≥ 100 × 10^9/L (≥ 100,000 per mm3);
+  8. c. ALT and AST ≤ 2.5 × ULN;
+  9. d. Serum bilirubin ≤ 1.5 × ULN, or ≤ 3.0 × ULN for patients with Gilbert Syndrome;
+  10. e. Serum creatinine ≤ 1.5 × ULN, or creatinine clearance (CrCl) ≥ 50 mL/min.
+  11. ≥ 18 years of age.
+  12. Women of child-bearing potential (WOCBP) or men whose partner is a WOCBP agrees to use contraception while participating in this study, and for a period of 6 months following termination of study treatment.
+  13. Completed informed consent process, including signing Institutional Review Board/Ethics Committee/Research Ethics Board (IRB/EC/REB) approved informed consent form.
+  14. Willing to comply with clinical trial instructions and requirements.
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune disease, except for patients with Type I diabetes, vitiligo, Grave’s disease, residual hypothyroidism due to autoimmune condition only requiring hormone replacement, or psoriasis not requiring systemic treatment.
+  6. Active or prior immunocompromising conditions, including:
+  7. a. Current or prior use of immunosuppressive medication within 28 days before the first dose of study treatment, with exceptions for intranasal and inhaled corticosteroids or systemic corticosteroids at physiological doses not exceeding 10 mg/day of prednisone or equivalent;
+  8. b. Known acute or chronic human immunodeficiency virus (HIV);
+  9. c. History of primary immunodeficiency;
+  10. d. History of allogeneic transplant.
+  11. Known acute or chronic hepatitis B or hepatitis C.
+  12. History of hypersensitivity to study treatment excipient.
+  13. History of severe hypersensitivity reaction to any monoclonal antibody.
+  14. Use of live vaccines against infectious disease within 28 days of initiation of study therapy; killed vaccinations are allowed at any appropriate time before and during the study.
+  15. Uncontrolled arterial hypertension (&amp;gt; 150 mm Hg systolic or &amp;gt; 100 mm Hg diastolic) on multiple observations despite standard of care treatment.
+  16. History of stroke or transient ischemic attack within the previous 6 months.
+  17. Any of the following cardiac abnormalities:
+  18. a. Unstable angina pectoris;
+  19. b. Congestive heart failure ≥ NYHA Class 3;
+  20. c. QTc &amp;gt; 480 milliseconds;
+  21. d. Left ventricular ejection fraction (LVEF) ≤ 40%.
+  22. Concomitant medication known to cause prolonged QT which cannot be discontinued or changed to a different medication prior to enrollment.
+  23. Known or suspected presence of another malignancy that could be mistaken for the malignancy under study during disease assessments.
+  24. Pregnancy. WOCBP must have a negative serum or urine pregnancy test documented within the screening period prior to start of study drug.
+  25. Breast-feeding or planning to breast feed during the study or within 6 months after study treatment.
+  26. Any serious illness, uncontrolled inter-current illness, psychiatric illness, active or uncontrolled infection, or other medical history, including laboratory results, which, in the Investigator’s opinion, would be likely to interfere with the patient’s participation in the study, or with the interpretation of the results."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced &lt;span class=&quot;diff-add&quot;&gt;RCC without evidence of metastatic disease and absence of adjacent organ invasion or retroperitoneal adenopathy (cT2-T3b, N0, M0).
+  2. Candidate&lt;/span&gt; for partial or complete nephrectomy &lt;span class=&quot;diff-add&quot;&gt;that extirpates all tumor tissue &lt;/span&gt;as part of treatment plan.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Measurable disease&lt;span class=&quot;diff-add&quot;&gt; as&lt;/span&gt; per RECIST version 1.1.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eastern Cooperative Oncology Group (ECOG)&lt;/span&gt; performance status 0 or 1.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Adequate bone marrow and organ &lt;span class=&quot;diff-add&quot;&gt;function demonstrated by:
+  6. a. Absolute neutrophil count ≥ 1,000/mm3 (≥ 1.0 × 10^9/L);
+  7. b. Platelet count ≥ 100 × 10^9/L (≥ 100,000 per mm3);
+  8. c. ALT and AST ≤ 2.5 × ULN;
+  9. d. Serum bilirubin ≤ 1.5 × ULN, or ≤ 3.0 × ULN for patients with Gilbert Syndrome;
+  10. e. Serum creatinine ≤ 1.5 × ULN, or creatinine clearance (CrCl) ≥ 50 mL/min.
+  11. ≥ 18 years of age.
+  12. Women of child-bearing potential (WOCBP) or men whose partner is a WOCBP agrees to use contraception while participating in this study, and for a period of 6 months following termination of study treatment.
+  13. Completed informed consent process, including signing Institutional Review Board/Ethics Committee/Research Ethics Board (IRB/EC/REB) approved informed consent form.
+  14. Willing to comply with clinical trial instructions and requirements.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune &lt;span class=&quot;diff-add&quot;&gt;disease, except for patients with Type I diabetes, vitiligo, Grave’s disease, residual hypothyroidism due to autoimmune condition only requiring hormone replacement, &lt;/span&gt;or&lt;span class=&quot;diff-add&quot;&gt; psoriasis not requiring systemic treatment.
+  6. Active or prior&lt;/span&gt; immunocompromising &lt;span class=&quot;diff-add&quot;&gt;conditions, including:&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7. a. Current or prior use of immunosuppressive medication within 28 days before the first dose of study treatment, with exceptions for intranasal and inhaled corticosteroids or systemic corticosteroids at physiological doses not exceeding 10 mg/day of prednisone or equivalent;
+  8. b. Known acute or chronic human immunodeficiency virus (HIV);
+  9. c. History of primary immunodeficiency;
+  10. d. History of allogeneic transplant.
+  11. Known acute or chronic hepatitis B or hepatitis C.
+  12. History of hypersensitivity to study treatment excipient.
+  13. History of severe hypersensitivity reaction to any monoclonal antibody.
+  14. Use of live vaccines against infectious disease within 28 days of initiation of study therapy; killed vaccinations are allowed at any appropriate time before and during the study.
+  15.&lt;/span&gt; Uncontrolled &lt;span class=&quot;diff-add&quot;&gt;arterial hypertension (&amp;gt; 150 mm Hg systolic or &amp;gt; 100 mm Hg diastolic) on multiple observations despite standard of care treatment.
+  16. History of stroke or transient ischemic attack within the previous 6 months.
+  17. Any of the following cardiac abnormalities:
+  18. a. Unstable angina pectoris;
+  19. b. Congestive heart failure ≥ NYHA Class 3;
+  20. c. QTc &amp;gt; 480 milliseconds;
+  21. d. Left ventricular ejection fraction (LVEF) ≤ 40%.
+  22. Concomitant medication known to cause prolonged QT which cannot be discontinued or changed to a different medication prior to enrollment.
+  23. Known or suspected presence of another malignancy that could be mistaken for the malignancy under study during disease assessments.
+  24. Pregnancy. WOCBP must have a negative serum or urine pregnancy test documented within the screening period prior to start of study drug.
+  25. Breast-feeding or planning to breast feed during the study or within 6 months after study treatment.
+  26. Any serious illness, uncontrolled inter-current illness, psychiatric illness, active or uncontrolled infection, or other medical history, including laboratory results, which, in the Investigator’s opinion, would be likely to interfere with the patient’s participation in the study, or with the interpretation of the results.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+1. Imaging results consistent with locally-advanced RCC without evidence of metastatic disease and absence of adjacent organ invasion or retroperitoneal adenopathy (cT2-T3b, N0, M0).
+2. Candidate for partial or complete nephrectomy that extirpates all tumor tissue as part of treatment plan.
+3. Measurable disease as per RECIST version 1.1.
+4. Eastern Cooperative Oncology Group (ECOG) performance status 0 or 1.
+5. Adequate bone marrow and organ function demonstrated by:
+   a. Absolute neutrophil count ≥ 1,000/mm3 (≥ 1.0 × 10^9/L);
+   b. Platelet count ≥ 100 × 10^9/L (≥ 100,000 per mm3);
+   c. ALT and AST ≤ 2.5 × ULN;
+   d. Serum bilirubin ≤ 1.5 × ULN, or ≤ 3.0 × ULN for patients with Gilbert Syndrome;
+   e. Serum creatinine ≤ 1.5 × ULN, or creatinine clearance (CrCl) ≥ 50 mL/min.
+6. ≥ 18 years of age.
+7. Women of child-bearing potential (WOCBP) or men whose partner is a WOCBP agrees to use contraception while participating in this study, and for a period of 6 months following termination of study treatment.
+8. Completed informed consent process, including signing Institutional Review Board/Ethics Committee/Research Ethics Board (IRB/EC/REB) approved informed consent form.
+9. Willing to comply with clinical trial instructions and requirements.
+
+Exclusion Criteria:
+1. Prior systemic anti-tumor treatment for RCC.
+2. Patients who are receiving any other investigational agents.
+3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+4. Inability to undergo baseline tumor biopsy.
+5. Active or prior documented autoimmune disease, except for patients with Type I diabetes, vitiligo, Grave’s disease, residual hypothyroidism due to autoimmune condition only requiring hormone replacement, or psoriasis not requiring systemic treatment.
+6. Active or prior immunocompromising conditions, including:
+   a. Current or prior use of immunosuppressive medication within 28 days before the first dose of study treatment, with exceptions for intranasal and inhaled corticosteroids or systemic corticosteroids at physiological doses not exceeding 10 mg/day of prednisone or equivalent;
+   b. Known acute or chronic human immunodeficiency virus (HIV);
+   c. History of primary immunodeficiency;
+   d. History of allogeneic transplant.
+7. Known acute or chronic hepatitis B or hepatitis C.
+8. History of hypersensitivity to study treatment excipient.
+9. History of severe hypersensitivity reaction to any monoclonal antibody.
+10. Use of live vaccines against infectious disease within 28 days of initiation of study therapy; killed vaccinations are allowed at any appropriate time before and during the study.
+11. Uncontrolled arterial hypertension (&amp;gt; 150 mm Hg systolic or &amp;gt; 100 mm Hg diastolic) on multiple observations despite standard of care treatment.
+12. History of stroke or transient ischemic attack within the previous 6 months.
+13. Any of the following cardiac abnormalities:
+    a. Unstable angina pectoris;
+    b. Congestive heart failure ≥ NYHA Class 3;
+    c. QTc &amp;gt; 480 milliseconds;
+    d. Left ventricular ejection fraction (LVEF) ≤ 40%.
+14. Concomitant medication known to cause prolonged QT which cannot be discontinued or changed to a different medication prior to enrollment.
+15. Known or suspected presence of another malignancy that could be mistaken for the malignancy under study during disease assessments.
+16. Pregnancy. WOCBP must have a negative serum or urine pregnancy test documented within the screening period prior to start of study drug.
+17. Breast-feeding or planning to breast feed during the study or within 6 months after study treatment.
+18. Any serious illness, uncontrolled inter-current illness, psychiatric illness, active or uncontrolled infection, or other medical history, including laboratory results, which, in the Investigator’s opinion, would be likely to interfere with the patient’s participation in the study, or with the interpretation of the results.">INCLUSION CRITERIA
+
+  1. Imaging results consistent with locally-advanced RCC without evidence of metastatic disease and absence of adjacent organ invasion or retroperitoneal adenopathy (cT2-T3b, N0, M0).
+  2. Candidate for partial or complete nephrectomy that extirpates all tumor tissue as part of treatment plan.
+  3. Measurable disease as per RECIST version 1.1.
+  4. Eastern Cooperative Oncology Group (ECOG) performance status 0 or 1.
+  5. Adequate bone marrow and organ function demonstrated by:
+  6. a. Absolute neutrophil count ≥ 1,000/mm3 (≥ 1.0 × 10^9/L);
+  7. b. Platelet count ≥ 100 × 10^9/L (≥ 100,000 per mm3);
+  8. c. ALT and AST ≤ 2.5 × ULN;
+  9. d. Serum bilirubin ≤ 1.5 × ULN, or ≤ 3.0 × ULN for patients with Gilbert Syndrome;
+  10. e. Serum creatinine ≤ 1.5 × ULN, or creatinine clearance (CrCl) ≥ 50 mL/min.
+  11. ≥ 18 years of age.
+  12. Women of child-bearing potential (WOCBP) or men whose partner is a WOCBP agrees to use contraception while participating in this study, and for a period of 6 months following termination of study treatment.
+  13. Completed informed consent process, including signing Institutional Review Board/Ethics Committee/Research Ethics Board (IRB/EC/REB) approved informed consent form.
+  14. Willing to comply with clinical trial instructions and requirements.
+
+EXCLUSION CRITERIA
+
+  1. Prior systemic anti-tumor treatment for RCC.
+  2. Patients who are receiving any other investigational agents.
+  3. Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.
+  4. Inability to undergo baseline tumor biopsy.
+  5. Active or prior documented autoimmune disease, except for patients with Type I diabetes, vitiligo, Grave’s disease, residual hypothyroidism due to autoimmune condition only requiring hormone replacement, or psoriasis not requiring systemic treatment.
+  6. Active or prior immunocompromising conditions, including:
+  7. a. Current or prior use of immunosuppressive medication within 28 days before the first dose of study treatment, with exceptions for intranasal and inhaled corticosteroids or systemic corticosteroids at physiological doses not exceeding 10 mg/day of prednisone or equivalent;
+  8. b. Known acute or chronic human immunodeficiency virus (HIV);
+  9. c. History of primary immunodeficiency;
+  10. d. History of allogeneic transplant.
+  11. Known acute or chronic hepatitis B or hepatitis C.
+  12. History of hypersensitivity to study treatment excipient.
+  13. History of severe hypersensitivity reaction to any monoclonal antibody.
+  14. Use of live vaccines against infectious disease within 28 days of initiation of study therapy; killed vaccinations are allowed at any appropriate time before and during the study.
+  15. Uncontrolled arterial hypertension (&gt; 150 mm Hg systolic or &gt; 100 mm Hg diastolic) on multiple observations despite standard of care treatment.
+  16. History of stroke or transient ischemic attack within the previous 6 months.
+  17. Any of the following cardiac abnormalities:
+  18. a. Unstable angina pectoris;
+  19. b. Congestive heart failure ≥ NYHA Class 3;
+  20. c. QTc &gt; 480 milliseconds;
+  21. d. Left ventricular ejection fraction (LVEF) ≤ 40%.
+  22. Concomitant medication known to cause prolonged QT which cannot be discontinued or changed to a different medication prior to enrollment.
+  23. Known or suspected presence of another malignancy that could be mistaken for the malignancy under study during disease assessments.
+  24. Pregnancy. WOCBP must have a negative serum or urine pregnancy test documented within the screening period prior to start of study drug.
+  25. Breast-feeding or planning to breast feed during the study or within 6 months after study treatment.
+  26. Any serious illness, uncontrolled inter-current illness, psychiatric illness, active or uncontrolled infection, or other medical history, including laboratory results, which, in the Investigator’s opinion, would be likely to interfere with the patient’s participation in the study, or with the interpretation of the results.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

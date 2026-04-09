@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 21</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 21</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. Biopsy confirmed diagnosis of IgAN within 8 years prior to Screening or Run-in Visit 1
+  3. Documented history of proteinuria of &amp;gt; 1 g/day within 6 months prior to Screening or uPCR &amp;gt; 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements &amp;gt; 1 g/day at baseline
+  5. Estimated glomerular filtration rate of ≥ 30 mL/min/1.73 m² at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), Chinese traditional medicine with immunosuppressive function, cytotoxic drugs, or eculizumab within 8 weeks prior to Screening, unless such treatment is given for indications other than IgA.
+  2. Treatment with systemic corticosteroids within 8 weeks prior to ScreeningUncontrolled BP, a systolic BP of &amp;gt; 150 mmHg and a diastolic BP of &amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACE inhibitors, ARBs, or direct renin inhibitorsFemale patients who are pregnant, breast feeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatments.
+  3. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatmentsClinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-InPresence of significant morbidity or other major illness or disease that may confound the interpretation of the clinical trial results or may result in death within 2 years of ScreeningHistory of renal transplantationHave a known hypersensitivity to any constituent of the investigational productRapidly progressive glomerulonephritis, defined as a fall in eGFR of &amp;gt; 30 mL/min/1.73 m^2 within 24 weeks or &amp;gt; 15 mL/min/1.73 m^2 within 12 weeks prior to ScreeningSignificant abnormalities in clinical laboratory valuesHistory of human immunodeficiency virus (HIV), evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded; for patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  4. Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 yearsHave received any other investigational drug or device or experimental procedures within 30 days of the Screening Visit (SV) or within 5 times the plasma half-life of the administered experimental drug, whichever is longerInitiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods.
+  5. However, a stable dose regimen established at least 8 weeks prior to screening is acceptableTreatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening.
+  6. Treatment with Tarpeyo is not allowed during Screening and Run-In PeriodsTreatment with Kerendia® (finerenone) within 6 months prior to screening.
+  7. Treatment with Kerendia is not allowed during Screening and Run-In PeriodsInitiation of treatment with Filspari™ (sparsentan), a dual Endothelin Angiotensin Receptor Antagonist (dEARA) or similar medication within three months prior to screening.
+  8. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background therapy"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. &lt;span class=&quot;diff-del&quot;&gt;Biopsy confirmed&lt;/span&gt; diagnosis of IgAN within 8 years prior to Screening&lt;span class=&quot;diff-del&quot;&gt; or Run-in Visit 1&lt;/span&gt;
+  3. &lt;span class=&quot;diff-del&quot;&gt;Documented history&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;proteinuria of &amp;gt;&lt;/span&gt; 1 g/day within 6 months prior to Screening or uPCR &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; 1 g/day at baseline
+  5. Estimated glomerular filtration rate of ≥ 30 mL/min/1.73 &lt;span class=&quot;diff-del&quot;&gt;m²&lt;/span&gt; at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), &lt;span class=&quot;diff-del&quot;&gt;Chinese traditional medicine with immunosuppressive function,&lt;/span&gt; cytotoxic drugs, or eculizumab within 8 weeks prior to &lt;span class=&quot;diff-del&quot;&gt;Screening,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;such&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; is &lt;span class=&quot;diff-del&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;indications&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;IgA.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Treatment with systemic corticosteroids within 8 weeks prior to &lt;span class=&quot;diff-del&quot;&gt;ScreeningUncontrolled&lt;/span&gt; BP, a systolic BP of &amp;gt; 150 mmHg and a diastolic BP of &amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including &lt;span class=&quot;diff-del&quot;&gt;ACE inhibitors,&lt;/span&gt; ARBs, or direct renin &lt;span class=&quot;diff-del&quot;&gt;inhibitorsFemale&lt;/span&gt; patients who are pregnant, &lt;span class=&quot;diff-del&quot;&gt;breast feeding,&lt;/span&gt; or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible &lt;span class=&quot;diff-del&quot;&gt;retreatments.
+  3.&lt;/span&gt; Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible &lt;span class=&quot;diff-del&quot;&gt;retreatmentsClinical&lt;/span&gt; or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and &lt;span class=&quot;diff-del&quot;&gt;Run-InPresence&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of significant morbidity or other major illness or disease that may confound the interpretation of the clinical trial results or may result in death within 2 years of ScreeningHistory&lt;/span&gt; of renal &lt;span class=&quot;diff-del&quot;&gt;transplantationHave&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a known&lt;/span&gt; hypersensitivity to any constituent of the investigational &lt;span class=&quot;diff-del&quot;&gt;productRapidly&lt;/span&gt; progressive &lt;span class=&quot;diff-del&quot;&gt;glomerulonephritis,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined as a fall in eGFR of &amp;gt; 30 mL/min/1.73 m^2 within 24 weeks or &amp;gt; 15 mL/min/1.73 m^2 within 12 weeks prior to ScreeningSignificant&lt;/span&gt; abnormalities in clinical laboratory &lt;span class=&quot;diff-del&quot;&gt;valuesHistory&lt;/span&gt; of human immunodeficiency virus &lt;span class=&quot;diff-del&quot;&gt;(HIV),&lt;/span&gt; evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), hepatitis B virus (HBV) infection (patients with positive HBsAg are &lt;span class=&quot;diff-del&quot;&gt;excluded;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 &lt;span class=&quot;diff-del&quot;&gt;yearsHave&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;received&lt;/span&gt; any other investigational drug or device or experimental procedures within 30 days of the Screening Visit (SV) &lt;span class=&quot;diff-del&quot;&gt;or within 5 times the plasma half-life of the administered experimental drug, whichever is longerInitiation&lt;/span&gt; or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods.&lt;span class=&quot;diff-del&quot;&gt;
+  5.&lt;/span&gt; However, a stable dose regimen established at least 8 weeks prior to screening is &lt;span class=&quot;diff-del&quot;&gt;acceptableTreatment&lt;/span&gt; with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening.&lt;span class=&quot;diff-del&quot;&gt;
+  6.&lt;/span&gt; Treatment with Tarpeyo is not allowed during Screening and Run-In &lt;span class=&quot;diff-del&quot;&gt;PeriodsTreatment&lt;/span&gt; with Kerendia® (finerenone) within 6 months prior to screening.&lt;span class=&quot;diff-del&quot;&gt;
+  7.&lt;/span&gt; Treatment with Kerendia is not allowed during Screening and Run-In &lt;span class=&quot;diff-del&quot;&gt;PeriodsInitiation&lt;/span&gt; of treatment with Filspari™ (sparsentan), a dual &lt;span class=&quot;diff-del&quot;&gt;Endothelin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Angiotensin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Receptor&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Antagonist&lt;/span&gt; (dEARA) or similar medication within three months prior to screening.&lt;span class=&quot;diff-del&quot;&gt;
+  8.&lt;/span&gt; A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Age 18 years or older at the onset of ScreeningBiopsy confirmed diagnosis of IgAN within 8 years prior to Screening or Run-in Visit 1Documented history of proteinuria of &amp;amp;gt; 1 g&amp;amp;#x2F;day within 6 months prior to Screening or uPCR &amp;amp;gt; 0.75 by spot urine at ScreeningMean of two proteinuria measurements &amp;amp;gt; 1 g&amp;amp;#x2F;day at baselineEstimated glomerular filtration rate of ≥ 30 mL&amp;amp;#x2F;min&amp;amp;#x2F;1.73 m² at Screening and baselineExclusion Criteria:Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), Chinese traditional medicine with immunosuppressive function, cytotoxic drugs, or eculizumab within 8 weeks prior to Screening, unless such treatment is given for indications other than IgA.Treatment with systemic corticosteroids within 8 weeks prior to ScreeningUncontrolled BP, a systolic BP of &amp;amp;gt; 150 mmHg and a diastolic BP of &amp;amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACE inhibitors, ARBs, or direct renin inhibitorsFemale patients who are pregnant, breast feeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatments. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatmentsClinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-InPresence of significant morbidity or other major illness or disease that may confound the interpretation of the clinical trial results or may result in death within 2 years of ScreeningHistory of renal transplantationHave a known hypersensitivity to any constituent of the investigational productRapidly progressive glomerulonephritis, defined as a fall in eGFR of &amp;amp;gt; 30 mL&amp;amp;#x2F;min&amp;amp;#x2F;1.73 m^2 within 24 weeks or &amp;amp;gt; 15 mL&amp;amp;#x2F;min&amp;amp;#x2F;1.73 m^2 within 12 weeks prior to ScreeningSignificant abnormalities in clinical laboratory valuesHistory of human immunodeficiency virus (HIV), evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded; for patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 yearsHave received any other investigational drug or device or experimental procedures within 30 days of the Screening Visit (SV) or within 5 times the plasma half-life of the administered experimental drug, whichever is longerInitiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods. However, a stable dose regimen established at least 8 weeks prior to screening is acceptableTreatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening. Treatment with Tarpeyo is not allowed during Screening and Run-In PeriodsTreatment with Kerendia® (finerenone) within 6 months prior to screening. Treatment with Kerendia is not allowed during Screening and Run-In PeriodsInitiation of treatment with Filspari™ (sparsentan), a dual Endothelin Angiotensin Receptor Antagonist (dEARA) or similar medication within three months prior to screening. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi&amp;amp;#x2F;ARB as background therapy">INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. Biopsy confirmed diagnosis of IgAN within 8 years prior to Screening or Run-in Visit 1
+  3. Documented history of proteinuria of &gt; 1 g/day within 6 months prior to Screening or uPCR &gt; 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements &gt; 1 g/day at baseline
+  5. Estimated glomerular filtration rate of ≥ 30 mL/min/1.73 m² at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), Chinese traditional medicine with immunosuppressive function, cytotoxic drugs, or eculizumab within 8 weeks prior to Screening, unless such treatment is given for indications other than IgA.
+  2. Treatment with systemic corticosteroids within 8 weeks prior to ScreeningUncontrolled BP, a systolic BP of &gt; 150 mmHg and a diastolic BP of &gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACE inhibitors, ARBs, or direct renin inhibitorsFemale patients who are pregnant, breast feeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatments.
+  3. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatmentsClinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-InPresence of significant morbidity or other major illness or disease that may confound the interpretation of the clinical trial results or may result in death within 2 years of ScreeningHistory of renal transplantationHave a known hypersensitivity to any constituent of the investigational productRapidly progressive glomerulonephritis, defined as a fall in eGFR of &gt; 30 mL/min/1.73 m^2 within 24 weeks or &gt; 15 mL/min/1.73 m^2 within 12 weeks prior to ScreeningSignificant abnormalities in clinical laboratory valuesHistory of human immunodeficiency virus (HIV), evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded; for patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  4. Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 yearsHave received any other investigational drug or device or experimental procedures within 30 days of the Screening Visit (SV) or within 5 times the plasma half-life of the administered experimental drug, whichever is longerInitiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods.
+  5. However, a stable dose regimen established at least 8 weeks prior to screening is acceptableTreatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening.
+  6. Treatment with Tarpeyo is not allowed during Screening and Run-In PeriodsTreatment with Kerendia® (finerenone) within 6 months prior to screening.
+  7. Treatment with Kerendia is not allowed during Screening and Run-In PeriodsInitiation of treatment with Filspari™ (sparsentan), a dual Endothelin Angiotensin Receptor Antagonist (dEARA) or similar medication within three months prior to screening.
+  8. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background therapy</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 3)
+
+INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. Biopsy-confirmed diagnosis of IgAN within 8 years prior to Screening
+  3. Proteinuria of ≥ 1 g/day within 6 months prior to Screening or uPCR ≥ 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements ≥ 1 g/day at baseline
+  5. Estimated glomerular filtration rate (eGFR) of ≥ 30 mL/min/1.73 m2 at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), or cytotoxic drugs, for IgAN within 8 weeks prior to Screening. Treatment with immunosuppressants or cytotoxic drugs for indications other than IgAN is allowed during the Run-In Period and throughout the study.
+  2. Treatment with eculizumab within 8 weeks prior to Screening. Treatment with eculizumab is not allowed during the Run-In Period.
+  3. Treatment with systemic corticosteroids within 8 weeks prior to Screening. Treatment with systemic corticosteroids is not allowed during the Run-In Period.
+  4. Uncontrolled BP, a systolic BP of &amp;gt; 150 mmHg and a diastolic BP of &amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACEIs, ARBs, or direct renin inhibitors at Screening and baseline
+  5. Female patients who are pregnant, breastfeeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatment. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatment
+  6. Clinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-In
+  7. History of renal transplantation
+  8. Known hypersensitivity to any constituent of the investigational product
+  9. Rapidly progressive glomerulonephritis
+  10. Significant abnormalities in clinical laboratory values
+  11. History of human immunodeficiency virus (HIV) infection, evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), or hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded. For patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  12. Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 years
+  13. Receipt of any other investigational drug or device or experimental procedures and/or treatments within 30 days of the Screening Visit (SV)
+  14. Initiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods. However, a stable dose regimen established at least 8 weeks prior to screening is acceptable.
+  15. Treatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening. Treatment with Tarpeyo is not allowed during Screening and Run-In Periods.
+  16. Treatment with Kerendia® (finerenone) within 6 months prior to screening. Treatment with Kerendia is not allowed during Screening and Run-In Periods.
+  17. Initiation of treatment with Filspari™ (sparsentan), a dual endothelin angiotensin receptor antagonist (dEARA) or similar medication within three months prior to screening. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background therapy."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 3)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. &lt;span class=&quot;diff-add&quot;&gt;Biopsy-confirmed&lt;/span&gt; diagnosis of IgAN within 8 years prior to Screening
+  3. &lt;span class=&quot;diff-add&quot;&gt;Proteinuria&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 1 g/day within 6 months prior to Screening or uPCR &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 1 g/day at baseline
+  5. Estimated glomerular filtration rate &lt;span class=&quot;diff-add&quot;&gt;(eGFR) &lt;/span&gt;of ≥ 30 mL/min/1.73 &lt;span class=&quot;diff-add&quot;&gt;m2&lt;/span&gt; at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; cytotoxic drugs, &lt;span class=&quot;diff-add&quot;&gt;for IgAN within 8 weeks prior to Screening. Treatment with immunosuppressants &lt;/span&gt;or&lt;span class=&quot;diff-add&quot;&gt; cytotoxic drugs for indications other than IgAN is allowed during the Run-In Period and throughout the study.
+  2. Treatment with&lt;/span&gt; eculizumab within 8 weeks prior to &lt;span class=&quot;diff-add&quot;&gt;Screening.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eculizumab&lt;/span&gt; is &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;allowed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Run-In&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Period.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Treatment with systemic corticosteroids within 8 weeks prior to &lt;span class=&quot;diff-add&quot;&gt;Screening. Treatment with systemic corticosteroids is not allowed during the Run-In Period.
+  4. Uncontrolled&lt;/span&gt; BP, a systolic BP of &amp;gt; 150 mmHg and a diastolic BP of &amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including &lt;span class=&quot;diff-add&quot;&gt;ACEIs,&lt;/span&gt; ARBs, or direct renin &lt;span class=&quot;diff-add&quot;&gt;inhibitors at Screening and baseline
+  5. Female&lt;/span&gt; patients who are pregnant, &lt;span class=&quot;diff-add&quot;&gt;breastfeeding,&lt;/span&gt; or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible &lt;span class=&quot;diff-add&quot;&gt;retreatment.&lt;/span&gt; Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible &lt;span class=&quot;diff-add&quot;&gt;retreatment
+  6. Clinical&lt;/span&gt; or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and &lt;span class=&quot;diff-add&quot;&gt;Run-In
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; of renal &lt;span class=&quot;diff-add&quot;&gt;transplantation
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; hypersensitivity to any constituent of the investigational &lt;span class=&quot;diff-add&quot;&gt;product
+  9. Rapidly&lt;/span&gt; progressive &lt;span class=&quot;diff-add&quot;&gt;glomerulonephritis
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Significant&lt;/span&gt; abnormalities in clinical laboratory &lt;span class=&quot;diff-add&quot;&gt;values
+  11. History&lt;/span&gt; of human immunodeficiency virus &lt;span class=&quot;diff-add&quot;&gt;(HIV) infection,&lt;/span&gt; evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), &lt;span class=&quot;diff-add&quot;&gt;or &lt;/span&gt;hepatitis B virus (HBV) infection (patients with positive HBsAg are &lt;span class=&quot;diff-add&quot;&gt;excluded.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;For&lt;/span&gt; patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 &lt;span class=&quot;diff-add&quot;&gt;years
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Receipt of&lt;/span&gt; any other investigational drug or device or experimental procedures &lt;span class=&quot;diff-add&quot;&gt;and/or treatments &lt;/span&gt;within 30 days of the Screening Visit (SV)&lt;span class=&quot;diff-add&quot;&gt;
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Initiation&lt;/span&gt; or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods. However, a stable dose regimen established at least 8 weeks prior to screening is &lt;span class=&quot;diff-add&quot;&gt;acceptable.
+  15. Treatment&lt;/span&gt; with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening. Treatment with Tarpeyo is not allowed during Screening and Run-In &lt;span class=&quot;diff-add&quot;&gt;Periods.
+  16. Treatment&lt;/span&gt; with Kerendia® (finerenone) within 6 months prior to screening. Treatment with Kerendia is not allowed during Screening and Run-In &lt;span class=&quot;diff-add&quot;&gt;Periods.
+  17. Initiation&lt;/span&gt; of treatment with Filspari™ (sparsentan), a dual &lt;span class=&quot;diff-add&quot;&gt;endothelin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;angiotensin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;receptor&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;antagonist&lt;/span&gt; (dEARA) or similar medication within three months prior to screening. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 3)
+
+**Inclusion Criteria:**
+
+* Age 18 years or older at the onset of Screening
+* Biopsy-confirmed diagnosis of IgAN within 8 years prior to Screening
+* Proteinuria of ≥ 1 g/day within 6 months prior to Screening or uPCR ≥ 0.75 by spot urine at Screening
+* Mean of two proteinuria measurements ≥ 1 g/day at baseline
+* Estimated glomerular filtration rate (eGFR) of ≥ 30 mL/min/1.73 m2 at Screening and baseline
+
+**Exclusion Criteria:**
+
+* Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), or cytotoxic drugs, for IgAN within 8 weeks prior to Screening. Treatment with immunosuppressants or cytotoxic drugs for indications other than IgAN is allowed during the Run-In Period and throughout the study.
+* Treatment with eculizumab within 8 weeks prior to Screening. Treatment with eculizumab is not allowed during the Run-In Period.
+* Treatment with systemic corticosteroids within 8 weeks prior to Screening. Treatment with systemic corticosteroids is not allowed during the Run-In Period.
+* Uncontrolled BP, a systolic BP of &amp;gt; 150 mmHg and a diastolic BP of &amp;gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACEIs, ARBs, or direct renin inhibitors at Screening and baseline
+* Female patients who are pregnant, breastfeeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatment. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatment
+* Clinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &amp;gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-In
+* History of renal transplantation
+* Known hypersensitivity to any constituent of the investigational product
+* Rapidly progressive glomerulonephritis
+* Significant abnormalities in clinical laboratory values
+* History of human immunodeficiency virus (HIV) infection, evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), or hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded. For patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+* Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 years
+* Receipt of any other investigational drug or device or experimental procedures and/or treatments within 30 days of the Screening Visit (SV)
+* Initiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods. However, a stable dose regimen established at least 8 weeks prior to screening is acceptable.
+* Treatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening. Treatment with Tarpeyo is not allowed during Screening and Run-In Periods.
+* Treatment with Kerendia® (finerenone) within 6 months prior to screening. Treatment with Kerendia is not allowed during Screening and Run-In Periods.
+* Initiation of treatment with Filspari™ (sparsentan), a dual endothelin angiotensin receptor antagonist (dEARA) or similar medication within three months prior to screening. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background therapy.">Amended Eligibility Criteria (Version 3)
+
+INCLUSION CRITERIA
+
+  1. Age 18 years or older at the onset of Screening
+  2. Biopsy-confirmed diagnosis of IgAN within 8 years prior to Screening
+  3. Proteinuria of ≥ 1 g/day within 6 months prior to Screening or uPCR ≥ 0.75 by spot urine at Screening
+  4. Mean of two proteinuria measurements ≥ 1 g/day at baseline
+  5. Estimated glomerular filtration rate (eGFR) of ≥ 30 mL/min/1.73 m2 at Screening and baseline
+
+EXCLUSION CRITERIA
+
+  1. Treatment with immunosuppressants (e.g., azathioprine or cyclophosphamide), or cytotoxic drugs, for IgAN within 8 weeks prior to Screening. Treatment with immunosuppressants or cytotoxic drugs for indications other than IgAN is allowed during the Run-In Period and throughout the study.
+  2. Treatment with eculizumab within 8 weeks prior to Screening. Treatment with eculizumab is not allowed during the Run-In Period.
+  3. Treatment with systemic corticosteroids within 8 weeks prior to Screening. Treatment with systemic corticosteroids is not allowed during the Run-In Period.
+  4. Uncontrolled BP, a systolic BP of &gt; 150 mmHg and a diastolic BP of &gt; 100 mmHg at rest despite the combination of two or more anti-hypertensives including ACEIs, ARBs, or direct renin inhibitors at Screening and baseline
+  5. Female patients who are pregnant, breastfeeding, or planning to become pregnant up through 12 weeks after the last dose of study drug, including possible retreatment. Males who are planning to father children up through 12 weeks after the last dose of study drug, including possible retreatment
+  6. Clinical or biological evidence of Type 1 diabetes mellitus (DM), or poorly controlled DM with hemoglobin A1c &gt; 7.5 or with evidence of diabetic nephropathy on biopsy, systemic lupus erythematosus, IgA vasculitis (Henoch-Schonlein purpura), secondary IgAN, or other renal disease during Screening and Run-In
+  7. History of renal transplantation
+  8. Known hypersensitivity to any constituent of the investigational product
+  9. Rapidly progressive glomerulonephritis
+  10. Significant abnormalities in clinical laboratory values
+  11. History of human immunodeficiency virus (HIV) infection, evidence of immune suppression, active hepatitis C virus (HCV) infection (patients with positive anti-HCV antibody but a non-detected HCV RNA PCR can enroll), or hepatitis B virus (HBV) infection (patients with positive HBsAg are excluded. For patients with isolated positive anti-HBc antibody, HBV DNA test by PCR must be non-detectable to enroll).
+  12. Diagnosis of a malignancy except for adequately treated and cured basal or squamous cell skin cancer, curatively treated in situ disease, or other cancer from which the patient has been disease-free for ≥ 5 years
+  13. Receipt of any other investigational drug or device or experimental procedures and/or treatments within 30 days of the Screening Visit (SV)
+  14. Initiation or change in dosing of sodium glucose co-transporter 2 inhibitors (SGLT2i) during Screening and Run-In Periods. However, a stable dose regimen established at least 8 weeks prior to screening is acceptable.
+  15. Treatment with Tarpeyo™ (budesonide) or other approved treatments for IgAN within 6 months prior to screening. Treatment with Tarpeyo is not allowed during Screening and Run-In Periods.
+  16. Treatment with Kerendia® (finerenone) within 6 months prior to screening. Treatment with Kerendia is not allowed during Screening and Run-In Periods.
+  17. Initiation of treatment with Filspari™ (sparsentan), a dual endothelin angiotensin receptor antagonist (dEARA) or similar medication within three months prior to screening. A stable dose initiated at minimum 3 months before screening is acceptable and will take the place of ACEi/ARB as background therapy.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 103</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 103</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study PA-ADPKD-303Continued control of hypertension without the use of a diureticContinued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocolWilling to practice acceptable methods of birth control (both males who have partners of child-bearing potential and females of childbearing potential).
+  2. Able to provide informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with lixivaptan
+  2. Clinically significant incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia)
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participant
+  4. Hypovolemia on physical examination at Screening
+  5. The following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:Serum ALT or aspartate aminotransferase (AST) values &amp;gt;1.5 × ULNTotal bilirubin values &amp;gt;1.5 × ULNeGFR &amp;lt;20 mL/min/1.73 m^2 based on laboratory results from Visit 26 of PA-ADPKD-303A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study &lt;span class=&quot;diff-del&quot;&gt;PA-ADPKD-303Continued&lt;/span&gt; control of hypertension without the use of a &lt;span class=&quot;diff-del&quot;&gt;diureticContinued&lt;/span&gt; adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 &lt;span class=&quot;diff-del&quot;&gt;protocolWilling&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;practice&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;acceptable&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;methods&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;birth control (both males who have partners of child-bearing potential&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;females of childbearing potential).
+  2. Able to provide informed consent.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with &lt;span class=&quot;diff-del&quot;&gt;lixivaptan&lt;/span&gt;
+  2. Clinically significant incontinence, overactive bladder, or urinary retention (e.g., benign prostatic &lt;span class=&quot;diff-del&quot;&gt;hyperplasia)&lt;/span&gt;
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt;
+  4. Hypovolemia on physical examination at &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt;
+  5. The following laboratory results based on serum drawn at Visit 24 of &lt;span class=&quot;diff-del&quot;&gt;PA-ADPKD-303:Serum&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ALT&lt;/span&gt; or aspartate aminotransferase (AST) values &amp;gt;1.5 × &lt;span class=&quot;diff-del&quot;&gt;ULNTotal&lt;/span&gt; bilirubin values &amp;gt;1.5 × &lt;span class=&quot;diff-del&quot;&gt;ULNeGFR&lt;/span&gt; &amp;lt;20 &lt;span class=&quot;diff-del&quot;&gt;mL/min/1.73&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;m^2&lt;/span&gt; based on laboratory results from Visit 26 of &lt;span class=&quot;diff-del&quot;&gt;PA-ADPKD-303A&lt;/span&gt; finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical &lt;span class=&quot;diff-del&quot;&gt;monitor&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Male or female participants with ADPKD who completed study PA-ADPKD-303Continued control of hypertension without the use of a diureticContinued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocolWilling to practice acceptable methods of birth control (both males who have partners of child-bearing potential and females of childbearing potential).Able to provide informed consent.Exclusion Criteria:Any contraindication to continued treatment with lixivaptanClinically significant incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia)New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participantHypovolemia on physical examination at ScreeningThe following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:Serum ALT or aspartate aminotransferase (AST) values &amp;amp;gt;1.5 × ULNTotal bilirubin values &amp;amp;gt;1.5 × ULNeGFR &amp;amp;lt;20 mL&amp;amp;#x2F;min&amp;amp;#x2F;1.73 m^2 based on laboratory results from Visit 26 of PA-ADPKD-303A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor">INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study PA-ADPKD-303Continued control of hypertension without the use of a diureticContinued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocolWilling to practice acceptable methods of birth control (both males who have partners of child-bearing potential and females of childbearing potential).
+  2. Able to provide informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with lixivaptan
+  2. Clinically significant incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia)
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participant
+  4. Hypovolemia on physical examination at Screening
+  5. The following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:Serum ALT or aspartate aminotransferase (AST) values &gt;1.5 × ULNTotal bilirubin values &gt;1.5 × ULNeGFR &lt;20 mL/min/1.73 m^2 based on laboratory results from Visit 26 of PA-ADPKD-303A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 7):
+
+INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study PA-ADPKD-303.
+  2. Female participants must:
+  3. a. Not be pregnant, lactating, or breastfeeding.
+  4. b. Be either postmenopausal (defined as amenorrhea for ≥12 months), surgically sterile (defined as having undergone hysterectomy and/or bilateral oophorectomy), or if of child-bearing potential (WOCBP) must agree to continue to practice appropriate methods of birth control or remain abstinent (only if this is the usual and preferred lifestyle of the participant).
+  5. Male participants must agree to continue to use an acceptable form of birth control (see list above) or remain abstinent (only if this is the usual and preferred lifestyle of the participant) during the full duration of the trial and for 30 days after the last dose of lixivaptan treatment.
+  6. Continued control of hypertension without the use of a diuretic in concert with KDIGO “Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease.”
+  7. Continued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocol and in Section 5.7.1.2 of this protocol, including use of strong or moderate CYP3A4 or CYP2C8 inhibitors or inducers.
+  8. Read, understood, and provided written informed consent after the nature of the study has been fully explained and must be willing to comply with all study requirements and procedures.
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with lixivaptan.
+  2. Clinically significant (CS) incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia).
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participant.
+  4. Hypovolemia on physical examination at Screening.
+  5. The following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:
+  6. a. Serum alanine aminotransferase (ALT) or aspartate aminotransferase (AST) values &amp;gt;1.5 × upper limit of normal (ULN).
+  7. b. Total bilirubin values &amp;gt;1.5 × ULN.
+  8. eGFR &amp;lt;20 ml/min/1.73 m² based on laboratory results from Visit 26 of PA-ADPKD-303.
+  9. A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor.
+  10. These amendments incorporate the evidence provided, particularly focusing on the safety and tolerability of lixivaptan, while maintaining the clinical accuracy and relevance of the original criteria."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 7):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study &lt;span class=&quot;diff-add&quot;&gt;PA-ADPKD-303.
+  2. Female participants must:
+  3. a. Not be pregnant, lactating, or breastfeeding.
+  4. b. Be either postmenopausal (defined as amenorrhea for ≥12 months), surgically sterile (defined as having undergone hysterectomy and/or bilateral oophorectomy), or if of child-bearing potential (WOCBP) must agree to continue to practice appropriate methods of birth control or remain abstinent (only if this is the usual and preferred lifestyle of the participant).
+  5. Male participants must agree to continue to use an acceptable form of birth control (see list above) or remain abstinent (only if this is the usual and preferred lifestyle of the participant) during the full duration of the trial and for 30 days after the last dose of lixivaptan treatment.
+  6. Continued&lt;/span&gt; control of hypertension without the use of a &lt;span class=&quot;diff-add&quot;&gt;diuretic in concert with KDIGO “Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease.”
+  7. Continued&lt;/span&gt; adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 &lt;span class=&quot;diff-add&quot;&gt;protocol and in Section 5.7.1.2 of this protocol, including use of strong or moderate CYP3A4 or CYP2C8 inhibitors or inducers.
+  8. Read, understood, and provided written informed consent after the nature of the study has been fully explained and must be willing&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;comply&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;requirements&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;procedures.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with &lt;span class=&quot;diff-add&quot;&gt;lixivaptan.&lt;/span&gt;
+  2. Clinically significant&lt;span class=&quot;diff-add&quot;&gt; (CS)&lt;/span&gt; incontinence, overactive bladder, or urinary retention (e.g., benign prostatic &lt;span class=&quot;diff-add&quot;&gt;hyperplasia).&lt;/span&gt;
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the &lt;span class=&quot;diff-add&quot;&gt;participant.&lt;/span&gt;
+  4. Hypovolemia on physical examination at &lt;span class=&quot;diff-add&quot;&gt;Screening.&lt;/span&gt;
+  5. The following laboratory results based on serum drawn at Visit 24 of &lt;span class=&quot;diff-add&quot;&gt;PA-ADPKD-303:
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a. Serum alanine aminotransferase (ALT)&lt;/span&gt; or aspartate aminotransferase (AST) values &amp;gt;1.5 × &lt;span class=&quot;diff-add&quot;&gt;upper limit of normal (ULN).
+  7. b. Total&lt;/span&gt; bilirubin values &amp;gt;1.5 × &lt;span class=&quot;diff-add&quot;&gt;ULN.
+  8. eGFR&lt;/span&gt; &amp;lt;20 &lt;span class=&quot;diff-add&quot;&gt;ml/min/1.73&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;m²&lt;/span&gt; based on laboratory results from Visit 26 of &lt;span class=&quot;diff-add&quot;&gt;PA-ADPKD-303.
+  9. A&lt;/span&gt; finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical &lt;span class=&quot;diff-add&quot;&gt;monitor.
+  10. These amendments incorporate the evidence provided, particularly focusing on the safety and tolerability of lixivaptan, while maintaining the clinical accuracy and relevance of the original criteria.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (Version 7):
+
+**Inclusion Criteria:**
+1. Male or female participants with ADPKD who completed study PA-ADPKD-303.
+2. Female participants must:
+   a. Not be pregnant, lactating, or breastfeeding.
+   b. Be either postmenopausal (defined as amenorrhea for ≥12 months), surgically sterile (defined as having undergone hysterectomy and/or bilateral oophorectomy), or if of child-bearing potential (WOCBP) must agree to continue to practice appropriate methods of birth control or remain abstinent (only if this is the usual and preferred lifestyle of the participant).
+3. Male participants must agree to continue to use an acceptable form of birth control (see list above) or remain abstinent (only if this is the usual and preferred lifestyle of the participant) during the full duration of the trial and for 30 days after the last dose of lixivaptan treatment.
+4. Continued control of hypertension without the use of a diuretic in concert with KDIGO “Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease.”
+5. Continued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocol and in Section 5.7.1.2 of this protocol, including use of strong or moderate CYP3A4 or CYP2C8 inhibitors or inducers.
+6. Read, understood, and provided written informed consent after the nature of the study has been fully explained and must be willing to comply with all study requirements and procedures.
+
+**Exclusion Criteria:**
+1. Any contraindication to continued treatment with lixivaptan.
+2. Clinically significant (CS) incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia).
+3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participant.
+4. Hypovolemia on physical examination at Screening.
+5. The following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:
+   a. Serum alanine aminotransferase (ALT) or aspartate aminotransferase (AST) values &amp;gt;1.5 × upper limit of normal (ULN).
+   b. Total bilirubin values &amp;gt;1.5 × ULN.
+6. eGFR &amp;lt;20 ml/min/1.73 m² based on laboratory results from Visit 26 of PA-ADPKD-303.
+7. A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor.
+
+These amendments incorporate the evidence provided, particularly focusing on the safety and tolerability of lixivaptan, while maintaining the clinical accuracy and relevance of the original criteria.">Amended Eligibility Criteria (Version 7):
+
+INCLUSION CRITERIA
+
+  1. Male or female participants with ADPKD who completed study PA-ADPKD-303.
+  2. Female participants must:
+  3. a. Not be pregnant, lactating, or breastfeeding.
+  4. b. Be either postmenopausal (defined as amenorrhea for ≥12 months), surgically sterile (defined as having undergone hysterectomy and/or bilateral oophorectomy), or if of child-bearing potential (WOCBP) must agree to continue to practice appropriate methods of birth control or remain abstinent (only if this is the usual and preferred lifestyle of the participant).
+  5. Male participants must agree to continue to use an acceptable form of birth control (see list above) or remain abstinent (only if this is the usual and preferred lifestyle of the participant) during the full duration of the trial and for 30 days after the last dose of lixivaptan treatment.
+  6. Continued control of hypertension without the use of a diuretic in concert with KDIGO “Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease.”
+  7. Continued adherence to prohibitions on concomitant medications stated in the study PA-ADPKD-303 protocol and in Section 5.7.1.2 of this protocol, including use of strong or moderate CYP3A4 or CYP2C8 inhibitors or inducers.
+  8. Read, understood, and provided written informed consent after the nature of the study has been fully explained and must be willing to comply with all study requirements and procedures.
+
+EXCLUSION CRITERIA
+
+  1. Any contraindication to continued treatment with lixivaptan.
+  2. Clinically significant (CS) incontinence, overactive bladder, or urinary retention (e.g., benign prostatic hyperplasia).
+  3. New York Heart Association Functional Class 3 or 4 heart failure or other significant cardiac or electrocardiogram (ECG) findings that could pose a safety risk to the participant.
+  4. Hypovolemia on physical examination at Screening.
+  5. The following laboratory results based on serum drawn at Visit 24 of PA-ADPKD-303:
+  6. a. Serum alanine aminotransferase (ALT) or aspartate aminotransferase (AST) values &gt;1.5 × upper limit of normal (ULN).
+  7. b. Total bilirubin values &gt;1.5 × ULN.
+  8. eGFR &lt;20 ml/min/1.73 m² based on laboratory results from Visit 26 of PA-ADPKD-303.
+  9. A finding at Screening that precludes safe participation in the study or participants who are likely to be non-compliant with study procedures in the opinion of the Investigator or medical monitor.
+  10. These amendments incorporate the evidence provided, particularly focusing on the safety and tolerability of lixivaptan, while maintaining the clinical accuracy and relevance of the original criteria.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

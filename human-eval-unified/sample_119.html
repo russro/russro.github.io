@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 119</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 119</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade glioma that has relapsed, progressed or failed to respond to frontline therapy
+  2. Diagnosis of Low Grade glioma and require treatment but are unable to undergo further surgical resection
+  3. Confirmed measurable disease
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF inhibitor, other MEK or ERK inhibitor
+  2. Cancer treatment within the past 3 weeks
+  3. Stem cell transplant within the past 3 months
+  4. History of heart disease
+  5. Pregnant or lactating females"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade &lt;span class=&quot;diff-del&quot;&gt;glioma&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;relapsed,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;progressed&lt;/span&gt; or failed to respond to frontline &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Diagnosis of Low Grade glioma&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatment but are unable to undergo further surgical resection
+  3. Confirmed&lt;/span&gt; measurable disease
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF &lt;span class=&quot;diff-del&quot;&gt;inhibitor,&lt;/span&gt; other MEK or ERK &lt;span class=&quot;diff-del&quot;&gt;inhibitor&lt;/span&gt;
+  2. Cancer treatment within the past 3 &lt;span class=&quot;diff-del&quot;&gt;weeks&lt;/span&gt;
+  3. Stem cell transplant within the past 3 &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt;
+  4. History of heart &lt;span class=&quot;diff-del&quot;&gt;disease&lt;/span&gt;
+  5. Pregnant or lactating &lt;span class=&quot;diff-del&quot;&gt;females&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Diagnosis of High Grade glioma that has relapsed, progressed or failed to respond to frontline therapyDiagnosis of Low Grade glioma and require treatment but are unable to undergo further surgical resectionConfirmed measurable diseaseExclusion Criteria:Previous treatment with dabrafenib, trametinib, other RAF inhibitor, other MEK or ERK inhibitorCancer treatment within the past 3 weeksStem cell transplant within the past 3 monthsHistory of heart diseasePregnant or lactating females">INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade glioma that has relapsed, progressed or failed to respond to frontline therapy
+  2. Diagnosis of Low Grade glioma and require treatment but are unable to undergo further surgical resection
+  3. Confirmed measurable disease
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF inhibitor, other MEK or ERK inhibitor
+  2. Cancer treatment within the past 3 weeks
+  3. Stem cell transplant within the past 3 months
+  4. History of heart disease
+  5. Pregnant or lactating females</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 14):
+
+INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade Glioma (HGG) or Low Grade Glioma (LGG).
+  2. Relapsed, progressed, or failed to respond to frontline therapy.
+  3. Local and centrally confirmed measurable disease for enrollment.
+  4. Local histological diagnosis of HGG is sufficient for study entry.
+  5. Positive BRAF V600 mutation status.
+  6. Able to swallow capsules.
+  7. Local and centrally confirmed BRAF V600 mutation status.
+  8. Local and centrally confirmed HGG histopathology for HGG patients.
+  9. Willingness to follow all contraception guidance.
+  10. No history of heart disease.
+  11. No Gilbert’s syndrome (specific laboratory criteria for inclusion).
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF inhibitors, other MEK or ERK inhibitors.
+  2. Cancer treatment within the past 3 weeks.
+  3. Stem cell transplant within the past 3 months.
+  4. History of heart disease.
+  5. Pregnant or lactating females.
+  6. Known allergy to dabrafenib, trametinib, or their excipients.
+  7. Measurable disease in the LGG cohort (optional but a new baseline tumor evaluation must be established within 28 days of starting dabrafenib in combination with trametinib crossover treatment for LGG patients).
+  8. Patients who have not met the
+
+INCLUSION CRITERIA
+
+  1. for cardiac function or who cannot meet the
+
+EXCLUSION CRITERIA
+
+  1. for allergy to dabrafenib, trametinib, or their excipients."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 14):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade &lt;span class=&quot;diff-add&quot;&gt;Glioma&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(HGG)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Low&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Grade Glioma (LGG).
+  2. Relapsed, progressed,&lt;/span&gt; or failed to respond to frontline &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Local&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;centrally&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;confirmed&lt;/span&gt; measurable disease&lt;span class=&quot;diff-add&quot;&gt; for enrollment.
+  4. Local histological diagnosis of HGG is sufficient for study entry.
+  5. Positive BRAF V600 mutation status.
+  6. Able to swallow capsules.
+  7. Local and centrally confirmed BRAF V600 mutation status.
+  8. Local and centrally confirmed HGG histopathology for HGG patients.
+  9. Willingness to follow all contraception guidance.
+  10. No history of heart disease.
+  11. No Gilbert’s syndrome (specific laboratory criteria for inclusion).&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF &lt;span class=&quot;diff-add&quot;&gt;inhibitors,&lt;/span&gt; other MEK or ERK &lt;span class=&quot;diff-add&quot;&gt;inhibitors.&lt;/span&gt;
+  2. Cancer treatment within the past 3 &lt;span class=&quot;diff-add&quot;&gt;weeks.&lt;/span&gt;
+  3. Stem cell transplant within the past 3 &lt;span class=&quot;diff-add&quot;&gt;months.&lt;/span&gt;
+  4. History of heart &lt;span class=&quot;diff-add&quot;&gt;disease.&lt;/span&gt;
+  5. Pregnant or lactating &lt;span class=&quot;diff-add&quot;&gt;females.
+  6. Known allergy to dabrafenib, trametinib, or their excipients.
+  7. Measurable disease in the LGG cohort (optional but a new baseline tumor evaluation must be established within 28 days of starting dabrafenib in combination with trametinib crossover treatment for LGG patients).
+  8. Patients who have not met the
+
+INCLUSION CRITERIA
+
+  1. for cardiac function or who cannot meet the
+
+EXCLUSION CRITERIA
+
+  1. for allergy to dabrafenib, trametinib, or their excipients.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (version 14):
+
+**Inclusion Criteria:**
+1. Diagnosis of High Grade Glioma (HGG) or Low Grade Glioma (LGG).
+2. Relapsed, progressed, or failed to respond to frontline therapy.
+3. Local and centrally confirmed measurable disease for enrollment.
+4. Local histological diagnosis of HGG is sufficient for study entry.
+5. Positive BRAF V600 mutation status.
+6. Able to swallow capsules.
+7. Local and centrally confirmed BRAF V600 mutation status.
+8. Local and centrally confirmed HGG histopathology for HGG patients.
+9. Willingness to follow all contraception guidance.
+10. No history of heart disease.
+11. No Gilbert’s syndrome (specific laboratory criteria for inclusion).
+
+**Exclusion Criteria:**
+1. Previous treatment with dabrafenib, trametinib, other RAF inhibitors, other MEK or ERK inhibitors.
+2. Cancer treatment within the past 3 weeks.
+3. Stem cell transplant within the past 3 months.
+4. History of heart disease.
+5. Pregnant or lactating females.
+6. Known allergy to dabrafenib, trametinib, or their excipients.
+7. Measurable disease in the LGG cohort (optional but a new baseline tumor evaluation must be established within 28 days of starting dabrafenib in combination with trametinib crossover treatment for LGG patients).
+8. Patients who have not met the inclusion criteria for cardiac function or who cannot meet the exclusion criteria for allergy to dabrafenib, trametinib, or their excipients.">Amended Eligibility Criteria (version 14):
+
+INCLUSION CRITERIA
+
+  1. Diagnosis of High Grade Glioma (HGG) or Low Grade Glioma (LGG).
+  2. Relapsed, progressed, or failed to respond to frontline therapy.
+  3. Local and centrally confirmed measurable disease for enrollment.
+  4. Local histological diagnosis of HGG is sufficient for study entry.
+  5. Positive BRAF V600 mutation status.
+  6. Able to swallow capsules.
+  7. Local and centrally confirmed BRAF V600 mutation status.
+  8. Local and centrally confirmed HGG histopathology for HGG patients.
+  9. Willingness to follow all contraception guidance.
+  10. No history of heart disease.
+  11. No Gilbert’s syndrome (specific laboratory criteria for inclusion).
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with dabrafenib, trametinib, other RAF inhibitors, other MEK or ERK inhibitors.
+  2. Cancer treatment within the past 3 weeks.
+  3. Stem cell transplant within the past 3 months.
+  4. History of heart disease.
+  5. Pregnant or lactating females.
+  6. Known allergy to dabrafenib, trametinib, or their excipients.
+  7. Measurable disease in the LGG cohort (optional but a new baseline tumor evaluation must be established within 28 days of starting dabrafenib in combination with trametinib crossover treatment for LGG patients).
+  8. Patients who have not met the
+
+INCLUSION CRITERIA
+
+  1. for cardiac function or who cannot meet the
+
+EXCLUSION CRITERIA
+
+  1. for allergy to dabrafenib, trametinib, or their excipients.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 80</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 80</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Written informed consent must be obtained before any assessment is performed.
+  2. Fasting LDL-C of ≥ 130 mg/dL but &amp;lt; 190 mg/dLTriglycerides ≤ 400 mg/dLCategorized as low or moderate ASCVD risk by the 2016 Chinese Guideline
+
+EXCLUSION CRITERIA
+
+  1. Use of any LLT within 90 days prior to screening visit
+  2. History of ASCVDDiabetes mellitus or fasting plasma glucose of ≥ 7.0 mmol/L or HbA1c ≥ 6.5%Secondary hypercholesterolemia, e.g. hypothyroidism or nephrotic syndrome
+  3. Other protocol-defined inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Written&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;informed consent must be obtained before any assessment&lt;/span&gt; is &lt;span class=&quot;diff-del&quot;&gt;performed.
+  2. Fasting LDL-C of ≥ 130 mg/dL but &amp;lt; 190 mg/dLTriglycerides ≤ 400 mg/dLCategorized as low or moderate ASCVD risk by&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;2016&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Chinese&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Guideline&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Use&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;LLT&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;90&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;days&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;visit&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;History&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;ASCVDDiabetes&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mellitus&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;fasting&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;plasma&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;glucose&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;7.0&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mmol/L&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;HbA1c&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;6.5%Secondary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hypercholesterolemia,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;e.g.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hypothyroidism&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;nephrotic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;syndrome&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol-defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;may&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Written informed consent must be obtained before any assessment is performed.Fasting LDL-C of ≥ 130 mg&amp;amp;#x2F;dL but &amp;amp;lt; 190 mg&amp;amp;#x2F;dLTriglycerides ≤ 400 mg&amp;amp;#x2F;dLCategorized as low or moderate ASCVD risk by the 2016 Chinese GuidelineExclusion Criteria:Use of any LLT within 90 days prior to screening visitHistory of ASCVDDiabetes mellitus or fasting plasma glucose of ≥ 7.0 mmol&amp;amp;#x2F;L or HbA1c ≥ 6.5%Secondary hypercholesterolemia, e.g. hypothyroidism or nephrotic syndromeOther protocol-defined inclusion&amp;amp;#x2F;exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Written informed consent must be obtained before any assessment is performed.
+  2. Fasting LDL-C of ≥ 130 mg/dL but &lt; 190 mg/dLTriglycerides ≤ 400 mg/dLCategorized as low or moderate ASCVD risk by the 2016 Chinese Guideline
+
+EXCLUSION CRITERIA
+
+  1. Use of any LLT within 90 days prior to screening visit
+  2. History of ASCVDDiabetes mellitus or fasting plasma glucose of ≥ 7.0 mmol/L or HbA1c ≥ 6.5%Secondary hypercholesterolemia, e.g. hypothyroidism or nephrotic syndrome
+  3. Other protocol-defined inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Version Context: This task is for the transition from ClinicalTrials.gov version 10 to version 11. The evidence provided pertains to the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for the study, specifically focusing on the eligibility criteria for participants. Here is the revised version of the eligibility criteria:
+  2. ---
+  3. Original Eligibility Criteria (version 10):
+  4. Objectives and Endpoints
+  5. Primary goal: Demonstrate the superiority of inclisiran as monotherapy, compared to placebo, in reducing LDL-C.
+  6. Secondary goals:
+  7. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C.
+  8. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage change from baseline in LDL-C.
+  9. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.
+  10. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.
+  11. Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.
+  12. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  13. Secondary endpoints:
+  14. Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.
+  15. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  16. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  17. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  18. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  19. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  20. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  21. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  22. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  23. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  24. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  25. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  26. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  27. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  28. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  29. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  30. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  31. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  32. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  33. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  34. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  35. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  36. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  37. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  38. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  39. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  40. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  41. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  42. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  43. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  44. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  45. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  46. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  47. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  48. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  49. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  50. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  51. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  52. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  53. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  54. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  55. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  56. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  57. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  58. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  59. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  60. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  61. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  62. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  63. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  64. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  65. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  66. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  67. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  68. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  69. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  70. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  71. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  72. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  73. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  74. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  75. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  76. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  77. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  78. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  79. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  80. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  81. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  82. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  83. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  84. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  85. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  86. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  87. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  88. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  89. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  90. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  91. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  92. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  93. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  94. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  95. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  96. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  97. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  98. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  99. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  100. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Version&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Context:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;task&lt;/span&gt; is &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;transition&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ClinicalTrials.gov version 10 to version 11. The evidence provided pertains to the inclusion and&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;for the study, specifically focusing on the eligibility criteria for participants. Here is the revised version&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;---
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Original&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eligibility Criteria (version 10):
+  4. Objectives and Endpoints
+  5. Primary goal: Demonstrate the superiority of inclisiran as monotherapy, compared&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;placebo,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in reducing LDL-C.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Secondary goals:
+  7. Demonstrate the efficacy&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;inclisiran&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;monotherapy,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;compared&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;placebo, in absolute change from baseline in LDL-C.
+  8. Demonstrate the efficacy&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;inclisiran&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;monotherapy,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;compared&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;placebo,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;change&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;baseline&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;LDL-C.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Demonstrate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;efficacy&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inclisiran&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.
+  10. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.
+  11. Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.
+  12. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  13. Secondary endpoints:
+  14. Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.
+  15. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  16. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  17. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  18. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  19. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  20. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  21. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  22. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  23. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  24. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  25. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  26. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  27. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  28. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  29. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  30. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  31. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  32. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  33. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  34. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  35. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  36. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  37. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  38. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  39. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  40. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  41. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  42. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  43. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  44. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  45. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  46. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  47. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  48. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  49. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  50. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  51. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  52. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  53. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  54. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  55. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  56. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  57. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  58. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  59. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  60. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  61. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  62. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  63. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  64. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  65. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  66. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  67. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  68. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  69. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  70. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  71. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  72. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  73. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  74. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  75. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  76. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  77. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  78. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  79. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  80. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  81. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  82. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  83. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  84. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  85. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  86. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  87. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  88. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  89. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  90. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  91. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  92. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  93. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  94. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  95. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  96. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  97. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  98. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  99. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  100. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension&lt;/span&gt;"
+                 data-raw="**Version Context:** This task is for the transition from ClinicalTrials.gov version 10 to version 11. The evidence provided pertains to the inclusion and exclusion criteria for the study, specifically focusing on the eligibility criteria for participants. Here is the revised version of the eligibility criteria:
+
+---
+
+### Original Eligibility Criteria (version 10):
+
+#### Objectives and Endpoints
+- **Primary goal**: Demonstrate the superiority of inclisiran as monotherapy, compared to placebo, in reducing LDL-C.
+- **Secondary goals**: 
+  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C.
+  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage change from baseline in LDL-C.
+  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.
+  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+- **Secondary endpoints**: 
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension">Version Context: This task is for the transition from ClinicalTrials.gov version 10 to version 11. The evidence provided pertains to the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for the study, specifically focusing on the eligibility criteria for participants. Here is the revised version of the eligibility criteria:
+  2. ---
+  3. Original Eligibility Criteria (version 10):
+  4. Objectives and Endpoints
+  5. Primary goal: Demonstrate the superiority of inclisiran as monotherapy, compared to placebo, in reducing LDL-C.
+  6. Secondary goals:
+  7. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C.
+  8. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage change from baseline in LDL-C.
+  9. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.
+  10. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.
+  11. Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.
+  12. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  13. Secondary endpoints:
+  14. Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.
+  15. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  16. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  17. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  18. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  19. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  20. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  21. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  22. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  23. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  24. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  25. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  26. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  27. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  28. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  29. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  30. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  31. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  32. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  33. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  34. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  35. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  36. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  37. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  38. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  39. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  40. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  41. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  42. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  43. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  44. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  45. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  46. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  47. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  48. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  49. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  50. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  51. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  52. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  53. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  54. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  55. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  56. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  57. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  58. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  59. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  60. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  61. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  62. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  63. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  64. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  65. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  66. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  67. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  68. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  69. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  70. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  71. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  72. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  73. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  74. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  75. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  76. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  77. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  78. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  79. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  80. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  81. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  82. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  83. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  84. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  85. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  86. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  87. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  88. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  89. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  90. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  91. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  92. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  93. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  94. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  95. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  96. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  97. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  98. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  99. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.
+  100. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

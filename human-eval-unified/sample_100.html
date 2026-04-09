@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 100</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 100</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (with the exception of pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit 2.
+  2. A change in ART regimen ≥ 28 days prior to screening visit 2 for reasons other than virologic failure (VF) (eg, tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and/or K219Q).
+  4. Plasma human immunodeficiency virus-1 (HIV-1) ribonucleic acid (RNA) &amp;lt; 50 copies/mL at screening visit 2.
+  5. Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL for ≥ 12 months preceding screening visit 2 (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  6. Virologic elevations of ≥ 50 copies/mL (transient detectable viremia or &amp;quot;blips&amp;quot;) prior to screening are acceptable.
+  7. Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  8. Screening clusters of differentiation 4 (CD4)+ T-cell count ≥ 200 cells/μL at screening visit 2.
+
+EXCLUSION CRITERIA
+
+  1. Comorbid condition requiring ongoing immunosuppression.
+  2. Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable)Evidence of current hepatitis B virus (HBV) infection regardless of HBV surface antigen status, at the screening visit 2.
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes &lt;span class=&quot;diff-del&quot;&gt;(with the exception of&lt;/span&gt; pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening &lt;span class=&quot;diff-del&quot;&gt;visit 2.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;A change&lt;/span&gt; in ART regimen ≥ 28 days prior to screening visit &lt;span class=&quot;diff-del&quot;&gt;2 &lt;/span&gt;for reasons other than virologic failure (VF) &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; K219Q).
+  4.&lt;span class=&quot;diff-del&quot;&gt; Plasma human immunodeficiency virus-1 (HIV-1) ribonucleic acid (RNA) &amp;lt; 50 copies/mL at screening visit 2.
+  5.&lt;/span&gt; Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL for ≥ 12 months preceding screening visit&lt;span class=&quot;diff-del&quot;&gt; 2&lt;/span&gt; (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Virologic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;elevations&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;≥&lt;/span&gt; 50 copies/mL &lt;span class=&quot;diff-del&quot;&gt;(transient detectable viremia or &amp;quot;blips&amp;quot;) prior to&lt;/span&gt; screening &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;acceptable.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Screening &lt;span class=&quot;diff-del&quot;&gt;clusters of differentiation 4 (CD4)+&lt;/span&gt; T-cell count ≥ 200 cells/μL at screening visit 2.&lt;span class=&quot;diff-del&quot;&gt;
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Comorbid&lt;/span&gt; condition requiring ongoing immunosuppression.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is &lt;span class=&quot;diff-del&quot;&gt;acceptable)Evidence&lt;/span&gt; of current hepatitis B virus (HBV) &lt;span class=&quot;diff-del&quot;&gt;infection&lt;/span&gt; regardless of HBV surface antigen &lt;span class=&quot;diff-del&quot;&gt;status, at the screening visit 2.&lt;/span&gt;
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. &lt;span class=&quot;diff-del&quot;&gt;Note: &lt;/span&gt;Other &lt;span class=&quot;diff-del&quot;&gt;protocol defined&lt;/span&gt; Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-raw="Key Inclusion Criteria:On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (with the exception of pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit 2. A change in ART regimen ≥ 28 days prior to screening visit 2 for reasons other than virologic failure (VF) (eg, tolerability, simplification, drug-drug interaction profile) is allowed.No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and&amp;amp;#x2F;or K219Q).Plasma human immunodeficiency virus-1 (HIV-1) ribonucleic acid (RNA) &amp;amp;lt; 50 copies&amp;amp;#x2F;mL at screening visit 2.Documented plasma HIV-1 RNA &amp;amp;lt; 50 copies&amp;amp;#x2F;mL for ≥ 12 months preceding screening visit 2 (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies&amp;amp;#x2F;mL). Virologic elevations of ≥ 50 copies&amp;amp;#x2F;mL (transient detectable viremia or &amp;amp;quot;blips&amp;amp;quot;) prior to screening are acceptable.Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.Screening clusters of differentiation 4 (CD4)+ T-cell count ≥ 200 cells&amp;amp;#x2F;μL at screening visit 2.Key Exclusion Criteria:Comorbid condition requiring ongoing immunosuppression.Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable)Evidence of current hepatitis B virus (HBV) infection regardless of HBV surface antigen status, at the screening visit 2.History of opportunistic infection or illness indicative of Stage 3 HIV disease.Note: Other protocol defined Inclusion&amp;amp;#x2F;Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (with the exception of pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit 2.
+  2. A change in ART regimen ≥ 28 days prior to screening visit 2 for reasons other than virologic failure (VF) (eg, tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and/or K219Q).
+  4. Plasma human immunodeficiency virus-1 (HIV-1) ribonucleic acid (RNA) &lt; 50 copies/mL at screening visit 2.
+  5. Documented plasma HIV-1 RNA &lt; 50 copies/mL for ≥ 12 months preceding screening visit 2 (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  6. Virologic elevations of ≥ 50 copies/mL (transient detectable viremia or &quot;blips&quot;) prior to screening are acceptable.
+  7. Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  8. Screening clusters of differentiation 4 (CD4)+ T-cell count ≥ 200 cells/μL at screening visit 2.
+
+EXCLUSION CRITERIA
+
+  1. Comorbid condition requiring ongoing immunosuppression.
+  2. Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable)Evidence of current hepatitis B virus (HBV) infection regardless of HBV surface antigen status, at the screening visit 2.
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 17)
+
+INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (excluding pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit.
+  2. Change in ART regimen ≥ 28 days prior to screening visit for reasons other than virologic failure (VF) (e.g., tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and K219Q).
+  4. Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL for ≥ 12 months preceding screening visit (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  5. Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL at screening visit 2.
+  6. Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  7. Screening CD4+ T-cell count ≥ 200 cells/μL at screening visit 2.
+  8. No evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+  9. No evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+  10. No history of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  11. No evidence of comorbid condition requiring ongoing immunosuppression.
+
+EXCLUSION CRITERIA
+
+  1. Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+  2. Evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. Other protocol-defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.
+  2. Notably, the revised criteria incorporate the findings from the study protocol, including the demonstration of enhanced clearance of HIV-1-infected cells by broadly neutralizing antibodies in vivo, as well as the successful maintenance of viral suppression in virologically suppressed participants treated with a combination of GS-5423, GS-2872, and lenacapavir."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 17)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes &lt;span class=&quot;diff-add&quot;&gt;(excluding&lt;/span&gt; pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening &lt;span class=&quot;diff-add&quot;&gt;visit.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Change&lt;/span&gt; in ART regimen ≥ 28 days prior to screening visit for reasons other than virologic failure (VF) &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; K219Q).
+  4. Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL for ≥ 12 months preceding screening visit (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Documented&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;plasma&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HIV-1&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;RNA &amp;lt;&lt;/span&gt; 50 copies/mL &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; screening &lt;span class=&quot;diff-add&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Screening &lt;span class=&quot;diff-add&quot;&gt;CD4+&lt;/span&gt; T-cell count ≥ 200 cells/μL at screening visit 2.&lt;span class=&quot;diff-add&quot;&gt;
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+  9. No evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+  10. No history of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  11. No evidence of comorbid&lt;/span&gt; condition requiring ongoing immunosuppression.&lt;span class=&quot;diff-add&quot;&gt;
+
+EXCLUSION CRITERIA
+
+  1.&lt;/span&gt; Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is &lt;span class=&quot;diff-add&quot;&gt;acceptable).
+  2. Evidence&lt;/span&gt; of current hepatitis B virus (HBV) &lt;span class=&quot;diff-add&quot;&gt;infection,&lt;/span&gt; regardless of HBV surface antigen &lt;span class=&quot;diff-add&quot;&gt;status.&lt;/span&gt;
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. Other &lt;span class=&quot;diff-add&quot;&gt;protocol-defined&lt;/span&gt; Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.&lt;span class=&quot;diff-add&quot;&gt;
+  2. Notably, the revised criteria incorporate the findings from the study protocol, including the demonstration of enhanced clearance of HIV-1-infected cells by broadly neutralizing antibodies in vivo, as well as the successful maintenance of viral suppression in virologically suppressed participants treated with a combination of GS-5423, GS-2872, and lenacapavir.&lt;/span&gt;"
+                 data-raw="**Amended Eligibility Criteria (Version 17)**
+
+Key Inclusion Criteria:
+- On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (excluding pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit.
+- Change in ART regimen ≥ 28 days prior to screening visit for reasons other than virologic failure (VF) (e.g., tolerability, simplification, drug-drug interaction profile) is allowed.
+- No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and K219Q).
+- Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL for ≥ 12 months preceding screening visit (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+- Documented plasma HIV-1 RNA &amp;lt; 50 copies/mL at screening visit 2.
+- Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+- Screening CD4+ T-cell count ≥ 200 cells/μL at screening visit 2.
+- No evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+- No evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+- No history of opportunistic infection or illness indicative of Stage 3 HIV disease.
+- No evidence of comorbid condition requiring ongoing immunosuppression.
+
+Key Exclusion Criteria:
+- Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+- Evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+- History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+- Other protocol-defined Inclusion/Exclusion criteria may apply.
+
+Notably, the revised criteria incorporate the findings from the study protocol, including the demonstration of enhanced clearance of HIV-1-infected cells by broadly neutralizing antibodies in vivo, as well as the successful maintenance of viral suppression in virologically suppressed participants treated with a combination of GS-5423, GS-2872, and lenacapavir.">Amended Eligibility Criteria (Version 17)
+
+INCLUSION CRITERIA
+
+  1. On stable oral antiretroviral therapy (ART) consisting of no more than 2 drug classes (excluding pharmacologic boosters cobicistat or ritonavir) for ≥ 1 year prior to screening visit.
+  2. Change in ART regimen ≥ 28 days prior to screening visit for reasons other than virologic failure (VF) (e.g., tolerability, simplification, drug-drug interaction profile) is allowed.
+  3. No clinically significant documented historical resistance to the current ART regimen with the exception of isolated nucleoside reverse transcriptase inhibitor mutations including M184V or ≤ 2 thymidine analog mutations (TAMs: M41L, D67N, K70R, L210W, T215Y, and K219Q).
+  4. Documented plasma HIV-1 RNA &lt; 50 copies/mL for ≥ 12 months preceding screening visit (or undetectable HIV-1 RNA level according to the local assay being used if the limit of detection is ≥ 50 copies/mL).
+  5. Documented plasma HIV-1 RNA &lt; 50 copies/mL at screening visit 2.
+  6. Proviral phenotypic sensitivity to both teropavimab and zinlirvimab at screening or from protocol GS-US-536-5816 within 24 months prior to screening.
+  7. Screening CD4+ T-cell count ≥ 200 cells/μL at screening visit 2.
+  8. No evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+  9. No evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+  10. No history of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  11. No evidence of comorbid condition requiring ongoing immunosuppression.
+
+EXCLUSION CRITERIA
+
+  1. Evidence of hepatitis C virus (HCV) infection (prior infection cleared spontaneously or with treatment is acceptable).
+  2. Evidence of current hepatitis B virus (HBV) infection, regardless of HBV surface antigen status.
+  3. History of opportunistic infection or illness indicative of Stage 3 HIV disease.
+  4. Other protocol-defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.
+  2. Notably, the revised criteria incorporate the findings from the study protocol, including the demonstration of enhanced clearance of HIV-1-infected cells by broadly neutralizing antibodies in vivo, as well as the successful maintenance of viral suppression in virologically suppressed participants treated with a combination of GS-5423, GS-2872, and lenacapavir.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

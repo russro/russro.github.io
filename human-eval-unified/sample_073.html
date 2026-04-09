@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 73</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 73</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the bronchopulmonaryHistologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the bronchopulmonary (typical and atypical according to the World Health Organisation (WHO criteria), evaluated locally)Has a mitotic index &amp;lt;2 mitoses/2 mm2 for typical carcinoid (TC) and &amp;lt;10 mitoses/2 mm2 and/or foci of necrosis for atypical carcinoid (AC)At least one measurable lesion of the disease on imaging (CT or MRI;
+  2. RECIST 1.1)Positive Somatostatin receptors (SSTR) imaging
+
+EXCLUSION CRITERIA
+
+  1. Poorly differentiated or high grade carcinoma, or patients with neuroendocrine tumors not of bronchopulmonary origin
+  2. Has been treated with a Somatostatin analog (SSA) at any time prior to randomization, except if that treatment was for less than 15 days (e.g. peri-operatively) of short acting SSA or one dose of long acting SSA and the treatment was received more than 6 weeks prior to randomization
+  3. Has been treated with Peptide receptor radionuclide therapy (PRRT) at any time prior to randomization
+  4. Has been treated with more than two lines of cytotoxic chemotherapy or molecular targeted therapy or interferon for bronchopulmonary NET"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the &lt;span class=&quot;diff-del&quot;&gt;bronchopulmonaryHistologic&lt;/span&gt; evidence of Well differentiated Neuroendocrine tumors (NETs) of the &lt;span class=&quot;diff-del&quot;&gt;bronchopulmonary&lt;/span&gt; (typical and atypical according to the World Health Organisation &lt;span class=&quot;diff-del&quot;&gt;(WHO&lt;/span&gt; criteria), evaluated &lt;span class=&quot;diff-del&quot;&gt;locally)Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mitotic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;2 mitoses/2 mm2&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;typical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;carcinoid&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(TC)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;10&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mitoses/2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mm2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;foci&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;necrosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;atypical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;carcinoid&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(AC)At&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;measurable&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;lesion&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;disease&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;imaging&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(CT&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;MRI;
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;RECIST&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1.1)Positive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Somatostatin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receptors&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(SSTR)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;imaging
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Poorly&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;differentiated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;high&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;grade&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;carcinoma,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or patients with neuroendocrine tumors not of bronchopulmonary origin
+  2. Has been treated with a Somatostatin analog (SSA) at any&lt;/span&gt; time &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;randomization,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that treatment was for less than 15 days (e.g. peri-operatively) of short acting SSA or one dose of long acting SSA and&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;was received more than 6 weeks prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;randomization
+  3. Has been treated with Peptide receptor radionuclide therapy (PRRT) at any&lt;/span&gt; time &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;randomization
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;been&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;lines&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cytotoxic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;chemotherapy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;molecular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;targeted&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;interferon&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bronchopulmonary&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;NET&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Have metastatic and&amp;amp;#x2F;or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the bronchopulmonaryHistologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the bronchopulmonary (typical and atypical according to the World Health Organisation (WHO criteria), evaluated locally)Has a mitotic index &amp;amp;lt;2 mitoses&amp;amp;#x2F;2 mm2 for typical carcinoid (TC) and &amp;amp;lt;10 mitoses&amp;amp;#x2F;2 mm2 and&amp;amp;#x2F;or foci of necrosis for atypical carcinoid (AC)At least one measurable lesion of the disease on imaging (CT or MRI; RECIST 1.1)Positive Somatostatin receptors (SSTR) imagingExclusion Criteria:Poorly differentiated or high grade carcinoma, or patients with neuroendocrine tumors not of bronchopulmonary originHas been treated with a Somatostatin analog (SSA) at any time prior to randomization, except if that treatment was for less than 15 days (e.g. peri-operatively) of short acting SSA or one dose of long acting SSA and the treatment was received more than 6 weeks prior to randomizationHas been treated with Peptide receptor radionuclide therapy (PRRT) at any time prior to randomizationHas been treated with more than two lines of cytotoxic chemotherapy or molecular targeted therapy or interferon for bronchopulmonary NET">INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the bronchopulmonaryHistologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the bronchopulmonary (typical and atypical according to the World Health Organisation (WHO criteria), evaluated locally)Has a mitotic index &lt;2 mitoses/2 mm2 for typical carcinoid (TC) and &lt;10 mitoses/2 mm2 and/or foci of necrosis for atypical carcinoid (AC)At least one measurable lesion of the disease on imaging (CT or MRI;
+  2. RECIST 1.1)Positive Somatostatin receptors (SSTR) imaging
+
+EXCLUSION CRITERIA
+
+  1. Poorly differentiated or high grade carcinoma, or patients with neuroendocrine tumors not of bronchopulmonary origin
+  2. Has been treated with a Somatostatin analog (SSA) at any time prior to randomization, except if that treatment was for less than 15 days (e.g. peri-operatively) of short acting SSA or one dose of long acting SSA and the treatment was received more than 6 weeks prior to randomization
+  3. Has been treated with Peptide receptor radionuclide therapy (PRRT) at any time prior to randomization
+  4. Has been treated with more than two lines of cytotoxic chemotherapy or molecular targeted therapy or interferon for bronchopulmonary NET</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the revised eligibility criteria, here is the modified version:
+
+Version Context: This task is for the transition from ClinicalTrials.gov version 36 to version 37. The evidence may use different labels (e.g. &amp;quot;Amendment 1&amp;quot;, &amp;quot;Version 2.0&amp;quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.
+
+Original Eligibility Criteria (version 36):
+
+INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the lung Histologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the lung (typical and atypical according to the World Health Organisation (WHO) criteria), evaluated locally
+  2. Outcomes: Progression-free survival (PFS) for subjects randomized in LAN group, assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes in either the double-blind phase, or in the OL period. Secondary Efficacy Endpoints: • Progression-free survival (PFS), assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • Progression-free survival (PFS), assessed by local review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • ORR: objective response rate of CR or PR measured by RECIST v1.1 criteria every 12 weeks until the Post Treatment/Early Withdrawal Visit during the double-blind phase, • Time to treatment failure during the double-blind phase, defined as the time from randomization to disease progression [defined as the minimum (time to ET, time to ESD, time to TUE, time to TME, time to PR, time to PRD, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to T"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the revised eligibility criteria, here is the modified version:
+
+Version Context: This task is for the transition from ClinicalTrials.gov version 36 to version 37. The evidence may use different labels (e.g. &amp;quot;Amendment 1&amp;quot;, &amp;quot;Version 2.0&amp;quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.
+
+Original Eligibility Criteria (version 36):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the &lt;span class=&quot;diff-add&quot;&gt;lung Histologic&lt;/span&gt; evidence of Well differentiated Neuroendocrine tumors (NETs) of the &lt;span class=&quot;diff-add&quot;&gt;lung&lt;/span&gt; (typical and atypical according to the World Health Organisation &lt;span class=&quot;diff-add&quot;&gt;(WHO)&lt;/span&gt; criteria), evaluated &lt;span class=&quot;diff-add&quot;&gt;locally
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Outcomes:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Progression-free&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;survival&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(PFS)&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;randomized&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;LAN&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;group,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;assessed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;central&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes in either the double-blind phase, or in the OL period. Secondary Efficacy Endpoints: • Progression-free survival (PFS), assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • Progression-free survival (PFS), assessed by local review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • ORR: objective response rate&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;CR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;PR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;measured&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;RECIST&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;v1.1&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;every&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;12 weeks until&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Treatment/Early&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Withdrawal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;double-blind&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;phase,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;failure&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;double-blind&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;phase,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; time &lt;span class=&quot;diff-add&quot;&gt;from randomization&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;disease&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;progression&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;[defined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;minimum&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(time&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;ET,&lt;/span&gt; time &lt;span class=&quot;diff-add&quot;&gt;to ESD, time&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;TUE,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;TME,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;PR,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;PRD,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;TTP,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;TTP,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;TTP,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to T&lt;/span&gt;"
+                 data-raw="Based on the revised eligibility criteria, here is the modified version:
+
+**Version Context:** This task is for the transition from ClinicalTrials.gov version 36 to version 37. The evidence may use different labels (e.g. &amp;quot;Amendment 1&amp;quot;, &amp;quot;Version 2.0&amp;quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.
+
+**Original Eligibility Criteria (version 36):**
+Inclusion Criteria: Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the lung Histologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the lung (typical and atypical according to the World Health Organisation (WHO) criteria), evaluated locally
+
+Outcomes: Progression-free survival (PFS) for subjects randomized in LAN group, assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes in either the double-blind phase, or in the OL period. Secondary Efficacy Endpoints: • Progression-free survival (PFS), assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • Progression-free survival (PFS), assessed by local review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • ORR: objective response rate of CR or PR measured by RECIST v1.1 criteria every 12 weeks until the Post Treatment/Early Withdrawal Visit during the double-blind phase, • Time to treatment failure during the double-blind phase, defined as the time from randomization to disease progression [defined as the minimum (time to ET, time to ESD, time to TUE, time to TME, time to PR, time to PRD, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to T">Based on the revised eligibility criteria, here is the modified version:
+
+Version Context: This task is for the transition from ClinicalTrials.gov version 36 to version 37. The evidence may use different labels (e.g. &quot;Amendment 1&quot;, &quot;Version 2.0&quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.
+
+Original Eligibility Criteria (version 36):
+
+INCLUSION CRITERIA
+
+  1. Have metastatic and/or unresectable pathologically confirmed well-differentiated, typical or atypical neuroendocrine tumor of the lung Histologic evidence of Well differentiated Neuroendocrine tumors (NETs) of the lung (typical and atypical according to the World Health Organisation (WHO) criteria), evaluated locally
+  2. Outcomes: Progression-free survival (PFS) for subjects randomized in LAN group, assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes in either the double-blind phase, or in the OL period. Secondary Efficacy Endpoints: • Progression-free survival (PFS), assessed by central review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • Progression-free survival (PFS), assessed by local review using RECIST v1.1 criteria every 12 weeks, defined as the time from randomization to disease progression or death from any causes during the double-blind phase, • ORR: objective response rate of CR or PR measured by RECIST v1.1 criteria every 12 weeks until the Post Treatment/Early Withdrawal Visit during the double-blind phase, • Time to treatment failure during the double-blind phase, defined as the time from randomization to disease progression [defined as the minimum (time to ET, time to ESD, time to TUE, time to TME, time to PR, time to PRD, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to TTP, time to T</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 115</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 115</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. All subjects:Subject&amp;#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  2. Dialysate calcium concentration ≥ 2.5 mEq/L at day 1All subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:Subjects on anti-convulsant medication must be on a stable doseAll subjects from 20130356:Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 terminationDry weight ≥ 12.5 kg at day 1 of Study 20140159Subjects Randomized to the 20130356 Standard of Care Arm Only:intact parathyroid hormone (iPTH) value ≥ 300 pg/mL (within 7 days of day 1 in Study 20140159)Corrected calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study 20140159All Subjects from 20110100:Completed week 26 End of Study visit in the, 20110100 study or on study at the time of Study 20110100 terminationDry weight ≥ 7 kg at day 1 of Study 20140159
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and 20110100):Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  2. Other investigational procedures while participating in this study are excluded.
+  3. Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  4. Subject has known sensitivity to any of the products to be administered during dosing.
+  5. Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures (eg, electronic patient diary [ediary]) to the best of the subject and investigator&amp;#x27;s knowledgeHistory or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  6. Subject previously has entered this study.
+  7. If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  8. Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatmentHistory of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT intervalA new onset of seizures or worsening of pre-existing seizure disorderAll Subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening
+  2. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159
+  3. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely
+  4. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening
+  5. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening
+  6. All Subjects - Day 1 Study Visit:Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to investigational product and is ≥ Common Terminology Criteria for Adverse Events (CTCAE) (v 4.0) grade 3, and/or considered clinically significant in the opinion of the investigator
+  7. Central laboratory values were not obtained/are not available at day 1 in Study 20140159
+  8. Corrected QT Interval (QTc) &amp;gt; 500 ms, using Bazett&amp;#x27;s formulaQTc ≥ 450 to ≤ 500 ms, using Bazett&amp;#x27;s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologist
+  9. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (eg, erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (eg, flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine)
+  10. Use of concomitant medications that may prolong the QTc interval (eg, ondansetron, albuterol)"
+                 data-diff="INCLUSION CRITERIA
+
+  1. All &lt;span class=&quot;diff-del&quot;&gt;subjects:Subject&amp;#x27;s&lt;/span&gt; legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Dialysate calcium concentration ≥ 2.5 mEq/L at day &lt;span class=&quot;diff-del&quot;&gt;1All&lt;/span&gt; subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study &lt;span class=&quot;diff-del&quot;&gt;20140159:Subjects&lt;/span&gt; on anti-convulsant medication must be on a stable &lt;span class=&quot;diff-del&quot;&gt;doseAll&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subjects&lt;/span&gt; from &lt;span class=&quot;diff-del&quot;&gt;20130356:Completed&lt;/span&gt; treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 &lt;span class=&quot;diff-del&quot;&gt;terminationDry&lt;/span&gt; weight ≥ 12.5 kg at day 1 of Study &lt;span class=&quot;diff-del&quot;&gt;20140159Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Randomized&lt;/span&gt; to the 20130356 Standard of Care Arm &lt;span class=&quot;diff-del&quot;&gt;Only:intact&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;parathyroid hormone (iPTH)&lt;/span&gt; value ≥ 300 pg/mL (within 7 days of day 1 in Study &lt;span class=&quot;diff-del&quot;&gt;20140159)Corrected&lt;/span&gt; calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study &lt;span class=&quot;diff-del&quot;&gt;20140159All&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; from &lt;span class=&quot;diff-del&quot;&gt;20110100:Completed&lt;/span&gt; week 26 End of Study visit in &lt;span class=&quot;diff-del&quot;&gt;the,&lt;/span&gt; 20110100 study or on study at the time of Study 20110100 &lt;span class=&quot;diff-del&quot;&gt;terminationDry&lt;/span&gt; weight ≥ 7 kg at day 1 of Study 20140159
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and &lt;span class=&quot;diff-del&quot;&gt;20110100):Currently&lt;/span&gt; receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Other investigational procedures while participating in this study are excluded.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Subject has known sensitivity to any of the products to be administered during dosing.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; electronic patient diary [ediary]) to the best of the subject and &lt;span class=&quot;diff-del&quot;&gt;investigator&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;knowledgeHistory&lt;/span&gt; or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Subject previously has entered this study.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of &lt;span class=&quot;diff-del&quot;&gt;treatmentHistory&lt;/span&gt; of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT &lt;span class=&quot;diff-del&quot;&gt;intervalA&lt;/span&gt; new onset of seizures or worsening of pre-existing seizure &lt;span class=&quot;diff-del&quot;&gt;disorderAll Subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159
+  3. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely
+  4.&lt;/span&gt; Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening
+  6. All Subjects - Day 1 Study &lt;span class=&quot;diff-del&quot;&gt;Visit:Subject&lt;/span&gt; has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to &lt;span class=&quot;diff-del&quot;&gt;investigational product&lt;/span&gt; and is ≥ &lt;span class=&quot;diff-del&quot;&gt;Common Terminology Criteria for Adverse Events (CTCAE)&lt;/span&gt; (v 4.0) grade 3, and/or considered clinically significant in the opinion of the &lt;span class=&quot;diff-del&quot;&gt;investigator&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Central laboratory values were not obtained/are not available at day 1 in Study &lt;span class=&quot;diff-del&quot;&gt;20140159&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Corrected QT Interval (QTc) &amp;gt; 500 ms, using &lt;span class=&quot;diff-del&quot;&gt;Bazett&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;formulaQTc&lt;/span&gt; ≥ 450 to ≤ 500 ms, using &lt;span class=&quot;diff-del&quot;&gt;Bazett&amp;#x27;s&lt;/span&gt; formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric &lt;span class=&quot;diff-del&quot;&gt;cardiologist&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Use of grapefruit juice, herbal medications, CYP3A4 inhibitors &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; flecainide, propafenone, metoprolol, desipramine, nortriptyline, &lt;span class=&quot;diff-del&quot;&gt;clomipramine)&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Use of concomitant medications that may prolong the QTc interval &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; ondansetron, &lt;span class=&quot;diff-del&quot;&gt;albuterol)&lt;/span&gt;"
+                 data-raw="INCLUSION CRITERIA:All subjects:Subject&amp;amp;#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and&amp;amp;#x2F;or guidelines prior to any Study 20140159 activities&amp;amp;#x2F;procedures being initiated.Dialysate calcium concentration ≥ 2.5 mEq&amp;amp;#x2F;L at day 1All subjects with &amp;amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:Subjects on anti-convulsant medication must be on a stable doseAll subjects from 20130356:Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 terminationDry weight ≥ 12.5 kg at day 1 of Study 20140159Subjects Randomized to the 20130356 Standard of Care Arm Only:intact parathyroid hormone (iPTH) value ≥ 300 pg&amp;amp;#x2F;mL (within 7 days of day 1 in Study 20140159)Corrected calcium value ≥ 8.8 mg&amp;amp;#x2F;dL within 7 days of day 1 in Study 20140159All Subjects from 20110100:Completed week 26 End of Study visit in the, 20110100 study or on study at the time of Study 20110100 terminationDry weight ≥ 7 kg at day 1 of Study 20140159EXCLUSION CRITERIA:General (studies 20130356 and 20110100):Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.Other investigational procedures while participating in this study are excluded.Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.Subject has known sensitivity to any of the products to be administered during dosing.Subject likely to not be available to complete all protocol-required study visits or procedures, and&amp;amp;#x2F;or to comply with all required study procedures (eg, electronic patient diary [ediary]) to the best of the subject and investigator&amp;amp;#x27;s knowledgeHistory or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.Subject previously has entered this study.If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatmentHistory of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT intervalA new onset of seizures or worsening of pre-existing seizure disorderAll Subjects with &amp;amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following exclusion criteria applied during screening and day 1:Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screeningReceived therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikelyEither new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screeningHepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screeningAll Subjects - Day 1 Study Visit:Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to investigational product and is ≥ Common Terminology Criteria for Adverse Events (CTCAE) (v 4.0) grade 3, and&amp;amp;#x2F;or considered clinically significant in the opinion of the investigatorCentral laboratory values were not obtained&amp;amp;#x2F;are not available at day 1 in Study 20140159Corrected QT Interval (QTc) &amp;amp;gt; 500 ms, using Bazett&amp;amp;#x27;s formulaQTc ≥ 450 to ≤ 500 ms, using Bazett&amp;amp;#x27;s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologistUse of grapefruit juice, herbal medications, CYP3A4 inhibitors (eg, erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (eg, flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine)Use of concomitant medications that may prolong the QTc interval (eg, ondansetron, albuterol)">INCLUSION CRITERIA
+
+  1. All subjects:Subject&#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  2. Dialysate calcium concentration ≥ 2.5 mEq/L at day 1All subjects with &gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:Subjects on anti-convulsant medication must be on a stable doseAll subjects from 20130356:Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 terminationDry weight ≥ 12.5 kg at day 1 of Study 20140159Subjects Randomized to the 20130356 Standard of Care Arm Only:intact parathyroid hormone (iPTH) value ≥ 300 pg/mL (within 7 days of day 1 in Study 20140159)Corrected calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study 20140159All Subjects from 20110100:Completed week 26 End of Study visit in the, 20110100 study or on study at the time of Study 20110100 terminationDry weight ≥ 7 kg at day 1 of Study 20140159
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and 20110100):Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  2. Other investigational procedures while participating in this study are excluded.
+  3. Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  4. Subject has known sensitivity to any of the products to be administered during dosing.
+  5. Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures (eg, electronic patient diary [ediary]) to the best of the subject and investigator&#x27;s knowledgeHistory or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  6. Subject previously has entered this study.
+  7. If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  8. Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatmentHistory of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT intervalA new onset of seizures or worsening of pre-existing seizure disorderAll Subjects with &gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening
+  2. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159
+  3. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely
+  4. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening
+  5. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening
+  6. All Subjects - Day 1 Study Visit:Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to investigational product and is ≥ Common Terminology Criteria for Adverse Events (CTCAE) (v 4.0) grade 3, and/or considered clinically significant in the opinion of the investigator
+  7. Central laboratory values were not obtained/are not available at day 1 in Study 20140159
+  8. Corrected QT Interval (QTc) &gt; 500 ms, using Bazett&#x27;s formulaQTc ≥ 450 to ≤ 500 ms, using Bazett&#x27;s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologist
+  9. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (eg, erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (eg, flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine)
+  10. Use of concomitant medications that may prolong the QTc interval (eg, ondansetron, albuterol)</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 24):
+
+INCLUSION CRITERIA
+
+  1. All subjects:
+  2. Subject&amp;#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  3. Dialysate calcium concentration ≥ 2.5 mEq/L at day 1.
+  4. All subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:
+  5. Subjects on anti-convulsant medication must be on a stable dose.
+  6. Subjects from 20130356:
+  7. Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 termination.
+  8. Dry weight ≥ 12.5 kg at day 1 of Study 20140159.
+  9. Subjects randomized to the 20130356 Standard of Care Arm Only:
+  10. iPTH value ≥ 300 pg/mL (within 7 days of day 1 in Study 20140159).
+  11. Corrected calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study 20140159.
+  12. All subjects from 20110100:
+  13. Completed week 26 End of Study visit in the 20110100 study or on study at the time of Study 20110100 termination.
+  14. Dry weight ≥ 7 kg at day 1 of Study 20140159.
+  15. Subjects from 20130356:
+  16. Subjects who were ≤ 18 years old at week 20 in the 20130356 study or at the time of study termination, are eligible to enter this Study 20140159 even if they have already turned 18 years of age or are due to turn 18 years of age during their planned participation in the 20140159 study.
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and 20110100):
+  2. Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  3. Other investigational procedures while participating in this study are excluded.
+  4. Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  5. Subject has known sensitivity to any of the products to be administered during dosing.
+  6. Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures (e.g., electronic patient diary [ediary]) to the best of the subject and investigator’s knowledge.
+  7. History or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  8. Subject previously has entered this study.
+  9. If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  10. Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatment.
+  11. History of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT interval.
+  12. A new onset of seizures or worsening of pre-existing seizure disorder.
+  13. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  14. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+  15. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  16. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  17. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  18. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  19. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  20. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  21. All Subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:
+  2. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  3. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  4. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  5. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  6. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+  7. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  8. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  9. All Subjects - Day 1 Study Visit:
+  10. Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to IP and is ≥ CTCAE (v 4.0) grade 3, and/or considered clinically significant in the opinion of the investigator.
+  11. Central laboratory values were not obtained/are not available at day 1 in Study 20140159.
+  12. Corrected QT Interval (QTc) &amp;gt; 500 ms, using Bazett’s formula.
+  13. QTc ≥ 450 to ≤ 500 ms, using Bazett’s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologist.
+  14. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  15. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol)."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 24):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. All &lt;span class=&quot;diff-add&quot;&gt;subjects:
+  2. Subject&amp;#x27;s&lt;/span&gt; legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Dialysate calcium concentration ≥ 2.5 mEq/L at day &lt;span class=&quot;diff-add&quot;&gt;1.
+  4. All&lt;/span&gt; subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study &lt;span class=&quot;diff-add&quot;&gt;20140159:
+  5. Subjects&lt;/span&gt; on anti-convulsant medication must be on a stable &lt;span class=&quot;diff-add&quot;&gt;dose.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; from &lt;span class=&quot;diff-add&quot;&gt;20130356:
+  7. Completed&lt;/span&gt; treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 &lt;span class=&quot;diff-add&quot;&gt;termination.
+  8. Dry&lt;/span&gt; weight ≥ 12.5 kg at day 1 of Study &lt;span class=&quot;diff-add&quot;&gt;20140159.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Subjects randomized&lt;/span&gt; to the 20130356 Standard of Care Arm &lt;span class=&quot;diff-add&quot;&gt;Only:
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;iPTH&lt;/span&gt; value ≥ 300 pg/mL (within 7 days of day 1 in Study &lt;span class=&quot;diff-add&quot;&gt;20140159).
+  11. Corrected&lt;/span&gt; calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study &lt;span class=&quot;diff-add&quot;&gt;20140159.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;All subjects&lt;/span&gt; from &lt;span class=&quot;diff-add&quot;&gt;20110100:
+  13. Completed&lt;/span&gt; week 26 End of Study visit in &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; 20110100 study or on study at the time of Study 20110100 &lt;span class=&quot;diff-add&quot;&gt;termination.
+  14. Dry&lt;/span&gt; weight ≥ 7 kg at day 1 of Study &lt;span class=&quot;diff-add&quot;&gt;20140159.
+  15. Subjects from 20130356:
+  16. Subjects who were ≤ 18 years old at week 20 in the 20130356 study or at the time of study termination, are eligible to enter this Study &lt;/span&gt;20140159&lt;span class=&quot;diff-add&quot;&gt; even if they have already turned 18 years of age or are due to turn 18 years of age during their planned participation in the 20140159 study.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and &lt;span class=&quot;diff-add&quot;&gt;20110100):
+  2. Currently&lt;/span&gt; receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Other investigational procedures while participating in this study are excluded.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Subject has known sensitivity to any of the products to be administered during dosing.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; electronic patient diary [ediary]) to the best of the subject and &lt;span class=&quot;diff-add&quot;&gt;investigator’s&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;knowledge.
+  7. History&lt;/span&gt; or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Subject previously has entered this study.
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  11. History&lt;/span&gt; of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT &lt;span class=&quot;diff-add&quot;&gt;interval.
+  12. A&lt;/span&gt; new onset of seizures or worsening of pre-existing seizure &lt;span class=&quot;diff-add&quot;&gt;disorder.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during &lt;span class=&quot;diff-add&quot;&gt;screening.
+  15. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  16. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  17. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  18. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to &lt;/span&gt;screening&lt;span class=&quot;diff-add&quot;&gt; visit or day 1 of Study 20140159 screening.
+  19. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  20. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  21. All Subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:
+  2. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  3. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  4. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  5. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.&lt;/span&gt;
+  6.&lt;span class=&quot;diff-add&quot;&gt; Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+  7. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  8. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  9.&lt;/span&gt; All Subjects - Day 1 Study &lt;span class=&quot;diff-add&quot;&gt;Visit:
+  10. Subject&lt;/span&gt; has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to &lt;span class=&quot;diff-add&quot;&gt;IP&lt;/span&gt; and is ≥ &lt;span class=&quot;diff-add&quot;&gt;CTCAE&lt;/span&gt; (v 4.0) grade 3, and/or considered clinically significant in the opinion of the &lt;span class=&quot;diff-add&quot;&gt;investigator.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Central laboratory values were not obtained/are not available at day 1 in Study &lt;span class=&quot;diff-add&quot;&gt;20140159.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Corrected QT Interval (QTc) &amp;gt; 500 ms, using &lt;span class=&quot;diff-add&quot;&gt;Bazett’s&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;formula.
+  13. QTc&lt;/span&gt; ≥ 450 to ≤ 500 ms, using &lt;span class=&quot;diff-add&quot;&gt;Bazett’s&lt;/span&gt; formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric &lt;span class=&quot;diff-add&quot;&gt;cardiologist.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Use of grapefruit juice, herbal medications, CYP3A4 inhibitors &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; flecainide, propafenone, metoprolol, desipramine, nortriptyline, &lt;span class=&quot;diff-add&quot;&gt;clomipramine).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Use of concomitant medications that may prolong the QTc interval &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; ondansetron, &lt;span class=&quot;diff-add&quot;&gt;albuterol).&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (Version 24):
+
+**INCLUSION CRITERIA:**
+
+1. **All subjects:**
+   - Subject&amp;#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+   - Dialysate calcium concentration ≥ 2.5 mEq/L at day 1.
+   - All subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:
+     - Subjects on anti-convulsant medication must be on a stable dose.
+     - Subjects from 20130356:
+       - Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 termination.
+       - Dry weight ≥ 12.5 kg at day 1 of Study 20140159.
+       - Subjects randomized to the 20130356 Standard of Care Arm Only:
+         - iPTH value ≥ 300 pg/mL (within 7 days of day 1 in Study 20140159).
+         - Corrected calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study 20140159.
+     - All subjects from 20110100:
+       - Completed week 26 End of Study visit in the 20110100 study or on study at the time of Study 20110100 termination.
+       - Dry weight ≥ 7 kg at day 1 of Study 20140159.
+
+2. **Subjects from 20130356:**
+   - Subjects who were ≤ 18 years old at week 20 in the 20130356 study or at the time of study termination, are eligible to enter this Study 20140159 even if they have already turned 18 years of age or are due to turn 18 years of age during their planned participation in the 20140159 study.
+
+**EXCLUSION CRITERIA:**
+
+1. **General (studies 20130356 and 20110100):**
+   - Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+   - Other investigational procedures while participating in this study are excluded.
+   - Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+   - Subject has known sensitivity to any of the products to be administered during dosing.
+   - Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures (e.g., electronic patient diary [ediary]) to the best of the subject and investigator’s knowledge.
+   - History or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+   - Subject previously has entered this study.
+   - If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+   - Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatment.
+   - History of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT interval.
+   - A new onset of seizures or worsening of pre-existing seizure disorder.
+   - Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+   - Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+   - Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+   - Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+   - Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+   - Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+   - Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+   - Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+
+2. **All Subjects with &amp;gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following exclusion criteria applied during screening and day 1:**
+   - Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+   - Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+   - Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+   - Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+   - Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+   - Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+   - Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+
+3. **All Subjects - Day 1 Study Visit:**
+   - Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to IP and is ≥ CTCAE (v 4.0) grade 3, and/or considered clinically significant in the opinion of the investigator.
+   - Central laboratory values were not obtained/are not available at day 1 in Study 20140159.
+   - Corrected QT Interval (QTc) &amp;gt; 500 ms, using Bazett’s formula.
+   - QTc ≥ 450 to ≤ 500 ms, using Bazett’s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologist.
+   - Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+   - Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).">Amended Eligibility Criteria (Version 24):
+
+INCLUSION CRITERIA
+
+  1. All subjects:
+  2. Subject&#x27;s legally acceptable representative has provided informed consent when the subject is legally too young to provide informed consent and the subject has provided written assent based on local regulations and/or guidelines prior to any Study 20140159 activities/procedures being initiated.
+  3. Dialysate calcium concentration ≥ 2.5 mEq/L at day 1.
+  4. All subjects with &gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and screening for Study 20140159:
+  5. Subjects on anti-convulsant medication must be on a stable dose.
+  6. Subjects from 20130356:
+  7. Completed treatment through week 20 in the 20130356 study or on study at the time of Study 20130356 termination.
+  8. Dry weight ≥ 12.5 kg at day 1 of Study 20140159.
+  9. Subjects randomized to the 20130356 Standard of Care Arm Only:
+  10. iPTH value ≥ 300 pg/mL (within 7 days of day 1 in Study 20140159).
+  11. Corrected calcium value ≥ 8.8 mg/dL within 7 days of day 1 in Study 20140159.
+  12. All subjects from 20110100:
+  13. Completed week 26 End of Study visit in the 20110100 study or on study at the time of Study 20110100 termination.
+  14. Dry weight ≥ 7 kg at day 1 of Study 20140159.
+  15. Subjects from 20130356:
+  16. Subjects who were ≤ 18 years old at week 20 in the 20130356 study or at the time of study termination, are eligible to enter this Study 20140159 even if they have already turned 18 years of age or are due to turn 18 years of age during their planned participation in the 20140159 study.
+
+EXCLUSION CRITERIA
+
+  1. General (studies 20130356 and 20110100):
+  2. Currently receiving treatment in another investigational device or drug study, or less than 30 days since ending treatment on another investigational device or drug study(s), other than Amgen Studies 20130356 or 20110100.
+  3. Other investigational procedures while participating in this study are excluded.
+  4. Malignancy except non-melanoma skin cancers, cervical or breast ductal carcinoma in situ within the last 5 years.
+  5. Subject has known sensitivity to any of the products to be administered during dosing.
+  6. Subject likely to not be available to complete all protocol-required study visits or procedures, and/or to comply with all required study procedures (e.g., electronic patient diary [ediary]) to the best of the subject and investigator’s knowledge.
+  7. History or evidence of any other clinically significant disorder, condition or disease (with the exception of those outlined above) that, in the opinion of the investigator or Amgen physician, if consulted, would pose a risk to subject safety or interfere with the study evaluation, procedures, or completion.
+  8. Subject previously has entered this study.
+  9. If sexually active, subject is not willing to use acceptable contraception during treatment and for at least 9 days after the end of treatment.
+  10. Subject is pregnant or breast feeding, or planning to become pregnant during the study or within 9 days after the end of treatment.
+  11. History of congenital long QT syndrome, second or third degree heart block, ventricular tachyarrythmias, or other conditions associated with prolonged QT interval.
+  12. A new onset of seizures or worsening of pre-existing seizure disorder.
+  13. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  14. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+  15. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  16. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  17. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  18. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  19. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  20. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  21. All Subjects with &gt; 14 days between the last study visit in Study 20130356 or Study 20110100 and the screening visit in Study 20140159 will have the following
+
+EXCLUSION CRITERIA
+
+  1. applied during screening and day 1:
+  2. Unstable chronic heart failure defined as worsening pulmonary edema or other signs and symptoms as per investigator assessment during screening.
+  3. Received therapy with commercial cinacalcet after the last study visit in Study 20130356 or Study 20110100 before day 1 of Study 20140159.
+  4. Scheduled date for kidney transplantation from a known living donor that makes completion of the study unlikely.
+  5. Either new or recurrent cardiac ventricular arrhythmias requiring a change in treatment within 10 days prior to screening visit or day 1 of Study 20140159 screening.
+  6. Hepatic impairment indicated by elevated levels of hepatic transaminase or bilirubin (aspartate aminotransferase [AST] ≥ 1.5 × upper limit of normal [ULN] OR alanine aminotransferase [ALT] ≥ 1.5 × ULN OR total bilirubin ≥ 1 × ULN per institutional laboratory range) during screening.
+  7. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  8. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).
+  9. All Subjects - Day 1 Study Visit:
+  10. Subject has an ongoing adverse event from Studies 20130356 or 20110100 that is considered related to IP and is ≥ CTCAE (v 4.0) grade 3, and/or considered clinically significant in the opinion of the investigator.
+  11. Central laboratory values were not obtained/are not available at day 1 in Study 20140159.
+  12. Corrected QT Interval (QTc) &gt; 500 ms, using Bazett’s formula.
+  13. QTc ≥ 450 to ≤ 500 ms, using Bazett’s formula, unless written permission to enroll is provided by the investigator after consultation with a pediatric cardiologist.
+  14. Use of grapefruit juice, herbal medications, CYP3A4 inhibitors (e.g., erythromycin, clarithromycin, ketoconazole, itraconazole), or CYP2D6 substrates (e.g., flecainide, propafenone, metoprolol, desipramine, nortriptyline, clomipramine).
+  15. Use of concomitant medications that may prolong the QTc interval (e.g., ondansetron, albuterol).</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

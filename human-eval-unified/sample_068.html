@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 68</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 68</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 to 1.
+  2. Individuals with the following pathologically confirmed (cytological diagnosis is adequate) select locally advanced or metastatic solid tumors, whose disease has progressed on or are intolerant to standard therapy:Gastroesophageal (esophageal, gastroesophageal junction, and gastric) adenocarcinoma, pancreatic adenocarcinoma, hepatocellular carcinoma (HCC), nonsquamous non-small cell lung cancer (NSCLC), squamous cell carcinoma of the head and neck (SCCHN), mesothelioma, triple-negative breast cancer (TNBC), renal clear cell carcinoma (RCC) and nasopharyngeal carcinoma (NPC).
+  3. Participants who are intolerant to all standard therapies are those who have developed clinical or laboratory abnormalities that prevent continued drug administration as evaluated by the principal investigator at the time of screening.
+  4. For dose expansion in 2L nonsquamous NSCLC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  5. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  6. Must have had disease progression while on or following 1 prior line of therapy:- Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  7. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  8. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  9. Participants are eligible regardless of PD-L1 status.
+  10. For dose expansion in 3L nonsquamous NSCLC (TAK-500 SA):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  11. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  12. Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting OR Disease progression/recurrence within 6 months of the completion of 1 prior anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  13. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  14. Participants must have had disease progression while on or after 1 or 2 lines of chemotherapy in the recurrent locally advanced or metastatic setting.
+  15. If the anti-PD-(L)1 therapy is given in combination with chemotherapy, participant must have progressed on an additional line of chemotherapy.
+  16. Participants are eligible regardless of PD-L1 status.
+  17. For dose expansion in 2L pancreatic adenocarcinoma (TAK-500 SA and TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic pancreatic adenocarcinoma.
+  18. Must have had disease progression while on or following 1 prior line of therapy:- One prior line of fluorouracil- or gemcitabine-based chemotherapy (eg, FOLFIRINOX, FOLFOX, FOLFIRI, gemcitabine/nab-paclitaxel) in the metastatic/recurrent locally advanced setting.
+  19. Prior chemotherapy in the neoadjuvant/adjuvant setting does not qualify unless the participant had progression of disease within 6 months of completion of neoadjuvant/adjuvant chemotherapy.
+  20. Must not have had prior exposure to anti-PD-(L)1 therapy.
+  21. Participants with MSI-H/dMMR disease are not eligible.
+  22. Participants are eligible regardless of PD-L1 status.
+  23. For dose expansion in 3L RCC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic RCC.
+  24. Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  25. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  26. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or an anti-VEGFR TKI.
+  27. Participants must have had prior therapy with 1 or 2 lines of VEGFR TKIs in the metastatic/recurrent locally advanced setting.
+  28. If anti-PD-(L)1 therapy was given in combination with a VEGFR TKI, the participant must have had progressive disease on an additional line of therapy (eg, VEGFR TKI or VEGFR TKI-containing combination).
+  29. Participants are eligible regardless of PD-L1 status.
+  30. Must have at least 1 RECIST version 1.1 measurable lesion.
+  31. Lesions in previously irradiated areas (or other local therapy) should not be selected as measurable/target lesions unless there has been demonstrated radiographic progression in that lesion.
+  32. RECIST v1.1 target lesions must include at least 1 lesion that was not previously irradiated.
+  33. Adequate bone marrow, renal, and hepatic functions, as determined by the following laboratory parameters:Absolute neutrophil count (ANC) greater than or equal to (&amp;gt;=) 1000/ microliter (mcL), platelet count &amp;gt;=75,000/mcL, and hemoglobin &amp;gt;= 8.0 grams per deciliter (g/dL) without growth factor support for ANC or transfusion supportTotal bilirubin &amp;lt;=1.5 times the institutional upper limit of normal (ULN).
+  34. For participants with Gilbert&amp;#x27;s disease or HCC, &amp;lt;=3 milligrams per deciliter (mg/dL).
+  35. Serum alanine aminotransferase and aspartate aminotransferase &amp;lt;=3.0ULN or &amp;lt;=5.0ULN with liver metastases or HCC.
+  36. Albumin &amp;gt;=3.0 g/dL.
+  37. Calculated creatinine clearance using the Cockcroft-Gault formula &amp;gt;=30 mL/minute.
+  38. Left ventricular ejection fraction (LVEF) &amp;gt;50%, as measured by echocardiogram or multiple gated acquisition scan (MUGA) within 4 weeks before receiving the first dose of study drug.
+  39. For participants with HCC only: Child-Pugh score less than or equal to 7 (Child-Pugh A or B7).
+  40. Clinically significant toxic effects of previous therapy have recovered to Grade 1 (per National Cancer Institute Common Terminology Criteria for Adverse Events [NCI CTCAE] Version 5.0) or baseline, except for alopecia, Grade 2 peripheral neuropathy, and/or autoimmune endocrinopathies with stable endocrine replacement therapy.
+  41. Participants previously treated with fully human/humanized antineoplastic monoclonal antibodies must not have received treatment with such antibodies for at least 4 weeks or the time period equal to the dosing interval, whichever is shorter.
+  42. No washout period is required for prior treatment with pembrolizumab or other anti-programmed cell death protein 1 (PD-1) antibodies, although the first study dose of these drugs must not occur at an interval less than standard of care (that is, 3 weeks for 200 mg of IV pembrolizumab).
+
+EXCLUSION CRITERIA
+
+  1. History of any of the following &amp;lt;=6 months before first dose of study drug(s): congestive heart failure New York Heart Association Grade III or IV, unstable angina, myocardial infarction, persistent hypertension &amp;gt;=160/100 millimeters of mercury (mmHg) despite optimal medical therapy, ongoing cardiac arrhythmias of Grade &amp;gt;2 (including atrial flutter/ fibrillation or intermittent ventricular tachycardia), other ongoing serious cardiac conditions (example, Grade 3 pericardial effusion or Grade 3 restrictive cardiomyopathy), or symptomatic cerebrovascular events.
+  2. Chronic, stable atrial fibrillation on stable anticoagulation therapy, including low molecular-weight heparin, is allowed.
+  3. QT interval with Fridericia correction method &amp;gt;450 milliseconds (men) or &amp;gt;475 milliseconds (women) on a 12- lead ECG during the screening period.
+  4. Grade &amp;gt;=2 hypotension (that is, hypotension for which nonurgent intervention is required) at screening or during C1D1 predose assessment.
+  5. Oxygen saturation &amp;lt;92% on room air at screening or during C1D1 predose assessment.
+  6. Treatment with other STING agonists/antagonists, Toll-like receptor agonists or CCR2 agonist/antagonist within the past 6 months.
+  7. Active diagnosis of pneumonitis, interstitial lung disease, severe chronic obstructive pulmonary disease, idiopathic pulmonary fibrosis, other restrictive lung diseases, acute pulmonary embolism, or Grade &amp;gt;=2 pleural effusion not controlled by tap or requiring indwelling catheters.
+  8. Grade &amp;gt;=2 fever of malignant origin.
+  9. Chronic, active hepatitis (example, participants with known hepatitis B surface antigen seropositive and/or detectable hepatitis C virus [HCV] RNA).
+  10. History of hepatic encephalopathy.
+  11. Prior or current clinically significant ascites, as measured by physical examination, that requires active paracentesis for control.
+  12. Treatment with any investigational products or other anticancer therapy (including chemotherapy, targeted agents, and immunotherapy), within 14 days or 5 half-lives, whichever is shorter, before C1D1 of study drug(s).
+  13. Radiation therapy within 14 days (42 days for radiation to the lungs) and/ or systemic treatment with radionuclides within 42 days before C1D1 of study drug(s).
+  14. Participants with clinically relevant ongoing pulmonary complications from prior radiation therapy are not eligible.
+  15. Use of systemic corticosteroids or other immunosuppressive therapy, concurrently or within 14 days of C1D1 of study drug(s), with the following exceptions:Topical, intranasal, inhaled, ocular, intra-articular, and/or other nonsystemic corticosteroids.
+  16. Physiological doses of replacement steroid therapy (example, for adrenal insufficiency), not to exceed the equivalent of 10 mg prednisone daily.
+  17. Recipients of allogeneic or autologous stem cell transplantation or organ transplantation.
+  18. Additional criteria specific for participants in TAK-500 and pembrolizumab combination arm only:Contraindication to the administration of a pembrolizumab or prior intolerance to pembrolizumab or other anti-PD-1 or anti-programmed cell death protein ligand 1 antibody.
+  19. History of intolerance to any component of the study treatment agents or known serious or severe hypersensitivity reaction to any of the study drugs or their excipients. (Pembrolizumab is formulated with L-histidine, polysorbate 80, and sucrose."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 to 1.
+  2. Individuals with&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;following&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pathologically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;confirmed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(cytological&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnosis is adequate) select locally advanced or metastatic solid tumors, whose disease has progressed on or are intolerant to standard therapy:Gastroesophageal (esophageal, gastroesophageal junction, and gastric) adenocarcinoma, pancreatic adenocarcinoma, hepatocellular carcinoma (HCC), nonsquamous non-small cell lung cancer (NSCLC), squamous cell carcinoma&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;head&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;neck (SCCHN), mesothelioma, triple-negative breast cancer (TNBC), renal clear cell carcinoma (RCC) and nasopharyngeal carcinoma (NPC).
+  3. Participants who are intolerant&lt;/span&gt; to all &lt;span class=&quot;diff-del&quot;&gt;standard therapies are those who have developed clinical or laboratory abnormalities that prevent continued drug administration as evaluated by the principal investigator at the time of screening.
+  4. For dose expansion in 2L nonsquamous NSCLC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  5. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  6. Must have had disease progression while on or following 1 prior line of therapy:- Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  7. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  8. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  9. Participants are eligible&lt;/span&gt; regardless of &lt;span class=&quot;diff-del&quot;&gt;PD-L1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;status.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;For&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dose&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;expansion in 3L nonsquamous NSCLC (TAK-500 SA):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  11. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  12. Must have had disease progression while on or following 2&lt;/span&gt; prior &lt;span class=&quot;diff-del&quot;&gt;lines&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting OR Disease progression/recurrence within 6 months of the completion of 1 prior anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  13. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  14. Participants must have had disease progression while on or after 1 or 2 lines of chemotherapy in the recurrent locally advanced or metastatic setting.
+  15. If the anti-PD-(L)1 therapy is given in combination with chemotherapy, participant must have progressed on an additional line of chemotherapy.
+  16. Participants are eligible regardless of PD-L1 status.
+  17. For dose expansion in 2L pancreatic adenocarcinoma (TAK-500 SA and TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic pancreatic adenocarcinoma.
+  18. Must have had disease progression while on or following 1 prior line of therapy:- One prior line of fluorouracil- or gemcitabine-based chemotherapy (eg, FOLFIRINOX, FOLFOX, FOLFIRI, gemcitabine/nab-paclitaxel) in the metastatic/recurrent locally advanced setting.
+  19. Prior chemotherapy in the neoadjuvant/adjuvant setting does not qualify unless the participant had progression of disease within 6 months of completion of neoadjuvant/adjuvant chemotherapy.
+  20. Must not have had prior exposure to anti-PD-(L)1 therapy.
+  21. Participants with MSI-H/dMMR disease are not eligible.
+  22. Participants are eligible regardless of PD-L1 status.
+  23. For dose expansion in 3L RCC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic RCC.
+  24. Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  25. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  26. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or an anti-VEGFR TKI.
+  27. Participants must have had prior therapy with 1 or 2 lines of VEGFR TKIs in the metastatic/recurrent locally advanced setting.
+  28. If anti-PD-(L)1 therapy was given in combination with a VEGFR TKI, the participant must have had progressive disease on an additional line of therapy (eg, VEGFR TKI or VEGFR TKI-containing combination).
+  29. Participants are eligible regardless of PD-L1 status.
+  30. Must have at least 1 RECIST version 1.1 measurable lesion.
+  31. Lesions in previously irradiated areas (or other local therapy) should not be selected as measurable/target lesions unless there has been demonstrated radiographic progression in that lesion.
+  32. RECIST v1.1 target lesions must include at least 1 lesion that was not previously irradiated.
+  33. Adequate bone marrow, renal, and hepatic functions, as determined by the following laboratory parameters:Absolute neutrophil count (ANC) greater than or equal to (&amp;gt;=) 1000/ microliter (mcL), platelet count &amp;gt;=75,000/mcL, and hemoglobin &amp;gt;= 8.0 grams per deciliter (g/dL) without growth factor support for ANC or transfusion supportTotal bilirubin &amp;lt;=1.5 times the institutional upper limit of normal (ULN).
+  34. For participants with Gilbert&amp;#x27;s disease or HCC, &amp;lt;=3 milligrams per deciliter (mg/dL).
+  35. Serum alanine aminotransferase and aspartate aminotransferase &amp;lt;=3.0ULN or &amp;lt;=5.0ULN with liver metastases or HCC.
+  36. Albumin &amp;gt;=3.0 g/dL.
+  37. Calculated creatinine clearance using the Cockcroft-Gault formula &amp;gt;=30 mL/minute.
+  38. Left ventricular ejection fraction (LVEF) &amp;gt;50%, as measured by echocardiogram or multiple gated acquisition scan (MUGA) within 4 weeks before receiving the first dose of study drug.
+  39. For participants with HCC only: Child-Pugh score less than or equal to 7 (Child-Pugh A or B7).
+  40. Clinically significant toxic effects of previous therapy have recovered to Grade 1 (per National Cancer Institute Common Terminology Criteria for Adverse Events [NCI CTCAE] Version 5.0) or baseline, except for alopecia, Grade 2 peripheral neuropathy, and/or autoimmune endocrinopathies with stable endocrine replacement therapy.
+  41. Participants previously treated with fully human/humanized antineoplastic monoclonal antibodies must not have received treatment with such antibodies for at least 4 weeks or the time period equal to the dosing interval, whichever is shorter.
+  42. No washout period is required for prior treatment with pembrolizumab&lt;/span&gt; or other &lt;span class=&quot;diff-del&quot;&gt;anti-programmed cell death protein 1 (PD-1) antibodies, although the first study dose of these drugs must not occur at an interval less than standard of care (that is, 3 weeks for 200 mg of IV pembrolizumab).
+
+EXCLUSION CRITERIA
+
+  1. History of any of the following &amp;lt;=6 months before first dose of study drug(s): congestive heart failure New York Heart Association Grade III or IV, unstable angina, myocardial infarction, persistent hypertension &amp;gt;=160/100 millimeters of mercury (mmHg) despite optimal medical therapy, ongoing cardiac arrhythmias of Grade &amp;gt;2 (including atrial flutter/ fibrillation or intermittent ventricular tachycardia), other ongoing serious cardiac conditions (example, Grade 3 pericardial effusion or Grade 3 restrictive cardiomyopathy), or symptomatic cerebrovascular events.
+  2. Chronic, stable atrial fibrillation on stable anticoagulation therapy, including low molecular-weight heparin, is allowed.
+  3. QT interval with Fridericia correction method &amp;gt;450 milliseconds (men) or &amp;gt;475 milliseconds (women) on a 12- lead ECG during the screening period.
+  4. Grade &amp;gt;=2 hypotension (that is, hypotension for which nonurgent intervention is required) at screening or during C1D1 predose assessment.
+  5. Oxygen saturation &amp;lt;92% on room air at screening or during C1D1 predose assessment.
+  6. Treatment with other STING agonists/antagonists, Toll-like receptor agonists or CCR2 agonist/antagonist within the past 6 months.
+  7. Active diagnosis of pneumonitis, interstitial lung disease, severe chronic obstructive pulmonary disease, idiopathic pulmonary fibrosis, other restrictive lung diseases, acute pulmonary embolism, or Grade &amp;gt;=2 pleural effusion not controlled by tap or requiring indwelling catheters.
+  8. Grade &amp;gt;=2 fever of malignant origin.
+  9. Chronic, active hepatitis (example, participants with known hepatitis B surface antigen seropositive and/or detectable hepatitis C virus [HCV] RNA).
+  10. History of hepatic encephalopathy.
+  11. Prior or current clinically significant ascites, as measured by physical examination, that requires active paracentesis for control.
+  12. Treatment with any investigational products or other anticancer therapy (including chemotherapy, targeted agents, and immunotherapy), within 14 days or 5 half-lives, whichever is shorter, before C1D1 of study drug(s).
+  13. Radiation therapy within 14 days (42 days for radiation to the lungs) and/ or systemic treatment with radionuclides within 42 days before C1D1 of study drug(s).
+  14. Participants with clinically relevant ongoing pulmonary complications from prior radiation therapy are not eligible.
+  15. Use of systemic corticosteroids or other immunosuppressive therapy, concurrently or within 14 days of C1D1 of study drug(s), with the following exceptions:Topical, intranasal, inhaled, ocular, intra-articular, and/or other nonsystemic corticosteroids.
+  16. Physiological doses of replacement steroid therapy (example, for adrenal insufficiency), not to exceed the equivalent of 10 mg prednisone daily.
+  17. Recipients of allogeneic or autologous stem cell transplantation or organ transplantation.
+  18. Additional criteria specific for participants in TAK-500 and pembrolizumab combination arm only:Contraindication to the administration of a pembrolizumab or prior intolerance to pembrolizumab or other anti-PD-1 or anti-programmed cell death protein ligand 1 antibody.
+  19. History of intolerance to any component of the study treatment agents or known serious or severe hypersensitivity reaction to any of the study drugs or their excipients. (Pembrolizumab is formulated with L-histidine, polysorbate 80, and sucrose.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 to 1.Individuals with the following pathologically confirmed (cytological diagnosis is adequate) select locally advanced or metastatic solid tumors, whose disease has progressed on or are intolerant to standard therapy:Gastroesophageal (esophageal, gastroesophageal junction, and gastric) adenocarcinoma, pancreatic adenocarcinoma, hepatocellular carcinoma (HCC), nonsquamous non-small cell lung cancer (NSCLC), squamous cell carcinoma of the head and neck (SCCHN), mesothelioma, triple-negative breast cancer (TNBC), renal clear cell carcinoma (RCC) and nasopharyngeal carcinoma (NPC). Participants who are intolerant to all standard therapies are those who have developed clinical or laboratory abnormalities that prevent continued drug administration as evaluated by the principal investigator at the time of screening.For dose expansion in 2L nonsquamous NSCLC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).Must have had disease progression while on or following 1 prior line of therapy:- Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting. OR Disease progression&amp;amp;#x2F;recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant&amp;amp;#x2F;neoadjuvant setting. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and&amp;amp;#x2F;or chemotherapy (eg, carboplatin and pemetrexed).Participants are eligible regardless of PD-L1 status.For dose expansion in 3L nonsquamous NSCLC (TAK-500 SA):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting OR Disease progression&amp;amp;#x2F;recurrence within 6 months of the completion of 1 prior anti-PD-(L)1 therapy if administered in the adjuvant&amp;amp;#x2F;neoadjuvant setting. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and&amp;amp;#x2F;or chemotherapy (eg, carboplatin and pemetrexed).Participants must have had disease progression while on or after 1 or 2 lines of chemotherapy in the recurrent locally advanced or metastatic setting. If the anti-PD-(L)1 therapy is given in combination with chemotherapy, participant must have progressed on an additional line of chemotherapy.Participants are eligible regardless of PD-L1 status.For dose expansion in 2L pancreatic adenocarcinoma (TAK-500 SA and TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic pancreatic adenocarcinoma.Must have had disease progression while on or following 1 prior line of therapy:- One prior line of fluorouracil- or gemcitabine-based chemotherapy (eg, FOLFIRINOX, FOLFOX, FOLFIRI, gemcitabine&amp;amp;#x2F;nab-paclitaxel) in the metastatic&amp;amp;#x2F;recurrent locally advanced setting. Prior chemotherapy in the neoadjuvant&amp;amp;#x2F;adjuvant setting does not qualify unless the participant had progression of disease within 6 months of completion of neoadjuvant&amp;amp;#x2F;adjuvant chemotherapy.Must not have had prior exposure to anti-PD-(L)1 therapy.Participants with MSI-H&amp;amp;#x2F;dMMR disease are not eligible.Participants are eligible regardless of PD-L1 status.For dose expansion in 3L RCC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic RCC.Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting. OR Disease progression&amp;amp;#x2F;recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant&amp;amp;#x2F;neoadjuvant setting. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and&amp;amp;#x2F;or an anti-VEGFR TKI.Participants must have had prior therapy with 1 or 2 lines of VEGFR TKIs in the metastatic&amp;amp;#x2F;recurrent locally advanced setting. If anti-PD-(L)1 therapy was given in combination with a VEGFR TKI, the participant must have had progressive disease on an additional line of therapy (eg, VEGFR TKI or VEGFR TKI-containing combination).Participants are eligible regardless of PD-L1 status.Must have at least 1 RECIST version 1.1 measurable lesion. Lesions in previously irradiated areas (or other local therapy) should not be selected as measurable&amp;amp;#x2F;target lesions unless there has been demonstrated radiographic progression in that lesion. RECIST v1.1 target lesions must include at least 1 lesion that was not previously irradiated.Adequate bone marrow, renal, and hepatic functions, as determined by the following laboratory parameters:Absolute neutrophil count (ANC) greater than or equal to (&amp;amp;gt;=) 1000&amp;amp;#x2F; microliter (mcL), platelet count &amp;amp;gt;=75,000&amp;amp;#x2F;mcL, and hemoglobin &amp;amp;gt;= 8.0 grams per deciliter (g&amp;amp;#x2F;dL) without growth factor support for ANC or transfusion supportTotal bilirubin &amp;amp;lt;=1.5 times the institutional upper limit of normal (ULN). For participants with Gilbert&amp;amp;#x27;s disease or HCC, &amp;amp;lt;=3 milligrams per deciliter (mg&amp;amp;#x2F;dL).Serum alanine aminotransferase and aspartate aminotransferase &amp;amp;lt;=3.0*ULN or &amp;amp;lt;=5.0*ULN with liver metastases or HCC.Albumin &amp;amp;gt;=3.0 g&amp;amp;#x2F;dL.Calculated creatinine clearance using the Cockcroft-Gault formula &amp;amp;gt;=30 mL&amp;amp;#x2F;minute.Left ventricular ejection fraction (LVEF) &amp;amp;gt;50%, as measured by echocardiogram or multiple gated acquisition scan (MUGA) within 4 weeks before receiving the first dose of study drug.For participants with HCC only: Child-Pugh score less than or equal to 7 (Child-Pugh A or B7).Clinically significant toxic effects of previous therapy have recovered to Grade 1 (per National Cancer Institute Common Terminology Criteria for Adverse Events [NCI CTCAE] Version 5.0) or baseline, except for alopecia, Grade 2 peripheral neuropathy, and&amp;amp;#x2F;or autoimmune endocrinopathies with stable endocrine replacement therapy.Participants previously treated with fully human&amp;amp;#x2F;humanized antineoplastic monoclonal antibodies must not have received treatment with such antibodies for at least 4 weeks or the time period equal to the dosing interval, whichever is shorter. No washout period is required for prior treatment with pembrolizumab or other anti-programmed cell death protein 1 (PD-1) antibodies, although the first study dose of these drugs must not occur at an interval less than standard of care (that is, 3 weeks for 200 mg of IV pembrolizumab).Exclusion Criteria:History of any of the following &amp;amp;lt;=6 months before first dose of study drug(s): congestive heart failure New York Heart Association Grade III or IV, unstable angina, myocardial infarction, persistent hypertension &amp;amp;gt;=160&amp;amp;#x2F;100 millimeters of mercury (mmHg) despite optimal medical therapy, ongoing cardiac arrhythmias of Grade &amp;amp;gt;2 (including atrial flutter&amp;amp;#x2F; fibrillation or intermittent ventricular tachycardia), other ongoing serious cardiac conditions (example, Grade 3 pericardial effusion or Grade 3 restrictive cardiomyopathy), or symptomatic cerebrovascular events. Chronic, stable atrial fibrillation on stable anticoagulation therapy, including low molecular-weight heparin, is allowed.QT interval with Fridericia correction method &amp;amp;gt;450 milliseconds (men) or &amp;amp;gt;475 milliseconds (women) on a 12- lead ECG during the screening period.Grade &amp;amp;gt;=2 hypotension (that is, hypotension for which nonurgent intervention is required) at screening or during C1D1 predose assessment.Oxygen saturation &amp;amp;lt;92% on room air at screening or during C1D1 predose assessment.Treatment with other STING agonists&amp;amp;#x2F;antagonists, Toll-like receptor agonists or CCR2 agonist&amp;amp;#x2F;antagonist within the past 6 months.Active diagnosis of pneumonitis, interstitial lung disease, severe chronic obstructive pulmonary disease, idiopathic pulmonary fibrosis, other restrictive lung diseases, acute pulmonary embolism, or Grade &amp;amp;gt;=2 pleural effusion not controlled by tap or requiring indwelling catheters.Grade &amp;amp;gt;=2 fever of malignant origin.Chronic, active hepatitis (example, participants with known hepatitis B surface antigen seropositive and&amp;amp;#x2F;or detectable hepatitis C virus [HCV] RNA).History of hepatic encephalopathy.Prior or current clinically significant ascites, as measured by physical examination, that requires active paracentesis for control.Treatment with any investigational products or other anticancer therapy (including chemotherapy, targeted agents, and immunotherapy), within 14 days or 5 half-lives, whichever is shorter, before C1D1 of study drug(s).Radiation therapy within 14 days (42 days for radiation to the lungs) and&amp;amp;#x2F; or systemic treatment with radionuclides within 42 days before C1D1 of study drug(s). Participants with clinically relevant ongoing pulmonary complications from prior radiation therapy are not eligible.Use of systemic corticosteroids or other immunosuppressive therapy, concurrently or within 14 days of C1D1 of study drug(s), with the following exceptions:Topical, intranasal, inhaled, ocular, intra-articular, and&amp;amp;#x2F;or other nonsystemic corticosteroids.Physiological doses of replacement steroid therapy (example, for adrenal insufficiency), not to exceed the equivalent of 10 mg prednisone daily.Recipients of allogeneic or autologous stem cell transplantation or organ transplantation.Additional criteria specific for participants in TAK-500 and pembrolizumab combination arm only:Contraindication to the administration of a pembrolizumab or prior intolerance to pembrolizumab or other anti-PD-1 or anti-programmed cell death protein ligand 1 antibody.History of intolerance to any component of the study treatment agents or known serious or severe hypersensitivity reaction to any of the study drugs or their excipients. (Pembrolizumab is formulated with L-histidine, polysorbate 80, and sucrose.">INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 to 1.
+  2. Individuals with the following pathologically confirmed (cytological diagnosis is adequate) select locally advanced or metastatic solid tumors, whose disease has progressed on or are intolerant to standard therapy:Gastroesophageal (esophageal, gastroesophageal junction, and gastric) adenocarcinoma, pancreatic adenocarcinoma, hepatocellular carcinoma (HCC), nonsquamous non-small cell lung cancer (NSCLC), squamous cell carcinoma of the head and neck (SCCHN), mesothelioma, triple-negative breast cancer (TNBC), renal clear cell carcinoma (RCC) and nasopharyngeal carcinoma (NPC).
+  3. Participants who are intolerant to all standard therapies are those who have developed clinical or laboratory abnormalities that prevent continued drug administration as evaluated by the principal investigator at the time of screening.
+  4. For dose expansion in 2L nonsquamous NSCLC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  5. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  6. Must have had disease progression while on or following 1 prior line of therapy:- Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  7. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  8. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  9. Participants are eligible regardless of PD-L1 status.
+  10. For dose expansion in 3L nonsquamous NSCLC (TAK-500 SA):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic nonsquamous NSCLC.
+  11. Participants may not have a known targetable driver mutation, rearrangement or amplification (eg, EGFR, ALK, MET, ROS1, BRAF, KRASG12C, etc.).
+  12. Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting OR Disease progression/recurrence within 6 months of the completion of 1 prior anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  13. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or chemotherapy (eg, carboplatin and pemetrexed).
+  14. Participants must have had disease progression while on or after 1 or 2 lines of chemotherapy in the recurrent locally advanced or metastatic setting.
+  15. If the anti-PD-(L)1 therapy is given in combination with chemotherapy, participant must have progressed on an additional line of chemotherapy.
+  16. Participants are eligible regardless of PD-L1 status.
+  17. For dose expansion in 2L pancreatic adenocarcinoma (TAK-500 SA and TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic pancreatic adenocarcinoma.
+  18. Must have had disease progression while on or following 1 prior line of therapy:- One prior line of fluorouracil- or gemcitabine-based chemotherapy (eg, FOLFIRINOX, FOLFOX, FOLFIRI, gemcitabine/nab-paclitaxel) in the metastatic/recurrent locally advanced setting.
+  19. Prior chemotherapy in the neoadjuvant/adjuvant setting does not qualify unless the participant had progression of disease within 6 months of completion of neoadjuvant/adjuvant chemotherapy.
+  20. Must not have had prior exposure to anti-PD-(L)1 therapy.
+  21. Participants with MSI-H/dMMR disease are not eligible.
+  22. Participants are eligible regardless of PD-L1 status.
+  23. For dose expansion in 3L RCC (TAK-500 plus pembrolizumab):Participants with pathologically confirmed (cytological diagnosis is adequate) locally advanced or metastatic RCC.
+  24. Must have had disease progression while on or following 2 prior lines of therapy:Disease progression while on or following at least 6 weeks of 1 prior anti-PD-(L)1 therapy in the recurrent locally advanced or metastatic setting.
+  25. OR Disease progression/recurrence within 6 months of the completion of anti-PD-(L)1 therapy if administered in the adjuvant/neoadjuvant setting.
+  26. Prior anti-PD-(L)1 therapy may have been given with or without an anti-CTLA4 antibody and/or an anti-VEGFR TKI.
+  27. Participants must have had prior therapy with 1 or 2 lines of VEGFR TKIs in the metastatic/recurrent locally advanced setting.
+  28. If anti-PD-(L)1 therapy was given in combination with a VEGFR TKI, the participant must have had progressive disease on an additional line of therapy (eg, VEGFR TKI or VEGFR TKI-containing combination).
+  29. Participants are eligible regardless of PD-L1 status.
+  30. Must have at least 1 RECIST version 1.1 measurable lesion.
+  31. Lesions in previously irradiated areas (or other local therapy) should not be selected as measurable/target lesions unless there has been demonstrated radiographic progression in that lesion.
+  32. RECIST v1.1 target lesions must include at least 1 lesion that was not previously irradiated.
+  33. Adequate bone marrow, renal, and hepatic functions, as determined by the following laboratory parameters:Absolute neutrophil count (ANC) greater than or equal to (&gt;=) 1000/ microliter (mcL), platelet count &gt;=75,000/mcL, and hemoglobin &gt;= 8.0 grams per deciliter (g/dL) without growth factor support for ANC or transfusion supportTotal bilirubin &lt;=1.5 times the institutional upper limit of normal (ULN).
+  34. For participants with Gilbert&#x27;s disease or HCC, &lt;=3 milligrams per deciliter (mg/dL).
+  35. Serum alanine aminotransferase and aspartate aminotransferase &lt;=3.0ULN or &lt;=5.0ULN with liver metastases or HCC.
+  36. Albumin &gt;=3.0 g/dL.
+  37. Calculated creatinine clearance using the Cockcroft-Gault formula &gt;=30 mL/minute.
+  38. Left ventricular ejection fraction (LVEF) &gt;50%, as measured by echocardiogram or multiple gated acquisition scan (MUGA) within 4 weeks before receiving the first dose of study drug.
+  39. For participants with HCC only: Child-Pugh score less than or equal to 7 (Child-Pugh A or B7).
+  40. Clinically significant toxic effects of previous therapy have recovered to Grade 1 (per National Cancer Institute Common Terminology Criteria for Adverse Events [NCI CTCAE] Version 5.0) or baseline, except for alopecia, Grade 2 peripheral neuropathy, and/or autoimmune endocrinopathies with stable endocrine replacement therapy.
+  41. Participants previously treated with fully human/humanized antineoplastic monoclonal antibodies must not have received treatment with such antibodies for at least 4 weeks or the time period equal to the dosing interval, whichever is shorter.
+  42. No washout period is required for prior treatment with pembrolizumab or other anti-programmed cell death protein 1 (PD-1) antibodies, although the first study dose of these drugs must not occur at an interval less than standard of care (that is, 3 weeks for 200 mg of IV pembrolizumab).
+
+EXCLUSION CRITERIA
+
+  1. History of any of the following &lt;=6 months before first dose of study drug(s): congestive heart failure New York Heart Association Grade III or IV, unstable angina, myocardial infarction, persistent hypertension &gt;=160/100 millimeters of mercury (mmHg) despite optimal medical therapy, ongoing cardiac arrhythmias of Grade &gt;2 (including atrial flutter/ fibrillation or intermittent ventricular tachycardia), other ongoing serious cardiac conditions (example, Grade 3 pericardial effusion or Grade 3 restrictive cardiomyopathy), or symptomatic cerebrovascular events.
+  2. Chronic, stable atrial fibrillation on stable anticoagulation therapy, including low molecular-weight heparin, is allowed.
+  3. QT interval with Fridericia correction method &gt;450 milliseconds (men) or &gt;475 milliseconds (women) on a 12- lead ECG during the screening period.
+  4. Grade &gt;=2 hypotension (that is, hypotension for which nonurgent intervention is required) at screening or during C1D1 predose assessment.
+  5. Oxygen saturation &lt;92% on room air at screening or during C1D1 predose assessment.
+  6. Treatment with other STING agonists/antagonists, Toll-like receptor agonists or CCR2 agonist/antagonist within the past 6 months.
+  7. Active diagnosis of pneumonitis, interstitial lung disease, severe chronic obstructive pulmonary disease, idiopathic pulmonary fibrosis, other restrictive lung diseases, acute pulmonary embolism, or Grade &gt;=2 pleural effusion not controlled by tap or requiring indwelling catheters.
+  8. Grade &gt;=2 fever of malignant origin.
+  9. Chronic, active hepatitis (example, participants with known hepatitis B surface antigen seropositive and/or detectable hepatitis C virus [HCV] RNA).
+  10. History of hepatic encephalopathy.
+  11. Prior or current clinically significant ascites, as measured by physical examination, that requires active paracentesis for control.
+  12. Treatment with any investigational products or other anticancer therapy (including chemotherapy, targeted agents, and immunotherapy), within 14 days or 5 half-lives, whichever is shorter, before C1D1 of study drug(s).
+  13. Radiation therapy within 14 days (42 days for radiation to the lungs) and/ or systemic treatment with radionuclides within 42 days before C1D1 of study drug(s).
+  14. Participants with clinically relevant ongoing pulmonary complications from prior radiation therapy are not eligible.
+  15. Use of systemic corticosteroids or other immunosuppressive therapy, concurrently or within 14 days of C1D1 of study drug(s), with the following exceptions:Topical, intranasal, inhaled, ocular, intra-articular, and/or other nonsystemic corticosteroids.
+  16. Physiological doses of replacement steroid therapy (example, for adrenal insufficiency), not to exceed the equivalent of 10 mg prednisone daily.
+  17. Recipients of allogeneic or autologous stem cell transplantation or organ transplantation.
+  18. Additional criteria specific for participants in TAK-500 and pembrolizumab combination arm only:Contraindication to the administration of a pembrolizumab or prior intolerance to pembrolizumab or other anti-PD-1 or anti-programmed cell death protein ligand 1 antibody.
+  19. History of intolerance to any component of the study treatment agents or known serious or severe hypersensitivity reaction to any of the study drugs or their excipients. (Pembrolizumab is formulated with L-histidine, polysorbate 80, and sucrose.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="To modify the eligibility criteria for version 14 of the clinical trial eligibility criteria, we need to add the following:
+
+1. Age: The minimum age requirement for the dose expansion phase is 18 years old.
+2. Race: The minimum age requirement for the dose expansion phase is 18 years old.
+3. Medical History: The minimum age requirement for the dose expansion phase is 18 years old.
+4. Prior Medications/Therapies: The minimum age requirement for the dose expansion phase is 18 years old.
+5. ECG Findings: The minimum age requirement for the dose expansion phase is 18 years old.
+6. Other Parameters: The minimum age requirement for the dose expansion phase is 18 years old.
+
+These modifications ensure that the eligibility criteria are inclusive and apply to all patients, regardless of age, gender, race, medical history, prior medications/therapy, ECG findings, or other parameters."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;To&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;modify&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;14&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;clinical trial eligibility criteria, we need to add the following:
+
+1. Age: The minimum age requirement for the dose expansion phase is 18 years old.
+2. Race: The minimum age requirement for the dose expansion phase is 18 years old.
+3. Medical History: The minimum age requirement for the dose expansion phase is 18 years old.
+4. Prior Medications/Therapies: The minimum age requirement for the dose expansion phase is 18 years old.
+5. ECG Findings: The minimum age requirement for the dose expansion phase is 18 years old.
+6. Other Parameters: The minimum age requirement for the dose expansion phase is 18 years old.
+
+These modifications ensure that the eligibility criteria are inclusive&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;apply&lt;/span&gt; to all &lt;span class=&quot;diff-add&quot;&gt;patients,&lt;/span&gt; regardless of &lt;span class=&quot;diff-add&quot;&gt;age,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;gender,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;race,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;history,&lt;/span&gt; prior &lt;span class=&quot;diff-add&quot;&gt;medications/therapy,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ECG&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;findings,&lt;/span&gt; or other &lt;span class=&quot;diff-add&quot;&gt;parameters.&lt;/span&gt;"
+                 data-raw="To modify the eligibility criteria for version 14 of the clinical trial eligibility criteria, we need to add the following:
+
+1. **Age**: The minimum age requirement for the dose expansion phase is 18 years old.
+2. **Race**: The minimum age requirement for the dose expansion phase is 18 years old.
+3. **Medical History**: The minimum age requirement for the dose expansion phase is 18 years old.
+4. **Prior Medications/Therapies**: The minimum age requirement for the dose expansion phase is 18 years old.
+5. **ECG Findings**: The minimum age requirement for the dose expansion phase is 18 years old.
+6. **Other Parameters**: The minimum age requirement for the dose expansion phase is 18 years old.
+
+These modifications ensure that the eligibility criteria are inclusive and apply to all patients, regardless of age, gender, race, medical history, prior medications/therapy, ECG findings, or other parameters.">To modify the eligibility criteria for version 14 of the clinical trial eligibility criteria, we need to add the following:
+
+1. Age: The minimum age requirement for the dose expansion phase is 18 years old.
+2. Race: The minimum age requirement for the dose expansion phase is 18 years old.
+3. Medical History: The minimum age requirement for the dose expansion phase is 18 years old.
+4. Prior Medications/Therapies: The minimum age requirement for the dose expansion phase is 18 years old.
+5. ECG Findings: The minimum age requirement for the dose expansion phase is 18 years old.
+6. Other Parameters: The minimum age requirement for the dose expansion phase is 18 years old.
+
+These modifications ensure that the eligibility criteria are inclusive and apply to all patients, regardless of age, gender, race, medical history, prior medications/therapy, ECG findings, or other parameters.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 22</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 22</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. The mother must be enrolled in the Fabry Registry, pregnant, and receiving or have received Fabrazyme treatment during the pregnancy.
+  2. At least 5 women must be planning to breastfeed while receiving Fabrazyme treatment.
+  3. The mother must provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  4. The mother must agree to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  5. The mother must agree to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mother&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must be&lt;/span&gt; enrolled in the Fabry &lt;span class=&quot;diff-del&quot;&gt;Registry,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pregnant,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; receiving or have received Fabrazyme treatment during the pregnancy.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;At least 5 women must be planning to breastfeed while receiving Fabrazyme treatment.
+  3. The mother must provide&lt;/span&gt; signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The mother must agree&lt;/span&gt; to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The mother must agree&lt;/span&gt; to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment."
+                 data-raw="Inclusion Criteria:The mother must be enrolled in the Fabry Registry, pregnant, and receiving or have received Fabrazyme treatment during the pregnancy. At least 5 women must be planning to breastfeed while receiving Fabrazyme treatment.The mother must provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.The mother must agree to adhere to the Fabry Registry recommended guidelines for antibody collection.The mother must agree to adhere to the schedule of events within this protocol including the testing of their infant.Exclusion Criteria:The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment.">INCLUSION CRITERIA
+
+  1. The mother must be enrolled in the Fabry Registry, pregnant, and receiving or have received Fabrazyme treatment during the pregnancy.
+  2. At least 5 women must be planning to breastfeed while receiving Fabrazyme treatment.
+  3. The mother must provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  4. The mother must agree to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  5. The mother must agree to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Mothers must:
+  2. Be enrolled in the Fabry Registry
+  3. Be pregnant or lactating
+  4. Be receiving or have received Fabrazyme treatment during the pregnancy.
+  5. Provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  6. Agree to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  7. Agree to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Mothers&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must:
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Be&lt;/span&gt; enrolled in the Fabry &lt;span class=&quot;diff-add&quot;&gt;Registry
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;pregnant or lactating
+  4. Be&lt;/span&gt; receiving or have received Fabrazyme treatment during the pregnancy.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Provide&lt;/span&gt; signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Agree&lt;/span&gt; to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Agree&lt;/span&gt; to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment."
+                 data-raw="Inclusion Criteria:Mothers must:
+
+* Be enrolled in the Fabry Registry
+* Be pregnant or lactating
+* Be receiving or have received Fabrazyme treatment during the pregnancy.
+* Provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+* Agree to adhere to the Fabry Registry recommended guidelines for antibody collection.
+* Agree to adhere to the schedule of events within this protocol including the testing of their infant.
+
+Exclusion Criteria:
+
+The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment.">INCLUSION CRITERIA
+
+  1. Mothers must:
+  2. Be enrolled in the Fabry Registry
+  3. Be pregnant or lactating
+  4. Be receiving or have received Fabrazyme treatment during the pregnancy.
+  5. Provide signed, written informed consent for themselves and their infant to participate in the study prior to any protocol-related procedures being performed.
+  6. Agree to adhere to the Fabry Registry recommended guidelines for antibody collection.
+  7. Agree to adhere to the schedule of events within this protocol including the testing of their infant.
+
+EXCLUSION CRITERIA
+
+  1. The patients (mother and infant) will be excluded from this study if the mother has received an investigational drug within 30 days prior to study enrollment.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

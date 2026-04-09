@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 24</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 24</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Cohorts 1 and 2: chronic genotype 1 or 3 HCV infection
+  2. Cohort 3: chronic genotype 1 or 4 HCV infectionHCV RNA ≥ 10^4 IU/mL at screening
+  3. Screening labs within defined thresholds
+  4. Cirrhosis determination at screening
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant partner
+  2. Prior null response to PEG+RBV therapy
+  3. Current of prior history of hepatic decompensation
+  4. Infection with hepatitis B virus (HBV) or HIVHistory of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with individual&amp;#x27;s treatment and/or adherence to the protocol
+  5. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Cohorts&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;2:&lt;/span&gt; chronic genotype 1 or 3 HCV &lt;span class=&quot;diff-del&quot;&gt;infection&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Cohort&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;3:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;chronic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;genotype&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;HCV&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;infectionHCV&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;RNA ≥ 10^4 IU/mL at screening
+  3. Screening labs within defined thresholds
+  4. Cirrhosis determination at screening&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant &lt;span class=&quot;diff-del&quot;&gt;partner&lt;/span&gt;
+  2. Prior null response to PEG+RBV &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt;
+  3. Current &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; prior history of hepatic &lt;span class=&quot;diff-del&quot;&gt;decompensation&lt;/span&gt;
+  4. Infection with hepatitis B virus (HBV) or &lt;span class=&quot;diff-del&quot;&gt;HIVHistory&lt;/span&gt; of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with &lt;span class=&quot;diff-del&quot;&gt;individual&amp;#x27;s&lt;/span&gt; treatment and/or adherence to the &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Note:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined Inclusion/&lt;/span&gt;
+
+&lt;span class=&quot;diff-del&quot;&gt;EXCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;may&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Key Inclusion Criteria:Cohorts 1 and 2: chronic genotype 1 or 3 HCV infectionCohort 3: chronic genotype 1 or 4 HCV infectionHCV RNA ≥ 10^4 IU&amp;amp;#x2F;mL at screeningScreening labs within defined thresholdsCirrhosis determination at screeningKey Exclusion Criteria:Females who are pregnant or nursing or males who have a pregnant partnerPrior null response to PEG+RBV therapyCurrent of prior history of hepatic decompensationInfection with hepatitis B virus (HBV) or HIVHistory of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with individual&amp;amp;#x27;s treatment and&amp;amp;#x2F;or adherence to the protocolNote: Other protocol defined Inclusion&amp;amp;#x2F;Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Cohorts 1 and 2: chronic genotype 1 or 3 HCV infection
+  2. Cohort 3: chronic genotype 1 or 4 HCV infectionHCV RNA ≥ 10^4 IU/mL at screening
+  3. Screening labs within defined thresholds
+  4. Cirrhosis determination at screening
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant partner
+  2. Prior null response to PEG+RBV therapy
+  3. Current of prior history of hepatic decompensation
+  4. Infection with hepatitis B virus (HBV) or HIVHistory of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with individual&#x27;s treatment and/or adherence to the protocol
+  5. Note: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 27)
+
+INCLUSION CRITERIA
+
+  1. Adults (≥18 years) with chronic genotype 1 or 3 HCV infection.
+  2. Evidence of renal insufficiency (e.g., creatinine clearance &amp;lt; 60 mL/min).
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant partner.
+  2. Prior null response to PEG+RBV therapy.
+  3. Current or prior history of hepatic decompensation.
+  4. Infection with hepatitis B virus (HBV) or HIV.
+  5. History of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with subject treatment and/or adherence to the protocol.
+  6. Changes Made:
+  7. Specificity: The
+
+INCLUSION CRITERIA
+
+  1. now explicitly state the requirement for evidence of renal insufficiency.
+  2. Conciseness:** The wording has been streamlined for clarity and conciseness.
+  3. Let me know if you have any other clinical trial eligibility criteria you&amp;#x27;d like me to review!"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 27)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Adults&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(≥18&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;years)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; chronic genotype 1 or 3 HCV &lt;span class=&quot;diff-add&quot;&gt;infection.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Evidence&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;renal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;insufficiency&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;creatinine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clearance&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mL/min).&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant &lt;span class=&quot;diff-add&quot;&gt;partner.&lt;/span&gt;
+  2. Prior null response to PEG+RBV &lt;span class=&quot;diff-add&quot;&gt;therapy.&lt;/span&gt;
+  3. Current &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; prior history of hepatic &lt;span class=&quot;diff-add&quot;&gt;decompensation.&lt;/span&gt;
+  4. Infection with hepatitis B virus (HBV) or &lt;span class=&quot;diff-add&quot;&gt;HIV.
+  5. History&lt;/span&gt; of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with &lt;span class=&quot;diff-add&quot;&gt;subject&lt;/span&gt; treatment and/or adherence to the &lt;span class=&quot;diff-add&quot;&gt;protocol.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Changes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Made:
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Specificity:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt;
+
+&lt;span class=&quot;diff-add&quot;&gt;INCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;explicitly state the requirement for evidence of renal insufficiency.
+  2. Conciseness:** The wording has been streamlined for clarity and conciseness.
+  3. Let me know if you have any other clinical trial eligibility criteria you&amp;#x27;d like me to review!&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria (Version 27)
+
+**Inclusion Criteria:**
+
+* Adults (≥18 years) with chronic genotype 1 or 3 HCV infection.
+*  Evidence of renal insufficiency (e.g., creatinine clearance &amp;lt; 60 mL/min).
+
+**Exclusion Criteria:**
+
+* Females who are pregnant or nursing or males who have a pregnant partner.
+* Prior null response to PEG+RBV therapy.
+* Current or prior history of hepatic decompensation.
+* Infection with hepatitis B virus (HBV) or HIV.
+* History of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with subject treatment and/or adherence to the protocol. 
+
+
+
+**Changes Made:**
+
+* **Specificity:** The inclusion criteria now explicitly state the requirement for evidence of renal insufficiency.
+* **Conciseness:**  The wording has been streamlined for clarity and conciseness. 
+
+
+Let me know if you have any other clinical trial eligibility criteria you&amp;#x27;d like me to review!">Amended Eligibility Criteria (Version 27)
+
+INCLUSION CRITERIA
+
+  1. Adults (≥18 years) with chronic genotype 1 or 3 HCV infection.
+  2. Evidence of renal insufficiency (e.g., creatinine clearance &lt; 60 mL/min).
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or nursing or males who have a pregnant partner.
+  2. Prior null response to PEG+RBV therapy.
+  3. Current or prior history of hepatic decompensation.
+  4. Infection with hepatitis B virus (HBV) or HIV.
+  5. History of clinically significant illness (including psychiatric or cardiac) or any other medical disorder that may interfere with subject treatment and/or adherence to the protocol.
+  6. Changes Made:
+  7. Specificity: The
+
+INCLUSION CRITERIA
+
+  1. now explicitly state the requirement for evidence of renal insufficiency.
+  2. Conciseness:** The wording has been streamlined for clarity and conciseness.
+  3. Let me know if you have any other clinical trial eligibility criteria you&#x27;d like me to review!</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

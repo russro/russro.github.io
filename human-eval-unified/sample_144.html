@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 144</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 144</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Aged 12 to &amp;lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined thresholdsNo History of solid organ or bone marrow transplantationNo history of clinical hepatic decompensation (eg, ascites, jaundice, encephalopathy, variceal hemorrhage)NOTE: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Aged 12 to &amp;lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined &lt;span class=&quot;diff-del&quot;&gt;thresholdsNo&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;History&lt;/span&gt; of solid organ or bone marrow &lt;span class=&quot;diff-del&quot;&gt;transplantationNo&lt;/span&gt; history of clinical hepatic decompensation &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; ascites, jaundice, encephalopathy, variceal &lt;span class=&quot;diff-del&quot;&gt;hemorrhage)NOTE:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;may&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Key Inclusion Criteria:Aged 12 to &amp;amp;lt;18 yearsParent or legal guardian must provide written informed consentTreatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimenReceiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancyChronic HCV infection (≥ 6 months) documented by medical history or liver biopsyScreening laboratory values within defined thresholdsNo History of solid organ or bone marrow transplantationNo history of clinical hepatic decompensation (eg, ascites, jaundice, encephalopathy, variceal hemorrhage)NOTE: Other protocol defined Inclusion&amp;amp;#x2F; Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Aged 12 to &lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined thresholdsNo History of solid organ or bone marrow transplantationNo history of clinical hepatic decompensation (eg, ascites, jaundice, encephalopathy, variceal hemorrhage)NOTE: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Aged 12 to &amp;lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined thresholds
+  7. No history of solid organ or bone marrow transplantation
+  8. No history of clinical hepatic decompensation (e.g., ascites, jaundice, encephalopathy, variceal hemorrhage)
+  9. Must have an absolute lymphocyte count ≥ 300/mm3
+  10. Must not have any Grade 3 or greater rash associated with constitutional symptoms
+  11. Must not have any Grade 4 adverse event or laboratory abnormality assessed as related to the investigational drug"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Aged 12 to &amp;lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined &lt;span class=&quot;diff-add&quot;&gt;thresholds
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;No history&lt;/span&gt; of solid organ or bone marrow &lt;span class=&quot;diff-add&quot;&gt;transplantation
+  8. No&lt;/span&gt; history of clinical hepatic decompensation &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; ascites, jaundice, encephalopathy, variceal &lt;span class=&quot;diff-add&quot;&gt;hemorrhage)
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;absolute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;lymphocyte&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥ 300/mm3
+  10. Must not have any Grade 3 or greater rash associated with constitutional symptoms
+  11. Must not have any Grade 4 adverse event or laboratory abnormality assessed as related to the investigational drug&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+- Aged 12 to &amp;lt;18 years
+- Parent or legal guardian must provide written informed consent
+- Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+- Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+- Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+- Screening laboratory values within defined thresholds
+- No history of solid organ or bone marrow transplantation
+- No history of clinical hepatic decompensation (e.g., ascites, jaundice, encephalopathy, variceal hemorrhage)
+- Must have an absolute lymphocyte count ≥ 300/mm3
+- Must not have any Grade 3 or greater rash associated with constitutional symptoms
+- Must not have any Grade 4 adverse event or laboratory abnormality assessed as related to the investigational drug">INCLUSION CRITERIA
+
+  1. Aged 12 to &lt;18 years
+  2. Parent or legal guardian must provide written informed consent
+  3. Treatment naïve or experienced children with genotype 1 or 4 HCV infection, and are on a maintenance cancer chemotherapy regimen
+  4. Receiving a protocol-approved maintenance chemotherapy regimen for a hematological malignancy
+  5. Chronic HCV infection (≥ 6 months) documented by medical history or liver biopsy
+  6. Screening laboratory values within defined thresholds
+  7. No history of solid organ or bone marrow transplantation
+  8. No history of clinical hepatic decompensation (e.g., ascites, jaundice, encephalopathy, variceal hemorrhage)
+  9. Must have an absolute lymphocyte count ≥ 300/mm3
+  10. Must not have any Grade 3 or greater rash associated with constitutional symptoms
+  11. Must not have any Grade 4 adverse event or laboratory abnormality assessed as related to the investigational drug</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

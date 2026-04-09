@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 156</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 156</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting with 20 to 100 facial inflammatory lesions (papules, pustules and nodules) at baseline, no more than 2 facial inflammatory nodules or cysts at screening and baseline, and a minimun number of 10 non-inflammatory facial lesions (open and closed comedones).
+  4. Patients who are candidates for systemic treatment and for whom in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, or was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back)Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+
+EXCLUSION CRITERIA
+
+  1. Appropriate wash out periods are required for investigational drugs, any oral/systemic treatment for acne, systemic or lesional injected (for acne) corticosteroids or systemic immunomodulators, any systemic hormonal treatments, previous treatment with biologics, oral retinoids (in particular isotretinoin) and any topical anti-acne treatment.
+  2. Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy or laser therapy within 4 weeks prior to baselineUse of facial medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  3. Any other forms of acneAny severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  4. Active systemic infections (other than common cold) during the 2 weeks prior to baseline.
+  5. History of immunodeficiency diseases, including a positive HIV (ELISA and Western blot) test result at screening.
+  6. Chronic infection with Hepatitis B or Hepatitis C virus.
+  7. Pregnant or nursing (lactating) women, where pregnancy is defined as the state of a female after conception and until the termination of gestation, confirmed by a positive Human chorionic gonadotropin (HCG) laboratory test.
+  8. Sexually active males or women of child-bearing potential, defined as all women physiologically capable of becoming pregnant, unless they are using basic methods of contraception during dosing of study treatment."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, &lt;span class=&quot;diff-del&quot;&gt;ECGs&lt;/span&gt; and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; 20 to 100 facial inflammatory lesions (papules, &lt;span class=&quot;diff-del&quot;&gt;pustules&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;nodules) at baseline,&lt;/span&gt; no more than 2 facial inflammatory nodules or &lt;span class=&quot;diff-del&quot;&gt;cysts at screening and baseline, and&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;minimun&lt;/span&gt; number of 10 non-inflammatory facial lesions (open and closed comedones).
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Patients who are candidates for systemic treatment and for &lt;span class=&quot;diff-del&quot;&gt;whom&lt;/span&gt; in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed,&lt;span class=&quot;diff-del&quot;&gt; or&lt;/span&gt; was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the &lt;span class=&quot;diff-del&quot;&gt;back)Patients&lt;/span&gt; with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Appropriate wash out periods are required for investigational drugs, any oral/systemic treatment for acne, systemic or lesional injected (for acne) corticosteroids or systemic immunomodulators, any systemic hormonal treatments, previous&lt;/span&gt; treatment with &lt;span class=&quot;diff-del&quot;&gt;biologics,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;oral&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;retinoids&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;particular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;isotretinoin)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; any topical anti-acne &lt;span class=&quot;diff-del&quot;&gt;treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy or laser therapy within 4 weeks prior to &lt;span class=&quot;diff-del&quot;&gt;baselineUse&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; facial medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Any other forms of &lt;span class=&quot;diff-del&quot;&gt;acneAny&lt;/span&gt; severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Active systemic infections (other than common cold) &lt;span class=&quot;diff-del&quot;&gt;during the&lt;/span&gt; 2 weeks prior to baseline.&lt;span class=&quot;diff-del&quot;&gt;
+  5. History of immunodeficiency diseases, including a positive HIV (ELISA and Western blot) test result at screening.
+  6. Chronic infection with Hepatitis B or Hepatitis C virus.
+  7. Pregnant or nursing (lactating) women, where pregnancy is defined as the state of a female after conception and until the termination of gestation, confirmed by a positive Human chorionic gonadotropin (HCG) laboratory test.
+  8. Sexually active males or women of child-bearing potential, defined as all women physiologically capable of becoming pregnant, unless they are using basic methods of contraception during dosing of study treatment.&lt;/span&gt;"
+                 data-raw="Inclusion criteria:Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs and laboratory tests at screening.Body weight between 50 and 120 kg, both inclusive, at screening.Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting with 20 to 100 facial inflammatory lesions (papules, pustules and nodules) at baseline, no more than 2 facial inflammatory nodules or cysts at screening and baseline, and a minimun number of 10 non-inflammatory facial lesions (open and closed comedones).Patients who are candidates for systemic treatment and for whom in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, or was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back)Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.Exclusion criteria:Appropriate wash out periods are required for investigational drugs, any oral&amp;amp;#x2F;systemic treatment for acne, systemic or lesional injected (for acne) corticosteroids or systemic immunomodulators, any systemic hormonal treatments, previous treatment with biologics, oral retinoids (in particular isotretinoin) and any topical anti-acne treatment.Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy or laser therapy within 4 weeks prior to baselineUse of facial medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.Any other forms of acneAny severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.Active systemic infections (other than common cold) during the 2 weeks prior to baseline.History of immunodeficiency diseases, including a positive HIV (ELISA and Western blot) test result at screening.Chronic infection with Hepatitis B or Hepatitis C virus.Pregnant or nursing (lactating) women, where pregnancy is defined as the state of a female after conception and until the termination of gestation, confirmed by a positive Human chorionic gonadotropin (HCG) laboratory test.Sexually active males or women of child-bearing potential, defined as all women physiologically capable of becoming pregnant, unless they are using basic methods of contraception during dosing of study treatment.">INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting with 20 to 100 facial inflammatory lesions (papules, pustules and nodules) at baseline, no more than 2 facial inflammatory nodules or cysts at screening and baseline, and a minimun number of 10 non-inflammatory facial lesions (open and closed comedones).
+  4. Patients who are candidates for systemic treatment and for whom in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, or was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back)Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+
+EXCLUSION CRITERIA
+
+  1. Appropriate wash out periods are required for investigational drugs, any oral/systemic treatment for acne, systemic or lesional injected (for acne) corticosteroids or systemic immunomodulators, any systemic hormonal treatments, previous treatment with biologics, oral retinoids (in particular isotretinoin) and any topical anti-acne treatment.
+  2. Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy or laser therapy within 4 weeks prior to baselineUse of facial medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  3. Any other forms of acneAny severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  4. Active systemic infections (other than common cold) during the 2 weeks prior to baseline.
+  5. History of immunodeficiency diseases, including a positive HIV (ELISA and Western blot) test result at screening.
+  6. Chronic infection with Hepatitis B or Hepatitis C virus.
+  7. Pregnant or nursing (lactating) women, where pregnancy is defined as the state of a female after conception and until the termination of gestation, confirmed by a positive Human chorionic gonadotropin (HCG) laboratory test.
+  8. Sexually active males or women of child-bearing potential, defined as all women physiologically capable of becoming pregnant, unless they are using basic methods of contraception during dosing of study treatment.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 35)
+
+INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs, and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting at baseline with:
+  4. 20 to 100 facial inflammatory lesions (papules, pustules, and nodules),
+  5. no more than 2 facial inflammatory nodules or cysts,
+  6. a minimum number of 10 non-inflammatory facial lesions (open and closed comedones).
+  7. Patients who are candidates for systemic treatment and for whom, in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back).
+  8. Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+  9. Able to communicate well with the investigator, to understand and comply with the requirements of the study.
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with investigational drugs at the time of screening, or within 4 weeks or 5 half-lives of baseline, whichever is longer; or more as required by local regulations.
+  2. Previous treatment with any topical anti-acne therapy:
+  3. Prescription treatment within 2 weeks prior to baseline,
+  4. Over-The-Counter (OTC) treatment within 1 week prior to baseline. The use of medicated anti-acne creams, medicated cleansers, or medicated soaps will remain prohibited for the duration of the study.
+  5. Previous treatment with any oral/systemic anti-acne therapy:
+  6. Oral antibiotics, dapsone, oral zinc within 4 weeks prior to baseline,
+  7. Retinoids, e.g., isotretinoin, within 3 months prior to baseline,
+  8. Hormonal therapy (in particular anti-androgen for example spironolactone, finasteride, and cyproterone acetate alone or in combination with estrogen derivatives) within 1 month prior to baseline. If women of child-bearing potential are using oral contraception, this contraception can be used under certain conditions (see prohibited treatments for further guidance on oral contraception in women of child-bearing potential [WOCBP]).
+  9. Previous treatment with systemic corticosteroids or immunomodulators (such as, but not limited to, cyclosporine, methotrexate, azathioprine) within 4 weeks prior to baseline. This includes lesional injections of the above medications in acne-prone areas (such as corticosteroids).
+  10. Previous treatment with biologics (such as anti-TNFα agents, anti-IL-1, or anti-IL-17) within 3 months or 5 half-lives (whichever is longer) prior to baseline.
+  11. Previous treatment with anti-IL-12/23 blocking agents (such as briakinumab and ustekinumab or p19 antibodies) within 6 months prior to baseline.
+  12. Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy [PDT]) or laser therapy within 4 weeks prior to baseline.
+  13. Previous facial treatment with medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  14. Patients receiving concomitant medication(s) that is/are known to inhibit OAT3 and that cannot be discontinued or replaced by safe alternative medication within 5 half-lives or 1 week (whichever is longer) to baseline and for the duration of the study.
+  15. Any other forms of acne.
+  16. Any severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  17. Active systemic infections (other than common cold) within 2 weeks prior to baseline."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 35)
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, &lt;span class=&quot;diff-add&quot;&gt;ECGs,&lt;/span&gt; and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting &lt;span class=&quot;diff-add&quot;&gt;at baseline with:
+  4.&lt;/span&gt; 20 to 100 facial inflammatory lesions (papules, &lt;span class=&quot;diff-add&quot;&gt;pustules,&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;nodules),
+  5.&lt;/span&gt; no more than 2 facial inflammatory nodules or &lt;span class=&quot;diff-add&quot;&gt;cysts,
+  6.&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;minimum&lt;/span&gt; number of 10 non-inflammatory facial lesions (open and closed comedones).
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Patients who are candidates for systemic treatment and for &lt;span class=&quot;diff-add&quot;&gt;whom,&lt;/span&gt; in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the &lt;span class=&quot;diff-add&quot;&gt;back).
+  8. Patients&lt;/span&gt; with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.&lt;span class=&quot;diff-add&quot;&gt;
+  9. Able to communicate well with the investigator, to understand and comply with the requirements of the study.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; treatment with &lt;span class=&quot;diff-add&quot;&gt;investigational&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drugs&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;screening, or within 4 weeks or 5 half-lives of baseline, whichever is longer; or more as required by local regulations.
+  2. Previous treatment with&lt;/span&gt; any topical anti-acne &lt;span class=&quot;diff-add&quot;&gt;therapy:&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3. Prescription treatment within 2 weeks prior to baseline,
+  4. Over-The-Counter (OTC) treatment within 1 week prior to baseline. The use of medicated anti-acne creams, medicated cleansers, or medicated soaps will remain prohibited for the duration of the study.
+  5. Previous treatment with any oral/systemic anti-acne therapy:
+  6. Oral antibiotics, dapsone, oral zinc within 4 weeks prior to baseline,
+  7. Retinoids, e.g., isotretinoin, within 3 months prior to baseline,
+  8. Hormonal therapy (in particular anti-androgen for example spironolactone, finasteride, and cyproterone acetate alone or in combination with estrogen derivatives) within 1 month prior to baseline. If women of child-bearing potential are using oral contraception, this contraception can be used under certain conditions (see prohibited treatments for further guidance on oral contraception in women of child-bearing potential [WOCBP]).
+  9. Previous treatment with systemic corticosteroids or immunomodulators (such as, but not limited to, cyclosporine, methotrexate, azathioprine) within 4 weeks prior to baseline. This includes lesional injections of the above medications in acne-prone areas (such as corticosteroids).
+  10. Previous treatment with biologics (such as anti-TNFα agents, anti-IL-1, or anti-IL-17) within 3 months or 5 half-lives (whichever is longer) prior to baseline.
+  11. Previous treatment with anti-IL-12/23 blocking agents (such as briakinumab and ustekinumab or p19 antibodies) within 6 months prior to baseline.
+  12.&lt;/span&gt; Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy &lt;span class=&quot;diff-add&quot;&gt;[PDT]) &lt;/span&gt;or laser therapy within 4 weeks prior to &lt;span class=&quot;diff-add&quot;&gt;baseline.
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; facial&lt;span class=&quot;diff-add&quot;&gt; treatment with&lt;/span&gt; medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  &lt;span class=&quot;diff-add&quot;&gt;14. Patients receiving concomitant medication(s) that is/are known to inhibit OAT3 and that cannot be discontinued or replaced by safe alternative medication within 5 half-lives or 1 week (whichever is longer) to baseline and for the duration of the study.
+  15.&lt;/span&gt; Any other forms of &lt;span class=&quot;diff-add&quot;&gt;acne.
+  16. Any&lt;/span&gt; severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Active systemic infections (other than common cold) &lt;span class=&quot;diff-add&quot;&gt;within&lt;/span&gt; 2 weeks prior to baseline."
+                 data-raw="**Amended Eligibility Criteria (version 35)**
+
+**Inclusion Criteria:**
+1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs, and laboratory tests at screening.
+2. Body weight between 50 and 120 kg, both inclusive, at screening.
+3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting at baseline with:
+   - 20 to 100 facial inflammatory lesions (papules, pustules, and nodules),
+   - no more than 2 facial inflammatory nodules or cysts,
+   - a minimum number of 10 non-inflammatory facial lesions (open and closed comedones).
+4. Patients who are candidates for systemic treatment and for whom, in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back).
+5. Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+6. Able to communicate well with the investigator, to understand and comply with the requirements of the study.
+
+**Exclusion Criteria:**
+1. Previous treatment with investigational drugs at the time of screening, or within 4 weeks or 5 half-lives of baseline, whichever is longer; or more as required by local regulations.
+2. Previous treatment with any topical anti-acne therapy:
+   - Prescription treatment within 2 weeks prior to baseline,
+   - Over-The-Counter (OTC) treatment within 1 week prior to baseline. The use of medicated anti-acne creams, medicated cleansers, or medicated soaps will remain prohibited for the duration of the study.
+3. Previous treatment with any oral/systemic anti-acne therapy:
+   - Oral antibiotics, dapsone, oral zinc within 4 weeks prior to baseline,
+   - Retinoids, e.g., isotretinoin, within 3 months prior to baseline,
+   - Hormonal therapy (in particular anti-androgen for example spironolactone, finasteride, and cyproterone acetate alone or in combination with estrogen derivatives) within 1 month prior to baseline. If women of child-bearing potential are using oral contraception, this contraception can be used under certain conditions (see prohibited treatments for further guidance on oral contraception in women of child-bearing potential [WOCBP]).
+4. Previous treatment with systemic corticosteroids or immunomodulators (such as, but not limited to, cyclosporine, methotrexate, azathioprine) within 4 weeks prior to baseline. This includes lesional injections of the above medications in acne-prone areas (such as corticosteroids).
+5. Previous treatment with biologics (such as anti-TNFα agents, anti-IL-1, or anti-IL-17) within 3 months or 5 half-lives (whichever is longer) prior to baseline.
+6. Previous treatment with anti-IL-12/23 blocking agents (such as briakinumab and ustekinumab or p19 antibodies) within 6 months prior to baseline.
+7. Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy [PDT]) or laser therapy within 4 weeks prior to baseline.
+8. Previous facial treatment with medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+9. Patients receiving concomitant medication(s) that is/are known to inhibit OAT3 and that cannot be discontinued or replaced by safe alternative medication within 5 half-lives or 1 week (whichever is longer) to baseline and for the duration of the study.
+10. Any other forms of acne.
+11. Any severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+12. Active systemic infections (other than common cold) within 2 weeks prior to baseline.">Amended Eligibility Criteria (version 35)
+
+INCLUSION CRITERIA
+
+  1. Male and female subjects aged 18 to 45 years of age inclusive, and otherwise in good health as determined by medical history, physical examination, vital signs, ECGs, and laboratory tests at screening.
+  2. Body weight between 50 and 120 kg, both inclusive, at screening.
+  3. Patients with papulo-pustular acne vulgaris (inflammatory acne) presenting at baseline with:
+  4. 20 to 100 facial inflammatory lesions (papules, pustules, and nodules),
+  5. no more than 2 facial inflammatory nodules or cysts,
+  6. a minimum number of 10 non-inflammatory facial lesions (open and closed comedones).
+  7. Patients who are candidates for systemic treatment and for whom, in the opinion of the investigator, an appropriate previous treatment with topical anti-acne medication failed, was not well tolerated, or is not indicated (e.g., due to large body surface area affected, e.g., on the back).
+  8. Patients with Grade 3 (moderate) or Grade 4 (severe) IGA score assessed by the investigator at screening and baseline.
+  9. Able to communicate well with the investigator, to understand and comply with the requirements of the study.
+
+EXCLUSION CRITERIA
+
+  1. Previous treatment with investigational drugs at the time of screening, or within 4 weeks or 5 half-lives of baseline, whichever is longer; or more as required by local regulations.
+  2. Previous treatment with any topical anti-acne therapy:
+  3. Prescription treatment within 2 weeks prior to baseline,
+  4. Over-The-Counter (OTC) treatment within 1 week prior to baseline. The use of medicated anti-acne creams, medicated cleansers, or medicated soaps will remain prohibited for the duration of the study.
+  5. Previous treatment with any oral/systemic anti-acne therapy:
+  6. Oral antibiotics, dapsone, oral zinc within 4 weeks prior to baseline,
+  7. Retinoids, e.g., isotretinoin, within 3 months prior to baseline,
+  8. Hormonal therapy (in particular anti-androgen for example spironolactone, finasteride, and cyproterone acetate alone or in combination with estrogen derivatives) within 1 month prior to baseline. If women of child-bearing potential are using oral contraception, this contraception can be used under certain conditions (see prohibited treatments for further guidance on oral contraception in women of child-bearing potential [WOCBP]).
+  9. Previous treatment with systemic corticosteroids or immunomodulators (such as, but not limited to, cyclosporine, methotrexate, azathioprine) within 4 weeks prior to baseline. This includes lesional injections of the above medications in acne-prone areas (such as corticosteroids).
+  10. Previous treatment with biologics (such as anti-TNFα agents, anti-IL-1, or anti-IL-17) within 3 months or 5 half-lives (whichever is longer) prior to baseline.
+  11. Previous treatment with anti-IL-12/23 blocking agents (such as briakinumab and ustekinumab or p19 antibodies) within 6 months prior to baseline.
+  12. Previous surgical, physical (such as ThermaClear™), light (including blue or UV light, photodynamic therapy [PDT]) or laser therapy within 4 weeks prior to baseline.
+  13. Previous facial treatment with medium depth chemical peels (excluding home regimens) within 3 months prior to baseline.
+  14. Patients receiving concomitant medication(s) that is/are known to inhibit OAT3 and that cannot be discontinued or replaced by safe alternative medication within 5 half-lives or 1 week (whichever is longer) to baseline and for the duration of the study.
+  15. Any other forms of acne.
+  16. Any severe, progressive or uncontrolled medical or psychiatric condition or other factors at randomization that in the judgment of the investigator prevents the patient from participating in the study.
+  17. Active systemic infections (other than common cold) within 2 weeks prior to baseline.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

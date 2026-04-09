@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 99</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 99</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of &amp;lt; 15% and no heart failure admission over the last 12 months;
+  4. LVEF 35% or greater by cine cardiac magnetic resonance imaging (MRI) or echocardiography; myocardial damage in one or more left ventricular segments evident by late gadolinium enhancement allowed; concurrent angiotensin-converting enzyme inhibitors (ACEI), beta-blocker (BB) or angiotensin receptor blocker (ARB) therapy allowed (selection of which dictated by clinical care) if started three months or greater from first dose of IMP without change in dose.
+  5. Aldosterone receptor antagonists (eg.
+  6. Spironolactone or eplerenone) allowed if started 12 months or greater from first dose of Investigational Medicinal Product (IMP).
+  7. No changes throughout the study allowed.
+  8. Subjects aged 18 years and older, informed consent obtained directly.
+  9. For subjects ages 7-17 years old (yo), both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than DMDClinically significant laboratory abnormality not associated with DMDMajor surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study proceduresRequire antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 monthsA LVEF of &amp;lt; 35% by CMR and/or fractional shortening of &amp;lt; 15% based on echocardiography (ECHO) during screeningA known bleeding disorder or has received anticoagulant treatment within 2 weeks of study entryAllergy to gadolinium contrast or known renal insufficiency defined as abnormal cystatin C or creatinine above the upper limit of normal for age.
+  2. The male serum reference ranges as follows:Age 7-9 years - 0.2-0.6 mg/dLAge 10-11 years - 0.3-0.7 mg/dLAge 12-13 years - 0.4-0.8 mg/dLAge 14-15 years - 0.5-0.9 mg/dLAge 16 years or older - 0.8-1.3 mg/dLNon-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD])Subjects who participated in a therapeutic clinical trial within 30 days or five half-lives (whichever is longer) of study entryAny other condition that could interfere with the subject&amp;#x27;s participation"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;15% and no heart failure admission over&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;last 12 months;
+  4. LVEF 35% or greater by cine&lt;/span&gt; cardiac magnetic resonance imaging &lt;span class=&quot;diff-del&quot;&gt;(MRI)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;echocardiography; myocardial damage in one or more left ventricular segments evident&lt;/span&gt; by &lt;span class=&quot;diff-del&quot;&gt;late&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;gadolinium&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enhancement&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;allowed;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;concurrent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;angiotensin-converting&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enzyme&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inhibitors&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ACEI),&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;beta-blocker&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(BB)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or angiotensin receptor blocker (ARB) therapy allowed (selection of which dictated by clinical care) if started three months or greater from first dose of IMP without&lt;/span&gt; change in &lt;span class=&quot;diff-del&quot;&gt;dose.
+  5. Aldosterone receptor antagonists (eg.
+  6. Spironolactone or eplerenone) allowed if started 12 months or greater from first dose&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;Investigational&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Medicinal Product (IMP).
+  7. No changes throughout&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;allowed.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Subjects aged 18 years and older, informed consent obtained directly.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; For subjects ages 7-17 years &lt;span class=&quot;diff-del&quot;&gt;old&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(yo),&lt;/span&gt; both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than &lt;span class=&quot;diff-del&quot;&gt;DMDClinically&lt;/span&gt; significant laboratory abnormality not associated with &lt;span class=&quot;diff-del&quot;&gt;DMDMajor&lt;/span&gt; surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study &lt;span class=&quot;diff-del&quot;&gt;proceduresRequire&lt;/span&gt; antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 &lt;span class=&quot;diff-del&quot;&gt;monthsA&lt;/span&gt; LVEF of &amp;lt; 35% by &lt;span class=&quot;diff-del&quot;&gt;CMR&lt;/span&gt; and/or fractional shortening of &amp;lt; 15% based on echocardiography (ECHO) during &lt;span class=&quot;diff-del&quot;&gt;screeningA&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;known&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bleeding&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disorder&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;received&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;anticoagulant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;weeks&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;entryAllergy to gadolinium contrast or known renal insufficiency defined as abnormal cystatin C or creatinine above the upper limit of normal for age.
+  2. The male serum reference ranges as follows:Age 7-9 years - 0.2-0.6 mg/dLAge 10-11 years - 0.3-0.7 mg/dLAge 12-13 years - 0.4-0.8 mg/dLAge 14-15 years - 0.5-0.9 mg/dLAge 16 years or older - 0.8-1.3 mg/dLNon-MR&lt;/span&gt; compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator &lt;span class=&quot;diff-del&quot;&gt;[AICD])Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who participated in a therapeutic clinical trial within 30 days or five half-lives (whichever is longer) of study entryAny&lt;/span&gt; other condition that could interfere with the subject&amp;#x27;s &lt;span class=&quot;diff-del&quot;&gt;participation&lt;/span&gt;"
+                 data-raw="Inclusion criteria:Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of &amp;amp;lt; 15% and no heart failure admission over the last 12 months; LVEF 35% or greater by cine cardiac magnetic resonance imaging (MRI) or echocardiography; myocardial damage in one or more left ventricular segments evident by late gadolinium enhancement allowed; concurrent angiotensin-converting enzyme inhibitors (ACEI), beta-blocker (BB) or angiotensin receptor blocker (ARB) therapy allowed (selection of which dictated by clinical care) if started three months or greater from first dose of IMP without change in dose. Aldosterone receptor antagonists (eg. Spironolactone or eplerenone) allowed if started 12 months or greater from first dose of Investigational Medicinal Product (IMP). No changes throughout the study allowed.Subjects aged 18 years and older, informed consent obtained directly. For subjects ages 7-17 years old (yo), both assent from the subject and permission from a parent or guardian.Exclusion criteria:Clinically significant illness other than DMDClinically significant laboratory abnormality not associated with DMDMajor surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study proceduresRequire antiarrhythmic therapy and&amp;amp;#x2F;or initiation of diuretic therapy for management of acute heart failure in the last 6 monthsA LVEF of &amp;amp;lt; 35% by CMR and&amp;amp;#x2F;or fractional shortening of &amp;amp;lt; 15% based on echocardiography (ECHO) during screeningA known bleeding disorder or has received anticoagulant treatment within 2 weeks of study entryAllergy to gadolinium contrast or known renal insufficiency defined as abnormal cystatin C or creatinine above the upper limit of normal for age. The male serum reference ranges as follows:Age 7-9 years - 0.2-0.6 mg&amp;amp;#x2F;dLAge 10-11 years - 0.3-0.7 mg&amp;amp;#x2F;dLAge 12-13 years - 0.4-0.8 mg&amp;amp;#x2F;dLAge 14-15 years - 0.5-0.9 mg&amp;amp;#x2F;dLAge 16 years or older - 0.8-1.3 mg&amp;amp;#x2F;dLNon-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD])Subjects who participated in a therapeutic clinical trial within 30 days or five half-lives (whichever is longer) of study entryAny other condition that could interfere with the subject&amp;amp;#x27;s participation">INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of &lt; 15% and no heart failure admission over the last 12 months;
+  4. LVEF 35% or greater by cine cardiac magnetic resonance imaging (MRI) or echocardiography; myocardial damage in one or more left ventricular segments evident by late gadolinium enhancement allowed; concurrent angiotensin-converting enzyme inhibitors (ACEI), beta-blocker (BB) or angiotensin receptor blocker (ARB) therapy allowed (selection of which dictated by clinical care) if started three months or greater from first dose of IMP without change in dose.
+  5. Aldosterone receptor antagonists (eg.
+  6. Spironolactone or eplerenone) allowed if started 12 months or greater from first dose of Investigational Medicinal Product (IMP).
+  7. No changes throughout the study allowed.
+  8. Subjects aged 18 years and older, informed consent obtained directly.
+  9. For subjects ages 7-17 years old (yo), both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than DMDClinically significant laboratory abnormality not associated with DMDMajor surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study proceduresRequire antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 monthsA LVEF of &lt; 35% by CMR and/or fractional shortening of &lt; 15% based on echocardiography (ECHO) during screeningA known bleeding disorder or has received anticoagulant treatment within 2 weeks of study entryAllergy to gadolinium contrast or known renal insufficiency defined as abnormal cystatin C or creatinine above the upper limit of normal for age.
+  2. The male serum reference ranges as follows:Age 7-9 years - 0.2-0.6 mg/dLAge 10-11 years - 0.3-0.7 mg/dLAge 12-13 years - 0.4-0.8 mg/dLAge 14-15 years - 0.5-0.9 mg/dLAge 16 years or older - 0.8-1.3 mg/dLNon-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD])Subjects who participated in a therapeutic clinical trial within 30 days or five half-lives (whichever is longer) of study entryAny other condition that could interfere with the subject&#x27;s participation</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of 5% following the baseline cardiac magnetic resonance imaging (CMR) as measured by a subsequent CMR at the same center.
+  4. Stable cardiac function defined as change in LVEF of 5% following the baseline echocardiography (Echo) as measured by a subsequent Echo at the same center.
+  5. Subjects aged 18 years and older, informed consent obtained directly.
+  6. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian.
+  7. AAV-based gene therapy permitted if ≥ 2 years from AAV administration and subject has documented cardiac decline defined as &amp;gt;5% decline in LVEF over a 2-year period following AAV administration using consecutive CMRs or echocardiographies performed at the same center (must still meet inclusion criterion #3).
+  8. No changes throughout the study allowed.
+  9. Use of contraceptives for sexually active males throughout the study.
+  10. Subjects aged 18 years and older, informed consent obtained directly.
+  11. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than DMD.
+  2. Clinically significant laboratory abnormality not associated with DMD.
+  3. Major surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study procedures.
+  4. Require antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 months.
+  5. A LVEF of 5% following the baseline CMR as measured by a subsequent CMR at the same center.
+  6. Should this occur, changes in cardiac medications are allowed on the study.
+  7. A LVEF of &amp;lt; 35% by cine cardiac magnetic resonance imaging (CMR) and/or fractional shortening of &amp;lt; 15% based on echocardiography (ECHO) during screening.
+  8. Concurrent use of nitrates, alpha-adrenergic receptor blockers, or phosphodiesterase inhibitors.
+  9. Aldosterone receptor antagonists (e.g. spironolactone or eplerenone) allowed if started 12 months or greater from first dose of IMP.
+  10. Non-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD]).
+  11. Any other condition that could interfere with the subject&amp;#x27;s participation."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of &lt;span class=&quot;diff-add&quot;&gt;5%&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;following&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;baseline&lt;/span&gt; cardiac magnetic resonance imaging &lt;span class=&quot;diff-add&quot;&gt;(CMR)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;measured&lt;/span&gt; by &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;subsequent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CMR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;same&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;center.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Stable&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;cardiac&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;as&lt;/span&gt; change in &lt;span class=&quot;diff-add&quot;&gt;LVEF&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;5%&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;following&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;baseline&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;echocardiography (Echo) as measured by a subsequent Echo at the same center.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Subjects aged 18 years and older, informed consent obtained directly.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; For subjects ages 7-17 &lt;span class=&quot;diff-add&quot;&gt;years, both assent from the subject and permission from a parent or guardian.
+  7. AAV-based gene therapy permitted if ≥ 2 &lt;/span&gt;years &lt;span class=&quot;diff-add&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;AAV administration and subject has documented cardiac decline defined as &amp;gt;5% decline in LVEF over a 2-year period following AAV administration using consecutive CMRs or echocardiographies performed at the same center (must still meet inclusion criterion #3).
+  8. No changes throughout the study allowed.
+  9. Use of contraceptives for sexually active males throughout the study.
+  10. Subjects aged 18 years and older, informed consent obtained directly.
+  11. For subjects ages 7-17 years,&lt;/span&gt; both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than &lt;span class=&quot;diff-add&quot;&gt;DMD.
+  2. Clinically&lt;/span&gt; significant laboratory abnormality not associated with &lt;span class=&quot;diff-add&quot;&gt;DMD.
+  3. Major&lt;/span&gt; surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study &lt;span class=&quot;diff-add&quot;&gt;procedures.
+  4. Require&lt;/span&gt; antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 &lt;span class=&quot;diff-add&quot;&gt;months.
+  5. A LVEF of 5% following the baseline CMR as measured by a subsequent CMR at the same center.
+  6. Should this occur, changes in cardiac medications are allowed on the study.
+  7. A&lt;/span&gt; LVEF of &amp;lt; 35% by &lt;span class=&quot;diff-add&quot;&gt;cine cardiac magnetic resonance imaging (CMR)&lt;/span&gt; and/or fractional shortening of &amp;lt; 15% based on echocardiography (ECHO) during &lt;span class=&quot;diff-add&quot;&gt;screening.
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Concurrent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of nitrates, alpha-adrenergic receptor blockers,&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;phosphodiesterase&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inhibitors.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Aldosterone&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;receptor&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;antagonists&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(e.g.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;spironolactone or eplerenone) allowed if started 12 months or greater from first dose&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;IMP.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Non-MR&lt;/span&gt; compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator &lt;span class=&quot;diff-add&quot;&gt;[AICD]).
+  11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Any&lt;/span&gt; other condition that could interfere with the subject&amp;#x27;s &lt;span class=&quot;diff-add&quot;&gt;participation.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria: Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of 5% following the baseline cardiac magnetic resonance imaging (CMR) as measured by a subsequent CMR at the same center. Stable cardiac function defined as change in LVEF of 5% following the baseline echocardiography (Echo) as measured by a subsequent Echo at the same center. Subjects aged 18 years and older, informed consent obtained directly. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian. AAV-based gene therapy permitted if ≥ 2 years from AAV administration and subject has documented cardiac decline defined as &amp;gt;5% decline in LVEF over a 2-year period following AAV administration using consecutive CMRs or echocardiographies performed at the same center (must still meet inclusion criterion #3). No changes throughout the study allowed. Use of contraceptives for sexually active males throughout the study. Subjects aged 18 years and older, informed consent obtained directly. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian. Exclusion Criteria: Clinically significant illness other than DMD. Clinically significant laboratory abnormality not associated with DMD. Major surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study procedures. Require antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 months. A LVEF of 5% following the baseline CMR as measured by a subsequent CMR at the same center. Should this occur, changes in cardiac medications are allowed on the study. A LVEF of &amp;lt; 35% by cine cardiac magnetic resonance imaging (CMR) and/or fractional shortening of &amp;lt; 15% based on echocardiography (ECHO) during screening. Concurrent use of nitrates, alpha-adrenergic receptor blockers, or phosphodiesterase inhibitors. Aldosterone receptor antagonists (e.g. spironolactone or eplerenone) allowed if started 12 months or greater from first dose of IMP. Non-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD]). Any other condition that could interfere with the subject&amp;#x27;s participation.">INCLUSION CRITERIA
+
+  1. Males 7 years of age and older with the diagnosis of DMD, defined as phenotype consistent with DMD and either positive genotype, first degree relative with positive genotype, or confirmatory muscle biopsy.
+  2. Stable dose of oral corticosteroids for at least 8 weeks or has not received corticosteroids for at least 30 days.
+  3. Stable cardiac function defined as change in left ventricular ejection fraction (LVEF) of 5% following the baseline cardiac magnetic resonance imaging (CMR) as measured by a subsequent CMR at the same center.
+  4. Stable cardiac function defined as change in LVEF of 5% following the baseline echocardiography (Echo) as measured by a subsequent Echo at the same center.
+  5. Subjects aged 18 years and older, informed consent obtained directly.
+  6. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian.
+  7. AAV-based gene therapy permitted if ≥ 2 years from AAV administration and subject has documented cardiac decline defined as &gt;5% decline in LVEF over a 2-year period following AAV administration using consecutive CMRs or echocardiographies performed at the same center (must still meet inclusion criterion #3).
+  8. No changes throughout the study allowed.
+  9. Use of contraceptives for sexually active males throughout the study.
+  10. Subjects aged 18 years and older, informed consent obtained directly.
+  11. For subjects ages 7-17 years, both assent from the subject and permission from a parent or guardian.
+
+EXCLUSION CRITERIA
+
+  1. Clinically significant illness other than DMD.
+  2. Clinically significant laboratory abnormality not associated with DMD.
+  3. Major surgery within six weeks prior to the first dose of study drug, or planned surgery during this study which would interfere with the ability to perform study procedures.
+  4. Require antiarrhythmic therapy and/or initiation of diuretic therapy for management of acute heart failure in the last 6 months.
+  5. A LVEF of 5% following the baseline CMR as measured by a subsequent CMR at the same center.
+  6. Should this occur, changes in cardiac medications are allowed on the study.
+  7. A LVEF of &lt; 35% by cine cardiac magnetic resonance imaging (CMR) and/or fractional shortening of &lt; 15% based on echocardiography (ECHO) during screening.
+  8. Concurrent use of nitrates, alpha-adrenergic receptor blockers, or phosphodiesterase inhibitors.
+  9. Aldosterone receptor antagonists (e.g. spironolactone or eplerenone) allowed if started 12 months or greater from first dose of IMP.
+  10. Non-MR compatible implants (e.g. neurostimulator, automatic implantable cardioverter-defibrillator [AICD]).
+  11. Any other condition that could interfere with the subject&#x27;s participation.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

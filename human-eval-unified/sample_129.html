@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 129</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 129</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast carcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If participant has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: participant has measurable disease outside CNS; participant does not have metastases to midbrain, pons, medulla or spinal cord; participant is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); participant has not had whole-brain radiation within 6 weeks prior to study enrollment; participant has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female participants must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the participant&amp;#x27;s participation for the full duration of the study, or is not in the best interest of the participant to participate, in the opinion of the treating Investigator, including, but not limited to: history of immune deficiencies or autoimmune disease; myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;gt; 470 msec; uncontrolled hypertension or diabetes mellitus; another known malignancy that is progressing or requires active treatment; active infection requiring systemic therapy; known active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast &lt;span class=&quot;diff-del&quot;&gt;carcinoma&lt;/span&gt; that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; has measurable disease outside CNS; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; does not have metastases to midbrain, pons, medulla or spinal cord; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; has not had whole-brain radiation within 6 weeks prior to study enrollment; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the &lt;span class=&quot;diff-del&quot;&gt;participant&amp;#x27;s&lt;/span&gt; participation for the full duration of the study, or is not in the best interest of the &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; to participate, in the opinion of the treating Investigator, including, but not limited to: &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of immune deficiencies or autoimmune disease; &lt;span class=&quot;diff-del&quot;&gt;myocardial&lt;/span&gt; infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;gt; 470 msec; &lt;span class=&quot;diff-del&quot;&gt;uncontrolled&lt;/span&gt; hypertension or diabetes mellitus; &lt;span class=&quot;diff-del&quot;&gt;another&lt;/span&gt; known malignancy that is progressing or requires active treatment; &lt;span class=&quot;diff-del&quot;&gt;active&lt;/span&gt; infection requiring systemic therapy; &lt;span class=&quot;diff-del&quot;&gt;known&lt;/span&gt; active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study."
+                 data-raw="Inclusion Criteria:Has histologically or cytologically confirmed triple negative breast carcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and&amp;amp;#x2F;or metastatic disease.If participant has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: participant has measurable disease outside CNS; participant does not have metastases to midbrain, pons, medulla or spinal cord; participant is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); participant has not had whole-brain radiation within 6 weeks prior to study enrollment; participant has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.ECOG performance status of 0 or 1.Has acceptable, applicable laboratory parameters.Female participants must not be pregnant; willing to use 2 methods of birth control&amp;amp;#x2F;abstinence if applicable through 120 days after the last dose of study drug.Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;amp;lt;1 (except alopecia or neuropathy).Able to understand and give written informed consent and comply with study procedures.Exclusion Criteria:Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.Previously treated with a PD-1&amp;amp;#x2F;PD-L1-blocking antibody or a histone deacetylase inhibitor.History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the participant&amp;amp;#x27;s participation for the full duration of the study, or is not in the best interest of the participant to participate, in the opinion of the treating Investigator, including, but not limited to: history of immune deficiencies or autoimmune disease; myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;amp;gt; 470 msec; uncontrolled hypertension or diabetes mellitus; another known malignancy that is progressing or requires active treatment; active infection requiring systemic therapy; known active central nervous system (CNS) metastases and&amp;amp;#x2F;or carcinomatous meningitis.Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.Received a live vaccine within 30 days of the first dose of treatment.Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.Currently receiving treatment with any other agent listed on the prohibited medication list.If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.Known history of human immunodeficiency virus (HIV) (HIV 1&amp;amp;#x2F;2 antibodies).Known active hepatitis B or hepatitis C.Allergy to benzamide or inactive components of entinostat.History of allergies to any active or inactive ingredients of atezolizumab.Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study.">INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast carcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If participant has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: participant has measurable disease outside CNS; participant does not have metastases to midbrain, pons, medulla or spinal cord; participant is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); participant has not had whole-brain radiation within 6 weeks prior to study enrollment; participant has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female participants must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the participant&#x27;s participation for the full duration of the study, or is not in the best interest of the participant to participate, in the opinion of the treating Investigator, including, but not limited to: history of immune deficiencies or autoimmune disease; myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &gt; 470 msec; uncontrolled hypertension or diabetes mellitus; another known malignancy that is progressing or requires active treatment; active infection requiring systemic therapy; known active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast adenocarcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If patient has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: Patient has measurable disease outside CNS; Patient does not have metastases to midbrain, pons, medulla or spinal cord; Patient is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); Patient has not had whole-brain radiation within 6 weeks prior to study enrollment; Patient has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female subjects must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the patient&amp;#x27;s participation for the full duration of the study, or is not in the best interest of the patient to participate, in the opinion of the treating Investigator, including, but not limited to: History of immune deficiencies or autoimmune disease; Myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;gt; 470 msec; Uncontrolled hypertension or diabetes mellitus; Another known malignancy that is progressing or requires active treatment; Active infection requiring systemic therapy; Known active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast &lt;span class=&quot;diff-add&quot;&gt;adenocarcinoma&lt;/span&gt; that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If &lt;span class=&quot;diff-add&quot;&gt;patient&lt;/span&gt; has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; has measurable disease outside CNS; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; does not have metastases to midbrain, pons, medulla or spinal cord; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; has not had whole-brain radiation within 6 weeks prior to study enrollment; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the &lt;span class=&quot;diff-add&quot;&gt;patient&amp;#x27;s&lt;/span&gt; participation for the full duration of the study, or is not in the best interest of the &lt;span class=&quot;diff-add&quot;&gt;patient&lt;/span&gt; to participate, in the opinion of the treating Investigator, including, but not limited to: &lt;span class=&quot;diff-add&quot;&gt;History&lt;/span&gt; of immune deficiencies or autoimmune disease; &lt;span class=&quot;diff-add&quot;&gt;Myocardial&lt;/span&gt; infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;gt; 470 msec; &lt;span class=&quot;diff-add&quot;&gt;Uncontrolled&lt;/span&gt; hypertension or diabetes mellitus; &lt;span class=&quot;diff-add&quot;&gt;Another&lt;/span&gt; known malignancy that is progressing or requires active treatment; &lt;span class=&quot;diff-add&quot;&gt;Active&lt;/span&gt; infection requiring systemic therapy; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study."
+                 data-raw="Inclusion Criteria:
+- Has histologically or cytologically confirmed triple negative breast adenocarcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+- Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+- Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+- If patient has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: Patient has measurable disease outside CNS; Patient does not have metastases to midbrain, pons, medulla or spinal cord; Patient is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); Patient has not had whole-brain radiation within 6 weeks prior to study enrollment; Patient has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+- ECOG performance status of 0 or 1.
+- Has acceptable, applicable laboratory parameters.
+- Female subjects must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+- Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &amp;lt;1 (except alopecia or neuropathy).
+- Able to understand and give written informed consent and comply with study procedures.
+
+Exclusion Criteria:
+- Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+- Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+- Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+- History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the patient&amp;#x27;s participation for the full duration of the study, or is not in the best interest of the patient to participate, in the opinion of the treating Investigator, including, but not limited to: History of immune deficiencies or autoimmune disease; Myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &amp;gt; 470 msec; Uncontrolled hypertension or diabetes mellitus; Another known malignancy that is progressing or requires active treatment; Active infection requiring systemic therapy; Known active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+- Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+- Received a live vaccine within 30 days of the first dose of treatment.
+- Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+- Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+- Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+- Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+- Currently receiving treatment with any other agent listed on the prohibited medication list.
+- If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+- Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+- Known active hepatitis B or hepatitis C.
+- Allergy to benzamide or inactive components of entinostat.
+- History of allergies to any active or inactive ingredients of atezolizumab.
+- Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study.">INCLUSION CRITERIA
+
+  1. Has histologically or cytologically confirmed triple negative breast adenocarcinoma that is either metastatic (stage IV of the TNM classification) or locally recurrent and not amenable to local curative treatment.
+  2. Evidence of measurable, locally recurrent or metastatic disease based on imaging studies within 28 days before the first dose of study drug.
+  3. Has received at least 1, but no more than 2, prior lines of systemic therapy for locally recurrent and/or metastatic disease.
+  4. If patient has a history of treated asymptomatic CNS metastases they are eligible, provided they meet all of the following criteria: Patient has measurable disease outside CNS; Patient does not have metastases to midbrain, pons, medulla or spinal cord; Patient is not on corticosteroids as therapy for CNS disease (anticonvulsants at a stable dose are allowed); Patient has not had whole-brain radiation within 6 weeks prior to study enrollment; Patient has stable CNS disease as demonstrated by at least 4 weeks of stability between the last intervention scan and the study screening scan.
+  5. ECOG performance status of 0 or 1.
+  6. Has acceptable, applicable laboratory parameters.
+  7. Female subjects must not be pregnant; willing to use 2 methods of birth control/abstinence if applicable through 120 days after the last dose of study drug.
+  8. Experienced resolution of toxic effect(s) of the most recent prior anti-cancer therapy to Grade &lt;1 (except alopecia or neuropathy).
+  9. Able to understand and give written informed consent and comply with study procedures.
+
+EXCLUSION CRITERIA
+
+  1. Diagnosis of immunodeficiency or receiving systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to the first dose of study drug.
+  2. Active autoimmune disease including active diverticulitis, symptomatic peptic ulcer disease, colitis, or inflammatory bowel disease that has required systemic treatment in past 2 years.
+  3. Previously treated with a PD-1/PD-L1-blocking antibody or a histone deacetylase inhibitor.
+  4. History or current evidence of any condition, therapy, or laboratory abnormality that might confound the results of the study, interfere with the patient&#x27;s participation for the full duration of the study, or is not in the best interest of the patient to participate, in the opinion of the treating Investigator, including, but not limited to: History of immune deficiencies or autoimmune disease; Myocardial infarction or arterial thromboembolic events within 6 months prior to screening or severe or unstable angina, New York Heart Association (NYHA) Class III or IV disease, or a QTc interval &gt; 470 msec; Uncontrolled hypertension or diabetes mellitus; Another known malignancy that is progressing or requires active treatment; Active infection requiring systemic therapy; Known active central nervous system (CNS) metastases and/or carcinomatous meningitis.
+  5. Any contraindication to oral agents or significant nausea and vomiting, malabsorption, or significant small bowel resection that, in the opinion of the investigator, would preclude adequate absorption.
+  6. Received a live vaccine within 30 days of the first dose of treatment.
+  7. Prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to enrollment or who has not recovered from AEs due to mAb agents administered more than 4 weeks earlier.
+  8. Prior chemotherapy within 3 weeks, targeted small molecule therapy or radiation therapy within 2 weeks prior to enrollment, or who has not recovered (i.e., ≤Grade 1 at enrollment) from AEs due to a previously administered agent.
+  9. Received transfusion of blood products or administration of colony stimulating factors within 4 weeks prior to the first dose of treatment.
+  10. Currently participating and receiving study therapy or has participated in a study of an investigational agent and received study therapy or used an investigational device within 4 weeks of the first dose of study drug.
+  11. Currently receiving treatment with any other agent listed on the prohibited medication list.
+  12. If female, is pregnant, breastfeeding, or expecting to conceive starting with the screening visit through 120 days after the last dose of study drug.
+  13. Known history of human immunodeficiency virus (HIV) (HIV 1/2 antibodies).
+  14. Known active hepatitis B or hepatitis C.
+  15. Allergy to benzamide or inactive components of entinostat.
+  16. History of allergies to any active or inactive ingredients of atezolizumab.
+  17. Known psychiatric or substance abuse disorders that would interfere with cooperation with the requirements of the study.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

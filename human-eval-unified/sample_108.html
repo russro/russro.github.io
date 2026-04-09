@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 108</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 108</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Part 1:Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;gt;1% by IHCNo previous treatment with check-point inhibitor.
+  2. Or patients with checkpoint inhibitor based treatment as last therapy before entering the trial.
+  3. Documented disease progression or relapse (based on investigator&amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first line treatment of Stage IIIB/IV NSCLC.
+  4. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or chemoradiotherapyAt least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  5. Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2)Part 1 &amp;amp; Part 2:Of full age (according to local legislation, usually &amp;gt;= 18 years) at screening.
+  6. Eastern Cooperative Oncology Group (ECOG) performance status &amp;lt;= 1Life expectancy &amp;gt;= 3 months after start of the treatment in the opinion of the investigatorRecovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy , must be &amp;lt;= CTCAE grade 2 or considered not clinically significant.
+  7. Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trialAdequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation)Male or female patients.
+  8. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively.
+  9. A list of contraception methods meeting these criteria is provided in the patient information.
+  10. Further
+
+INCLUSION CRITERIA
+
+  1. apply
+
+EXCLUSION CRITERIA
+
+  1. Part 1:- Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  2. Part 1 &amp;amp; Part 2:Known hypersensitivity to the trial drugs or their excipients or risk of allergic of anaphylactic reaction to drug product according to Investigator judgement (e.g. patient with history of anaphylactic reaction or autoimmune disease that is not controlled by nonsteroidal anti-inflammatory drugs (NSAIDs), inhaled corticosteroids, or the equivalent of &amp;lt;/= 10 mg/day prednisone).
+  3. History of severe hypersensitivity reactions to other mAbs.
+  4. Immunosuppressive corticosteroid doses (&amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&amp;gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases (i.e. uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;gt; NYHA II).
+  10. Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition &amp;gt;= 140 mmHg, systolic or &amp;gt;= 90 mmHg diastolic (with or without medication)Left Ventricular Ejection Fraction (LVEF) &amp;lt; 50%History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  11. Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  12. Patient with brain metastases that are symptomatic and/or require therapy.
+  13. Patients who require full-dose anticoagulation (according to local guidelines).
+  14. No Vitamin K antagonist and other anticoagulation allowed;
+  15. Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  16. History of pneumonitis within the last 5 yearsPatients who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with protocolPrevious enrolment in this trial (Part 1 or Part 2).
+  18. Chronic alcohol or drug abuse or any condition that, in the investigator&amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  19. Women who are pregnant, nursing, or who plan to become pregnant in the trialFurther
+
+EXCLUSION CRITERIA
+
+  1. apply"
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Part&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1:Pathologically&lt;/span&gt; confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;gt;1% by &lt;span class=&quot;diff-del&quot;&gt;IHCNo&lt;/span&gt; previous treatment with &lt;span class=&quot;diff-del&quot;&gt;check-point&lt;/span&gt; inhibitor.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; Or patients with checkpoint &lt;span class=&quot;diff-del&quot;&gt;inhibitor based&lt;/span&gt; treatment as last therapy before entering the trial.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Documented disease progression or relapse (based on investigator&amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as &lt;span class=&quot;diff-del&quot;&gt;first line&lt;/span&gt; treatment of Stage IIIB/IV NSCLC.&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or &lt;span class=&quot;diff-del&quot;&gt;chemoradiotherapyAt&lt;/span&gt; least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part &lt;span class=&quot;diff-del&quot;&gt;2)Part 1 &amp;amp; Part 2:Of full age (according to local legislation, usually &amp;gt;= 18 years) at screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) performance status &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1Life&lt;/span&gt; expectancy &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 3 months after start of the treatment in the opinion of the &lt;span class=&quot;diff-del&quot;&gt;investigatorRecovery&lt;/span&gt; from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral &lt;span class=&quot;diff-del&quot;&gt;neuropathy ,&lt;/span&gt; must be &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;=&lt;/span&gt; CTCAE grade 2 or considered not clinically significant.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the &lt;span class=&quot;diff-del&quot;&gt;trialAdequate&lt;/span&gt; organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment &lt;span class=&quot;diff-del&quot;&gt;initiation)Male&lt;/span&gt; or female patients.&lt;span class=&quot;diff-del&quot;&gt;
+  8.&lt;/span&gt; Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively.&lt;span class=&quot;diff-del&quot;&gt;
+  9.&lt;/span&gt; A list of contraception methods meeting these criteria is provided in the patient information.&lt;span class=&quot;diff-del&quot;&gt;
+  10. Further
+
+INCLUSION CRITERIA
+
+  1. apply&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Part&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1:-&lt;/span&gt; Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  &lt;span class=&quot;diff-del&quot;&gt;2. Part 1 &amp;amp; Part 2:Known hypersensitivity to the trial drugs or their excipients or risk of allergic of anaphylactic reaction to drug product according to Investigator judgement (e.g. patient with history of anaphylactic reaction or autoimmune disease that is not controlled by nonsteroidal anti-inflammatory drugs (NSAIDs), inhaled corticosteroids, or the equivalent of &amp;lt;/= 10 mg/day prednisone).
+  &lt;/span&gt;3. History of severe hypersensitivity reactions to other &lt;span class=&quot;diff-del&quot;&gt;mAbs.&lt;/span&gt;
+  4. Immunosuppressive corticosteroid doses (&amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is &lt;span class=&quot;diff-del&quot;&gt;shorter&lt;/span&gt; before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&amp;gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases &lt;span class=&quot;diff-del&quot;&gt;(i.e.&lt;/span&gt; uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;gt; NYHA II).&lt;span class=&quot;diff-del&quot;&gt;
+  10.&lt;/span&gt; Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 140 mmHg, systolic or &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=&lt;/span&gt; 90 mmHg diastolic (with or without &lt;span class=&quot;diff-del&quot;&gt;medication)Left&lt;/span&gt; Ventricular Ejection Fraction (LVEF) &amp;lt; &lt;span class=&quot;diff-del&quot;&gt;50%History&lt;/span&gt; of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Patient with brain metastases that are symptomatic and/or require therapy.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Patients who require full-dose anticoagulation (according to local guidelines).&lt;span class=&quot;diff-del&quot;&gt;
+  14.&lt;/span&gt; No Vitamin K antagonist and other anticoagulation allowed;&lt;span class=&quot;diff-del&quot;&gt;
+  15.&lt;/span&gt; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; History of pneumonitis within the last 5 &lt;span class=&quot;diff-del&quot;&gt;yearsPatients&lt;/span&gt; who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with &lt;span class=&quot;diff-del&quot;&gt;protocolPrevious&lt;/span&gt; enrolment in this trial (Part 1 or Part 2).
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; Chronic alcohol or drug abuse or any condition that, in the investigator&amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; Women who are pregnant, nursing, or who plan to become pregnant &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;trialFurther
+
+EXCLUSION CRITERIA
+
+  1. apply&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Part 1:Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;amp;gt;1% by IHCNo previous treatment with check-point inhibitor. Or patients with checkpoint inhibitor based treatment as last therapy before entering the trial.Documented disease progression or relapse (based on investigator&amp;amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first line treatment of Stage IIIB&amp;amp;#x2F;IV NSCLC. This includes patients relapsing within 6 months of completing (neo)adjuvant&amp;amp;#x2F;curative-intent chemotherapy or chemoradiotherapyAt least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2)Part 1 &amp;amp;amp; Part 2:Of full age (according to local legislation, usually &amp;amp;gt;= 18 years) at screening.Eastern Cooperative Oncology Group (ECOG) performance status &amp;amp;lt;= 1Life expectancy &amp;amp;gt;= 3 months after start of the treatment in the opinion of the investigatorRecovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy , must be &amp;amp;lt;= CTCAE grade 2 or considered not clinically significant.Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trialAdequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation)Male or female patients. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively. A list of contraception methods meeting these criteria is provided in the patient information.Further inclusion criteria applyExclusion criteria:Part 1:- Known immunodeficiency virus infection or an active hepatitis B or C virus infection.Part 1 &amp;amp;amp; Part 2:Known hypersensitivity to the trial drugs or their excipients or risk of allergic of anaphylactic reaction to drug product according to Investigator judgement (e.g. patient with history of anaphylactic reaction or autoimmune disease that is not controlled by nonsteroidal anti-inflammatory drugs (NSAIDs), inhaled corticosteroids, or the equivalent of &amp;amp;lt;&amp;amp;#x2F;= 10 mg&amp;amp;#x2F;day prednisone).History of severe hypersensitivity reactions to other mAbs.Immunosuppressive corticosteroid doses (&amp;amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter before start of treatment.Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.Major injuries and&amp;amp;#x2F;or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.Patients with personal or family history of QT prolongation and&amp;amp;#x2F;or long QT syndrome, or prolonged QTcF at baseline (&amp;amp;gt; 480 ms).Significant cardiovascular&amp;amp;#x2F;cerebrovascular diseases (i.e. uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;amp;gt; NYHA II). Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition &amp;amp;gt;= 140 mmHg, systolic or &amp;amp;gt;= 90 mmHg diastolic (with or without medication)Left Ventricular Ejection Fraction (LVEF) &amp;amp;lt; 50%History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.Patient with brain metastases that are symptomatic and&amp;amp;#x2F;or require therapy.Patients who require full-dose anticoagulation (according to local guidelines). No Vitamin K antagonist and other anticoagulation allowed; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.History of pneumonitis within the last 5 yearsPatients who are under judicial protection and patients who are legally institutionalized.Patients unable or unwilling to comply with protocolPrevious enrolment in this trial (Part 1 or Part 2).Chronic alcohol or drug abuse or any condition that, in the investigator&amp;amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.Women who are pregnant, nursing, or who plan to become pregnant in the trialFurther exclusion criteria apply">INCLUSION CRITERIA
+
+  1. Part 1:Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &gt;1% by IHCNo previous treatment with check-point inhibitor.
+  2. Or patients with checkpoint inhibitor based treatment as last therapy before entering the trial.
+  3. Documented disease progression or relapse (based on investigator&#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first line treatment of Stage IIIB/IV NSCLC.
+  4. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or chemoradiotherapyAt least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  5. Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2)Part 1 &amp; Part 2:Of full age (according to local legislation, usually &gt;= 18 years) at screening.
+  6. Eastern Cooperative Oncology Group (ECOG) performance status &lt;= 1Life expectancy &gt;= 3 months after start of the treatment in the opinion of the investigatorRecovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy , must be &lt;= CTCAE grade 2 or considered not clinically significant.
+  7. Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trialAdequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation)Male or female patients.
+  8. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively.
+  9. A list of contraception methods meeting these criteria is provided in the patient information.
+  10. Further
+
+INCLUSION CRITERIA
+
+  1. apply
+
+EXCLUSION CRITERIA
+
+  1. Part 1:- Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  2. Part 1 &amp; Part 2:Known hypersensitivity to the trial drugs or their excipients or risk of allergic of anaphylactic reaction to drug product according to Investigator judgement (e.g. patient with history of anaphylactic reaction or autoimmune disease that is not controlled by nonsteroidal anti-inflammatory drugs (NSAIDs), inhaled corticosteroids, or the equivalent of &lt;/= 10 mg/day prednisone).
+  3. History of severe hypersensitivity reactions to other mAbs.
+  4. Immunosuppressive corticosteroid doses (&gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases (i.e. uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &gt; NYHA II).
+  10. Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition &gt;= 140 mmHg, systolic or &gt;= 90 mmHg diastolic (with or without medication)Left Ventricular Ejection Fraction (LVEF) &lt; 50%History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  11. Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  12. Patient with brain metastases that are symptomatic and/or require therapy.
+  13. Patients who require full-dose anticoagulation (according to local guidelines).
+  14. No Vitamin K antagonist and other anticoagulation allowed;
+  15. Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  16. History of pneumonitis within the last 5 yearsPatients who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with protocolPrevious enrolment in this trial (Part 1 or Part 2).
+  18. Chronic alcohol or drug abuse or any condition that, in the investigator&#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  19. Women who are pregnant, nursing, or who plan to become pregnant in the trialFurther
+
+EXCLUSION CRITERIA
+
+  1. apply</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 24):
+
+INCLUSION CRITERIA
+
+  1. Of full age (according to local legislation, usually ≥ 18 years) at screening.
+  2. Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;gt;1% by IHC.
+  3. No previous treatment with checkpoint inhibitor. Or patients with checkpoint inhibitor-based treatment as last therapy before entering the trial.
+  4. Documented disease progression or relapse (based on investigator&amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first-line treatment of Stage IIIB/IV NSCLC. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or chemoradiotherapy.
+  5. At least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  6. Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2).
+  7. Eastern Cooperative Oncology Group (ECOG) performance status ≤ 1.
+  8. Life expectancy ≥ 3 months after start of the treatment in the opinion of the investigator.
+  9. Recovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy, must be ≤ CTCAE grade 2 or considered not clinically significant.
+  10. Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trial.
+  11. Adequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation):
+  12. Hematological: Absolute neutrophil count (ANC) ≥1.5 x 10^9/L, Platelets ≥75 x 10^9/L, Hemoglobin ≥9.0 g/dL or ≥5.6 mmol/L.
+  13. Renal: Creatinine OR Measured or calculated creatinine clearance (Glomerular Filtration Rate (GFR) can also be used in place of creatinine or CrCl) ≤ 1.5 x ULN OR ≥50 mL/min for patients with creatinine levels &amp;gt;1.5x ULN.
+  14. Hepatic: Total bilirubin ≤1.5 times the upper limit of normal (ULN), AST (SGOT) and ALT (SGPT) ≤2.5 x ULN OR ≤5 x ULN for patients with liver metastases.
+  15. Coagulation: International Normalised Ratio (INR) or Prothrombin Time (PT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PT is within therapeutic range of intended use of anticoagulants, Activated Partial Thromboplastin Time (aPTT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PTT is within therapeutic range of intended use of anticoagulants.
+  16. Male or female patients. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively. A list of contraception methods meeting these criteria is provided in the patient information.
+
+EXCLUSION CRITERIA
+
+  1. Known hypersensitivity to the trial drugs or their excipients or risk of allergic or anaphylactic reaction to drug product according to Investigator judgement.
+  2. Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  3. History of severe hypersensitivity reactions to other monoclonal antibodies.
+  4. Immunosuppressive corticosteroid doses (&amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter, before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&amp;gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases (i.e., uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;gt; NYHA II). Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition ≥ 140 mmHg, systolic or ≥ 90 mmHg diastolic (with or without medication), measured according to Appendix 10.2.
+  10. Left Ventricular Ejection Fraction (LVEF) &amp;lt; 50%.
+  11. History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  12. Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  13. Patient with brain metastases that are symptomatic and/or require therapy.
+  14. Patients who require full-dose anticoagulation (according to local guidelines). No Vitamin K antagonist and other anticoagulation allowed; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  15. History of pneumonitis within the last 5 years.
+  16. Patients who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with protocol.
+  18. Previous enrolment in this trial (Part 1 or Part 2).
+  19. Chronic alcohol or drug abuse or any condition that, in the investigator&amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  20. Women who are pregnant, nursing, or who plan to become pregnant during the trial."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 24):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;full age (according to local legislation, usually ≥ 18 years) at screening.
+  2. Pathologically&lt;/span&gt; confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;gt;1% by &lt;span class=&quot;diff-add&quot;&gt;IHC.
+  3. No&lt;/span&gt; previous treatment with &lt;span class=&quot;diff-add&quot;&gt;checkpoint&lt;/span&gt; inhibitor. Or patients with checkpoint &lt;span class=&quot;diff-add&quot;&gt;inhibitor-based&lt;/span&gt; treatment as last therapy before entering the trial.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Documented disease progression or relapse (based on investigator&amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as &lt;span class=&quot;diff-add&quot;&gt;first-line&lt;/span&gt; treatment of Stage IIIB/IV NSCLC. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or &lt;span class=&quot;diff-add&quot;&gt;chemoradiotherapy.
+  5. At&lt;/span&gt; least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part &lt;span class=&quot;diff-add&quot;&gt;2).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) performance status &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1.
+  8. Life&lt;/span&gt; expectancy &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 3 months after start of the treatment in the opinion of the &lt;span class=&quot;diff-add&quot;&gt;investigator.
+  9. Recovery&lt;/span&gt; from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral &lt;span class=&quot;diff-add&quot;&gt;neuropathy,&lt;/span&gt; must be &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; CTCAE grade 2 or considered not clinically significant.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the &lt;span class=&quot;diff-add&quot;&gt;trial.
+  11. Adequate&lt;/span&gt; organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment &lt;span class=&quot;diff-add&quot;&gt;initiation):
+  12. Hematological: Absolute neutrophil count (ANC) ≥1.5 x 10^9/L, Platelets ≥75 x 10^9/L, Hemoglobin ≥9.0 g/dL or ≥5.6 mmol/L.
+  13. Renal: Creatinine OR Measured or calculated creatinine clearance (Glomerular Filtration Rate (GFR) can also be used in place of creatinine or CrCl) ≤ 1.5 x ULN OR ≥50 mL/min for patients with creatinine levels &amp;gt;1.5x ULN.
+  14. Hepatic: Total bilirubin ≤1.5 times the upper limit of normal (ULN), AST (SGOT) and ALT (SGPT) ≤2.5 x ULN OR ≤5 x ULN for patients with liver metastases.
+  15. Coagulation: International Normalised Ratio (INR) or Prothrombin Time (PT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PT is within therapeutic range of intended use of anticoagulants, Activated Partial Thromboplastin Time (aPTT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PTT is within therapeutic range of intended use of anticoagulants.
+  16. Male&lt;/span&gt; or female patients. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively. A list of contraception methods meeting these criteria is provided in the patient information.
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;hypersensitivity to the trial drugs or their excipients or risk of allergic or anaphylactic reaction to drug product according to Investigator judgement.
+  2.&lt;/span&gt; Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  3. History of severe hypersensitivity reactions to other &lt;span class=&quot;diff-add&quot;&gt;monoclonal antibodies.&lt;/span&gt;
+  4. Immunosuppressive corticosteroid doses (&amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is &lt;span class=&quot;diff-add&quot;&gt;shorter,&lt;/span&gt; before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&amp;gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases &lt;span class=&quot;diff-add&quot;&gt;(i.e.,&lt;/span&gt; uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;gt; NYHA II). Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 140 mmHg, systolic or &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 90 mmHg diastolic (with or without &lt;span class=&quot;diff-add&quot;&gt;medication), measured according to Appendix 10.2.
+  10. Left&lt;/span&gt; Ventricular Ejection Fraction (LVEF) &amp;lt; &lt;span class=&quot;diff-add&quot;&gt;50%.
+  11. History&lt;/span&gt; of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Patient with brain metastases that are symptomatic and/or require therapy.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Patients who require full-dose anticoagulation (according to local guidelines). No Vitamin K antagonist and other anticoagulation allowed; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; History of pneumonitis within the last 5 &lt;span class=&quot;diff-add&quot;&gt;years.
+  16. Patients&lt;/span&gt; who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with &lt;span class=&quot;diff-add&quot;&gt;protocol.
+  18. Previous&lt;/span&gt; enrolment in this trial (Part 1 or Part 2).
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Chronic alcohol or drug abuse or any condition that, in the investigator&amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Women who are pregnant, nursing, or who plan to become pregnant &lt;span class=&quot;diff-add&quot;&gt;during&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;trial.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (Version 24):
+
+**Inclusion Criteria:**
+1. Of full age (according to local legislation, usually ≥ 18 years) at screening.
+2. Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &amp;gt;1% by IHC.
+3. No previous treatment with checkpoint inhibitor. Or patients with checkpoint inhibitor-based treatment as last therapy before entering the trial.
+4. Documented disease progression or relapse (based on investigator&amp;#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first-line treatment of Stage IIIB/IV NSCLC. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or chemoradiotherapy.
+5. At least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+6. Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2).
+7. Eastern Cooperative Oncology Group (ECOG) performance status ≤ 1.
+8. Life expectancy ≥ 3 months after start of the treatment in the opinion of the investigator.
+9. Recovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy, must be ≤ CTCAE grade 2 or considered not clinically significant.
+10. Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trial.
+11. Adequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation):
+   - Hematological: Absolute neutrophil count (ANC) ≥1.5 x 10^9/L, Platelets ≥75 x 10^9/L, Hemoglobin ≥9.0 g/dL or ≥5.6 mmol/L.
+   - Renal: Creatinine OR Measured or calculated creatinine clearance (Glomerular Filtration Rate (GFR) can also be used in place of creatinine or CrCl) ≤ 1.5 x ULN OR ≥50 mL/min for patients with creatinine levels &amp;gt;1.5x ULN.
+   - Hepatic: Total bilirubin ≤1.5 times the upper limit of normal (ULN), AST (SGOT) and ALT (SGPT) ≤2.5 x ULN OR ≤5 x ULN for patients with liver metastases.
+   - Coagulation: International Normalised Ratio (INR) or Prothrombin Time (PT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PT is within therapeutic range of intended use of anticoagulants, Activated Partial Thromboplastin Time (aPTT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PTT is within therapeutic range of intended use of anticoagulants.
+12. Male or female patients. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively. A list of contraception methods meeting these criteria is provided in the patient information.
+
+**Exclusion Criteria:**
+1. Known hypersensitivity to the trial drugs or their excipients or risk of allergic or anaphylactic reaction to drug product according to Investigator judgement.
+2. Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+3. History of severe hypersensitivity reactions to other monoclonal antibodies.
+4. Immunosuppressive corticosteroid doses (&amp;gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter, before start of treatment.
+6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&amp;gt; 480 ms).
+9. Significant cardiovascular/cerebrovascular diseases (i.e., uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &amp;gt; NYHA II). Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition ≥ 140 mmHg, systolic or ≥ 90 mmHg diastolic (with or without medication), measured according to Appendix 10.2.
+10. Left Ventricular Ejection Fraction (LVEF) &amp;lt; 50%.
+11. History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+12. Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+13. Patient with brain metastases that are symptomatic and/or require therapy.
+14. Patients who require full-dose anticoagulation (according to local guidelines). No Vitamin K antagonist and other anticoagulation allowed; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+15. History of pneumonitis within the last 5 years.
+16. Patients who are under judicial protection and patients who are legally institutionalized.
+17. Patients unable or unwilling to comply with protocol.
+18. Previous enrolment in this trial (Part 1 or Part 2).
+19. Chronic alcohol or drug abuse or any condition that, in the investigator&amp;#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+20. Women who are pregnant, nursing, or who plan to become pregnant during the trial.">Amended Eligibility Criteria (Version 24):
+
+INCLUSION CRITERIA
+
+  1. Of full age (according to local legislation, usually ≥ 18 years) at screening.
+  2. Pathologically confirmed locally advanced or metastatic non-squamous Non-Small Cell Lung Cancer (NSCLC) with Programmed death-ligand 1 (PDL-1) expression available and &gt;1% by IHC.
+  3. No previous treatment with checkpoint inhibitor. Or patients with checkpoint inhibitor-based treatment as last therapy before entering the trial.
+  4. Documented disease progression or relapse (based on investigator&#x27;s assessment) during or after completion of at least 2 cycles of platinum-based chemotherapy as first-line treatment of Stage IIIB/IV NSCLC. This includes patients relapsing within 6 months of completing (neo)adjuvant/curative-intent chemotherapy or chemoradiotherapy.
+  5. At least one target lesion (outside the brain) that can be accurately measured per Response Evaluation Criteria in Solid Tumours (RECIST) version 1.1.
+  6. Lesion with a diameter ≥ 2cm assessed by radiologist as suitable for Dynamic Contrast-Enhanced Magnetic Resonance Imaging (DCE-MRI) evaluation (Mandatory in Part 1, optional in Part 2).
+  7. Eastern Cooperative Oncology Group (ECOG) performance status ≤ 1.
+  8. Life expectancy ≥ 3 months after start of the treatment in the opinion of the investigator.
+  9. Recovery from all reversible adverse events of previous anti-cancer therapies to baseline or Common Terminology Criteria for Adverse Events (CTCAE) grade 1, except for alopecia (any grade), sensory peripheral neuropathy, must be ≤ CTCAE grade 2 or considered not clinically significant.
+  10. Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trial.
+  11. Adequate organ function defined as all of the following (all screening labs should be performed at local lab within 10 days prior to treatment initiation):
+  12. Hematological: Absolute neutrophil count (ANC) ≥1.5 x 10^9/L, Platelets ≥75 x 10^9/L, Hemoglobin ≥9.0 g/dL or ≥5.6 mmol/L.
+  13. Renal: Creatinine OR Measured or calculated creatinine clearance (Glomerular Filtration Rate (GFR) can also be used in place of creatinine or CrCl) ≤ 1.5 x ULN OR ≥50 mL/min for patients with creatinine levels &gt;1.5x ULN.
+  14. Hepatic: Total bilirubin ≤1.5 times the upper limit of normal (ULN), AST (SGOT) and ALT (SGPT) ≤2.5 x ULN OR ≤5 x ULN for patients with liver metastases.
+  15. Coagulation: International Normalised Ratio (INR) or Prothrombin Time (PT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PT is within therapeutic range of intended use of anticoagulants, Activated Partial Thromboplastin Time (aPTT) ≤1.5xULN unless patient is receiving anticoagulant therapy as long as PTT is within therapeutic range of intended use of anticoagulants.
+  16. Male or female patients. Women of childbearing potential (WOCBP) and men able to father a child must be ready and able to use highly effective methods of birth control per ICH M3 (R2) that result in a low failure rate of less than 1% per year when used consistently and correctly, starting with the screening visit and through 150 days after the last dose of BI 836880 and BI 754091 treatment, respectively. A list of contraception methods meeting these criteria is provided in the patient information.
+
+EXCLUSION CRITERIA
+
+  1. Known hypersensitivity to the trial drugs or their excipients or risk of allergic or anaphylactic reaction to drug product according to Investigator judgement.
+  2. Known immunodeficiency virus infection or an active hepatitis B or C virus infection.
+  3. History of severe hypersensitivity reactions to other monoclonal antibodies.
+  4. Immunosuppressive corticosteroid doses (&gt; 10 mg prednisone daily or equivalent) within 4 weeks prior to the first dose of trial medication.
+  5. Current or prior treatment with any systemic anti-cancer therapy either within 28 days or a minimum of 5 half-lives, whichever is shorter, before start of treatment.
+  6. Serious concomitant disease, especially those affecting compliance with trial requirements or which are considered relevant for the evaluation of the endpoints of the trial drug, such as neurologic, psychiatric, infectious disease or active ulcers (gastrointestinal tract, skin) or laboratory abnormality that may increase the risk associated with trial participation or trial drug administration, and in the judgment of the investigator would make the patient inappropriate for entry into the trial.
+  7. Major injuries and/or surgery or bone fracture within 4 weeks of start of treatment, or planned surgical procedures during the trial period.
+  8. Patients with personal or family history of QT prolongation and/or long QT syndrome, or prolonged QTcF at baseline (&gt; 480 ms).
+  9. Significant cardiovascular/cerebrovascular diseases (i.e., uncontrolled hypertension, unstable angina, history of infarction within past 6 months, congestive heart failure &gt; NYHA II). Uncontrolled hypertension defined as: Blood pressure in rested and relaxed condition ≥ 140 mmHg, systolic or ≥ 90 mmHg diastolic (with or without medication), measured according to Appendix 10.2.
+  10. Left Ventricular Ejection Fraction (LVEF) &lt; 50%.
+  11. History of severe hemorrhagic or thromboembolic event in the past 12 months (excluding central venous catheter thrombosis and peripheral deep vein thrombosis).
+  12. Known inherited predisposition to bleeding or to thrombosis in the opinion of the investigator.
+  13. Patient with brain metastases that are symptomatic and/or require therapy.
+  14. Patients who require full-dose anticoagulation (according to local guidelines). No Vitamin K antagonist and other anticoagulation allowed; Low-Molecular-Weight Heparin (LMWH) allowed only for prevention not for curative treatment.
+  15. History of pneumonitis within the last 5 years.
+  16. Patients who are under judicial protection and patients who are legally institutionalized.
+  17. Patients unable or unwilling to comply with protocol.
+  18. Previous enrolment in this trial (Part 1 or Part 2).
+  19. Chronic alcohol or drug abuse or any condition that, in the investigator&#x27;s opinion, makes them an unreliable trial patient or unlikely to complete the trial.
+  20. Women who are pregnant, nursing, or who plan to become pregnant during the trial.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

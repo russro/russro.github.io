@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 75</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 75</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="Cohort 1 Main
+
+INCLUSION CRITERIA
+
+  1. Previously enrolled in Study SERES-012, had CDI recurrence within 8 weeks after receipt of a treatment regimen of SER-109 or placeboSigned informed consent prior to initiation of any study-specific procedure or treatment.
+  2. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.
+  3. The CDI recurrence in Study SERES-012 must have met the protocol definition of ≥ 3 unformed stools per day over 2 consecutive days, a positive C. difficile stool toxin assay, and the requirement of CDI SOC antibiotic therapy, and an adequate clinical response following antibiotic therapy (&amp;lt;3 unformed stools in 24 hours for 2 or more consecutive days).
+  4. Cohort 1 Main
+
+EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study.
+  2. Known or suspected toxic megacolon and/or known small bowel ileus.
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding).
+  4. Note: nursing homes, rehabilitation, assisted living centers and acute care hospitals are acceptable.
+  5. Absolute neutrophil count of &amp;lt;500 cells/ml^3.
+  6. Major gastrointestinal surgery (e.g. significant bowel resection or diversion) within 3 months before enrollment (this does not include appendectomy or cholecystectomy), or any history of total colectomy or bariatric surgery (bariatric surgery which does not disrupt the gastrointestinal lumen, i.e., restrictive procedures such as banding, are permitted).
+  7. History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months.
+  8. Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor).
+  9. Any history of fecal microbiota transplantation (FMT) in the past 3 months.
+  10. Cohort 2 Main
+
+INCLUSION CRITERIA
+
+  1. Subjects 18 years of age or older who had one or more CDI recurrence (as confirmed by a C. difficile stool toxin or PCR test) and have responded to a course of antibiotic treatment.
+  2. Signed informed consent prior to initiation of any study-specific procedure or treatment.
+  3. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.
+  4. Cohort 2 Main
+
+EXCLUSION CRITERIA
+
+  1. (all Cohort 1
+
+EXCLUSION CRITERIA
+
+  1. [#1-8 above] plus the below addition criterion)9.
+  2. Previously enrolled in a Seres Therapeutics clinical study.
+  3. An exception is made for subjects who screened in SERES-012 who did not receive SER-109 and did not previously roll-over to SERES-013."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;Cohort&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Main&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. Previously enrolled in Study &lt;span class=&quot;diff-del&quot;&gt;SERES-012,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; CDI recurrence within 8 weeks after receipt of &lt;span class=&quot;diff-del&quot;&gt;a treatment regimen of &lt;/span&gt;SER-109 or &lt;span class=&quot;diff-del&quot;&gt;placeboSigned&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;informed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to initiation of any study-specific procedure&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;treatment.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subject,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;their&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.&lt;/span&gt;
+  3.&lt;span class=&quot;diff-del&quot;&gt; The CDI recurrence in Study SERES-012 must have met the protocol definition of&lt;/span&gt; ≥ 3 unformed stools per day over 2 consecutive &lt;span class=&quot;diff-del&quot;&gt;days,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a positive&lt;/span&gt; C. difficile stool toxin &lt;span class=&quot;diff-del&quot;&gt;assay,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;requirement&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CDI&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;SOC&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;antibiotic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and an adequate clinical response following antibiotic therapy (&amp;lt;3 unformed stools in 24 hours for 2 or more consecutive days).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4. Cohort 1 Main
+
+&lt;/span&gt;EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the &lt;span class=&quot;diff-del&quot;&gt;study.&lt;/span&gt;
+  2. Known or suspected toxic megacolon and/or known small bowel &lt;span class=&quot;diff-del&quot;&gt;ileus.&lt;/span&gt;
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just &lt;span class=&quot;diff-del&quot;&gt;boarding).&lt;/span&gt;
+  4.&lt;span class=&quot;diff-del&quot;&gt; Note: nursing homes, rehabilitation, assisted living centers and acute care hospitals are acceptable.
+  5. Absolute neutrophil count of &amp;lt;500 cells/ml^3.
+  6. Major gastrointestinal surgery (e.g. significant bowel resection or diversion) within 3 months before enrollment (this does not include appendectomy or cholecystectomy), or any history of total colectomy or bariatric surgery (bariatric surgery which does not disrupt the gastrointestinal lumen, i.e., restrictive procedures such as banding, are permitted).
+  7.&lt;/span&gt; History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 &lt;span class=&quot;diff-del&quot;&gt;months.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical &lt;span class=&quot;diff-del&quot;&gt;monitor).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;fecal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;microbiota&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;transplantation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(FMT) in&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;past&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Cohort&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Main&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;older who had one or more&lt;/span&gt; CDI recurrence &lt;span class=&quot;diff-del&quot;&gt;(as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;confirmed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;by&lt;/span&gt; a C. difficile stool toxin or PCR &lt;span class=&quot;diff-del&quot;&gt;test)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and have responded to&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;course&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of antibiotic treatment.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Signed informed consent prior to initiation of any study-specific procedure or treatment.
+  3. &lt;/span&gt;The&lt;span class=&quot;diff-del&quot;&gt; subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.
+  4. Cohort 2 Main&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;(all&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Cohort&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;1
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;[#1-8&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;above]&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;plus&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;below&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;addition&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;criterion)9.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Previously&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enrolled&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in a Seres Therapeutics clinical study.
+  3. An exception is made for subjects who screened in SERES-012 who did not receive SER-109&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;did&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;previously roll-over to SERES-013.&lt;/span&gt;"
+                 data-raw="Cohort 1 Main Inclusion Criteria:Previously enrolled in Study SERES-012, had CDI recurrence within 8 weeks after receipt of a treatment regimen of SER-109 or placeboSigned informed consent prior to initiation of any study-specific procedure or treatment. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.The CDI recurrence in Study SERES-012 must have met the protocol definition of ≥ 3 unformed stools per day over 2 consecutive days, a positive C. difficile stool toxin assay, and the requirement of CDI SOC antibiotic therapy, and an adequate clinical response following antibiotic therapy (&amp;amp;lt;3 unformed stools in 24 hours for 2 or more consecutive days).Cohort 1 Main Exclusion Criteria:Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study.Known or suspected toxic megacolon and&amp;amp;#x2F;or known small bowel ileus.Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding). Note: nursing homes, rehabilitation, assisted living centers and acute care hospitals are acceptable.Absolute neutrophil count of &amp;amp;lt;500 cells&amp;amp;#x2F;ml^3.Major gastrointestinal surgery (e.g. significant bowel resection or diversion) within 3 months before enrollment (this does not include appendectomy or cholecystectomy), or any history of total colectomy or bariatric surgery (bariatric surgery which does not disrupt the gastrointestinal lumen, i.e., restrictive procedures such as banding, are permitted).History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months.Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor).Any history of fecal microbiota transplantation (FMT) in the past 3 months.Cohort 2 Main Inclusion Criteria:Subjects 18 years of age or older who had one or more CDI recurrence (as confirmed by a C. difficile stool toxin or PCR test) and have responded to a course of antibiotic treatment.Signed informed consent prior to initiation of any study-specific procedure or treatment. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.Cohort 2 Main Exclusion Criteria:(all Cohort 1 exclusion criteria [#1-8 above] plus the below addition criterion)9. Previously enrolled in a Seres Therapeutics clinical study. An exception is made for subjects who screened in SERES-012 who did not receive SER-109 and did not previously roll-over to SERES-013.">Cohort 1 Main
+
+INCLUSION CRITERIA
+
+  1. Previously enrolled in Study SERES-012, had CDI recurrence within 8 weeks after receipt of a treatment regimen of SER-109 or placeboSigned informed consent prior to initiation of any study-specific procedure or treatment.
+  2. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.
+  3. The CDI recurrence in Study SERES-012 must have met the protocol definition of ≥ 3 unformed stools per day over 2 consecutive days, a positive C. difficile stool toxin assay, and the requirement of CDI SOC antibiotic therapy, and an adequate clinical response following antibiotic therapy (&lt;3 unformed stools in 24 hours for 2 or more consecutive days).
+  4. Cohort 1 Main
+
+EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study.
+  2. Known or suspected toxic megacolon and/or known small bowel ileus.
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding).
+  4. Note: nursing homes, rehabilitation, assisted living centers and acute care hospitals are acceptable.
+  5. Absolute neutrophil count of &lt;500 cells/ml^3.
+  6. Major gastrointestinal surgery (e.g. significant bowel resection or diversion) within 3 months before enrollment (this does not include appendectomy or cholecystectomy), or any history of total colectomy or bariatric surgery (bariatric surgery which does not disrupt the gastrointestinal lumen, i.e., restrictive procedures such as banding, are permitted).
+  7. History of active inflammatory bowel disease (ulcerative colitis, Crohn&#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months.
+  8. Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor).
+  9. Any history of fecal microbiota transplantation (FMT) in the past 3 months.
+  10. Cohort 2 Main
+
+INCLUSION CRITERIA
+
+  1. Subjects 18 years of age or older who had one or more CDI recurrence (as confirmed by a C. difficile stool toxin or PCR test) and have responded to a course of antibiotic treatment.
+  2. Signed informed consent prior to initiation of any study-specific procedure or treatment.
+  3. The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.
+  4. Cohort 2 Main
+
+EXCLUSION CRITERIA
+
+  1. (all Cohort 1
+
+EXCLUSION CRITERIA
+
+  1. [#1-8 above] plus the below addition criterion)9.
+  2. Previously enrolled in a Seres Therapeutics clinical study.
+  3. An exception is made for subjects who screened in SERES-012 who did not receive SER-109 and did not previously roll-over to SERES-013.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the revised eligibility criteria provided in the version 9 of the ClinicalTrials.gov version 9, here are the key modifications:
+
+1.
+
+INCLUSION CRITERIA
+
+  1. Recurrent CDI: Previously enrolled in Study SERES-012 and experienced a CDI recurrence within 8 weeks after receipt of SER-109 or placebo.
+  2. Serum C. difficile toxin or PCR test positivity: Positive C. difficile stool toxin assay or PCR algorithm.
+  3. ≥ 3 unformed stools per day over 2 consecutive days
+  4. Positive C. difficile stool toxin assay on a stool sample determined by a toxin assay
+  5. 
+
+EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study
+  2. Known or suspected toxic megacolon and/or known small bowel ileus
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding)
+  4. History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months
+  5. Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor)
+  6. These modifications reflect the updated understanding of the eligibility criteria for the study, focusing on the specific conditions that would qualify a subject for participation. The
+
+INCLUSION CRITERIA
+
+  1. now specify that subjects must have a CDI recurrence within 8 weeks of receiving SER-109 or placebo, and must have a positive C. difficile stool toxin or PCR test on a stool sample.
+  2. The
+
+EXCLUSION CRITERIA
+
+  1. have been adjusted to exclude individuals who are not suitable for the study based on their medical history and current health status."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the revised eligibility criteria provided in the version 9 of the ClinicalTrials.gov version 9, here are the key modifications:
+
+1.&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-add&quot;&gt; Recurrent CDI:&lt;/span&gt; Previously enrolled in Study &lt;span class=&quot;diff-add&quot;&gt;SERES-012&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and experienced a&lt;/span&gt; CDI recurrence within 8 weeks after receipt of SER-109 or &lt;span class=&quot;diff-add&quot;&gt;placebo.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Serum&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;C.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;difficile&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;toxin&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;PCR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positivity: Positive C. difficile stool toxin assay&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;PCR&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;algorithm.&lt;/span&gt;
+  3. ≥ 3 unformed stools per day over 2 consecutive &lt;span class=&quot;diff-add&quot;&gt;days
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Positive&lt;/span&gt; C. difficile stool toxin &lt;span class=&quot;diff-add&quot;&gt;assay&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;stool&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;sample&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;determined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;toxin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;assay&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5. 
+
+&lt;/span&gt;EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt;
+  2. Known or suspected toxic megacolon and/or known small bowel &lt;span class=&quot;diff-add&quot;&gt;ileus&lt;/span&gt;
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just &lt;span class=&quot;diff-add&quot;&gt;boarding)&lt;/span&gt;
+  4. History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 &lt;span class=&quot;diff-add&quot;&gt;months&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical &lt;span class=&quot;diff-add&quot;&gt;monitor)&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;These&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;modifications reflect the updated understanding&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;focusing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;specific&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions that would qualify a subject for participation. The&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;specify&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; CDI recurrence &lt;span class=&quot;diff-add&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;weeks of receiving SER-109 or placebo, and must have&lt;/span&gt; a&lt;span class=&quot;diff-add&quot;&gt; positive&lt;/span&gt; C. difficile stool toxin or PCR &lt;span class=&quot;diff-add&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;stool&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;sample.&lt;/span&gt;
+  2. The
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;been&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;adjusted&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;exclude&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;individuals&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;who are not suitable for&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;based&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;their&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;status.&lt;/span&gt;"
+                 data-raw="Based on the revised eligibility criteria provided in the version 9 of the ClinicalTrials.gov version 9, here are the key modifications:
+
+1. **Inclusion Criteria**:
+   - **Recurrent CDI**: Previously enrolled in Study SERES-012 and experienced a CDI recurrence within 8 weeks after receipt of SER-109 or placebo.
+   - **Serum C. difficile toxin or PCR test positivity**: Positive C. difficile stool toxin assay or PCR algorithm.
+   - **≥ 3 unformed stools per day over 2 consecutive days**
+   - **Positive C. difficile stool toxin assay on a stool sample determined by a toxin assay**
+
+2. **Exclusion Criteria**:
+   - **Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study**
+   - **Known or suspected toxic megacolon and/or known small bowel ileus**
+   - **Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding)**
+   - **History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months**
+   - **Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor)**
+
+These modifications reflect the updated understanding of the eligibility criteria for the study, focusing on the specific conditions that would qualify a subject for participation. The inclusion criteria now specify that subjects must have a CDI recurrence within 8 weeks of receiving SER-109 or placebo, and must have a positive C. difficile stool toxin or PCR test on a stool sample. The exclusion criteria have been adjusted to exclude individuals who are not suitable for the study based on their medical history and current health status.">Based on the revised eligibility criteria provided in the version 9 of the ClinicalTrials.gov version 9, here are the key modifications:
+
+1.
+
+INCLUSION CRITERIA
+
+  1. Recurrent CDI: Previously enrolled in Study SERES-012 and experienced a CDI recurrence within 8 weeks after receipt of SER-109 or placebo.
+  2. Serum C. difficile toxin or PCR test positivity: Positive C. difficile stool toxin assay or PCR algorithm.
+  3. ≥ 3 unformed stools per day over 2 consecutive days
+  4. Positive C. difficile stool toxin assay on a stool sample determined by a toxin assay
+  5. 
+
+EXCLUSION CRITERIA
+
+  1. Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study
+  2. Known or suspected toxic megacolon and/or known small bowel ileus
+  3. Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding)
+  4. History of active inflammatory bowel disease (ulcerative colitis, Crohn&#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months
+  5. Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor)
+  6. These modifications reflect the updated understanding of the eligibility criteria for the study, focusing on the specific conditions that would qualify a subject for participation. The
+
+INCLUSION CRITERIA
+
+  1. now specify that subjects must have a CDI recurrence within 8 weeks of receiving SER-109 or placebo, and must have a positive C. difficile stool toxin or PCR test on a stool sample.
+  2. The
+
+EXCLUSION CRITERIA
+
+  1. have been adjusted to exclude individuals who are not suitable for the study based on their medical history and current health status.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

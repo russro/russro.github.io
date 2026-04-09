@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 141</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 141</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to (&amp;gt;=)18 years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, CMML or AMLEastern Cooperative Oncology Group (ECOG) performance status score of 0 or 1 or 2Adequate organ functionA woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) involvementPrior solid organ transplantationKnown allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipientPrior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitorHistory of a second malignancy, excluding non-melanoma skin cell cancer, within the last three yearsActive severe or uncontrolled infectionHistory of optic nerve neuropathy or neuritis.
+  2. History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to &lt;span class=&quot;diff-del&quot;&gt;(&amp;gt;=)18&lt;/span&gt; years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, &lt;span class=&quot;diff-del&quot;&gt;CMML&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;AMLEastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status score of &lt;span class=&quot;diff-del&quot;&gt;0&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or 2Adequate&lt;/span&gt; organ &lt;span class=&quot;diff-del&quot;&gt;functionA&lt;/span&gt; woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) &lt;span class=&quot;diff-del&quot;&gt;involvementPrior&lt;/span&gt; solid organ &lt;span class=&quot;diff-del&quot;&gt;transplantationKnown&lt;/span&gt; allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its &lt;span class=&quot;diff-del&quot;&gt;excipientPrior&lt;/span&gt; therapy with any Protein arginine methyl transferase 5 (PRMT5) &lt;span class=&quot;diff-del&quot;&gt;inhibitorHistory&lt;/span&gt; of a second malignancy, excluding non-melanoma skin cell cancer, within the last three &lt;span class=&quot;diff-del&quot;&gt;yearsActive&lt;/span&gt; severe or uncontrolled &lt;span class=&quot;diff-del&quot;&gt;infectionHistory&lt;/span&gt; of optic nerve neuropathy or neuritis.
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation."
+                 data-raw="Inclusion Criteria:Males and females greater than or equal to (&amp;amp;gt;=)18 years of age (at the time consent is obtained).Diagnosis of MDS, CMML or AMLEastern Cooperative Oncology Group (ECOG) performance status score of 0 or 1 or 2Adequate organ functionA woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.Exclusion Criteria:History of, or known, central nervous system (CNS) involvementPrior solid organ transplantationKnown allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipientPrior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitorHistory of a second malignancy, excluding non-melanoma skin cell cancer, within the last three yearsActive severe or uncontrolled infectionHistory of optic nerve neuropathy or neuritis.History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.">INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to (&gt;=)18 years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, CMML or AMLEastern Cooperative Oncology Group (ECOG) performance status score of 0 or 1 or 2Adequate organ functionA woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) involvementPrior solid organ transplantationKnown allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipientPrior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitorHistory of a second malignancy, excluding non-melanoma skin cell cancer, within the last three yearsActive severe or uncontrolled infectionHistory of optic nerve neuropathy or neuritis.
+  2. History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to (&amp;gt;=) 18 years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, CMML, or AML.
+  3. Eastern Cooperative Oncology Group (ECOG) performance status score of 0, 1, or 2.
+  4. Adequate organ function.
+  5. A woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+  6. Treatment naïve MDS and CMML participants are now included in the Part 2 Dose Expansion cohorts.
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) involvement.
+  2. Prior solid organ transplantation.
+  3. Known allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipient.
+  4. Prior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitor.
+  5. History of a second malignancy, excluding non-melanoma skin cell cancer, within the last three years.
+  6. Active severe or uncontrolled infection.
+  7. History of optic nerve neuropathy or neuritis.
+  8. History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.
+  9. Additional prohibited medications (strong/moderate inhibitors or inducers of MATE2-K, OAT3, and OCT2 transporters) as identified in the latest supplement to the Investigator Brochure."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to &lt;span class=&quot;diff-add&quot;&gt;(&amp;gt;=) 18&lt;/span&gt; years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, &lt;span class=&quot;diff-add&quot;&gt;CMML,&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;AML.
+  3. Eastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status score of &lt;span class=&quot;diff-add&quot;&gt;0, 1,&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;2.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Adequate&lt;/span&gt; organ &lt;span class=&quot;diff-add&quot;&gt;function.
+  5. A&lt;/span&gt; woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.&lt;span class=&quot;diff-add&quot;&gt;
+  6. Treatment naïve MDS and CMML participants are now included in the Part 2 Dose Expansion cohorts.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) &lt;span class=&quot;diff-add&quot;&gt;involvement.
+  2. Prior&lt;/span&gt; solid organ &lt;span class=&quot;diff-add&quot;&gt;transplantation.
+  3. Known&lt;/span&gt; allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its &lt;span class=&quot;diff-add&quot;&gt;excipient.
+  4. Prior&lt;/span&gt; therapy with any Protein arginine methyl transferase 5 (PRMT5) &lt;span class=&quot;diff-add&quot;&gt;inhibitor.
+  5. History&lt;/span&gt; of a second malignancy, excluding non-melanoma skin cell cancer, within the last three &lt;span class=&quot;diff-add&quot;&gt;years.
+  6. Active&lt;/span&gt; severe or uncontrolled &lt;span class=&quot;diff-add&quot;&gt;infection.
+  7. History&lt;/span&gt; of optic nerve neuropathy or neuritis.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.&lt;span class=&quot;diff-add&quot;&gt;
+  9. Additional prohibited medications (strong/moderate inhibitors or inducers of MATE2-K, OAT3, and OCT2 transporters) as identified in the latest supplement to the Investigator Brochure.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+- Males and females greater than or equal to (&amp;gt;=) 18 years of age (at the time consent is obtained).
+- Diagnosis of MDS, CMML, or AML.
+- Eastern Cooperative Oncology Group (ECOG) performance status score of 0, 1, or 2.
+- Adequate organ function.
+- A woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+- Treatment naïve MDS and CMML participants are now included in the Part 2 Dose Expansion cohorts.
+
+Exclusion Criteria:
+- History of, or known, central nervous system (CNS) involvement.
+- Prior solid organ transplantation.
+- Known allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipient.
+- Prior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitor.
+- History of a second malignancy, excluding non-melanoma skin cell cancer, within the last three years.
+- Active severe or uncontrolled infection.
+- History of optic nerve neuropathy or neuritis.
+- History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.
+- Additional prohibited medications (strong/moderate inhibitors or inducers of MATE2-K, OAT3, and OCT2 transporters) as identified in the latest supplement to the Investigator Brochure.">INCLUSION CRITERIA
+
+  1. Males and females greater than or equal to (&gt;=) 18 years of age (at the time consent is obtained).
+  2. Diagnosis of MDS, CMML, or AML.
+  3. Eastern Cooperative Oncology Group (ECOG) performance status score of 0, 1, or 2.
+  4. Adequate organ function.
+  5. A woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.
+  6. Treatment naïve MDS and CMML participants are now included in the Part 2 Dose Expansion cohorts.
+
+EXCLUSION CRITERIA
+
+  1. History of, or known, central nervous system (CNS) involvement.
+  2. Prior solid organ transplantation.
+  3. Known allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipient.
+  4. Prior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitor.
+  5. History of a second malignancy, excluding non-melanoma skin cell cancer, within the last three years.
+  6. Active severe or uncontrolled infection.
+  7. History of optic nerve neuropathy or neuritis.
+  8. History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.
+  9. Additional prohibited medications (strong/moderate inhibitors or inducers of MATE2-K, OAT3, and OCT2 transporters) as identified in the latest supplement to the Investigator Brochure.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 96</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 96</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Diagnosis of one of the following:Primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria.
+  2. Post-polycythemia vera/essential thrombocythemia myelofibrosis (Post-ET/PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria.
+  3. High-risk or Intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]).
+  4. Life expectancy of greater than or equal to (&amp;gt;=) 12 weeks.
+  5. Able to provide informed consent and be willing to sign an informed consent form.
+  6. Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1 or 2.
+  7. Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) =&amp;lt;2.5 x upper limit of normal (ULN) (or =&amp;lt;5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  8. Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) =&amp;lt;2.5 x ULN (or =&amp;lt;5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  9. Total bilirubin =&amp;lt;3.0 mg/dL (or direct bilirubin &amp;lt; 1 mg/dL).
+  10. Creatinine =&amp;lt;3.0 mg/dL.
+  11. Absolute neutrophil count &amp;gt;=1000/microliter (mcL).
+  12. Platelet count &amp;gt;=50,000/mcL.
+  13. Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  14. Females of childbearing potential must have a negative pregnancy test =&amp;lt;7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), OR postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &amp;gt;30 U/mL).
+  15. Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study participants and their understanding confirmed.
+  16. Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the participants and their understanding confirmed.
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or Janus kinase (JAK) inhibitor therapy =&amp;lt;14 days prior to registration.
+  3. Participants with another active malignancy.
+  4. Note: participants with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.
+  5. Known positive status for human immunodeficiency virus (HIV).
+  6. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  7. Incomplete recovery from any prior surgical procedures or had surgery =&amp;lt;4 weeks prior to registration, excluding the placement of vascular access.
+  8. Presence of acute active infection requiring antibiotics.
+  9. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;#x27;s opinion, would jeopardize the safety of the participant or compliance with the protocol."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Diagnosis of one of the &lt;span class=&quot;diff-del&quot;&gt;following:Primary&lt;/span&gt; myelofibrosis (PMF) per the revised World Health Organization (WHO) &lt;span class=&quot;diff-del&quot;&gt;criteria.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Post-polycythemia&lt;/span&gt; vera/essential thrombocythemia myelofibrosis &lt;span class=&quot;diff-del&quot;&gt;(Post-ET/PV&lt;/span&gt; MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) &lt;span class=&quot;diff-del&quot;&gt;criteria.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;High-risk&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;Intermediate-2&lt;/span&gt; risk MF (as defined by the Dynamic International Prognostic Scoring System &lt;span class=&quot;diff-del&quot;&gt;[DIPSS-plus]).
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Life&lt;/span&gt; expectancy of greater than or equal to &lt;span class=&quot;diff-del&quot;&gt;(&amp;gt;=)&lt;/span&gt; 12 weeks.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Able to provide informed consent and be willing to sign an informed consent form.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) performance status of 0, &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt; or 2.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;2.5&lt;/span&gt; x upper limit of normal (ULN) (or &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;5&lt;/span&gt; x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;2.5&lt;/span&gt; x &lt;span class=&quot;diff-del&quot;&gt;ULN&lt;/span&gt; (or &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;5&lt;/span&gt; x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Total bilirubin &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;3.0&lt;/span&gt; mg/dL (or direct bilirubin &amp;lt; 1 mg/dL).
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Creatinine &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;3.0&lt;/span&gt; mg/dL.
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Absolute neutrophil count &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=1000/microliter&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(mcL).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Platelet count &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=50,000/mcL.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Females of childbearing potential must have a negative pregnancy test &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;7&lt;/span&gt; days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), &lt;span class=&quot;diff-del&quot;&gt;OR&lt;/span&gt; postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;30&lt;/span&gt; U/mL).&lt;span class=&quot;diff-del&quot;&gt;
+  15.&lt;/span&gt; Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; and their understanding confirmed.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; and their understanding confirmed.
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or &lt;span class=&quot;diff-del&quot;&gt;Janus kinase (JAK)&lt;/span&gt; inhibitor therapy &lt;span class=&quot;diff-del&quot;&gt;=&amp;lt;14&lt;/span&gt; days prior to registration.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Participants&lt;/span&gt; with another active malignancy.
+  4. &lt;span class=&quot;diff-del&quot;&gt;Note:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.&lt;span class=&quot;diff-del&quot;&gt;
+  5. Known positive status for human immunodeficiency virus (HIV).
+  6. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  7. Incomplete recovery from any prior surgical procedures or had surgery =&amp;lt;4 weeks prior to registration, excluding the placement of vascular access.
+  8. Presence of acute active infection requiring antibiotics.
+  9. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;#x27;s opinion, would jeopardize the safety of the participant or compliance with the protocol.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Diagnosis of one of the following:Primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria.Post-polycythemia vera&amp;amp;#x2F;essential thrombocythemia myelofibrosis (Post-ET&amp;amp;#x2F;PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria.High-risk or Intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]).Life expectancy of greater than or equal to (&amp;amp;gt;=) 12 weeks.Able to provide informed consent and be willing to sign an informed consent form.Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1 or 2.Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) =&amp;amp;lt;2.5 x upper limit of normal (ULN) (or =&amp;amp;lt;5 x ULN if in the investigator&amp;amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) =&amp;amp;lt;2.5 x ULN (or =&amp;amp;lt;5 x ULN if in the investigator&amp;amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).Total bilirubin =&amp;amp;lt;3.0 mg&amp;amp;#x2F;dL (or direct bilirubin &amp;amp;lt; 1 mg&amp;amp;#x2F;dL).Creatinine =&amp;amp;lt;3.0 mg&amp;amp;#x2F;dL.Absolute neutrophil count &amp;amp;gt;=1000&amp;amp;#x2F;microliter (mcL).Platelet count &amp;amp;gt;=50,000&amp;amp;#x2F;mcL.Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.Females of childbearing potential must have a negative pregnancy test =&amp;amp;lt;7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), OR postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &amp;amp;gt;30 U&amp;amp;#x2F;mL).Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study participants and their understanding confirmed.Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the participants and their understanding confirmed.Exclusion Criteria:Females who are pregnant or are currently breastfeeding.Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;amp;gt; 10 mg&amp;amp;#x2F;day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or Janus kinase (JAK) inhibitor therapy =&amp;amp;lt;14 days prior to registration.Participants with another active malignancy.Note: participants with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.Known positive status for human immunodeficiency virus (HIV).Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.Incomplete recovery from any prior surgical procedures or had surgery =&amp;amp;lt;4 weeks prior to registration, excluding the placement of vascular access.Presence of acute active infection requiring antibiotics.Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;amp;#x27;s opinion, would jeopardize the safety of the participant or compliance with the protocol.">INCLUSION CRITERIA
+
+  1. Diagnosis of one of the following:Primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria.
+  2. Post-polycythemia vera/essential thrombocythemia myelofibrosis (Post-ET/PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria.
+  3. High-risk or Intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]).
+  4. Life expectancy of greater than or equal to (&gt;=) 12 weeks.
+  5. Able to provide informed consent and be willing to sign an informed consent form.
+  6. Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1 or 2.
+  7. Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) =&lt;2.5 x upper limit of normal (ULN) (or =&lt;5 x ULN if in the investigator&#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  8. Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) =&lt;2.5 x ULN (or =&lt;5 x ULN if in the investigator&#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  9. Total bilirubin =&lt;3.0 mg/dL (or direct bilirubin &lt; 1 mg/dL).
+  10. Creatinine =&lt;3.0 mg/dL.
+  11. Absolute neutrophil count &gt;=1000/microliter (mcL).
+  12. Platelet count &gt;=50,000/mcL.
+  13. Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  14. Females of childbearing potential must have a negative pregnancy test =&lt;7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), OR postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &gt;30 U/mL).
+  15. Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study participants and their understanding confirmed.
+  16. Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the participants and their understanding confirmed.
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or Janus kinase (JAK) inhibitor therapy =&lt;14 days prior to registration.
+  3. Participants with another active malignancy.
+  4. Note: participants with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.
+  5. Known positive status for human immunodeficiency virus (HIV).
+  6. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  7. Incomplete recovery from any prior surgical procedures or had surgery =&lt;4 weeks prior to registration, excluding the placement of vascular access.
+  8. Presence of acute active infection requiring antibiotics.
+  9. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&#x27;s opinion, would jeopardize the safety of the participant or compliance with the protocol.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 17):
+
+INCLUSION CRITERIA
+
+  1. Diagnosis of one of the following: primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria, post-polycythemia vera/essential thrombocythemia myelofibrosis (Post-ET/Post-PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria, high-risk or intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]), life expectancy of greater than or equal to (≥) 12 weeks.
+  2. Able to provide informed consent and be willing to sign an informed consent form.
+  3. Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1, or 2.
+  4. Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) &amp;lt; 2.5 x upper limit of normal (ULN) (or &amp;lt; 5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  5. Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) &amp;lt; 2.5 x upper limit of normal (ULN) (or &amp;lt; 5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  6. Total bilirubin &amp;lt; 3.0 mg/dL (or direct bilirubin &amp;lt; 1 mg/dL).
+  7. Creatinine &amp;lt; 3.0 mg/dL.
+  8. Absolute neutrophil count ≥ 1000 cells/µL.
+  9. Platelet count ≥ 50,000 cells/µL.
+  10. Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  11. Females of childbearing potential must have a negative pregnancy test &amp;lt; 7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), or postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &amp;gt; 30 U/mL). Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study subjects and their understanding confirmed.
+  12. Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the subjects and their understanding confirmed.
+  13. Absence of known positive status for human immunodeficiency virus (HIV).
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or JAK inhibitor therapy &amp;lt; 14 days prior to registration.
+  3. Subjects with another active malignancy.
+  4. Known positive status for HIV.
+  5. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  6. Incomplete recovery from any prior surgical procedures or had surgery &amp;lt; 4 weeks prior to registration, excluding the placement of vascular access.
+  7. Presence of acute active infection requiring antibiotics.
+  8. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;#x27;s opinion, would jeopardize the safety of the patient or compliance with the protocol.
+  9. Patients with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 17):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Diagnosis of one of the &lt;span class=&quot;diff-add&quot;&gt;following: primary&lt;/span&gt; myelofibrosis (PMF) per the revised World Health Organization (WHO) &lt;span class=&quot;diff-add&quot;&gt;criteria,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;post-polycythemia&lt;/span&gt; vera/essential thrombocythemia myelofibrosis &lt;span class=&quot;diff-add&quot;&gt;(Post-ET/Post-PV&lt;/span&gt; MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) &lt;span class=&quot;diff-add&quot;&gt;criteria,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;high-risk&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;intermediate-2&lt;/span&gt; risk MF (as defined by the Dynamic International Prognostic Scoring System &lt;span class=&quot;diff-add&quot;&gt;[DIPSS-plus]),&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;life&lt;/span&gt; expectancy of greater than or equal to &lt;span class=&quot;diff-add&quot;&gt;(≥)&lt;/span&gt; 12 weeks.
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; Able to provide informed consent and be willing to sign an informed consent form.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Eastern Cooperative Oncology Group (ECOG) performance status of 0, &lt;span class=&quot;diff-add&quot;&gt;1,&lt;/span&gt; or 2.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 2.5&lt;/span&gt; x upper limit of normal (ULN) (or &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 5&lt;/span&gt; x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 2.5&lt;/span&gt; x &lt;span class=&quot;diff-add&quot;&gt;upper limit of normal (ULN)&lt;/span&gt; (or &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 5&lt;/span&gt; x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Total bilirubin &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 3.0&lt;/span&gt; mg/dL (or direct bilirubin &amp;lt; 1 mg/dL).
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Creatinine &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 3.0&lt;/span&gt; mg/dL.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Absolute neutrophil count &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1000 cells/µL.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Platelet count &lt;span class=&quot;diff-add&quot;&gt;≥ 50,000 cells/µL.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Females of childbearing potential must have a negative pregnancy test &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 7&lt;/span&gt; days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &lt;span class=&quot;diff-add&quot;&gt;&amp;gt; 30&lt;/span&gt; U/mL). Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; and their understanding confirmed.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the &lt;span class=&quot;diff-add&quot;&gt;subjects&lt;/span&gt; and their understanding confirmed.&lt;span class=&quot;diff-add&quot;&gt;
+  13. Absence of known positive status for human immunodeficiency virus (HIV).&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or &lt;span class=&quot;diff-add&quot;&gt;JAK&lt;/span&gt; inhibitor therapy &lt;span class=&quot;diff-add&quot;&gt;&amp;lt; 14&lt;/span&gt; days prior to registration.
+  3. &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; with another active malignancy.
+  4. &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positive status for HIV.
+  5. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  6. Incomplete recovery from any prior surgical procedures or had surgery &amp;lt; 4 weeks prior to registration, excluding the placement of vascular access.
+  7. Presence of acute active infection requiring antibiotics.
+  8. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;#x27;s opinion, would jeopardize the safety of the patient or compliance with the protocol.
+  9. Patients&lt;/span&gt; with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment."
+                 data-raw="Amended Eligibility Criteria (version 17):
+
+Inclusion Criteria:
+- Diagnosis of one of the following: primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria, post-polycythemia vera/essential thrombocythemia myelofibrosis (Post-ET/Post-PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria, high-risk or intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]), life expectancy of greater than or equal to (≥) 12 weeks.
+- Able to provide informed consent and be willing to sign an informed consent form.
+- Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1, or 2.
+- Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) &amp;lt; 2.5 x upper limit of normal (ULN) (or &amp;lt; 5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+- Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) &amp;lt; 2.5 x upper limit of normal (ULN) (or &amp;lt; 5 x ULN if in the investigator&amp;#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+- Total bilirubin &amp;lt; 3.0 mg/dL (or direct bilirubin &amp;lt; 1 mg/dL).
+- Creatinine &amp;lt; 3.0 mg/dL.
+- Absolute neutrophil count ≥ 1000 cells/µL.
+- Platelet count ≥ 50,000 cells/µL.
+- Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+- Females of childbearing potential must have a negative pregnancy test &amp;lt; 7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), or postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &amp;gt; 30 U/mL). Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study subjects and their understanding confirmed.
+- Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the subjects and their understanding confirmed.
+- Absence of known positive status for human immunodeficiency virus (HIV).
+
+Exclusion Criteria:
+- Females who are pregnant or are currently breastfeeding.
+- Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &amp;gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or JAK inhibitor therapy &amp;lt; 14 days prior to registration.
+- Subjects with another active malignancy.
+- Known positive status for HIV.
+- Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+- Incomplete recovery from any prior surgical procedures or had surgery &amp;lt; 4 weeks prior to registration, excluding the placement of vascular access.
+- Presence of acute active infection requiring antibiotics.
+- Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&amp;#x27;s opinion, would jeopardize the safety of the patient or compliance with the protocol.
+- Patients with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.">Amended Eligibility Criteria (version 17):
+
+INCLUSION CRITERIA
+
+  1. Diagnosis of one of the following: primary myelofibrosis (PMF) per the revised World Health Organization (WHO) criteria, post-polycythemia vera/essential thrombocythemia myelofibrosis (Post-ET/Post-PV MF) per the International Working Group for Myeloproliferative Neoplasms Research and Treatment (IWG-MRT) criteria, high-risk or intermediate-2 risk MF (as defined by the Dynamic International Prognostic Scoring System [DIPSS-plus]), life expectancy of greater than or equal to (≥) 12 weeks.
+  2. Able to provide informed consent and be willing to sign an informed consent form.
+  3. Eastern Cooperative Oncology Group (ECOG) performance status of 0, 1, or 2.
+  4. Serum glutamic oxaloacetic transaminase (SGOT) (aspartate aminotransferase [AST]) &lt; 2.5 x upper limit of normal (ULN) (or &lt; 5 x ULN if in the investigator&#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  5. Serum glutamic pyruvate transaminase (SGPT) alanine aminotransferase (ALT) &lt; 2.5 x upper limit of normal (ULN) (or &lt; 5 x ULN if in the investigator&#x27;s opinion the elevation is due to extramedullary hematopoiesis).
+  6. Total bilirubin &lt; 3.0 mg/dL (or direct bilirubin &lt; 1 mg/dL).
+  7. Creatinine &lt; 3.0 mg/dL.
+  8. Absolute neutrophil count ≥ 1000 cells/µL.
+  9. Platelet count ≥ 50,000 cells/µL.
+  10. Absence of active treatment with systemic anticoagulation and a baseline prothrombin time (PT) and activated partial thromboplastin time (aPTT) that does not exceed 1.5 x ULN.
+  11. Females of childbearing potential must have a negative pregnancy test &lt; 7 days prior to registration, unless they are surgically sterile for at least 3 months (i.e., hysterectomy), or postmenopausal for at least 12 months (follicle-stimulating hormone [FSH] &gt; 30 U/mL). Females of childbearing potential must agree to take appropriate precautions to avoid pregnancy (with at least 99% certainty) from screening through end of study; permitted methods for preventing pregnancy must be communicated to study subjects and their understanding confirmed.
+  12. Males must agree to take appropriate precautions to avoid fathering a child (with at least 99% certainty) from screening through follow-up; permitted methods for preventing pregnancy should be communicated to the subjects and their understanding confirmed.
+  13. Absence of known positive status for human immunodeficiency virus (HIV).
+
+EXCLUSION CRITERIA
+
+  1. Females who are pregnant or are currently breastfeeding.
+  2. Any chemotherapy (e.g., hydroxyurea), immunomodulatory drug therapy (e.g., thalidomide), immunosuppressive therapy, corticosteroids &gt; 10 mg/day prednisone or equivalent, growth factor treatment (e.g., erythropoietin) or JAK inhibitor therapy &lt; 14 days prior to registration.
+  3. Subjects with another active malignancy.
+  4. Known positive status for HIV.
+  5. Any unresolved toxicity greater or equal to grade 2 from previous anticancer therapy, except for stable chronic toxicities not expected to resolve.
+  6. Incomplete recovery from any prior surgical procedures or had surgery &lt; 4 weeks prior to registration, excluding the placement of vascular access.
+  7. Presence of acute active infection requiring antibiotics.
+  8. Uncontrolled intercurrent illness or any concurrent condition that, in the Investigator&#x27;s opinion, would jeopardize the safety of the patient or compliance with the protocol.
+  9. Patients with early stage squamous cell carcinoma of the skin, basal cell carcinoma of the skin or cervical intraepithelial neoplasia are eligible for enrollment.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

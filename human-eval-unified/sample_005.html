@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 5</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 5</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or older;
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma (histological documentation of recurrence is not required);
+  3. Recurrent or persistent progressive disease which is refractory to curative therapy or established treatments and cannot be treated with surgery or radiotherapy;
+  4. Measurable disease, as defined by RECIST 1.1 criteria;
+  5. At least one &amp;quot;target lesion&amp;quot; to be used to assess response, as defined by RECIST 1.1 criteria.
+  6. Tumors within a previously irradiated field will be designated as &amp;quot;non-target&amp;quot; lesions unless previous progression is documented;
+  7. Availability of archived tumor tissue sample that can be used for assessment of PrR status by the central laboratory;
+  8. GOG (Gynecologic Oncology Group) performance status 0-2 (refer to Appendix A);
+  9. Calculated Glomerular filtration rate ≥ 50 mL/min;
+  10. Total bilirubin ≤ 2.5 times upper limit of normal (ULN);
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);
+  13. Albumin ≥ 3.0 mg/dL;
+  14. Ability to take oral medication;
+  15. Patients able to understand the nature of the study and who are willing to give written informed consent;
+  16. And for Treatment Period 2 only: 1) Patients participating in Treatment Period 1 must have had disease progression after receiving at least 4 weeks of progestin therapy or 2) Patients must be determined as PrR negative status at Screening.
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma;
+  2. Concurrent systemic corticosteroid therapy;
+  3. Concurrent oral contraceptive use / Women of childbearing potential not using highly effective means of contraception;
+  4. Pregnancy confirmed by pregnancy test / Lactating women;
+  5. Prior therapy with hormonal progestin agents;
+  6. Patients who are candidates for treatment with standard chemotherapy agents (there is no limit to the number of lines of chemotherapy);
+  7. History of blood clot;
+  8. History of known bleeding disorder (i.e. disseminated intravascular coagulation or clotting factor deficiency);
+  9. Major surgery within 4 weeks prior to the start of the study;
+  10. Patients with clinically significant illnesses which, according to the Investigator, could compromise participation in the study;
+  11. History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous carcinoma of the skin.
+  12. Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine) and excipients;
+  13. Patients with known brain metastases;
+  14. Patients currently receiving any other investigational agents;
+  15. Patients currently receiving any other anticancer therapies;
+  16. Participation in any other clinical study within the last 4 weeks prior to the start of the study"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or &lt;span class=&quot;diff-del&quot;&gt;older;&lt;/span&gt;
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma&lt;span class=&quot;diff-del&quot;&gt; (histological documentation of recurrence is not required);&lt;/span&gt;
+  3. Recurrent or persistent progressive disease&lt;span class=&quot;diff-del&quot;&gt; which is&lt;/span&gt; refractory to curative therapy or established treatments&lt;span class=&quot;diff-del&quot;&gt; and cannot be treated with surgery or radiotherapy;&lt;/span&gt;
+  4. Measurable disease, as defined by RECIST 1.1 &lt;span class=&quot;diff-del&quot;&gt;criteria;&lt;/span&gt;
+  5. At least one &amp;quot;target lesion&amp;quot; to be used &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;assess&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;response,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as defined by RECIST 1.1 criteria.&lt;/span&gt;
+  6. Tumors within a previously irradiated field will be designated as &amp;quot;non-target&amp;quot; lesions unless previous progression is &lt;span class=&quot;diff-del&quot;&gt;documented;&lt;/span&gt;
+  7. Availability of archived tumor tissue sample&lt;span class=&quot;diff-del&quot;&gt; that can be used&lt;/span&gt; for assessment of PrR status by the central &lt;span class=&quot;diff-del&quot;&gt;laboratory;&lt;/span&gt;
+  8. GOG&lt;span class=&quot;diff-del&quot;&gt; (Gynecologic Oncology Group)&lt;/span&gt; performance status 0-2&lt;span class=&quot;diff-del&quot;&gt; (refer to Appendix A);&lt;/span&gt;
+  9. Calculated Glomerular &lt;span class=&quot;diff-del&quot;&gt;filtration&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;rate&lt;/span&gt; ≥ 50 &lt;span class=&quot;diff-del&quot;&gt;mL/min;&lt;/span&gt;
+  10. Total bilirubin ≤ 2.5 times upper limit of normal &lt;span class=&quot;diff-del&quot;&gt;(ULN);&lt;/span&gt;
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver &lt;span class=&quot;diff-del&quot;&gt;metastases);&lt;/span&gt;
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver &lt;span class=&quot;diff-del&quot;&gt;metastases);&lt;/span&gt;
+  13. Albumin ≥ 3.0 &lt;span class=&quot;diff-del&quot;&gt;mg/dL;&lt;/span&gt;
+  14. Ability to &lt;span class=&quot;diff-del&quot;&gt;take oral medication;
+  15. Patients able to &lt;/span&gt;understand&lt;span class=&quot;diff-del&quot;&gt; the nature of the study&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;who are willing to give&lt;/span&gt; written informed &lt;span class=&quot;diff-del&quot;&gt;consent;
+  16. And for Treatment Period 2 only: 1) Patients participating in Treatment Period 1 must have had disease progression after receiving at least 4 weeks of progestin therapy or 2) Patients must be determined as PrR negative status at Screening.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial &lt;span class=&quot;diff-del&quot;&gt;carcinoma;&lt;/span&gt;
+  2. Concurrent systemic corticosteroid &lt;span class=&quot;diff-del&quot;&gt;therapy;&lt;/span&gt;
+  3. Concurrent oral contraceptive use &lt;span class=&quot;diff-del&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Women&lt;/span&gt; of childbearing potential not using highly effective &lt;span class=&quot;diff-del&quot;&gt;means of contraception;&lt;/span&gt;
+  4.&lt;span class=&quot;diff-del&quot;&gt; Pregnancy confirmed by pregnancy test / Lactating women;
+  5.&lt;/span&gt; Prior therapy with hormonal progestin &lt;span class=&quot;diff-del&quot;&gt;agents;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Patients who are candidates for treatment with standard chemotherapy agents&lt;span class=&quot;diff-del&quot;&gt; (there is no limit to the number of lines of chemotherapy);&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; History of blood &lt;span class=&quot;diff-del&quot;&gt;clot;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; History of known bleeding disorder &lt;span class=&quot;diff-del&quot;&gt;(i.e.&lt;/span&gt; disseminated intravascular &lt;span class=&quot;diff-del&quot;&gt;coagulation or clotting factor deficiency);&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Major surgery within 4 weeks prior to the start of the &lt;span class=&quot;diff-del&quot;&gt;study;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Patients with clinically&lt;/span&gt; significant &lt;span class=&quot;diff-del&quot;&gt;illnesses&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;which, according to the Investigator,&lt;/span&gt; could compromise participation in the &lt;span class=&quot;diff-del&quot;&gt;study;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous carcinoma of the &lt;span class=&quot;diff-del&quot;&gt;skin.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, &lt;span class=&quot;diff-del&quot;&gt;lidocaine)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;excipients;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Patients with known brain &lt;span class=&quot;diff-del&quot;&gt;metastases;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Patients currently receiving any other investigational &lt;span class=&quot;diff-del&quot;&gt;agents;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;15. Patients currently receiving any other anticancer therapies;
+  16.&lt;/span&gt; Participation in any other clinical study within the last 4 weeks prior to the start of the study"
+                 data-raw="Inclusion Criteria:Female patients 18 years of age or older;Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma (histological documentation of recurrence is not required);Recurrent or persistent progressive disease which is refractory to curative therapy or established treatments and cannot be treated with surgery or radiotherapy;Measurable disease, as defined by RECIST 1.1 criteria;At least one &amp;amp;quot;target lesion&amp;amp;quot; to be used to assess response, as defined by RECIST 1.1 criteria. Tumors within a previously irradiated field will be designated as &amp;amp;quot;non-target&amp;amp;quot; lesions unless previous progression is documented;Availability of archived tumor tissue sample that can be used for assessment of PrR status by the central laboratory;GOG (Gynecologic Oncology Group) performance status 0-2 (refer to Appendix A);Calculated Glomerular filtration rate ≥ 50 mL&amp;amp;#x2F;min;Total bilirubin ≤ 2.5 times upper limit of normal (ULN);AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);Albumin ≥ 3.0 mg&amp;amp;#x2F;dL;Ability to take oral medication;Patients able to understand the nature of the study and who are willing to give written informed consent;And for Treatment Period 2 only: 1) Patients participating in Treatment Period 1 must have had disease progression after receiving at least 4 weeks of progestin therapy or 2) Patients must be determined as PrR negative status at Screening.Exclusion Criteria:Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma;Concurrent systemic corticosteroid therapy;Concurrent oral contraceptive use &amp;amp;#x2F; Women of childbearing potential not using highly effective means of contraception;Pregnancy confirmed by pregnancy test &amp;amp;#x2F; Lactating women;Prior therapy with hormonal progestin agents;Patients who are candidates for treatment with standard chemotherapy agents (there is no limit to the number of lines of chemotherapy);History of blood clot;History of known bleeding disorder (i.e. disseminated intravascular coagulation or clotting factor deficiency);Major surgery within 4 weeks prior to the start of the study;Patients with clinically significant illnesses which, according to the Investigator, could compromise participation in the study;History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous carcinoma of the skin.Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine) and excipients;Patients with known brain metastases;Patients currently receiving any other investigational agents;Patients currently receiving any other anticancer therapies;Participation in any other clinical study within the last 4 weeks prior to the start of the study">INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or older;
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma (histological documentation of recurrence is not required);
+  3. Recurrent or persistent progressive disease which is refractory to curative therapy or established treatments and cannot be treated with surgery or radiotherapy;
+  4. Measurable disease, as defined by RECIST 1.1 criteria;
+  5. At least one &quot;target lesion&quot; to be used to assess response, as defined by RECIST 1.1 criteria.
+  6. Tumors within a previously irradiated field will be designated as &quot;non-target&quot; lesions unless previous progression is documented;
+  7. Availability of archived tumor tissue sample that can be used for assessment of PrR status by the central laboratory;
+  8. GOG (Gynecologic Oncology Group) performance status 0-2 (refer to Appendix A);
+  9. Calculated Glomerular filtration rate ≥ 50 mL/min;
+  10. Total bilirubin ≤ 2.5 times upper limit of normal (ULN);
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases);
+  13. Albumin ≥ 3.0 mg/dL;
+  14. Ability to take oral medication;
+  15. Patients able to understand the nature of the study and who are willing to give written informed consent;
+  16. And for Treatment Period 2 only: 1) Patients participating in Treatment Period 1 must have had disease progression after receiving at least 4 weeks of progestin therapy or 2) Patients must be determined as PrR negative status at Screening.
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma;
+  2. Concurrent systemic corticosteroid therapy;
+  3. Concurrent oral contraceptive use / Women of childbearing potential not using highly effective means of contraception;
+  4. Pregnancy confirmed by pregnancy test / Lactating women;
+  5. Prior therapy with hormonal progestin agents;
+  6. Patients who are candidates for treatment with standard chemotherapy agents (there is no limit to the number of lines of chemotherapy);
+  7. History of blood clot;
+  8. History of known bleeding disorder (i.e. disseminated intravascular coagulation or clotting factor deficiency);
+  9. Major surgery within 4 weeks prior to the start of the study;
+  10. Patients with clinically significant illnesses which, according to the Investigator, could compromise participation in the study;
+  11. History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous carcinoma of the skin.
+  12. Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine) and excipients;
+  13. Patients with known brain metastases;
+  14. Patients currently receiving any other investigational agents;
+  15. Patients currently receiving any other anticancer therapies;
+  16. Participation in any other clinical study within the last 4 weeks prior to the start of the study</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of Clinical Trial Protocol VX-EC-2-02
+  2. Based on the provided text, here are the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the Clinical Trial Protocol VX-EC-2-02:
+
+INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or older
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma
+  3. Recurrent or persistent progressive disease refractory to curative therapy or established treatments
+  4. Measurable disease, as defined by RECIST 1.1 criteria
+  5. At least one &amp;quot;target lesion&amp;quot; to be used for assessment of response
+  6. Tumors within a previously irradiated field will be designated as &amp;quot;non-target&amp;quot; lesions unless previous progression is documented
+  7. Availability of archived tumor tissue sample for assessment of PrR status by the central laboratory
+  8. GOG performance status 0-2
+  9. Calculated Glomerular Filtration Rate (GFR) ≥ 50 mL/min
+  10. Total bilirubin ≤ 2.5 times upper limit of normal (ULN)
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)
+  13. Albumin ≥ 3.0 mg/dL
+  14. Ability to understand and provide written informed consent
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma
+  2. Concurrent systemic corticosteroid therapy
+  3. Concurrent oral contraceptive use or women of childbearing potential not using highly effective contraception
+  4. Prior therapy with hormonal progestin agents
+  5. Patients who are candidates for treatment with standard chemotherapy agents
+  6. History of blood clot
+  7. History of known bleeding disorder (e.g., disseminated intravascular coagulation)
+  8. Major surgery within 4 weeks prior to the start of the study
+  9. Clinically significant illness that could compromise participation in the study
+  10. History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous cell carcinoma of the skin
+  11. Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine hydrochloride) or excipients
+  12. Patients with known brain metastases
+  13. Patients currently receiving any other investigational agents
+  14. Participation in any other clinical study within the last 4 weeks prior to the start of the study
+  15. Note: This is a summary of the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. . The complete and detailed criteria should be reviewed in the full protocol document.
+  2. Important Considerations:
+  3. Version 2.0: This document reflects the changes made to the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the clinical trial protocol.
+  2. Specificity: The specific wording and details of the criteria may vary depending on the specific study design and objectives.
+  3. Clinical Expertise: It is crucial to consult with a qualified clinical research professional for a comprehensive interpretation of the criteria and their application to individual patients.
+  4. Informed Consent: Ensuring that patients fully understand the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. and the potential risks and benefits of participating in the study is essential."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of Clinical Trial Protocol VX-EC-2-02
+  2. Based on the provided text, here are the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the Clinical Trial Protocol VX-EC-2-02:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or &lt;span class=&quot;diff-add&quot;&gt;older&lt;/span&gt;
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma
+  3. Recurrent or persistent progressive disease refractory to curative therapy or established treatments
+  4. Measurable disease, as defined by RECIST 1.1 &lt;span class=&quot;diff-add&quot;&gt;criteria&lt;/span&gt;
+  5. At least one &amp;quot;target lesion&amp;quot; to be used &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;assessment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;response&lt;/span&gt;
+  6. Tumors within a previously irradiated field will be designated as &amp;quot;non-target&amp;quot; lesions unless previous progression is &lt;span class=&quot;diff-add&quot;&gt;documented&lt;/span&gt;
+  7. Availability of archived tumor tissue sample for assessment of PrR status by the central &lt;span class=&quot;diff-add&quot;&gt;laboratory&lt;/span&gt;
+  8. GOG performance status 0-2
+  9. Calculated Glomerular &lt;span class=&quot;diff-add&quot;&gt;Filtration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Rate (GFR)&lt;/span&gt; ≥ 50 &lt;span class=&quot;diff-add&quot;&gt;mL/min&lt;/span&gt;
+  10. Total bilirubin ≤ 2.5 times upper limit of normal &lt;span class=&quot;diff-add&quot;&gt;(ULN)&lt;/span&gt;
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver &lt;span class=&quot;diff-add&quot;&gt;metastases)&lt;/span&gt;
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver &lt;span class=&quot;diff-add&quot;&gt;metastases)&lt;/span&gt;
+  13. Albumin ≥ 3.0 &lt;span class=&quot;diff-add&quot;&gt;mg/dL&lt;/span&gt;
+  14. Ability to understand and &lt;span class=&quot;diff-add&quot;&gt;provide&lt;/span&gt; written informed &lt;span class=&quot;diff-add&quot;&gt;consent&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial &lt;span class=&quot;diff-add&quot;&gt;carcinoma&lt;/span&gt;
+  2. Concurrent systemic corticosteroid &lt;span class=&quot;diff-add&quot;&gt;therapy&lt;/span&gt;
+  3. Concurrent oral contraceptive use &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;women&lt;/span&gt; of childbearing potential not using highly effective &lt;span class=&quot;diff-add&quot;&gt;contraception&lt;/span&gt;
+  4. Prior therapy with hormonal progestin &lt;span class=&quot;diff-add&quot;&gt;agents&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Patients who are candidates for treatment with standard chemotherapy agents
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; History of blood &lt;span class=&quot;diff-add&quot;&gt;clot&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; History of known bleeding disorder &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; disseminated intravascular &lt;span class=&quot;diff-add&quot;&gt;coagulation)&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Major surgery within 4 weeks prior to the start of the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Clinically&lt;/span&gt; significant &lt;span class=&quot;diff-add&quot;&gt;illness&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; could compromise participation in the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous &lt;span class=&quot;diff-add&quot;&gt;cell &lt;/span&gt;carcinoma of the &lt;span class=&quot;diff-add&quot;&gt;skin&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, &lt;span class=&quot;diff-add&quot;&gt;lidocaine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;hydrochloride)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or excipients&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Patients with known brain &lt;span class=&quot;diff-add&quot;&gt;metastases&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Patients currently receiving any other investigational &lt;span class=&quot;diff-add&quot;&gt;agents&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Participation in any other clinical study within the last 4 weeks prior to the start of the study&lt;span class=&quot;diff-add&quot;&gt;
+  15. Note: This is a summary of the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. . The complete and detailed criteria should be reviewed in the full protocol document.
+  2. Important Considerations:
+  3. Version 2.0: This document reflects the changes made to the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the clinical trial protocol.
+  2. Specificity: The specific wording and details of the criteria may vary depending on the specific study design and objectives.
+  3. Clinical Expertise: It is crucial to consult with a qualified clinical research professional for a comprehensive interpretation of the criteria and their application to individual patients.
+  4. Informed Consent: Ensuring that patients fully understand the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. and the potential risks and benefits of participating in the study is essential.&lt;/span&gt;"
+                 data-raw="##  Modified Inclusion and Exclusion Criteria for Version 2.0 of Clinical Trial Protocol VX-EC-2-02
+
+**Based on the provided text, here are the modified inclusion and exclusion criteria for Version 2.0 of the Clinical Trial Protocol VX-EC-2-02:**
+
+**Inclusion Criteria:**
+
+* **Female patients 18 years of age or older**
+* **Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma**
+* **Recurrent or persistent progressive disease refractory to curative therapy or established treatments**
+* **Measurable disease, as defined by RECIST 1.1 criteria**
+* **At least one &amp;quot;target lesion&amp;quot; to be used for assessment of response**
+* **Tumors within a previously irradiated field will be designated as &amp;quot;non-target&amp;quot; lesions unless previous progression is documented**
+* **Availability of archived tumor tissue sample for assessment of PrR status by the central laboratory**
+* **GOG performance status 0-2**
+* **Calculated Glomerular Filtration Rate (GFR) ≥ 50 mL/min**
+* **Total bilirubin ≤ 2.5 times upper limit of normal (ULN)**
+* **AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)**
+* **Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)**
+* **Albumin ≥ 3.0 mg/dL**
+* **Ability to understand and provide written informed consent**
+
+**Exclusion Criteria:**
+
+* **Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma**
+* **Concurrent systemic corticosteroid therapy**
+* **Concurrent oral contraceptive use or women of childbearing potential not using highly effective contraception**
+* **Prior therapy with hormonal progestin agents**
+* **Patients who are candidates for treatment with standard chemotherapy agents**
+* **History of blood clot**
+* **History of known bleeding disorder (e.g., disseminated intravascular coagulation)**
+* **Major surgery within 4 weeks prior to the start of the study**
+* **Clinically significant illness that could compromise participation in the study**
+* **History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous cell carcinoma of the skin**
+* **Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine hydrochloride) or excipients**
+* **Patients with known brain metastases**
+* **Patients currently receiving any other investigational agents**
+* **Participation in any other clinical study within the last 4 weeks prior to the start of the study**
+
+
+**Note:** This is a summary of the modified inclusion and exclusion criteria. The complete and detailed criteria should be reviewed in the full protocol document. 
+
+
+**Important Considerations:**
+
+* **Version 2.0:** This document reflects the changes made to the inclusion and exclusion criteria for Version 2.0 of the clinical trial protocol. 
+* **Specificity:** The specific wording and details of the criteria may vary depending on the specific study design and objectives. 
+* **Clinical Expertise:** It is crucial to consult with a qualified clinical research professional for a comprehensive interpretation of the criteria and their application to individual patients. 
+* **Informed Consent:**  Ensuring that patients fully understand the inclusion and exclusion criteria and the potential risks and benefits of participating in the study is essential.">Modified Inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of Clinical Trial Protocol VX-EC-2-02
+  2. Based on the provided text, here are the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the Clinical Trial Protocol VX-EC-2-02:
+
+INCLUSION CRITERIA
+
+  1. Female patients 18 years of age or older
+  2. Histologically confirmed serous carcinoma or endometrioid type of endometrial carcinoma
+  3. Recurrent or persistent progressive disease refractory to curative therapy or established treatments
+  4. Measurable disease, as defined by RECIST 1.1 criteria
+  5. At least one &quot;target lesion&quot; to be used for assessment of response
+  6. Tumors within a previously irradiated field will be designated as &quot;non-target&quot; lesions unless previous progression is documented
+  7. Availability of archived tumor tissue sample for assessment of PrR status by the central laboratory
+  8. GOG performance status 0-2
+  9. Calculated Glomerular Filtration Rate (GFR) ≥ 50 mL/min
+  10. Total bilirubin ≤ 2.5 times upper limit of normal (ULN)
+  11. AST ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)
+  12. Alkaline phosphatase ≤ 2.5 times ULN (≤ 5 times ULN for patients with liver metastases)
+  13. Albumin ≥ 3.0 mg/dL
+  14. Ability to understand and provide written informed consent
+
+EXCLUSION CRITERIA
+
+  1. Mixed histology of the tumor or evidence of tumor histology other than serous carcinoma or endometrioid type of endometrial carcinoma
+  2. Concurrent systemic corticosteroid therapy
+  3. Concurrent oral contraceptive use or women of childbearing potential not using highly effective contraception
+  4. Prior therapy with hormonal progestin agents
+  5. Patients who are candidates for treatment with standard chemotherapy agents
+  6. History of blood clot
+  7. History of known bleeding disorder (e.g., disseminated intravascular coagulation)
+  8. Major surgery within 4 weeks prior to the start of the study
+  9. Clinically significant illness that could compromise participation in the study
+  10. History of other clinically active malignancies within 5 years, except for carcinoma in situ of the cervix, basal cell carcinoma, or squamous cell carcinoma of the skin
+  11. Known hypersensitivity or idiosyncratic reaction to any of the study drugs (Sodium Cridanimod, megestrol acetate, lidocaine hydrochloride) or excipients
+  12. Patients with known brain metastases
+  13. Patients currently receiving any other investigational agents
+  14. Participation in any other clinical study within the last 4 weeks prior to the start of the study
+  15. Note: This is a summary of the modified inclusion and
+
+EXCLUSION CRITERIA
+
+  1. . The complete and detailed criteria should be reviewed in the full protocol document.
+  2. Important Considerations:
+  3. Version 2.0: This document reflects the changes made to the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for Version 2.0 of the clinical trial protocol.
+  2. Specificity: The specific wording and details of the criteria may vary depending on the specific study design and objectives.
+  3. Clinical Expertise: It is crucial to consult with a qualified clinical research professional for a comprehensive interpretation of the criteria and their application to individual patients.
+  4. Informed Consent: Ensuring that patients fully understand the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. and the potential risks and benefits of participating in the study is essential.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

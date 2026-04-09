@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 105</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 105</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique.
+  2. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  3. Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  4. Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  5. Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. &amp;lt;18 or &amp;gt;80 years of age.
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis.
+  4. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  5. American Society of Anesthesiologists (ASA) Class 4 or 5.
+  6. Known inability to take the study drug orally (i.e. complete small bowel obstruction).
+  7. Has contraindications or potential risk factors to taking TXA.
+  8. These include subjects with:Known sensitivity to TXA;
+  9. Recent craniotomy (past 30 days);
+  10. Active cerebrovascular bleed;
+  11. Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome);
+  12. Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction, orContinuing use of a combined hormonal contraceptive and or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal carcinomatosisHistory of or current seizure disorder.
+  14. Patients with myeloproliferative disorders.
+  15. Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.
+  16. Planned treatment with alvimopan (Entereg®) during study participation period.
+  17. Planned use of 4% icodextrin (Adept®) or SEPRAFILM during the first surgery.
+  18. Received any other investigational therapy within 4 weeks prior to RandomizationFemale subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30.
+  19. Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.
+  20. Known history of radiation enteritis."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique.&lt;span class=&quot;diff-del&quot;&gt;
+  2.&lt;/span&gt; This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;18&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;80&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of age.&lt;/span&gt;
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis.&lt;span class=&quot;diff-del&quot;&gt;
+  4.&lt;/span&gt; Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; American Society of Anesthesiologists (ASA) Class 4 or 5.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Known inability to take the study drug orally &lt;span class=&quot;diff-del&quot;&gt;(i.e.&lt;/span&gt; complete small bowel obstruction).
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Has contraindications or potential risk factors to taking TXA.&lt;span class=&quot;diff-del&quot;&gt;
+  8.&lt;/span&gt; These include subjects &lt;span class=&quot;diff-del&quot;&gt;with:Known&lt;/span&gt; sensitivity to &lt;span class=&quot;diff-del&quot;&gt;TXA;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Recent craniotomy (past 30 &lt;span class=&quot;diff-del&quot;&gt;days);&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Active cerebrovascular &lt;span class=&quot;diff-del&quot;&gt;bleed;&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary &lt;span class=&quot;diff-del&quot;&gt;syndrome);&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Acute promyelocytic leukemia taking all-trans retinoic acid for remission &lt;span class=&quot;diff-del&quot;&gt;induction,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;orContinuing&lt;/span&gt; use of a combined hormonal contraceptive &lt;span class=&quot;diff-del&quot;&gt;and or&lt;/span&gt; combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal &lt;span class=&quot;diff-del&quot;&gt;carcinomatosisHistory&lt;/span&gt; of or current seizure disorder.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Patients with myeloproliferative disorders.
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.&lt;span class=&quot;diff-del&quot;&gt;
+  16. Planned treatment with alvimopan (Entereg®) during study participation period.
+  17. Planned use of 4% icodextrin (Adept®) or SEPRAFILM during the first surgery.
+  18. Received any other investigational therapy within 4 weeks prior to RandomizationFemale subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30.
+  19. Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.
+  20. Known history of radiation enteritis.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Subjects will be eligible for participation in the study only if they meet ALL of the following inclusion criteria:Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.Exclusion Criteria:Subjects will not be eligible for participation in the study if they meet ANY of the following exclusion criteria:&amp;amp;lt;18 or &amp;amp;gt;80 years of age.Requires emergency bowel surgery.Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;amp;#x27;s Disease, or ulcerative colitis.Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.American Society of Anesthesiologists (ASA) Class 4 or 5.Known inability to take the study drug orally (i.e. complete small bowel obstruction).Has contraindications or potential risk factors to taking TXA. These include subjects with:Known sensitivity to TXA;Recent craniotomy (past 30 days);Active cerebrovascular bleed;Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome);Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction, orContinuing use of a combined hormonal contraceptive and or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).Has peritoneal carcinomatosisHistory of or current seizure disorder.Patients with myeloproliferative disorders.Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.Planned treatment with alvimopan (Entereg®) during study participation period.Planned use of 4% icodextrin (Adept®) or SEPRAFILM during the first surgery.Received any other investigational therapy within 4 weeks prior to RandomizationFemale subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30. Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.Known history of radiation enteritis.">INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique.
+  2. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  3. Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  4. Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  5. Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. &lt;18 or &gt;80 years of age.
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&#x27;s Disease, or ulcerative colitis.
+  4. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  5. American Society of Anesthesiologists (ASA) Class 4 or 5.
+  6. Known inability to take the study drug orally (i.e. complete small bowel obstruction).
+  7. Has contraindications or potential risk factors to taking TXA.
+  8. These include subjects with:Known sensitivity to TXA;
+  9. Recent craniotomy (past 30 days);
+  10. Active cerebrovascular bleed;
+  11. Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome);
+  12. Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction, orContinuing use of a combined hormonal contraceptive and or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal carcinomatosisHistory of or current seizure disorder.
+  14. Patients with myeloproliferative disorders.
+  15. Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.
+  16. Planned treatment with alvimopan (Entereg®) during study participation period.
+  17. Planned use of 4% icodextrin (Adept®) or SEPRAFILM during the first surgery.
+  18. Received any other investigational therapy within 4 weeks prior to RandomizationFemale subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30.
+  19. Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.
+  20. Known history of radiation enteritis.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  2. Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  3. Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  4. Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. Age &amp;lt; 18 or &amp;gt; 80 years.
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  4. American Society of Anesthesiologists (ASA) Class 4 or 5.
+  5. Known inability to take the study drug orally (i.e., complete small bowel obstruction).
+  6. Has contraindications or potential risk factors to taking TXA. These include subjects with:
+  7. Known sensitivity to TXA.
+  8. Recent craniotomy (past 30 days).
+  9. Active cerebrovascular bleed.
+  10. Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome).
+  11. Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction.
+  12. Continuing use of a combined hormonal contraceptive and/or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal carcinomatosis.
+  14. History of or current seizure disorder.
+  15. Patients with myeloproliferative disorders.
+  16. Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Age &amp;lt; 18&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;years.&lt;/span&gt;
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; American Society of Anesthesiologists (ASA) Class 4 or 5.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Known inability to take the study drug orally &lt;span class=&quot;diff-add&quot;&gt;(i.e.,&lt;/span&gt; complete small bowel obstruction).
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Has contraindications or potential risk factors to taking TXA. These include subjects &lt;span class=&quot;diff-add&quot;&gt;with:
+  7. Known&lt;/span&gt; sensitivity to &lt;span class=&quot;diff-add&quot;&gt;TXA.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Recent craniotomy (past 30 &lt;span class=&quot;diff-add&quot;&gt;days).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Active cerebrovascular &lt;span class=&quot;diff-add&quot;&gt;bleed.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary &lt;span class=&quot;diff-add&quot;&gt;syndrome).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Acute promyelocytic leukemia taking all-trans retinoic acid for remission &lt;span class=&quot;diff-add&quot;&gt;induction.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Continuing&lt;/span&gt; use of a combined hormonal contraceptive &lt;span class=&quot;diff-add&quot;&gt;and/or&lt;/span&gt; combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal &lt;span class=&quot;diff-add&quot;&gt;carcinomatosis.
+  14. History&lt;/span&gt; of or current seizure disorder.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Patients with myeloproliferative disorders.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment."
+                 data-raw="Inclusion Criteria:
+- Subjects will be eligible for participation in the study only if they meet ALL of the following inclusion criteria:
+  - Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  - Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  - Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  - Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+Exclusion Criteria:
+- Subjects will not be eligible for participation in the study if they meet ANY of the following exclusion criteria:
+  - Age &amp;amp;lt; 18 or &amp;amp;gt; 80 years.
+  - Requires emergency bowel surgery.
+  - Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  - American Society of Anesthesiologists (ASA) Class 4 or 5.
+  - Known inability to take the study drug orally (i.e., complete small bowel obstruction).
+  - Has contraindications or potential risk factors to taking TXA. These include subjects with:
+    - Known sensitivity to TXA.
+    - Recent craniotomy (past 30 days).
+    - Active cerebrovascular bleed.
+    - Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome).
+    - Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction.
+    - Continuing use of a combined hormonal contraceptive and/or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  - Has peritoneal carcinomatosis.
+  - History of or current seizure disorder.
+  - Patients with myeloproliferative disorders.
+  - Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.">INCLUSION CRITERIA
+
+  1. Subjects will be eligible for participation in the study only if they meet ALL of the following
+
+INCLUSION CRITERIA
+
+  1. Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique. This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.
+  2. Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.
+  3. Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.
+  4. Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Subjects will not be eligible for participation in the study if they meet ANY of the following
+
+EXCLUSION CRITERIA
+
+  1. Age &lt; 18 or &gt; 80 years.
+  2. Requires emergency bowel surgery.
+  3. Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&#x27;s Disease, or ulcerative colitis. Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.
+  4. American Society of Anesthesiologists (ASA) Class 4 or 5.
+  5. Known inability to take the study drug orally (i.e., complete small bowel obstruction).
+  6. Has contraindications or potential risk factors to taking TXA. These include subjects with:
+  7. Known sensitivity to TXA.
+  8. Recent craniotomy (past 30 days).
+  9. Active cerebrovascular bleed.
+  10. Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome).
+  11. Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction.
+  12. Continuing use of a combined hormonal contraceptive and/or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).
+  13. Has peritoneal carcinomatosis.
+  14. History of or current seizure disorder.
+  15. Patients with myeloproliferative disorders.
+  16. Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

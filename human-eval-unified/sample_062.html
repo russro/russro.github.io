@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 62</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 62</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Aged 6 to &amp;lt; 36 months of age on the day of first study vaccination (study product administration).
+  2. Born at full term of pregnancy (≥ 37 weeks) and/or with a birth weight ≥ 2.5 kg.
+  3. Note: This inclusion criterion only applies to subjects 6 to &amp;lt; 12 months of age on the day of the first study visit.
+  4. Informed consent form has been signed and dated by the parent(s) or guardian(s).
+  5. Subject and parent/guardian are able to attend all scheduled visits and to comply with all trial procedures.
+
+EXCLUSION CRITERIA
+
+  1. Participation at the time of study enrollment (or in the 30 days preceding the first trial vaccination) or planned participation during the present trial period in another clinical trial investigating a vaccine, drug, medical device, or medical procedure.
+  2. Receipt of any vaccine in the 30 days preceding the first trial vaccination, or planned receipt of any vaccine before Visit 2 for subjects receiving 1 dose of influenza vaccine or Visit 3 for subjects receiving 2 doses of influenza vaccine.
+  3. Previous vaccination against influenza (in the 2016-2017 season) with either the trial vaccine or another vaccine.
+  4. Receipt of immune globulins, blood, or blood-derived products in the past 3 months.
+  5. Known or suspected congenital or acquired immunodeficiency; or receipt of immunosuppressive therapy, such as anti-cancer chemotherapy or radiation therapy, within the preceding 6 months; or long-term systemic corticosteroid therapy (prednisone or equivalent for more than 2 consecutive weeks within the past 3 months).
+  6. Known systemic hypersensitivity to any of the vaccine components, or history of a life-threatening reaction to the vaccine used in the trial or to a vaccine containing any of the same substances.
+  7. Thrombocytopenia, which may be a contraindication for intramuscular vaccination, at the discretion of the Investigator.
+  8. Bleeding disorder, or receipt of anticoagulants in the 3 weeks preceding inclusion, contraindicating intramuscular vaccination.
+  9. Deprived of freedom by an administrative or court order, or in an emergency setting, or hospitalized involuntarily.
+  10. Chronic illness that, in the opinion of the Investigator, is at a stage where it might interfere with trial conduct or completion.
+  11. Moderate or severe acute illness/infection (according to Investigator judgment) on the day of planned vaccination or febrile illness (temperature ≥ 100.4°F [38.0°C]).
+  12. A prospective subject should not be included in the study until the condition has resolved or the febrile event has subsided.
+  13. Identified as a natural or adopted child of either the Investigator or an employee with direct involvement in the proposed study.
+  14. History of serious adverse reactions to any influenza vaccine.
+  15. Personal history of Guillain-Barré Syndrome.
+  16. Any condition that in the opinion of the Investigator would pose a health risk to the subject if enrolled or could interfere with the evaluation of the vaccine.
+  17. Personal history of clinically significant developmental delay (at the discretion of the Investigator), neurologic disorder, or seizure disorder.
+  18. Known seropositivity for human immunodeficiency virus, hepatitis B, or hepatitis C."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Aged&lt;/span&gt; 6 to &amp;lt; 36 months of &lt;span class=&quot;diff-del&quot;&gt;age on the day of first study vaccination (study product administration).&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Born&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at full term of pregnancy (≥ 37 weeks) and/or with a birth weight&lt;/span&gt; ≥ 2.5 kg.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Note: This inclusion criterion only applies to subjects 6 to &amp;lt; 12 months of age on the day of the first study visit.
+  4. &lt;/span&gt;Informed &lt;span class=&quot;diff-del&quot;&gt;consent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;form&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has been signed&lt;/span&gt; and dated by the parent(s) or guardian(s).
+  5. &lt;span class=&quot;diff-del&quot;&gt;Subject and parent/guardian are able to attend all scheduled visits and to comply with all trial procedures.
+
+EXCLUSION CRITERIA
+
+  1. Participation at the time&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;study enrollment (or&lt;/span&gt; in the 30 &lt;span class=&quot;diff-del&quot;&gt;days&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;preceding&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;trial&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;vaccination)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or planned participation during the present trial period in another clinical trial investigating a vaccine, drug, medical device, or medical procedure.
+  2. Receipt of&lt;/span&gt; any vaccine in the 30 days &lt;span class=&quot;diff-del&quot;&gt;preceding&lt;/span&gt; the first trial &lt;span class=&quot;diff-del&quot;&gt;vaccination,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;planned&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receipt&lt;/span&gt; of any&lt;span class=&quot;diff-del&quot;&gt; vaccine before Visit 2 for subjects receiving 1 dose of&lt;/span&gt; influenza &lt;span class=&quot;diff-del&quot;&gt;vaccine or Visit 3 for subjects receiving 2 doses of influenza vaccine.
+  3. Previous vaccination against influenza (in the 2016-2017 season) with either the trial vaccine or another vaccine.
+  4. Receipt of immune globulins, blood, or blood-derived products in the past 3 months.
+  5.&lt;/span&gt; Known or suspected congenital or acquired &lt;span class=&quot;diff-del&quot;&gt;immunodeficiency;&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;receipt&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;immunosuppressive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;such as anti-cancer chemotherapy&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;radiation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;preceding&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months;&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;long-term&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;systemic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;corticosteroid therapy (prednisone&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;equivalent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consecutive&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;weeks&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within the past 3 months).
+  6. Known systemic hypersensitivity to any of the vaccine components,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a life-threatening reaction to the vaccine used in the trial or to a vaccine containing any of the same substances.
+  7. Thrombocytopenia, which may&lt;/span&gt; be a contraindication for intramuscular &lt;span class=&quot;diff-del&quot;&gt;vaccination, at the discretion of the Investigator.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Bleeding &lt;span class=&quot;diff-del&quot;&gt;disorder,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;receipt of anticoagulants in the 3 weeks preceding inclusion, contraindicating intramuscular vaccination.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9. Deprived of freedom by an administrative or court order, or in an emergency setting, or hospitalized involuntarily.
+  10.&lt;/span&gt; Chronic &lt;span class=&quot;diff-del&quot;&gt;illness&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that, in&lt;/span&gt; the opinion of the Investigator,&lt;span class=&quot;diff-del&quot;&gt; is&lt;/span&gt; at a stage where it might interfere with trial conduct or completion.
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Moderate or &lt;span class=&quot;diff-del&quot;&gt;severe&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;acute&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;illness/infection&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(according to Investigator judgment) on the day of planned vaccination or febrile illness (temperature ≥ 100.4°F [38.0°C]).
+  12. A prospective subject should not be included in the study until the condition has resolved or the febrile event has subsided.
+  13. Identified as a natural or adopted child of either the Investigator or an employee with direct involvement in the proposed study.
+  14. History of serious adverse reactions to any influenza vaccine.
+  15. Personal history of Guillain-Barré Syndrome.
+  16. Any condition that in&lt;/span&gt; the opinion of the &lt;span class=&quot;diff-del&quot;&gt;Investigator&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;would pose&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;risk&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the subject if enrolled or could&lt;/span&gt; interfere with the &lt;span class=&quot;diff-del&quot;&gt;evaluation&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;vaccine.&lt;/span&gt;
+  17. &lt;span class=&quot;diff-del&quot;&gt;Personal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clinically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;significant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;developmental delay (at&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;discretion&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;Investigator),&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;neurologic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disorder,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;seizure disorder.&lt;/span&gt;
+  18. &lt;span class=&quot;diff-del&quot;&gt;Known seropositivity for human immunodeficiency virus, hepatitis B,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;hepatitis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;C.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Aged 6 to &amp;amp;lt; 36 months of age on the day of first study vaccination (study product administration).Born at full term of pregnancy (≥ 37 weeks) and&amp;amp;#x2F;or with a birth weight ≥ 2.5 kg.Note: This inclusion criterion only applies to subjects 6 to &amp;amp;lt; 12 months of age on the day of the first study visit.Informed consent form has been signed and dated by the parent(s) or guardian(s).Subject and parent&amp;amp;#x2F;guardian are able to attend all scheduled visits and to comply with all trial procedures.Exclusion Criteria:Participation at the time of study enrollment (or in the 30 days preceding the first trial vaccination) or planned participation during the present trial period in another clinical trial investigating a vaccine, drug, medical device, or medical procedure.Receipt of any vaccine in the 30 days preceding the first trial vaccination, or planned receipt of any vaccine before Visit 2 for subjects receiving 1 dose of influenza vaccine or Visit 3 for subjects receiving 2 doses of influenza vaccine.Previous vaccination against influenza (in the 2016-2017 season) with either the trial vaccine or another vaccine.Receipt of immune globulins, blood, or blood-derived products in the past 3 months.Known or suspected congenital or acquired immunodeficiency; or receipt of immunosuppressive therapy, such as anti-cancer chemotherapy or radiation therapy, within the preceding 6 months; or long-term systemic corticosteroid therapy (prednisone or equivalent for more than 2 consecutive weeks within the past 3 months).Known systemic hypersensitivity to any of the vaccine components, or history of a life-threatening reaction to the vaccine used in the trial or to a vaccine containing any of the same substances.Thrombocytopenia, which may be a contraindication for intramuscular vaccination, at the discretion of the Investigator.Bleeding disorder, or receipt of anticoagulants in the 3 weeks preceding inclusion, contraindicating intramuscular vaccination.Deprived of freedom by an administrative or court order, or in an emergency setting, or hospitalized involuntarily.Chronic illness that, in the opinion of the Investigator, is at a stage where it might interfere with trial conduct or completion.Moderate or severe acute illness&amp;amp;#x2F;infection (according to Investigator judgment) on the day of planned vaccination or febrile illness (temperature ≥ 100.4°F [38.0°C]). A prospective subject should not be included in the study until the condition has resolved or the febrile event has subsided.Identified as a natural or adopted child of either the Investigator or an employee with direct involvement in the proposed study.History of serious adverse reactions to any influenza vaccine.Personal history of Guillain-Barré Syndrome.Any condition that in the opinion of the Investigator would pose a health risk to the subject if enrolled or could interfere with the evaluation of the vaccine.Personal history of clinically significant developmental delay (at the discretion of the Investigator), neurologic disorder, or seizure disorder.Known seropositivity for human immunodeficiency virus, hepatitis B, or hepatitis C.">INCLUSION CRITERIA
+
+  1. Aged 6 to &lt; 36 months of age on the day of first study vaccination (study product administration).
+  2. Born at full term of pregnancy (≥ 37 weeks) and/or with a birth weight ≥ 2.5 kg.
+  3. Note: This inclusion criterion only applies to subjects 6 to &lt; 12 months of age on the day of the first study visit.
+  4. Informed consent form has been signed and dated by the parent(s) or guardian(s).
+  5. Subject and parent/guardian are able to attend all scheduled visits and to comply with all trial procedures.
+
+EXCLUSION CRITERIA
+
+  1. Participation at the time of study enrollment (or in the 30 days preceding the first trial vaccination) or planned participation during the present trial period in another clinical trial investigating a vaccine, drug, medical device, or medical procedure.
+  2. Receipt of any vaccine in the 30 days preceding the first trial vaccination, or planned receipt of any vaccine before Visit 2 for subjects receiving 1 dose of influenza vaccine or Visit 3 for subjects receiving 2 doses of influenza vaccine.
+  3. Previous vaccination against influenza (in the 2016-2017 season) with either the trial vaccine or another vaccine.
+  4. Receipt of immune globulins, blood, or blood-derived products in the past 3 months.
+  5. Known or suspected congenital or acquired immunodeficiency; or receipt of immunosuppressive therapy, such as anti-cancer chemotherapy or radiation therapy, within the preceding 6 months; or long-term systemic corticosteroid therapy (prednisone or equivalent for more than 2 consecutive weeks within the past 3 months).
+  6. Known systemic hypersensitivity to any of the vaccine components, or history of a life-threatening reaction to the vaccine used in the trial or to a vaccine containing any of the same substances.
+  7. Thrombocytopenia, which may be a contraindication for intramuscular vaccination, at the discretion of the Investigator.
+  8. Bleeding disorder, or receipt of anticoagulants in the 3 weeks preceding inclusion, contraindicating intramuscular vaccination.
+  9. Deprived of freedom by an administrative or court order, or in an emergency setting, or hospitalized involuntarily.
+  10. Chronic illness that, in the opinion of the Investigator, is at a stage where it might interfere with trial conduct or completion.
+  11. Moderate or severe acute illness/infection (according to Investigator judgment) on the day of planned vaccination or febrile illness (temperature ≥ 100.4°F [38.0°C]).
+  12. A prospective subject should not be included in the study until the condition has resolved or the febrile event has subsided.
+  13. Identified as a natural or adopted child of either the Investigator or an employee with direct involvement in the proposed study.
+  14. History of serious adverse reactions to any influenza vaccine.
+  15. Personal history of Guillain-Barré Syndrome.
+  16. Any condition that in the opinion of the Investigator would pose a health risk to the subject if enrolled or could interfere with the evaluation of the vaccine.
+  17. Personal history of clinically significant developmental delay (at the discretion of the Investigator), neurologic disorder, or seizure disorder.
+  18. Known seropositivity for human immunodeficiency virus, hepatitis B, or hepatitis C.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Eligibility Criteria for Version 1:
+
+INCLUSION CRITERIA
+
+  1. Age: 6 to &amp;lt; 36 months of age.
+  2. Birth Weight: ≥ 2.5 kg.
+  3. Informed Consent Form: Signed and dated by the parent(s) or guardian(s).
+  4. No Previous Vaccination Against Influenza: Not previously vaccinated against influenza.
+  5. Receipt of Vaccine in the 30 Days Before First Trial Vaccination: Not received any vaccine in the 30 days leading up to the first trial vaccination.
+  6. Previous Vaccination Against Influenza: Not previously vaccinated against influenza.
+  7. History of Serious ARs to any influenza vaccine: Known or suspected congenital or acquired immunodeficiency.
+  8. History of Guillain-Barré Syndrome: Known or suspected.
+  9. Personal History of Neurological Disorder: Known or suspected.
+  10. Known Seropositivity for Human Immunodeficiency Virus, Hepatitis B, or Hepatitis C: Known or suspected.
+  11. Serum Glomerular Filtration Rate (SGFR): Not known or suspected.
+  12. Thrombocytopenia: May be a contraindication for intramuscular vaccination.
+  13. Bleeding Disorder: Not currently interfering with trial conduct or completion.
+  14. Chronic Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  15. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  16. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  17. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  18. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  19. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  20. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  21. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  22. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  23. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  24. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  25. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  26. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  27. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  28. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  29. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  30. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  31. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  32. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  33. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  34. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  35. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  36. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  37. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  38. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  39. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  40. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  41. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  42. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  43. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  44. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  45. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  46. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  47. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  48. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  49. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  50. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  51. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  52. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  53. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  54. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  55. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  56. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  57. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  58. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  59. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  60. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  61. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  62. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  63. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  64. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  65. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  66. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  67. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Eligibility Criteria for Version 1:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Age:&lt;/span&gt; 6 to &amp;lt; 36 months of &lt;span class=&quot;diff-add&quot;&gt;age.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Birth&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Weight:&lt;/span&gt; ≥ 2.5 kg.
+  3. Informed &lt;span class=&quot;diff-add&quot;&gt;Consent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Form:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Signed&lt;/span&gt; and dated by the parent(s) or guardian(s).
+  &lt;span class=&quot;diff-add&quot;&gt;4. No Previous Vaccination Against Influenza: Not previously vaccinated against influenza.
+  &lt;/span&gt;5. &lt;span class=&quot;diff-add&quot;&gt;Receipt&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Vaccine&lt;/span&gt; in the 30 &lt;span class=&quot;diff-add&quot;&gt;Days&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Before&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;First&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Trial&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Vaccination:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;received&lt;/span&gt; any vaccine in the 30 days &lt;span class=&quot;diff-add&quot;&gt;leading up to&lt;/span&gt; the first trial &lt;span class=&quot;diff-add&quot;&gt;vaccination.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Vaccination&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Against Influenza: Not previously vaccinated against influenza.
+  7. History&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Serious ARs to &lt;/span&gt;any influenza &lt;span class=&quot;diff-add&quot;&gt;vaccine:&lt;/span&gt; Known or suspected congenital or acquired &lt;span class=&quot;diff-add&quot;&gt;immunodeficiency.
+  8. History of Guillain-Barré Syndrome: Known&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;suspected.
+  9. Personal History&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;Neurological&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Disorder:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;suspected.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Seropositivity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Immunodeficiency&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Virus, Hepatitis B,&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;Hepatitis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;C:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;suspected.
+  11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Serum&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Glomerular&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Filtration&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Rate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(SGFR):&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;known&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;suspected.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Thrombocytopenia:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;May&lt;/span&gt; be a contraindication for intramuscular &lt;span class=&quot;diff-add&quot;&gt;vaccination.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Bleeding &lt;span class=&quot;diff-add&quot;&gt;Disorder: Not currently interfering with trial conduct&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;completion.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; Chronic &lt;span class=&quot;diff-add&quot;&gt;Illness:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;In&lt;/span&gt; the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Moderate or &lt;span class=&quot;diff-add&quot;&gt;Severe&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Illness:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;In&lt;/span&gt; the opinion of the &lt;span class=&quot;diff-add&quot;&gt;Investigator,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;stage&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;might&lt;/span&gt; interfere with &lt;span class=&quot;diff-add&quot;&gt;trial conduct or completion.
+  16. Moderate or Severe Acute Illness: In &lt;/span&gt;the &lt;span class=&quot;diff-add&quot;&gt;opinion&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;Investigator, at a stage where it might interfere with trial conduct or completion.&lt;/span&gt;
+  17. &lt;span class=&quot;diff-add&quot;&gt;Moderate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Severe&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acute&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Illness:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;In&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;opinion&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;Investigator,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a stage where it might interfere with trial conduct&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;completion.&lt;/span&gt;
+  18. &lt;span class=&quot;diff-add&quot;&gt;Moderate&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;Severe&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  19. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  20. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  21. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  22. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  23. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  24. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  25. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  26. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  27. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  28. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  29. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  30. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  31. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  32. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  33. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  34. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  35. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  36. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  37. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  38. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  39. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  40. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  41. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  42. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  43. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  44. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  45. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  46. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  47. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  48. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  49. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  50. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  51. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  52. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  53. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  54. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  55. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  56. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  57. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  58. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  59. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  60. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  61. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  62. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  63. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  64. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  65. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  66. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  67. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.&lt;/span&gt;"
+                 data-raw="**Eligibility Criteria for Version 1:**
+
+**Inclusion Criteria:**
+- **Age:** 6 to &amp;lt; 36 months of age.
+- **Birth Weight:** ≥ 2.5 kg.
+- **Informed Consent Form:** Signed and dated by the parent(s) or guardian(s).
+- **No Previous Vaccination Against Influenza:** Not previously vaccinated against influenza.
+- **Receipt of Vaccine in the 30 Days Before First Trial Vaccination:** Not received any vaccine in the 30 days leading up to the first trial vaccination.
+- **Previous Vaccination Against Influenza:** Not previously vaccinated against influenza.
+- **History of Serious ARs to any influenza vaccine:** Known or suspected congenital or acquired immunodeficiency.
+- **History of Guillain-Barré Syndrome:** Known or suspected.
+- **Personal History of Neurological Disorder:** Known or suspected.
+- **Known Seropositivity for Human Immunodeficiency Virus, Hepatitis B, or Hepatitis C:** Known or suspected.
+- **Serum Glomerular Filtration Rate (SGFR):** Not known or suspected.
+- **Thrombocytopenia:** May be a contraindication for intramuscular vaccination.
+- **Bleeding Disorder:** Not currently interfering with trial conduct or completion.
+- **Chronic Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+- **Moderate or Severe Acute Illness:** In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.">Eligibility Criteria for Version 1:
+
+INCLUSION CRITERIA
+
+  1. Age: 6 to &lt; 36 months of age.
+  2. Birth Weight: ≥ 2.5 kg.
+  3. Informed Consent Form: Signed and dated by the parent(s) or guardian(s).
+  4. No Previous Vaccination Against Influenza: Not previously vaccinated against influenza.
+  5. Receipt of Vaccine in the 30 Days Before First Trial Vaccination: Not received any vaccine in the 30 days leading up to the first trial vaccination.
+  6. Previous Vaccination Against Influenza: Not previously vaccinated against influenza.
+  7. History of Serious ARs to any influenza vaccine: Known or suspected congenital or acquired immunodeficiency.
+  8. History of Guillain-Barré Syndrome: Known or suspected.
+  9. Personal History of Neurological Disorder: Known or suspected.
+  10. Known Seropositivity for Human Immunodeficiency Virus, Hepatitis B, or Hepatitis C: Known or suspected.
+  11. Serum Glomerular Filtration Rate (SGFR): Not known or suspected.
+  12. Thrombocytopenia: May be a contraindication for intramuscular vaccination.
+  13. Bleeding Disorder: Not currently interfering with trial conduct or completion.
+  14. Chronic Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  15. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  16. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  17. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  18. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  19. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  20. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  21. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  22. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  23. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  24. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  25. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  26. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  27. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  28. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  29. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  30. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  31. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  32. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  33. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  34. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  35. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  36. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  37. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  38. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  39. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  40. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  41. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  42. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  43. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  44. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  45. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  46. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  47. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  48. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  49. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  50. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  51. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  52. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  53. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  54. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  55. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  56. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  57. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  58. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  59. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  60. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  61. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  62. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  63. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  64. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  65. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  66. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.
+  67. Moderate or Severe Acute Illness: In the opinion of the Investigator, at a stage where it might interfere with trial conduct or completion.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

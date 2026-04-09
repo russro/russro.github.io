@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 95</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 95</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy &amp;gt; 3 months
+  6. Eastern co-operative oncology group (ECOG, R01-0787) performance score &amp;gt;=2 at screening
+  7. Signed written informed consent consistent with international conference on harmonisation, good clinical practice (ICH-GCP) and local legislation
+
+EXCLUSION CRITERIA
+
+  1. Previously untreated AML (phase I part only)Relapsed or treatment refractory AML (phase IIa part only)Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)Hypersensitivity to one of the trial drugs or the excipientsOther malignancy requiring treatmentSymptomatic central nervous system involvementClinically relevant QT prolongation (e.g. long QT syndrome)Aspartate amino transferase (AST) or alanine amino transferase (ALT) greater than 2.5 times the upper limit of normal (ULN), or AST or ALT greater than 5 times the ULN in case of known leukaemia liver involvementProthrombin time (PT) &amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)Bilirubin greater than 1.5 mg/dl (&amp;gt; 26 mcmol/L)Serum creatinine greater than 2.0 mg/dlConcomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmiaPsychiatric illness or social situation that would limit compliance with trial requirementsConcomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drugContraindications for cytarabine treatment according to the SPCFemale patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.).
+  2. Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trialPregnant or nursing female patientsPatient unable to comply with the protocol"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; 3 months
+  6. Eastern &lt;span class=&quot;diff-del&quot;&gt;co-operative&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;oncology&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ECOG, R01-0787)&lt;/span&gt; performance score &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;=2&lt;/span&gt; at screening
+  7. Signed written informed consent consistent with international conference on &lt;span class=&quot;diff-del&quot;&gt;harmonisation,&lt;/span&gt; good clinical practice (ICH-GCP) and local legislation&lt;span class=&quot;diff-del&quot;&gt;
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Previously untreated AML (phase I part only)Relapsed or treatment refractory AML (phase IIa part only)Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)Hypersensitivity&lt;/span&gt; to one of the trial drugs or the &lt;span class=&quot;diff-del&quot;&gt;excipientsOther&lt;/span&gt; malignancy requiring &lt;span class=&quot;diff-del&quot;&gt;treatmentSymptomatic&lt;/span&gt; central nervous system &lt;span class=&quot;diff-del&quot;&gt;involvementClinically&lt;/span&gt; relevant QT prolongation &lt;span class=&quot;diff-del&quot;&gt;(e.g.&lt;/span&gt; long QT &lt;span class=&quot;diff-del&quot;&gt;syndrome)Aspartate&lt;/span&gt; amino transferase (AST) or alanine amino transferase (ALT) &lt;span class=&quot;diff-del&quot;&gt;greater than&lt;/span&gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &lt;span class=&quot;diff-del&quot;&gt;greater than&lt;/span&gt; 5 times the ULN in case of known leukaemia liver &lt;span class=&quot;diff-del&quot;&gt;involvementProthrombin&lt;/span&gt; time (PT) &lt;span class=&quot;diff-del&quot;&gt;&amp;gt;&lt;/span&gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, &lt;span class=&quot;diff-del&quot;&gt;warfarin)Bilirubin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;greater&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; 1.5 &lt;span class=&quot;diff-del&quot;&gt;mg/dl&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(&amp;gt;&lt;/span&gt; 26 &lt;span class=&quot;diff-del&quot;&gt;mcmol/L)Serum&lt;/span&gt; creatinine &lt;span class=&quot;diff-del&quot;&gt;greater than&lt;/span&gt; 2.0 &lt;span class=&quot;diff-del&quot;&gt;mg/dlConcomitant&lt;/span&gt; intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac &lt;span class=&quot;diff-del&quot;&gt;arrhythmiaPsychiatric&lt;/span&gt; illness or social situation that would limit compliance with trial &lt;span class=&quot;diff-del&quot;&gt;requirementsConcomitant&lt;/span&gt; therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial &lt;span class=&quot;diff-del&quot;&gt;drugContraindications&lt;/span&gt; for cytarabine treatment according to the &lt;span class=&quot;diff-del&quot;&gt;SPCFemale&lt;/span&gt; patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, &lt;span class=&quot;diff-del&quot;&gt;etc.).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the &lt;span class=&quot;diff-del&quot;&gt;trialPregnant&lt;/span&gt; or nursing &lt;span class=&quot;diff-del&quot;&gt;female&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;patientsPatient&lt;/span&gt; unable to comply with the protocol"
+                 data-raw="Inclusion Criteria:Male or female adult with relapsed&amp;amp;#x2F;refractory AML ineligible for intensive treatment (phase I part only)Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)Patient is eligible for LD-Ara-C treatmentLife expectancy &amp;amp;gt; 3 monthsEastern co-operative oncology group (ECOG, R01-0787) performance score &amp;amp;gt;=2 at screeningSigned written informed consent consistent with international conference on harmonisation, good clinical practice (ICH-GCP) and local legislationExclusion Criteria:Previously untreated AML (phase I part only)Relapsed or treatment refractory AML (phase IIa part only)Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)Hypersensitivity to one of the trial drugs or the excipientsOther malignancy requiring treatmentSymptomatic central nervous system involvementClinically relevant QT prolongation (e.g. long QT syndrome)Aspartate amino transferase (AST) or alanine amino transferase (ALT) greater than 2.5 times the upper limit of normal (ULN), or AST or ALT greater than 5 times the ULN in case of known leukaemia liver involvementProthrombin time (PT) &amp;amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)Bilirubin greater than 1.5 mg&amp;amp;#x2F;dl (&amp;amp;gt; 26 mcmol&amp;amp;#x2F;L)Serum creatinine greater than 2.0 mg&amp;amp;#x2F;dlConcomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmiaPsychiatric illness or social situation that would limit compliance with trial requirementsConcomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drugContraindications for cytarabine treatment according to the SPCFemale patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.).Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trialPregnant or nursing female patientsPatient unable to comply with the protocol">INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy &gt; 3 months
+  6. Eastern co-operative oncology group (ECOG, R01-0787) performance score &gt;=2 at screening
+  7. Signed written informed consent consistent with international conference on harmonisation, good clinical practice (ICH-GCP) and local legislation
+
+EXCLUSION CRITERIA
+
+  1. Previously untreated AML (phase I part only)Relapsed or treatment refractory AML (phase IIa part only)Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)Hypersensitivity to one of the trial drugs or the excipientsOther malignancy requiring treatmentSymptomatic central nervous system involvementClinically relevant QT prolongation (e.g. long QT syndrome)Aspartate amino transferase (AST) or alanine amino transferase (ALT) greater than 2.5 times the upper limit of normal (ULN), or AST or ALT greater than 5 times the ULN in case of known leukaemia liver involvementProthrombin time (PT) &gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)Bilirubin greater than 1.5 mg/dl (&gt; 26 mcmol/L)Serum creatinine greater than 2.0 mg/dlConcomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmiaPsychiatric illness or social situation that would limit compliance with trial requirementsConcomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drugContraindications for cytarabine treatment according to the SPCFemale patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.).
+  2. Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trialPregnant or nursing female patientsPatient unable to comply with the protocol</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (version 3):
+
+INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy ≥ 3 months
+  6. Eastern Cooperative Oncology Group (ECOG) performance score ≥ 2 at screening
+  7. Signed written informed consent consistent with international conference on harmonization, good clinical practice (ICH-GCP) and local legislation
+  8. No hypersensitivity to one of the trial drugs or the excipients
+  9. No other malignancy requiring treatment
+  10. No symptomatic central nervous system involvement
+  11. No clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &amp;gt; 470 ms)
+  12. Aspartate amino transferase (AST) or alanine amino transferase (ALT) ≤ 2.5 times the upper limit of normal (ULN), or AST or ALT ≤ 5 times the ULN in case of known leukaemia liver involvement
+  13. Prothrombin time (PT) ≤ 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+  14. Bilirubin ≤ 1.5 mg/dL (≤ 26 #mol/L)
+  15. Serum creatinine ≤ 2.0 mg/dL
+  16. No concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+  17. No psychiatric illness or social situation that would limit compliance with trial requirements
+  18. No concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+  19. No contraindications for cytarabine treatment according to the SPC
+  20. Female patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.)
+  21. Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trial
+  22. Not pregnant or nursing
+  23. Patient able to comply with the protocol
+
+EXCLUSION CRITERIA
+
+  1. Previously untreated AML (phase I part only)
+  2. Relapsed or treatment refractory AML (phase IIa part only)
+  3. Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)
+  4. Hypersensitivity to one of the trial drugs or the excipients
+  5. Other malignancy requiring treatment
+  6. Symptomatic central nervous system involvement
+  7. Clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &amp;gt; 470 ms)
+  8. Aspartate amino transferase (AST) or alanine amino transferase (ALT) &amp;gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &amp;gt; 5 times the ULN in case of known leukaemia liver involvement
+  9. Prothrombin time (PT) &amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+  10. Bilirubin &amp;gt; 1.5 mg/dL (&amp;gt; 26 #mol/L)
+  11. Serum creatinine &amp;gt; 2.0 mg/dL
+  12. Concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris, cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+  13. Psychiatric illness or social situation that would limit compliance with trial requirements
+  14. Concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+  15. Contraindications for cytarabine treatment according to the SPC
+  16. Patient unable to comply with the protocol"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (version 3):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy &lt;span class=&quot;diff-add&quot;&gt;≥&lt;/span&gt; 3 months
+  6. Eastern &lt;span class=&quot;diff-add&quot;&gt;Cooperative&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Oncology&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Group&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(ECOG)&lt;/span&gt; performance score &lt;span class=&quot;diff-add&quot;&gt;≥ 2&lt;/span&gt; at screening
+  7. Signed written informed consent consistent with international conference on &lt;span class=&quot;diff-add&quot;&gt;harmonization,&lt;/span&gt; good clinical practice (ICH-GCP) and local legislation&lt;span class=&quot;diff-add&quot;&gt;
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;hypersensitivity&lt;/span&gt; to one of the trial drugs or the &lt;span class=&quot;diff-add&quot;&gt;excipients
+  9. No other&lt;/span&gt; malignancy requiring &lt;span class=&quot;diff-add&quot;&gt;treatment
+  10. No symptomatic&lt;/span&gt; central nervous system &lt;span class=&quot;diff-add&quot;&gt;involvement
+  11. No clinically&lt;/span&gt; relevant QT prolongation &lt;span class=&quot;diff-add&quot;&gt;(e.g.,&lt;/span&gt; long QT &lt;span class=&quot;diff-add&quot;&gt;syndrome, QTcF &amp;gt; 470 ms)
+  12. Aspartate&lt;/span&gt; amino transferase (AST) or alanine amino transferase (ALT) &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 5 times the ULN in case of known leukaemia liver &lt;span class=&quot;diff-add&quot;&gt;involvement
+  13. Prothrombin&lt;/span&gt; time (PT) &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, &lt;span class=&quot;diff-add&quot;&gt;warfarin)
+  14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Bilirubin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 1.5 &lt;span class=&quot;diff-add&quot;&gt;mg/dL&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(≤&lt;/span&gt; 26 &lt;span class=&quot;diff-add&quot;&gt;#mol/L)
+  15. Serum&lt;/span&gt; creatinine &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; 2.0 &lt;span class=&quot;diff-add&quot;&gt;mg/dL
+  16. No concomitant&lt;/span&gt; intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac &lt;span class=&quot;diff-add&quot;&gt;arrhythmia, or severe heart failure/cardiac insufficiency
+  17. No psychiatric&lt;/span&gt; illness or social situation that would limit compliance with trial &lt;span class=&quot;diff-add&quot;&gt;requirements
+  18. No concomitant&lt;/span&gt; therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial &lt;span class=&quot;diff-add&quot;&gt;drug
+  19. No contraindications&lt;/span&gt; for cytarabine treatment according to the &lt;span class=&quot;diff-add&quot;&gt;SPC
+  20. Female&lt;/span&gt; patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, &lt;span class=&quot;diff-add&quot;&gt;etc.)&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the &lt;span class=&quot;diff-add&quot;&gt;trial
+  22. Not pregnant&lt;/span&gt; or nursing&lt;span class=&quot;diff-add&quot;&gt;
+  23.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;able to comply with the protocol
+
+EXCLUSION CRITERIA
+
+  1. Previously untreated AML (phase I part only)
+  2. Relapsed or treatment refractory AML (phase IIa part only)
+  3. Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)
+  4. Hypersensitivity to one of the trial drugs or the excipients
+  5. Other malignancy requiring treatment
+  6. Symptomatic central nervous system involvement
+  7. Clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &amp;gt; 470 ms)
+  8. Aspartate amino transferase (AST) or alanine amino transferase (ALT) &amp;gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &amp;gt; 5 times the ULN in case of known leukaemia liver involvement
+  9. Prothrombin time (PT) &amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+  10. Bilirubin &amp;gt; 1.5 mg/dL (&amp;gt; 26 #mol/L)
+  11. Serum creatinine &amp;gt; 2.0 mg/dL
+  12. Concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris, cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+  13. Psychiatric illness or social situation that would limit compliance with trial requirements
+  14. Concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+  15. Contraindications for cytarabine treatment according to the SPC
+  16. Patient&lt;/span&gt; unable to comply with the protocol"
+                 data-raw="Amended Eligibility Criteria (version 3):
+
+Inclusion Criteria:
+- Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+- Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+- Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+- Patient is eligible for LD-Ara-C treatment
+- Life expectancy ≥ 3 months
+- Eastern Cooperative Oncology Group (ECOG) performance score ≥ 2 at screening
+- Signed written informed consent consistent with international conference on harmonization, good clinical practice (ICH-GCP) and local legislation
+- No hypersensitivity to one of the trial drugs or the excipients
+- No other malignancy requiring treatment
+- No symptomatic central nervous system involvement
+- No clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &amp;gt; 470 ms)
+- Aspartate amino transferase (AST) or alanine amino transferase (ALT) ≤ 2.5 times the upper limit of normal (ULN), or AST or ALT ≤ 5 times the ULN in case of known leukaemia liver involvement
+- Prothrombin time (PT) ≤ 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+- Bilirubin ≤ 1.5 mg/dL (≤ 26 #mol/L)
+- Serum creatinine ≤ 2.0 mg/dL
+- No concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+- No psychiatric illness or social situation that would limit compliance with trial requirements
+- No concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+- No contraindications for cytarabine treatment according to the SPC
+- Female patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.)
+- Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trial
+- Not pregnant or nursing
+- Patient able to comply with the protocol
+
+Exclusion Criteria:
+- Previously untreated AML (phase I part only)
+- Relapsed or treatment refractory AML (phase IIa part only)
+- Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)
+- Hypersensitivity to one of the trial drugs or the excipients
+- Other malignancy requiring treatment
+- Symptomatic central nervous system involvement
+- Clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &amp;gt; 470 ms)
+- Aspartate amino transferase (AST) or alanine amino transferase (ALT) &amp;gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &amp;gt; 5 times the ULN in case of known leukaemia liver involvement
+- Prothrombin time (PT) &amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+- Bilirubin &amp;gt; 1.5 mg/dL (&amp;gt; 26 #mol/L)
+- Serum creatinine &amp;gt; 2.0 mg/dL
+- Concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris, cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+- Psychiatric illness or social situation that would limit compliance with trial requirements
+- Concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+- Contraindications for cytarabine treatment according to the SPC
+- Patient unable to comply with the protocol">Amended Eligibility Criteria (version 3):
+
+INCLUSION CRITERIA
+
+  1. Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)
+  2. Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)
+  3. Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)
+  4. Patient is eligible for LD-Ara-C treatment
+  5. Life expectancy ≥ 3 months
+  6. Eastern Cooperative Oncology Group (ECOG) performance score ≥ 2 at screening
+  7. Signed written informed consent consistent with international conference on harmonization, good clinical practice (ICH-GCP) and local legislation
+  8. No hypersensitivity to one of the trial drugs or the excipients
+  9. No other malignancy requiring treatment
+  10. No symptomatic central nervous system involvement
+  11. No clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &gt; 470 ms)
+  12. Aspartate amino transferase (AST) or alanine amino transferase (ALT) ≤ 2.5 times the upper limit of normal (ULN), or AST or ALT ≤ 5 times the ULN in case of known leukaemia liver involvement
+  13. Prothrombin time (PT) ≤ 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+  14. Bilirubin ≤ 1.5 mg/dL (≤ 26 #mol/L)
+  15. Serum creatinine ≤ 2.0 mg/dL
+  16. No concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris or cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+  17. No psychiatric illness or social situation that would limit compliance with trial requirements
+  18. No concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+  19. No contraindications for cytarabine treatment according to the SPC
+  20. Female patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e. combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.)
+  21. Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trial
+  22. Not pregnant or nursing
+  23. Patient able to comply with the protocol
+
+EXCLUSION CRITERIA
+
+  1. Previously untreated AML (phase I part only)
+  2. Relapsed or treatment refractory AML (phase IIa part only)
+  3. Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)
+  4. Hypersensitivity to one of the trial drugs or the excipients
+  5. Other malignancy requiring treatment
+  6. Symptomatic central nervous system involvement
+  7. Clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &gt; 470 ms)
+  8. Aspartate amino transferase (AST) or alanine amino transferase (ALT) &gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &gt; 5 times the ULN in case of known leukaemia liver involvement
+  9. Prothrombin time (PT) &gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)
+  10. Bilirubin &gt; 1.5 mg/dL (&gt; 26 #mol/L)
+  11. Serum creatinine &gt; 2.0 mg/dL
+  12. Concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g. active severe infection, unstable angina pectoris, cardiac arrhythmia, or severe heart failure/cardiac insufficiency
+  13. Psychiatric illness or social situation that would limit compliance with trial requirements
+  14. Concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug
+  15. Contraindications for cytarabine treatment according to the SPC
+  16. Patient unable to comply with the protocol</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

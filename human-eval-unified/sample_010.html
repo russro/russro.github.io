@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 10</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 10</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at screening Visit
+  2. Currently taking a failing ARV regimen that contains 2 NRTIs and a NNRTINo prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)
+  3. Screening genotype must show at least the protocol defined resistance mutation profile
+
+EXCLUSION CRITERIA
+
+  1. Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1
+  2. Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trial
+  3. Use of an investigational drug other than the study drug
+  4. Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate
+  5. Active tuberculosis infectionNOTE: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Visit&lt;/span&gt;
+  2. Currently taking a failing &lt;span class=&quot;diff-del&quot;&gt;ARV&lt;/span&gt; regimen that contains 2 NRTIs and a &lt;span class=&quot;diff-del&quot;&gt;NNRTINo&lt;/span&gt; prior or current ARV regimens containing integrase &lt;span class=&quot;diff-del&quot;&gt;inhibitor&lt;/span&gt; (INSTI) or protease &lt;span class=&quot;diff-del&quot;&gt;inhibitor&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(PI)
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;genotype&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;least&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;resistance&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mutation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;profile
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Active, serious&lt;/span&gt; infections&lt;span class=&quot;diff-del&quot;&gt; (other than HIV-1 infection)&lt;/span&gt; requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day &lt;span class=&quot;diff-del&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participation&lt;/span&gt; in any other clinical trial, including observational studies, without prior approval from the &lt;span class=&quot;diff-del&quot;&gt;sponsor&lt;/span&gt; is &lt;span class=&quot;diff-del&quot;&gt;prohibited&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participating&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;trial&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Use of&lt;span class=&quot;diff-del&quot;&gt; an&lt;/span&gt; investigational drug other than the study drug
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Individuals with chronic hepatitis B virus (HBV) infection are not permitted to &lt;span class=&quot;diff-del&quot;&gt;participate
+  5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Active&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;tuberculosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;infectionNOTE:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Inclusion/&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. may &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Key Inclusion Criteria:Plasma HIV-1 RNA ≥ 500 copies&amp;amp;#x2F;mL at screening VisitCurrently taking a failing ARV regimen that contains 2 NRTIs and a NNRTINo prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)Screening genotype must show at least the protocol defined resistance mutation profileKey Exclusion Criteria:Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trialUse of an investigational drug other than the study drugIndividuals with chronic hepatitis B virus (HBV) infection are not permitted to participateActive tuberculosis infectionNOTE: Other protocol defined Inclusion&amp;amp;#x2F; Exclusion criteria may apply.">INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at screening Visit
+  2. Currently taking a failing ARV regimen that contains 2 NRTIs and a NNRTINo prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)
+  3. Screening genotype must show at least the protocol defined resistance mutation profile
+
+EXCLUSION CRITERIA
+
+  1. Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1
+  2. Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trial
+  3. Use of an investigational drug other than the study drug
+  4. Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate
+  5. Active tuberculosis infectionNOTE: Other protocol defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. may apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for Version 15 of the Clinical Trial
+
+INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at Screening Visit: This is a key inclusion criterion, reflecting the study&amp;#x27;s focus on patients with a high viral load.
+  2. Currently taking a failing antiretroviral (ARV) regimen that contains 2 NRTIs and a non-NRTI (NNRTI): This criterion ensures the study population is comprised of patients who have not responded adequately to current ARV therapy.
+  3. No prior or current ARV regimens containing integrase inhibitors (INSTI) or protease inhibitors (PI): This criterion excludes patients who have previously received these classes of ARVs, as they may have different pharmacokinetic profiles and potential interactions with the study drug.
+  4. No prior or current active infections requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1: This criterion ensures the study is conducted in a safe environment for patients with active infections.
+  5. Not currently participating in any other clinical trial, including observational studies, without prior approval from the sponsor: This criterion ensures the study is not overly burdened by concurrent clinical trials.
+  6. Use of investigational drug other than the study drug: This criterion ensures the study drug is the primary treatment and not a secondary intervention.
+  7. Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate: This criterion excludes patients with HBV infection, as it may interfere with the study drug&amp;#x27;s efficacy.
+
+EXCLUSION CRITERIA
+
+  1. Active tuberculosis infection: This criterion ensures the study is conducted in a safe environment for patients with active tuberculosis.
+  2. Other significant medical conditions that may interfere with the study: This criterion ensures the study is conducted in a safe environment for patients with other medical conditions.
+  3. Note:** This is a summary of the amended eligibility criteria. The full document should be reviewed for a complete understanding of the criteria."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for Version 15 of the Clinical Trial
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at &lt;span class=&quot;diff-add&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit: This is a key inclusion criterion, reflecting the study&amp;#x27;s focus on patients with a high viral load.&lt;/span&gt;
+  2. Currently taking a failing &lt;span class=&quot;diff-add&quot;&gt;antiretroviral (ARV)&lt;/span&gt; regimen that contains 2 NRTIs and a &lt;span class=&quot;diff-add&quot;&gt;non-NRTI (NNRTI): This criterion ensures the study population is comprised of patients who have not responded adequately to current ARV therapy.
+  3. No&lt;/span&gt; prior or current ARV regimens containing integrase &lt;span class=&quot;diff-add&quot;&gt;inhibitors&lt;/span&gt; (INSTI) or protease &lt;span class=&quot;diff-add&quot;&gt;inhibitors&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(PI):&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criterion&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;excludes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have previously received these classes of ARVs, as they may have different pharmacokinetic profiles and potential interactions with&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drug.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;active&lt;/span&gt; infections requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day &lt;span class=&quot;diff-add&quot;&gt;1: This criterion ensures the study is conducted in a safe environment for patients with active infections.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Not currently participating&lt;/span&gt; in any other clinical trial, including observational studies, without prior approval from the &lt;span class=&quot;diff-add&quot;&gt;sponsor: This criterion ensures the study&lt;/span&gt; is &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;overly&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;burdened&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;concurrent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clinical trials.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Use of investigational drug other than the study &lt;span class=&quot;diff-add&quot;&gt;drug: This criterion ensures the study &lt;/span&gt;drug&lt;span class=&quot;diff-add&quot;&gt; is the primary treatment and not a secondary intervention.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Individuals with chronic hepatitis B virus (HBV) infection are not permitted to &lt;span class=&quot;diff-add&quot;&gt;participate:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criterion&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;excludes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;patients&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HBV&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;infection, as it may interfere with the study drug&amp;#x27;s efficacy.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Active tuberculosis infection: This criterion ensures the study is conducted in a safe environment for patients with active tuberculosis.
+  2. Other significant medical conditions that &lt;/span&gt;may &lt;span class=&quot;diff-add&quot;&gt;interfere with the study: This criterion ensures the study is conducted in a safe environment for patients with other medical conditions.
+  3. Note:** This is a summary of the amended eligibility criteria. The full document should be reviewed for a complete understanding of the criteria.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for Version 15 of the Clinical Trial
+
+**Key Inclusion Criteria:**
+
+* **Plasma HIV-1 RNA ≥ 500 copies/mL at Screening Visit:**  This is a key inclusion criterion, reflecting the study&amp;#x27;s focus on patients with a high viral load.
+* **Currently taking a failing antiretroviral (ARV) regimen that contains 2 NRTIs and a non-NRTI (NNRTI):** This criterion ensures the study population is comprised of patients who have not responded adequately to current ARV therapy.
+* **No prior or current ARV regimens containing integrase inhibitors (INSTI) or protease inhibitors (PI):** This criterion excludes patients who have previously received these classes of ARVs, as they may have different pharmacokinetic profiles and potential interactions with the study drug.
+* **No prior or current active infections requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1:** This criterion ensures the study is conducted in a safe environment for patients with active infections.
+* **Not currently participating in any other clinical trial, including observational studies, without prior approval from the sponsor:** This criterion ensures the study is not overly burdened by concurrent clinical trials.
+* **Use of investigational drug other than the study drug:** This criterion ensures the study drug is the primary treatment and not a secondary intervention.
+* **Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate:** This criterion excludes patients with HBV infection, as it may interfere with the study drug&amp;#x27;s efficacy.
+
+**Key Exclusion Criteria:**
+
+* **Active tuberculosis infection:** This criterion ensures the study is conducted in a safe environment for patients with active tuberculosis.
+* **Other significant medical conditions that may interfere with the study:** This criterion ensures the study is conducted in a safe environment for patients with other medical conditions.
+
+
+**Note:** This is a summary of the amended eligibility criteria. The full document should be reviewed for a complete understanding of the criteria.">Amended Eligibility Criteria for Version 15 of the Clinical Trial
+
+INCLUSION CRITERIA
+
+  1. Plasma HIV-1 RNA ≥ 500 copies/mL at Screening Visit: This is a key inclusion criterion, reflecting the study&#x27;s focus on patients with a high viral load.
+  2. Currently taking a failing antiretroviral (ARV) regimen that contains 2 NRTIs and a non-NRTI (NNRTI): This criterion ensures the study population is comprised of patients who have not responded adequately to current ARV therapy.
+  3. No prior or current ARV regimens containing integrase inhibitors (INSTI) or protease inhibitors (PI): This criterion excludes patients who have previously received these classes of ARVs, as they may have different pharmacokinetic profiles and potential interactions with the study drug.
+  4. No prior or current active infections requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1: This criterion ensures the study is conducted in a safe environment for patients with active infections.
+  5. Not currently participating in any other clinical trial, including observational studies, without prior approval from the sponsor: This criterion ensures the study is not overly burdened by concurrent clinical trials.
+  6. Use of investigational drug other than the study drug: This criterion ensures the study drug is the primary treatment and not a secondary intervention.
+  7. Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate: This criterion excludes patients with HBV infection, as it may interfere with the study drug&#x27;s efficacy.
+
+EXCLUSION CRITERIA
+
+  1. Active tuberculosis infection: This criterion ensures the study is conducted in a safe environment for patients with active tuberculosis.
+  2. Other significant medical conditions that may interfere with the study: This criterion ensures the study is conducted in a safe environment for patients with other medical conditions.
+  3. Note:** This is a summary of the amended eligibility criteria. The full document should be reviewed for a complete understanding of the criteria.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

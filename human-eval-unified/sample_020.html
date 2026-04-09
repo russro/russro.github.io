@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 20</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 20</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Adult male subject aged 18 to 65 years inclusiveBMI &amp;gt; 30 kg/m2 and &amp;lt; 50 kg/m2
+  2. Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normal
+  3. Oestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunction
+
+EXCLUSION CRITERIA
+
+  1. Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessments
+  2. Other types of hypogonadotropic hypogonadism or primary hypogonadism
+  3. Any other pituitary or hypothalamic disease"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Adult &lt;span class=&quot;diff-del&quot;&gt;male subject&lt;/span&gt; aged 18 to 65 years &lt;span class=&quot;diff-del&quot;&gt;inclusiveBMI&lt;/span&gt; &amp;gt; 30 kg/m2 &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;kg/m2&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Serum&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;testosterone&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;concentration&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;below&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;rangeLH&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;levels&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;below&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;upper&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;limit of normal
+  3. Oestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months&lt;/span&gt; prior to the first Screening &lt;span class=&quot;diff-del&quot;&gt;Visit,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;one&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;these&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;being&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;sexual&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dysfunction&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Evidence&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;clinically significant endocrinopathy at screening that may interfere with &lt;/span&gt;the &lt;span class=&quot;diff-del&quot;&gt;study assessments
+  2. Other types of hypogonadotropic hypogonadism or primary hypogonadism
+  3. Any other pituitary or hypothalamic disease&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Adult male subject aged 18 to 65 years inclusiveBMI &amp;amp;gt; 30 kg&amp;amp;#x2F;m2 and &amp;amp;lt; 50 kg&amp;amp;#x2F;m2Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normalOestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunctionExclusion Criteria:Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessmentsOther types of hypogonadotropic hypogonadism or primary hypogonadismAny other pituitary or hypothalamic disease">INCLUSION CRITERIA
+
+  1. Adult male subject aged 18 to 65 years inclusiveBMI &gt; 30 kg/m2 and &lt; 50 kg/m2
+  2. Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normal
+  3. Oestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunction
+
+EXCLUSION CRITERIA
+
+  1. Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessments
+  2. Other types of hypogonadotropic hypogonadism or primary hypogonadism
+  3. Any other pituitary or hypothalamic disease</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria for Clinical Trial Version 10
+
+INCLUSION CRITERIA
+
+  1. Age: Adult male, aged 18 to 65 years inclusive.
+  2. BMI: BMI &amp;gt; 30 kg/m2
+  3. HbA1c: HbA1c ≤ 10.5% at Screening.
+  4. Type 2 Diabetes:
+  5. HbA1c ≤ 10.5% at Screening.
+  6. Anti-diabetic medication regimen (excluding insulin) has been stable for ≥ 8 weeks before the first Screening visit.
+  7. Other
+
+EXCLUSION CRITERIA
+
+  1. History of monoclonal antibodies, insulin, or other medications known to affect sex hormone production within the 4 weeks prior to the first Screening Visit.
+  2. Weight loss or weight gain (gain or loss &amp;gt; 5% body weight) OR weight reduction surgery or procedure within the 3 months prior to first Screening Visit.
+  3. Participation in any clinical trial using clinical investigational product intervention within 3 months before first Screening Visit or 5 half-lives of investigational product administration, whichever is longer.
+  4. Medical history of Long QT syndrome.
+  5. History of thromboembolic disease.
+  6. Grade ≥3 lower extremity oedema.
+  7. Use of cardiac pacemaker or other medical electronic devices that can be affected by bioimpedance assessment.
+  8. Medical diagnosis of any of the following cardiovascular conditions within the 6 months prior to first Screening Visit:
+  9. Myocardial infarction or unstable angina.
+  10. Coronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention or carotid revascularisation procedure.
+  11. Uncontrolled hypertension within the 3 months prior to first Screening Visit.
+  12. Significant cardiac arrhythmia (as determined by the investigator).
+  13. Endovascular procedure or surgical intervention for peripheral vascular disease within the 3 months prior to first Screening Visit.
+  14. Advanced ischemic heart disease.
+  15. Note:** The specific inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may vary depending on the version of the protocol."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Eligibility Criteria for Clinical Trial Version 10
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Age: &lt;/span&gt;Adult &lt;span class=&quot;diff-add&quot;&gt;male,&lt;/span&gt; aged 18 to 65 years &lt;span class=&quot;diff-add&quot;&gt;inclusive.
+  2. BMI: BMI&lt;/span&gt; &amp;gt; 30 kg/m2&lt;span class=&quot;diff-add&quot;&gt;
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HbA1c:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HbA1c&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≤&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;10.5% at Screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Diabetes:
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HbA1c&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≤ 10.5% at Screening.
+  6. Anti-diabetic medication regimen (excluding insulin) has been stable for ≥ 8 weeks before&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visit.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other
+
+EXCLUSION CRITERIA
+
+  1. History of monoclonal antibodies, insulin, or other medications known to affect sex hormone production within&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;weeks&lt;/span&gt; prior to the first Screening &lt;span class=&quot;diff-add&quot;&gt;Visit.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Weight&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;loss&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;weight gain (gain or loss &amp;gt; 5% body weight) OR weight reduction surgery or procedure within the 3 months prior to first Screening Visit.
+  3. Participation in any clinical trial using clinical investigational product intervention within 3 months before first Screening Visit or 5 half-lives&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;investigational&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;product&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;administration,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;whichever&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is longer.
+  4. Medical history of Long QT syndrome.
+  5. History of thromboembolic disease.
+  6. Grade ≥3 lower extremity oedema.
+  7. Use of cardiac pacemaker or other medical electronic devices that can be affected by bioimpedance assessment.
+  8. Medical diagnosis of any of the following cardiovascular conditions within the 6 months prior to first Screening Visit:
+  9. Myocardial infarction or unstable angina.
+  10. Coronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention or carotid revascularisation procedure.
+  11. Uncontrolled hypertension within the 3 months prior to first Screening Visit.
+  12. Significant cardiac arrhythmia (as determined by the investigator).
+  13. Endovascular procedure or surgical intervention for peripheral vascular disease within the 3 months prior to first Screening Visit.
+  14. Advanced ischemic heart disease.
+  15. Note:** The specific inclusion and&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;may vary depending on the version&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;protocol.&lt;/span&gt;"
+                 data-raw="##  Modified Eligibility Criteria for Clinical Trial Version 10
+
+**Inclusion Criteria:**
+
+* **Age:** Adult male, aged 18 to 65 years inclusive.
+* **BMI:**  BMI &amp;gt; 30 kg/m2 
+* **HbA1c:** HbA1c ≤ 10.5% at Screening.
+* **Type 2 Diabetes:**  
+    * HbA1c ≤ 10.5% at Screening.
+    * Anti-diabetic medication regimen (excluding insulin) has been stable for ≥ 8 weeks before the first Screening visit.
+* **Other Exclusion Criteria:**
+    *  History of monoclonal antibodies, insulin, or other medications known to affect sex hormone production within the 4 weeks prior to the first Screening Visit.
+    *  Weight loss or weight gain (gain or loss &amp;gt; 5% body weight) OR weight reduction surgery or procedure within the 3 months prior to first Screening Visit.
+    *  Participation in any clinical trial using clinical investigational product intervention within 3 months before first Screening Visit or 5 half-lives of investigational product administration, whichever is longer.
+    *  Medical history of Long QT syndrome.
+    *  History of thromboembolic disease.
+    *  Grade ≥3 lower extremity oedema.
+    *  Use of cardiac pacemaker or other medical electronic devices that can be affected by bioimpedance assessment.
+    *  Medical diagnosis of any of the following cardiovascular conditions within the 6 months prior to first Screening Visit:
+        * Myocardial infarction or unstable angina.
+        * Coronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention or carotid revascularisation procedure.
+        * Uncontrolled hypertension within the 3 months prior to first Screening Visit.
+        * Significant cardiac arrhythmia (as determined by the investigator).
+        * Endovascular procedure or surgical intervention for peripheral vascular disease within the 3 months prior to first Screening Visit.
+        * Advanced ischemic heart disease.
+
+**Note:**  The specific inclusion and exclusion criteria may vary depending on the version of the protocol.">Modified Eligibility Criteria for Clinical Trial Version 10
+
+INCLUSION CRITERIA
+
+  1. Age: Adult male, aged 18 to 65 years inclusive.
+  2. BMI: BMI &gt; 30 kg/m2
+  3. HbA1c: HbA1c ≤ 10.5% at Screening.
+  4. Type 2 Diabetes:
+  5. HbA1c ≤ 10.5% at Screening.
+  6. Anti-diabetic medication regimen (excluding insulin) has been stable for ≥ 8 weeks before the first Screening visit.
+  7. Other
+
+EXCLUSION CRITERIA
+
+  1. History of monoclonal antibodies, insulin, or other medications known to affect sex hormone production within the 4 weeks prior to the first Screening Visit.
+  2. Weight loss or weight gain (gain or loss &gt; 5% body weight) OR weight reduction surgery or procedure within the 3 months prior to first Screening Visit.
+  3. Participation in any clinical trial using clinical investigational product intervention within 3 months before first Screening Visit or 5 half-lives of investigational product administration, whichever is longer.
+  4. Medical history of Long QT syndrome.
+  5. History of thromboembolic disease.
+  6. Grade ≥3 lower extremity oedema.
+  7. Use of cardiac pacemaker or other medical electronic devices that can be affected by bioimpedance assessment.
+  8. Medical diagnosis of any of the following cardiovascular conditions within the 6 months prior to first Screening Visit:
+  9. Myocardial infarction or unstable angina.
+  10. Coronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention or carotid revascularisation procedure.
+  11. Uncontrolled hypertension within the 3 months prior to first Screening Visit.
+  12. Significant cardiac arrhythmia (as determined by the investigator).
+  13. Endovascular procedure or surgical intervention for peripheral vascular disease within the 3 months prior to first Screening Visit.
+  14. Advanced ischemic heart disease.
+  15. Note:** The specific inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may vary depending on the version of the protocol.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

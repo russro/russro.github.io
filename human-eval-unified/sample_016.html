@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 16</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 16</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male and female adults with a diagnosis of PD and who were heterozygous carriers of a GBA mutation associated with PD.
+  2. Participants carrying known sequence variants associated with GBA-PD must had rapid eye movement (REM) sleep behavior disorder (RBD) confirmed by historically documented polysomnography or by questionnaire.
+  3. Age greater than or equal to (&amp;gt;=) 18 years to 80 years inclusive at the time of informed consent signing (FOR JAPANESE PARTICIPANTS ONLY: Age &amp;gt;=20 years to 80 years, inclusive, at the time of signing the informed consent.
+  4. Note: Japanese participants refers only to Japanese participants enrolled and living in Japan).
+  5. Had symptoms of PD &amp;gt;=2 years.
+  6. Hoehn and Yahr (H and Y) stage of 2 or lower at baseline.
+  7. Stable medication regimen of PD drugs for at least 30 days (at least 60 days for rasagiline) prior to randomization.
+  8. The participant was willing to abstain from grapefruit containing products for 72 hours prior to administration of the first dose of GZ/SAR402671 and for the duration of the entire treatment period (Part 1 and Part 2, Periods 2 and 3).
+  9. Signed written consent.
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or toxin(s).
+  2. Participants carrying the LRRK2 G2019S mutation.
+  3. Participants with Gaucher disease (GD) as defined by clinical signs and symptoms (i.e., hepatosplenomegaly, cytopenia, skeletal disease) and/or marked deficiency of GCase activity compatible with GD.
+  4. Montreal Cognitive Assessment score less than 20.
+  5. Participants with prior surgical history of deep brain stimulation (DBS).
+  6. Participants with baseline brain MRI without contrast showing a structural abnormality that is a possible cause of their PD signs or symptoms.
+  7. Hepatic insufficiency with liver function tests (LFT) greater than (&amp;gt;) 2 times upper limit of normal at Screening Visit.
+  8. The participant had a documented diagnosis, as per local regulations, of any of the following infections: hepatitis B, hepatitis C, human immunodeficiency virus 1 or 2.
+  9. Renal insufficiency as defined by creatine &amp;gt;1.5 times normal at Screening Visit.
+  10. The participant had received strong or moderate inducers or inhibitors of CYP3A4 within 30 days or 5 half-lives prior to randomization, whichever is longer.
+  11. The participant had, according to World Health Organization (WHO) Grading, a cortical cataract &amp;gt; one-quarter the lens circumference (grade cortical catact-2 [COR-2]) or a posterior subcapsular cataract &amp;gt;2 millimeters (grade posterior subscapsular cataract [PSC-2]).
+  12. Participant with nuclear cataracts would not be excluded.
+  13. The participant was currently receiving potentially cataractogenic medications, including chronic regimen (more frequently than every 2 weeks) of any dose or route of corticosteroids or any medication that could cause cataract or worsen the vision of participants with cataract (eg, glaucoma medications) according to the Prescribing Information.
+  14. If female, pregnant (defined as positive beta-human chorionic gonadotrophin [Beta-HCG] blood test) or lactating or breast-feeding.
+  15. Any medical disorders and/or clinically relevant findings that, in the opinion of the Investigator, could interfere with study-related procedures.
+  16. This included condition(s) that precluded the safe performance of routine lumbar punctures, such as prohibitive spinal diseases, bleeding diasthesis, or clinically significant coagulopathy or thrombocytopenia.
+  17. Current participation in another investigational interventional study.
+  18. Any medications specifically used for treating memory dysfunction, such as, but not limited to cholinesterase inhibitors or memantine, within 30 days or 5 half-lives of these medications prior to randomization, whichever was longer.
+  19. The above information was not intended to contain all considerations relevant to a participant&amp;#x27;s potential participation in a clinical trial."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male and female adults with a diagnosis of PD and &lt;span class=&quot;diff-del&quot;&gt;who were heterozygous carriers of&lt;/span&gt; a GBA mutation &lt;span class=&quot;diff-del&quot;&gt;associated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;PD.
+  2. Participants carrying known&lt;/span&gt; sequence &lt;span class=&quot;diff-del&quot;&gt;variants associated with GBA-PD must had rapid eye movement (REM) sleep behavior disorder (RBD) confirmed by historically documented polysomnography or by questionnaire.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-del&quot;&gt;Age&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;greater than or equal to (&amp;gt;=) 18&lt;/span&gt; years&lt;span class=&quot;diff-del&quot;&gt; to 80 years inclusive at the time of informed consent signing (FOR JAPANESE PARTICIPANTS ONLY: Age &amp;gt;=20 years to 80 years, inclusive, at the time of signing the informed consent.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Note: Japanese participants refers only to Japanese participants enrolled and living in Japan).
+  5. Had symptoms of PD &amp;gt;=2 years.
+  6. &lt;/span&gt;Hoehn &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; Yahr &lt;span class=&quot;diff-del&quot;&gt;(H&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Y) stage of&lt;/span&gt; 2 or lower at &lt;span class=&quot;diff-del&quot;&gt;baseline.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Stable medication regimen &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; PD&lt;span class=&quot;diff-del&quot;&gt; drugs&lt;/span&gt; for at least 30 days &lt;span class=&quot;diff-del&quot;&gt;(at least 60 days for rasagiline) &lt;/span&gt;prior to &lt;span class=&quot;diff-del&quot;&gt;randomization.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;was&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;willing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;abstain&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;grapefruit&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;containing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;products&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;72&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hours&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to administration&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dose&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;GZ/SAR402671 and for the duration of the entire treatment period (Part 1 and Part 2, Periods 2 and 3).
+  9. Signed written consent.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or &lt;span class=&quot;diff-del&quot;&gt;toxin(s).&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participants carrying the LRRK2&lt;/span&gt; G2019S &lt;span class=&quot;diff-del&quot;&gt;mutation.&lt;/span&gt;
+  3.&lt;span class=&quot;diff-del&quot;&gt; Participants with&lt;/span&gt; Gaucher disease (GD) as defined by clinical signs and symptoms &lt;span class=&quot;diff-del&quot;&gt;(i.e., hepatosplenomegaly,&lt;/span&gt; cytopenia, skeletal disease) and/or marked deficiency of GCase activity&lt;span class=&quot;diff-del&quot;&gt; compatible with GD.&lt;/span&gt;
+  4. Montreal Cognitive Assessment score &lt;span class=&quot;diff-del&quot;&gt;less than 20.&lt;/span&gt;
+  5. &lt;span class=&quot;diff-del&quot;&gt;Participants with prior&lt;/span&gt; surgical history of deep brain stimulation &lt;span class=&quot;diff-del&quot;&gt;(DBS).&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;Participants with baseline&lt;/span&gt; brain MRI &lt;span class=&quot;diff-del&quot;&gt;without contrast &lt;/span&gt;showing&lt;span class=&quot;diff-del&quot;&gt; a&lt;/span&gt; structural &lt;span class=&quot;diff-del&quot;&gt;abnormality&lt;/span&gt; that &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; a possible cause of their PD signs or &lt;span class=&quot;diff-del&quot;&gt;symptoms.&lt;/span&gt;
+  7. Hepatic insufficiency with liver function tests (LFT) &lt;span class=&quot;diff-del&quot;&gt;greater than (&amp;gt;) 2&lt;/span&gt; times upper limit of normal at Screening &lt;span class=&quot;diff-del&quot;&gt;Visit.&lt;/span&gt;
+  8. &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;documented&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;diagnosis,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;regulations,&lt;/span&gt; of&lt;span class=&quot;diff-del&quot;&gt; any of the following infections:&lt;/span&gt; hepatitis B, hepatitis C, human immunodeficiency virus 1 or &lt;span class=&quot;diff-del&quot;&gt;2.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Renal insufficiency as defined by creatine &amp;gt;1.5 times normal at Screening Visit.&lt;/span&gt;
+  10. &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;had&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;received&lt;/span&gt; strong or moderate inducers or inhibitors of CYP3A4 within 30 days &lt;span class=&quot;diff-del&quot;&gt;or 5 half-lives &lt;/span&gt;prior to &lt;span class=&quot;diff-del&quot;&gt;randomization, whichever is longer.&lt;/span&gt;
+  11. &lt;span class=&quot;diff-del&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant had, according to World Health Organization (WHO) Grading, a cortical cataract &amp;gt; one-quarter the lens circumference (grade cortical catact-2 [COR-2]) or a posterior subcapsular cataract &amp;gt;2 millimeters (grade posterior subscapsular cataract [PSC-2]).
+  12. Participant with nuclear cataracts would not be excluded.
+  13. The participant was currently receiving potentially cataractogenic medications, including chronic regimen (more frequently than every 2 weeks)&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;any dose or route of corticosteroids or any medication&lt;/span&gt; that &lt;span class=&quot;diff-del&quot;&gt;could&lt;/span&gt; cause cataract or worsen &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;vision&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;participants&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; cataract &lt;span class=&quot;diff-del&quot;&gt;(eg,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;glaucoma&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;medications)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;according&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Prescribing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Information.&lt;/span&gt;
+  14. &lt;span class=&quot;diff-del&quot;&gt;If&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;female, pregnant&lt;/span&gt; (defined as positive beta-human chorionic &lt;span class=&quot;diff-del&quot;&gt;gonadotrophin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;[Beta-HCG]&lt;/span&gt; blood test) or lactating&lt;span class=&quot;diff-del&quot;&gt; or breast-feeding.&lt;/span&gt;
+  15. Any medical &lt;span class=&quot;diff-del&quot;&gt;disorders&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; clinically relevant &lt;span class=&quot;diff-del&quot;&gt;findings&lt;/span&gt; that, in the opinion of the &lt;span class=&quot;diff-del&quot;&gt;Investigator,&lt;/span&gt; could interfere with study-related procedures.
+  16. This &lt;span class=&quot;diff-del&quot;&gt;included&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;condition(s)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;precluded&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;safe&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;performance&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;routine&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;lumbar&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;punctures,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;such&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as prohibitive spinal diseases, bleeding diasthesis, or clinically significant coagulopathy or thrombocytopenia.
+  17. Current participation in another investigational interventional study.
+  18. Any medications specifically used&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;treating&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;memory dysfunction, such as, but not limited to cholinesterase inhibitors or memantine, within 30 days or 5 half-lives of these medications prior to randomization, whichever was longer.
+  19. The above information was not intended to contain all considerations relevant to a participant&amp;#x27;s potential participation in a clinical trial.&lt;/span&gt;"
+                 data-raw="Inclusion criteria:Male and female adults with a diagnosis of PD and who were heterozygous carriers of a GBA mutation associated with PD.Participants carrying known sequence variants associated with GBA-PD must had rapid eye movement (REM) sleep behavior disorder (RBD) confirmed by historically documented polysomnography or by questionnaire.Age greater than or equal to (&amp;amp;gt;=) 18 years to 80 years inclusive at the time of informed consent signing (FOR JAPANESE PARTICIPANTS ONLY: Age &amp;amp;gt;=20 years to 80 years, inclusive, at the time of signing the informed consent. Note: Japanese participants refers only to Japanese participants enrolled and living in Japan).Had symptoms of PD &amp;amp;gt;=2 years.Hoehn and Yahr (H and Y) stage of 2 or lower at baseline.Stable medication regimen of PD drugs for at least 30 days (at least 60 days for rasagiline) prior to randomization.The participant was willing to abstain from grapefruit containing products for 72 hours prior to administration of the first dose of GZ&amp;amp;#x2F;SAR402671 and for the duration of the entire treatment period (Part 1 and Part 2, Periods 2 and 3).Signed written consent.Exclusion criteria:Parkinsonism due to drug(s) or toxin(s).Participants carrying the LRRK2 G2019S mutation.Participants with Gaucher disease (GD) as defined by clinical signs and symptoms (i.e., hepatosplenomegaly, cytopenia, skeletal disease) and&amp;amp;#x2F;or marked deficiency of GCase activity compatible with GD.Montreal Cognitive Assessment score less than 20.Participants with prior surgical history of deep brain stimulation (DBS).Participants with baseline brain MRI without contrast showing a structural abnormality that is a possible cause of their PD signs or symptoms.Hepatic insufficiency with liver function tests (LFT) greater than (&amp;amp;gt;) 2 times upper limit of normal at Screening Visit.The participant had a documented diagnosis, as per local regulations, of any of the following infections: hepatitis B, hepatitis C, human immunodeficiency virus 1 or 2.Renal insufficiency as defined by creatine &amp;amp;gt;1.5 times normal at Screening Visit.The participant had received strong or moderate inducers or inhibitors of CYP3A4 within 30 days or 5 half-lives prior to randomization, whichever is longer.The participant had, according to World Health Organization (WHO) Grading, a cortical cataract &amp;amp;gt; one-quarter the lens circumference (grade cortical catact-2 [COR-2]) or a posterior subcapsular cataract &amp;amp;gt;2 millimeters (grade posterior subscapsular cataract [PSC-2]). Participant with nuclear cataracts would not be excluded.The participant was currently receiving potentially cataractogenic medications, including chronic regimen (more frequently than every 2 weeks) of any dose or route of corticosteroids or any medication that could cause cataract or worsen the vision of participants with cataract (eg, glaucoma medications) according to the Prescribing Information.If female, pregnant (defined as positive beta-human chorionic gonadotrophin [Beta-HCG] blood test) or lactating or breast-feeding.Any medical disorders and&amp;amp;#x2F;or clinically relevant findings that, in the opinion of the Investigator, could interfere with study-related procedures. This included condition(s) that precluded the safe performance of routine lumbar punctures, such as prohibitive spinal diseases, bleeding diasthesis, or clinically significant coagulopathy or thrombocytopenia.Current participation in another investigational interventional study.Any medications specifically used for treating memory dysfunction, such as, but not limited to cholinesterase inhibitors or memantine, within 30 days or 5 half-lives of these medications prior to randomization, whichever was longer.The above information was not intended to contain all considerations relevant to a participant&amp;amp;#x27;s potential participation in a clinical trial.">INCLUSION CRITERIA
+
+  1. Male and female adults with a diagnosis of PD and who were heterozygous carriers of a GBA mutation associated with PD.
+  2. Participants carrying known sequence variants associated with GBA-PD must had rapid eye movement (REM) sleep behavior disorder (RBD) confirmed by historically documented polysomnography or by questionnaire.
+  3. Age greater than or equal to (&gt;=) 18 years to 80 years inclusive at the time of informed consent signing (FOR JAPANESE PARTICIPANTS ONLY: Age &gt;=20 years to 80 years, inclusive, at the time of signing the informed consent.
+  4. Note: Japanese participants refers only to Japanese participants enrolled and living in Japan).
+  5. Had symptoms of PD &gt;=2 years.
+  6. Hoehn and Yahr (H and Y) stage of 2 or lower at baseline.
+  7. Stable medication regimen of PD drugs for at least 30 days (at least 60 days for rasagiline) prior to randomization.
+  8. The participant was willing to abstain from grapefruit containing products for 72 hours prior to administration of the first dose of GZ/SAR402671 and for the duration of the entire treatment period (Part 1 and Part 2, Periods 2 and 3).
+  9. Signed written consent.
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or toxin(s).
+  2. Participants carrying the LRRK2 G2019S mutation.
+  3. Participants with Gaucher disease (GD) as defined by clinical signs and symptoms (i.e., hepatosplenomegaly, cytopenia, skeletal disease) and/or marked deficiency of GCase activity compatible with GD.
+  4. Montreal Cognitive Assessment score less than 20.
+  5. Participants with prior surgical history of deep brain stimulation (DBS).
+  6. Participants with baseline brain MRI without contrast showing a structural abnormality that is a possible cause of their PD signs or symptoms.
+  7. Hepatic insufficiency with liver function tests (LFT) greater than (&gt;) 2 times upper limit of normal at Screening Visit.
+  8. The participant had a documented diagnosis, as per local regulations, of any of the following infections: hepatitis B, hepatitis C, human immunodeficiency virus 1 or 2.
+  9. Renal insufficiency as defined by creatine &gt;1.5 times normal at Screening Visit.
+  10. The participant had received strong or moderate inducers or inhibitors of CYP3A4 within 30 days or 5 half-lives prior to randomization, whichever is longer.
+  11. The participant had, according to World Health Organization (WHO) Grading, a cortical cataract &gt; one-quarter the lens circumference (grade cortical catact-2 [COR-2]) or a posterior subcapsular cataract &gt;2 millimeters (grade posterior subscapsular cataract [PSC-2]).
+  12. Participant with nuclear cataracts would not be excluded.
+  13. The participant was currently receiving potentially cataractogenic medications, including chronic regimen (more frequently than every 2 weeks) of any dose or route of corticosteroids or any medication that could cause cataract or worsen the vision of participants with cataract (eg, glaucoma medications) according to the Prescribing Information.
+  14. If female, pregnant (defined as positive beta-human chorionic gonadotrophin [Beta-HCG] blood test) or lactating or breast-feeding.
+  15. Any medical disorders and/or clinically relevant findings that, in the opinion of the Investigator, could interfere with study-related procedures.
+  16. This included condition(s) that precluded the safe performance of routine lumbar punctures, such as prohibitive spinal diseases, bleeding diasthesis, or clinically significant coagulopathy or thrombocytopenia.
+  17. Current participation in another investigational interventional study.
+  18. Any medications specifically used for treating memory dysfunction, such as, but not limited to cholinesterase inhibitors or memantine, within 30 days or 5 half-lives of these medications prior to randomization, whichever was longer.
+  19. The above information was not intended to contain all considerations relevant to a participant&#x27;s potential participation in a clinical trial.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for Version 58
+
+INCLUSION CRITERIA
+
+  1. Diagnosis: Male and female adults with a diagnosis of Parkinson&amp;#x27;s disease (PD)
+  2. GBA Mutation: Patients must have a confirmed diagnosis of PD and carry a GBA mutation or other prespecified sequence variant.
+  3. Age: ≥18 years
+  4. Hoehn &amp;amp; Yahr (H&amp;amp;Y) Stage: Stage 2 or lower at baseline
+  5. Stable Medication Regimen: Patients must have a stable medication regimen for PD for at least 30 days prior to study entry.
+  6. REM Sleep Behavior Disorder (RBD): Patients must have confirmed RBD by a physician documented history of RBD or a positive questionnaire.
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or toxin(s)
+  2. Lrrk2 G2019S mutation
+  3. Gaucher disease (GD) as defined by clinical signs and symptoms (hepatosplenomegaly, cytopenia, skeletal disease) and/or marked deficiency of GCase activity
+  4. Montreal Cognitive Assessment (MoCA) score &amp;lt;20
+  5. Prior surgical history of deep brain stimulation (DBS)
+  6. Baseline brain MRI showing structural abnormalities that are a possible cause of their PD signs or symptoms
+  7. Hepatic insufficiency with liver function tests (LFT) &amp;gt;2 times upper limit of normal (ULN) at Screening Visit
+  8. Renal insufficiency with creatinine &amp;gt;1.5 times ULN at Screening Visit
+  9. History of hepatitis B, hepatitis C, human immunodeficiency virus (HIV) 1 or 2 infection
+  10. Current or past use of strong or moderate inducers or inhibitors of CYP3A4 within 30 days prior to randomization
+  11. Current use of medications that can cause cataract or worsen vision
+  12. Current use of corticosteroids or other medications that can cause cataract or worsen vision
+  13. Current use of medications that can cause cataract or worsen vision
+  14. Current pregnancy (defined as a positive beta-human chorionic gonadotropin (β-hCG) blood test) or lactating
+  15. Any medical condition or clinically relevant finding that, in the opinion of the investigator, could interfere with study-related procedures.
+  16. Note: This is a summary of the key changes. The full protocol should be reviewed for complete details."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for Version 58
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1.&lt;span class=&quot;diff-add&quot;&gt; Diagnosis:&lt;/span&gt; Male and female adults with a diagnosis of &lt;span class=&quot;diff-add&quot;&gt;Parkinson&amp;#x27;s disease (PD)
+  2. GBA Mutation: Patients must have a confirmed diagnosis of &lt;/span&gt;PD and &lt;span class=&quot;diff-add&quot;&gt;carry&lt;/span&gt; a GBA mutation &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;prespecified&lt;/span&gt; sequence &lt;span class=&quot;diff-add&quot;&gt;variant.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-add&quot;&gt;Age:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;≥18&lt;/span&gt; years
+  4. Hoehn &lt;span class=&quot;diff-add&quot;&gt;&amp;amp;&lt;/span&gt; Yahr &lt;span class=&quot;diff-add&quot;&gt;(H&amp;amp;Y)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Stage:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Stage&lt;/span&gt; 2 or lower at &lt;span class=&quot;diff-add&quot;&gt;baseline&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Stable&lt;span class=&quot;diff-add&quot;&gt; Medication Regimen: Patients must have a stable&lt;/span&gt; medication regimen &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; PD for at least 30 days prior to &lt;span class=&quot;diff-add&quot;&gt;study entry.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;REM&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Sleep&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Behavior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Disorder&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(RBD):&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Patients&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;confirmed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;RBD&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;physician&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;documented&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;RBD&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;positive&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;questionnaire.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or &lt;span class=&quot;diff-add&quot;&gt;toxin(s)&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Lrrk2&lt;/span&gt; G2019S &lt;span class=&quot;diff-add&quot;&gt;mutation&lt;/span&gt;
+  3. Gaucher disease (GD) as defined by clinical signs and symptoms &lt;span class=&quot;diff-add&quot;&gt;(hepatosplenomegaly,&lt;/span&gt; cytopenia, skeletal disease) and/or marked deficiency of GCase activity
+  4. Montreal Cognitive Assessment &lt;span class=&quot;diff-add&quot;&gt;(MoCA) &lt;/span&gt;score &lt;span class=&quot;diff-add&quot;&gt;&amp;lt;20&lt;/span&gt;
+  5. &lt;span class=&quot;diff-add&quot;&gt;Prior&lt;/span&gt; surgical history of deep brain stimulation &lt;span class=&quot;diff-add&quot;&gt;(DBS)&lt;/span&gt;
+  6. &lt;span class=&quot;diff-add&quot;&gt;Baseline&lt;/span&gt; brain MRI showing structural &lt;span class=&quot;diff-add&quot;&gt;abnormalities&lt;/span&gt; that &lt;span class=&quot;diff-add&quot;&gt;are&lt;/span&gt; a possible cause of their PD signs or &lt;span class=&quot;diff-add&quot;&gt;symptoms&lt;/span&gt;
+  7. Hepatic insufficiency with liver function tests (LFT) &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;2&lt;/span&gt; times upper limit of normal &lt;span class=&quot;diff-add&quot;&gt;(ULN) &lt;/span&gt;at Screening &lt;span class=&quot;diff-add&quot;&gt;Visit&lt;/span&gt;
+  8. &lt;span class=&quot;diff-add&quot;&gt;Renal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;insufficiency&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;creatinine&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;gt;1.5&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;times&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ULN&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visit
+  9. History&lt;/span&gt; of hepatitis B, hepatitis C, human immunodeficiency virus &lt;span class=&quot;diff-add&quot;&gt;(HIV) &lt;/span&gt;1 or &lt;span class=&quot;diff-add&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;infection&lt;/span&gt;
+  10. &lt;span class=&quot;diff-add&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;past&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use of&lt;/span&gt; strong or moderate inducers or inhibitors of CYP3A4 within 30 days prior to &lt;span class=&quot;diff-add&quot;&gt;randomization&lt;/span&gt;
+  11. &lt;span class=&quot;diff-add&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;medications&lt;/span&gt; that &lt;span class=&quot;diff-add&quot;&gt;can&lt;/span&gt; cause cataract or worsen &lt;span class=&quot;diff-add&quot;&gt;vision
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Current use&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;corticosteroids&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or other medications that can cause&lt;/span&gt; cataract &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;worsen&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;vision
+  13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;medications&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that can cause cataract or worsen vision&lt;/span&gt;
+  14. &lt;span class=&quot;diff-add&quot;&gt;Current&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;pregnancy&lt;/span&gt; (defined as&lt;span class=&quot;diff-add&quot;&gt; a&lt;/span&gt; positive beta-human chorionic &lt;span class=&quot;diff-add&quot;&gt;gonadotropin&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(β-hCG)&lt;/span&gt; blood test) or lactating
+  15. Any medical &lt;span class=&quot;diff-add&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; clinically relevant &lt;span class=&quot;diff-add&quot;&gt;finding&lt;/span&gt; that, in the opinion of the &lt;span class=&quot;diff-add&quot;&gt;investigator,&lt;/span&gt; could interfere with study-related procedures.
+  16. &lt;span class=&quot;diff-add&quot;&gt;Note: &lt;/span&gt;This &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;summary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;changes.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;reviewed&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;complete&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;details.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for Version 58
+
+**Inclusion Criteria:**
+
+* **Diagnosis:**  Male and female adults with a diagnosis of Parkinson&amp;#x27;s disease (PD)
+* **GBA Mutation:**  Patients must have a confirmed diagnosis of PD and carry a GBA mutation or other prespecified sequence variant.
+* **Age:** ≥18 years
+* **Hoehn &amp;amp; Yahr (H&amp;amp;Y) Stage:**  Stage 2 or lower at baseline
+* **Stable Medication Regimen:**  Patients must have a stable medication regimen for PD for at least 30 days prior to study entry.
+* **REM Sleep Behavior Disorder (RBD):**  Patients must have confirmed RBD by a physician documented history of RBD or a positive questionnaire.
+* **Exclusion Criteria:**
+    *  Parkinsonism due to drug(s) or toxin(s)
+    *  Lrrk2 G2019S mutation
+    *  Gaucher disease (GD) as defined by clinical signs and symptoms (hepatosplenomegaly, cytopenia, skeletal disease) and/or marked deficiency of GCase activity
+    *  Montreal Cognitive Assessment (MoCA) score &amp;lt;20
+    *  Prior surgical history of deep brain stimulation (DBS)
+    *  Baseline brain MRI showing structural abnormalities that are a possible cause of their PD signs or symptoms
+    *  Hepatic insufficiency with liver function tests (LFT) &amp;gt;2 times upper limit of normal (ULN) at Screening Visit
+    *  Renal insufficiency with creatinine &amp;gt;1.5 times ULN at Screening Visit
+    *  History of hepatitis B, hepatitis C, human immunodeficiency virus (HIV) 1 or 2 infection
+    *  Current or past use of strong or moderate inducers or inhibitors of CYP3A4 within 30 days prior to randomization
+    *  Current use of medications that can cause cataract or worsen vision
+    *  Current use of corticosteroids or other medications that can cause cataract or worsen vision
+    *  Current use of medications that can cause cataract or worsen vision
+    *  Current pregnancy (defined as a positive beta-human chorionic gonadotropin (β-hCG) blood test) or lactating
+    *  Any medical condition or clinically relevant finding that, in the opinion of the investigator, could interfere with study-related procedures.
+
+
+**Note:** This is a summary of the key changes. The full protocol should be reviewed for complete details.">Amended Eligibility Criteria for Version 58
+
+INCLUSION CRITERIA
+
+  1. Diagnosis: Male and female adults with a diagnosis of Parkinson&#x27;s disease (PD)
+  2. GBA Mutation: Patients must have a confirmed diagnosis of PD and carry a GBA mutation or other prespecified sequence variant.
+  3. Age: ≥18 years
+  4. Hoehn &amp; Yahr (H&amp;Y) Stage: Stage 2 or lower at baseline
+  5. Stable Medication Regimen: Patients must have a stable medication regimen for PD for at least 30 days prior to study entry.
+  6. REM Sleep Behavior Disorder (RBD): Patients must have confirmed RBD by a physician documented history of RBD or a positive questionnaire.
+
+EXCLUSION CRITERIA
+
+  1. Parkinsonism due to drug(s) or toxin(s)
+  2. Lrrk2 G2019S mutation
+  3. Gaucher disease (GD) as defined by clinical signs and symptoms (hepatosplenomegaly, cytopenia, skeletal disease) and/or marked deficiency of GCase activity
+  4. Montreal Cognitive Assessment (MoCA) score &lt;20
+  5. Prior surgical history of deep brain stimulation (DBS)
+  6. Baseline brain MRI showing structural abnormalities that are a possible cause of their PD signs or symptoms
+  7. Hepatic insufficiency with liver function tests (LFT) &gt;2 times upper limit of normal (ULN) at Screening Visit
+  8. Renal insufficiency with creatinine &gt;1.5 times ULN at Screening Visit
+  9. History of hepatitis B, hepatitis C, human immunodeficiency virus (HIV) 1 or 2 infection
+  10. Current or past use of strong or moderate inducers or inhibitors of CYP3A4 within 30 days prior to randomization
+  11. Current use of medications that can cause cataract or worsen vision
+  12. Current use of corticosteroids or other medications that can cause cataract or worsen vision
+  13. Current use of medications that can cause cataract or worsen vision
+  14. Current pregnancy (defined as a positive beta-human chorionic gonadotropin (β-hCG) blood test) or lactating
+  15. Any medical condition or clinically relevant finding that, in the opinion of the investigator, could interfere with study-related procedures.
+  16. Note: This is a summary of the key changes. The full protocol should be reviewed for complete details.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

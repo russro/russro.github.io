@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 15</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 15</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participant at the time of screening has a diagnosis of uterine fibroids documented by a pelvic ultrasound [transabdominal ultrasound (TAU) and transvaginal ultrasound (TVU)].
+  2. Participant has HMB associated with uterine fibroids as evidenced by menstrual blood loss (MBL) &amp;gt; 80 mL during 1 menses in screening as measured by the alkaline hematin method.
+  3. Participant has negative urine and/or serum pregnancy test in Washout (if applicable) and/or Screening and just prior to first dose.
+  4. Participant has an adequate endometrial biopsy performed during Screening, the results of which show no clinical significant endometrial pathology.
+
+EXCLUSION CRITERIA
+
+  1. Participant has screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a clinically significant gynecological disorder.
+  2. Participant has history of osteoporosis, osteopenia, or other metabolic bone disease.
+  3. Participant has clinically significant abnormalities in clinical chemistry, hematology, or urinalysis.
+  4. Participant has a history of major depression or post-traumatic stress disorder (PTSD) episode within 2 years of screening, OR a history of other major psychiatric disorder at any time (e.g., schizophrenia, bipolar disorder).
+  5. Participant is using any systemic corticosteroids for over 14 days within 3 months prior to Screening or is likely to require treatment with systemic corticosteroids during the course of the study.
+  6. Over the counter and prescription topical, inhaled, intranasal or intra-articular injectable (for occasional use) corticosteroids are allowed."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; at the time of &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a diagnosis of&lt;/span&gt; uterine fibroids &lt;span class=&quot;diff-del&quot;&gt;documented &lt;/span&gt;by&lt;span class=&quot;diff-del&quot;&gt; a&lt;/span&gt; pelvic ultrasound &lt;span class=&quot;diff-del&quot;&gt;[transabdominal&lt;/span&gt; ultrasound &lt;span class=&quot;diff-del&quot;&gt;(TAU) and&lt;/span&gt; transvaginal ultrasound &lt;span class=&quot;diff-del&quot;&gt;(TVU)].&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; HMB associated with uterine fibroids as evidenced by &lt;span class=&quot;diff-del&quot;&gt;menstrual blood loss (MBL)&lt;/span&gt; &amp;gt; 80 mL during 1 menses in &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; as measured by the alkaline hematin method.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;negative&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;urine&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;serum&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pregnancy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;test&lt;/span&gt; in &lt;span class=&quot;diff-del&quot;&gt;Washout&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(if&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;applicable)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and/or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;just&lt;/span&gt; prior to &lt;span class=&quot;diff-del&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;dose.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;adequate&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;endometrial&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;biopsy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;performed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;during&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Screening,&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;results&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;which&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clinical&lt;/span&gt; significant &lt;span class=&quot;diff-del&quot;&gt;endometrial&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pathology.
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a&lt;/span&gt; clinically significant &lt;span class=&quot;diff-del&quot;&gt;gynecological&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disorder.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; has &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;osteoporosis,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;osteopenia,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;metabolic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bone&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disease.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has clinically significant abnormalities in clinical chemistry, hematology,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;urinalysis.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;major&lt;/span&gt; depression or post-traumatic stress disorder (PTSD) episode within 2 years &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;screening,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a history of other&lt;/span&gt; major psychiatric &lt;span class=&quot;diff-del&quot;&gt;disorder&lt;/span&gt; at any time (e.g., schizophrenia, bipolar disorder).
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;using&lt;/span&gt; any &lt;span class=&quot;diff-del&quot;&gt;systemic corticosteroids for over 14 days&lt;/span&gt; within &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; months prior to Screening or&lt;span class=&quot;diff-del&quot;&gt; is likely to require treatment with systemic corticosteroids&lt;/span&gt; during the &lt;span class=&quot;diff-del&quot;&gt;course&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;study.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;Over&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;counter&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;prescription&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;topical,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inhaled,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;intranasal&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;intra-articular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;injectable&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(for&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;occasional&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;use)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;corticosteroids&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;allowed.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Participant at the time of screening has a diagnosis of uterine fibroids documented by a pelvic ultrasound [transabdominal ultrasound (TAU) and transvaginal ultrasound (TVU)].Participant has HMB associated with uterine fibroids as evidenced by menstrual blood loss (MBL) &amp;amp;gt; 80 mL during 1 menses in screening as measured by the alkaline hematin method.Participant has negative urine and&amp;amp;#x2F;or serum pregnancy test in Washout (if applicable) and&amp;amp;#x2F;or Screening and just prior to first dose.Participant has an adequate endometrial biopsy performed during Screening, the results of which show no clinical significant endometrial pathology.Exclusion Criteria:Participant has screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a clinically significant gynecological disorder.Participant has history of osteoporosis, osteopenia, or other metabolic bone disease.Participant has clinically significant abnormalities in clinical chemistry, hematology, or urinalysis.Participant has a history of major depression or post-traumatic stress disorder (PTSD) episode within 2 years of screening, OR a history of other major psychiatric disorder at any time (e.g., schizophrenia, bipolar disorder).Participant is using any systemic corticosteroids for over 14 days within 3 months prior to Screening or is likely to require treatment with systemic corticosteroids during the course of the study. Over the counter and prescription topical, inhaled, intranasal or intra-articular injectable (for occasional use) corticosteroids are allowed.">INCLUSION CRITERIA
+
+  1. Participant at the time of screening has a diagnosis of uterine fibroids documented by a pelvic ultrasound [transabdominal ultrasound (TAU) and transvaginal ultrasound (TVU)].
+  2. Participant has HMB associated with uterine fibroids as evidenced by menstrual blood loss (MBL) &gt; 80 mL during 1 menses in screening as measured by the alkaline hematin method.
+  3. Participant has negative urine and/or serum pregnancy test in Washout (if applicable) and/or Screening and just prior to first dose.
+  4. Participant has an adequate endometrial biopsy performed during Screening, the results of which show no clinical significant endometrial pathology.
+
+EXCLUSION CRITERIA
+
+  1. Participant has screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a clinically significant gynecological disorder.
+  2. Participant has history of osteoporosis, osteopenia, or other metabolic bone disease.
+  3. Participant has clinically significant abnormalities in clinical chemistry, hematology, or urinalysis.
+  4. Participant has a history of major depression or post-traumatic stress disorder (PTSD) episode within 2 years of screening, OR a history of other major psychiatric disorder at any time (e.g., schizophrenia, bipolar disorder).
+  5. Participant is using any systemic corticosteroids for over 14 days within 3 months prior to Screening or is likely to require treatment with systemic corticosteroids during the course of the study.
+  6. Over the counter and prescription topical, inhaled, intranasal or intra-articular injectable (for occasional use) corticosteroids are allowed.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov
+
+Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:
+
+INCLUSION CRITERIA
+
+  1. Age: 18 to 51 years old at the time of Screening.
+  2. Diagnosis: Documented uterine fibroids by pelvic ultrasound (transabdominal ultrasound [TAU], transvaginal ultrasound [TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.
+  3. Menstrual Blood Loss (MBL): HMB associated with uterine fibroids as evidenced by MBL &amp;gt; 80 mL during 1 menses in Screening as measured by the alkaline hematin method.
+  4. Hormonal Status:
+  5. Premenopausal: Not currently pregnant or breastfeeding.
+  6. Contraception: Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.
+  7. Medical History:
+  8. Exclusionary Medications: Must meet the criteria outlined in Table 1 for washout periods.
+  9. Medical Conditions: No history of:
+  10. Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).
+  11. History of surgery-related severe bleeding or severe and prolonged bleeding associated with dental work.
+  12. Two separate events of blood transfusions within 9 months prior to Screening (with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.
+  13. Active malignancy or history of malignancy (except basal cell carcinoma of the skin) with or without systemic chemotherapy.
+  14. Documented history of a severe, life-threatening, or other significant sensitivity to any drug.
+  15. Newly diagnosed, clinically significant medical condition requiring therapeutic intervention (e.g., new onset hypertension) that has not been stabilized prior to Day 1.
+  16. Clinically significant medical condition anticipated to require intervention during the course of the study participation (e.g., anticipated major elective surgery).
+  17. An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.
+  18. Any suicide attempts &amp;quot;ever&amp;quot; or subject answers &amp;quot;yes&amp;quot; to questions 4 or 5 on the suicidal ideation portion (referring to within the last year) of the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.
+  19. Drug abuse and/or alcohol abuse within 12 months prior to Screening.
+  20. Major depression or post-traumatic stress disorder (PTSD) episode within 2 years prior to Screening.
+  21. Other major psychiatric disorders at any time (e.g., schizophrenia, bipolar disorder).
+  22. Surgical history of:
+  23. Hysterectomy (with or without oophorectomy).
+  24. Bilateral oophorectomy.
+  25. Bariatric surgical procedures of any type within 6 months prior to Screening.
+  26. Laboratory Values:
+  27. Hemoglobin ≥ 7 g/dL at Screening.
+  28. Other laboratory values must meet the criteria at Screening (unless otherwise specified).
+
+EXCLUSION CRITERIA
+
+  1. Pregnancy or Breastfeeding: Pregnant or breastfeeding at the time of Screening or during the study.
+  2. Other: Any other medical condition that would make the subject unsuitable for the study in the opinion of the investigator.
+  3. Important Notes:
+  4. This is a summary of the modified eligibility criteria based on the provided text.
+  5. The complete and official eligibility criteria should be found in the full protocol document.
+  6. It is crucial to consult the full protocol for the most accurate and up-to-date information.
+  7. This information is for educational purposes only and should not be considered medical advice.
+  8. Always consult with a healthcare professional for any health concerns or before making any decisions related to your health or treatment."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov
+
+Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Age: 18 to 51 years old&lt;/span&gt; at the time of &lt;span class=&quot;diff-add&quot;&gt;Screening.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Diagnosis:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Documented&lt;/span&gt; uterine fibroids by pelvic ultrasound &lt;span class=&quot;diff-add&quot;&gt;(transabdominal&lt;/span&gt; ultrasound &lt;span class=&quot;diff-add&quot;&gt;[TAU],&lt;/span&gt; transvaginal ultrasound &lt;span class=&quot;diff-add&quot;&gt;[TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Menstrual&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Blood Loss (MBL):&lt;/span&gt; HMB associated with uterine fibroids as evidenced by &lt;span class=&quot;diff-add&quot;&gt;MBL&lt;/span&gt; &amp;gt; 80 mL during 1 menses in &lt;span class=&quot;diff-add&quot;&gt;Screening&lt;/span&gt; as measured by the alkaline hematin method.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Hormonal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Status:
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Premenopausal:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;currently&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;pregnant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;breastfeeding.
+  6. Contraception: Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.
+  7. Medical History:
+  8. Exclusionary Medications: Must meet the criteria outlined&lt;/span&gt; in &lt;span class=&quot;diff-add&quot;&gt;Table&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;washout&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;periods.
+  9. Medical Conditions: No history of:
+  10. Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).
+  11. History of surgery-related severe bleeding or severe&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;prolonged bleeding associated with dental work.
+  12. Two separate events of blood transfusions within 9 months&lt;/span&gt; prior to &lt;span class=&quot;diff-add&quot;&gt;Screening&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Active&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;malignancy&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;malignancy&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(except&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;basal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;cell carcinoma of&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;skin) with or without systemic chemotherapy.
+  14. Documented history&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;severe,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;life-threatening,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or other&lt;/span&gt; significant &lt;span class=&quot;diff-add&quot;&gt;sensitivity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drug.
+  15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Newly&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;diagnosed,&lt;/span&gt; clinically significant &lt;span class=&quot;diff-add&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;requiring therapeutic intervention (e.g., new onset hypertension) that&lt;/span&gt; has &lt;span class=&quot;diff-add&quot;&gt;not been stabilized prior to Day 1.
+  16. Clinically significant medical condition anticipated to require intervention during the course&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study participation (e.g., anticipated major elective surgery).
+  17. An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.
+  18. Any suicide attempts &amp;quot;ever&amp;quot;&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;answers&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;&amp;quot;yes&amp;quot;&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;questions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;4&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;suicidal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ideation portion (referring to within the last year)&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.
+  19. Drug abuse and/or alcohol abuse within 12 months prior to Screening.
+  20. Major&lt;/span&gt; depression or post-traumatic stress disorder (PTSD) episode within 2 years &lt;span class=&quot;diff-add&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Screening.
+  21.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; major psychiatric &lt;span class=&quot;diff-add&quot;&gt;disorders&lt;/span&gt; at any time (e.g., schizophrenia, bipolar disorder).
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Surgical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of:
+  23. Hysterectomy (with or without oophorectomy).
+  24. Bilateral oophorectomy.
+  25. Bariatric surgical procedures of&lt;/span&gt; any &lt;span class=&quot;diff-add&quot;&gt;type&lt;/span&gt; within &lt;span class=&quot;diff-add&quot;&gt;6&lt;/span&gt; months prior to &lt;span class=&quot;diff-add&quot;&gt;Screening.
+  26. Laboratory Values:
+  27. Hemoglobin ≥ 7 g/dL at Screening.
+  28. Other laboratory values must meet the criteria at Screening (unless otherwise specified).
+
+EXCLUSION CRITERIA
+
+  1. Pregnancy or Breastfeeding: Pregnant or breastfeeding at the time of &lt;/span&gt;Screening or during the &lt;span class=&quot;diff-add&quot;&gt;study.
+  2. Other: Any other medical condition that would make the subject unsuitable for the study in the opinion&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;investigator.
+  3. Important Notes:
+  4. This is a summary of the modified eligibility criteria based on the provided text.
+  5. The complete and official eligibility criteria should be found in the full protocol document.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-add&quot;&gt;It is crucial to consult&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;full protocol for the most accurate&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;up-to-date&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;information.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;information is for educational purposes only and should not be considered medical advice.
+  8. Always consult with a healthcare professional for any health concerns&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;making&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;decisions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;related&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;health or treatment.&lt;/span&gt;"
+                 data-raw="##  Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov
+
+Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:
+
+**Inclusion Criteria:**
+
+* **Age:** 18 to 51 years old at the time of Screening.
+* **Diagnosis:**  Documented uterine fibroids by pelvic ultrasound (transabdominal ultrasound [TAU], transvaginal ultrasound [TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.
+* **Menstrual Blood Loss (MBL):**  HMB associated with uterine fibroids as evidenced by MBL &amp;gt; 80 mL during 1 menses in Screening as measured by the alkaline hematin method.
+* **Hormonal Status:**
+    * **Premenopausal:**  Not currently pregnant or breastfeeding.
+    * **Contraception:**  Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.
+* **Medical History:**
+    * **Exclusionary Medications:**  Must meet the criteria outlined in Table 1 for washout periods.
+    * **Medical Conditions:**  No history of:
+        * Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).
+        * History of surgery-related severe bleeding or severe and prolonged bleeding associated with dental work.
+        * Two separate events of blood transfusions within 9 months prior to Screening (with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.
+        * Active malignancy or history of malignancy (except basal cell carcinoma of the skin) with or without systemic chemotherapy.
+        * Documented history of a severe, life-threatening, or other significant sensitivity to any drug.
+        * Newly diagnosed, clinically significant medical condition requiring therapeutic intervention (e.g., new onset hypertension) that has not been stabilized prior to Day 1.
+        * Clinically significant medical condition anticipated to require intervention during the course of the study participation (e.g., anticipated major elective surgery).
+        * An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.
+        * Any suicide attempts &amp;quot;ever&amp;quot; or subject answers &amp;quot;yes&amp;quot; to questions 4 or 5 on the suicidal ideation portion (referring to within the last year) of the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.
+        * Drug abuse and/or alcohol abuse within 12 months prior to Screening.
+        * Major depression or post-traumatic stress disorder (PTSD) episode within 2 years prior to Screening.
+        * Other major psychiatric disorders at any time (e.g., schizophrenia, bipolar disorder).
+        * Surgical history of:
+            * Hysterectomy (with or without oophorectomy).
+            * Bilateral oophorectomy.
+            * Bariatric surgical procedures of any type within 6 months prior to Screening.
+* **Laboratory Values:**
+    * Hemoglobin ≥ 7 g/dL at Screening.
+    * Other laboratory values must meet the criteria at Screening (unless otherwise specified).
+
+**Exclusion Criteria:**
+
+* **Pregnancy or Breastfeeding:**  Pregnant or breastfeeding at the time of Screening or during the study.
+* **Other:**  Any other medical condition that would make the subject unsuitable for the study in the opinion of the investigator.
+
+
+**Important Notes:**
+
+* This is a summary of the modified eligibility criteria based on the provided text. 
+* The complete and official eligibility criteria should be found in the full protocol document.
+* It is crucial to consult the full protocol for the most accurate and up-to-date information. 
+* This information is for educational purposes only and should not be considered medical advice. 
+* Always consult with a healthcare professional for any health concerns or before making any decisions related to your health or treatment.">Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov
+
+Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:
+
+INCLUSION CRITERIA
+
+  1. Age: 18 to 51 years old at the time of Screening.
+  2. Diagnosis: Documented uterine fibroids by pelvic ultrasound (transabdominal ultrasound [TAU], transvaginal ultrasound [TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.
+  3. Menstrual Blood Loss (MBL): HMB associated with uterine fibroids as evidenced by MBL &gt; 80 mL during 1 menses in Screening as measured by the alkaline hematin method.
+  4. Hormonal Status:
+  5. Premenopausal: Not currently pregnant or breastfeeding.
+  6. Contraception: Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.
+  7. Medical History:
+  8. Exclusionary Medications: Must meet the criteria outlined in Table 1 for washout periods.
+  9. Medical Conditions: No history of:
+  10. Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).
+  11. History of surgery-related severe bleeding or severe and prolonged bleeding associated with dental work.
+  12. Two separate events of blood transfusions within 9 months prior to Screening (with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.
+  13. Active malignancy or history of malignancy (except basal cell carcinoma of the skin) with or without systemic chemotherapy.
+  14. Documented history of a severe, life-threatening, or other significant sensitivity to any drug.
+  15. Newly diagnosed, clinically significant medical condition requiring therapeutic intervention (e.g., new onset hypertension) that has not been stabilized prior to Day 1.
+  16. Clinically significant medical condition anticipated to require intervention during the course of the study participation (e.g., anticipated major elective surgery).
+  17. An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.
+  18. Any suicide attempts &quot;ever&quot; or subject answers &quot;yes&quot; to questions 4 or 5 on the suicidal ideation portion (referring to within the last year) of the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.
+  19. Drug abuse and/or alcohol abuse within 12 months prior to Screening.
+  20. Major depression or post-traumatic stress disorder (PTSD) episode within 2 years prior to Screening.
+  21. Other major psychiatric disorders at any time (e.g., schizophrenia, bipolar disorder).
+  22. Surgical history of:
+  23. Hysterectomy (with or without oophorectomy).
+  24. Bilateral oophorectomy.
+  25. Bariatric surgical procedures of any type within 6 months prior to Screening.
+  26. Laboratory Values:
+  27. Hemoglobin ≥ 7 g/dL at Screening.
+  28. Other laboratory values must meet the criteria at Screening (unless otherwise specified).
+
+EXCLUSION CRITERIA
+
+  1. Pregnancy or Breastfeeding: Pregnant or breastfeeding at the time of Screening or during the study.
+  2. Other: Any other medical condition that would make the subject unsuitable for the study in the opinion of the investigator.
+  3. Important Notes:
+  4. This is a summary of the modified eligibility criteria based on the provided text.
+  5. The complete and official eligibility criteria should be found in the full protocol document.
+  6. It is crucial to consult the full protocol for the most accurate and up-to-date information.
+  7. This information is for educational purposes only and should not be considered medical advice.
+  8. Always consult with a healthcare professional for any health concerns or before making any decisions related to your health or treatment.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

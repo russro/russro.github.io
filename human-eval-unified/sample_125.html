@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 125</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 125</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg/m2 (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control (see below) combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP (covering a full menstrual cycle of 30 days starting after 5 half-lives of last dose of IMP) and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential (WONCBP)Males who have, or may have female sexual partners of child bearing potential during the course of the study must agree to use a double method of contraception including condom plus diaphragm, or condom plus intrauterine device, or condom plus stable oral/transdermal/injectable/implantable hormonal contraceptive by the female partner, from the time of informed consent through to 60 days (covering a spermatogenesis cycle) after the last dose of the IMP.
+  9. Abstinent males must agree to start a double method if they begin sexual relationship with a female during the study and up to 60 days after the last dose of study drug.
+  10. Males with female partners of child-bearing potential that are surgically sterile, or males who have undergone sterilisation and have had testing to confirm the success of the sterilisation, may also be included and will not be required to use above described methods of contraception.
+  11. Vital signs after 5 minutes resting in supine position:Systolic blood pressure (SBP) - 90-140 mmHg,Diastolic blood pressure (DBP) - 40-90 mmHg,Heart rate (HR) 40-100 bpm.
+  12. At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:QT ≤ 500 msec,QT Interval Corrected Using Fridericia&amp;#x27;s Formula (QTcF) QTcF ≤ 450 msec, QT Interval Corrected Using Bazett&amp;#x27;s Formula (QTcB) QTcB ≤ 450 msecPR interval ≤ 210 msec for both males and females, andNormal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.12.
+  13. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.13.
+  14. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).14.
+  15. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.15.
+  16. Agrees to adhere to the lifestyle considerations throughout the study (see Section 4.3.3) and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. This includes but is not limited to:history of having travelled to or lived (&amp;gt; 2 weeks) in a malaria-endemic region during the past 12 months or planned travel to a malaria-endemic region during the course of the trial;history of having lived for &amp;gt;1 year in a malaria-endemic region in the past 10 years;history of having ever lived in a malaria-endemic region for more than 10 years inclusive.
+  4. For endemic regions see https://malariaatlas.org/explorer/#/ Bali is not considered a malaria-endemic region.
+  5. Presence of acute infectious disease and/or abnormal body temperature (defined as an a.m. tympanic temperature &amp;gt;37.5 ºC or a p.m. &amp;gt;37.7 ºC) at pre-inoculation.
+  6. Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either:considered clinically significant by the Principal Investigator or delegate;
+  7. ORconsidered not clinically significant by the Principal Investigator or delegate but are also outside of Sponsor-approved clinically acceptable laboratory rangesBreastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  8. Has previously received a blood transfusion.
+  9. Use of antibiotics within 6 weeks of Screening.
+  10. Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  11. This includes (but not limited to) artemisinin, amodiaquine, atovaquone, chloroquine, mefloquine, mepacrine, primaquine, proguanil, quinine, sulfadoxine-pyrimethamine, benzodiazepine, flunarizine, fluoxetine, tetracycline, azithromycin, clindamycin, doxycycline, and tafenoquine.
+  12. Prior to screening and inoculation with the malaria challenge agent:any systemic administration (oral, pulmonary/nasal, IV) of corticosteroids, anti-inflammatory drugs (excluding commonly used over-the-counter anti-inflammatory drugs such as ibuprofen, acetylsalicylic acid, diclofenac), immunomodulators or anticoagulants within the past three months.
+  13. Ibuprofen (preferred) may be used at doses of up to 1.2 g/day, or paracetamol at doses of up to 2 g/day after discussion with the Investigator.
+  14. Limited use of other non-prescription medications or dietary supplements, not believed to affect subject safety or the overall results of the study, may be permitted on a case-by-case basis following approval by the Sponsor in consultation with the Investigator.
+  15. Any topical administration (cutaneous, eye drops) of corticosteroids within the past 2 weeks.
+  16. Any individual currently receiving or having previously received immunosuppressive therapy (including systemic steroids, adrenocorticotrophic hormone or inhaled steroids) at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  17. Any contra-indication to rescue medication according to the applicable labelling and if found to be severely glucose-6-phosphate dehydrogenase (G6PD) deficient at screening (i.e. activity of less than 10% as per World Health Organization (WHO) definition).
+  18. Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic/ gallbladder/ bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness. including medical history of asymptomatic gallbladder stones.
+  19. History of recurrent headache (eg, tension-type, cluster or migraine) with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  20. History of recurrent nausea and/or vomiting (for vomiting only: more than twice a month).
+  21. Asthma (excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening).
+  22. Any personal history of surgical procedures that may affect IMP absorption, distribution (i.e.
+  23. GI surgery) and metabolism or immune response to malaria inoculation (splenectomy).
+  24. Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling (more than 450 mL/unit of blood).
+  25. Any documented evidence of current or past cardiovascular disease including:cardiac arrhythmias orfamily history of congenital long QT syndrome, Brugada syndrome, or unexplained sudden cardiac death.
+  26. Symptomatic postural hypotension at screening irrespective of the decrease in blood pressure, or asymptomatic postural hypotension defined as a decrease in systolic blood pressure ≥20 mmHg within 3 min when changing from supine to standing position.
+  27. Has evidence of increased cardiovascular risk (defined as &amp;gt;10%, 5-year risk for those greater than 35 years of age, as determined by the Australian Absolute Cardiovascular Disease Risk Calculator (http://www.cvdcheck.org.au).
+  28. Risk factors include sex, age, systolic blood pressure (mm/Hg), smoking status, total and High-density lipoprotein (HDL) cholesterol (mmol/L) and reported diabetes status.
+  29. Note: The site investigator will perform cardiovascular risk calculation once all assessments have been performed, prior to eligibility.
+  30. History or presence of diagnosed (by an allergist/immunologist) or treated (by a physician) food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions including face, mouth, or throat swelling or any difficulty breathing.
+  31. Individuals with known lactose or dairy intolerance are excluded.
+  32. Volunteers with seasonal allergies/hay fever or allergy to animals or house dust mite that are untreated and asymptomatic at the time of dosing can be enrolled in the trial.
+  33. History of convulsion (including drug or vaccine-induced episodes).
+  34. A medical history of a single febrile convulsion during childhood is not an exclusion criterion.
+  35. History of substance use disorder(s) within 5 years of screening and/or history of alcohol dependancy and/or any prior intravenous use of an illicit substance.
+  36. Smoked &amp;gt; 1 pack of cigarettes per day for &amp;gt; 10 years, or who currently (within 14 days prior to screening) smokes &amp;gt; 5 cigarettes per day.
+  37. Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study, or unable to cooperate because of a language problem or poor mental development.
+  38. Any individual who cannot be contacted in case of emergency.
+  39. Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  40. Any individual without a good peripheral venous access.
+  41. Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  42. Positive serology test for hepatitis B (HB) (positive Hepatitis B surface antigen (HB sAG) or anti-hepatitis B core antibody (anti-HBc Ab), hepatitis C (anti-HCV) or human immune deficiency virus (HIV) (positive for anti-HIV1 (HIV type 1) and anti-HIV2 (HIV type 2) Ab ).
+  43. Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  44. Any drug from the list of drugs tested (such as amphetamine, barbiturates, benzodiazepines, cocaine, methamphetamine, methadone, Opiates, phencyclidine, Tetrahydrocannabinol; and their metabolites) unless there is an acceptable explanation to the Principal Investigator or delegate (eg, volunteer has stated in advance that they consumed a prescription of over the counter product which contained the detected drug) and/or the volunteer has a negative urine drug screen on retest.
+  45. Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  46. Any consumption of citrus fruits (such as grapefruit, Seville oranges) or their juices within 7 days prior to IMP administration.
+  47. History of serious psychiatric condition that may affect participation in the study or preclude compliance with the protocol, including but not limited to: past or present psychoses, disorders requiring lithium, a history of attempted or planned suicide, more than one previous episode of major depression, any previous single episode of major depression lasting for or requiring treatment for more than 6 months, or any episode of major depression during the 5 years preceding screening.
+  48. History of malignancy of any organ system (other than localized basal cell carcinoma of the skin or in situ cervical cancer considered treated and cured), treated or untreated, within 5 years of Screening, regardless of whether there is no evidence of local recurrence or metastases.
+  49. Any vaccination within 28 days of screening.
+  50. Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;#x27;s involvement in the study"
+                 data-diff="INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 &lt;span class=&quot;diff-del&quot;&gt;kg/m2&lt;/span&gt; (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control &lt;span class=&quot;diff-del&quot;&gt;(see below) &lt;/span&gt;combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP&lt;span class=&quot;diff-del&quot;&gt; (covering a full menstrual cycle of 30 days starting after 5 half-lives of last dose of IMP)&lt;/span&gt; and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential &lt;span class=&quot;diff-del&quot;&gt;(WONCBP)Males&lt;/span&gt; who have, or may have female sexual partners of &lt;span class=&quot;diff-del&quot;&gt;child bearing&lt;/span&gt; potential during the course of the study must agree to use a double method of contraception &lt;span class=&quot;diff-del&quot;&gt;including condom plus diaphragm, or condom plus intrauterine device, or condom plus stable oral/transdermal/injectable/implantable hormonal contraceptive by the female partner, &lt;/span&gt;from the time of informed consent through to 60 days &lt;span class=&quot;diff-del&quot;&gt;(covering a spermatogenesis cycle) &lt;/span&gt;after the last dose of the IMP.
+  &lt;span class=&quot;diff-del&quot;&gt;9. Abstinent males must agree to start a double method if they begin sexual relationship with a female during the study and up to 60 days after the last dose of study drug.
+  10. Males with female partners of child-bearing potential that are surgically sterile, or males who have undergone sterilisation and have had testing to confirm the success of the sterilisation, may also be included and will not be required to use above described methods of contraception.
+  11.&lt;/span&gt; Vital signs after 5 minutes resting in supine &lt;span class=&quot;diff-del&quot;&gt;position:Systolic&lt;/span&gt; blood pressure (SBP) - &lt;span class=&quot;diff-del&quot;&gt;90-140&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mmHg,Diastolic&lt;/span&gt; blood pressure (DBP) - &lt;span class=&quot;diff-del&quot;&gt;40-90&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mmHg,Heart&lt;/span&gt; rate (HR) &lt;span class=&quot;diff-del&quot;&gt;40-100&lt;/span&gt; bpm.
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following &lt;span class=&quot;diff-del&quot;&gt;ranges:QT&lt;/span&gt; ≤ 500 &lt;span class=&quot;diff-del&quot;&gt;msec,QT&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Interval Corrected Using Fridericia&amp;#x27;s Formula (QTcF)&lt;/span&gt; QTcF ≤ 450 msec, &lt;span class=&quot;diff-del&quot;&gt;QT Interval Corrected Using Bazett&amp;#x27;s Formula (QTcB) &lt;/span&gt;QTcB ≤ 450 &lt;span class=&quot;diff-del&quot;&gt;msecPR&lt;/span&gt; interval ≤ 210 msec for both males and females, &lt;span class=&quot;diff-del&quot;&gt;andNormal&lt;/span&gt; ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically &lt;span class=&quot;diff-del&quot;&gt;relevant.12.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted &lt;span class=&quot;diff-del&quot;&gt;medications.13.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical &lt;span class=&quot;diff-del&quot;&gt;examination).14.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; Fluent in English and able to understand and comply with written and verbal protocol-related &lt;span class=&quot;diff-del&quot;&gt;requirements.15.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Agrees to adhere to the lifestyle considerations throughout the study&lt;span class=&quot;diff-del&quot;&gt; (see Section 4.3.3)&lt;/span&gt; and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. &lt;span class=&quot;diff-del&quot;&gt;This includes but is not limited to:history of having travelled to or lived (&amp;gt; 2 weeks) in a malaria-endemic region during the past 12 months or planned travel to a malaria-endemic region during the course of the trial;history of having lived for &amp;gt;1 year in a malaria-endemic region in the past 10 years;history of having ever lived in a malaria-endemic region for more than 10 years inclusive.
+  4. For endemic regions see https://malariaatlas.org/explorer/#/ Bali is not considered a malaria-endemic region.
+  5. &lt;/span&gt;Presence of acute infectious disease and/or abnormal body temperature &lt;span class=&quot;diff-del&quot;&gt;(defined as an a.m. tympanic temperature &amp;gt;37.5 ºC or a p.m. &amp;gt;37.7 ºC) &lt;/span&gt;at pre-inoculation.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are &lt;span class=&quot;diff-del&quot;&gt;either:considered&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;clinically significant by the Principal Investigator or delegate;
+  7. ORconsidered not&lt;/span&gt; clinically significant by the Principal Investigator or delegate &lt;span class=&quot;diff-del&quot;&gt;but are also&lt;/span&gt; outside of Sponsor-approved clinically acceptable laboratory &lt;span class=&quot;diff-del&quot;&gt;rangesBreastfeeding&lt;/span&gt; or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; Has previously received a blood transfusion.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Use of antibiotics within 6 weeks of Screening.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  &lt;span class=&quot;diff-del&quot;&gt;11. This includes (but not limited to) artemisinin, amodiaquine, atovaquone, chloroquine, mefloquine, mepacrine, primaquine, proguanil, quinine, sulfadoxine-pyrimethamine, benzodiazepine, flunarizine, fluoxetine, tetracycline, azithromycin, clindamycin, doxycycline, and tafenoquine.
+  12.&lt;/span&gt; Prior to screening and inoculation with the malaria challenge &lt;span class=&quot;diff-del&quot;&gt;agent:any&lt;/span&gt; systemic administration&lt;span class=&quot;diff-del&quot;&gt; (oral, pulmonary/nasal, IV)&lt;/span&gt; of corticosteroids, anti-inflammatory &lt;span class=&quot;diff-del&quot;&gt;drugs (excluding commonly used over-the-counter anti-inflammatory drugs such as ibuprofen, acetylsalicylic acid, diclofenac),&lt;/span&gt; immunomodulators or anticoagulants within the past three months.
+  &lt;span class=&quot;diff-del&quot;&gt;13. Ibuprofen (preferred) may be used at doses of up to 1.2 g/day, or paracetamol at doses of up to 2 g/day after discussion with the Investigator.
+  14. Limited use of other non-prescription medications or dietary supplements, not believed to affect subject safety or the overall results of the study, may be permitted on a case-by-case basis following approval by the Sponsor in consultation with the Investigator.
+  15.&lt;/span&gt; Any topical administration&lt;span class=&quot;diff-del&quot;&gt; (cutaneous, eye drops)&lt;/span&gt; of corticosteroids within the past 2 weeks.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Any individual currently receiving or having previously received immunosuppressive therapy&lt;span class=&quot;diff-del&quot;&gt; (including systemic steroids, adrenocorticotrophic hormone or inhaled steroids)&lt;/span&gt; at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; Any contra-indication to rescue medication according to the applicable labelling and if found to be severely &lt;span class=&quot;diff-del&quot;&gt;glucose-6-phosphate dehydrogenase (G6PD)&lt;/span&gt; deficient at &lt;span class=&quot;diff-del&quot;&gt;screening (i.e. activity of less than 10% as per World Health Organization (WHO) definition).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;18.&lt;/span&gt; Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, &lt;span class=&quot;diff-del&quot;&gt;hepatic/ gallbladder/ bile&lt;/span&gt; duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness.&lt;span class=&quot;diff-del&quot;&gt; including medical history of asymptomatic gallbladder stones.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; History of recurrent headache&lt;span class=&quot;diff-del&quot;&gt; (eg, tension-type, cluster or migraine)&lt;/span&gt; with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;History&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of recurrent nausea and/or vomiting (for vomiting only: more than twice a month).
+  21. Asthma (excluding&lt;/span&gt; childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to &lt;span class=&quot;diff-del&quot;&gt;screening).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;22.&lt;/span&gt; Any personal history of surgical procedures that may affect IMP absorption, distribution &lt;span class=&quot;diff-del&quot;&gt;(i.e.
+  23. GI surgery) &lt;/span&gt;and metabolism or immune response to malaria &lt;span class=&quot;diff-del&quot;&gt;inoculation (splenectomy).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;24.&lt;/span&gt; Blood donation of any volume within one month before screening, or participation in any research study involving blood &lt;span class=&quot;diff-del&quot;&gt;sampling (more than 450 mL/unit of blood).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;25.&lt;/span&gt; Any documented evidence of current or past cardiovascular &lt;span class=&quot;diff-del&quot;&gt;disease including:cardiac arrhythmias orfamily history of congenital long QT syndrome, Brugada syndrome, or unexplained sudden cardiac death.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;26. Symptomatic postural hypotension at screening irrespective of the decrease in blood pressure, or asymptomatic postural hypotension defined as a decrease in systolic blood pressure ≥20 mmHg within 3 min when changing from supine to standing position.
+  27.&lt;/span&gt; Has evidence of increased cardiovascular &lt;span class=&quot;diff-del&quot;&gt;risk (defined as &amp;gt;10%, 5-year risk for those greater than 35 years of age, as determined by the Australian Absolute Cardiovascular Disease Risk Calculator (http://www.cvdcheck.org.au).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;28. Risk factors include sex, age, systolic blood pressure (mm/Hg), smoking status, total and High-density lipoprotein (HDL) cholesterol (mmol/L) and reported diabetes status.
+  29. Note: The site investigator will perform cardiovascular risk calculation once all assessments have been performed, prior to eligibility.
+  30.&lt;/span&gt; History or presence of diagnosed &lt;span class=&quot;diff-del&quot;&gt;(by an allergist/immunologist) &lt;/span&gt;or treated&lt;span class=&quot;diff-del&quot;&gt; (by a physician)&lt;/span&gt; food or known drug allergies, or any history of anaphylaxis or other severe allergic &lt;span class=&quot;diff-del&quot;&gt;reactions including face, mouth, or throat swelling or any difficulty breathing.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;31. Individuals with known lactose or dairy intolerance are excluded.
+  32. Volunteers with seasonal allergies/hay fever or allergy to animals or house dust mite that are untreated and asymptomatic at the time of dosing can be enrolled in the trial.
+  33.&lt;/span&gt; History of &lt;span class=&quot;diff-del&quot;&gt;convulsion (including drug or vaccine-induced episodes).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;34. A medical history of a single febrile convulsion during childhood is not an exclusion criterion.
+  35.&lt;/span&gt; History of substance use disorder(s) within 5 years of screening and/or history of alcohol &lt;span class=&quot;diff-del&quot;&gt;dependancy&lt;/span&gt; and/or any prior intravenous use of an illicit substance.
+  &lt;span class=&quot;diff-del&quot;&gt;36.&lt;/span&gt; Smoked &amp;gt; 1 pack of cigarettes per day for &amp;gt; 10 years, or who currently &lt;span class=&quot;diff-del&quot;&gt;(within 14 days prior to screening) &lt;/span&gt;smokes &amp;gt; 5 cigarettes per day.
+  &lt;span class=&quot;diff-del&quot;&gt;37.&lt;/span&gt; Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the &lt;span class=&quot;diff-del&quot;&gt;study, or unable to cooperate because of a language problem or poor mental development.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;38.&lt;/span&gt; Any individual who cannot be contacted in case of emergency.
+  &lt;span class=&quot;diff-del&quot;&gt;39.&lt;/span&gt; Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  &lt;span class=&quot;diff-del&quot;&gt;40.&lt;/span&gt; Any individual without a good peripheral venous access.
+  &lt;span class=&quot;diff-del&quot;&gt;41.&lt;/span&gt; Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  &lt;span class=&quot;diff-del&quot;&gt;42.&lt;/span&gt; Positive serology test for hepatitis &lt;span class=&quot;diff-del&quot;&gt;B (HB) (positive Hepatitis B surface antigen (HB sAG) or anti-hepatitis B core antibody (anti-HBc Ab),&lt;/span&gt; hepatitis C&lt;span class=&quot;diff-del&quot;&gt; (anti-HCV)&lt;/span&gt; or human immune deficiency virus &lt;span class=&quot;diff-del&quot;&gt;(HIV) (positive for anti-HIV1 (HIV type 1) and anti-HIV2 (HIV type 2) Ab ).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;43.&lt;/span&gt; Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  &lt;span class=&quot;diff-del&quot;&gt;44. Any drug from the list of drugs tested (such as amphetamine, barbiturates, benzodiazepines, cocaine, methamphetamine, methadone, Opiates, phencyclidine, Tetrahydrocannabinol; and their metabolites) unless there is an acceptable explanation to the Principal Investigator or delegate (eg, volunteer has stated in advance that they consumed a prescription of over the counter product which contained the detected drug) and/or the volunteer has a negative urine drug screen on retest.
+  45.&lt;/span&gt; Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  &lt;span class=&quot;diff-del&quot;&gt;46.&lt;/span&gt; Any consumption of citrus fruits&lt;span class=&quot;diff-del&quot;&gt; (such as grapefruit, Seville oranges)&lt;/span&gt; or their juices within 7 days prior to IMP administration.
+  &lt;span class=&quot;diff-del&quot;&gt;47.&lt;/span&gt; History of serious psychiatric condition that may affect participation in the &lt;span class=&quot;diff-del&quot;&gt;study or preclude compliance with the protocol, including but not limited to: past or present psychoses, disorders requiring lithium, a history of attempted or planned suicide, more than one previous episode of major depression, any previous single episode of major depression lasting for or requiring treatment for more than 6 months, or any episode of major depression during the 5 years preceding screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;48.&lt;/span&gt; History of malignancy of any organ system &lt;span class=&quot;diff-del&quot;&gt;(other than localized basal cell carcinoma of the skin or in situ cervical cancer considered treated and cured), treated or untreated, &lt;/span&gt;within 5 years of &lt;span class=&quot;diff-del&quot;&gt;Screening, regardless of whether there is no evidence of local recurrence or metastases.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;49.&lt;/span&gt; Any vaccination within 28 days of screening.
+  &lt;span class=&quot;diff-del&quot;&gt;50.&lt;/span&gt; Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;#x27;s involvement in the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Having given written informed consent prior to undertaking any study-related procedure.Male or female aged between 18 to 55 years inclusive.Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg&amp;amp;#x2F;m2 (inclusive).Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control (see below) combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP (covering a full menstrual cycle of 30 days starting after 5 half-lives of last dose of IMP) and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.Women of non-childbearing potential (WONCBP)Males who have, or may have female sexual partners of child bearing potential during the course of the study must agree to use a double method of contraception including condom plus diaphragm, or condom plus intrauterine device, or condom plus stable oral&amp;amp;#x2F;transdermal&amp;amp;#x2F;injectable&amp;amp;#x2F;implantable hormonal contraceptive by the female partner, from the time of informed consent through to 60 days (covering a spermatogenesis cycle) after the last dose of the IMP. Abstinent males must agree to start a double method if they begin sexual relationship with a female during the study and up to 60 days after the last dose of study drug. Males with female partners of child-bearing potential that are surgically sterile, or males who have undergone sterilisation and have had testing to confirm the success of the sterilisation, may also be included and will not be required to use above described methods of contraception.Vital signs after 5 minutes resting in supine position:Systolic blood pressure (SBP) - 90-140 mmHg,Diastolic blood pressure (DBP) - 40-90 mmHg,Heart rate (HR) 40-100 bpm.At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:QT ≤ 500 msec,QT Interval Corrected Using Fridericia&amp;amp;#x27;s Formula (QTcF) QTcF ≤ 450 msec, QT Interval Corrected Using Bazett&amp;amp;#x27;s Formula (QTcB) QTcB ≤ 450 msecPR interval ≤ 210 msec for both males and females, andNormal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.12. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.13. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).14. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.15. Agrees to adhere to the lifestyle considerations throughout the study (see Section 4.3.3) and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.Exclusion Criteria:Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate. This includes but is not limited to:history of having travelled to or lived (&amp;amp;gt; 2 weeks) in a malaria-endemic region during the past 12 months or planned travel to a malaria-endemic region during the course of the trial;history of having lived for &amp;amp;gt;1 year in a malaria-endemic region in the past 10 years;history of having ever lived in a malaria-endemic region for more than 10 years inclusive. For endemic regions see https:&amp;amp;#x2F;&amp;amp;#x2F;malariaatlas.org&amp;amp;#x2F;explorer&amp;amp;#x2F;#&amp;amp;#x2F; Bali is not considered a malaria-endemic region.Presence of acute infectious disease and&amp;amp;#x2F;or abnormal body temperature (defined as an a.m. tympanic temperature &amp;amp;gt;37.5 ºC or a p.m. &amp;amp;gt;37.7 ºC) at pre-inoculation.Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either:considered clinically significant by the Principal Investigator or delegate; ORconsidered not clinically significant by the Principal Investigator or delegate but are also outside of Sponsor-approved clinically acceptable laboratory rangesBreastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.Has previously received a blood transfusion.Use of antibiotics within 6 weeks of Screening.Use of systemic therapies with antimalarial activity within 6 weeks of Screening. This includes (but not limited to) artemisinin, amodiaquine, atovaquone, chloroquine, mefloquine, mepacrine, primaquine, proguanil, quinine, sulfadoxine-pyrimethamine, benzodiazepine, flunarizine, fluoxetine, tetracycline, azithromycin, clindamycin, doxycycline, and tafenoquine.Prior to screening and inoculation with the malaria challenge agent:any systemic administration (oral, pulmonary&amp;amp;#x2F;nasal, IV) of corticosteroids, anti-inflammatory drugs (excluding commonly used over-the-counter anti-inflammatory drugs such as ibuprofen, acetylsalicylic acid, diclofenac), immunomodulators or anticoagulants within the past three months.Ibuprofen (preferred) may be used at doses of up to 1.2 g&amp;amp;#x2F;day, or paracetamol at doses of up to 2 g&amp;amp;#x2F;day after discussion with the Investigator. Limited use of other non-prescription medications or dietary supplements, not believed to affect subject safety or the overall results of the study, may be permitted on a case-by-case basis following approval by the Sponsor in consultation with the Investigator.Any topical administration (cutaneous, eye drops) of corticosteroids within the past 2 weeks.Any individual currently receiving or having previously received immunosuppressive therapy (including systemic steroids, adrenocorticotrophic hormone or inhaled steroids) at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.Any contra-indication to rescue medication according to the applicable labelling and if found to be severely glucose-6-phosphate dehydrogenase (G6PD) deficient at screening (i.e. activity of less than 10% as per World Health Organization (WHO) definition).Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic&amp;amp;#x2F; gallbladder*&amp;amp;#x2F; bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness. *including medical history of asymptomatic gallbladder stones.History of recurrent headache (eg, tension-type, cluster or migraine) with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy. History of recurrent nausea and&amp;amp;#x2F;or vomiting (for vomiting only: more than twice a month).Asthma (excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening).Any personal history of surgical procedures that may affect IMP absorption, distribution (i.e. GI surgery) and metabolism or immune response to malaria inoculation (splenectomy).Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling (more than 450 mL&amp;amp;#x2F;unit of blood).Any documented evidence of current or past cardiovascular disease including:cardiac arrhythmias orfamily history of congenital long QT syndrome, Brugada syndrome, or unexplained sudden cardiac death.Symptomatic postural hypotension at screening irrespective of the decrease in blood pressure, or asymptomatic postural hypotension defined as a decrease in systolic blood pressure ≥20 mmHg within 3 min when changing from supine to standing position.Has evidence of increased cardiovascular risk (defined as &amp;amp;gt;10%, 5-year risk for those greater than 35 years of age, as determined by the Australian Absolute Cardiovascular Disease Risk Calculator (http:&amp;amp;#x2F;&amp;amp;#x2F;www.cvdcheck.org.au). Risk factors include sex, age, systolic blood pressure (mm&amp;amp;#x2F;Hg), smoking status, total and High-density lipoprotein (HDL) cholesterol (mmol&amp;amp;#x2F;L) and reported diabetes status. Note: The site investigator will perform cardiovascular risk calculation once all assessments have been performed, prior to eligibility.History or presence of diagnosed (by an allergist&amp;amp;#x2F;immunologist) or treated (by a physician) food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions including face, mouth, or throat swelling or any difficulty breathing. Individuals with known lactose or dairy intolerance are excluded. Volunteers with seasonal allergies&amp;amp;#x2F;hay fever or allergy to animals or house dust mite that are untreated and asymptomatic at the time of dosing can be enrolled in the trial.History of convulsion (including drug or vaccine-induced episodes). A medical history of a single febrile convulsion during childhood is not an exclusion criterion.History of substance use disorder(s) within 5 years of screening and&amp;amp;#x2F;or history of alcohol dependancy and&amp;amp;#x2F;or any prior intravenous use of an illicit substance.Smoked &amp;amp;gt; 1 pack of cigarettes per day for &amp;amp;gt; 10 years, or who currently (within 14 days prior to screening) smokes &amp;amp;gt; 5 cigarettes per day.Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study, or unable to cooperate because of a language problem or poor mental development.Any individual who cannot be contacted in case of emergency.Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.Any individual without a good peripheral venous access.Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.Positive serology test for hepatitis B (HB) (positive Hepatitis B surface antigen (HB sAG) or anti-hepatitis B core antibody (anti-HBc Ab), hepatitis C (anti-HCV) or human immune deficiency virus (HIV) (positive for anti-HIV1 (HIV type 1) and anti-HIV2 (HIV type 2) Ab ).Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing. Any drug from the list of drugs tested (such as amphetamine, barbiturates, benzodiazepines, cocaine, methamphetamine, methadone, Opiates, phencyclidine, Tetrahydrocannabinol; and their metabolites) unless there is an acceptable explanation to the Principal Investigator or delegate (eg, volunteer has stated in advance that they consumed a prescription of over the counter product which contained the detected drug) and&amp;amp;#x2F;or the volunteer has a negative urine drug screen on retest.Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.Any consumption of citrus fruits (such as grapefruit, Seville oranges) or their juices within 7 days prior to IMP administration.History of serious psychiatric condition that may affect participation in the study or preclude compliance with the protocol, including but not limited to: past or present psychoses, disorders requiring lithium, a history of attempted or planned suicide, more than one previous episode of major depression, any previous single episode of major depression lasting for or requiring treatment for more than 6 months, or any episode of major depression during the 5 years preceding screening.History of malignancy of any organ system (other than localized basal cell carcinoma of the skin or in situ cervical cancer considered treated and cured), treated or untreated, within 5 years of Screening, regardless of whether there is no evidence of local recurrence or metastases.Any vaccination within 28 days of screening.Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;amp;#x27;s involvement in the study">INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg/m2 (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control (see below) combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP (covering a full menstrual cycle of 30 days starting after 5 half-lives of last dose of IMP) and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential (WONCBP)Males who have, or may have female sexual partners of child bearing potential during the course of the study must agree to use a double method of contraception including condom plus diaphragm, or condom plus intrauterine device, or condom plus stable oral/transdermal/injectable/implantable hormonal contraceptive by the female partner, from the time of informed consent through to 60 days (covering a spermatogenesis cycle) after the last dose of the IMP.
+  9. Abstinent males must agree to start a double method if they begin sexual relationship with a female during the study and up to 60 days after the last dose of study drug.
+  10. Males with female partners of child-bearing potential that are surgically sterile, or males who have undergone sterilisation and have had testing to confirm the success of the sterilisation, may also be included and will not be required to use above described methods of contraception.
+  11. Vital signs after 5 minutes resting in supine position:Systolic blood pressure (SBP) - 90-140 mmHg,Diastolic blood pressure (DBP) - 40-90 mmHg,Heart rate (HR) 40-100 bpm.
+  12. At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:QT ≤ 500 msec,QT Interval Corrected Using Fridericia&#x27;s Formula (QTcF) QTcF ≤ 450 msec, QT Interval Corrected Using Bazett&#x27;s Formula (QTcB) QTcB ≤ 450 msecPR interval ≤ 210 msec for both males and females, andNormal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.12.
+  13. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.13.
+  14. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).14.
+  15. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.15.
+  16. Agrees to adhere to the lifestyle considerations throughout the study (see Section 4.3.3) and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. This includes but is not limited to:history of having travelled to or lived (&gt; 2 weeks) in a malaria-endemic region during the past 12 months or planned travel to a malaria-endemic region during the course of the trial;history of having lived for &gt;1 year in a malaria-endemic region in the past 10 years;history of having ever lived in a malaria-endemic region for more than 10 years inclusive.
+  4. For endemic regions see https://malariaatlas.org/explorer/#/ Bali is not considered a malaria-endemic region.
+  5. Presence of acute infectious disease and/or abnormal body temperature (defined as an a.m. tympanic temperature &gt;37.5 ºC or a p.m. &gt;37.7 ºC) at pre-inoculation.
+  6. Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either:considered clinically significant by the Principal Investigator or delegate;
+  7. ORconsidered not clinically significant by the Principal Investigator or delegate but are also outside of Sponsor-approved clinically acceptable laboratory rangesBreastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  8. Has previously received a blood transfusion.
+  9. Use of antibiotics within 6 weeks of Screening.
+  10. Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  11. This includes (but not limited to) artemisinin, amodiaquine, atovaquone, chloroquine, mefloquine, mepacrine, primaquine, proguanil, quinine, sulfadoxine-pyrimethamine, benzodiazepine, flunarizine, fluoxetine, tetracycline, azithromycin, clindamycin, doxycycline, and tafenoquine.
+  12. Prior to screening and inoculation with the malaria challenge agent:any systemic administration (oral, pulmonary/nasal, IV) of corticosteroids, anti-inflammatory drugs (excluding commonly used over-the-counter anti-inflammatory drugs such as ibuprofen, acetylsalicylic acid, diclofenac), immunomodulators or anticoagulants within the past three months.
+  13. Ibuprofen (preferred) may be used at doses of up to 1.2 g/day, or paracetamol at doses of up to 2 g/day after discussion with the Investigator.
+  14. Limited use of other non-prescription medications or dietary supplements, not believed to affect subject safety or the overall results of the study, may be permitted on a case-by-case basis following approval by the Sponsor in consultation with the Investigator.
+  15. Any topical administration (cutaneous, eye drops) of corticosteroids within the past 2 weeks.
+  16. Any individual currently receiving or having previously received immunosuppressive therapy (including systemic steroids, adrenocorticotrophic hormone or inhaled steroids) at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  17. Any contra-indication to rescue medication according to the applicable labelling and if found to be severely glucose-6-phosphate dehydrogenase (G6PD) deficient at screening (i.e. activity of less than 10% as per World Health Organization (WHO) definition).
+  18. Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic/ gallbladder/ bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness. including medical history of asymptomatic gallbladder stones.
+  19. History of recurrent headache (eg, tension-type, cluster or migraine) with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  20. History of recurrent nausea and/or vomiting (for vomiting only: more than twice a month).
+  21. Asthma (excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening).
+  22. Any personal history of surgical procedures that may affect IMP absorption, distribution (i.e.
+  23. GI surgery) and metabolism or immune response to malaria inoculation (splenectomy).
+  24. Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling (more than 450 mL/unit of blood).
+  25. Any documented evidence of current or past cardiovascular disease including:cardiac arrhythmias orfamily history of congenital long QT syndrome, Brugada syndrome, or unexplained sudden cardiac death.
+  26. Symptomatic postural hypotension at screening irrespective of the decrease in blood pressure, or asymptomatic postural hypotension defined as a decrease in systolic blood pressure ≥20 mmHg within 3 min when changing from supine to standing position.
+  27. Has evidence of increased cardiovascular risk (defined as &gt;10%, 5-year risk for those greater than 35 years of age, as determined by the Australian Absolute Cardiovascular Disease Risk Calculator (http://www.cvdcheck.org.au).
+  28. Risk factors include sex, age, systolic blood pressure (mm/Hg), smoking status, total and High-density lipoprotein (HDL) cholesterol (mmol/L) and reported diabetes status.
+  29. Note: The site investigator will perform cardiovascular risk calculation once all assessments have been performed, prior to eligibility.
+  30. History or presence of diagnosed (by an allergist/immunologist) or treated (by a physician) food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions including face, mouth, or throat swelling or any difficulty breathing.
+  31. Individuals with known lactose or dairy intolerance are excluded.
+  32. Volunteers with seasonal allergies/hay fever or allergy to animals or house dust mite that are untreated and asymptomatic at the time of dosing can be enrolled in the trial.
+  33. History of convulsion (including drug or vaccine-induced episodes).
+  34. A medical history of a single febrile convulsion during childhood is not an exclusion criterion.
+  35. History of substance use disorder(s) within 5 years of screening and/or history of alcohol dependancy and/or any prior intravenous use of an illicit substance.
+  36. Smoked &gt; 1 pack of cigarettes per day for &gt; 10 years, or who currently (within 14 days prior to screening) smokes &gt; 5 cigarettes per day.
+  37. Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study, or unable to cooperate because of a language problem or poor mental development.
+  38. Any individual who cannot be contacted in case of emergency.
+  39. Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  40. Any individual without a good peripheral venous access.
+  41. Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  42. Positive serology test for hepatitis B (HB) (positive Hepatitis B surface antigen (HB sAG) or anti-hepatitis B core antibody (anti-HBc Ab), hepatitis C (anti-HCV) or human immune deficiency virus (HIV) (positive for anti-HIV1 (HIV type 1) and anti-HIV2 (HIV type 2) Ab ).
+  43. Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  44. Any drug from the list of drugs tested (such as amphetamine, barbiturates, benzodiazepines, cocaine, methamphetamine, methadone, Opiates, phencyclidine, Tetrahydrocannabinol; and their metabolites) unless there is an acceptable explanation to the Principal Investigator or delegate (eg, volunteer has stated in advance that they consumed a prescription of over the counter product which contained the detected drug) and/or the volunteer has a negative urine drug screen on retest.
+  45. Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  46. Any consumption of citrus fruits (such as grapefruit, Seville oranges) or their juices within 7 days prior to IMP administration.
+  47. History of serious psychiatric condition that may affect participation in the study or preclude compliance with the protocol, including but not limited to: past or present psychoses, disorders requiring lithium, a history of attempted or planned suicide, more than one previous episode of major depression, any previous single episode of major depression lasting for or requiring treatment for more than 6 months, or any episode of major depression during the 5 years preceding screening.
+  48. History of malignancy of any organ system (other than localized basal cell carcinoma of the skin or in situ cervical cancer considered treated and cured), treated or untreated, within 5 years of Screening, regardless of whether there is no evidence of local recurrence or metastases.
+  49. Any vaccination within 28 days of screening.
+  50. Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&#x27;s involvement in the study</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg/m² (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential (WONCBP) are defined as:
+  9. a. Natural (spontaneous) post-menopausal defined as being amenorrhoeic for at least 12 months without an alternative medical cause with a screening follicle stimulating hormone level (FSH) &amp;gt;25 IU/L.
+  10. b. Premenopausal with irreversible surgical sterilization by hysterectomy and/or bilateral oophorectomy or salpingectomy at least 6 months before screening.
+  11. Males who have, or may have female sexual partners of childbearing potential during the course of the study must agree to use a double method of contraception from the time of informed consent through to 60 days after the last dose of the IMP.
+  12. Vital signs after 5 minutes resting in supine position:
+  13. a. Systolic blood pressure (SBP) - 90–140 mmHg,
+  14. b. Diastolic blood pressure (DBP) - 40–90 mmHg,
+  15. c. Heart rate (HR) 40–100 bpm.
+  16. At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:
+  17. a. QT ≤ 500 msec,
+  18. b. QTcF ≤ 450 msec, QTcB ≤ 450 msec,
+  19. c. PR interval ≤ 210 msec for both males and females,
+  20. d. Normal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.
+  21. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.
+  22. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).
+  23. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.
+  24. Agrees to adhere to the lifestyle considerations throughout the study and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. Presence of acute infectious disease and/or abnormal body temperature at pre-inoculation.
+  4. Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either considered clinically significant by the Principal Investigator or delegate or outside of Sponsor-approved clinically acceptable laboratory ranges.
+  5. Breastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  6. Has previously received a blood transfusion.
+  7. Use of antibiotics within 6 weeks of Screening.
+  8. Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  9. Prior to screening and inoculation with the malaria challenge agent: any systemic administration of corticosteroids, anti-inflammatory drugs, immunomodulators or anticoagulants within the past three months.
+  10. Any topical administration of corticosteroids within the past 2 weeks.
+  11. Any individual currently receiving or having previously received immunosuppressive therapy at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  12. Any contra-indication to rescue medication according to the applicable labelling and if found to be severely G6PD deficient at screening.
+  13. Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic/gallbladder/bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness.
+  14. History of recurrent headache with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  15. Asthma, excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening.
+  16. Any personal history of surgical procedures that may affect IMP absorption, distribution and metabolism or immune response to malaria inoculation.
+  17. Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling.
+  18. Any documented evidence of current or past cardiovascular disease.
+  19. Has evidence of increased cardiovascular risk.
+  20. History or presence of diagnosed or treated food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions.
+  21. History of convulsion.
+  22. History of substance use disorder(s) within 5 years of screening and/or history of alcohol dependency and/or any prior intravenous use of an illicit substance.
+  23. Smoked &amp;gt; 1 pack of cigarettes per day for &amp;gt; 10 years, or who currently smokes &amp;gt; 5 cigarettes per day.
+  24. Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study.
+  25. Any individual who cannot be contacted in case of emergency.
+  26. Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  27. Any individual without a good peripheral venous access.
+  28. Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  29. Positive serology test for hepatitis B, hepatitis C or human immune deficiency virus (HIV).
+  30. Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  31. Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  32. Any consumption of citrus fruits or their juices within 7 days prior to IMP administration.
+  33. History of serious psychiatric condition that may affect participation in the study.
+  34. History of malignancy of any organ system within 5 years of Screening.
+  35. Any vaccination within 28 days of screening.
+  36. Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;#x27;s involvement in the study."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 &lt;span class=&quot;diff-add&quot;&gt;kg/m²&lt;/span&gt; (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential &lt;span class=&quot;diff-add&quot;&gt;(WONCBP) are defined as:
+  9. a. Natural (spontaneous) post-menopausal defined as being amenorrhoeic for at least 12 months without an alternative medical cause with a screening follicle stimulating hormone level (FSH) &amp;gt;25 IU/L.
+  10. b. Premenopausal with irreversible surgical sterilization by hysterectomy and/or bilateral oophorectomy or salpingectomy at least 6 months before screening.
+  11. Males&lt;/span&gt; who have, or may have female sexual partners of &lt;span class=&quot;diff-add&quot;&gt;childbearing&lt;/span&gt; potential during the course of the study must agree to use a double method of contraception from the time of informed consent through to 60 days after the last dose of the IMP.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Vital signs after 5 minutes resting in supine &lt;span class=&quot;diff-add&quot;&gt;position:
+  13. a. Systolic&lt;/span&gt; blood pressure (SBP) - &lt;span class=&quot;diff-add&quot;&gt;90–140&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mmHg,
+  14. b. Diastolic&lt;/span&gt; blood pressure (DBP) - &lt;span class=&quot;diff-add&quot;&gt;40–90&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mmHg,
+  15. c. Heart&lt;/span&gt; rate (HR) &lt;span class=&quot;diff-add&quot;&gt;40–100&lt;/span&gt; bpm.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following &lt;span class=&quot;diff-add&quot;&gt;ranges:
+  17. a. QT&lt;/span&gt; ≤ 500 &lt;span class=&quot;diff-add&quot;&gt;msec,
+  18.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;b.&lt;/span&gt; QTcF ≤ 450 msec, QTcB ≤ 450 &lt;span class=&quot;diff-add&quot;&gt;msec,
+  19. c. PR&lt;/span&gt; interval ≤ 210 msec for both males and females,&lt;span class=&quot;diff-add&quot;&gt;
+  20.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;d. Normal&lt;/span&gt; ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically &lt;span class=&quot;diff-add&quot;&gt;relevant.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted &lt;span class=&quot;diff-add&quot;&gt;medications.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical &lt;span class=&quot;diff-add&quot;&gt;examination).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;23.&lt;/span&gt; Fluent in English and able to understand and comply with written and verbal protocol-related &lt;span class=&quot;diff-add&quot;&gt;requirements.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;24.&lt;/span&gt; Agrees to adhere to the lifestyle considerations throughout the study and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. Presence of acute infectious disease and/or abnormal body temperature at pre-inoculation.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are &lt;span class=&quot;diff-add&quot;&gt;either&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;considered&lt;/span&gt; clinically significant by the Principal Investigator or delegate &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; outside of Sponsor-approved clinically acceptable laboratory &lt;span class=&quot;diff-add&quot;&gt;ranges.
+  5. Breastfeeding&lt;/span&gt; or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Has previously received a blood transfusion.
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; Use of antibiotics within 6 weeks of Screening.
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; Prior to screening and inoculation with the malaria challenge &lt;span class=&quot;diff-add&quot;&gt;agent: any&lt;/span&gt; systemic administration of corticosteroids, anti-inflammatory &lt;span class=&quot;diff-add&quot;&gt;drugs,&lt;/span&gt; immunomodulators or anticoagulants within the past three months.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Any topical administration of corticosteroids within the past 2 weeks.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Any individual currently receiving or having previously received immunosuppressive therapy at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Any contra-indication to rescue medication according to the applicable labelling and if found to be severely &lt;span class=&quot;diff-add&quot;&gt;G6PD&lt;/span&gt; deficient at &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, &lt;span class=&quot;diff-add&quot;&gt;hepatic/gallbladder/bile&lt;/span&gt; duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness.
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; History of recurrent headache with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Asthma,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;excluding&lt;/span&gt; childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to &lt;span class=&quot;diff-add&quot;&gt;screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; Any personal history of surgical procedures that may affect IMP absorption, distribution and metabolism or immune response to malaria &lt;span class=&quot;diff-add&quot;&gt;inoculation.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Blood donation of any volume within one month before screening, or participation in any research study involving blood &lt;span class=&quot;diff-add&quot;&gt;sampling.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; Any documented evidence of current or past cardiovascular &lt;span class=&quot;diff-add&quot;&gt;disease.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Has evidence of increased cardiovascular &lt;span class=&quot;diff-add&quot;&gt;risk.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; History or presence of diagnosed or treated food or known drug allergies, or any history of anaphylaxis or other severe allergic &lt;span class=&quot;diff-add&quot;&gt;reactions.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; History of &lt;span class=&quot;diff-add&quot;&gt;convulsion.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; History of substance use disorder(s) within 5 years of screening and/or history of alcohol &lt;span class=&quot;diff-add&quot;&gt;dependency&lt;/span&gt; and/or any prior intravenous use of an illicit substance.
+  &lt;span class=&quot;diff-add&quot;&gt;23.&lt;/span&gt; Smoked &amp;gt; 1 pack of cigarettes per day for &amp;gt; 10 years, or who currently smokes &amp;gt; 5 cigarettes per day.
+  &lt;span class=&quot;diff-add&quot;&gt;24.&lt;/span&gt; Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;25.&lt;/span&gt; Any individual who cannot be contacted in case of emergency.
+  &lt;span class=&quot;diff-add&quot;&gt;26.&lt;/span&gt; Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  &lt;span class=&quot;diff-add&quot;&gt;27.&lt;/span&gt; Any individual without a good peripheral venous access.
+  &lt;span class=&quot;diff-add&quot;&gt;28.&lt;/span&gt; Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  &lt;span class=&quot;diff-add&quot;&gt;29.&lt;/span&gt; Positive serology test for hepatitis &lt;span class=&quot;diff-add&quot;&gt;B,&lt;/span&gt; hepatitis C or human immune deficiency virus &lt;span class=&quot;diff-add&quot;&gt;(HIV).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;30.&lt;/span&gt; Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  &lt;span class=&quot;diff-add&quot;&gt;31.&lt;/span&gt; Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  &lt;span class=&quot;diff-add&quot;&gt;32.&lt;/span&gt; Any consumption of citrus fruits or their juices within 7 days prior to IMP administration.
+  &lt;span class=&quot;diff-add&quot;&gt;33.&lt;/span&gt; History of serious psychiatric condition that may affect participation in the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;34.&lt;/span&gt; History of malignancy of any organ system within 5 years of &lt;span class=&quot;diff-add&quot;&gt;Screening.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;35.&lt;/span&gt; Any vaccination within 28 days of screening.
+  &lt;span class=&quot;diff-add&quot;&gt;36.&lt;/span&gt; Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;#x27;s involvement in the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+1. Having given written informed consent prior to undertaking any study-related procedure.
+2. Male or female aged between 18 to 55 years inclusive.
+3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg/m² (inclusive).
+6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+8. Women of non-childbearing potential (WONCBP) are defined as:
+   a. Natural (spontaneous) post-menopausal defined as being amenorrhoeic for at least 12 months without an alternative medical cause with a screening follicle stimulating hormone level (FSH) &amp;gt;25 IU/L.
+   b. Premenopausal with irreversible surgical sterilization by hysterectomy and/or bilateral oophorectomy or salpingectomy at least 6 months before screening.
+9. Males who have, or may have female sexual partners of childbearing potential during the course of the study must agree to use a double method of contraception from the time of informed consent through to 60 days after the last dose of the IMP.
+10. Vital signs after 5 minutes resting in supine position:
+    a. Systolic blood pressure (SBP) - 90–140 mmHg,
+    b. Diastolic blood pressure (DBP) - 40–90 mmHg,
+    c. Heart rate (HR) 40–100 bpm.
+11. At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:
+    a. QT ≤ 500 msec,
+    b. QTcF ≤ 450 msec, QTcB ≤ 450 msec,
+    c. PR interval ≤ 210 msec for both males and females,
+    d. Normal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.
+12. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.
+13. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).
+14. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.
+15. Agrees to adhere to the lifestyle considerations throughout the study and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+Exclusion Criteria:
+1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+3. Presence of acute infectious disease and/or abnormal body temperature at pre-inoculation.
+4. Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either considered clinically significant by the Principal Investigator or delegate or outside of Sponsor-approved clinically acceptable laboratory ranges.
+5. Breastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+6. Has previously received a blood transfusion.
+7. Use of antibiotics within 6 weeks of Screening.
+8. Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+9. Prior to screening and inoculation with the malaria challenge agent: any systemic administration of corticosteroids, anti-inflammatory drugs, immunomodulators or anticoagulants within the past three months.
+10. Any topical administration of corticosteroids within the past 2 weeks.
+11. Any individual currently receiving or having previously received immunosuppressive therapy at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+12. Any contra-indication to rescue medication according to the applicable labelling and if found to be severely G6PD deficient at screening.
+13. Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic/gallbladder/bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness.
+14. History of recurrent headache with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+15. Asthma, excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening.
+16. Any personal history of surgical procedures that may affect IMP absorption, distribution and metabolism or immune response to malaria inoculation.
+17. Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling.
+18. Any documented evidence of current or past cardiovascular disease.
+19. Has evidence of increased cardiovascular risk.
+20. History or presence of diagnosed or treated food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions.
+21. History of convulsion.
+22. History of substance use disorder(s) within 5 years of screening and/or history of alcohol dependency and/or any prior intravenous use of an illicit substance.
+23. Smoked &amp;gt; 1 pack of cigarettes per day for &amp;gt; 10 years, or who currently smokes &amp;gt; 5 cigarettes per day.
+24. Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study.
+25. Any individual who cannot be contacted in case of emergency.
+26. Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+27. Any individual without a good peripheral venous access.
+28. Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+29. Positive serology test for hepatitis B, hepatitis C or human immune deficiency virus (HIV).
+30. Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+31. Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+32. Any consumption of citrus fruits or their juices within 7 days prior to IMP administration.
+33. History of serious psychiatric condition that may affect participation in the study.
+34. History of malignancy of any organ system within 5 years of Screening.
+35. Any vaccination within 28 days of screening.
+36. Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&amp;#x27;s involvement in the study.">INCLUSION CRITERIA
+
+  1. Having given written informed consent prior to undertaking any study-related procedure.
+  2. Male or female aged between 18 to 55 years inclusive.
+  3. Available for the duration of the study and for 2 weeks following the End of Study Visit (EOS).
+  4. Lives with a spouse, family member, or housemate from the time of inoculation with the malaria challenge agent through to the EOS.
+  5. Total body weight greater than or equal to 50 kg, and a body mass index (BMI) within the range of 18 to 32 kg/m² (inclusive).
+  6. Willing to defer blood donations to a blood service for a minimum of 6 months after the EOS.
+  7. Heterosexual women of childbearing potential (WOCBP) must agree to the use of a highly effective method of birth control combined with a barrier contraceptive from the screening visit until 30 days after the last dose of the IMP and have a negative result on urine pregnancy test performed before inoculation with the malaria challenge agent.
+  8. Women of non-childbearing potential (WONCBP) are defined as:
+  9. a. Natural (spontaneous) post-menopausal defined as being amenorrhoeic for at least 12 months without an alternative medical cause with a screening follicle stimulating hormone level (FSH) &gt;25 IU/L.
+  10. b. Premenopausal with irreversible surgical sterilization by hysterectomy and/or bilateral oophorectomy or salpingectomy at least 6 months before screening.
+  11. Males who have, or may have female sexual partners of childbearing potential during the course of the study must agree to use a double method of contraception from the time of informed consent through to 60 days after the last dose of the IMP.
+  12. Vital signs after 5 minutes resting in supine position:
+  13. a. Systolic blood pressure (SBP) - 90–140 mmHg,
+  14. b. Diastolic blood pressure (DBP) - 40–90 mmHg,
+  15. c. Heart rate (HR) 40–100 bpm.
+  16. At Screening and pre-inoculation with the malaria challenge agent: normal standard mean of triplicate 12-lead electrocardiogram (ECG) parameters after 10 minutes resting in supine position in the following ranges:
+  17. a. QT ≤ 500 msec,
+  18. b. QTcF ≤ 450 msec, QTcB ≤ 450 msec,
+  19. c. PR interval ≤ 210 msec for both males and females,
+  20. d. Normal ECG tracing unless the Principal Investigator or delegate considers an ECG tracing abnormality to be not clinically relevant.
+  21. In the opinion of the Principal Investigator or delegate, the individual has a high probability of adherence with and completion of the study, and willing and able to withdraw and refrain from restricted medications.
+  22. Certified as healthy by a comprehensive clinical assessment (detailed medical history and complete physical examination).
+  23. Fluent in English and able to understand and comply with written and verbal protocol-related requirements.
+  24. Agrees to adhere to the lifestyle considerations throughout the study and is willing to consume 240 mL full-fat milk with each dose of rescue medication Riamet®.
+
+EXCLUSION CRITERIA
+
+  1. Any lifetime history of malaria or participation in a previous malaria challenge study or malaria vaccine trial.
+  2. Must not have had malaria exposure that is considered significant by the Principal Investigator or delegate.
+  3. Presence of acute infectious disease and/or abnormal body temperature at pre-inoculation.
+  4. Haematology, biochemistry or urinalysis results that are outside of the laboratory normal reference ranges and are either considered clinically significant by the Principal Investigator or delegate or outside of Sponsor-approved clinically acceptable laboratory ranges.
+  5. Breastfeeding or lactating; positive serum pregnancy test at screening, positive urine pregnancy test upon admission or at other timepoints as specified by schedule of activities tables.
+  6. Has previously received a blood transfusion.
+  7. Use of antibiotics within 6 weeks of Screening.
+  8. Use of systemic therapies with antimalarial activity within 6 weeks of Screening.
+  9. Prior to screening and inoculation with the malaria challenge agent: any systemic administration of corticosteroids, anti-inflammatory drugs, immunomodulators or anticoagulants within the past three months.
+  10. Any topical administration of corticosteroids within the past 2 weeks.
+  11. Any individual currently receiving or having previously received immunosuppressive therapy at a dose or duration potentially associated with hypothalamic-pituitary-adrenal axis suppression within the past 12 months.
+  12. Any contra-indication to rescue medication according to the applicable labelling and if found to be severely G6PD deficient at screening.
+  13. Any history or presence of clinically relevant cardiovascular, pulmonary, gastrointestinal, hepatic/gallbladder/bile duct, renal, metabolic, haematological, neurological, musculoskeletal, rheumatologic, systemic, ocular, gynaecologic (if female), infectious or autoimmune disease, or signs of acute illness.
+  14. History of recurrent headache with a frequency of ≥2 episodes per month on average and severe enough to require medical therapy.
+  15. Asthma, excluding childhood asthma, or mild asthma with preventative asthma medication required less than monthly and no event requiring treatment in the last 2 weeks prior to screening.
+  16. Any personal history of surgical procedures that may affect IMP absorption, distribution and metabolism or immune response to malaria inoculation.
+  17. Blood donation of any volume within one month before screening, or participation in any research study involving blood sampling.
+  18. Any documented evidence of current or past cardiovascular disease.
+  19. Has evidence of increased cardiovascular risk.
+  20. History or presence of diagnosed or treated food or known drug allergies, or any history of anaphylaxis or other severe allergic reactions.
+  21. History of convulsion.
+  22. History of substance use disorder(s) within 5 years of screening and/or history of alcohol dependency and/or any prior intravenous use of an illicit substance.
+  23. Smoked &gt; 1 pack of cigarettes per day for &gt; 10 years, or who currently smokes &gt; 5 cigarettes per day.
+  24. Any individual who, in the judgement of the Principal Investigator or delegate, is likely to be noncompliant during the study.
+  25. Any individual who cannot be contacted in case of emergency.
+  26. Any individual who is the Investigator, or delegates, research assistant, pharmacist, study coordinator, project manager, or other staff thereof, directly involved in conducting the study.
+  27. Any individual without a good peripheral venous access.
+  28. Participation in any investigational product study within the 12 weeks preceding inoculation with the malaria challenge agent or 5 times the half-life of the Investigational product, whichever is longer.
+  29. Positive serology test for hepatitis B, hepatitis C or human immune deficiency virus (HIV).
+  30. Positive urine drug test at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  31. Positive alcohol screen at Screening, prior to inoculation with the malaria challenge agent or prior to IMP dosing.
+  32. Any consumption of citrus fruits or their juices within 7 days prior to IMP administration.
+  33. History of serious psychiatric condition that may affect participation in the study.
+  34. History of malignancy of any organ system within 5 years of Screening.
+  35. Any vaccination within 28 days of screening.
+  36. Any medical condition that in the opinion of the Principal Investigator or delegate would jeopardize the individual&#x27;s involvement in the study.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

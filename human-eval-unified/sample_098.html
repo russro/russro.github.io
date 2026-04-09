@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 98</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 98</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of agePresence of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required):oral temperature ≥99.4°F or ≥37.4°C (obtained in office or self- measured within 12 hours prior to screening - if self-measured, subjects must also have taken an antipyretic within 4 hours prior to screening), ANDat least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), ANDone of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  2. Confirmation of influenza A or B infection in the local community by one of the following means:the institution&amp;#x27;s local laboratory,the local public health system,the national public health system, ORa laboratory of a recognized national or multinational influenza surveillance scheme.
+  3. Onset of illness no more than 40 hours before enrollment in the trial.
+  4. Note: Time of onset of illness is defined as either the earlier of:the time when the temperature was first measured as elevated, ORthe time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  5. Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. Cystic fibrosis in children.
+  4. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  5. Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain)ArrhythmiaImmunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants)Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells/mm3 in the last 6 monthsPersons with sickle cell anemia or other hemoglobinopathiesPoorly controlled insulin-dependent diabetes mellitus (HBA1C &amp;gt; 8%)Residents of any age of nursing homes or other long-term care institutionsConcurrent infection at the screening examination that requires systemic antimicrobial therapy.
+  6. Females of childbearing potential who are either pregnant, breast-feeding or are sexually active without the use of birth control.
+  7. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post- treatment.
+  8. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  9. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  10. Vaccination for seasonal influenza on or after August 1, 2017.
+  11. Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  12. Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  13. Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  14. Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  15. Subjects unable to take oral medications.
+  16. Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  17. Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of &lt;span class=&quot;diff-del&quot;&gt;agePresence&lt;/span&gt; of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is &lt;span class=&quot;diff-del&quot;&gt;required):oral&lt;/span&gt; temperature &lt;span class=&quot;diff-del&quot;&gt;≥99.4°F&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;≥37.4°C&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(obtained&lt;/span&gt; in office &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;self- measured within 12 hours prior to screening - if self-measured, subjects must also have taken an antipyretic within 4 hours prior to screening), ANDat&lt;/span&gt; least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), &lt;span class=&quot;diff-del&quot;&gt;ANDone&lt;/span&gt; of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Confirmation of influenza A or B infection in the local community by one of the following &lt;span class=&quot;diff-del&quot;&gt;means:the&lt;/span&gt; institution&amp;#x27;s local &lt;span class=&quot;diff-del&quot;&gt;laboratory,the&lt;/span&gt; local public health &lt;span class=&quot;diff-del&quot;&gt;system,the&lt;/span&gt; national public health system, &lt;span class=&quot;diff-del&quot;&gt;ORa&lt;/span&gt; laboratory of a recognized national or multinational influenza surveillance scheme.
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; Onset of illness no more than 40 hours before enrollment in the trial.
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; Note: Time of onset of illness is defined as either the earlier &lt;span class=&quot;diff-del&quot;&gt;of:the&lt;/span&gt; time when the temperature was first measured as elevated, &lt;span class=&quot;diff-del&quot;&gt;ORthe&lt;/span&gt; time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Cystic fibrosis in children.
+  4. &lt;/span&gt;Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina &lt;span class=&quot;diff-del&quot;&gt;pain)ArrhythmiaImmunosuppressive&lt;/span&gt; disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow &lt;span class=&quot;diff-del&quot;&gt;transplants)Untreated&lt;/span&gt; HIV infection or treated HIV infection with a CD4 count below 350 &lt;span class=&quot;diff-del&quot;&gt;cells/mm3&lt;/span&gt; in the last 6 &lt;span class=&quot;diff-del&quot;&gt;monthsPersons&lt;/span&gt; with sickle cell anemia or other &lt;span class=&quot;diff-del&quot;&gt;hemoglobinopathiesPoorly&lt;/span&gt; controlled insulin-dependent diabetes mellitus (HBA1C &amp;gt; &lt;span class=&quot;diff-del&quot;&gt;8%)Residents&lt;/span&gt; of any age of nursing homes or other long-term care &lt;span class=&quot;diff-del&quot;&gt;institutionsConcurrent&lt;/span&gt; infection at the screening examination that requires systemic antimicrobial therapy.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; Females of childbearing potential who are either pregnant, &lt;span class=&quot;diff-del&quot;&gt;breast-feeding&lt;/span&gt; or are sexually active without the use of birth control.
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month &lt;span class=&quot;diff-del&quot;&gt;post- treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;8.&lt;/span&gt; A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  &lt;span class=&quot;diff-del&quot;&gt;10.&lt;/span&gt; Vaccination for seasonal influenza on or after August 1, 2017.
+  &lt;span class=&quot;diff-del&quot;&gt;11.&lt;/span&gt; Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  &lt;span class=&quot;diff-del&quot;&gt;12.&lt;/span&gt; Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; Subjects unable to take oral medications.
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  &lt;span class=&quot;diff-del&quot;&gt;17.&lt;/span&gt; Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol."
+                 data-raw="Inclusion Criteria:Male and female subjects at least 12 years of agePresence of clinical signs and&amp;amp;#x2F;or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required):oral temperature ≥99.4°F or ≥37.4°C (obtained in office or self- measured within 12 hours prior to screening - if self-measured, subjects must also have taken an antipyretic within 4 hours prior to screening), ANDat least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), ANDone of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).Confirmation of influenza A or B infection in the local community by one of the following means:the institution&amp;amp;#x27;s local laboratory,the local public health system,the national public health system, ORa laboratory of a recognized national or multinational influenza surveillance scheme.Onset of illness no more than 40 hours before enrollment in the trial.Note: Time of onset of illness is defined as either the earlier of:the time when the temperature was first measured as elevated, ORthe time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.Exclusion Criteria:Severity of illness requiring or anticipated to require in-hospital care.Moderate or severe persistent asthma.Cystic fibrosis in children.Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain)ArrhythmiaImmunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants)Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells&amp;amp;#x2F;mm3 in the last 6 monthsPersons with sickle cell anemia or other hemoglobinopathiesPoorly controlled insulin-dependent diabetes mellitus (HBA1C &amp;amp;gt; 8%)Residents of any age of nursing homes or other long-term care institutionsConcurrent infection at the screening examination that requires systemic antimicrobial therapy.Females of childbearing potential who are either pregnant, breast-feeding or are sexually active without the use of birth control. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post- treatment. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.Vaccination for seasonal influenza on or after August 1, 2017.Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.Prior treatment with any investigational drug therapy within 30 days prior to screening.Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.Subjects unable to take oral medications.Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol.">INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of agePresence of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required):oral temperature ≥99.4°F or ≥37.4°C (obtained in office or self- measured within 12 hours prior to screening - if self-measured, subjects must also have taken an antipyretic within 4 hours prior to screening), ANDat least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), ANDone of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  2. Confirmation of influenza A or B infection in the local community by one of the following means:the institution&#x27;s local laboratory,the local public health system,the national public health system, ORa laboratory of a recognized national or multinational influenza surveillance scheme.
+  3. Onset of illness no more than 40 hours before enrollment in the trial.
+  4. Note: Time of onset of illness is defined as either the earlier of:the time when the temperature was first measured as elevated, ORthe time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  5. Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. Cystic fibrosis in children.
+  4. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  5. Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain)ArrhythmiaImmunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants)Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells/mm3 in the last 6 monthsPersons with sickle cell anemia or other hemoglobinopathiesPoorly controlled insulin-dependent diabetes mellitus (HBA1C &gt; 8%)Residents of any age of nursing homes or other long-term care institutionsConcurrent infection at the screening examination that requires systemic antimicrobial therapy.
+  6. Females of childbearing potential who are either pregnant, breast-feeding or are sexually active without the use of birth control.
+  7. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post- treatment.
+  8. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  9. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  10. Vaccination for seasonal influenza on or after August 1, 2017.
+  11. Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  12. Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  13. Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  14. Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  15. Subjects unable to take oral medications.
+  16. Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  17. Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="4. 1
+
+INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of age.
+  2. Presence of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required): oral temperature ≥99. 4°F or ≥37. 4°C obtained in office AND at least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), AND one of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  3. Confirmation of influenza A or B infection in the local community by one of the following means: the institution&amp;#x27;s local laboratory, the local public health system, the national public health system, OR a laboratory of a recognized national or multinational influenza surveillance scheme.
+  4. Onset of illness no more than 40 hours before enrollment in the trial.
+  5. Note: Time of onset of illness is defined as either the earlier of: the time when the temperature was first measured as elevated, OR the time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  6. Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  4. Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain).
+  5. Arrhythmia.
+  6. Immunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants).
+  7. Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells/mm³ in the last 6 months.
+  8. Persons with sickle cell anemia or other hemoglobinopathies.
+  9. Poorly controlled insulin-dependent diabetes mellitus (HBA1C &amp;gt; 8%).
+  10. Residents of any age of nursing homes or other long-term care institutions.
+  11. Concurrent infection at the screening examination that requires systemic antimicrobial therapy.
+  12. Females of childbearing potential who are either pregnant, breastfeeding, or are sexually active without the use of birth control.
+  13. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post-treatment.
+  14. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  15. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  16. Vaccination for seasonal influenza on or after August 1, 2017.
+  17. Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  18. Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  19. Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  20. Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  21. Subjects unable to take oral medications.
+  22. Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  23. Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;4. 1
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of &lt;span class=&quot;diff-add&quot;&gt;age.
+  2. Presence&lt;/span&gt; of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is &lt;span class=&quot;diff-add&quot;&gt;required): oral&lt;/span&gt; temperature &lt;span class=&quot;diff-add&quot;&gt;≥99. 4°F&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;≥37.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;4°C obtained&lt;/span&gt; in office &lt;span class=&quot;diff-add&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), &lt;span class=&quot;diff-add&quot;&gt;AND one&lt;/span&gt; of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Confirmation of influenza A or B infection in the local community by one of the following &lt;span class=&quot;diff-add&quot;&gt;means: the&lt;/span&gt; institution&amp;#x27;s local &lt;span class=&quot;diff-add&quot;&gt;laboratory, the&lt;/span&gt; local public health &lt;span class=&quot;diff-add&quot;&gt;system, the&lt;/span&gt; national public health system, &lt;span class=&quot;diff-add&quot;&gt;OR a&lt;/span&gt; laboratory of a recognized national or multinational influenza surveillance scheme.
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Onset of illness no more than 40 hours before enrollment in the trial.
+  &lt;span class=&quot;diff-add&quot;&gt;5.&lt;/span&gt; Note: Time of onset of illness is defined as either the earlier &lt;span class=&quot;diff-add&quot;&gt;of: the&lt;/span&gt; time when the temperature was first measured as elevated, &lt;span class=&quot;diff-add&quot;&gt;OR the&lt;/span&gt; time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  &lt;span class=&quot;diff-add&quot;&gt;6.&lt;/span&gt; Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina &lt;span class=&quot;diff-add&quot;&gt;pain).
+  5. Arrhythmia.
+  6. Immunosuppressive&lt;/span&gt; disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow &lt;span class=&quot;diff-add&quot;&gt;transplants).
+  7. Untreated&lt;/span&gt; HIV infection or treated HIV infection with a CD4 count below 350 &lt;span class=&quot;diff-add&quot;&gt;cells/mm³&lt;/span&gt; in the last 6 &lt;span class=&quot;diff-add&quot;&gt;months.
+  8. Persons&lt;/span&gt; with sickle cell anemia or other &lt;span class=&quot;diff-add&quot;&gt;hemoglobinopathies.
+  9. Poorly&lt;/span&gt; controlled insulin-dependent diabetes mellitus (HBA1C &amp;gt; &lt;span class=&quot;diff-add&quot;&gt;8%).
+  10. Residents&lt;/span&gt; of any age of nursing homes or other long-term care &lt;span class=&quot;diff-add&quot;&gt;institutions.
+  11. Concurrent&lt;/span&gt; infection at the screening examination that requires systemic antimicrobial therapy.
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Females of childbearing potential who are either pregnant, &lt;span class=&quot;diff-add&quot;&gt;breastfeeding,&lt;/span&gt; or are sexually active without the use of birth control.
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month &lt;span class=&quot;diff-add&quot;&gt;post-treatment.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  &lt;span class=&quot;diff-add&quot;&gt;15.&lt;/span&gt; Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  &lt;span class=&quot;diff-add&quot;&gt;16.&lt;/span&gt; Vaccination for seasonal influenza on or after August 1, 2017.
+  &lt;span class=&quot;diff-add&quot;&gt;17.&lt;/span&gt; Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  &lt;span class=&quot;diff-add&quot;&gt;18.&lt;/span&gt; Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  &lt;span class=&quot;diff-add&quot;&gt;19.&lt;/span&gt; Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  &lt;span class=&quot;diff-add&quot;&gt;20.&lt;/span&gt; Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; Subjects unable to take oral medications.
+  &lt;span class=&quot;diff-add&quot;&gt;22.&lt;/span&gt; Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  &lt;span class=&quot;diff-add&quot;&gt;23.&lt;/span&gt; Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol."
+                 data-raw="4. 1 Inclusion Criteria: Male and female subjects at least 12 years of age. Presence of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required): oral temperature ≥99. 4°F or ≥37. 4°C obtained in office AND at least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), AND one of the following constitutional symptoms (fatigue, headache, myalgia, feverishness). Confirmation of influenza A or B infection in the local community by one of the following means: the institution&amp;#x27;s local laboratory, the local public health system, the national public health system, OR a laboratory of a recognized national or multinational influenza surveillance scheme. Onset of illness no more than 40 hours before enrollment in the trial. Note: Time of onset of illness is defined as either the earlier of: the time when the temperature was first measured as elevated, OR the time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom. Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary. Exclusion Criteria: Severity of illness requiring or anticipated to require in-hospital care. Moderate or severe persistent asthma. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD). Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain). Arrhythmia. Immunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants). Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells/mm³ in the last 6 months. Persons with sickle cell anemia or other hemoglobinopathies. Poorly controlled insulin-dependent diabetes mellitus (HBA1C &amp;gt; 8%). Residents of any age of nursing homes or other long-term care institutions. Concurrent infection at the screening examination that requires systemic antimicrobial therapy. Females of childbearing potential who are either pregnant, breastfeeding, or are sexually active without the use of birth control. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post-treatment. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy. Vaccination for seasonal influenza on or after August 1, 2017. Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening. Prior treatment with any investigational drug therapy within 30 days prior to screening. Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies. Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets. Subjects unable to take oral medications. Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study. Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol.">4. 1
+
+INCLUSION CRITERIA
+
+  1. Male and female subjects at least 12 years of age.
+  2. Presence of clinical signs and/or symptoms consistent with an acute illness compatible with influenza infection (each of the following is required): oral temperature ≥99. 4°F or ≥37. 4°C obtained in office AND at least one of the following respiratory symptoms (cough, sore throat, nasal obstruction), AND one of the following constitutional symptoms (fatigue, headache, myalgia, feverishness).
+  3. Confirmation of influenza A or B infection in the local community by one of the following means: the institution&#x27;s local laboratory, the local public health system, the national public health system, OR a laboratory of a recognized national or multinational influenza surveillance scheme.
+  4. Onset of illness no more than 40 hours before enrollment in the trial.
+  5. Note: Time of onset of illness is defined as either the earlier of: the time when the temperature was first measured as elevated, OR the time when the subject experienced the presence of at least one respiratory symptom AND the presence of at least one constitutional symptom.
+  6. Willing and able to provide written informed consent (including assent by legal guardian if under 18 years of age) and comply with the requirements of the protocol, including completion of the patient diary.
+
+EXCLUSION CRITERIA
+
+  1. Severity of illness requiring or anticipated to require in-hospital care.
+  2. Moderate or severe persistent asthma.
+  3. Stage III or IV (severe or very severe) chronic obstructive pulmonary disease (COPD).
+  4. Class III or IV congestive heart failure (at least marked limitation of physical activity in which minimal ordinary activity results in fatigue, palpitation, dyspnea, or angina pain).
+  5. Arrhythmia.
+  6. Immunosuppressive disorders or who are receiving immunosuppressive therapy (e.g., for organ or bone marrow transplants).
+  7. Untreated HIV infection or treated HIV infection with a CD4 count below 350 cells/mm³ in the last 6 months.
+  8. Persons with sickle cell anemia or other hemoglobinopathies.
+  9. Poorly controlled insulin-dependent diabetes mellitus (HBA1C &gt; 8%).
+  10. Residents of any age of nursing homes or other long-term care institutions.
+  11. Concurrent infection at the screening examination that requires systemic antimicrobial therapy.
+  12. Females of childbearing potential who are either pregnant, breastfeeding, or are sexually active without the use of birth control.
+  13. Female subjects of child-bearing potential that are sexually active must have a negative baseline pregnancy test and must agree to continue an acceptable method of birth control for the duration of the study and for 1 month post-treatment.
+  14. A double barrier method, oral birth control pills administered for at least 2 monthly cycles prior to study drug administration, an IUD, or medroxyprogesterone acetate administered intramuscularly for a minimum of one month prior to study drug administration are acceptable methods of birth control for inclusion into the study.
+  15. Female subjects are considered of childbearing potential unless they are postmenopausal (absence of menstrual bleeding for 1 year - or 6 months if laboratory confirmation of hormonal status), or have had a hysterectomy, bilateral tubular ligation or bilateral oophorectomy.
+  16. Vaccination for seasonal influenza on or after August 1, 2017.
+  17. Receipt of any dose of NTZ, oseltamivir, zanamivir, peramivir, amantadine or rimantadine within 3 days prior to screening.
+  18. Prior treatment with any investigational drug therapy within 30 days prior to screening.
+  19. Subjects with active respiratory allergies or subjects expected to require anti-allergy medications during the study period for respiratory allergies.
+  20. Known sensitivity to NTZ or any of the excipients comprising the NTZ tablets.
+  21. Subjects unable to take oral medications.
+  22. Presence of any pre-existing illness that, in the opinion of the Investigator, would place the subject at an unreasonably increased risk through participation in this study.
+  23. Subjects who, in the judgment of the Investigator, will be unlikely to comply with the requirements of this protocol.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

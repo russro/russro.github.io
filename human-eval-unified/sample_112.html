@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 112</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 112</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in BIOCARD study
+  2. Ability to tolerate PET scan procedures
+  3. Ability to provide informed consent for study procedures
+
+EXCLUSION CRITERIA
+
+  1. Has condition(s) that could augment risk to participant or compromise ability to tolerate experimental procedures or interfere with analysis of the study data as determined by the investigatorHas a history of risk factors for Torsades de Pointes or taking medications known to cause QT prolongation.
+  2. Has ECG acquired prior to initial 18F-AV-1451 scan that clinically contradicts subject&amp;#x27;s participation in the study as determined by the investigator.
+  3. Bazett&amp;#x27;s corrected QT (QTcB) interval must be assessed and not exceed accepted values (458 msec in males, 474 msec in females).
+  4. Females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable contraceptive methods.
+  5. Has hypersensitivity to 18F-AV-1451.
+  6. Has a currently clinically significant infectious disease, endocrine/metabolic disease, pulmonary/renal/hepatic impairment, or cancer that could impact study participation or scan results in the opinion of the investigator.
+  7. Has a non-study related radiopharmaceutical imaging/treatment procedure within seven days prior to 18F-AV-1451 imaging visit.
+  8. Is unsuitable for a study of this type in the opinion of the investigator."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in BIOCARD &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Ability to&lt;/span&gt; tolerate PET scan &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt;
+  3. &lt;span class=&quot;diff-del&quot;&gt;Ability&lt;/span&gt; to provide informed consent for study procedures
+
+EXCLUSION CRITERIA
+
+  1. Has &lt;span class=&quot;diff-del&quot;&gt;condition(s)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;that&lt;/span&gt; could &lt;span class=&quot;diff-del&quot;&gt;augment&lt;/span&gt; risk to &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;compromise&lt;/span&gt; ability to tolerate experimental &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt; or interfere with analysis of the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;data as determined by the investigatorHas&lt;/span&gt; a history of risk factors for Torsades de Pointes or taking medications known to &lt;span class=&quot;diff-del&quot;&gt;cause&lt;/span&gt; QT &lt;span class=&quot;diff-del&quot;&gt;prolongation.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Has ECG &lt;span class=&quot;diff-del&quot;&gt;acquired&lt;/span&gt; prior to initial &lt;span class=&quot;diff-del&quot;&gt;18F-AV-1451&lt;/span&gt; scan that clinically &lt;span class=&quot;diff-del&quot;&gt;contradicts&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subject&amp;#x27;s&lt;/span&gt; participation in the &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as determined by the investigator.
+  3. Bazett&amp;#x27;s&lt;/span&gt; corrected QT (QTcB) interval must be &lt;span class=&quot;diff-del&quot;&gt;assessed&lt;/span&gt; and not exceed &lt;span class=&quot;diff-del&quot;&gt;accepted values (458&lt;/span&gt; msec in males, 474 msec in &lt;span class=&quot;diff-del&quot;&gt;females).&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Females&lt;/span&gt; of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable contraceptive &lt;span class=&quot;diff-del&quot;&gt;methods.&lt;/span&gt;
+  5. Has hypersensitivity to &lt;span class=&quot;diff-del&quot;&gt;18F-AV-1451.&lt;/span&gt;
+  6. Has a &lt;span class=&quot;diff-del&quot;&gt;currently&lt;/span&gt; clinically significant infectious disease, &lt;span class=&quot;diff-del&quot;&gt;endocrine/metabolic&lt;/span&gt; disease, &lt;span class=&quot;diff-del&quot;&gt;pulmonary/renal/hepatic&lt;/span&gt; impairment, or cancer that &lt;span class=&quot;diff-del&quot;&gt;could&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;impact&lt;/span&gt; study participation or scan &lt;span class=&quot;diff-del&quot;&gt;results&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; the opinion of the &lt;span class=&quot;diff-del&quot;&gt;investigator.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a non-study related radiopharmaceutical imaging/treatment procedure within seven days prior to 18F-AV-1451 imaging visit.
+  8. Is&lt;/span&gt; unsuitable for a study of this &lt;span class=&quot;diff-del&quot;&gt;type in the opinion of the investigator.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Males or females that have provided consent and are currently enrolled in BIOCARD studyAbility to tolerate PET scan proceduresAbility to provide informed consent for study proceduresExclusion Criteria:Has condition(s) that could augment risk to participant or compromise ability to tolerate experimental procedures or interfere with analysis of the study data as determined by the investigatorHas a history of risk factors for Torsades de Pointes or taking medications known to cause QT prolongation.Has ECG acquired prior to initial 18F-AV-1451 scan that clinically contradicts subject&amp;amp;#x27;s participation in the study as determined by the investigator. Bazett&amp;amp;#x27;s corrected QT (QTcB) interval must be assessed and not exceed accepted values (458 msec in males, 474 msec in females).Females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable contraceptive methods.Has hypersensitivity to 18F-AV-1451.Has a currently clinically significant infectious disease, endocrine&amp;amp;#x2F;metabolic disease, pulmonary&amp;amp;#x2F;renal&amp;amp;#x2F;hepatic impairment, or cancer that could impact study participation or scan results in the opinion of the investigator.Has a non-study related radiopharmaceutical imaging&amp;amp;#x2F;treatment procedure within seven days prior to 18F-AV-1451 imaging visit.Is unsuitable for a study of this type in the opinion of the investigator.">INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in BIOCARD study
+  2. Ability to tolerate PET scan procedures
+  3. Ability to provide informed consent for study procedures
+
+EXCLUSION CRITERIA
+
+  1. Has condition(s) that could augment risk to participant or compromise ability to tolerate experimental procedures or interfere with analysis of the study data as determined by the investigatorHas a history of risk factors for Torsades de Pointes or taking medications known to cause QT prolongation.
+  2. Has ECG acquired prior to initial 18F-AV-1451 scan that clinically contradicts subject&#x27;s participation in the study as determined by the investigator.
+  3. Bazett&#x27;s corrected QT (QTcB) interval must be assessed and not exceed accepted values (458 msec in males, 474 msec in females).
+  4. Females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable contraceptive methods.
+  5. Has hypersensitivity to 18F-AV-1451.
+  6. Has a currently clinically significant infectious disease, endocrine/metabolic disease, pulmonary/renal/hepatic impairment, or cancer that could impact study participation or scan results in the opinion of the investigator.
+  7. Has a non-study related radiopharmaceutical imaging/treatment procedure within seven days prior to 18F-AV-1451 imaging visit.
+  8. Is unsuitable for a study of this type in the opinion of the investigator.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria (Version 2):
+
+INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in the BIOCARD study.
+  2. Can tolerate PET scan procedures.
+  3. Have the ability to provide informed consent for study procedures (if the patient is ineligible to give informed consent, based on local standards, the patient’s legal representative may consent on behalf of the patient, but the patient must still confirm assent).
+
+EXCLUSION CRITERIA
+
+  1. Has any condition by history or abnormal findings on physical examination or screening tests that, in the investigator’s opinion, could increase risk to the participant, limit the participant’s ability to tolerate the experimental procedures, or interfere with analysis of the data.
+  2. Has a history of risk factors for Torsades de Pointes or is taking medications known to prolong QT interval. A list of restricted medications will be provided.
+  3. Has ECG obtained prior to the initial flortaucipir (18F) scan that in the opinion of the investigator is clinically significant with regard to the subject’s participation in the study. Bazett’s corrected QT (QTcB) interval must be evaluated and must not exceed 458 msec in males, or 474 msec in females.
+  4. Are females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable methods of contraception. Females of childbearing potential must not be pregnant (negative serum β-hCG at the time of screening and negative urine β-hCG on imaging day) or breastfeeding at screening. Females must agree to avoid becoming pregnant, and refrain from sexual activity or to use reliable contraceptive methods for 24 hours following administration of flortaucipir (18F).
+  5. Has hypersensitivity to flortaucipir (18F) or any of its excipients.
+  6. Has a current clinically significant infectious disease, endocrine or metabolic disease, pulmonary, renal or hepatic impairment, or cancer that the investigator believes would affect study participation or scan results.
+  7. Has had a non-study related radiopharmaceutical imaging or treatment procedure within 7 days prior to the flortaucipir (18F) imaging session.
+  8. In the opinion of the investigator, are otherwise unsuitable for a study of this type."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria (Version 2):
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;BIOCARD &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Can&lt;/span&gt; tolerate PET scan &lt;span class=&quot;diff-add&quot;&gt;procedures.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-add&quot;&gt;Have the ability&lt;/span&gt; to provide informed consent for study procedures&lt;span class=&quot;diff-add&quot;&gt; (if the patient is ineligible to give informed consent, based on local standards, the patient’s legal representative may consent on behalf of the patient, but the patient must still confirm assent).&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Has &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;condition by history or abnormal findings on physical examination or screening tests that, in the investigator’s opinion,&lt;/span&gt; could &lt;span class=&quot;diff-add&quot;&gt;increase&lt;/span&gt; risk to &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participant,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;limit the participant’s&lt;/span&gt; ability to tolerate &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;experimental &lt;span class=&quot;diff-add&quot;&gt;procedures,&lt;/span&gt; or interfere with analysis of the &lt;span class=&quot;diff-add&quot;&gt;data.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Has&lt;/span&gt; a history of risk factors for Torsades de Pointes or &lt;span class=&quot;diff-add&quot;&gt;is &lt;/span&gt;taking medications known to &lt;span class=&quot;diff-add&quot;&gt;prolong&lt;/span&gt; QT &lt;span class=&quot;diff-add&quot;&gt;interval. A list of restricted medications will be provided.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; Has ECG &lt;span class=&quot;diff-add&quot;&gt;obtained&lt;/span&gt; prior to &lt;span class=&quot;diff-add&quot;&gt;the &lt;/span&gt;initial &lt;span class=&quot;diff-add&quot;&gt;flortaucipir (18F)&lt;/span&gt; scan that &lt;span class=&quot;diff-add&quot;&gt;in the opinion of the investigator is &lt;/span&gt;clinically &lt;span class=&quot;diff-add&quot;&gt;significant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with regard to the subject’s&lt;/span&gt; participation in the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Bazett’s&lt;/span&gt; corrected QT (QTcB) interval must be &lt;span class=&quot;diff-add&quot;&gt;evaluated&lt;/span&gt; and&lt;span class=&quot;diff-add&quot;&gt; must&lt;/span&gt; not exceed &lt;span class=&quot;diff-add&quot;&gt;458&lt;/span&gt; msec in males, &lt;span class=&quot;diff-add&quot;&gt;or &lt;/span&gt;474 msec in &lt;span class=&quot;diff-add&quot;&gt;females.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-add&quot;&gt;Are females&lt;/span&gt; of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable &lt;span class=&quot;diff-add&quot;&gt;methods of contraception. Females of childbearing potential must not be pregnant (negative serum β-hCG at the time of screening and negative urine β-hCG on imaging day) or breastfeeding at screening. Females must agree to avoid becoming pregnant, and refrain from sexual activity or to use reliable &lt;/span&gt;contraceptive &lt;span class=&quot;diff-add&quot;&gt;methods for 24 hours following administration of flortaucipir (18F).&lt;/span&gt;
+  5. Has hypersensitivity to &lt;span class=&quot;diff-add&quot;&gt;flortaucipir (18F) or any of its excipients.&lt;/span&gt;
+  6. Has a &lt;span class=&quot;diff-add&quot;&gt;current&lt;/span&gt; clinically significant infectious disease, &lt;span class=&quot;diff-add&quot;&gt;endocrine or metabolic&lt;/span&gt; disease, &lt;span class=&quot;diff-add&quot;&gt;pulmonary, renal or hepatic&lt;/span&gt; impairment, or cancer that &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;investigator believes would affect&lt;/span&gt; study participation or scan &lt;span class=&quot;diff-add&quot;&gt;results.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Has had a non-study related radiopharmaceutical imaging or treatment procedure within 7 days prior to the flortaucipir (18F) imaging session.
+  8. In&lt;/span&gt; the opinion of the &lt;span class=&quot;diff-add&quot;&gt;investigator,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;otherwise&lt;/span&gt; unsuitable for a study of this &lt;span class=&quot;diff-add&quot;&gt;type.&lt;/span&gt;"
+                 data-raw="Amended Eligibility Criteria (Version 2):
+
+Inclusion Criteria:
+1. Males or females that have provided consent and are currently enrolled in the BIOCARD study.
+2. Can tolerate PET scan procedures.
+3. Have the ability to provide informed consent for study procedures (if the patient is ineligible to give informed consent, based on local standards, the patient’s legal representative may consent on behalf of the patient, but the patient must still confirm assent).
+
+Exclusion Criteria:
+1. Has any condition by history or abnormal findings on physical examination or screening tests that, in the investigator’s opinion, could increase risk to the participant, limit the participant’s ability to tolerate the experimental procedures, or interfere with analysis of the data.
+2. Has a history of risk factors for Torsades de Pointes or is taking medications known to prolong QT interval. A list of restricted medications will be provided.
+3. Has ECG obtained prior to the initial flortaucipir (18F) scan that in the opinion of the investigator is clinically significant with regard to the subject’s participation in the study. Bazett’s corrected QT (QTcB) interval must be evaluated and must not exceed 458 msec in males, or 474 msec in females.
+4. Are females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable methods of contraception. Females of childbearing potential must not be pregnant (negative serum β-hCG at the time of screening and negative urine β-hCG on imaging day) or breastfeeding at screening. Females must agree to avoid becoming pregnant, and refrain from sexual activity or to use reliable contraceptive methods for 24 hours following administration of flortaucipir (18F).
+5. Has hypersensitivity to flortaucipir (18F) or any of its excipients.
+6. Has a current clinically significant infectious disease, endocrine or metabolic disease, pulmonary, renal or hepatic impairment, or cancer that the investigator believes would affect study participation or scan results.
+7. Has had a non-study related radiopharmaceutical imaging or treatment procedure within 7 days prior to the flortaucipir (18F) imaging session.
+8. In the opinion of the investigator, are otherwise unsuitable for a study of this type.">Amended Eligibility Criteria (Version 2):
+
+INCLUSION CRITERIA
+
+  1. Males or females that have provided consent and are currently enrolled in the BIOCARD study.
+  2. Can tolerate PET scan procedures.
+  3. Have the ability to provide informed consent for study procedures (if the patient is ineligible to give informed consent, based on local standards, the patient’s legal representative may consent on behalf of the patient, but the patient must still confirm assent).
+
+EXCLUSION CRITERIA
+
+  1. Has any condition by history or abnormal findings on physical examination or screening tests that, in the investigator’s opinion, could increase risk to the participant, limit the participant’s ability to tolerate the experimental procedures, or interfere with analysis of the data.
+  2. Has a history of risk factors for Torsades de Pointes or is taking medications known to prolong QT interval. A list of restricted medications will be provided.
+  3. Has ECG obtained prior to the initial flortaucipir (18F) scan that in the opinion of the investigator is clinically significant with regard to the subject’s participation in the study. Bazett’s corrected QT (QTcB) interval must be evaluated and must not exceed 458 msec in males, or 474 msec in females.
+  4. Are females of childbearing potential who are not surgically sterile, not refraining from sexual activity, or not using reliable methods of contraception. Females of childbearing potential must not be pregnant (negative serum β-hCG at the time of screening and negative urine β-hCG on imaging day) or breastfeeding at screening. Females must agree to avoid becoming pregnant, and refrain from sexual activity or to use reliable contraceptive methods for 24 hours following administration of flortaucipir (18F).
+  5. Has hypersensitivity to flortaucipir (18F) or any of its excipients.
+  6. Has a current clinically significant infectious disease, endocrine or metabolic disease, pulmonary, renal or hepatic impairment, or cancer that the investigator believes would affect study participation or scan results.
+  7. Has had a non-study related radiopharmaceutical imaging or treatment procedure within 7 days prior to the flortaucipir (18F) imaging session.
+  8. In the opinion of the investigator, are otherwise unsuitable for a study of this type.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

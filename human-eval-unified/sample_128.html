@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 128</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 128</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:.i) Autologous stem cell transplant (ASCT) ineligible patients.ii) Patients after failure of ASCT.- Must have at least one lesion that is &amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. Other protocol-defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. apply."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the &lt;span class=&quot;diff-del&quot;&gt;following:.i)&lt;/span&gt; Autologous stem cell transplant (ASCT) ineligible &lt;span class=&quot;diff-del&quot;&gt;patients.ii)&lt;/span&gt; Patients after failure of &lt;span class=&quot;diff-del&quot;&gt;ASCT.-&lt;/span&gt; Must have at least one lesion that is &amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol-defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Inclusion/
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Inclusion CriteriaEastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:.i) Autologous stem cell transplant (ASCT) ineligible patients.ii) Patients after failure of ASCT.- Must have at least one lesion that is &amp;amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.Exclusion CriteriaKnown central nervous system lymphoma.Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).Other protocol-defined Inclusion&amp;amp;#x2F;Exclusion criteria apply.">INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:.i) Autologous stem cell transplant (ASCT) ineligible patients.ii) Patients after failure of ASCT.- Must have at least one lesion that is &gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. Other protocol-defined Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:
+  3. i) Autologous stem cell transplant (ASCT) ineligible patients.
+  4. ii) Patients after failure of ASCT.
+  5. Must have at least one lesion that is &amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+  6. Participants must not have received prior treatment with an anti-PD-1, anti-PD-L1, anti-PD-L2, anti-CD137, or anti-CTLA-4 antibody.
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. Participants with evidence of active brain metastases on brain imaging (i.e., MRI or contrast CT).
+  5. Participants who have received prior allogeneic transplant.
+  6. Participants who are BV refractory as identified by a failure to achieve a PR or CR, relapse, or progression within 3 months of receiving BV treatment.
+  7. Participants with any positive test result for hepatitis B virus or hepatitis C virus indicating presence of virus.
+  8. Participants with known history of testing positive for human immunodeficiency virus (HIV) or known acquired immunodeficiency syndrome (AIDS).
+  9. Participants who are compulsorily detained for treatment of either a psychiatric or physical (e.g., infectious disease) illness.
+  10. Females who are pregnant or breastfeeding."
+                 data-diff="INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the &lt;span class=&quot;diff-add&quot;&gt;following:
+  3. i)&lt;/span&gt; Autologous stem cell transplant (ASCT) ineligible &lt;span class=&quot;diff-add&quot;&gt;patients.
+  4. ii)&lt;/span&gt; Patients after failure of &lt;span class=&quot;diff-add&quot;&gt;ASCT.
+  5.&lt;/span&gt; Must have at least one lesion that is &amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.&lt;span class=&quot;diff-add&quot;&gt;
+  6. Participants must not have received prior treatment with an anti-PD-1, anti-PD-L1, anti-PD-L2, anti-CD137, or anti-CTLA-4 antibody.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;evidence&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;active brain metastases on brain imaging (i.e., MRI or contrast CT).
+  5. Participants who have received prior allogeneic transplant.
+  6. Participants who are BV refractory as identified by a failure to achieve a PR or CR, relapse, or progression within 3 months of receiving BV treatment.
+  7. Participants with any positive test result for hepatitis B virus or hepatitis C virus indicating presence of virus.
+  8. Participants with known history of testing positive for human immunodeficiency virus (HIV) or known acquired immunodeficiency syndrome (AIDS).
+  9. Participants who are compulsorily detained for treatment of either a psychiatric or physical (e.g., infectious disease) illness.
+  10. Females who are pregnant or breastfeeding.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:
+- Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+- Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:
+  i) Autologous stem cell transplant (ASCT) ineligible patients.
+  ii) Patients after failure of ASCT.
+- Must have at least one lesion that is &amp;gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+- Participants must not have received prior treatment with an anti-PD-1, anti-PD-L1, anti-PD-L2, anti-CD137, or anti-CTLA-4 antibody.
+
+Exclusion Criteria:
+- Known central nervous system lymphoma.
+- Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+- Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+- Participants with evidence of active brain metastases on brain imaging (i.e., MRI or contrast CT).
+- Participants who have received prior allogeneic transplant.
+- Participants who are BV refractory as identified by a failure to achieve a PR or CR, relapse, or progression within 3 months of receiving BV treatment.
+- Participants with any positive test result for hepatitis B virus or hepatitis C virus indicating presence of virus.
+- Participants with known history of testing positive for human immunodeficiency virus (HIV) or known acquired immunodeficiency syndrome (AIDS).
+- Participants who are compulsorily detained for treatment of either a psychiatric or physical (e.g., infectious disease) illness.
+- Females who are pregnant or breastfeeding.">INCLUSION CRITERIA
+
+  1. Eastern Cooperative Oncology Group (ECOG) performance status (PS) 0 or 1.
+  2. Participants must have a pathologic diagnosis of classical Hodgkin lymphoma (cHL) who are relapsed or refractory with one of the following:
+  3. i) Autologous stem cell transplant (ASCT) ineligible patients.
+  4. ii) Patients after failure of ASCT.
+  5. Must have at least one lesion that is &gt; 15 mm (1.5 cm) in the longest diameter and avid by Fluoro Deoxy Glucose (FDG) Positron Emission Tomography (PET) scan.
+  6. Participants must not have received prior treatment with an anti-PD-1, anti-PD-L1, anti-PD-L2, anti-CD137, or anti-CTLA-4 antibody.
+
+EXCLUSION CRITERIA
+
+  1. Known central nervous system lymphoma.
+  2. Participants with nodular lymphocyte-predominant Hodgkin lymphoma (HL).
+  3. Participants with known history of pancreatitis or progressive multifocal leukoencephalopathy (PML).
+  4. Participants with evidence of active brain metastases on brain imaging (i.e., MRI or contrast CT).
+  5. Participants who have received prior allogeneic transplant.
+  6. Participants who are BV refractory as identified by a failure to achieve a PR or CR, relapse, or progression within 3 months of receiving BV treatment.
+  7. Participants with any positive test result for hepatitis B virus or hepatitis C virus indicating presence of virus.
+  8. Participants with known history of testing positive for human immunodeficiency virus (HIV) or known acquired immunodeficiency syndrome (AIDS).
+  9. Participants who are compulsorily detained for treatment of either a psychiatric or physical (e.g., infectious disease) illness.
+  10. Females who are pregnant or breastfeeding.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

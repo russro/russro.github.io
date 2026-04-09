@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 2</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 2</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Participant is male with a mutation in the RS1 gene identified by genotyping.
+  2. Participant must be 18 years of age or older.
+  3. Participant must be able to understand and sign the informed consent.
+  4. Participant must be medically able to comply with the study treatment, study testing and procedures and follow-up visits.
+  5. Participant has at least one eye that meets the study eye criteria listed below.
+  6. Participant must agree to use effective barrier (male or female condom) of contraception starting two weeks before and continuing one year after gene transfer.
+  7. If the participant&amp;#x27;s partner is able to become pregnant, a second form of effective contraception will be required starting two weeks before and continuing one year after gene transfer.
+  8. Effective methods of contraception for this study include:hormonal contraception (birth control pills, injected hormones or vaginal ring),intrauterine device,barrier methods (condom or diaphragm) combined with spermicide,surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy).
+
+EXCLUSION CRITERIA
+
+  1. Participant is actively receiving another study medication/investigational product (IP).
+  2. Participant has previously enrolled in another gene therapy trial.
+  3. Participant is currently taking, or has taken in the last three months, a systemic carbonic anhydrase inhibitor prior to enrollment/baseline 1 testing.
+  4. Participant has any condition that significantly increases risk of systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).
+  5. Participant has an underlying serious illness that impairs regular follow-up during the study.
+  6. Participant has had diagnosis or treatment of a malignancy (excluding non-melanoma skin cancer) within the previous five years.
+  7. Participant has pre-existing ocular tumors (excluding non-suspicious nevi).
+  8. Participant has a known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.
+  9. Participant is on a medication that prevents safe administration of study related drugs.
+  10. Participant has uncontrolled hypertension. (Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)Participant has compromised renal function such that cyclosporine or Cellcept, which could be used to treat any manifest ocular inflammation, would be contraindicated.
+  11. Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times upper limit of normal [ULN]).
+  12. Participant has low absolute neutrophil count (ANC&amp;lt;1.3 x 10(3)/micro liters).
+  13. Participant has used any biologic immunosuppressive agents within the last three months (within the last six months for rituximab or cyclophosphamide).
+  14. STUDY EYE ELIGIBILITY CRITERIA:The participant must have at least one eye meeting all
+
+INCLUSION CRITERIA
+
+  1. and none of the
+
+EXCLUSION CRITERIA
+
+  1. listed below.
+  2. STUDY EYE
+
+INCLUSION CRITERIA
+
+  1. The study eye must have a best-corrected E-ETDRS visual acuity letterscore of less than or equal to 63 (i.e., worse than or equal to 20/63).
+  2. The visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).
+  3. Electroretinogram in the study eye with a scotopic combined response demonstrating a subnormal b wave, consistent with retinoschisis.
+  4. STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. The study eye has a history of other ocular disease likely to contribute significantly to visual loss or likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).
+  2. The study eye has lens, cornea, or other media opacities precluding adequate visualization and testing of the retina.
+  3. The study eye has undergone intraocular surgery within six months prior to enrollment.
+  4. The study eye is receiving topical carbonic anhydrase inhibitor, or has received topical carbonic anhydrase inhibitors in the past three months.
+  5. STUDY EYE SELECTION CRITERIA:If both eyes of a participant meet the study eye eligibility criteria, the choice of study eye will be determined as follows:The eye with the worse visual acuity will be selected as the study eye.
+  6. If both eyes have visual acuities within five letter differences of one another, the choice of study eye will be determined at the discretion of the Investigator in consultation with the participant."
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; male with a &lt;span class=&quot;diff-del&quot;&gt;mutation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;RS1&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;gene&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;identified by genotyping.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; must be 18 years of age or older.
+  3. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; must &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;able&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;understand&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;sign&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;informed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consent.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must be medically able to comply with&lt;/span&gt; the study &lt;span class=&quot;diff-del&quot;&gt;treatment,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;testing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;procedures&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;follow-up visits.
+  5. Participant has&lt;/span&gt; at least one eye that meets the study eye &lt;span class=&quot;diff-del&quot;&gt;criteria&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;listed&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;below.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; must &lt;span class=&quot;diff-del&quot;&gt;agree&lt;/span&gt; to &lt;span class=&quot;diff-del&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;effective&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;barrier&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(male&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;female&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;condom)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;contraception&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;starting two weeks before&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;continuing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;year after gene transfer.
+  7. If the participant&amp;#x27;s partner is able to become pregnant, a second form of effective contraception will be required starting two weeks before and continuing one year after gene transfer.
+  8. Effective methods of contraception for this study include:hormonal contraception (birth control pills, injected hormones or vaginal ring),intrauterine device,barrier methods (condom or diaphragm) combined with spermicide,surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy).&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;actively&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receiving&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;another&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;study medication/investigational product (IP).&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;previously&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enrolled&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;another&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;gene&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;trial.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;currently&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;taking,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;taken&lt;/span&gt; in the &lt;span class=&quot;diff-del&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;three months, a systemic carbonic anhydrase inhibitor prior to enrollment/baseline 1 testing.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;condition&lt;/span&gt; that &lt;span class=&quot;diff-del&quot;&gt;significantly&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;increases&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;risk&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).&lt;/span&gt;
+  5. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;underlying&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;serious&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;illness&lt;/span&gt; that &lt;span class=&quot;diff-del&quot;&gt;impairs&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;regular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;follow-up during&lt;/span&gt; the study.
+  6. &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; had &lt;span class=&quot;diff-del&quot;&gt;diagnosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; of a &lt;span class=&quot;diff-del&quot;&gt;malignancy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(excluding&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;non-melanoma&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;skin&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cancer)&lt;/span&gt; within the &lt;span class=&quot;diff-del&quot;&gt;previous&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;five&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pre-existing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ocular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;tumors&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(excluding non-suspicious nevi).
+  8. Participant has&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.
+  9. Participant is on a medication that prevents safe administration&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;study related drugs.
+  10. Participant has uncontrolled hypertension. (Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)Participant has compromised renal function such that cyclosporine or Cellcept, which could be used to treat any manifest ocular inflammation, would be contraindicated.
+  11. Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times upper limit of normal [ULN]).
+  12. Participant has low absolute neutrophil count (ANC&amp;lt;1.3 x 10(3)/micro liters).
+  13. Participant has used any biologic &lt;/span&gt;immunosuppressive &lt;span class=&quot;diff-del&quot;&gt;agents&lt;/span&gt; within the &lt;span class=&quot;diff-del&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(within&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;six&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;for rituximab&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;cyclophosphamide).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; STUDY EYE ELIGIBILITY &lt;span class=&quot;diff-del&quot;&gt;CRITERIA:The&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at least one eye meeting all
+
+INCLUSION CRITERIA
+
+  1. and none of the
+
+EXCLUSION CRITERIA
+
+  1. listed below.
+  2. STUDY EYE
+
+INCLUSION CRITERIA
+
+  1.&lt;/span&gt; The study eye must have a &lt;span class=&quot;diff-del&quot;&gt;best-corrected E-ETDRS visual acuity letterscore&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;less&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;equal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to 63 (i.e., worse than or equal to 20/63).
+  2.&lt;/span&gt; The&lt;span class=&quot;diff-del&quot;&gt; visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).
+  3. Electroretinogram in the&lt;/span&gt; study eye &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; a &lt;span class=&quot;diff-del&quot;&gt;scotopic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;combined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;demonstrating&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subnormal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;wave,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consistent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;retinoschisis.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. The study eye &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; a history of other &lt;span class=&quot;diff-del&quot;&gt;ocular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disease&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;likely&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;contribute&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;significantly&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;visual&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;loss&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).
+  2.&lt;/span&gt; The study eye &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;lens,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cornea, or&lt;/span&gt; other &lt;span class=&quot;diff-del&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;opacities&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;precluding&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;adequate&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;visualization&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and testing of&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;retina.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;3.&lt;/span&gt; The study eye &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;undergone&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;intraocular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;surgery&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;within&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;six&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;months&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;enrollment.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; The study eye &lt;span class=&quot;diff-del&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;receiving&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;topical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;carbonic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;anhydrase&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inhibitor,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;received&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;topical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;carbonic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;anhydrase&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;inhibitors&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the past three months.
+  5. STUDY EYE SELECTION CRITERIA:If both eyes&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;meet&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the study eye eligibility criteria, the choice of study eye will be determined as follows:The eye with the worse visual acuity will be selected as&lt;/span&gt; the study eye.
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;If&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;both&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;eyes have visual acuities within five letter differences of one another, the choice of&lt;/span&gt; study eye &lt;span class=&quot;diff-del&quot;&gt;will&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;determined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;discretion&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;Investigator&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;consultation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;with&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;participant.&lt;/span&gt;"
+                 data-raw="INCLUSION CRITERIA:Participant is male with a mutation in the RS1 gene identified by genotyping.Participant must be 18 years of age or older.Participant must be able to understand and sign the informed consent.Participant must be medically able to comply with the study treatment, study testing and procedures and follow-up visits.Participant has at least one eye that meets the study eye criteria listed below.Participant must agree to use effective barrier (male or female condom) of contraception starting two weeks before and continuing one year after gene transfer.If the participant&amp;amp;#x27;s partner is able to become pregnant, a second form of effective contraception will be required starting two weeks before and continuing one year after gene transfer.Effective methods of contraception for this study include:hormonal contraception (birth control pills, injected hormones or vaginal ring),intrauterine device,barrier methods (condom or diaphragm) combined with spermicide,surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy).EXCLUSION CRITERIA:Participant is actively receiving another study medication&amp;amp;#x2F;investigational product (IP).Participant has previously enrolled in another gene therapy trial.Participant is currently taking, or has taken in the last three months, a systemic carbonic anhydrase inhibitor prior to enrollment&amp;amp;#x2F;baseline 1 testing.Participant has any condition that significantly increases risk of systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).Participant has an underlying serious illness that impairs regular follow-up during the study.Participant has had diagnosis or treatment of a malignancy (excluding non-melanoma skin cancer) within the previous five years.Participant has pre-existing ocular tumors (excluding non-suspicious nevi).Participant has a known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.Participant is on a medication that prevents safe administration of study related drugs.Participant has uncontrolled hypertension. (Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)Participant has compromised renal function such that cyclosporine or Cellcept, which could be used to treat any manifest ocular inflammation, would be contraindicated.Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times upper limit of normal [ULN]).Participant has low absolute neutrophil count (ANC&amp;amp;lt;1.3 x 10(3)&amp;amp;#x2F;micro liters).Participant has used any biologic immunosuppressive agents within the last three months (within the last six months for rituximab or cyclophosphamide).STUDY EYE ELIGIBILITY CRITERIA:The participant must have at least one eye meeting all inclusion criteria and none of the exclusion criteria listed below.STUDY EYE INCLUSION CRITERIA:The study eye must have a best-corrected E-ETDRS visual acuity letterscore of less than or equal to 63 (i.e., worse than or equal to 20&amp;amp;#x2F;63). The visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).Electroretinogram in the study eye with a scotopic combined response demonstrating a subnormal b wave, consistent with retinoschisis.STUDY EYE EXCLUSION CRITERIA:The study eye has a history of other ocular disease likely to contribute significantly to visual loss or likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).The study eye has lens, cornea, or other media opacities precluding adequate visualization and testing of the retina.The study eye has undergone intraocular surgery within six months prior to enrollment.The study eye is receiving topical carbonic anhydrase inhibitor, or has received topical carbonic anhydrase inhibitors in the past three months.STUDY EYE SELECTION CRITERIA:If both eyes of a participant meet the study eye eligibility criteria, the choice of study eye will be determined as follows:The eye with the worse visual acuity will be selected as the study eye.If both eyes have visual acuities within five letter differences of one another, the choice of study eye will be determined at the discretion of the Investigator in consultation with the participant.">INCLUSION CRITERIA
+
+  1. Participant is male with a mutation in the RS1 gene identified by genotyping.
+  2. Participant must be 18 years of age or older.
+  3. Participant must be able to understand and sign the informed consent.
+  4. Participant must be medically able to comply with the study treatment, study testing and procedures and follow-up visits.
+  5. Participant has at least one eye that meets the study eye criteria listed below.
+  6. Participant must agree to use effective barrier (male or female condom) of contraception starting two weeks before and continuing one year after gene transfer.
+  7. If the participant&#x27;s partner is able to become pregnant, a second form of effective contraception will be required starting two weeks before and continuing one year after gene transfer.
+  8. Effective methods of contraception for this study include:hormonal contraception (birth control pills, injected hormones or vaginal ring),intrauterine device,barrier methods (condom or diaphragm) combined with spermicide,surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy).
+
+EXCLUSION CRITERIA
+
+  1. Participant is actively receiving another study medication/investigational product (IP).
+  2. Participant has previously enrolled in another gene therapy trial.
+  3. Participant is currently taking, or has taken in the last three months, a systemic carbonic anhydrase inhibitor prior to enrollment/baseline 1 testing.
+  4. Participant has any condition that significantly increases risk of systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).
+  5. Participant has an underlying serious illness that impairs regular follow-up during the study.
+  6. Participant has had diagnosis or treatment of a malignancy (excluding non-melanoma skin cancer) within the previous five years.
+  7. Participant has pre-existing ocular tumors (excluding non-suspicious nevi).
+  8. Participant has a known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.
+  9. Participant is on a medication that prevents safe administration of study related drugs.
+  10. Participant has uncontrolled hypertension. (Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)Participant has compromised renal function such that cyclosporine or Cellcept, which could be used to treat any manifest ocular inflammation, would be contraindicated.
+  11. Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times upper limit of normal [ULN]).
+  12. Participant has low absolute neutrophil count (ANC&lt;1.3 x 10(3)/micro liters).
+  13. Participant has used any biologic immunosuppressive agents within the last three months (within the last six months for rituximab or cyclophosphamide).
+  14. STUDY EYE ELIGIBILITY CRITERIA:The participant must have at least one eye meeting all
+
+INCLUSION CRITERIA
+
+  1. and none of the
+
+EXCLUSION CRITERIA
+
+  1. listed below.
+  2. STUDY EYE
+
+INCLUSION CRITERIA
+
+  1. The study eye must have a best-corrected E-ETDRS visual acuity letterscore of less than or equal to 63 (i.e., worse than or equal to 20/63).
+  2. The visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).
+  3. Electroretinogram in the study eye with a scotopic combined response demonstrating a subnormal b wave, consistent with retinoschisis.
+  4. STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. The study eye has a history of other ocular disease likely to contribute significantly to visual loss or likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).
+  2. The study eye has lens, cornea, or other media opacities precluding adequate visualization and testing of the retina.
+  3. The study eye has undergone intraocular surgery within six months prior to enrollment.
+  4. The study eye is receiving topical carbonic anhydrase inhibitor, or has received topical carbonic anhydrase inhibitors in the past three months.
+  5. STUDY EYE SELECTION CRITERIA:If both eyes of a participant meet the study eye eligibility criteria, the choice of study eye will be determined as follows:The eye with the worse visual acuity will be selected as the study eye.
+  6. If both eyes have visual acuities within five letter differences of one another, the choice of study eye will be determined at the discretion of the Investigator in consultation with the participant.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Amended Eligibility Criteria for Version 108 of the XLRS2 Protocol
+
+INCLUSION CRITERIA
+
+  1. Male Participants: Participants must be male with a confirmed diagnosis of X-linked Retinoschisis (XLRS).
+  2. Age: Participants must be 18 years of age or older.
+  3. Visual Acuity: Participants must have a best-corrected visual acuity (BCVA) of at least 20/40 in the study eye.
+  4. Study Eye: The participant must have at least one eye that meets the study eye eligibility criteria.
+  5. Medical and Ophthalmic History: Participants must have a medical history and ophthalmic history that is consistent with XLRS.
+  6. No Other Active Eye Conditions: Participants must have no other active eye conditions that would interfere with the study.
+  7. No Other Active Medical Conditions: Participants must have no other active medical conditions that would interfere with the study.
+  8. No Other Medications: Participants must not be taking any other medications that could interfere with the study.
+  9. No Recent Eye Surgery: Participants must not have had any recent eye surgery.
+  10. No History of Retinal Detachment: Participants must not have a history of retinal detachment.
+  11. No History of Retinal Inflammation: Participants must not have a history of retinal inflammation.
+  12. No History of Systemic Steroid Use: Participants must not have a history of systemic steroid use within the past 3 months.
+  13. No History of Immunosuppressive Therapy: Participants must not have a history of immunosuppressive therapy within the past 3 months.
+  14. No History of HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  15. No History of Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  16. No History of Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  17. No History of Thyroid Disease: Participants must not have a history of thyroid disease.
+  18. No History of Epilepsy: Participants must not have a history of epilepsy.
+  19. No History of Stroke: Participants must not have a history of stroke.
+  20. No History of Cancer: Participants must not have a history of cancer.
+  21. No History of Major Surgery: Participants must not have had any major surgery within the past 6 months.
+  22. No History of Pregnancy or Breastfeeding: Participants must not be pregnant or breastfeeding.
+  23. Willingness to Participate: Participants must be willing to participate in the study and provide informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Female Participants: Participants must be male.
+  2. Age: Participants must be less than 18 years of age.
+  3. Visual Acuity: Participants must have a BCVA of less than 20/40 in the study eye.
+  4. Other Eye Conditions: Participants must have other eye conditions that would interfere with the study.
+  5. Other Medical Conditions: Participants must have other medical conditions that would interfere with the study.
+  6. Medications: Participants must be taking medications that could interfere with the study.
+  7. Recent Eye Surgery: Participants must not have had any recent eye surgery.
+  8. Retinal Detachment: Participants must not have a history of retinal detachment.
+  9. Retinal Inflammation: Participants must not have a history of retinal inflammation.
+  10. Systemic Steroid Use: Participants must not have a history of systemic steroid use within the past 3 months.
+  11. Immunosuppressive Therapy: Participants must not have a history of immunosuppressive therapy within the past 3 months.
+  12. HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  13. Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  14. Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  15. Thyroid Disease: Participants must not have a history of thyroid disease.
+  16. Epilepsy: Participants must not have a history of epilepsy.
+  17. Stroke: Participants must not have a history of stroke.
+  18. Cancer: Participants must not have a history of cancer.
+  19. Major Surgery: Participants must not have had any major surgery within the past 6 months.
+  20. Pregnancy or Breastfeeding: Participants must not be pregnant or breastfeeding.
+  21. STUDY EYE ELIGIBILITY CRITERIA:
+  22. Best-Corrected Visual Acuity (BCVA): The study eye must have a BCVA of at least 20/40.
+  23. Retinal Structure: The study eye must have no history of retinal detachment or other significant retinal pathology.
+  24. Electroretinogram (ERG): The study eye must have a normal ERG response.
+  25. Optical Coherence Tomography (OCT): The study eye must have normal OCT findings.
+  26. STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. History of Retinal Detachment: The study eye must not have a history of retinal detachment.
+  2. History of Retinal Inflammation: The study eye must not have a history of retinal inflammation.
+  3. History of Other Eye Conditions: The study eye must not have a history of other eye conditions that would interfere with the study.
+  4. Other Medical Conditions: The study eye must not have other medical conditions that would interfere with the study.
+  5. Medications: The study eye must not be taking medications that could interfere with the study.
+  6. Recent Eye Surgery: The study eye must not have had any recent eye surgery.
+  7. STUDY SELECTION CRITERIA:
+  8. Age: Participants must be 18 years of age or older.
+  9. Visual Acuity: Participants must have a BCVA of at least 20/40 in the study eye.
+  10. Retinal Structure: The study eye must have normal retinal structure.
+  11. Electroretinogram (ERG): The study eye must have a normal ERG response.
+  12. Optical Coherence Tomography (OCT): The study eye must have normal OCT findings.
+  13. Note: This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Amended Eligibility Criteria for Version 108 of the XLRS2 Protocol
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Male&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants: Participants must be&lt;/span&gt; male with a &lt;span class=&quot;diff-add&quot;&gt;confirmed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;diagnosis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;X-linked&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Retinoschisis&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(XLRS).&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Age: Participants&lt;/span&gt; must be 18 years of age or older.
+  3. &lt;span class=&quot;diff-add&quot;&gt;Visual Acuity: Participants&lt;/span&gt; must &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;best-corrected&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visual&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;acuity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(BCVA)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;20/40&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; the study &lt;span class=&quot;diff-add&quot;&gt;eye.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eye:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; at least one eye that meets the study eye &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical and Ophthalmic History: Participants must have a medical history and ophthalmic history that is consistent with XLRS.&lt;/span&gt;
+  6. &lt;span class=&quot;diff-add&quot;&gt;No Other Active Eye Conditions: Participants&lt;/span&gt; must &lt;span class=&quot;diff-add&quot;&gt;have no other active eye conditions that would interfere with the study.
+  7. No Other Active Medical Conditions: Participants must have no other active medical conditions that would interfere with the study.
+  8. No Other Medications: Participants must not be taking any other medications that could interfere with the study.
+  9. No Recent Eye Surgery: Participants must not have had any recent eye surgery.
+  10. No History of Retinal Detachment: Participants must not have a history of retinal detachment.
+  11. No History of Retinal Inflammation: Participants must not have a history of retinal inflammation.
+  12. No History of Systemic Steroid Use: Participants must not have a history of systemic steroid use within the past 3 months.
+  13. No History of Immunosuppressive Therapy: Participants must not have a history of immunosuppressive therapy within the past 3 months.
+  14. No History of HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  15. No History of Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  16. No History of Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  17. No History of Thyroid Disease: Participants must not have a history of thyroid disease.
+  18. No History of Epilepsy: Participants must not have a history of epilepsy.
+  19. No History of Stroke: Participants must not have a history of stroke.
+  20. No History of Cancer: Participants must not have a history of cancer.
+  21. No History of Major Surgery: Participants must not have had any major surgery within the past 6 months.
+  22. No History of Pregnancy or Breastfeeding: Participants must not be pregnant or breastfeeding.
+  23. Willingness&lt;/span&gt; to &lt;span class=&quot;diff-add&quot;&gt;Participate:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;willing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;participate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;provide&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;informed&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;consent.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Female&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;male.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Age:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;less&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of age.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-add&quot;&gt;Visual&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acuity:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;BCVA of less than 20/40&lt;/span&gt; in the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eye.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Eye&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants must have other eye conditions&lt;/span&gt; that &lt;span class=&quot;diff-add&quot;&gt;would&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interfere&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  5. &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have other medical conditions&lt;/span&gt; that &lt;span class=&quot;diff-add&quot;&gt;would&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interfere&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; the study.
+  6. &lt;span class=&quot;diff-add&quot;&gt;Medications:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants must be taking medications that could interfere with the study.
+  7. Recent Eye Surgery: Participants must not have&lt;/span&gt; had &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;recent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eye surgery.
+  8. Retinal Detachment: Participants must not have a history&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;retinal detachment.
+  9. Retinal Inflammation: Participants must not have &lt;/span&gt;a &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;retinal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;inflammation.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Systemic Steroid Use: Participants must not have a history of systemic steroid use&lt;/span&gt; within the &lt;span class=&quot;diff-add&quot;&gt;past&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;months.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Immunosuppressive&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Therapy:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;history&lt;/span&gt; of immunosuppressive &lt;span class=&quot;diff-add&quot;&gt;therapy&lt;/span&gt; within the &lt;span class=&quot;diff-add&quot;&gt;past&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;months.
+  12.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  13. Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  14. Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  15. Thyroid Disease: Participants must not have a history of thyroid disease.
+  16. Epilepsy: Participants must not have a history of epilepsy.
+  17. Stroke: Participants must not have a history of stroke.
+  18. Cancer: Participants must not have a history of cancer.
+  19. Major Surgery: Participants must not have had any major surgery within&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;past&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;months.
+  20.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Pregnancy&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;Breastfeeding: Participants must not be pregnant or breastfeeding.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;21.&lt;/span&gt; STUDY EYE ELIGIBILITY &lt;span class=&quot;diff-add&quot;&gt;CRITERIA:
+  22.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Best-Corrected&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visual&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acuity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(BCVA):&lt;/span&gt; The study eye must have a &lt;span class=&quot;diff-add&quot;&gt;BCVA&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;20/40.
+  23.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Retinal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Structure:&lt;/span&gt; The study eye &lt;span class=&quot;diff-add&quot;&gt;must have no history of retinal detachment or other significant retinal pathology.
+  24. Electroretinogram (ERG): The study eye must have&lt;/span&gt; a &lt;span class=&quot;diff-add&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;ERG&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;response.
+  25.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Optical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Coherence&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Tomography&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(OCT):&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eye&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must have normal OCT findings.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;26.&lt;/span&gt; STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;History of Retinal Detachment: &lt;/span&gt;The study eye &lt;span class=&quot;diff-add&quot;&gt;must not have a history of retinal detachment.
+  2. History of Retinal Inflammation: The study eye must not have a history of retinal inflammation.
+  3. History of Other Eye Conditions: The study eye must not have&lt;/span&gt; a history of other &lt;span class=&quot;diff-add&quot;&gt;eye&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;would&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interfere&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study.
+  4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conditions:&lt;/span&gt; The study eye &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; other &lt;span class=&quot;diff-add&quot;&gt;medical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;conditions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;would&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interfere&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;5. Medications:&lt;/span&gt; The study eye &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;taking&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;medications&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;could&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;interfere&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the study.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;6. Recent Eye Surgery:&lt;/span&gt; The study eye &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;had&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;recent eye surgery.
+  7. STUDY SELECTION CRITERIA:
+  8. Age: Participants must be 18 years of age&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;older.
+  9.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Visual&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Acuity:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Participants&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;BCVA&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;least&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;20/40&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;in&lt;/span&gt; the study eye.
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Retinal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Structure:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; study eye &lt;span class=&quot;diff-add&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;retinal&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;structure.
+  11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Electroretinogram (ERG): The study eye must have a normal ERG response.
+  12. Optical Coherence Tomography (OCT): The study eye must have normal OCT findings.
+  13. Note: This is a summary&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;amended&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;eligibility&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;criteria.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Please refer to&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;full protocol for complete details.&lt;/span&gt;"
+                 data-raw="## Amended Eligibility Criteria for Version 108 of the XLRS2 Protocol
+
+**INCLUSION CRITERIA:**
+
+* **Male Participants:** Participants must be male with a confirmed diagnosis of X-linked Retinoschisis (XLRS).
+* **Age:** Participants must be 18 years of age or older.
+* **Visual Acuity:** Participants must have a best-corrected visual acuity (BCVA) of at least 20/40 in the study eye.
+* **Study Eye:** The participant must have at least one eye that meets the study eye eligibility criteria.
+* **Medical and Ophthalmic History:** Participants must have a medical history and ophthalmic history that is consistent with XLRS.
+* **No Other Active Eye Conditions:** Participants must have no other active eye conditions that would interfere with the study.
+* **No Other Active Medical Conditions:** Participants must have no other active medical conditions that would interfere with the study.
+* **No Other Medications:** Participants must not be taking any other medications that could interfere with the study.
+* **No Recent Eye Surgery:** Participants must not have had any recent eye surgery.
+* **No History of Retinal Detachment:** Participants must not have a history of retinal detachment.
+* **No History of Retinal Inflammation:** Participants must not have a history of retinal inflammation.
+* **No History of Systemic Steroid Use:** Participants must not have a history of systemic steroid use within the past 3 months.
+* **No History of Immunosuppressive Therapy:** Participants must not have a history of immunosuppressive therapy within the past 3 months.
+* **No History of HIV/AIDS:** Participants must not have a history of HIV/AIDS.
+* **No History of Hepatitis B or C:** Participants must not have a history of Hepatitis B or C.
+* **No History of Diabetes Mellitus:** Participants must not have a history of diabetes mellitus.
+* **No History of Thyroid Disease:** Participants must not have a history of thyroid disease.
+* **No History of Epilepsy:** Participants must not have a history of epilepsy.
+* **No History of Stroke:** Participants must not have a history of stroke.
+* **No History of Cancer:** Participants must not have a history of cancer.
+* **No History of Major Surgery:** Participants must not have had any major surgery within the past 6 months.
+* **No History of Pregnancy or Breastfeeding:** Participants must not be pregnant or breastfeeding.
+* **Willingness to Participate:** Participants must be willing to participate in the study and provide informed consent.
+
+**EXCLUSION CRITERIA:**
+
+* **Female Participants:** Participants must be male.
+* **Age:** Participants must be less than 18 years of age.
+* **Visual Acuity:** Participants must have a BCVA of less than 20/40 in the study eye.
+* **Other Eye Conditions:** Participants must have other eye conditions that would interfere with the study.
+* **Other Medical Conditions:** Participants must have other medical conditions that would interfere with the study.
+* **Medications:** Participants must be taking medications that could interfere with the study.
+* **Recent Eye Surgery:** Participants must not have had any recent eye surgery.
+* **Retinal Detachment:** Participants must not have a history of retinal detachment.
+* **Retinal Inflammation:** Participants must not have a history of retinal inflammation.
+* **Systemic Steroid Use:** Participants must not have a history of systemic steroid use within the past 3 months.
+* **Immunosuppressive Therapy:** Participants must not have a history of immunosuppressive therapy within the past 3 months.
+* **HIV/AIDS:** Participants must not have a history of HIV/AIDS.
+* **Hepatitis B or C:** Participants must not have a history of Hepatitis B or C.
+* **Diabetes Mellitus:** Participants must not have a history of diabetes mellitus.
+* **Thyroid Disease:** Participants must not have a history of thyroid disease.
+* **Epilepsy:** Participants must not have a history of epilepsy.
+* **Stroke:** Participants must not have a history of stroke.
+* **Cancer:** Participants must not have a history of cancer.
+* **Major Surgery:** Participants must not have had any major surgery within the past 6 months.
+* **Pregnancy or Breastfeeding:** Participants must not be pregnant or breastfeeding.
+
+
+**STUDY EYE ELIGIBILITY CRITERIA:**
+
+* **Best-Corrected Visual Acuity (BCVA):** The study eye must have a BCVA of at least 20/40.
+* **Retinal Structure:** The study eye must have no history of retinal detachment or other significant retinal pathology.
+* **Electroretinogram (ERG):** The study eye must have a normal ERG response.
+* **Optical Coherence Tomography (OCT):** The study eye must have normal OCT findings.
+
+**STUDY EYE EXCLUSION CRITERIA:**
+
+* **History of Retinal Detachment:** The study eye must not have a history of retinal detachment.
+* **History of Retinal Inflammation:** The study eye must not have a history of retinal inflammation.
+* **History of Other Eye Conditions:** The study eye must not have a history of other eye conditions that would interfere with the study.
+* **Other Medical Conditions:** The study eye must not have other medical conditions that would interfere with the study.
+* **Medications:** The study eye must not be taking medications that could interfere with the study.
+* **Recent Eye Surgery:** The study eye must not have had any recent eye surgery.
+
+**STUDY SELECTION CRITERIA:**
+
+* **Age:** Participants must be 18 years of age or older.
+* **Visual Acuity:** Participants must have a BCVA of at least 20/40 in the study eye.
+* **Retinal Structure:** The study eye must have normal retinal structure.
+* **Electroretinogram (ERG):** The study eye must have a normal ERG response.
+* **Optical Coherence Tomography (OCT):** The study eye must have normal OCT findings.
+
+**Note:** This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details.">Amended Eligibility Criteria for Version 108 of the XLRS2 Protocol
+
+INCLUSION CRITERIA
+
+  1. Male Participants: Participants must be male with a confirmed diagnosis of X-linked Retinoschisis (XLRS).
+  2. Age: Participants must be 18 years of age or older.
+  3. Visual Acuity: Participants must have a best-corrected visual acuity (BCVA) of at least 20/40 in the study eye.
+  4. Study Eye: The participant must have at least one eye that meets the study eye eligibility criteria.
+  5. Medical and Ophthalmic History: Participants must have a medical history and ophthalmic history that is consistent with XLRS.
+  6. No Other Active Eye Conditions: Participants must have no other active eye conditions that would interfere with the study.
+  7. No Other Active Medical Conditions: Participants must have no other active medical conditions that would interfere with the study.
+  8. No Other Medications: Participants must not be taking any other medications that could interfere with the study.
+  9. No Recent Eye Surgery: Participants must not have had any recent eye surgery.
+  10. No History of Retinal Detachment: Participants must not have a history of retinal detachment.
+  11. No History of Retinal Inflammation: Participants must not have a history of retinal inflammation.
+  12. No History of Systemic Steroid Use: Participants must not have a history of systemic steroid use within the past 3 months.
+  13. No History of Immunosuppressive Therapy: Participants must not have a history of immunosuppressive therapy within the past 3 months.
+  14. No History of HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  15. No History of Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  16. No History of Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  17. No History of Thyroid Disease: Participants must not have a history of thyroid disease.
+  18. No History of Epilepsy: Participants must not have a history of epilepsy.
+  19. No History of Stroke: Participants must not have a history of stroke.
+  20. No History of Cancer: Participants must not have a history of cancer.
+  21. No History of Major Surgery: Participants must not have had any major surgery within the past 6 months.
+  22. No History of Pregnancy or Breastfeeding: Participants must not be pregnant or breastfeeding.
+  23. Willingness to Participate: Participants must be willing to participate in the study and provide informed consent.
+
+EXCLUSION CRITERIA
+
+  1. Female Participants: Participants must be male.
+  2. Age: Participants must be less than 18 years of age.
+  3. Visual Acuity: Participants must have a BCVA of less than 20/40 in the study eye.
+  4. Other Eye Conditions: Participants must have other eye conditions that would interfere with the study.
+  5. Other Medical Conditions: Participants must have other medical conditions that would interfere with the study.
+  6. Medications: Participants must be taking medications that could interfere with the study.
+  7. Recent Eye Surgery: Participants must not have had any recent eye surgery.
+  8. Retinal Detachment: Participants must not have a history of retinal detachment.
+  9. Retinal Inflammation: Participants must not have a history of retinal inflammation.
+  10. Systemic Steroid Use: Participants must not have a history of systemic steroid use within the past 3 months.
+  11. Immunosuppressive Therapy: Participants must not have a history of immunosuppressive therapy within the past 3 months.
+  12. HIV/AIDS: Participants must not have a history of HIV/AIDS.
+  13. Hepatitis B or C: Participants must not have a history of Hepatitis B or C.
+  14. Diabetes Mellitus: Participants must not have a history of diabetes mellitus.
+  15. Thyroid Disease: Participants must not have a history of thyroid disease.
+  16. Epilepsy: Participants must not have a history of epilepsy.
+  17. Stroke: Participants must not have a history of stroke.
+  18. Cancer: Participants must not have a history of cancer.
+  19. Major Surgery: Participants must not have had any major surgery within the past 6 months.
+  20. Pregnancy or Breastfeeding: Participants must not be pregnant or breastfeeding.
+  21. STUDY EYE ELIGIBILITY CRITERIA:
+  22. Best-Corrected Visual Acuity (BCVA): The study eye must have a BCVA of at least 20/40.
+  23. Retinal Structure: The study eye must have no history of retinal detachment or other significant retinal pathology.
+  24. Electroretinogram (ERG): The study eye must have a normal ERG response.
+  25. Optical Coherence Tomography (OCT): The study eye must have normal OCT findings.
+  26. STUDY EYE
+
+EXCLUSION CRITERIA
+
+  1. History of Retinal Detachment: The study eye must not have a history of retinal detachment.
+  2. History of Retinal Inflammation: The study eye must not have a history of retinal inflammation.
+  3. History of Other Eye Conditions: The study eye must not have a history of other eye conditions that would interfere with the study.
+  4. Other Medical Conditions: The study eye must not have other medical conditions that would interfere with the study.
+  5. Medications: The study eye must not be taking medications that could interfere with the study.
+  6. Recent Eye Surgery: The study eye must not have had any recent eye surgery.
+  7. STUDY SELECTION CRITERIA:
+  8. Age: Participants must be 18 years of age or older.
+  9. Visual Acuity: Participants must have a BCVA of at least 20/40 in the study eye.
+  10. Retinal Structure: The study eye must have normal retinal structure.
+  11. Electroretinogram (ERG): The study eye must have a normal ERG response.
+  12. Optical Coherence Tomography (OCT): The study eye must have normal OCT findings.
+  13. Note: This is a summary of the amended eligibility criteria. Please refer to the full protocol for complete details.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

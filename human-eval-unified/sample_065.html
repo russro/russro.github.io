@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 65</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 65</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="Main
+
+INCLUSION CRITERIA
+
+  1. Male or female, at least 18 years of age at the time of informed consentEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0 or 1Histologically or cytologically confirmed, locally advanced or metastatic colorectal cancer (CRC) that is documented to be without Kirsten rat sarcoma (KRAS) or neuroblastoma rat sarcoma (NRAS) gene mutations (i.e., tumors must express the KRAS and NRAS wild type [WT], exon 2, 3 and 4).
+  2. Failed (defined as radiologic progression) treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab, during treatment or &amp;lt; 3 months after the last dose of first-line therapy and within &amp;lt; 3 months of C1/D1.
+  3. Patients who discontinued first-line therapy due to toxicity may be enrolled provided progression occurred &amp;lt; 6 months after the last dose of the first-line therapy regimen.or Failed (defined as radiologic progression) adjuvant therapy with combination therapy of oxaliplatin and a fluoropyrimidine during treatment or within &amp;lt; 6 months after the last dose of oxaliplatin and within &amp;lt; 6 months of C1/D1.
+  4. Eligible for FOLFIRIMeasurable disease according to RECIST v1.1Main
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  3. Significant gastrointestinal abnormalities
+  4. Patients with a significant cardiovascular disease or condition
+  5. Abnormal hematologic, renal or hepatic function"
+                 data-diff="Main
+
+INCLUSION CRITERIA
+
+  1. Male or &lt;span class=&quot;diff-del&quot;&gt;female,&lt;/span&gt; at least 18 years of age at the time of informed &lt;span class=&quot;diff-del&quot;&gt;consentEastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status &lt;span class=&quot;diff-del&quot;&gt;(PS) &lt;/span&gt;of 0 or &lt;span class=&quot;diff-del&quot;&gt;1Histologically&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;cytologically&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;confirmed, locally advanced or metastatic colorectal cancer&lt;/span&gt; (CRC) that is documented to be without &lt;span class=&quot;diff-del&quot;&gt;Kirsten rat sarcoma (KRAS)&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;neuroblastoma rat sarcoma (NRAS)&lt;/span&gt; gene mutations &lt;span class=&quot;diff-del&quot;&gt;(i.e.,&lt;/span&gt; tumors must express the KRAS and NRAS wild type &lt;span class=&quot;diff-del&quot;&gt;[WT],&lt;/span&gt; exon 2, &lt;span class=&quot;diff-del&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;and 4).&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;2.&lt;/span&gt; Failed &lt;span class=&quot;diff-del&quot;&gt;(defined&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;radiologic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;progression)&lt;/span&gt; treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without &lt;span class=&quot;diff-del&quot;&gt;bevacizumab, during treatment or &amp;lt; 3 months after the last dose of first-line therapy and within &amp;lt; 3 months of C1/D1.
+  3. Patients who discontinued first-line therapy due to toxicity may be enrolled provided progression occurred &amp;lt; 6 months after the last dose of the first-line therapy regimen.or Failed (defined as radiologic progression) adjuvant therapy with combination therapy of oxaliplatin and a fluoropyrimidine during treatment or within &amp;lt; 6 months after the last dose of oxaliplatin and within &amp;lt; 6 months of C1/D1.
+  4. Eligible for FOLFIRIMeasurable disease according to RECIST v1.1Main&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  &lt;span class=&quot;diff-del&quot;&gt;3. Significant gastrointestinal abnormalities
+  &lt;/span&gt;4. &lt;span class=&quot;diff-del&quot;&gt;Patients&lt;/span&gt; with a &lt;span class=&quot;diff-del&quot;&gt;significant&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cardiovascular&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disease&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;condition&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Abnormal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hematologic,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;renal&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;hepatic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;function&lt;/span&gt;"
+                 data-raw="Main inclusion Criteria:Male or female, at least 18 years of age at the time of informed consentEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0 or 1Histologically or cytologically confirmed, locally advanced or metastatic colorectal cancer (CRC) that is documented to be without Kirsten rat sarcoma (KRAS) or neuroblastoma rat sarcoma (NRAS) gene mutations (i.e., tumors must express the KRAS and NRAS wild type [WT], exon 2, 3 and 4).Failed (defined as radiologic progression) treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab, during treatment or &amp;amp;lt; 3 months after the last dose of first-line therapy and within &amp;amp;lt; 3 months of C1&amp;amp;#x2F;D1. Patients who discontinued first-line therapy due to toxicity may be enrolled provided progression occurred &amp;amp;lt; 6 months after the last dose of the first-line therapy regimen.or Failed (defined as radiologic progression) adjuvant therapy with combination therapy of oxaliplatin and a fluoropyrimidine during treatment or within &amp;amp;lt; 6 months after the last dose of oxaliplatin and within &amp;amp;lt; 6 months of C1&amp;amp;#x2F;D1.Eligible for FOLFIRIMeasurable disease according to RECIST v1.1Main exclusion Criteria:Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1&amp;amp;#x2F;D1Significant gastrointestinal abnormalitiesPatients with a significant cardiovascular disease or conditionAbnormal hematologic, renal or hepatic function">Main
+
+INCLUSION CRITERIA
+
+  1. Male or female, at least 18 years of age at the time of informed consentEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0 or 1Histologically or cytologically confirmed, locally advanced or metastatic colorectal cancer (CRC) that is documented to be without Kirsten rat sarcoma (KRAS) or neuroblastoma rat sarcoma (NRAS) gene mutations (i.e., tumors must express the KRAS and NRAS wild type [WT], exon 2, 3 and 4).
+  2. Failed (defined as radiologic progression) treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab, during treatment or &lt; 3 months after the last dose of first-line therapy and within &lt; 3 months of C1/D1.
+  3. Patients who discontinued first-line therapy due to toxicity may be enrolled provided progression occurred &lt; 6 months after the last dose of the first-line therapy regimen.or Failed (defined as radiologic progression) adjuvant therapy with combination therapy of oxaliplatin and a fluoropyrimidine during treatment or within &lt; 6 months after the last dose of oxaliplatin and within &lt; 6 months of C1/D1.
+  4. Eligible for FOLFIRIMeasurable disease according to RECIST v1.1Main
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  3. Significant gastrointestinal abnormalities
+  4. Patients with a significant cardiovascular disease or condition
+  5. Abnormal hematologic, renal or hepatic function</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Based on the information provided, here is the revised Eligibility Criteria for the Symphogen Clinical Trial Protocol:
+
+Main
+
+INCLUSION CRITERIA
+
+  1. Male or Female, at least 18 years of age at the time of informed consent.
+  2. Eastern Cooperative Oncology Group (ECOG) performance status of 0 or 1
+  3. Local Advanced or Metastatic CRC (CRC) that is documented to be without KRAS or NRAS gene mutations (i.e. tumors must express the KRAS and NRAS wild type (WT), exon 2, 3, 4)
+  4. Failed prior adjuvant therapy or prior therapy for treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. Discontinuation of prior therapy with oxaliplatin and a fluoropyrimidine due to diarrhea ≥ Grade 3
+  3. Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  4. Dose-Related Criteria:
+  5. Dose-Escalation (Phase 1b):
+  6. Primary Objective: To determine the MTD and/or RP2D of Sym004 when administered by intravenous (iv) infusion every second week in combination with a standard dosing regimen of FOLFIRI (folinic acid, 5-fluorouracil, irinotecan) to patients with locally advanced or metastatic colorectal cancer (CRC).
+  7. Secondary Objective: To evaluate the antineoplastic effect of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  8. Dose-Expansion (Phase 2a):
+  9. Primary Objective: To evaluate the antitumor response of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  10. Secondary Objective: To confirm objective antitumor response.
+  11. Safety Assessed:
+  12. Pharmacokinetic (PK) Assessments (Dose-Escalation Only):
+  13. AUC Norm 0-336h Dose-normalized area under the concentration-time curve from end of infusion to 336 hours
+  14. Anti-Drug Antibody (ADA) Testing:
+  15. Monitoring of Adverse Event (AE) surveys and DLT evaluation during Cycle 1 with final assessment 14 days after the last dose of Cycle 1 or on the scheduled first day of Cycle 2, prior to dosing
+  16. Dose-Expansion (Phase 2a):
+  17. Dose-Reduction for Grade 3 Skin Toxicities:
+  18. Reporting of Dose-Reduction for Grade 3 Skin Toxicities
+  19. Safety Reporting to Health Authorities, Independent Ethics Committees/Institutional Review Boards and Investigators:
+  20. Reporting of Serious Adverse Event and Follow-up
+  21. This revised Eligibility Criteria ensures that the trial is feasible and safe for participants, aligning with the original version while incorporating the key eligibility criteria for the Symphogen Clinical Trial Protocol."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Based on the information provided, here is the revised Eligibility Criteria for the Symphogen Clinical Trial Protocol:
+
+&lt;/span&gt;Main
+
+INCLUSION CRITERIA
+
+  1. Male or &lt;span class=&quot;diff-add&quot;&gt;Female,&lt;/span&gt; at least 18 years of age at the time of informed &lt;span class=&quot;diff-add&quot;&gt;consent.
+  2. Eastern&lt;/span&gt; Cooperative Oncology Group (ECOG) performance status of 0 or &lt;span class=&quot;diff-add&quot;&gt;1
+  3. Local Advanced&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;Metastatic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CRC&lt;/span&gt; (CRC) that is documented to be without &lt;span class=&quot;diff-add&quot;&gt;KRAS&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;NRAS&lt;/span&gt; gene mutations &lt;span class=&quot;diff-add&quot;&gt;(i.e.&lt;/span&gt; tumors must express the KRAS and NRAS wild type &lt;span class=&quot;diff-add&quot;&gt;(WT),&lt;/span&gt; exon 2, &lt;span class=&quot;diff-add&quot;&gt;3,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;4)&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; Failed &lt;span class=&quot;diff-add&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;adjuvant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;therapy&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or prior therapy for&lt;/span&gt; treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without &lt;span class=&quot;diff-add&quot;&gt;bevacizumab&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. &lt;span class=&quot;diff-add&quot;&gt;Discontinuation of prior therapy with oxaliplatin and a fluoropyrimidine due to diarrhea ≥ Grade 3
+  3. &lt;/span&gt;Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  4. &lt;span class=&quot;diff-add&quot;&gt;Dose-Related Criteria:
+  5. Dose-Escalation (Phase 1b):
+  6. Primary Objective: To determine the MTD and/or RP2D of Sym004 when administered by intravenous (iv) infusion every second week in combination&lt;/span&gt; with a &lt;span class=&quot;diff-add&quot;&gt;standard&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;dosing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;regimen of FOLFIRI (folinic acid, 5-fluorouracil, irinotecan) to patients with locally advanced&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;metastatic colorectal cancer (CRC).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Secondary&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Objective:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;To evaluate the antineoplastic effect of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;metastatic&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CRC.
+  8. Dose-Expansion (Phase 2a):
+  9. Primary Objective: To evaluate the antitumor response of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  10. Secondary Objective: To confirm objective antitumor response.
+  11. Safety Assessed:
+  12. Pharmacokinetic (PK) Assessments (Dose-Escalation Only):
+  13. AUC Norm 0-336h Dose-normalized area under the concentration-time curve from end of infusion to 336 hours
+  14. Anti-Drug Antibody (ADA) Testing:
+  15. Monitoring of Adverse Event (AE) surveys and DLT evaluation during Cycle 1 with final assessment 14 days after the last dose of Cycle 1 or on the scheduled first day of Cycle 2, prior to dosing
+  16. Dose-Expansion (Phase 2a):
+  17. Dose-Reduction for Grade 3 Skin Toxicities:
+  18. Reporting of Dose-Reduction for Grade 3 Skin Toxicities
+  19. Safety Reporting to Health Authorities, Independent Ethics Committees/Institutional Review Boards and Investigators:
+  20. Reporting of Serious Adverse Event and Follow-up
+  21. This revised Eligibility Criteria ensures that the trial is feasible and safe for participants, aligning with the original version while incorporating the key eligibility criteria for the Symphogen Clinical Trial Protocol.&lt;/span&gt;"
+                 data-raw="Based on the information provided, here is the revised Eligibility Criteria for the Symphogen Clinical Trial Protocol:
+
+**Main Inclusion Criteria:**
+- **Male or Female**, at least 18 years of age at the time of informed consent.
+- **Eastern Cooperative Oncology Group (ECOG)** performance status of 0 or 1
+- **Local Advanced or Metastatic CRC (CRC)** that is documented to be without KRAS or NRAS gene mutations (i.e. tumors must express the KRAS and NRAS wild type (WT), exon 2, 3, 4)
+- **Failed** prior adjuvant therapy or prior therapy for treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab
+
+**Exclusion Criteria:**
+- **Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)**
+- **Discontinuation of prior therapy with oxaliplatin and a fluoropyrimidine due to diarrhea ≥ Grade 3**
+- **Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1**
+
+**Dose-Related Criteria:**
+- **Dose-Escalation (Phase 1b)**: 
+  - **Primary Objective**: To determine the MTD and/or RP2D of Sym004 when administered by intravenous (iv) infusion every second week in combination with a standard dosing regimen of FOLFIRI (folinic acid, 5-fluorouracil, irinotecan) to patients with locally advanced or metastatic colorectal cancer (CRC).
+  - **Secondary Objective**: To evaluate the antineoplastic effect of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  
+- **Dose-Expansion (Phase 2a)**: 
+  - **Primary Objective**: To evaluate the antitumor response of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  - **Secondary Objective**: To confirm objective antitumor response.
+
+**Safety Assessed:**
+- **Pharmacokinetic (PK) Assessments (Dose-Escalation Only)**: 
+  - **AUC Norm 0-336h Dose-normalized area under the concentration-time curve from end of infusion to 336 hours**
+- **Anti-Drug Antibody (ADA) Testing**: 
+  - **Monitoring of Adverse Event (AE) surveys and DLT evaluation during Cycle 1 with final assessment 14 days after the last dose of Cycle 1 or on the scheduled first day of Cycle 2, prior to dosing**
+- **Dose-Expansion (Phase 2a)**: 
+  - **Dose-Reduction for Grade 3 Skin Toxicities**: 
+    - **Reporting of Dose-Reduction for Grade 3 Skin Toxicities**
+- **Safety Reporting to Health Authorities, Independent Ethics Committees/Institutional Review Boards and Investigators**: 
+  - **Reporting of Serious Adverse Event and Follow-up**
+
+This revised Eligibility Criteria ensures that the trial is feasible and safe for participants, aligning with the original version while incorporating the key eligibility criteria for the Symphogen Clinical Trial Protocol.">Based on the information provided, here is the revised Eligibility Criteria for the Symphogen Clinical Trial Protocol:
+
+Main
+
+INCLUSION CRITERIA
+
+  1. Male or Female, at least 18 years of age at the time of informed consent.
+  2. Eastern Cooperative Oncology Group (ECOG) performance status of 0 or 1
+  3. Local Advanced or Metastatic CRC (CRC) that is documented to be without KRAS or NRAS gene mutations (i.e. tumors must express the KRAS and NRAS wild type (WT), exon 2, 3, 4)
+  4. Failed prior adjuvant therapy or prior therapy for treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab
+
+EXCLUSION CRITERIA
+
+  1. Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)
+  2. Discontinuation of prior therapy with oxaliplatin and a fluoropyrimidine due to diarrhea ≥ Grade 3
+  3. Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1
+  4. Dose-Related Criteria:
+  5. Dose-Escalation (Phase 1b):
+  6. Primary Objective: To determine the MTD and/or RP2D of Sym004 when administered by intravenous (iv) infusion every second week in combination with a standard dosing regimen of FOLFIRI (folinic acid, 5-fluorouracil, irinotecan) to patients with locally advanced or metastatic colorectal cancer (CRC).
+  7. Secondary Objective: To evaluate the antineoplastic effect of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  8. Dose-Expansion (Phase 2a):
+  9. Primary Objective: To evaluate the antitumor response of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.
+  10. Secondary Objective: To confirm objective antitumor response.
+  11. Safety Assessed:
+  12. Pharmacokinetic (PK) Assessments (Dose-Escalation Only):
+  13. AUC Norm 0-336h Dose-normalized area under the concentration-time curve from end of infusion to 336 hours
+  14. Anti-Drug Antibody (ADA) Testing:
+  15. Monitoring of Adverse Event (AE) surveys and DLT evaluation during Cycle 1 with final assessment 14 days after the last dose of Cycle 1 or on the scheduled first day of Cycle 2, prior to dosing
+  16. Dose-Expansion (Phase 2a):
+  17. Dose-Reduction for Grade 3 Skin Toxicities:
+  18. Reporting of Dose-Reduction for Grade 3 Skin Toxicities
+  19. Safety Reporting to Health Authorities, Independent Ethics Committees/Institutional Review Boards and Investigators:
+  20. Reporting of Serious Adverse Event and Follow-up
+  21. This revised Eligibility Criteria ensures that the trial is feasible and safe for participants, aligning with the original version while incorporating the key eligibility criteria for the Symphogen Clinical Trial Protocol.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

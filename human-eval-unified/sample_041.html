@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 41</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 41</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Main Inclusion: To be enrolled in this protocol, subjects must meet all of the following
+
+INCLUSION CRITERIA
+
+  1. Subject must have experienced virologic failure as defined in a previous AbbVie/Abbott direct acting anti-viral combination trial.
+  2. Female subjects of childbearing potential must be willing to use two effective forms of birth control (not including oral contraceptives or contraceptives containing ethinyl estradiol) while receiving study drug and for 7 months (or per local ribavirin label) after stopping study drugMales must be surgically sterile or have male partners only or agree to practice two effective forms of birth control throughout the course of the study, starting with Study Day 1 and for 7 months (or per local ribavirin label) after the last dose of study drug, unless abstinent from sexual intercourse.
+  3. Subject must be considered an appropriate candidate for peginterferon alpha-2a, ribavirin, ABT-450/r and ABT-267 therapy in the opinion of the investigator.
+  4. Subject is infected with HCV genotype 1 at screening.
+  5. Subjects diagnosed with cirrhosis must also meet the following criteria:Compensated cirrhosis defined as Child-Pugh score of ≤ 6 at Screening.
+  6. Absence of hepatocellular carcinoma based on a negative ultrasound, computed tomography (CT) scan or magnetic resonance imaging (MRI) performed within 3 months prior to Screening or during the Screening period.
+
+EXCLUSION CRITERIA
+
+  1. In subjects with a prior null or partial response to pegIFN/RBV treatment at any time prior to pre-screening for this study or any prior failure with pegIFN/RBV plus telaprevir, the presence of variants relative to the appropriate prototypic reference sequence (H77 for 1a or Con1 for 1b) at any of the following positions: NS3 155, 156, or 168; or NS5A 28, 29, 30, 31, 32, 58, or 93.
+  2. Females who are pregnant or plan to become pregnant, or breast-feeding, or males whose partners are pregnant or planning to become pregnant within 7 months (or per local RBV label) after their last dose of RBV.
+  3. Use of known strong inducers (e.g., phenobarbital, rifampin, carbamazepine, St.
+  4. John&amp;#x27;s Wort) of CYP3A within 2 weeks prior to study drug administration.
+  5. Use of any medications contraindicated for use with peginterferon alpha-2a, RBV or ritonavir within 2 weeks prior to study drug administration.
+  6. Prior to entering the study, subjects must be able to safely discontinue the contraindicated medication or switch to an acceptable alternative under supervision of the investigator.
+  7. Discontinuation of antiviral therapy due to intolerance or a DAA- or RBV-associated adverse event in a previous AbbVie/Abbott DAA combination study.
+  8. Subjects with compensated cirrhosis must also not meet the following criteria:Any current or past clinical evidence of Child-Pugh B or C Classification or clinical history of liver decompensation such as ascites (noted on physical exam), variceal bleeding or hepatic encephalopathy.
+  9. Serum Alpha-Fetoprotein (sAFP) &amp;gt; 100 ng/mL at Screening.
+  10. A screening ultrasound suspicious for hepatocellular carcinoma and confirmed with a subsequent CT scan or MRI during the screening period."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1. Main Inclusion: To&lt;/span&gt; be &lt;span class=&quot;diff-del&quot;&gt;enrolled&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;meet&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;all&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;following&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Subject&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;experienced virologic failure as defined in a previous AbbVie/Abbott direct acting anti-viral combination trial.
+  2. Female&lt;/span&gt; subjects &lt;span class=&quot;diff-del&quot;&gt;of childbearing potential must be willing to use two effective forms of birth control (not including oral contraceptives or contraceptives containing ethinyl estradiol) while receiving study drug and for 7 months (or per local ribavirin label) after stopping study drugMales must be surgically sterile or have male partners only or agree to practice two effective forms of birth control throughout the course of the study, starting &lt;/span&gt;with &lt;span class=&quot;diff-del&quot;&gt;Study Day 1 and for 7 months (or per local ribavirin label) after the last dose of study drug, unless abstinent from sexual intercourse.
+  3. Subject must be considered an appropriate candidate for peginterferon alpha-2a, ribavirin, ABT-450/r and ABT-267 therapy in the opinion of the investigator.
+  4. Subject is infected with&lt;/span&gt; HCV genotype 1 at &lt;span class=&quot;diff-del&quot;&gt;screening.
+  5.&lt;/span&gt; Subjects &lt;span class=&quot;diff-del&quot;&gt;diagnosed &lt;/span&gt;with &lt;span class=&quot;diff-del&quot;&gt;cirrhosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;also&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;meet the following criteria:Compensated cirrhosis defined as Child-Pugh score of ≤ 6 at Screening.
+  6. Absence of hepatocellular carcinoma based on a negative ultrasound, computed tomography (CT) scan&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;magnetic resonance imaging (MRI) performed within &lt;/span&gt;3&lt;span class=&quot;diff-del&quot;&gt; months prior to Screening or during the Screening period.&lt;/span&gt;
+
+&lt;span class=&quot;diff-del&quot;&gt;EXCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;In&lt;/span&gt; subjects with &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;prior&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;null&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;partial&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;pegIFN/RBV&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;treatment&lt;/span&gt; at &lt;span class=&quot;diff-del&quot;&gt;any time prior to pre-screening for this study or any prior failure with pegIFN/RBV plus telaprevir, &lt;/span&gt;the &lt;span class=&quot;diff-del&quot;&gt;presence of variants relative to the appropriate prototypic reference sequence (H77 for 1a or Con1 for 1b) at any&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;following&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;positions:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;NS3 155, 156,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;168;&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;NS5A&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;28,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;29, 30, 31, 32, 58, or 93.
+  2. Females who are pregnant or plan to become pregnant, or breast-feeding, or males whose partners are pregnant or planning to become pregnant within 7 months (or per local RBV label) after their last dose&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;RBV.
+  3. Use of known strong inducers (e.g., phenobarbital, rifampin, carbamazepine, St.
+  4. John&amp;#x27;s Wort) of CYP3A within 2 weeks prior to study drug administration.
+  5. Use of any medications contraindicated for use with peginterferon alpha-2a, RBV or ritonavir within 2 weeks prior to study drug administration.
+  6. Prior to entering the study, subjects must be able to safely discontinue the contraindicated medication or switch to an acceptable alternative under supervision&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;investigator.
+  7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Discontinuation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;antiviral&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;therapy&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;due&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;intolerance&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or a DAA- or RBV-associated adverse event in a previous AbbVie/Abbott DAA combination study.
+  8.&lt;/span&gt; Subjects with &lt;span class=&quot;diff-del&quot;&gt;compensated&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cirrhosis&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;must&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;also&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;meet&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;following&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;criteria:Any&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;current&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;past&lt;/span&gt; clinical &lt;span class=&quot;diff-del&quot;&gt;evidence&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;Child-Pugh&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;B&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;C Classification&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;clinical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;history&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;liver&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;decompensation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;such&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ascites&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(noted&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;physical&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;exam),&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;variceal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;bleeding&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;hepatic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;encephalopathy.
+  9. Serum Alpha-Fetoprotein (sAFP) &amp;gt; 100 ng/mL&lt;/span&gt; at &lt;span class=&quot;diff-del&quot;&gt;Screening.
+  10.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;ultrasound&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;suspicious&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;hepatocellular carcinoma and confirmed&lt;/span&gt; with a &lt;span class=&quot;diff-del&quot;&gt;subsequent&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CT&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;scan&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;MRI&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;during&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;screening&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;period.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Main Inclusion: To be enrolled in this protocol, subjects must meet all of the following inclusion criteria:Subject must have experienced virologic failure as defined in a previous AbbVie&amp;amp;#x2F;Abbott direct acting anti-viral combination trial.Female subjects of childbearing potential must be willing to use two effective forms of birth control (not including oral contraceptives or contraceptives containing ethinyl estradiol) while receiving study drug and for 7 months (or per local ribavirin label) after stopping study drugMales must be surgically sterile or have male partners only or agree to practice two effective forms of birth control throughout the course of the study, starting with Study Day 1 and for 7 months (or per local ribavirin label) after the last dose of study drug, unless abstinent from sexual intercourse.Subject must be considered an appropriate candidate for peginterferon alpha-2a, ribavirin, ABT-450&amp;amp;#x2F;r and ABT-267 therapy in the opinion of the investigator.Subject is infected with HCV genotype 1 at screening.Subjects diagnosed with cirrhosis must also meet the following criteria:Compensated cirrhosis defined as Child-Pugh score of ≤ 6 at Screening.Absence of hepatocellular carcinoma based on a negative ultrasound, computed tomography (CT) scan or magnetic resonance imaging (MRI) performed within 3 months prior to Screening or during the Screening period.Exclusion Criteria:In subjects with a prior null or partial response to pegIFN&amp;amp;#x2F;RBV treatment at any time prior to pre-screening for this study or any prior failure with pegIFN&amp;amp;#x2F;RBV plus telaprevir, the presence of variants relative to the appropriate prototypic reference sequence (H77 for 1a or Con1 for 1b) at any of the following positions: NS3 155, 156, or 168; or NS5A 28, 29, 30, 31, 32, 58, or 93.Females who are pregnant or plan to become pregnant, or breast-feeding, or males whose partners are pregnant or planning to become pregnant within 7 months (or per local RBV label) after their last dose of RBV.Use of known strong inducers (e.g., phenobarbital, rifampin, carbamazepine, St. John&amp;amp;#x27;s Wort) of CYP3A within 2 weeks prior to study drug administration.Use of any medications contraindicated for use with peginterferon alpha-2a, RBV or ritonavir within 2 weeks prior to study drug administration. Prior to entering the study, subjects must be able to safely discontinue the contraindicated medication or switch to an acceptable alternative under supervision of the investigator.Discontinuation of antiviral therapy due to intolerance or a DAA- or RBV-associated adverse event in a previous AbbVie&amp;amp;#x2F;Abbott DAA combination study.Subjects with compensated cirrhosis must also not meet the following criteria:Any current or past clinical evidence of Child-Pugh B or C Classification or clinical history of liver decompensation such as ascites (noted on physical exam), variceal bleeding or hepatic encephalopathy.Serum Alpha-Fetoprotein (sAFP) &amp;amp;gt; 100 ng&amp;amp;#x2F;mL at Screening.A screening ultrasound suspicious for hepatocellular carcinoma and confirmed with a subsequent CT scan or MRI during the screening period.">INCLUSION CRITERIA
+
+  1. Main Inclusion: To be enrolled in this protocol, subjects must meet all of the following
+
+INCLUSION CRITERIA
+
+  1. Subject must have experienced virologic failure as defined in a previous AbbVie/Abbott direct acting anti-viral combination trial.
+  2. Female subjects of childbearing potential must be willing to use two effective forms of birth control (not including oral contraceptives or contraceptives containing ethinyl estradiol) while receiving study drug and for 7 months (or per local ribavirin label) after stopping study drugMales must be surgically sterile or have male partners only or agree to practice two effective forms of birth control throughout the course of the study, starting with Study Day 1 and for 7 months (or per local ribavirin label) after the last dose of study drug, unless abstinent from sexual intercourse.
+  3. Subject must be considered an appropriate candidate for peginterferon alpha-2a, ribavirin, ABT-450/r and ABT-267 therapy in the opinion of the investigator.
+  4. Subject is infected with HCV genotype 1 at screening.
+  5. Subjects diagnosed with cirrhosis must also meet the following criteria:Compensated cirrhosis defined as Child-Pugh score of ≤ 6 at Screening.
+  6. Absence of hepatocellular carcinoma based on a negative ultrasound, computed tomography (CT) scan or magnetic resonance imaging (MRI) performed within 3 months prior to Screening or during the Screening period.
+
+EXCLUSION CRITERIA
+
+  1. In subjects with a prior null or partial response to pegIFN/RBV treatment at any time prior to pre-screening for this study or any prior failure with pegIFN/RBV plus telaprevir, the presence of variants relative to the appropriate prototypic reference sequence (H77 for 1a or Con1 for 1b) at any of the following positions: NS3 155, 156, or 168; or NS5A 28, 29, 30, 31, 32, 58, or 93.
+  2. Females who are pregnant or plan to become pregnant, or breast-feeding, or males whose partners are pregnant or planning to become pregnant within 7 months (or per local RBV label) after their last dose of RBV.
+  3. Use of known strong inducers (e.g., phenobarbital, rifampin, carbamazepine, St.
+  4. John&#x27;s Wort) of CYP3A within 2 weeks prior to study drug administration.
+  5. Use of any medications contraindicated for use with peginterferon alpha-2a, RBV or ritonavir within 2 weeks prior to study drug administration.
+  6. Prior to entering the study, subjects must be able to safely discontinue the contraindicated medication or switch to an acceptable alternative under supervision of the investigator.
+  7. Discontinuation of antiviral therapy due to intolerance or a DAA- or RBV-associated adverse event in a previous AbbVie/Abbott DAA combination study.
+  8. Subjects with compensated cirrhosis must also not meet the following criteria:Any current or past clinical evidence of Child-Pugh B or C Classification or clinical history of liver decompensation such as ascites (noted on physical exam), variceal bleeding or hepatic encephalopathy.
+  9. Serum Alpha-Fetoprotein (sAFP) &gt; 100 ng/mL at Screening.
+  10. A screening ultrasound suspicious for hepatocellular carcinoma and confirmed with a subsequent CT scan or MRI during the screening period.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="450 will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. Serum concentrations of pegIFN will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. 5.3.2.5 Data Management and Reporting The data from the pharmacokinetic samples will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3 Safety and Tolerability 5.3.3.1 Safety Assessments and Management The safety assessments are performed at each study visit and include the collection of adverse events, as described in Section 5.3.4.1. The safety data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3.2 Tolerability Assessments and Management Tolerability is assessed during the study visits, including physical examination, review of the patient&amp;#x27;s medical history, and review of the patient&amp;#x27;s current medications. 5.3.4 Adverse Event Monitoring and Reporting Adverse events are monitored and reported according to the study protocol and the applicable regulatory requirements. 5.3.4.1 Adverse Event Collection and Reporting Adverse events are collected and reported at the time of occurrence or at the earliest possible follow-up visit. The investigators will review the adverse events and determine if they are related to the study drugs or other factors. 5.3.4.2 Data Disposition of Adverse Events Adverse events data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.4.3 Safety Follow-Up Safety follow-up is performed for all subjects who meet the criteria for it, as described in Section 5.3.5. 5.3.5.1 Safety Follow-Up for Cirrhotic Subjects Only The safety follow-up for cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.2 Safety Follow-Up for Non-Cirrhotic Subjects Only The safety follow-up for non-cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.3 Safety Follow-Up for Subjects with Previous HCV Genotype 1
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV genotype 1 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.4 Safety Follow-Up for Subjects with Previous HCV Genotype 2 or 3
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV genotype 2 or 3 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.5 Safety Follow-Up for Subjects with Previous HCV Ascitis
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV ascitis includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.6 Safety Follow-Up for Subjects with Previous HCV Encephalopathy
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV encephalopathy includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.7 Safety Follow-Up for Subjects with Previous HCV Depletion
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV depletion includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.8 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.9 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.10 Safety Follow-Up for Subjects with Previous HCV Drug Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV drug resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.11 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.12 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.13 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.14 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.15 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.16 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.17 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.18 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.19 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.20 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.21 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.22 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.23 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study"
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;450&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;will&lt;/span&gt; be &lt;span class=&quot;diff-add&quot;&gt;determined&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;validated&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;assay&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;methods&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;under&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;supervision&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;Drug Analysis Department at AbbVie. Serum concentrations of pegIFN will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. 5.3.2.5 Data Management and Reporting The data from the pharmacokinetic samples will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3 Safety and Tolerability 5.3.3.1 Safety Assessments and Management The safety assessments are performed at each study visit and include the collection of adverse events, as described in Section 5.3.4.1. The safety data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3.2 Tolerability Assessments and Management Tolerability is assessed during the study visits, including physical examination, review of the patient&amp;#x27;s medical history, and review of the patient&amp;#x27;s current medications. 5.3.4 Adverse Event Monitoring and Reporting Adverse events are monitored and reported according to the study protocol and the applicable regulatory requirements. 5.3.4.1 Adverse Event Collection and Reporting Adverse events are collected and reported at the time of occurrence or at the earliest possible follow-up visit. The investigators will review the adverse events and determine if they are related to the study drugs or other factors. 5.3.4.2 Data Disposition of Adverse Events Adverse events data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.4.3 Safety Follow-Up Safety follow-up is performed for all subjects who meet the criteria for it, as described in Section 5.3.5. 5.3.5.1 Safety Follow-Up for Cirrhotic Subjects Only The safety follow-up for cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.2 Safety Follow-Up for Non-Cirrhotic Subjects Only The safety follow-up for non-cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.3 Safety Follow-Up for Subjects with Previous HCV Genotype 1&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;safety&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;follow-up&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; subjects with &lt;span class=&quot;diff-add&quot;&gt;previous&lt;/span&gt; HCV genotype 1 &lt;span class=&quot;diff-add&quot;&gt;includes a clinical visit &lt;/span&gt;at &lt;span class=&quot;diff-add&quot;&gt;the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.4 Safety Follow-Up for&lt;/span&gt; Subjects with &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HCV&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Genotype&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;2&lt;/span&gt; or 3
+
+&lt;span class=&quot;diff-add&quot;&gt;INCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;The safety follow-up for&lt;/span&gt; subjects with &lt;span class=&quot;diff-add&quot;&gt;previous&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HCV&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;genotype 2&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;includes&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clinical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visit&lt;/span&gt; at the &lt;span class=&quot;diff-add&quot;&gt;end&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(visit&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;36&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;38)&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;discontinuation&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drug,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;whichever&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;sooner.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5.3.5.5&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Safety&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Follow-Up&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; Subjects with &lt;span class=&quot;diff-add&quot;&gt;Previous&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;HCV&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Ascitis
+
+INCLUSION&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;safety follow-up for subjects with previous HCV ascitis includes a clinical visit at&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the study (visit 36&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.6 Safety Follow-Up for Subjects with Previous HCV Encephalopathy
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV encephalopathy includes a&lt;/span&gt; clinical &lt;span class=&quot;diff-add&quot;&gt;visit at the end&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study (visit 36&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;38)&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the time&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;discontinuation&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;drug,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;whichever&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;sooner.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;5.3.5.7&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Safety&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Follow-Up for Subjects with Previous HCV Depletion
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV depletion includes a clinical visit at the end of the study (visit 36&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;38)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or&lt;/span&gt; at &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;discontinuation&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of the study drug, whichever is sooner. 5.3.5.8 Safety Follow-Up&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;Subjects&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes &lt;/span&gt;a &lt;span class=&quot;diff-add&quot;&gt;clinical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;at the end of the study (visit 36&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;38)&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;or at&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of discontinuation of the study drug, whichever is sooner. 5.3.5.9 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.10 Safety Follow-Up for Subjects with Previous HCV Drug Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV drug resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.11 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.12 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.13 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.14 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.15 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.16 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.17 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.18 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.19 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.20 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.21 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.22 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.23 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study&lt;/span&gt;"
+                 data-raw="450 will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. Serum concentrations of pegIFN will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. 5.3.2.5 Data Management and Reporting The data from the pharmacokinetic samples will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3 Safety and Tolerability 5.3.3.1 Safety Assessments and Management The safety assessments are performed at each study visit and include the collection of adverse events, as described in Section 5.3.4.1. The safety data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3.2 Tolerability Assessments and Management Tolerability is assessed during the study visits, including physical examination, review of the patient&amp;#x27;s medical history, and review of the patient&amp;#x27;s current medications. 5.3.4 Adverse Event Monitoring and Reporting Adverse events are monitored and reported according to the study protocol and the applicable regulatory requirements. 5.3.4.1 Adverse Event Collection and Reporting Adverse events are collected and reported at the time of occurrence or at the earliest possible follow-up visit. The investigators will review the adverse events and determine if they are related to the study drugs or other factors. 5.3.4.2 Data Disposition of Adverse Events Adverse events data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.4.3 Safety Follow-Up Safety follow-up is performed for all subjects who meet the criteria for it, as described in Section 5.3.5. 5.3.5.1 Safety Follow-Up for Cirrhotic Subjects Only The safety follow-up for cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.2 Safety Follow-Up for Non-Cirrhotic Subjects Only The safety follow-up for non-cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.3 Safety Follow-Up for Subjects with Previous HCV Genotype 1 Inclusion Criteria The safety follow-up for subjects with previous HCV genotype 1 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.4 Safety Follow-Up for Subjects with Previous HCV Genotype 2 or 3 Inclusion Criteria The safety follow-up for subjects with previous HCV genotype 2 or 3 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.5 Safety Follow-Up for Subjects with Previous HCV Ascitis Inclusion Criteria The safety follow-up for subjects with previous HCV ascitis includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.6 Safety Follow-Up for Subjects with Previous HCV Encephalopathy Inclusion Criteria The safety follow-up for subjects with previous HCV encephalopathy includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.7 Safety Follow-Up for Subjects with Previous HCV Depletion Inclusion Criteria The safety follow-up for subjects with previous HCV depletion includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.8 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.9 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.10 Safety Follow-Up for Subjects with Previous HCV Drug Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV drug resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.11 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.12 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.13 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.14 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.15 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.16 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.17 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.18 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.19 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.20 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.21 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.22 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.23 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results Inclusion Criteria The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study">450 will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. Serum concentrations of pegIFN will be determined using validated assay methods under the supervision of the Drug Analysis Department at AbbVie. 5.3.2.5 Data Management and Reporting The data from the pharmacokinetic samples will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3 Safety and Tolerability 5.3.3.1 Safety Assessments and Management The safety assessments are performed at each study visit and include the collection of adverse events, as described in Section 5.3.4.1. The safety data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.3.2 Tolerability Assessments and Management Tolerability is assessed during the study visits, including physical examination, review of the patient&#x27;s medical history, and review of the patient&#x27;s current medications. 5.3.4 Adverse Event Monitoring and Reporting Adverse events are monitored and reported according to the study protocol and the applicable regulatory requirements. 5.3.4.1 Adverse Event Collection and Reporting Adverse events are collected and reported at the time of occurrence or at the earliest possible follow-up visit. The investigators will review the adverse events and determine if they are related to the study drugs or other factors. 5.3.4.2 Data Disposition of Adverse Events Adverse events data will be managed and reported in accordance with the study protocol and the applicable regulatory requirements. 5.3.4.3 Safety Follow-Up Safety follow-up is performed for all subjects who meet the criteria for it, as described in Section 5.3.5. 5.3.5.1 Safety Follow-Up for Cirrhotic Subjects Only The safety follow-up for cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.2 Safety Follow-Up for Non-Cirrhotic Subjects Only The safety follow-up for non-cirrhotic subjects includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.3 Safety Follow-Up for Subjects with Previous HCV Genotype 1
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV genotype 1 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.4 Safety Follow-Up for Subjects with Previous HCV Genotype 2 or 3
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV genotype 2 or 3 includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.5 Safety Follow-Up for Subjects with Previous HCV Ascitis
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV ascitis includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.6 Safety Follow-Up for Subjects with Previous HCV Encephalopathy
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV encephalopathy includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.7 Safety Follow-Up for Subjects with Previous HCV Depletion
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV depletion includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.8 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.9 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.10 Safety Follow-Up for Subjects with Previous HCV Drug Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV drug resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.11 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.12 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.13 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.14 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.15 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.16 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.17 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.18 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.19 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.20 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.21 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.22 Safety Follow-Up for Subjects with Previous HCV Resistance Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV resistance testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study drug, whichever is sooner. 5.3.5.23 Safety Follow-Up for Subjects with Previous HCV Viral Load Testing Results
+
+INCLUSION CRITERIA
+
+  1. The safety follow-up for subjects with previous HCV viral load testing results includes a clinical visit at the end of the study (visit 36 or 38) or at the time of discontinuation of the study</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

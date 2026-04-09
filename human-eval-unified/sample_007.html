@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 7</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 7</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Eligible to receive ocrelizumab per the United States Package Insert (USPI)
+  2. Able to comply with the study protocol, in the investigator&amp;#x27;s judgment
+  3. Age 18-55 years, inclusive
+  4. Have a diagnosis of PPMS or RMS, confirmed per the revised 2017 Mc
+  5. Donald criteria
+  6. Expanded Disability Status Scale (EDSS) score of 0 to 6.5, inclusive
+  7. For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI)
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of life-threatening infusion reaction to ocrelizumab
+  3. Known presence of other neurological disorders
+  4. Pregnancy or lactation, or intention to become pregnant during the study
+  5. Any concomitant disease that may require chronic treatment with systemic corticosteroids or immunosuppressants during the course of the study
+  6. Significant, uncontrolled disease, such as cardiovascular (including cardiac arrhythmia), pulmonary (including obstructive pulmonary disease), renal, hepatic, endocrine, and gastrointestinal or any other significant disease that may preclude patient from participating in the study
+  7. Congestive heart failure
+  8. Known active bacterial, viral, fungal, mycobacterial infection or other infection or any severe episode of infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit or oral antibiotics within 2 weeks prior to baseline visit
+  9. History of or currently active primary or secondary immunodeficiency
+  10. History or known presence of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  11. History of recurrent aspiration pneumonia requiring antibiotic therapy
+  12. History of malignancy, including solid tumors and hematological malignancies,except basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  13. History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  14. History of alcohol or drug abuse within 24 weeks prior to enrollment
+  15. Receipt of a live vaccine within 6 weeks prior to enrollment
+  16. Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  17. Contraindications to or intolerance of oral or IV corticosteroids, including IV methylprednisolone (or equivalent steroid) administered according to the country label
+  18. Treatment with alemtuzumab
+  19. Treatment with a B-cell targeted therapies other than ocrelizumab
+  20. Treatment with a drug that is experimental
+  21. Abnormal laboratory results per local laboratory standards and investigator assessment"
+                 data-diff="INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Eligible to receive ocrelizumab per the United States Package Insert (USPI)
+  2. Able to comply with the study protocol, in the investigator&amp;#x27;s judgment
+  3. Age&lt;/span&gt; 18-55 years, inclusive
+  &lt;span class=&quot;diff-del&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Have a diagnosis of&lt;/span&gt; PPMS or RMS, confirmed per the revised 2017 &lt;span class=&quot;diff-del&quot;&gt;Mc
+  5. Donald&lt;/span&gt; criteria
+  &lt;span class=&quot;diff-del&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Expanded&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Disability Status Scale (EDSS) score of&lt;/span&gt; 0 to 6.5, inclusive
+  &lt;span class=&quot;diff-del&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;For&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;women&lt;/span&gt; of childbearing &lt;span class=&quot;diff-del&quot;&gt;potential:&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;agreement&lt;/span&gt; to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the &lt;span class=&quot;diff-del&quot;&gt;USPI)&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of &lt;span class=&quot;diff-del&quot;&gt;life-threatening infusion reaction to ocrelizumab
+  3. Known presence of &lt;/span&gt;other neurological disorders
+  4. Pregnancy or &lt;span class=&quot;diff-del&quot;&gt;lactation,&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;intention&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;become pregnant during the study
+  5. Any concomitant disease that may require chronic treatment with&lt;/span&gt; systemic corticosteroids or immunosuppressants&lt;span class=&quot;diff-del&quot;&gt; during the course of the study&lt;/span&gt;
+  6. &lt;span class=&quot;diff-del&quot;&gt;Significant, uncontrolled disease, such as cardiovascular (including cardiac arrhythmia), pulmonary (including obstructive pulmonary disease), renal, hepatic, endocrine, and gastrointestinal&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;any other significant disease that may preclude patient from participating in the study
+  7. Congestive heart failure
+  8. Known&lt;/span&gt; active&lt;span class=&quot;diff-del&quot;&gt; bacterial, viral, fungal, mycobacterial infection or other infection or any severe episode of&lt;/span&gt; infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit&lt;span class=&quot;diff-del&quot;&gt; or oral antibiotics within 2 weeks prior to baseline visit&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;9.&lt;/span&gt; History of or &lt;span class=&quot;diff-del&quot;&gt;currently active primary or secondary immunodeficiency
+  10. History or known presence of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  11. History of recurrent aspiration pneumonia requiring antibiotic therapy
+  12. History of&lt;/span&gt; malignancy, including solid tumors and hematological &lt;span class=&quot;diff-del&quot;&gt;malignancies,except&lt;/span&gt; basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  &lt;span class=&quot;diff-del&quot;&gt;13.&lt;/span&gt; History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  &lt;span class=&quot;diff-del&quot;&gt;14.&lt;/span&gt; History of alcohol or drug abuse within 24 weeks prior to enrollment
+  &lt;span class=&quot;diff-del&quot;&gt;15.&lt;/span&gt; Receipt of a live vaccine within 6 weeks prior to enrollment
+  &lt;span class=&quot;diff-del&quot;&gt;16.&lt;/span&gt; Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  &lt;span class=&quot;diff-del&quot;&gt;17. Contraindications to or intolerance of oral or IV corticosteroids, including IV methylprednisolone (or equivalent steroid) administered according to the country label
+  18.&lt;/span&gt; Treatment with alemtuzumab
+  &lt;span class=&quot;diff-del&quot;&gt;19.&lt;/span&gt; Treatment with a B-cell targeted &lt;span class=&quot;diff-del&quot;&gt;therapies&lt;/span&gt; other than ocrelizumab
+  &lt;span class=&quot;diff-del&quot;&gt;20.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Treatment&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;drug&lt;/span&gt; that is &lt;span class=&quot;diff-del&quot;&gt;experimental&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;21.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Abnormal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;laboratory&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;results&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;laboratory&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;standards&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;investigator&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;assessment&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Eligible to receive ocrelizumab per the United States Package Insert (USPI)Able to comply with the study protocol, in the investigator&amp;amp;#x27;s judgmentAge 18-55 years, inclusiveHave a diagnosis of PPMS or RMS, confirmed per the revised 2017 McDonald criteriaExpanded Disability Status Scale (EDSS) score of 0 to 6.5, inclusiveFor women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI)Exclusion Criteria:Experienced serious IRR(s)History of life-threatening infusion reaction to ocrelizumabKnown presence of other neurological disordersPregnancy or lactation, or intention to become pregnant during the studyAny concomitant disease that may require chronic treatment with systemic corticosteroids or immunosuppressants during the course of the studySignificant, uncontrolled disease, such as cardiovascular (including cardiac arrhythmia), pulmonary (including obstructive pulmonary disease), renal, hepatic, endocrine, and gastrointestinal or any other significant disease that may preclude patient from participating in the studyCongestive heart failureKnown active bacterial, viral, fungal, mycobacterial infection or other infection or any severe episode of infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit or oral antibiotics within 2 weeks prior to baseline visitHistory of or currently active primary or secondary immunodeficiencyHistory or known presence of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)History of recurrent aspiration pneumonia requiring antibiotic therapyHistory of malignancy, including solid tumors and hematological malignancies,except basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear marginsHistory of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodiesHistory of alcohol or drug abuse within 24 weeks prior to enrollmentReceipt of a live vaccine within 6 weeks prior to enrollmentSystemic corticosteroid therapy within 4 weeks prior to enrollmentContraindications to or intolerance of oral or IV corticosteroids, including IV methylprednisolone (or equivalent steroid) administered according to the country labelTreatment with alemtuzumabTreatment with a B-cell targeted therapies other than ocrelizumabTreatment with a drug that is experimentalAbnormal laboratory results per local laboratory standards and investigator assessment">INCLUSION CRITERIA
+
+  1. Eligible to receive ocrelizumab per the United States Package Insert (USPI)
+  2. Able to comply with the study protocol, in the investigator&#x27;s judgment
+  3. Age 18-55 years, inclusive
+  4. Have a diagnosis of PPMS or RMS, confirmed per the revised 2017 Mc
+  5. Donald criteria
+  6. Expanded Disability Status Scale (EDSS) score of 0 to 6.5, inclusive
+  7. For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI)
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of life-threatening infusion reaction to ocrelizumab
+  3. Known presence of other neurological disorders
+  4. Pregnancy or lactation, or intention to become pregnant during the study
+  5. Any concomitant disease that may require chronic treatment with systemic corticosteroids or immunosuppressants during the course of the study
+  6. Significant, uncontrolled disease, such as cardiovascular (including cardiac arrhythmia), pulmonary (including obstructive pulmonary disease), renal, hepatic, endocrine, and gastrointestinal or any other significant disease that may preclude patient from participating in the study
+  7. Congestive heart failure
+  8. Known active bacterial, viral, fungal, mycobacterial infection or other infection or any severe episode of infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit or oral antibiotics within 2 weeks prior to baseline visit
+  9. History of or currently active primary or secondary immunodeficiency
+  10. History or known presence of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  11. History of recurrent aspiration pneumonia requiring antibiotic therapy
+  12. History of malignancy, including solid tumors and hematological malignancies,except basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  13. History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  14. History of alcohol or drug abuse within 24 weeks prior to enrollment
+  15. Receipt of a live vaccine within 6 weeks prior to enrollment
+  16. Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  17. Contraindications to or intolerance of oral or IV corticosteroids, including IV methylprednisolone (or equivalent steroid) administered according to the country label
+  18. Treatment with alemtuzumab
+  19. Treatment with a B-cell targeted therapies other than ocrelizumab
+  20. Treatment with a drug that is experimental
+  21. Abnormal laboratory results per local laboratory standards and investigator assessment</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="Modified Eligibility Criteria for Version 1 of the Ocrelizumab Study Protocol
+
+Based on the provided text, here are the modified eligibility criteria for the Ocrelizumab study protocol, Version 1, incorporating the evidence from the document:
+
+INCLUSION CRITERIA
+
+  1. Age: 18-55 years, inclusive
+  2. Diagnosis: PPMS or RMS, confirmed per the revised 2017 McDonald criteria (Thompson et al. 2017)
+  3. EDSS Score: 0 to 6.5, inclusive
+  4. Childbearing Potential:
+  5. Women of childbearing potential must agree to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI).
+  6. Contraceptive methods include:
+  7. Bilateral tubal ligation
+  8. Male sterilization
+  9. Established hormonal contraceptives that inhibit ovulation
+  10. Hormone-releasing intrauterine devices
+  11. Copper intrauterine devices
+  12. The reliability of sexual abstinence should be evaluated in relation to the duration of the clinical trial and the preferred and usual lifestyle of the patient.
+  13. Periodic abstinence (e.g., calendar, ovulation, symptothermal, or postovulation methods) and withdrawal are not acceptable methods of contraception.
+  14. Eligible for Ocrelizumab: Able to comply with the study protocol, in the investigator&amp;#x27;s judgment.
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of other neurological disorders that may interfere with the study
+  3. History of severe allergic reactions to humanized or murine monoclonal antibodies
+  4. Pregnancy or lactation
+  5. Current or recent use of systemic corticosteroids or other immunosuppressants
+  6. Known or suspected active infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit
+  7. History of or current malignancy, including solid tumors and hematological malignancies, except for basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  8. History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  9. History of alcohol or drug abuse within 24 weeks prior to enrollment
+  10. Receipt of a live vaccine within 6 weeks prior to enrollment
+  11. Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  12. Treatment with alemtuzumab
+  13. Treatment with a B-cell targeted therapy other than ocrelizumab
+  14. History of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  15. History of severe autoimmune disorders that may interfere with the study
+  16. History of severe heart failure
+  17. History of pulmonary disease, including obstructive pulmonary disease
+  18. History of renal disease, including renal failure
+  19. History of hepatic disease, including liver failure
+  20. History of endocrine disorders, including thyroid disease
+  21. History of gastrointestinal disorders, including gastrointestinal bleeding
+  22. History of cardiovascular disease, including arrhythmia
+  23. History of gastrointestinal disorders, including gastrointestinal bleeding
+  24. History of hematologic disorders, including anemia
+  25. History of metabolic disorders, including diabetes mellitus
+  26. History of psychiatric disorders, including psychosis
+  27. History of other medical conditions that may interfere with the study
+  28. Important Notes:
+  29. This is a summary of the modified eligibility criteria based on the provided text.
+  30. The full protocol should be consulted for a complete and accurate understanding of the eligibility criteria.
+  31. The specific inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may be subject to change based on the evolving understanding of the disease and the study design.
+  2. It is crucial to consult with the study team and the relevant regulatory authorities for any specific questions or clarifications."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;Modified Eligibility Criteria for Version 1 of the Ocrelizumab Study Protocol
+
+Based on the provided text, here are the modified eligibility criteria for the Ocrelizumab study protocol, Version 1, incorporating the evidence from the document:
+
+&lt;/span&gt;INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;Age:&lt;/span&gt; 18-55 years, inclusive
+  &lt;span class=&quot;diff-add&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Diagnosis:&lt;/span&gt; PPMS or RMS, confirmed per the revised 2017 &lt;span class=&quot;diff-add&quot;&gt;McDonald&lt;/span&gt; criteria&lt;span class=&quot;diff-add&quot;&gt; (Thompson et al. 2017)&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;EDSS&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Score:&lt;/span&gt; 0 to 6.5, inclusive
+  &lt;span class=&quot;diff-add&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Childbearing&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Potential:
+  5. Women&lt;/span&gt; of childbearing &lt;span class=&quot;diff-add&quot;&gt;potential&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;must agree&lt;/span&gt; to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the &lt;span class=&quot;diff-add&quot;&gt;USPI).
+  6. Contraceptive methods include:
+  7. Bilateral tubal ligation
+  8. Male sterilization
+  9. Established hormonal contraceptives that inhibit ovulation
+  10. Hormone-releasing intrauterine devices
+  11. Copper intrauterine devices
+  12. The reliability of sexual abstinence should be evaluated in relation to the duration of the clinical trial and the preferred and usual lifestyle of the patient.
+  13. Periodic abstinence (e.g., calendar, ovulation, symptothermal, or postovulation methods) and withdrawal are not acceptable methods of contraception.
+  14. Eligible for Ocrelizumab: Able to comply with the study protocol, in the investigator&amp;#x27;s judgment.&lt;/span&gt;
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of other neurological disorders&lt;span class=&quot;diff-add&quot;&gt; that may interfere with the study
+  3. History of severe allergic reactions to humanized or murine monoclonal antibodies&lt;/span&gt;
+  4. Pregnancy or &lt;span class=&quot;diff-add&quot;&gt;lactation
+  5. Current&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;recent&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;of&lt;/span&gt; systemic corticosteroids or &lt;span class=&quot;diff-add&quot;&gt;other &lt;/span&gt;immunosuppressants
+  6. &lt;span class=&quot;diff-add&quot;&gt;Known&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;suspected&lt;/span&gt; active infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit
+  &lt;span class=&quot;diff-add&quot;&gt;7.&lt;/span&gt; History of or &lt;span class=&quot;diff-add&quot;&gt;current&lt;/span&gt; malignancy, including solid tumors and hematological &lt;span class=&quot;diff-add&quot;&gt;malignancies, except for&lt;/span&gt; basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  &lt;span class=&quot;diff-add&quot;&gt;8.&lt;/span&gt; History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  &lt;span class=&quot;diff-add&quot;&gt;9.&lt;/span&gt; History of alcohol or drug abuse within 24 weeks prior to enrollment
+  &lt;span class=&quot;diff-add&quot;&gt;10.&lt;/span&gt; Receipt of a live vaccine within 6 weeks prior to enrollment
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  &lt;span class=&quot;diff-add&quot;&gt;12.&lt;/span&gt; Treatment with alemtuzumab
+  &lt;span class=&quot;diff-add&quot;&gt;13.&lt;/span&gt; Treatment with a B-cell targeted &lt;span class=&quot;diff-add&quot;&gt;therapy&lt;/span&gt; other than ocrelizumab
+  &lt;span class=&quot;diff-add&quot;&gt;14.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;History of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  15. History of severe autoimmune disorders that may interfere&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;study
+  16. History of severe heart failure
+  17. History of pulmonary disease, including obstructive pulmonary disease
+  18. History of renal disease, including renal failure
+  19. History of hepatic disease, including liver failure
+  20. History of endocrine disorders, including thyroid disease
+  21. History of gastrointestinal disorders, including gastrointestinal bleeding
+  22. History of cardiovascular disease, including arrhythmia
+  23. History of gastrointestinal disorders, including gastrointestinal bleeding
+  24. History of hematologic disorders, including anemia
+  25. History of metabolic disorders, including diabetes mellitus
+  26. History of psychiatric disorders, including psychosis
+  27. History of other medical conditions&lt;/span&gt; that &lt;span class=&quot;diff-add&quot;&gt;may interfere with the study
+  28. Important Notes:
+  29. This &lt;/span&gt;is &lt;span class=&quot;diff-add&quot;&gt;a summary of the modified eligibility criteria based on the provided text.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;30.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;consulted&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for a complete&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;accurate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;understanding of the eligibility criteria.
+  31. The specific inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may be subject to change based on the evolving understanding of the disease and the study design.
+  2. It is crucial to consult with the study team and the relevant regulatory authorities for any specific questions or clarifications.&lt;/span&gt;"
+                 data-raw="##  Modified Eligibility Criteria for Version 1 of the Ocrelizumab Study Protocol
+
+Based on the provided text, here are the modified eligibility criteria for the Ocrelizumab study protocol, Version 1, incorporating the evidence from the document:
+
+**Inclusion Criteria:**
+
+* **Age:** 18-55 years, inclusive
+* **Diagnosis:** PPMS or RMS, confirmed per the revised 2017 McDonald criteria (Thompson et al. 2017)
+* **EDSS Score:** 0 to 6.5, inclusive
+* **Childbearing Potential:**
+    * Women of childbearing potential must agree to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &amp;lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI).
+    *  Contraceptive methods include:
+        * Bilateral tubal ligation
+        * Male sterilization
+        * Established hormonal contraceptives that inhibit ovulation
+        * Hormone-releasing intrauterine devices
+        * Copper intrauterine devices
+    *  The reliability of sexual abstinence should be evaluated in relation to the duration of the clinical trial and the preferred and usual lifestyle of the patient.
+    *  Periodic abstinence (e.g., calendar, ovulation, symptothermal, or postovulation methods) and withdrawal are not acceptable methods of contraception.
+* **Eligible for Ocrelizumab:**  Able to comply with the study protocol, in the investigator&amp;#x27;s judgment.
+
+**Exclusion Criteria:**
+
+*  Experienced serious IRR(s)
+*  History of other neurological disorders that may interfere with the study
+*  History of severe allergic reactions to humanized or murine monoclonal antibodies
+*  Pregnancy or lactation
+*  Current or recent use of systemic corticosteroids or other immunosuppressants
+*  Known or suspected active infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit
+*  History of or current malignancy, including solid tumors and hematological malignancies, except for basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+*  History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+*  History of alcohol or drug abuse within 24 weeks prior to enrollment
+*  Receipt of a live vaccine within 6 weeks prior to enrollment
+*  Systemic corticosteroid therapy within 4 weeks prior to enrollment
+*  Treatment with alemtuzumab
+*  Treatment with a B-cell targeted therapy other than ocrelizumab
+*  History of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+*  History of severe autoimmune disorders that may interfere with the study
+*  History of severe heart failure
+*  History of pulmonary disease, including obstructive pulmonary disease
+*  History of renal disease, including renal failure
+*  History of hepatic disease, including liver failure
+*  History of endocrine disorders, including thyroid disease
+*  History of gastrointestinal disorders, including gastrointestinal bleeding
+*  History of cardiovascular disease, including arrhythmia
+*  History of gastrointestinal disorders, including gastrointestinal bleeding
+*  History of hematologic disorders, including anemia
+*  History of metabolic disorders, including diabetes mellitus
+*  History of psychiatric disorders, including psychosis
+*  History of other medical conditions that may interfere with the study
+
+
+**Important Notes:**
+
+* This is a summary of the modified eligibility criteria based on the provided text. 
+* The full protocol should be consulted for a complete and accurate understanding of the eligibility criteria. 
+* The specific inclusion and exclusion criteria may be subject to change based on the evolving understanding of the disease and the study design. 
+* It is crucial to consult with the study team and the relevant regulatory authorities for any specific questions or clarifications.">Modified Eligibility Criteria for Version 1 of the Ocrelizumab Study Protocol
+
+Based on the provided text, here are the modified eligibility criteria for the Ocrelizumab study protocol, Version 1, incorporating the evidence from the document:
+
+INCLUSION CRITERIA
+
+  1. Age: 18-55 years, inclusive
+  2. Diagnosis: PPMS or RMS, confirmed per the revised 2017 McDonald criteria (Thompson et al. 2017)
+  3. EDSS Score: 0 to 6.5, inclusive
+  4. Childbearing Potential:
+  5. Women of childbearing potential must agree to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods that result in a failure rate of &lt;1% per year during the treatment period and for at least 6 months after the last dose of study treatment (per the USPI).
+  6. Contraceptive methods include:
+  7. Bilateral tubal ligation
+  8. Male sterilization
+  9. Established hormonal contraceptives that inhibit ovulation
+  10. Hormone-releasing intrauterine devices
+  11. Copper intrauterine devices
+  12. The reliability of sexual abstinence should be evaluated in relation to the duration of the clinical trial and the preferred and usual lifestyle of the patient.
+  13. Periodic abstinence (e.g., calendar, ovulation, symptothermal, or postovulation methods) and withdrawal are not acceptable methods of contraception.
+  14. Eligible for Ocrelizumab: Able to comply with the study protocol, in the investigator&#x27;s judgment.
+
+EXCLUSION CRITERIA
+
+  1. Experienced serious IRR(s)
+  2. History of other neurological disorders that may interfere with the study
+  3. History of severe allergic reactions to humanized or murine monoclonal antibodies
+  4. Pregnancy or lactation
+  5. Current or recent use of systemic corticosteroids or other immunosuppressants
+  6. Known or suspected active infection requiring hospitalization or treatment with IV antibiotics within 4 weeks prior to baseline visit
+  7. History of or current malignancy, including solid tumors and hematological malignancies, except for basal cell, in situ squamous cell carcinoma of the skin, and in situ carcinoma of the cervix of the uterus that have been excised with clear margins
+  8. History of severe allergic or anaphylactic reactions to humanized or murine monoclonal antibodies
+  9. History of alcohol or drug abuse within 24 weeks prior to enrollment
+  10. Receipt of a live vaccine within 6 weeks prior to enrollment
+  11. Systemic corticosteroid therapy within 4 weeks prior to enrollment
+  12. Treatment with alemtuzumab
+  13. Treatment with a B-cell targeted therapy other than ocrelizumab
+  14. History of recurrent or chronic infection (e.g., HIV, syphilis, tuberculosis)
+  15. History of severe autoimmune disorders that may interfere with the study
+  16. History of severe heart failure
+  17. History of pulmonary disease, including obstructive pulmonary disease
+  18. History of renal disease, including renal failure
+  19. History of hepatic disease, including liver failure
+  20. History of endocrine disorders, including thyroid disease
+  21. History of gastrointestinal disorders, including gastrointestinal bleeding
+  22. History of cardiovascular disease, including arrhythmia
+  23. History of gastrointestinal disorders, including gastrointestinal bleeding
+  24. History of hematologic disorders, including anemia
+  25. History of metabolic disorders, including diabetes mellitus
+  26. History of psychiatric disorders, including psychosis
+  27. History of other medical conditions that may interfere with the study
+  28. Important Notes:
+  29. This is a summary of the modified eligibility criteria based on the provided text.
+  30. The full protocol should be consulted for a complete and accurate understanding of the eligibility criteria.
+  31. The specific inclusion and
+
+EXCLUSION CRITERIA
+
+  1. may be subject to change based on the evolving understanding of the disease and the study design.
+  2. It is crucial to consult with the study team and the relevant regulatory authorities for any specific questions or clarifications.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>

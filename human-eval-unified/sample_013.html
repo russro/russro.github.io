@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 13</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fafafa;
+    padding: 1.5rem;
+}
+h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.meta { color: #777; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.toggle-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.toggle-btn:hover { border-color: #4a7fc1; color: #4a7fc1; }
+.toggle-btn.active {
+    background: #4a7fc1;
+    color: #fff;
+    border-color: #4a7fc1;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    body { padding: 0.75rem; }
+    h1 { font-size: 1.2rem; }
+    .grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .panel { padding: 0.6rem; }
+    .panel pre { font-size: 0.72rem; line-height: 1.4; }
+    .toggle-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+}
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+    overflow-x: auto;
+}
+.panel-gt { border-left: 3px solid #888; }
+.panel-pred { border-left: 3px solid #4a7fc1; }
+.panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+.panel pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+nav { margin-bottom: 1.5rem; }
+nav a { color: #4a7fc1; text-decoration: none; font-size: 0.9rem; }
+nav a:hover { text-decoration: underline; }
+.diff-add {
+    background: #edf7f0;
+    color: #2d6a4f;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+.diff-del {
+    background: #fff0ed;
+    color: #b35900;
+    text-decoration: line-through;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+</style>
+</head>
+<body>
+    <nav><a href="index.html">&larr; Back</a></nav>
+    <h1>Sample 13</h1>
+
+    <div class="toggle-bar">
+        <button class="toggle-btn active" data-mode="clean" onclick="setMode('clean')">Clean</button>
+        <button class="toggle-btn" data-mode="diff" onclick="setMode('diff')">Diff</button>
+        <button class="toggle-btn" data-mode="raw" onclick="setMode('raw')">Raw</button>
+    </div>
+
+    <div class="grid">
+        <div class="panel panel-gt">
+            <h3>Ground Truth</h3>
+            <pre id="gt-pre"
+                 data-clean="INCLUSION CRITERIA
+
+  1. Subjects are eligible for this trial if they fulfill all of the following
+
+INCLUSION CRITERIA
+
+  1. Female or male subjects aged between 18 and 75 years of age who provide informed written consent.
+  2. Subjects fulfilling the 2013 American College of Rheumatology (ACR) /European League Against Rheumatism criteria for classification of systemic sclerosis (SSc).
+  3. Disease duration of less than (&amp;lt;) 7 years from first non-Raynaud&amp;#x27;s symptom.
+  4. Subjects who have been taking the same mycophenolate regimen (stable dose) in a range of 1.5 to 3 gram (g)/day of Mycophenolate mofetil (MMF) or 1080 to 2160 milligram/day (mg/day) of MPS for at least 2 months prior to the Screening Visit and continued through Day 1 of the Treatment Period, of the lung on HRCT according to central reading.
+  5. According to central readings: Diffusion capacity of the lung for carbon monoxide (DLCO) greater than or equal to (&amp;gt;=) 30 percent (%) predicted, Forced vital capacity (FVC) 40% to 85% predicted, and a ratio of FVC % predicted to DLCO % predicted &amp;gt;=1.8 is acceptable if right heart catheterization within 3 months of screening revealed no pulmonary hypertension.
+  6. If these criteria are met, then High-resolution computed tomography (HRCT) of lungs will be performed, and must show at least 5% fibrosis for subjects to be eligible.
+  7. Female subjects of childbearing potential must use a highly effective method of contraception to prevent pregnancy for 4 weeks before randomization and must agree to continue to practice adequate contraception for the duration of their participation in the trial (up to the last Safety Follow-Up Visit).
+  8. For the purposes of this trial, women of childbearing potential are defined as &amp;quot;All female subjects after puberty unless they are post-menopausal for at least 2 years or are surgically sterile.&amp;quot; Highly effective contraception is defined as 2 barrier methods (eg, female diaphragm and male condoms); or 1 barrier method with at least one of the following: spermicide, a hormonal method, or an intrauterine device.
+  9. Note that because mycophenolate affects the metabolism of oral contraceptives and may reduce their effectiveness, women receiving mycophenolate who are using oral contraceptives for birth control should employ an additional contraceptive method (for example, male or female barrier method).
+
+EXCLUSION CRITERIA
+
+  1. Any condition that in the Investigator&amp;#x27;s opinion constitutes an inappropriate risk or a contraindication for participation in the trial or that could interfere with the trial objectives, conduct, or evaluation.
+  2. Renal impairment (glomerular filtration rate [GFR] &amp;lt;45 mL/minute (min)/1.73 square meter (m^2) as calculated by the Modification of Diet in Renal Disease equation) calculated as follows: GFR (mL/min per 1.73 m^2) = 175(standardized serum creatinine)^-1.154 (age)^-0.203 1.212 (if black) 0.742 (if female)Urine dipstick with &amp;gt;=3 plus protein and urine protein:creatinine ratio more than (&amp;gt;)2 mg/mg.
+  3. Known diagnosis of obstructive lung disease/emphysema (Forced Expiratory Volume [FEV1]/FVC ratio &amp;lt;0.65) and/or significant emphysematous change on screening HRCT.
+  4. Other clinically significant abnormalities on HRCT not attributable to scleroderma or emphysema as defined above.
+  5. Known diagnosis of other significant respiratory disorders.
+  6. Pulmonary hypertension that fulfills at least one of the following:Current/planned treatment with systemic therapy targeted to Pulmonary arterial hypertension (PAH) or pulmonary hypertension;
+  7. History of transthoracic echocardiography showing at least one of the following: tricuspid regurgitation jet &amp;gt;2.8 m/sec, right atrial enlargement (major dimension &amp;gt;53 mm), right ventricular enlargement (mid cavity dimension &amp;gt;35 mm), moderate to severe left ventricular dysfunction;
+  8. N-terminal prohormone brain natriuretic peptide &amp;gt;3Upper limit of normal (ULN)Considered by the investigator to require initiation of systemic targeted PAH therapy.
+  9. Current clinical diagnosis of another inflammatory connective tissue disease (eg, systemic lupus erythematosus, rheumatoid arthritis, ankylosing spondylitis, or dermato/polymyositis).
+  10. Concomitant scleroderma-associated myopathy, fibromyalgia, and secondary Sjögren&amp;#x27;s are allowed.
+  11. Suspected/confirmed significant aspiration within the previous 6 months, for example.viral/bacterial/fungal infectioninfection requiring hospitalizationTreatment with parenteral anti-infectives within 4 weeks prior/during Screening PeriodCompletion of oral anti-infectives within 2 weeks of ScreeningUse of oral anti-infectives during Screening PeriodVaginal candidiasisonychomycosischronically suppressed oral herpes simplex virusProphylaxis for Pneumocystis jiroveci pneumoniaHistory of/positive Human immunodeficiency virus, hepatitis C antibody and/or polymerase chain reaction or Hepatitis B surface antigen and/or hepatitis B core antibody (total and/or Immunoglobulin M) antibody at screening.
+  12. History of/current diagnosis of active tuberculosis (TB), or untreated latent TB infection (LTBI).
+  13. Presence of uncontrolled or New York Heart Association Class 3 or 4 congestive heart failure.
+  14. History of cancer, except adequately treated (ie, no evidence of recurrence within 5 years prior screening) basal cell/squamous cell carcinomas of the skin (≤3 total in lifetime) or carcinoma in situ of the cervix.
+  15. Known hypersensitivity to abituzumab DS or DP.
+  16. Current smoker (incl. e-cigarettes) / smoking within 4 weeks of screening.
+  17. Use of agents other than mycophenolate considered by the Investigator to have immunomodulating, immunosuppressive, or potential scleroderma disease-modifying properties within 2 months of screening visit is not allowed (or 5 months prior to the Screening Visit for cyclophosphamide).
+  18. Hydroxychloroquine or chloroquine are permitted if dose has been stable for at least 4 weeks before the screening visit.
+  19. Use of systemic corticosteroids above 10 mg/day prednisone equivalent within 4 weeks prior until last dose of study drug.
+  20. Inhaled and topical corticosteroids are permitted.
+  21. Use of any biologic agent within 12 weeks or 5 half-lives, whichever is longer, of screening.
+  22. History of anti-CD20 B-cell depleting therapy, eg, rituximab or ocrelizumab within 6 months prior to screening visit.
+  23. Use of anticoagulant or antiplatelet agent (aspirin =&amp;lt;350 mg daily is permitted).
+  24. Clinically significant or predefined abnormalities in lab tests:Aspartate aminotransferase, Alanine aminotransferase or alkaline phosphatase level &amp;gt;2.5ULN;
+  25. Total bilirubin &amp;gt;1.5ULN (other than that due to known Gilbert&amp;#x27;s disease);
+  26. Hemoglobin &amp;lt;5.0 mmol/L (9 g/dL), white blood cell count &amp;lt;2.510^9/L, or platelets &amp;lt;10010^9/L);
+  27. International normalized ratio or partial thromboplastin time &amp;gt;2.0ULN;
+  28. Thyroid-stimulating hormone &amp;lt;0.01 or &amp;gt;=7.1 milli international units per litre (mIU/L).
+  29. Inability to receive IV infusions.
+  30. History of alcohol/drug abuse for 1 year prior screening.
+  31. Pregnancy/breastfeeding/lactation within 3 months prior screening.
+  32. History of thrombotic, thromboembolic, or abnormal bleeding events including concomitant antiphospholipid antibody syndrome.
+  33. Subjects with known lupus anticoagulant and/or anticardiolipin and/or anti-b2 glycoprotein antibodies alone should not be excluded.
+  34. Legal incapacity/limited legal capacity.
+  35. Receipt/planned live/attenuated vaccination within 12 weeks prior screening until 3 months after last dose of study drug.
+  36. Seasonal influenza vaccination with inactivated vaccine formulation is permitted.
+  37. Major surgery requiring hospitalization within 4 weeks prior screening, planned major surgery for the duration of the trial.
+  38. Subjects with lung resection.
+  39. History of/planned major organ or hematopoietic stem cell/marrow transplant.
+  40. Severe gastrointestinal disease requiring parenteral nutrition.
+  41. Other protocol defined
+
+EXCLUSION CRITERIA
+
+  1. could apply."
+                 data-diff="&lt;span class=&quot;diff-del&quot;&gt;INCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;eligible&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;trial&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;they&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;fulfill&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;all of&lt;/span&gt; the&lt;span class=&quot;diff-del&quot;&gt; following&lt;/span&gt;
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-del&quot;&gt;Female or male&lt;/span&gt; subjects &lt;span class=&quot;diff-del&quot;&gt;aged&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;between 18&lt;/span&gt; and &lt;span class=&quot;diff-del&quot;&gt;75&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;provide&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;informed written consent.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;fulfilling&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;2013&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;American&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;College&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Rheumatology&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(ACR)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;/European&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;League&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Against&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Rheumatism&lt;/span&gt; criteria for &lt;span class=&quot;diff-del&quot;&gt;classification&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of systemic sclerosis (SSc).&lt;/span&gt;
+  3. Disease duration of &lt;span class=&quot;diff-del&quot;&gt;less&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;than&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;(&amp;lt;)&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;years&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;non-Raynaud&amp;#x27;s&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;symptom.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;who&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;been&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;taking&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;same&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;mycophenolate regimen (stable dose) in a range of 1.5 to 3 gram (g)/day of Mycophenolate mofetil (MMF) or 1080 to 2160 milligram/day (mg/day) of MPS for at least 2 months prior to the Screening Visit and continued through Day 1&lt;/span&gt; of the &lt;span class=&quot;diff-del&quot;&gt;Treatment&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Period,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;lung&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;HRCT according to central reading.
+  5. According to central readings: Diffusion capacity of the lung&lt;/span&gt; for &lt;span class=&quot;diff-del&quot;&gt;carbon&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;monoxide (DLCO) greater than&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;equal to (&amp;gt;=) 30 percent (%) predicted, Forced vital capacity (FVC) 40% to 85% predicted,&lt;/span&gt; and&lt;span class=&quot;diff-del&quot;&gt; a ratio of FVC % predicted to DLCO % predicted &amp;gt;=1.8 is acceptable if right heart catheterization within 3 months of screening revealed no pulmonary hypertension.
+  6. If these criteria are met, then High-resolution computed tomography (HRCT) of lungs will be performed, and must show at least 5% fibrosis for subjects to be eligible.
+  7. Female subjects of childbearing potential must use a highly effective method of contraception to prevent pregnancy for 4 weeks before randomization and must agree to continue to practice adequate contraception for&lt;/span&gt; the duration of &lt;span class=&quot;diff-del&quot;&gt;their&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;participation&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;in&lt;/span&gt; the &lt;span class=&quot;diff-del&quot;&gt;trial (up to the last Safety Follow-Up Visit).
+  8. For the purposes&lt;/span&gt; of &lt;span class=&quot;diff-del&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;trial,&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;women&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;childbearing&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;potential&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;are defined as &amp;quot;All female subjects after puberty unless they are post-menopausal for at least 2 years&lt;/span&gt; or &lt;span class=&quot;diff-del&quot;&gt;are surgically sterile.&amp;quot; Highly effective contraception is defined as 2 barrier methods (eg, female diaphragm and male condoms); or 1 barrier method with at least one of the following: spermicide, a hormonal method, or an intrauterine device.
+  9. Note that because mycophenolate affects the metabolism of oral contraceptives and may reduce their effectiveness, women receiving mycophenolate who are using oral contraceptives for birth control should employ an additional contraceptive method (for example, male or female barrier method).
+
+EXCLUSION CRITERIA
+
+  1. Any condition that in the Investigator&amp;#x27;s opinion constitutes an inappropriate risk or a contraindication for participation in the trial or that could interfere with the trial objectives, conduct, or evaluation.
+  2. Renal impairment (glomerular filtration rate [GFR] &amp;lt;45 mL/minute (min)/1.73 square meter (m^2) as calculated by the Modification of Diet in Renal Disease equation) calculated as follows: GFR (mL/min per 1.73 m^2) = 175(standardized serum creatinine)^-1.154 (age)^-0.203 1.212 (if black) 0.742 (if female)Urine dipstick with &amp;gt;=3 plus protein and urine protein:creatinine ratio more than (&amp;gt;)2 mg/mg.
+  3. Known diagnosis of obstructive lung disease/emphysema (Forced Expiratory Volume [FEV1]/FVC ratio &amp;lt;0.65) and/or significant emphysematous change on screening HRCT.
+  4. Other clinically significant abnormalities on HRCT not attributable to scleroderma or emphysema as defined above.
+  5. Known diagnosis of other significant respiratory disorders.
+  6. Pulmonary hypertension that fulfills at least one of the following:Current/planned treatment with systemic therapy targeted to Pulmonary arterial hypertension (PAH) or pulmonary hypertension;
+  7. History of transthoracic echocardiography showing at least one of the following: tricuspid regurgitation jet &amp;gt;2.8 m/sec, right atrial enlargement (major dimension &amp;gt;53 mm), right ventricular enlargement (mid cavity dimension &amp;gt;35 mm), moderate to severe left ventricular dysfunction;
+  8. N-terminal prohormone brain natriuretic peptide &amp;gt;3Upper limit of normal (ULN)Considered by the investigator to &lt;/span&gt;require &lt;span class=&quot;diff-del&quot;&gt;initiation of systemic targeted PAH therapy.
+  9. Current clinical diagnosis of another inflammatory connective tissue disease (eg, systemic lupus erythematosus, rheumatoid arthritis, ankylosing spondylitis, or dermato/polymyositis).
+  10. Concomitant scleroderma-associated myopathy, fibromyalgia, and secondary Sjögren&amp;#x27;s are allowed.
+  11. Suspected/confirmed significant aspiration within the previous 6 months, for example.viral/bacterial/fungal infectioninfection requiring hospitalizationTreatment with parenteral anti-infectives within 4 weeks prior/during Screening PeriodCompletion of oral anti-infectives within 2 weeks of ScreeningUse of oral anti-infectives during Screening PeriodVaginal candidiasisonychomycosischronically suppressed oral herpes simplex virusProphylaxis for Pneumocystis jiroveci pneumoniaHistory of/positive Human immunodeficiency virus, hepatitis C antibody and/or polymerase chain reaction or Hepatitis B surface antigen and/or hepatitis B core antibody (total and/or Immunoglobulin M) antibody at screening.
+  12. History of/current diagnosis of active tuberculosis (TB), or untreated latent TB infection (LTBI).
+  13. Presence of uncontrolled or New York Heart Association Class 3 or 4 congestive heart failure.
+  14. History of cancer, except adequately treated (ie, no evidence of recurrence within 5 years prior screening) basal cell/squamous cell carcinomas of the skin (≤3 total in lifetime) or carcinoma in situ of the cervix.
+  15. Known hypersensitivity to abituzumab DS or DP.
+  16. Current smoker (incl. e-cigarettes) / smoking within 4 weeks of screening.
+  17. Use of agents other than mycophenolate considered by the Investigator to have immunomodulating, immunosuppressive, or potential scleroderma disease-modifying properties within 2 months of screening visit is not allowed (or 5 months prior to the Screening Visit for cyclophosphamide).
+  18. Hydroxychloroquine or chloroquine are permitted if dose has been stable for at least 4 weeks before the screening visit.
+  19. Use of systemic corticosteroids above 10 mg/day prednisone equivalent within 4 weeks prior until last dose of study drug.
+  20. Inhaled and topical corticosteroids are permitted.
+  21. Use of any biologic agent within 12 weeks or 5 half-lives, whichever is longer, of screening.
+  22. History of anti-CD20 B-cell depleting therapy, eg, rituximab or ocrelizumab within 6 months prior to screening visit.
+  23. Use of anticoagulant or antiplatelet agent (aspirin =&amp;lt;350 mg daily is permitted).
+  24. Clinically significant or predefined abnormalities in lab tests:Aspartate aminotransferase, Alanine aminotransferase or alkaline phosphatase level &amp;gt;2.5ULN;
+  25. Total bilirubin &amp;gt;1.5ULN (other than that due to known Gilbert&amp;#x27;s disease);
+  26. Hemoglobin &amp;lt;5.0 mmol/L (9 g/dL), white blood cell count &amp;lt;2.510^9/L, or platelets &amp;lt;10010^9/L);
+  27. International normalized ratio or partial thromboplastin time &amp;gt;2.0ULN;
+  28. Thyroid-stimulating hormone &amp;lt;0.01 or &amp;gt;=7.1 milli international units per litre (mIU/L).
+  29. Inability to receive IV infusions.
+  30. History of alcohol/drug abuse for 1 year prior screening.
+  31. Pregnancy/breastfeeding/lactation within 3 months prior screening.
+  32. History of thrombotic, thromboembolic, or abnormal bleeding events including concomitant antiphospholipid antibody syndrome.
+  33. Subjects with known lupus anticoagulant and/or anticardiolipin and/or anti-b2 glycoprotein antibodies alone should not be excluded.
+  34. Legal incapacity/limited legal capacity.
+  35. Receipt/planned live/attenuated vaccination within 12 weeks prior screening until 3 months after last dose of study drug.
+  36. Seasonal influenza vaccination with inactivated vaccine formulation is permitted.
+  37. Major surgery requiring hospitalization within 4 weeks prior screening, planned major surgery for the duration&lt;/span&gt; of the trial.
+  &lt;span class=&quot;diff-del&quot;&gt;38.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Subjects&lt;/span&gt; with &lt;span class=&quot;diff-del&quot;&gt;lung&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;resection.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;39.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;History&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;of/planned&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;major&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;organ&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;hematopoietic&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;stem&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;cell/marrow&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;transplant.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;40.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Severe&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;gastrointestinal&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;disease&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;requiring&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;parenteral&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;nutrition.&lt;/span&gt;
+  &lt;span class=&quot;diff-del&quot;&gt;41.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;defined
+
+EXCLUSION&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;CRITERIA
+
+  1.&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;could&lt;/span&gt; &lt;span class=&quot;diff-del&quot;&gt;apply.&lt;/span&gt;"
+                 data-raw="Inclusion Criteria:Subjects are eligible for this trial if they fulfill all of the following inclusion criteria:Female or male subjects aged between 18 and 75 years of age who provide informed written consent.Subjects fulfilling the 2013 American College of Rheumatology (ACR) &amp;amp;#x2F;European League Against Rheumatism criteria for classification of systemic sclerosis (SSc).Disease duration of less than (&amp;amp;lt;) 7 years from first non-Raynaud&amp;amp;#x27;s symptom.Subjects who have been taking the same mycophenolate regimen (stable dose) in a range of 1.5 to 3 gram (g)&amp;amp;#x2F;day of Mycophenolate mofetil (MMF) or 1080 to 2160 milligram&amp;amp;#x2F;day (mg&amp;amp;#x2F;day) of MPS for at least 2 months prior to the Screening Visit and continued through Day 1 of the Treatment Period, of the lung on HRCT according to central reading.According to central readings: Diffusion capacity of the lung for carbon monoxide (DLCO) greater than or equal to (&amp;amp;gt;=) 30 percent (%) predicted, Forced vital capacity (FVC) 40% to 85% predicted, and a ratio of FVC % predicted to DLCO % predicted &amp;amp;gt;=1.8 is acceptable if right heart catheterization within 3 months of screening revealed no pulmonary hypertension. If these criteria are met, then High-resolution computed tomography (HRCT) of lungs will be performed, and must show at least 5% fibrosis for subjects to be eligible.Female subjects of childbearing potential must use a highly effective method of contraception to prevent pregnancy for 4 weeks before randomization and must agree to continue to practice adequate contraception for the duration of their participation in the trial (up to the last Safety Follow-Up Visit). For the purposes of this trial, women of childbearing potential are defined as &amp;amp;quot;All female subjects after puberty unless they are post-menopausal for at least 2 years or are surgically sterile.&amp;amp;quot; Highly effective contraception is defined as 2 barrier methods (eg, female diaphragm and male condoms); or 1 barrier method with at least one of the following: spermicide, a hormonal method, or an intrauterine device. Note that because mycophenolate affects the metabolism of oral contraceptives and may reduce their effectiveness, women receiving mycophenolate who are using oral contraceptives for birth control should employ an additional contraceptive method (for example, male or female barrier method).Exclusion Criteria:Any condition that in the Investigator&amp;amp;#x27;s opinion constitutes an inappropriate risk or a contraindication for participation in the trial or that could interfere with the trial objectives, conduct, or evaluation.Renal impairment (glomerular filtration rate [GFR] &amp;amp;lt;45 mL&amp;amp;#x2F;minute (min)&amp;amp;#x2F;1.73 square meter (m^2) as calculated by the Modification of Diet in Renal Disease equation) calculated as follows: GFR (mL&amp;amp;#x2F;min per 1.73 m^2) = 175*(standardized serum creatinine)^-1.154 * (age)^-0.203 * 1.212 (if black) * 0.742 (if female)Urine dipstick with &amp;amp;gt;=3 plus protein and urine protein:creatinine ratio more than (&amp;amp;gt;)2 mg&amp;amp;#x2F;mg.Known diagnosis of obstructive lung disease&amp;amp;#x2F;emphysema (Forced Expiratory Volume [FEV1]&amp;amp;#x2F;FVC ratio &amp;amp;lt;0.65) and&amp;amp;#x2F;or significant emphysematous change on screening HRCT.Other clinically significant abnormalities on HRCT not attributable to scleroderma or emphysema as defined above.Known diagnosis of other significant respiratory disorders.Pulmonary hypertension that fulfills at least one of the following:Current&amp;amp;#x2F;planned treatment with systemic therapy targeted to Pulmonary arterial hypertension (PAH) or pulmonary hypertension;History of transthoracic echocardiography showing at least one of the following: tricuspid regurgitation jet &amp;amp;gt;2.8 m&amp;amp;#x2F;sec, right atrial enlargement (major dimension &amp;amp;gt;53 mm), right ventricular enlargement (mid cavity dimension &amp;amp;gt;35 mm), moderate to severe left ventricular dysfunction;N-terminal prohormone brain natriuretic peptide &amp;amp;gt;3*Upper limit of normal (ULN)Considered by the investigator to require initiation of systemic targeted PAH therapy.Current clinical diagnosis of another inflammatory connective tissue disease (eg, systemic lupus erythematosus, rheumatoid arthritis, ankylosing spondylitis, or dermato&amp;amp;#x2F;polymyositis). Concomitant scleroderma-associated myopathy, fibromyalgia, and secondary Sjögren&amp;amp;#x27;s are allowed.Suspected&amp;amp;#x2F;confirmed significant aspiration within the previous 6 months, for example.viral&amp;amp;#x2F;bacterial&amp;amp;#x2F;fungal infectioninfection requiring hospitalizationTreatment with parenteral anti-infectives within 4 weeks prior&amp;amp;#x2F;during Screening PeriodCompletion of oral anti-infectives within 2 weeks of ScreeningUse of oral anti-infectives during Screening PeriodVaginal candidiasisonychomycosischronically suppressed oral herpes simplex virusProphylaxis for Pneumocystis jiroveci pneumoniaHistory of&amp;amp;#x2F;positive Human immunodeficiency virus, hepatitis C antibody and&amp;amp;#x2F;or polymerase chain reaction or Hepatitis B surface antigen and&amp;amp;#x2F;or hepatitis B core antibody (total and&amp;amp;#x2F;or Immunoglobulin M) antibody at screening.History of&amp;amp;#x2F;current diagnosis of active tuberculosis (TB), or untreated latent TB infection (LTBI).Presence of uncontrolled or New York Heart Association Class 3 or 4 congestive heart failure.History of cancer, except adequately treated (ie, no evidence of recurrence within 5 years prior screening) basal cell&amp;amp;#x2F;squamous cell carcinomas of the skin (≤3 total in lifetime) or carcinoma in situ of the cervix.Known hypersensitivity to abituzumab DS or DP.Current smoker (incl. e-cigarettes) &amp;amp;#x2F; smoking within 4 weeks of screening.Use of agents other than mycophenolate considered by the Investigator to have immunomodulating, immunosuppressive, or potential scleroderma disease-modifying properties within 2 months of screening visit is not allowed (or 5 months prior to the Screening Visit for cyclophosphamide). Hydroxychloroquine or chloroquine are permitted if dose has been stable for at least 4 weeks before the screening visit.Use of systemic corticosteroids above 10 mg&amp;amp;#x2F;day prednisone equivalent within 4 weeks prior until last dose of study drug. Inhaled and topical corticosteroids are permitted.Use of any biologic agent within 12 weeks or 5 half-lives, whichever is longer, of screening.History of anti-CD20 B-cell depleting therapy, eg, rituximab or ocrelizumab within 6 months prior to screening visit.Use of anticoagulant or antiplatelet agent (aspirin =&amp;amp;lt;350 mg daily is permitted).Clinically significant or predefined abnormalities in lab tests:Aspartate aminotransferase, Alanine aminotransferase or alkaline phosphatase level &amp;amp;gt;2.5*ULN;Total bilirubin &amp;amp;gt;1.5*ULN (other than that due to known Gilbert&amp;amp;#x27;s disease);Hemoglobin &amp;amp;lt;5.0 mmol&amp;amp;#x2F;L (9 g&amp;amp;#x2F;dL), white blood cell count &amp;amp;lt;2.5*10^9&amp;amp;#x2F;L, or platelets &amp;amp;lt;100*10^9&amp;amp;#x2F;L);International normalized ratio or partial thromboplastin time &amp;amp;gt;2.0*ULN;Thyroid-stimulating hormone &amp;amp;lt;0.01 or &amp;amp;gt;=7.1 milli international units per litre (mIU&amp;amp;#x2F;L).Inability to receive IV infusions.History of alcohol&amp;amp;#x2F;drug abuse for 1 year prior screening.Pregnancy&amp;amp;#x2F;breastfeeding&amp;amp;#x2F;lactation within 3 months prior screening.History of thrombotic, thromboembolic, or abnormal bleeding events including concomitant antiphospholipid antibody syndrome. Subjects with known lupus anticoagulant and&amp;amp;#x2F;or anticardiolipin and&amp;amp;#x2F;or anti-b2 glycoprotein antibodies alone should not be excluded.Legal incapacity&amp;amp;#x2F;limited legal capacity.Receipt&amp;amp;#x2F;planned live&amp;amp;#x2F;attenuated vaccination within 12 weeks prior screening until 3 months after last dose of study drug. Seasonal influenza vaccination with inactivated vaccine formulation is permitted.Major surgery requiring hospitalization within 4 weeks prior screening, planned major surgery for the duration of the trial. Subjects with lung resection.History of&amp;amp;#x2F;planned major organ or hematopoietic stem cell&amp;amp;#x2F;marrow transplant.Severe gastrointestinal disease requiring parenteral nutrition. Other protocol defined exclusion criteria could apply.">INCLUSION CRITERIA
+
+  1. Subjects are eligible for this trial if they fulfill all of the following
+
+INCLUSION CRITERIA
+
+  1. Female or male subjects aged between 18 and 75 years of age who provide informed written consent.
+  2. Subjects fulfilling the 2013 American College of Rheumatology (ACR) /European League Against Rheumatism criteria for classification of systemic sclerosis (SSc).
+  3. Disease duration of less than (&lt;) 7 years from first non-Raynaud&#x27;s symptom.
+  4. Subjects who have been taking the same mycophenolate regimen (stable dose) in a range of 1.5 to 3 gram (g)/day of Mycophenolate mofetil (MMF) or 1080 to 2160 milligram/day (mg/day) of MPS for at least 2 months prior to the Screening Visit and continued through Day 1 of the Treatment Period, of the lung on HRCT according to central reading.
+  5. According to central readings: Diffusion capacity of the lung for carbon monoxide (DLCO) greater than or equal to (&gt;=) 30 percent (%) predicted, Forced vital capacity (FVC) 40% to 85% predicted, and a ratio of FVC % predicted to DLCO % predicted &gt;=1.8 is acceptable if right heart catheterization within 3 months of screening revealed no pulmonary hypertension.
+  6. If these criteria are met, then High-resolution computed tomography (HRCT) of lungs will be performed, and must show at least 5% fibrosis for subjects to be eligible.
+  7. Female subjects of childbearing potential must use a highly effective method of contraception to prevent pregnancy for 4 weeks before randomization and must agree to continue to practice adequate contraception for the duration of their participation in the trial (up to the last Safety Follow-Up Visit).
+  8. For the purposes of this trial, women of childbearing potential are defined as &quot;All female subjects after puberty unless they are post-menopausal for at least 2 years or are surgically sterile.&quot; Highly effective contraception is defined as 2 barrier methods (eg, female diaphragm and male condoms); or 1 barrier method with at least one of the following: spermicide, a hormonal method, or an intrauterine device.
+  9. Note that because mycophenolate affects the metabolism of oral contraceptives and may reduce their effectiveness, women receiving mycophenolate who are using oral contraceptives for birth control should employ an additional contraceptive method (for example, male or female barrier method).
+
+EXCLUSION CRITERIA
+
+  1. Any condition that in the Investigator&#x27;s opinion constitutes an inappropriate risk or a contraindication for participation in the trial or that could interfere with the trial objectives, conduct, or evaluation.
+  2. Renal impairment (glomerular filtration rate [GFR] &lt;45 mL/minute (min)/1.73 square meter (m^2) as calculated by the Modification of Diet in Renal Disease equation) calculated as follows: GFR (mL/min per 1.73 m^2) = 175(standardized serum creatinine)^-1.154 (age)^-0.203 1.212 (if black) 0.742 (if female)Urine dipstick with &gt;=3 plus protein and urine protein:creatinine ratio more than (&gt;)2 mg/mg.
+  3. Known diagnosis of obstructive lung disease/emphysema (Forced Expiratory Volume [FEV1]/FVC ratio &lt;0.65) and/or significant emphysematous change on screening HRCT.
+  4. Other clinically significant abnormalities on HRCT not attributable to scleroderma or emphysema as defined above.
+  5. Known diagnosis of other significant respiratory disorders.
+  6. Pulmonary hypertension that fulfills at least one of the following:Current/planned treatment with systemic therapy targeted to Pulmonary arterial hypertension (PAH) or pulmonary hypertension;
+  7. History of transthoracic echocardiography showing at least one of the following: tricuspid regurgitation jet &gt;2.8 m/sec, right atrial enlargement (major dimension &gt;53 mm), right ventricular enlargement (mid cavity dimension &gt;35 mm), moderate to severe left ventricular dysfunction;
+  8. N-terminal prohormone brain natriuretic peptide &gt;3Upper limit of normal (ULN)Considered by the investigator to require initiation of systemic targeted PAH therapy.
+  9. Current clinical diagnosis of another inflammatory connective tissue disease (eg, systemic lupus erythematosus, rheumatoid arthritis, ankylosing spondylitis, or dermato/polymyositis).
+  10. Concomitant scleroderma-associated myopathy, fibromyalgia, and secondary Sjögren&#x27;s are allowed.
+  11. Suspected/confirmed significant aspiration within the previous 6 months, for example.viral/bacterial/fungal infectioninfection requiring hospitalizationTreatment with parenteral anti-infectives within 4 weeks prior/during Screening PeriodCompletion of oral anti-infectives within 2 weeks of ScreeningUse of oral anti-infectives during Screening PeriodVaginal candidiasisonychomycosischronically suppressed oral herpes simplex virusProphylaxis for Pneumocystis jiroveci pneumoniaHistory of/positive Human immunodeficiency virus, hepatitis C antibody and/or polymerase chain reaction or Hepatitis B surface antigen and/or hepatitis B core antibody (total and/or Immunoglobulin M) antibody at screening.
+  12. History of/current diagnosis of active tuberculosis (TB), or untreated latent TB infection (LTBI).
+  13. Presence of uncontrolled or New York Heart Association Class 3 or 4 congestive heart failure.
+  14. History of cancer, except adequately treated (ie, no evidence of recurrence within 5 years prior screening) basal cell/squamous cell carcinomas of the skin (≤3 total in lifetime) or carcinoma in situ of the cervix.
+  15. Known hypersensitivity to abituzumab DS or DP.
+  16. Current smoker (incl. e-cigarettes) / smoking within 4 weeks of screening.
+  17. Use of agents other than mycophenolate considered by the Investigator to have immunomodulating, immunosuppressive, or potential scleroderma disease-modifying properties within 2 months of screening visit is not allowed (or 5 months prior to the Screening Visit for cyclophosphamide).
+  18. Hydroxychloroquine or chloroquine are permitted if dose has been stable for at least 4 weeks before the screening visit.
+  19. Use of systemic corticosteroids above 10 mg/day prednisone equivalent within 4 weeks prior until last dose of study drug.
+  20. Inhaled and topical corticosteroids are permitted.
+  21. Use of any biologic agent within 12 weeks or 5 half-lives, whichever is longer, of screening.
+  22. History of anti-CD20 B-cell depleting therapy, eg, rituximab or ocrelizumab within 6 months prior to screening visit.
+  23. Use of anticoagulant or antiplatelet agent (aspirin =&lt;350 mg daily is permitted).
+  24. Clinically significant or predefined abnormalities in lab tests:Aspartate aminotransferase, Alanine aminotransferase or alkaline phosphatase level &gt;2.5ULN;
+  25. Total bilirubin &gt;1.5ULN (other than that due to known Gilbert&#x27;s disease);
+  26. Hemoglobin &lt;5.0 mmol/L (9 g/dL), white blood cell count &lt;2.510^9/L, or platelets &lt;10010^9/L);
+  27. International normalized ratio or partial thromboplastin time &gt;2.0ULN;
+  28. Thyroid-stimulating hormone &lt;0.01 or &gt;=7.1 milli international units per litre (mIU/L).
+  29. Inability to receive IV infusions.
+  30. History of alcohol/drug abuse for 1 year prior screening.
+  31. Pregnancy/breastfeeding/lactation within 3 months prior screening.
+  32. History of thrombotic, thromboembolic, or abnormal bleeding events including concomitant antiphospholipid antibody syndrome.
+  33. Subjects with known lupus anticoagulant and/or anticardiolipin and/or anti-b2 glycoprotein antibodies alone should not be excluded.
+  34. Legal incapacity/limited legal capacity.
+  35. Receipt/planned live/attenuated vaccination within 12 weeks prior screening until 3 months after last dose of study drug.
+  36. Seasonal influenza vaccination with inactivated vaccine formulation is permitted.
+  37. Major surgery requiring hospitalization within 4 weeks prior screening, planned major surgery for the duration of the trial.
+  38. Subjects with lung resection.
+  39. History of/planned major organ or hematopoietic stem cell/marrow transplant.
+  40. Severe gastrointestinal disease requiring parenteral nutrition.
+  41. Other protocol defined
+
+EXCLUSION CRITERIA
+
+  1. could apply.</pre>
+        </div>
+        <div class="panel panel-pred">
+            <h3>Prediction</h3>
+            <pre id="pred-pre"
+                 data-clean="This is a great start to a modified eligibility criteria document based on the provided text. Here&amp;#x27;s a breakdown of the key changes and suggestions for further refinement:
+
+Key Changes:
+
+ Version Consistency:  The document clearly states the trial&amp;#x27;s version (2.0) and references the original source (EMR200017-014).
+ Structure: The document follows a logical structure, including a synopsis, objectives, and methodology.
+ Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. The document outlines the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for the trial.
+  2. Clarification: The document clarifies the
+
+INCLUSION CRITERIA
+
+  1. for subjects with SSc-ILD and the requirement for a stable mycophenolate regimen.
+  2. Specifics: The document provides specific details about the treatment regimen, including the dosage range for mycophenolate.
+  3. Suggestions for Refinement:
+  4. Detailed
+
+INCLUSION CRITERIA
+
+  1. Expand on the
+
+INCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Disease Severity: Specify the ACR criteria for SSc-ILD classification.
+  3. Lung Function: Specify the required FEV1/FVC ratio and/or DLCO values.
+  4. Disease Duration: Specify the minimum duration of SSc-ILD.
+  5. Other Relevant Factors: Include any other relevant factors, such as the presence of specific SSc-ILD subtypes.
+  6. Detailed
+
+EXCLUSION CRITERIA
+
+  1. Expand on the
+
+EXCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Other Medical Conditions: Specify any other medical conditions that would exclude a subject.
+  3. Pregnancy/Lactation: Specify the criteria for exclusion for pregnant or lactating women.
+  4. Other Medications: Specify any other medications that would exclude a subject.
+  5. Rationale for Criteria: Provide a brief rationale for each inclusion and exclusion criterion. This helps to explain the clinical significance of the criteria.
+  6. Specifics for Mycophenolate:
+  7. Dosage Range: Specify the exact dosage range for mycophenolate (MMF or MPS) and the duration of treatment.
+  8. Stable Dose: Clarify what constitutes a &amp;quot;stable dose&amp;quot; for mycophenolate.
+  9. Safety Considerations:
+  10. Adverse Events: Specify the types of adverse events that would be considered serious or require discontinuation of the trial.
+  11. Monitoring: Describe the monitoring procedures for adverse events.
+  12. Statistical Considerations:
+  13. Sample Size: Specify the target sample size.
+  14. Analysis Sets: Describe the different analysis sets (ITT, per-protocol, etc.) and their rationale.
+  15. Ethical Considerations:
+  16. Informed Consent: Ensure that the document clearly outlines the informed consent process.
+  17. Data Privacy: Address data privacy and confidentiality.
+  18. Trial Management:
+  19. Case Report Forms (CRFs): Specify the format and content of CRFs.
+  20. Data Management: Describe the data management plan.
+  21. Monitoring: Describe the monitoring plan.
+  22. Reporting: Describe the reporting procedures for adverse events and other study outcomes.
+  23. Additional Considerations:
+  24. Legal Compliance: Ensure that the document complies with all relevant regulatory requirements (e.g., FDA, EMA, ICH).
+  25. Clarity and Conciseness: Use clear and concise language. Avoid jargon and technical terms that may not be understood by all readers.
+  26. Accessibility:** Make the document accessible to all stakeholders, including patients, investigators, and regulatory authorities.
+  27. By incorporating these suggestions, you can create a comprehensive and informative eligibility criteria document that is both accurate and user-friendly."
+                 data-diff="&lt;span class=&quot;diff-add&quot;&gt;This is a great start to a modified eligibility criteria document based on the provided text. Here&amp;#x27;s a breakdown of the key changes and suggestions for further refinement:
+
+Key Changes:
+
+ Version Consistency:  The document clearly states the trial&amp;#x27;s version (2.0) and references the original source (EMR200017-014).
+ Structure: The document follows a logical structure, including a synopsis, objectives, and methodology.
+ Inclusion/
+
+EXCLUSION&lt;/span&gt; CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;document&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;outlines the inclusion and
+
+EXCLUSION CRITERIA
+
+  1.&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;trial.
+  2.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Clarification:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;document&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clarifies&lt;/span&gt; the
+
+INCLUSION CRITERIA
+
+  1. &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; subjects &lt;span class=&quot;diff-add&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;SSc-ILD&lt;/span&gt; and &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;requirement&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;stable&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mycophenolate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;regimen.&lt;/span&gt;
+  2. &lt;span class=&quot;diff-add&quot;&gt;Specifics:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;The document provides specific details about&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;treatment&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;regimen,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;including&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;dosage&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;mycophenolate.
+  3.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Suggestions&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for Refinement:
+  4. Detailed
+
+INCLUSION CRITERIA
+
+  1. Expand on the
+
+INCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Disease Severity: Specify the ACR&lt;/span&gt; criteria for &lt;span class=&quot;diff-add&quot;&gt;SSc-ILD&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;classification.&lt;/span&gt;
+  3. &lt;span class=&quot;diff-add&quot;&gt;Lung Function: Specify the required FEV1/FVC ratio and/or DLCO values.
+  4. &lt;/span&gt;Disease&lt;span class=&quot;diff-add&quot;&gt; Duration: Specify the minimum&lt;/span&gt; duration of &lt;span class=&quot;diff-add&quot;&gt;SSc-ILD.
+  5.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Relevant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Factors:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Include&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;relevant&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;factors, such as the presence of specific SSc-ILD subtypes.
+  6. Detailed
+
+EXCLUSION CRITERIA
+
+  1. Expand on the
+
+EXCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Other Medical Conditions: Specify any other medical conditions that would exclude a subject.
+  3. Pregnancy/Lactation: Specify the criteria for exclusion for pregnant or lactating women.&lt;/span&gt;
+  4. &lt;span class=&quot;diff-add&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Medications:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Specify&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;other medications that would exclude a subject.
+  5. Rationale for Criteria: Provide a brief rationale for each inclusion and exclusion criterion. This helps to explain&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;clinical&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;significance&lt;/span&gt; of the &lt;span class=&quot;diff-add&quot;&gt;criteria.
+  6.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Specifics&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;for Mycophenolate:
+  7. Dosage Range: Specify&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;exact&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;dosage&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;range&lt;/span&gt; for &lt;span class=&quot;diff-add&quot;&gt;mycophenolate&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;(MMF&lt;/span&gt; or &lt;span class=&quot;diff-add&quot;&gt;MPS)&lt;/span&gt; and the duration of &lt;span class=&quot;diff-add&quot;&gt;treatment.
+  8.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Stable&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Dose: Clarify what constitutes a &amp;quot;stable dose&amp;quot; for mycophenolate.
+  9. Safety Considerations:
+  10. Adverse Events: Specify&lt;/span&gt; the &lt;span class=&quot;diff-add&quot;&gt;types&lt;/span&gt; of &lt;span class=&quot;diff-add&quot;&gt;adverse&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;events&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;would&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;be&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;considered&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;serious&lt;/span&gt; or require &lt;span class=&quot;diff-add&quot;&gt;discontinuation&lt;/span&gt; of the trial.
+  &lt;span class=&quot;diff-add&quot;&gt;11.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Monitoring: Describe the monitoring procedures for adverse events.
+  12. Statistical Considerations:
+  13. Sample Size: Specify the target sample size.
+  14. Analysis Sets: Describe the different analysis sets (ITT, per-protocol, etc.) and their rationale.
+  15. Ethical Considerations:
+  16. Informed Consent: Ensure that the document clearly outlines the informed consent process.
+  17. Data Privacy: Address data privacy and confidentiality.
+  18. Trial Management:
+  19. Case Report Forms (CRFs): Specify the format and content of CRFs.
+  20. Data Management: Describe the data management plan.
+  21. Monitoring: Describe the monitoring plan.
+  22. Reporting: Describe the reporting procedures for adverse events and other study outcomes.
+  23. Additional Considerations:
+  24. Legal Compliance: Ensure that the document complies&lt;/span&gt; with &lt;span class=&quot;diff-add&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;relevant regulatory requirements (e.g., FDA, EMA, ICH).&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;25.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Clarity&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Conciseness:&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Use&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;clear&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;concise&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;language.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Avoid jargon and technical terms that may not be understood by all readers.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;26.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Accessibility:**&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;Make&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;document&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;accessible&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;to all stakeholders, including patients, investigators, and regulatory authorities.&lt;/span&gt;
+  &lt;span class=&quot;diff-add&quot;&gt;27.&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;By&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;incorporating&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;these&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;suggestions,&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;diff-add&quot;&gt;can create a comprehensive and informative eligibility criteria document that is both accurate and user-friendly.&lt;/span&gt;"
+                 data-raw="This is a great start to a modified eligibility criteria document based on the provided text. Here&amp;#x27;s a breakdown of the key changes and suggestions for further refinement:
+
+**Key Changes:**
+
+* **Version Consistency:**  The document clearly states the trial&amp;#x27;s version (2.0) and references the original source (EMR200017-014).
+* **Structure:** The document follows a logical structure, including a synopsis, objectives, and methodology.
+* **Inclusion/Exclusion Criteria:** The document outlines the inclusion and exclusion criteria for the trial.
+* **Clarification:**  The document clarifies the inclusion criteria for subjects with SSc-ILD and the requirement for a stable mycophenolate regimen.
+* **Specifics:** The document provides specific details about the treatment regimen, including the dosage range for mycophenolate.
+
+**Suggestions for Refinement:**
+
+* **Detailed Inclusion Criteria:**  Expand on the inclusion criteria to be more specific. For example:
+    * **Disease Severity:** Specify the ACR criteria for SSc-ILD classification.
+    * **Lung Function:**  Specify the required FEV1/FVC ratio and/or DLCO values.
+    * **Disease Duration:**  Specify the minimum duration of SSc-ILD.
+    * **Other Relevant Factors:**  Include any other relevant factors, such as the presence of specific SSc-ILD subtypes.
+* **Detailed Exclusion Criteria:**  Expand on the exclusion criteria to be more specific. For example:
+    * **Other Medical Conditions:** Specify any other medical conditions that would exclude a subject.
+    * **Pregnancy/Lactation:**  Specify the criteria for exclusion for pregnant or lactating women.
+    * **Other Medications:**  Specify any other medications that would exclude a subject.
+* **Rationale for Criteria:**  Provide a brief rationale for each inclusion and exclusion criterion. This helps to explain the clinical significance of the criteria.
+* **Specifics for Mycophenolate:**  
+    * **Dosage Range:**  Specify the exact dosage range for mycophenolate (MMF or MPS) and the duration of treatment.
+    * **Stable Dose:**  Clarify what constitutes a &amp;quot;stable dose&amp;quot; for mycophenolate.
+* **Safety Considerations:**  
+    * **Adverse Events:**  Specify the types of adverse events that would be considered serious or require discontinuation of the trial.
+    * **Monitoring:**  Describe the monitoring procedures for adverse events.
+* **Statistical Considerations:**  
+    * **Sample Size:**  Specify the target sample size.
+    * **Analysis Sets:**  Describe the different analysis sets (ITT, per-protocol, etc.) and their rationale.
+* **Ethical Considerations:**  
+    * **Informed Consent:**  Ensure that the document clearly outlines the informed consent process.
+    * **Data Privacy:**  Address data privacy and confidentiality.
+* **Trial Management:**  
+    * **Case Report Forms (CRFs):**  Specify the format and content of CRFs.
+    * **Data Management:**  Describe the data management plan.
+    * **Monitoring:**  Describe the monitoring plan.
+    * **Reporting:**  Describe the reporting procedures for adverse events and other study outcomes.
+
+**Additional Considerations:**
+
+* **Legal Compliance:**  Ensure that the document complies with all relevant regulatory requirements (e.g., FDA, EMA, ICH).
+* **Clarity and Conciseness:**  Use clear and concise language. Avoid jargon and technical terms that may not be understood by all readers.
+* **Accessibility:**  Make the document accessible to all stakeholders, including patients, investigators, and regulatory authorities.
+
+
+By incorporating these suggestions, you can create a comprehensive and informative eligibility criteria document that is both accurate and user-friendly.">This is a great start to a modified eligibility criteria document based on the provided text. Here&#x27;s a breakdown of the key changes and suggestions for further refinement:
+
+Key Changes:
+
+ Version Consistency:  The document clearly states the trial&#x27;s version (2.0) and references the original source (EMR200017-014).
+ Structure: The document follows a logical structure, including a synopsis, objectives, and methodology.
+ Inclusion/
+
+EXCLUSION CRITERIA
+
+  1. The document outlines the inclusion and
+
+EXCLUSION CRITERIA
+
+  1. for the trial.
+  2. Clarification: The document clarifies the
+
+INCLUSION CRITERIA
+
+  1. for subjects with SSc-ILD and the requirement for a stable mycophenolate regimen.
+  2. Specifics: The document provides specific details about the treatment regimen, including the dosage range for mycophenolate.
+  3. Suggestions for Refinement:
+  4. Detailed
+
+INCLUSION CRITERIA
+
+  1. Expand on the
+
+INCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Disease Severity: Specify the ACR criteria for SSc-ILD classification.
+  3. Lung Function: Specify the required FEV1/FVC ratio and/or DLCO values.
+  4. Disease Duration: Specify the minimum duration of SSc-ILD.
+  5. Other Relevant Factors: Include any other relevant factors, such as the presence of specific SSc-ILD subtypes.
+  6. Detailed
+
+EXCLUSION CRITERIA
+
+  1. Expand on the
+
+EXCLUSION CRITERIA
+
+  1. to be more specific. For example:
+  2. Other Medical Conditions: Specify any other medical conditions that would exclude a subject.
+  3. Pregnancy/Lactation: Specify the criteria for exclusion for pregnant or lactating women.
+  4. Other Medications: Specify any other medications that would exclude a subject.
+  5. Rationale for Criteria: Provide a brief rationale for each inclusion and exclusion criterion. This helps to explain the clinical significance of the criteria.
+  6. Specifics for Mycophenolate:
+  7. Dosage Range: Specify the exact dosage range for mycophenolate (MMF or MPS) and the duration of treatment.
+  8. Stable Dose: Clarify what constitutes a &quot;stable dose&quot; for mycophenolate.
+  9. Safety Considerations:
+  10. Adverse Events: Specify the types of adverse events that would be considered serious or require discontinuation of the trial.
+  11. Monitoring: Describe the monitoring procedures for adverse events.
+  12. Statistical Considerations:
+  13. Sample Size: Specify the target sample size.
+  14. Analysis Sets: Describe the different analysis sets (ITT, per-protocol, etc.) and their rationale.
+  15. Ethical Considerations:
+  16. Informed Consent: Ensure that the document clearly outlines the informed consent process.
+  17. Data Privacy: Address data privacy and confidentiality.
+  18. Trial Management:
+  19. Case Report Forms (CRFs): Specify the format and content of CRFs.
+  20. Data Management: Describe the data management plan.
+  21. Monitoring: Describe the monitoring plan.
+  22. Reporting: Describe the reporting procedures for adverse events and other study outcomes.
+  23. Additional Considerations:
+  24. Legal Compliance: Ensure that the document complies with all relevant regulatory requirements (e.g., FDA, EMA, ICH).
+  25. Clarity and Conciseness: Use clear and concise language. Avoid jargon and technical terms that may not be understood by all readers.
+  26. Accessibility:** Make the document accessible to all stakeholders, including patients, investigators, and regulatory authorities.
+  27. By incorporating these suggestions, you can create a comprehensive and informative eligibility criteria document that is both accurate and user-friendly.</pre>
+        </div>
+    </div>
+
+    <script>
+let currentMode = 'clean';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    // GT panel
+    const gtPre = document.getElementById('gt-pre');
+    const predPre = document.getElementById('pred-pre');
+
+    if (mode === 'clean') {
+        gtPre.innerHTML = gtPre.dataset.clean;
+        predPre.innerHTML = predPre.dataset.clean;
+    } else if (mode === 'diff') {
+        gtPre.innerHTML = gtPre.dataset.diff;
+        predPre.innerHTML = predPre.dataset.diff;
+    } else {
+        gtPre.innerHTML = gtPre.dataset.raw;
+        predPre.innerHTML = predPre.dataset.raw;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => setMode('clean'));
+</script>
+</body>
+</html>
