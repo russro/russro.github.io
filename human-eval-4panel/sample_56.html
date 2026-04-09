@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 56 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 56</h1>
+    <div class="meta">
+        <span>NCT: NCT03679598</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Participants are eligible to be included in the study only if ALL of the following criteria apply:Capable of giving signed informed consent as described in Appendix 3, which includes compliance with the requirements and restrictions listed in the informed consent form and in this protocolAge ≥18 and ≤80 yearsPatients with a diagnosis or confirmation of AATD (Pi*ZZ, Pi*SZ, Pi*Z Null, or Pi*Null genotype&amp;#x2F;phenotype). Historical laboratory reports are acceptable.FEV1 ≥25% predictedComputed tomography (CT) scan evidence of emphysema by visual reading by local investigatorPatients will be eligible if they are either a) are not currently receiving augmentation treatment and have not received augmentation in the 12 weeks prior to screening or b) have received weekly infusions of augmentation at 60 mg&amp;#x2F;kg for at least 12 weeks prior to screening and intend to continue augmentation through the study period.Male or female sex a. Male participants must agree to use a highly effective contraception as detailed in Appendix 5 during the treatment period and for at least 4 days after the last dose of study treatment and refrain from donating sperm during this period b. Female participants are eligible to participate if not pregnant; not breastfeeding; and at least one of the following conditions is met: i. Not a woman of childbearing potential as defined in Appendix 5 OR ii. A woman of childbearing potential who agrees to follow the contraceptive guidance in Appendix 5. During the treatment phase and for at least 4 days after the last dose of study medication.Exclusion Criteria:Participants are excluded from the study if ANY of the following criteria apply:Excluded Medical ConditionsSubjects with other AATD phenotypes&amp;#x2F;genotypes including Pi*MZAny clinically diagnosed lung disease other than COPD such as diffuse interstitial lung diseases, cystic fibrosis, or clinically significant bronchiectasis as determined by the InvestigatorAcute exacerbation of underlying lung disease requiring oral steroids and&amp;#x2F;or antibiotics within 4 weeks of baselineAcute or chronic hepatitis, including hepatitis B, hepatitis C (positive serologies, including hepatitis B and C antibody)HIV infection or other immunodeficiency or with an absolute neutrophil count ≤1.0 × 109&amp;#x2F;LAbnormal liver biochemistry (alanine aminotransferase, aspartate aminotransferase, gamma-glutamyl transferase) &amp;gt;1.5 × upper limit of normal or total bilirubin &amp;gt; upper limit of normal (unless Gilbert&amp;#x27;s disease with normal conjugated bilirubin)Any of the following laboratory abnormalities are present at baseline:Platelet count &amp;lt;150×109&amp;#x2F;LSerum albumin ≤ 3.5 g&amp;#x2F;dLINR ≥1.2CPK ≥ ULN.History or current evidence of cirrhosis (on biopsy or imaging), esophageal varices, ascites or hepatic encephalopathy.Evidence of other forms of chronic liver disease based on diagnostic testing as per the guidelines (i.e. autoimmune liver disease, primary biliary cirrhosis, primary sclerosing cholangitis, Wilson&amp;#x27;s disease, Hemochromatosis or iron overload).Patients with nonalcoholic fatty liver disease (NAFLD) as diagnosed by any imaging modality (or use of drugs associated with NAFLD for more than 2 weeks in the year prior to screening).Subjects with a history of significant alcohol consumption for a period of more than 3 consecutive months within 1 year prior to screening, defined as average of &amp;gt;20g&amp;#x2F; day in female subjects and &amp;gt;30g&amp;#x2F; day in male subjects.Fibrosis-4 (FIB-4) score &amp;gt;3.25Any of the following cardiovascular conditions within 6 months prior to the screening visit:Myocardial infarction or unstable anginaCoronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention, or carotid revascularization procedureUncontrolled hypertensionStroke or transient ischemic attackCongestive heart failure (New York Heart Association III&amp;#x2F;IV) with left ventricular ejection fraction &amp;lt; 40%Any clinically significant 12-lead electrocardiogram abnormalities at screening or baseline, including corrected QT interval by Fridericia&amp;#x27;s correction method &amp;gt;450 ms or history of significant cardiac dysrhythmia, including long QT syndromeHistory of cancer within the last 5 years, except for well-treated basal cell carcinoma and squamous cell carcinoma of the skinOther documented comorbidities or laboratory abnormalities that in the opinion of the Investigator could affect the outcome of the study assessments, participant safety, or ability of the participant to comply with the requirements of the protocolExcluded Prior&amp;#x2F;Concomitant TherapyDaily use of prednisone (&amp;gt;10mg daily), or other systemic glucocorticoids at comparable or higher equivalent dose, or use of other immunosuppressant therapies are prohibitedImmunomodulating monoclonal antibodies within 6 months prior to screening are prohibitedDaily use of non-steroidal anti-inflammatory drugs (NSAIDs) is prohibited. Daily use of acetaminophen up to 2 g per day and aspirin up to 325 mg per day is permitted.Initiation of drugs known for hepatotoxic potential within the 28 days prior to screening including but not limited to: statins, NSAIDS, amoxicillin&amp;#x2F;clavulanate, PDE inhibitors (theophylline, roflumilast), and anti-epileptics. Subjects on established treatment for more than 28 days prior to screening will not be excluded. Requirement for medications mainly metabolized by CYP2C9 and with narrow therapeutic index (eg, warfarin, phenytoin) is prohibitedExcluded Prior&amp;#x2F;Concurrent Clinical Study ExperienceParticipation in any clinical investigation using medical devices or non-biologic treatments within 4 weeks or 5 half-lives of the drug (whichever is longer) prior to the initial dosing (or longer if required by local regulations) is prohibitedParticipation in any clinical investigation using biologic treatment within 6 months of screening is prohibitedPrevious participation in a gene therapy study for AATD at any time is prohibitedOther ExclusionsHistory of hypersensitivity to alvelestat (MPH966) or any of its excipients or the class of neutrophil elastase inhibitorsKnown hypersensitivity to medications used in the study procedures (e.g. midazolam, fentanyl, and lidocaine for bronchoscopy)</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">38 of 59 20. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 21. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 22. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 23. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 24. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 25. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 26. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 27. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 28. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 29. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 30. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 31. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 32. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 33. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 34. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 35. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 36. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 37. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 38. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 39. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 40. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 41. Wells JM, Gaggar A, Blalock JE. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease. Am J Respir Crit Care Med 2014;185:241-52. 3. E.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants are eligible to be included in the study only if ALL of the following criteria apply:Capable of giving signed informed consent as described in Appendix 3, which includes compliance with the requirements and restrictions listed in the informed consent form and in this protocolAge ≥18 and ≤80 yearsPatients with a diagnosis or confirmation of AATD (PiZZ, PiSZ, PiZ Null, or PiNull genotype/phenotype). Historical laboratory reports are acceptable.FEV1 ≥25% predictedComputed tomography (CT) scan evidence of emphysema by visual reading by local investigatorPatients will be eligible if they are either a) are not currently receiving augmentation treatment and have not received augmentation in the 12 weeks prior to screening or b) have received weekly infusions of augmentation at 60 mg/kg for at least 12 weeks prior to screening and intend to continue augmentation through the study period.Male or female sex a. Male participants must agree to use a highly effective contraception as detailed in Appendix 5 during the treatment period and for at least 4 days after the last dose of study treatment and refrain from donating sperm during this period b. Female participants are eligible to participate if not pregnant; not breastfeeding; and at least one of the following conditions is met: i. Not a woman of childbearing potential as defined in Appendix 5 OR ii. A woman of childbearing potential who agrees to follow the contraceptive guidance in Appendix 5. During the treatment phase and for at least 4 days after the last dose of study medication.Exclusion Criteria:Participants are excluded from the study if ANY of the following criteria apply:Excluded Medical ConditionsSubjects with other AATD phenotypes/genotypes including Pi*MZAny clinically diagnosed lung disease other than COPD such as diffuse interstitial lung diseases, cystic fibrosis, or clinically significant bronchiectasis as determined by the InvestigatorAcute exacerbation of underlying lung disease requiring oral steroids and/or antibiotics within 4 weeks of baselineAcute or chronic hepatitis, including hepatitis B, hepatitis C (positive serologies, including hepatitis B and C antibody)HIV infection or other immunodeficiency or with an absolute neutrophil count ≤1.0 × 109/LAbnormal liver biochemistry (alanine aminotransferase, aspartate aminotransferase, gamma-glutamyl transferase) &gt;1.5 × upper limit of normal or total bilirubin &gt; upper limit of normal (unless Gilbert&#x27;s disease with normal conjugated bilirubin)Any of the following laboratory abnormalities are present at baseline:Platelet count &lt;150×109/LSerum albumin ≤ 3.5 g/dLINR ≥1.2CPK ≥ ULN.History or current evidence of cirrhosis (on biopsy or imaging), esophageal varices, ascites or hepatic encephalopathy.Evidence of other forms of chronic liver disease based on diagnostic testing as per the guidelines (i.e. autoimmune liver disease, primary biliary cirrhosis, primary sclerosing cholangitis, Wilson&#x27;s disease, Hemochromatosis or iron overload).Patients with nonalcoholic fatty liver disease (NAFLD) as diagnosed by any imaging modality (or use of drugs associated with NAFLD for more than 2 weeks in the year prior to screening).Subjects with a history of significant alcohol consumption for a period of more than 3 consecutive months within 1 year prior to screening, defined as average of &gt;20g/ day in female subjects and &gt;30g/ day in male subjects.Fibrosis-4 (FIB-4) score &gt;3.25Any of the following cardiovascular conditions within 6 months prior to the screening visit:Myocardial infarction or unstable anginaCoronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention, or carotid revascularization procedureUncontrolled hypertensionStroke or transient ischemic attackCongestive heart failure (New York Heart Association III/IV) with left ventricular ejection fraction &lt; 40%Any clinically significant 12-lead electrocardiogram abnormalities at screening or baseline, including corrected QT interval by Fridericia&#x27;s correction method &gt;450 ms or history of significant cardiac dysrhythmia, including long QT syndromeHistory of cancer within the last 5 years, except for well-treated basal cell carcinoma and squamous cell carcinoma of the skinOther documented comorbidities or laboratory abnormalities that in the opinion of the Investigator could affect the outcome of the study assessments, participant safety, or ability of the participant to comply with the requirements of the protocolExcluded Prior/Concomitant TherapyDaily use of prednisone (&gt;10mg daily), or other systemic glucocorticoids at comparable or higher equivalent dose, or use of other immunosuppressant therapies are prohibitedImmunomodulating monoclonal antibodies within 6 months prior to screening are prohibitedDaily use of non-steroidal anti-inflammatory drugs (NSAIDs) is prohibited. Daily use of acetaminophen up to 2 g per day and aspirin up to 325 mg per day is permitted.Initiation of drugs known for hepatotoxic potential within the 28 days prior to screening including but not limited to: statins, NSAIDS, amoxicillin/clavulanate, PDE inhibitors (theophylline, roflumilast), and anti-epileptics. Subjects on established treatment for more than 28 days prior to screening will not be excluded. Requirement for medications mainly metabolized by CYP2C9 and with narrow therapeutic index (eg, warfarin, phenytoin) is prohibitedExcluded Prior/Concurrent Clinical Study ExperienceParticipation in any clinical investigation using medical devices or non-biologic treatments within 4 weeks or 5 half-lives of the drug (whichever is longer) prior to the initial dosing (or longer if required by local regulations) is prohibitedParticipation in any clinical investigation using biologic treatment within 6 months of screening is prohibitedPrevious participation in a gene therapy study for AATD at any time is prohibitedOther ExclusionsHistory of hypersensitivity to alvelestat (MPH966) or any of its excipients or the class of neutrophil elastase inhibitorsKnown hypersensitivity to medications used in the study procedures (e.g. midazolam, fentanyl, and lidocaine for bronchoscopy)</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. 38 of 59 20.</div>
+<div class="line criterion">2. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">3. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">4. Am J Respir Crit Care Med 2014;185:241-52. 21.</div>
+<div class="line criterion">5. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">6. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">7. Am J Respir Crit Care Med 2014;185:241-52. 22.</div>
+<div class="line criterion">8. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">9. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">10. Am J Respir Crit Care Med 2014;185:241-52. 23.</div>
+<div class="line criterion">11. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">12. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">13. Am J Respir Crit Care Med 2014;185:241-52. 24.</div>
+<div class="line criterion">14. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">15. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">16. Am J Respir Crit Care Med 2014;185:241-52. 25.</div>
+<div class="line criterion">17. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">18. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">19. Am J Respir Crit Care Med 2014;185:241-52. 26.</div>
+<div class="line criterion">20. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">21. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">22. Am J Respir Crit Care Med 2014;185:241-52. 27.</div>
+<div class="line criterion">23. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">24. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">25. Am J Respir Crit Care Med 2014;185:241-52. 28.</div>
+<div class="line criterion">26. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">27. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">28. Am J Respir Crit Care Med 2014;185:241-52. 29.</div>
+<div class="line criterion">29. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">30. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">31. Am J Respir Crit Care Med 2014;185:241-52. 30.</div>
+<div class="line criterion">32. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">33. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">34. Am J Respir Crit Care Med 2014;185:241-52. 31.</div>
+<div class="line criterion">35. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">36. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">37. Am J Respir Crit Care Med 2014;185:241-52. 32.</div>
+<div class="line criterion">38. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">39. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">40. Am J Respir Crit Care Med 2014;185:241-52. 33.</div>
+<div class="line criterion">41. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">42. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">43. Am J Respir Crit Care Med 2014;185:241-52. 34.</div>
+<div class="line criterion">44. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">45. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">46. Am J Respir Crit Care Med 2014;185:241-52. 35.</div>
+<div class="line criterion">47. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">48. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">49. Am J Respir Crit Care Med 2014;185:241-52. 36.</div>
+<div class="line criterion">50. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">51. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">52. Am J Respir Crit Care Med 2014;185:241-52. 37.</div>
+<div class="line criterion">53. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">54. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">55. Am J Respir Crit Care Med 2014;185:241-52. 38.</div>
+<div class="line criterion">56. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">57. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">58. Am J Respir Crit Care Med 2014;185:241-52. 39.</div>
+<div class="line criterion">59. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">60. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">61. Am J Respir Crit Care Med 2014;185:241-52. 40.</div>
+<div class="line criterion">62. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">63. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">64. Am J Respir Crit Care Med 2014;185:241-52. 41.</div>
+<div class="line criterion">65. Wells JM, Gaggar A, Blalock JE.</div>
+<div class="line criterion">66. The role of extracellular matrix metalloproteases in the pathogenesis of chronic obstructive pulmonary disease.</div>
+<div class="line criterion">67. Am J Respir Crit Care Med 2014;185:241-52. 3. E.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_55.html">&larr; Sample 55</a> | <a href="index.html">Index</a> | <a href="sample_57.html">Sample 57 &rarr;</a>
+</div>
+</body>
+</html>

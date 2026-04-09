@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 93 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 93</h1>
+    <div class="meta">
+        <span>NCT: NCT03472326</span>
+        <span>Model: local-qwen-3b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Key Inclusion Criteria:Plasma HIV-1 RNA ≥ 500 copies&amp;#x2F;mL at screening VisitCurrently taking a failing ARV regimen that contains 2 NRTIs and a NNRTINo prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)Screening genotype must show at least the protocol defined resistance mutation profileKey Exclusion Criteria:Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trialUse of an investigational drug other than the study drugIndividuals with chronic hepatitis B virus (HBV) infection are not permitted to participateActive tuberculosis infectionNOTE: Other protocol defined Inclusion&amp;#x2F; Exclusion criteria may apply.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Amended Eligibility Criteria (version 15):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Key Inclusion Criteria:</div>
+<div class="line raw">- Non-pregnant/non-lactating females, ≥18 years of age at Screening.</div>
+<div class="line raw">- Subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified method(s) of contraception as described in Appendix 7.</div>
+<div class="line raw">- Estimated glomerular filtration rate (eGFR) (Cockcroft-Gault equation) ≥70 mL/min.</div>
+<div class="line raw">- Currently taking a failing antiretroviral (ARV) regimen that contains an NRTI.</div>
+<div class="line raw">- HIV-1 RNA ≥500 copies/mL at Screening.</div>
+<div class="line raw">- CD4 &gt; 100 cells/μL at Screening.</div>
+<div class="line raw">- Have a screening genotype showing at least the following resistance mutation profile (a local genotype at the Screening visit is acceptable for enrollment upon review by the Sponsor):</div>
+<div class="line raw">  - K65R or </div>
+<div class="line raw">  - at least 3 TAMs; TAMs are defined as: M41L, D67N, K70R, L210W, T215F/Y, or K219Q/E/N/R in reverse transcriptase (RT) or </div>
+<div class="line raw">  - Q151M</div>
+<div class="line raw">  - and at least one primary resistance mutation to an NNRTI</div>
+<div class="line raw">- No prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)</div>
+<div class="line raw">- No evidence of chronic hepatitis B or C infection.</div>
+<div class="line raw">- No active opportunistic infections, including tuberculosis.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Key Exclusion Criteria:</div>
+<div class="line raw">- Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1.</div>
+<div class="line raw">- Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trial.</div>
+<div class="line raw">- Use of an investigational drug other than the study drug.</div>
+<div class="line raw">- Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate.</div>
+<div class="line raw">- Active tuberculosis infection.</div>
+<div class="line raw">- Subjects with known hypersensitivity to investigational medicinal products GS-9131, BIC, TAF, DRV, RTV, their metabolites, or formulation excipients.</div>
+<div class="line raw">- Subjects with acute hepatitis in the 30 days prior to randomization.</div>
+<div class="line raw">- Subjects with chronic HCV infection requiring HCV therapy during the course of the study.</div>
+<div class="line raw">- Subjects receiving ongoing therapy with any of the medications listed in Section 5.4, including drugs not to be used with BIC, TAF, DRV and RTV.</div>
+<div class="line raw">- Subjects with known hypersensitivity to polyvalent cations (e.g., Mg, Al, Ca, Fe) or cation-containing antacids or laxatives.</div>
+<div class="line raw">- Subjects with known hypersensitivity to Prezista® (DRV) or Norvir® (RTV).</div>
+<div class="line raw">- Subjects with known hypersensitivity to Tenofovir alafenamide (TAF).</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Key Inclusion Criteria:Plasma HIV-1 RNA ≥ 500 copies/mL at screening VisitCurrently taking a failing ARV regimen that contains 2 NRTIs and a NNRTINo prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)Screening genotype must show at least the protocol defined resistance mutation profileKey Exclusion Criteria:Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trialUse of an investigational drug other than the study drugIndividuals with chronic hepatitis B virus (HBV) infection are not permitted to participateActive tuberculosis infectionNOTE: Other protocol defined Inclusion/ Exclusion criteria may apply.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Amended Eligibility Criteria (version 15):</div>
+<div class="line criterion">2. Key Inclusion Criteria:</div>
+<div class="line criterion">3. Non-pregnant/non-lactating females, ≥18 years of age at Screening.</div>
+<div class="line criterion">4. Subjects of childbearing potential who engage in heterosexual intercourse must agree to use protocol-specified method(s) of contraception as described in Appendix 7.</div>
+<div class="line criterion">5. Estimated glomerular filtration rate (eGFR) (Cockcroft-Gault equation) ≥70 mL/min.</div>
+<div class="line criterion">6. Currently taking a failing antiretroviral (ARV) regimen that contains an NRTI.</div>
+<div class="line criterion">7. HIV-1 RNA ≥500 copies/mL at Screening.</div>
+<div class="line criterion">8. CD4 &gt; 100 cells/μL at Screening.</div>
+<div class="line criterion">9. Have a screening genotype showing at least the following resistance mutation profile (a local genotype at the Screening visit is acceptable for enrollment upon review by the Sponsor):</div>
+<div class="line criterion">10. K65R or</div>
+<div class="line criterion">11. at least 3 TAMs; TAMs are defined as: M41L, D67N, K70R, L210W, T215F/Y, or K219Q/E/N/R in reverse transcriptase (RT) or</div>
+<div class="line criterion">12. Q151M</div>
+<div class="line criterion">13. and at least one primary resistance mutation to an NNRTI</div>
+<div class="line criterion">14. No prior or current ARV regimens containing integrase inhibitor (INSTI) or protease inhibitor (PI)</div>
+<div class="line criterion">15. No evidence of chronic hepatitis B or C infection.</div>
+<div class="line criterion">16. No active opportunistic infections, including tuberculosis.</div>
+<div class="line criterion">17. Key Exclusion Criteria:</div>
+<div class="line criterion">18. Active, serious infections (other than HIV-1 infection) requiring parenteral antibiotic or antifungal therapy within 30 days prior to Day 1.</div>
+<div class="line criterion">19. Participation in any other clinical trial, including observational studies, without prior approval from the sponsor is prohibited while participating in this trial.</div>
+<div class="line criterion">20. Use of an investigational drug other than the study drug.</div>
+<div class="line criterion">21. Individuals with chronic hepatitis B virus (HBV) infection are not permitted to participate.</div>
+<div class="line criterion">22. Active tuberculosis infection.</div>
+<div class="line criterion">23. Subjects with known hypersensitivity to investigational medicinal products GS-9131, BIC, TAF, DRV, RTV, their metabolites, or formulation excipients.</div>
+<div class="line criterion">24. Subjects with acute hepatitis in the 30 days prior to randomization.</div>
+<div class="line criterion">25. Subjects with chronic HCV infection requiring HCV therapy during the course of the study.</div>
+<div class="line criterion">26. Subjects receiving ongoing therapy with any of the medications listed in Section 5.4, including drugs not to be used with BIC, TAF, DRV and RTV.</div>
+<div class="line criterion">27. Subjects with known hypersensitivity to polyvalent cations (e.g., Mg, Al, Ca, Fe) or cation-containing antacids or laxatives.</div>
+<div class="line criterion">28. Subjects with known hypersensitivity to Prezista® (DRV) or Norvir® (RTV).</div>
+<div class="line criterion">29. Subjects with known hypersensitivity to Tenofovir alafenamide (TAF).</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_92.html">&larr; Sample 92</a> | <a href="index.html">Index</a> | <a href="sample_94.html">Sample 94 &rarr;</a>
+</div>
+</body>
+</html>

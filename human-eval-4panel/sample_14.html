@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 14 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 14</h1>
+    <div class="meta">
+        <span>NCT: NCT05291520</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the exclusion criteria.Participants having body weight of ≥50 kilogram (kg) and &amp;lt;100 kgParticipants having a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.Participants who are female at birth are eligible to participate if at least one of the following conditions applies:Not pregnant or breastfeeding and at least one of the following conditions applies:Is not a participant of childbearing potential (POCBP) or Is a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relationship to the first dose of study intervention.A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention All participants in the study should be counseled on safer sexual practices including the use and benefit&amp;#x2F;risk of effective barrier methods (e.g., male condom).The investigator is responsible for review of medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early undetected pregnancy.Capable of giving written informed consent.Exclusion Criteria:Hypertension that is not well controlled.History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.Positive human immunodeficiency virus (HIV) antibody test.Positive test result for SARS-CoV-2.Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention Participants positive for Hepatitis B antigen (HBsAg) are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excludedAny history of a severe allergic reaction with generalized urticaria, angioedema or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that would interfere with assessment of injection sites.History of sensitivity to any of the study medications or their components or drugs of their class, or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.Prior receipt of licensed or investigational Monoclonal antibody (Mab).Receipt of any investigational study agent within 28 days prior to first dose of study treatmentPrior exposure to VH3810109 or rHuPH20 in this or another clinical study.Where participation in the study would result in donation of blood or blood products in excess of 500 milliliter (mL) within 56 days.Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.ALT ≥1.5 times the upper limit of normal (ULN).Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &amp;gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &amp;lt;35%).Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&amp;#x27;s syndrome or asymptomatic gallstones)Corrected QT interval Fridericia&amp;#x27;s formula (QTcF)&amp;gt;450 millisecond (msec) for males and QTcF &amp;gt;470 msec for females.The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.Grade 4 laboratory abnormalities.Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZ Drug Product (EDP)</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">##  Modified Eligibility Criteria for Version 5 of Clinical Trial Protocol</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Based on the provided text from the protocol amendment, here are the modified eligibility criteria for the clinical trial, incorporating the evidence and addressing potential concerns:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Age:**  Participants must be 18 years of age or older.</div>
+<div class="line raw">* **Healthy:** Participants must be deemed to be in good health based on a medical evaluation, including a review of medical history, physical examination, and laboratory tests.</div>
+<div class="line raw">* **Body Weight:** Participants must have a body weight of ≥50 kg.</div>
+<div class="line raw">* **Clinical Laboratory Profile:**  </div>
+<div class="line raw">    *  Clinical laboratory profile must be within the normal range or have results that do not show clinically significant abnormalities.</div>
+<div class="line raw">* **Contraceptive Use:**</div>
+<div class="line raw">    *  Menstruating women must be of childbearing potential and agree to use an acceptable contraceptive method as described in Section 10.4 of the protocol. </div>
+<div class="line raw">    *  Women who are not menstruating must be confirmed as not pregnant and agree to use an acceptable contraceptive method as described in Section 10.4 of the protocol.</div>
+<div class="line raw">* **Pregnancy Testing:**</div>
+<div class="line raw">    *  Women of childbearing potential must have a negative pregnancy test prior to study entry.</div>
+<div class="line raw">* **No History of:**</div>
+<div class="line raw">    *  Hypertension (not well controlled)</div>
+<div class="line raw">    *  Cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders that could significantly alter the absorption, metabolism, or elimination of drugs.</div>
+<div class="line raw">    *  Positive human immunodeficiency virus (HIV) antibody test.</div>
+<div class="line raw">    *  Positive test result for SARS-CoV-2.</div>
+<div class="line raw">    *  Evidence of hepatitis B virus (HBV) infection (HBsAg positive, HBsAg negative with anti-HBc positive, or HBsAg negative with anti-HBc positive and anti-HBs positive).</div>
+<div class="line raw">    *  History of severe allergic reactions with generalized urticaria, angioedema, or anaphylaxis within 2 years prior to enrollment.</div>
+<div class="line raw">    *  Underlying skin conditions that could interfere with the administration of the study medication.</div>
+<div class="line raw">    *  History of sensitivity to any of the study medications or their components or drugs of their class.</div>
+<div class="line raw">    *  Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear IgA, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).</div>
+<div class="line raw">    *  Current or past use of monoclonal antibodies (mAbs) within 28 days prior to the first dose of study treatment.</div>
+<div class="line raw">    *  Prior exposure to VH3810109 or rHuPH20 in this or another clinical study.</div>
+<div class="line raw">    *  History of donation of blood or blood products exceeding 500 mL within 56 days prior to the first dose of study treatment.</div>
+<div class="line raw">    *  Exposure to live vaccines during the study.</div>
+<div class="line raw">    *  Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZE™ Drug Product (EDP).</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the absorption, metabolism, or elimination of GSK3810109.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of ECG data.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of laboratory tests.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of clinical assessments.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of vital signs.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of physical examinations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study protocol.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study procedures.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study assessments.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study data.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study results.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study conclusions.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study implications.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study significance.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study limitations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study recommendations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study future directions.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study ethical considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study regulatory considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study safety considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study quality considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study feasibility considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study cost considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study logistics considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study personnel considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study infrastructure considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study communication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study data management considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study reporting considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line raw">    *  Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line raw">    *</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants who are overtly healthy as determined by medical evaluation including medical history, physical examination, laboratory tests, and without history of any of the conditions listed in the exclusion criteria.Participants having body weight of ≥50 kilogram (kg) and &lt;100 kgParticipants having a clinical laboratory profile within the normal range or must have results that do not show clinically significant abnormalities, as judged by the investigator at screening.Contraceptive use by men or women participants should be consistent with local regulations regarding the methods of contraception for those participating in clinical studies.Participants who are female at birth are eligible to participate if at least one of the following conditions applies:Not pregnant or breastfeeding and at least one of the following conditions applies:Is not a participant of childbearing potential (POCBP) or Is a POCBP and agree to use an acceptable contraceptive method as described in Section 10.4 from 3 weeks prior to the start of this study and during the study. The investigator should evaluate the effectiveness of the contraceptive method in relationship to the first dose of study intervention.A POCBP must have a negative highly sensitive serum pregnancy test on Day -1, prior to the first dose of study intervention All participants in the study should be counseled on safer sexual practices including the use and benefit/risk of effective barrier methods (e.g., male condom).The investigator is responsible for review of medical history, menstrual history, and recent sexual activity to decrease the risk for inclusion of a POCBP with an early undetected pregnancy.Capable of giving written informed consent.Exclusion Criteria:Hypertension that is not well controlled.History or presence of cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders capable of significantly altering the absorption, metabolism, or elimination of drugs; constituting a risk when taking the study intervention or interfering with the interpretation of data.Positive human immunodeficiency virus (HIV) antibody test.Positive test result for SARS-CoV-2.Evidence of hepatitis B (HB) virus infection at screening or within 3 months prior to first dose of study intervention Participants positive for Hepatitis B antigen (HBsAg) are excluded. Participants negative for anti-HBs but positive for anti-HBc (negative HBsAg status) and positive for Hepatitis B virus (HBV) DNA are excludedAny history of a severe allergic reaction with generalized urticaria, angioedema or anaphylaxis within the 2 years prior to enrollment that has a reasonable risk of recurrence during the study.The participant has an underlying skin disease or disorder (i.e., infection, inflammation, dermatitis, eczema, drug rash, drug allergy, psoriasis, food allergy, urticaria) or tattoos that would interfere with assessment of injection sites.History of sensitivity to any of the study medications or their components or drugs of their class, or a history of drug or other allergy that, in the opinion of the investigator or medical monitor, contraindicates their participation.Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear immunoglobulin A, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).Exposure to an experimental drug, human blood product, or vaccine (which does not have emergency, conditional, or standard market authorization) within 28 days prior to the first dose of study treatment OR plans to receive live vaccines during the study.Prior receipt of licensed or investigational Monoclonal antibody (Mab).Receipt of any investigational study agent within 28 days prior to first dose of study treatmentPrior exposure to VH3810109 or rHuPH20 in this or another clinical study.Where participation in the study would result in donation of blood or blood products in excess of 500 milliliter (mL) within 56 days.Exposure to more than 4 new chemical entities within 12 months prior to the first dosing day.ALT ≥1.5 times the upper limit of normal (ULN).Total bilirubin ≥1.5 times the ULN (isolated total bilirubin &gt;1.5×ULN is acceptable if total bilirubin is fractionated and direct bilirubin &lt;35%).Current or chronic history of liver disease or known hepatic or biliary abnormalities (with the exception of Gilbert&#x27;s syndrome or asymptomatic gallstones)Corrected QT interval Fridericia&#x27;s formula (QTcF)&gt;450 millisecond (msec) for males and QTcF &gt;470 msec for females.The participant has a tattoo or other dermatological condition overlying potential injection sites that may interfere with interpretation of ISRs or administration of VH3810109.Grade 4 laboratory abnormalities.Any other chronic or clinically significant medical condition that in the opinion of investigator would jeopardize the safety or rights of the subject including (but not limited to): diabetes mellitus type I, chronic hepatitis; OR clinically significant forms of drug or alcohol abuse, asthma, autoimmune disease, psychiatric disorders, heart disease, or cancer.Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZ Drug Product (EDP)</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Eligibility Criteria for Version 5 of Clinical Trial Protocol</div>
+<div class="line criterion">2. Based on the provided text from the protocol amendment, here are the modified eligibility criteria for the clinical trial, incorporating the evidence and addressing potential concerns:</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Age: Participants must be 18 years of age or older.</div>
+<div class="line criterion">2. Healthy: Participants must be deemed to be in good health based on a medical evaluation, including a review of medical history, physical examination, and laboratory tests.</div>
+<div class="line criterion">3. Body Weight: Participants must have a body weight of ≥50 kg.</div>
+<div class="line criterion">4. Clinical Laboratory Profile:</div>
+<div class="line criterion">5. Clinical laboratory profile must be within the normal range or have results that do not show clinically significant abnormalities.</div>
+<div class="line criterion">6. Contraceptive Use:</div>
+<div class="line criterion">7. Menstruating women must be of childbearing potential and agree to use an acceptable contraceptive method as described in Section 10.4 of the protocol.</div>
+<div class="line criterion">8. Women who are not menstruating must be confirmed as not pregnant and agree to use an acceptable contraceptive method as described in Section 10.4 of the protocol.</div>
+<div class="line criterion">9. Pregnancy Testing:</div>
+<div class="line criterion">10. Women of childbearing potential must have a negative pregnancy test prior to study entry.</div>
+<div class="line criterion">11. No History of:</div>
+<div class="line criterion">12. Hypertension (not well controlled)</div>
+<div class="line criterion">13. Cardiovascular, respiratory, hepatic, renal, gastrointestinal, endocrine, hematological, or neurological disorders that could significantly alter the absorption, metabolism, or elimination of drugs.</div>
+<div class="line criterion">14. Positive human immunodeficiency virus (HIV) antibody test.</div>
+<div class="line criterion">15. Positive test result for SARS-CoV-2.</div>
+<div class="line criterion">16. Evidence of hepatitis B virus (HBV) infection (HBsAg positive, HBsAg negative with anti-HBc positive, or HBsAg negative with anti-HBc positive and anti-HBs positive).</div>
+<div class="line criterion">17. History of severe allergic reactions with generalized urticaria, angioedema, or anaphylaxis within 2 years prior to enrollment.</div>
+<div class="line criterion">18. Underlying skin conditions that could interfere with the administration of the study medication.</div>
+<div class="line criterion">19. History of sensitivity to any of the study medications or their components or drugs of their class.</div>
+<div class="line criterion">20. Clinically significant multiple or severe drug allergies, intolerance to topical corticosteroids, or severe post-treatment hypersensitivity reactions (including, but not limited to, erythema multiforme major, linear IgA, dermatosis, toxic epidermal necrolysis, and exfoliative dermatitis).</div>
+<div class="line criterion">21. Current or past use of monoclonal antibodies (mAbs) within 28 days prior to the first dose of study treatment.</div>
+<div class="line criterion">22. Prior exposure to VH3810109 or rHuPH20 in this or another clinical study.</div>
+<div class="line criterion">23. History of donation of blood or blood products exceeding 500 mL within 56 days prior to the first dose of study treatment.</div>
+<div class="line criterion">24. Exposure to live vaccines during the study.</div>
+<div class="line criterion">25. Known hypersensitivity to hyaluronidase or any of the excipients in ENHANZE™ Drug Product (EDP).</div>
+<div class="line criterion">26. Current or past use of medications that could interfere with the absorption, metabolism, or elimination of GSK3810109.</div>
+<div class="line criterion">27. Current or past use of medications that could interfere with the interpretation of ECG data.</div>
+<div class="line criterion">28. Current or past use of medications that could interfere with the interpretation of laboratory tests.</div>
+<div class="line criterion">29. Current or past use of medications that could interfere with the interpretation of clinical assessments.</div>
+<div class="line criterion">30. Current or past use of medications that could interfere with the interpretation of vital signs.</div>
+<div class="line criterion">31. Current or past use of medications that could interfere with the interpretation of physical examinations.</div>
+<div class="line criterion">32. Current or past use of medications that could interfere with the interpretation of the study protocol.</div>
+<div class="line criterion">33. Current or past use of medications that could interfere with the interpretation of the study procedures.</div>
+<div class="line criterion">34. Current or past use of medications that could interfere with the interpretation of the study assessments.</div>
+<div class="line criterion">35. Current or past use of medications that could interfere with the interpretation of the study data.</div>
+<div class="line criterion">36. Current or past use of medications that could interfere with the interpretation of the study results.</div>
+<div class="line criterion">37. Current or past use of medications that could interfere with the interpretation of the study conclusions.</div>
+<div class="line criterion">38. Current or past use of medications that could interfere with the interpretation of the study implications.</div>
+<div class="line criterion">39. Current or past use of medications that could interfere with the interpretation of the study significance.</div>
+<div class="line criterion">40. Current or past use of medications that could interfere with the interpretation of the study limitations.</div>
+<div class="line criterion">41. Current or past use of medications that could interfere with the interpretation of the study recommendations.</div>
+<div class="line criterion">42. Current or past use of medications that could interfere with the interpretation of the study future directions.</div>
+<div class="line criterion">43. Current or past use of medications that could interfere with the interpretation of the study ethical considerations.</div>
+<div class="line criterion">44. Current or past use of medications that could interfere with the interpretation of the study regulatory considerations.</div>
+<div class="line criterion">45. Current or past use of medications that could interfere with the interpretation of the study safety considerations.</div>
+<div class="line criterion">46. Current or past use of medications that could interfere with the interpretation of the study quality considerations.</div>
+<div class="line criterion">47. Current or past use of medications that could interfere with the interpretation of the study feasibility considerations.</div>
+<div class="line criterion">48. Current or past use of medications that could interfere with the interpretation of the study cost considerations.</div>
+<div class="line criterion">49. Current or past use of medications that could interfere with the interpretation of the study logistics considerations.</div>
+<div class="line criterion">50. Current or past use of medications that could interfere with the interpretation of the study personnel considerations.</div>
+<div class="line criterion">51. Current or past use of medications that could interfere with the interpretation of the study infrastructure considerations.</div>
+<div class="line criterion">52. Current or past use of medications that could interfere with the interpretation of the study communication considerations.</div>
+<div class="line criterion">53. Current or past use of medications that could interfere with the interpretation of the study data management considerations.</div>
+<div class="line criterion">54. Current or past use of medications that could interfere with the interpretation of the study reporting considerations.</div>
+<div class="line criterion">55. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">56. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">57. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">58. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">59. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">60. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">61. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">62. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">63. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">64. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">65. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">66. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">67. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">68. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">69. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">70. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">71. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">72. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">73. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">74. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">75. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">76. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">77. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">78. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">79. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">80. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">81. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">82. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">83. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">84. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">85. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">86. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">87. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+<div class="line criterion">88. Current or past use of medications that could interfere with the interpretation of the study publication considerations.</div>
+<div class="line criterion">89. Current or past use of medications that could interfere with the interpretation of the study dissemination considerations.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_13.html">&larr; Sample 13</a> | <a href="index.html">Index</a> | <a href="sample_15.html">Sample 15 &rarr;</a>
+</div>
+</body>
+</html>

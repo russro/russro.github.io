@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 47 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 47</h1>
+    <div class="meta">
+        <span>NCT: NCT02684279</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Completion of the treatment period of a dasotraline core study (ie, SEP360 221 or SEP360-321) for the treatment of BED.Subject has agreed to participate by providing written informed consent and is willing and able to comply with the protocol, in the opinion of the investigator.Subject has not taken any medication other than the study drug for the purpose of controlling BED symptoms during the core study.Female subject must have a negative urine pregnancy test at open label (OL) Baseline; females who are post-menopausal (defined as at least 12 months of spontaneous amenorrhea) and those who have undergone hysterectomy or bilateral oophorectomy will be exempted from the pregnancy test.Female subject of childbearing potential and male subject with female partner of childbearing potential must agree to use an effective and medically acceptable form of birth control (see Section 22, Appendix III) throughout the study period. Note: Continued use of an effective and medically acceptable form of birth control is recommended for 30 days after study completion.Subject is judged by the investigator to be suitable for participation in a 12 month clinical trial involving open-label dasotraline treatment.Subject can read well enough to understand the informed consent form and other subject materials.Exclusion Criteria:Subject is considered by the investigator to be at imminent risk of suicide, injury to self or to others, or damage to property.Subject is considered a suicide risk in the investigator&amp;#x27;s opinion or has any previous history of suicide attempt within the past 12 months.Subject answers &amp;quot;yes&amp;quot; to &amp;quot;suicidal ideation&amp;quot; item 4 (active suicidal ideation with some intent to act, without specific plan) or item 5 (active suicidal ideation with specific plan and intent) on the C SSRS assessment at OL Baseline. Subjects who answer &amp;quot;yes&amp;quot; to this question must be referred to the Investigator for follow up evaluation.Subject has a clinically significant abnormality including physical examination, vital signs, ECG, or laboratory tests that the investigator in consultation with the medical monitor considers to be inappropriate to allow participation in the study.Subject has a positive urine drug screen (UDS) or breath alcohol test at OL Baseline.Subject is breastfeeding.Subject is at high risk of non-compliance in the investigator&amp;#x27;s opinion.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">will be performed during the 52-week withdrawal period. 7.2. Randomization and Allocation Randomization will be to 3 groups: 4 mg/day, 6 mg/day, and 8 mg/day. The randomization will be done by study site using a minimally balanced randomization procedure. The number of subjects per group will be approximately 167, with a 1:1:1 ratio. 7.3. Study Design and Sequences The study will be conducted in a double-blind, placebo-controlled manner, but since dasotraline is the active treatment, the study will be a randomized, open-label, single-dose, fixed-dose regimen. 7.3.1. Visit Schedule Visit 1: Day -1 (Accrual) - Day 0 (Day -1) - Day 1 (Day 0) - Day 2 (Day 1) - Day 3 (Day 2) - Day 4 (Day 3) - Day 5 (Day 4) - Day 6 (Day 5) - Day 7 (Day 6) - Day 8 (Day 7) - Day 9 (Day 8) - Day 10 (Day 9) - Day 11 (Day 10) - Day 12 (Day 11) - Day 13 (Day 12) - Day 14 (Day 13) - Day 15 (Day 14) - Day 16 (Day 15) - Day 17 (Day 16) - Day 18 (Day 17) - Day 19 (Day 18) - Day 20 (Day 19) - Day 21 (Day 20) - Day 22 (Day 21) - Day 23 (Day 22) - Day 24 (Day 23) - Day 25 (Day 24) - Day 26 (Day 25) - Day 27 (Day 26) - Day 28 (Day 27) - Day 29 (Day 28) - Day 30 (Day 29) - Day 31 (Day 30) - Day 32 (Day 31) - Day 33 (Day 32) - Day 34 (Day 33) - Day 35 (Day 34) - Day 36 (Day 35) - Day 37 (Day 36) - Day 38 (Day 37) - Day 39 (Day 38) - Day 40 (Day 39) - Day 41 (Day 40) - Day 42 (Day 41) - Day 43 (Day 42) - Day 44 (Day 43) - Day 45 (Day 44) - Day 46 (Day 45) - Day 47 (Day 46) - Day 48 (Day 47) - Day 49 (Day 48) - Day 50 (Day 49) - Day 51 (Day 50) - Day 52 (Day 51) - Day 53 (Day 52) - Day 54 (Day 53) - Day 55 (Day 54) - Day 56 (Day 55) - Day 57 (Day 56) - Day 58 (Day 57) - Day 59 (Day 58) - Day 60 (Day 59) - Day 61 (Day 60) - Day 62 (Day 61) - Day 63 (Day 62) - Day 64 (Day 63) - Day 65 (Day 64) - Day 66 (Day 65) - Day 67 (Day 66) - Day 68 (Day 67) - Day 69 (Day 68) - Day 70 (Day 69) - Day 71 (Day 70) - Day 72 (Day 71) - Day 73 (Day 72) - Day 74 (Day 73) - Day 75 (Day 74) - Day 76 (Day 75) - Day 77 (Day 76) - Day 78 (Day 77) - Day 79 (Day 78) - Day 80 (Day 79) - Day 81 (Day 80) - Day 82 (Day 81) - Day 83 (Day 82) - Day 84 (Day 83) - Day 85 (Day 84) - Day 86 (Day 85) - Day 87 (Day 86) - Day 88 (Day 87) - Day 89 (Day 88) - Day 90 (Day 89) - Day 91 (Day 90) - Day 92 (Day 91) - Day 93 (Day 92) - Day 94 (Day 93) - Day 95 (Day 94) - Day 96 (Day 95) - Day 97 (Day 96) - Day 98 (Day 97) - Day 99 (Day 98) - Day 100 (Day 99) - Day 101 (Day 100) - Day 102 (Day 101) - Day 103 (Day 102) - Day 104 (Day 103) - Day 105 (Day 104) - Day 106 (Day 105) - Day 107 (Day 106) - Day 108 (Day 107) - Day 109 (Day 108) - Day 110 (Day 109) - Day 111 (Day 110) - Day 112 (Day 111) - Day 113 (Day 112) - Day 114 (Day 113) - Day 115 (Day 114) - Day 116 (Day 115) - Day 117 (Day 116) - Day 118 (Day 117) - Day 119 (Day 118) - Day 120 (Day 119) - Day 121 (Day 120) - Day 122 (Day 119) - Day 123 (Day 120) - Day 124 (Day 121) - Day 125 (Day 122) - Day 126 (Day 123) - Day 127 (Day 124) - Day 128 (Day 125) - Day 129 (Day 126) - Day 130 (Day 127) - Day 131 (Day 128) - Day 132 (Day 129) - Day 133 (Day 130) - Day 134 (Day 131) - Day 135 (Day 132) - Day 136 (Day 133) - Day 137 (Day 134) - Day 138 (Day 135) - Day 139 (Day 136) - Day 140 (Day 137) - Day 141 (Day 138) - Day 142 (Day 139) - Day 143 (Day 140) - Day 144 (Day 141) - Day 145 (Day 142) - Day 146 (Day 143) - Day 147 (Day 144) - Day 148 (Day 145) - Day 149 (Day 146) - Day 150 (Day 147) - Day 151 (Day 148) - Day 152 (Day 149) - Day 153 (Day 150) - Day 154 (Day 151) - Day 155 (Day 152) - Day 156 (Day 153) - Day 157 (Day 154) - Day 158 (Day 155) - Day 159 (Day 156) - Day 160 (Day 157) - Day 161 (Day 158) -</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Completion of the treatment period of a dasotraline core study (ie, SEP360 221 or SEP360-321) for the treatment of BED.Subject has agreed to participate by providing written informed consent and is willing and able to comply with the protocol, in the opinion of the investigator.Subject has not taken any medication other than the study drug for the purpose of controlling BED symptoms during the core study.Female subject must have a negative urine pregnancy test at open label (OL) Baseline; females who are post-menopausal (defined as at least 12 months of spontaneous amenorrhea) and those who have undergone hysterectomy or bilateral oophorectomy will be exempted from the pregnancy test.Female subject of childbearing potential and male subject with female partner of childbearing potential must agree to use an effective and medically acceptable form of birth control (see Section 22, Appendix III) throughout the study period. Note: Continued use of an effective and medically acceptable form of birth control is recommended for 30 days after study completion.Subject is judged by the investigator to be suitable for participation in a 12 month clinical trial involving open-label dasotraline treatment.Subject can read well enough to understand the informed consent form and other subject materials.Exclusion Criteria:Subject is considered by the investigator to be at imminent risk of suicide, injury to self or to others, or damage to property.Subject is considered a suicide risk in the investigator&#x27;s opinion or has any previous history of suicide attempt within the past 12 months.Subject answers &quot;yes&quot; to &quot;suicidal ideation&quot; item 4 (active suicidal ideation with some intent to act, without specific plan) or item 5 (active suicidal ideation with specific plan and intent) on the C SSRS assessment at OL Baseline. Subjects who answer &quot;yes&quot; to this question must be referred to the Investigator for follow up evaluation.Subject has a clinically significant abnormality including physical examination, vital signs, ECG, or laboratory tests that the investigator in consultation with the medical monitor considers to be inappropriate to allow participation in the study.Subject has a positive urine drug screen (UDS) or breath alcohol test at OL Baseline.Subject is breastfeeding.Subject is at high risk of non-compliance in the investigator&#x27;s opinion.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. will be performed during the 52-week withdrawal period. 7.2.</div>
+<div class="line criterion">2. Randomization and Allocation Randomization will be to 3 groups: 4 mg/day, 6 mg/day, and 8 mg/day.</div>
+<div class="line criterion">3. The randomization will be done by study site using a minimally balanced randomization procedure.</div>
+<div class="line criterion">4. The number of subjects per group will be approximately 167, with a 1:1:1 ratio. 7.3.</div>
+<div class="line criterion">5. Study Design and Sequences The study will be conducted in a double-blind, placebo-controlled manner, but since dasotraline is the active treatment, the study will be a randomized, open-label, single-dose, fixed-dose regimen. 7.3.1.</div>
+<div class="line criterion">6. Visit Schedule Visit 1: Day -1 (Accrual) - Day 0 (Day -1) - Day 1 (Day 0) - Day 2 (Day 1) - Day 3 (Day 2) - Day 4 (Day 3) - Day 5 (Day 4) - Day 6 (Day 5) - Day 7 (Day 6) - Day 8 (Day 7) - Day 9 (Day 8) - Day 10 (Day 9) - Day 11 (Day 10) - Day 12 (Day 11) - Day 13 (Day 12) - Day 14 (Day 13) - Day 15 (Day 14) - Day 16 (Day 15) - Day 17 (Day 16) - Day 18 (Day 17) - Day 19 (Day 18) - Day 20 (Day 19) - Day 21 (Day 20) - Day 22 (Day 21) - Day 23 (Day 22) - Day 24 (Day 23) - Day 25 (Day 24) - Day 26 (Day 25) - Day 27 (Day 26) - Day 28 (Day 27) - Day 29 (Day 28) - Day 30 (Day 29) - Day 31 (Day 30) - Day 32 (Day 31) - Day 33 (Day 32) - Day 34 (Day 33) - Day 35 (Day 34) - Day 36 (Day 35) - Day 37 (Day 36) - Day 38 (Day 37) - Day 39 (Day 38) - Day 40 (Day 39) - Day 41 (Day 40) - Day 42 (Day 41) - Day 43 (Day 42) - Day 44 (Day 43) - Day 45 (Day 44) - Day 46 (Day 45) - Day 47 (Day 46) - Day 48 (Day 47) - Day 49 (Day 48) - Day 50 (Day 49) - Day 51 (Day 50) - Day 52 (Day 51) - Day 53 (Day 52) - Day 54 (Day 53) - Day 55 (Day 54) - Day 56 (Day 55) - Day 57 (Day 56) - Day 58 (Day 57) - Day 59 (Day 58) - Day 60 (Day 59) - Day 61 (Day 60) - Day 62 (Day 61) - Day 63 (Day 62) - Day 64 (Day 63) - Day 65 (Day 64) - Day 66 (Day 65) - Day 67 (Day 66) - Day 68 (Day 67) - Day 69 (Day 68) - Day 70 (Day 69) - Day 71 (Day 70) - Day 72 (Day 71) - Day 73 (Day 72) - Day 74 (Day 73) - Day 75 (Day 74) - Day 76 (Day 75) - Day 77 (Day 76) - Day 78 (Day 77) - Day 79 (Day 78) - Day 80 (Day 79) - Day 81 (Day 80) - Day 82 (Day 81) - Day 83 (Day 82) - Day 84 (Day 83) - Day 85 (Day 84) - Day 86 (Day 85) - Day 87 (Day 86) - Day 88 (Day 87) - Day 89 (Day 88) - Day 90 (Day 89) - Day 91 (Day 90) - Day 92 (Day 91) - Day 93 (Day 92) - Day 94 (Day 93) - Day 95 (Day 94) - Day 96 (Day 95) - Day 97 (Day 96) - Day 98 (Day 97) - Day 99 (Day 98) - Day 100 (Day 99) - Day 101 (Day 100) - Day 102 (Day 101) - Day 103 (Day 102) - Day 104 (Day 103) - Day 105 (Day 104) - Day 106 (Day 105) - Day 107 (Day 106) - Day 108 (Day 107) - Day 109 (Day 108) - Day 110 (Day 109) - Day 111 (Day 110) - Day 112 (Day 111) - Day 113 (Day 112) - Day 114 (Day 113) - Day 115 (Day 114) - Day 116 (Day 115) - Day 117 (Day 116) - Day 118 (Day 117) - Day 119 (Day 118) - Day 120 (Day 119) - Day 121 (Day 120) - Day 122 (Day 119) - Day 123 (Day 120) - Day 124 (Day 121) - Day 125 (Day 122) - Day 126 (Day 123) - Day 127 (Day 124) - Day 128 (Day 125) - Day 129 (Day 126) - Day 130 (Day 127) - Day 131 (Day 128) - Day 132 (Day 129) - Day 133 (Day 130) - Day 134 (Day 131) - Day 135 (Day 132) - Day 136 (Day 133) - Day 137 (Day 134) - Day 138 (Day 135) - Day 139 (Day 136) - Day 140 (Day 137) - Day 141 (Day 138) - Day 142 (Day 139) - Day 143 (Day 140) - Day 144 (Day 141) - Day 145 (Day 142) - Day 146 (Day 143) - Day 147 (Day 144) - Day 148 (Day 145) - Day 149 (Day 146) - Day 150 (Day 147) - Day 151 (Day 148) - Day 152 (Day 149) - Day 153 (Day 150) - Day 154 (Day 151) - Day 155 (Day 152) - Day 156 (Day 153) - Day 157 (Day 154) - Day 158 (Day 155) - Day 159 (Day 156) - Day 160 (Day 157) - Day 161 (Day 158) -</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_46.html">&larr; Sample 46</a> | <a href="index.html">Index</a> | <a href="sample_48.html">Sample 48 &rarr;</a>
+</div>
+</body>
+</html>

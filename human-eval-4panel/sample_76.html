@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 76 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 76</h1>
+    <div class="meta">
+        <span>NCT: NCT05953363</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Any patient, regardless of age or gender, for which the investigator has decided that a neuraxial procedure must be performed utilizing BD NRFit™ Spinal Needles, NRFit™ Spinal Introducer Needles, and NRFit™ Syringes as part of their routine medical care.Expected to be available for observation through the study period (10 days, ± 3 days, post procedure*).Able and willing to provide signed and dated informed consent or legal authorized representative (LAR) authorized to give consent on behalf of the participant (Note: Consent of guardian or parent may be required for participants under the age of 18 years; participant assent may be required as well).Exclusion Criteria:Coagulopathy or bleeding disorder, where it is in the opinion of the investigator makes regional anesthetic of increased risk.Subjects with a history of neurological impairment of the trunk or lower extremities.Infection at the site of needle insertion.Previous spine surgery at the level involved in the study procedure.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">**Eligibility Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**1. Any patient, regardless of age or gender, for which the investigator has decided that a neuraxial procedure must be performed utilizing BD NRFit™ Spinal Needles, NRFit™ Spinal Introducer Needles, and NRFit™ Syringes as part of their routine medical care.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **2. Expected to be available for observation through the study period (10 days, ± 3 days, post procedure).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **3. Able and willing to provide signed and dated informed consent or legal authorized representative (LAR) authorized to give consent on behalf of the participant (Note: Consent of guardian or parent may be required for participants under the age of 18 years; participant assent may be required as well).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**4. Medical history, demographic and baseline information is collected.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **5. Limited medical history, including coagulopathy or bleeding disorder, history of neurological impairment of the trunk or lower extremities, infection at the site of needle insertion, previous spine surgery at the level involved in the study procedure, and previous history of chronic or recurrent headaches.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **6. Infection at the site of needle insertion.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **7. Previous spine surgery at the level involved in the study procedure.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.1. Coagulopathy or bleeding disorder, where it is in the opinion of the investigator makes regional anesthetic of increased risk.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.2. Subjects with a history of neurological impairment of the trunk or lower extremities.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.3. Infection at the site of needle insertion.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.4. Previous spine surgery at the level involved in the study procedure.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.5. History of chronic or recurring headaches.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.6. Spine deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.7. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.8. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.9. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.10. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.11. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.12. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.13. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.14. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.15. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.16. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.17. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.18. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.19. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.20. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.21. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.22. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.23. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.24. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.25. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.26. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.27. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.28. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.29. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.30. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.31. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.32. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.33. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.34. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.35. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.36. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.37. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.38. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.39. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.40. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.41. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.42. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.43. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.44. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.45. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.46. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.47. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.48. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.49. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.50. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.51. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.52. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.53. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.54. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.55. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.56. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.57. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.58. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.59. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.60. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.61. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.62. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.63. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.64. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.65. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.66. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.67. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.68. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.69. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.70. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.71. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.72. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.73. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.74. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.75. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.76. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.77. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">   **8. 3.78. Spinal deform</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Any patient, regardless of age or gender, for which the investigator has decided that a neuraxial procedure must be performed utilizing BD NRFit™ Spinal Needles, NRFit™ Spinal Introducer Needles, and NRFit™ Syringes as part of their routine medical care.Expected to be available for observation through the study period (10 days, ± 3 days, post procedure*).Able and willing to provide signed and dated informed consent or legal authorized representative (LAR) authorized to give consent on behalf of the participant (Note: Consent of guardian or parent may be required for participants under the age of 18 years; participant assent may be required as well).Exclusion Criteria:Coagulopathy or bleeding disorder, where it is in the opinion of the investigator makes regional anesthetic of increased risk.Subjects with a history of neurological impairment of the trunk or lower extremities.Infection at the site of needle insertion.Previous spine surgery at the level involved in the study procedure.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Eligibility Criteria:</div>
+<div class="line criterion">2. *1.</div>
+<div class="line criterion">3. Any patient, regardless of age or gender, for which the investigator has decided that a neuraxial procedure must be performed utilizing BD NRFit™ Spinal Needles, NRFit™ Spinal Introducer Needles, and NRFit™ Syringes as part of their routine medical care.</div>
+<div class="line criterion">4. *2.</div>
+<div class="line criterion">5. Expected to be available for observation through the study period (10 days, ± 3 days, post procedure).</div>
+<div class="line criterion">6. *3.</div>
+<div class="line criterion">7. Able and willing to provide signed and dated informed consent or legal authorized representative (LAR) authorized to give consent on behalf of the participant (Note: Consent of guardian or parent may be required for participants under the age of 18 years; participant assent may be required as well).</div>
+<div class="line criterion">8. *4.</div>
+<div class="line criterion">9. Medical history, demographic and baseline information is collected.</div>
+<div class="line criterion">10. *5.</div>
+<div class="line criterion">11. Limited medical history, including coagulopathy or bleeding disorder, history of neurological impairment of the trunk or lower extremities, infection at the site of needle insertion, previous spine surgery at the level involved in the study procedure, and previous history of chronic or recurrent headaches.</div>
+<div class="line criterion">12. *6.</div>
+<div class="line criterion">13. Infection at the site of needle insertion.</div>
+<div class="line criterion">14. *7.</div>
+<div class="line criterion">15. Previous spine surgery at the level involved in the study procedure.</div>
+<div class="line criterion">16. *8. 3.1.</div>
+<div class="line criterion">17. Coagulopathy or bleeding disorder, where it is in the opinion of the investigator makes regional anesthetic of increased risk.</div>
+<div class="line criterion">18. *8. 3.2.</div>
+<div class="line criterion">19. Subjects with a history of neurological impairment of the trunk or lower extremities.</div>
+<div class="line criterion">20. *8. 3.3.</div>
+<div class="line criterion">21. Infection at the site of needle insertion.</div>
+<div class="line criterion">22. *8. 3.4.</div>
+<div class="line criterion">23. Previous spine surgery at the level involved in the study procedure.</div>
+<div class="line criterion">24. *8. 3.5.</div>
+<div class="line criterion">25. History of chronic or recurring headaches.</div>
+<div class="line criterion">26. *8. 3.6.</div>
+<div class="line criterion">27. Spine deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">28. *8. 3.7.</div>
+<div class="line criterion">29. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">30. *8. 3.8.</div>
+<div class="line criterion">31. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">32. *8. 3.9.</div>
+<div class="line criterion">33. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">34. *8. 3.10.</div>
+<div class="line criterion">35. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">36. *8. 3.11.</div>
+<div class="line criterion">37. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">38. *8. 3.12.</div>
+<div class="line criterion">39. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">40. *8. 3.13.</div>
+<div class="line criterion">41. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">42. *8. 3.14.</div>
+<div class="line criterion">43. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">44. *8. 3.15.</div>
+<div class="line criterion">45. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">46. *8. 3.16.</div>
+<div class="line criterion">47. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">48. *8. 3.17.</div>
+<div class="line criterion">49. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">50. *8. 3.18.</div>
+<div class="line criterion">51. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">52. *8. 3.19.</div>
+<div class="line criterion">53. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">54. *8. 3.20.</div>
+<div class="line criterion">55. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">56. *8. 3.21.</div>
+<div class="line criterion">57. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">58. *8. 3.22.</div>
+<div class="line criterion">59. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">60. *8. 3.23.</div>
+<div class="line criterion">61. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">62. *8. 3.24.</div>
+<div class="line criterion">63. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">64. *8. 3.25.</div>
+<div class="line criterion">65. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">66. *8. 3.26.</div>
+<div class="line criterion">67. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">68. *8. 3.27.</div>
+<div class="line criterion">69. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">70. *8. 3.28.</div>
+<div class="line criterion">71. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">72. *8. 3.29.</div>
+<div class="line criterion">73. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">74. *8. 3.30.</div>
+<div class="line criterion">75. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">76. *8. 3.31.</div>
+<div class="line criterion">77. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">78. *8. 3.32.</div>
+<div class="line criterion">79. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">80. *8. 3.33.</div>
+<div class="line criterion">81. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">82. *8. 3.34.</div>
+<div class="line criterion">83. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">84. *8. 3.35.</div>
+<div class="line criterion">85. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">86. *8. 3.36.</div>
+<div class="line criterion">87. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">88. *8. 3.37.</div>
+<div class="line criterion">89. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">90. *8. 3.38.</div>
+<div class="line criterion">91. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">92. *8. 3.39.</div>
+<div class="line criterion">93. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">94. *8. 3.40.</div>
+<div class="line criterion">95. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">96. *8. 3.41.</div>
+<div class="line criterion">97. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">98. *8. 3.42.</div>
+<div class="line criterion">99. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">100. *8. 3.43.</div>
+<div class="line criterion">101. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">102. *8. 3.44.</div>
+<div class="line criterion">103. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">104. *8. 3.45.</div>
+<div class="line criterion">105. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">106. *8. 3.46.</div>
+<div class="line criterion">107. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">108. *8. 3.47.</div>
+<div class="line criterion">109. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">110. *8. 3.48.</div>
+<div class="line criterion">111. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">112. *8. 3.49.</div>
+<div class="line criterion">113. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">114. *8. 3.50.</div>
+<div class="line criterion">115. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">116. *8. 3.51.</div>
+<div class="line criterion">117. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">118. *8. 3.52.</div>
+<div class="line criterion">119. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">120. *8. 3.53.</div>
+<div class="line criterion">121. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">122. *8. 3.54.</div>
+<div class="line criterion">123. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">124. *8. 3.55.</div>
+<div class="line criterion">125. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">126. *8. 3.56.</div>
+<div class="line criterion">127. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">128. *8. 3.57.</div>
+<div class="line criterion">129. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">130. *8. 3.58.</div>
+<div class="line criterion">131. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">132. *8. 3.59.</div>
+<div class="line criterion">133. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">134. *8. 3.60.</div>
+<div class="line criterion">135. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">136. *8. 3.61.</div>
+<div class="line criterion">137. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">138. *8. 3.62.</div>
+<div class="line criterion">139. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">140. *8. 3.63.</div>
+<div class="line criterion">141. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">142. *8. 3.64.</div>
+<div class="line criterion">143. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">144. *8. 3.65.</div>
+<div class="line criterion">145. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">146. *8. 3.66.</div>
+<div class="line criterion">147. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">148. *8. 3.67.</div>
+<div class="line criterion">149. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">150. *8. 3.68.</div>
+<div class="line criterion">151. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">152. *8. 3.69.</div>
+<div class="line criterion">153. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">154. *8. 3.70.</div>
+<div class="line criterion">155. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">156. *8. 3.71.</div>
+<div class="line criterion">157. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">158. *8. 3.72.</div>
+<div class="line criterion">159. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">160. *8. 3.73.</div>
+<div class="line criterion">161. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">162. *8. 3.74.</div>
+<div class="line criterion">163. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">164. *8. 3.75.</div>
+<div class="line criterion">165. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">166. *8. 3.76.</div>
+<div class="line criterion">167. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">168. *8. 3.77.</div>
+<div class="line criterion">169. Spinal deformity (kyphosis/scoliosis).</div>
+<div class="line criterion">170. *8. 3.78.</div>
+<div class="line criterion">171. Spinal deform</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_75.html">&larr; Sample 75</a> | <a href="index.html">Index</a> | <a href="sample_77.html">Sample 77 &rarr;</a>
+</div>
+</body>
+</html>

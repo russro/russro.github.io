@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 124 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 124</h1>
+    <div class="meta">
+        <span>NCT: NCT05174065</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Key Inclusion CriteriaJapanese participants ≥ 18 years of age upon entry into initial screeningPalmoplantar pustulosis diagnosis with or without pustulotic arthro-osteitis (PAO) for no less than 24 weeksPPPASI total score of ≥12 at screening and at baselineModerate or severe pustules&amp;#x2F;vesicles on palms or soles (PPPASI severity score ≥2) at screening and at baselineInadequate response (defined as repeated relapsing-remitting in the same location for a 24-week period) to topical treatments prior to or at screeningKey Exclusion CriteriaChanges in disease severity during screening (PPPASI total score change ≥ 5 improvement, from screening to baseline)Periodontitis requiring treatmentChronic or recurrent tonsillitis or sinusitis requiring any continuous treatmentHas a diagnosis of plaque-type psoriasis at baselineHas the presence of pustular psoriasis on any part of the body other than the palms and solesHas evidence of skin conditions of hand and feet at baseline that would interfere with evaluations of the effect of Investigational ProductHas unstable cardiovascular disease, defined as a recent clinical deterioration or a cardiac hospitalization within 12 weeks prior to screeningMalignancy or history of malignancyParticipant has received any procedures for focal infection within 24 weeks of baselineFemale participants who are breastfeeding or who plan to breastfeed while on studyFemale participants of childbearing potential with a positive pregnancy testHad prior treatment with apremilastHas a prior medical history of suicide attempt at any time in the participant&amp;#x27;s lifetime prior to signing of informed consent or randomization, or major psychiatric illness requiring hospitalization within the last 3 years prior to signing of informed consent</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Key Inclusion Criteria</div>
+<div class="line raw">- Japanese participants ≥ 18 years of age upon entry into initial screening</div>
+<div class="line raw">- Palmoplantar pustulosis diagnosis with or without pustulotic arthro-osteitis (PAO) for no less than 24 weeks</div>
+<div class="line raw">- PPPASI total score of ≥12 at screening and at baseline</div>
+<div class="line raw">- Moderate or severe pustules/vesicles on palms or soles (PPPASI severity score ≥2) at screening and at baseline</div>
+<div class="line raw">- Inadequate response to topical treatments prior to or at screening</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Key Exclusion Criteria</div>
+<div class="line raw">- Changes in disease severity during screening (PPPASI total score change ≥ 5 improvement, from screening to baseline)</div>
+<div class="line raw">- Periodontitis requiring treatment</div>
+<div class="line raw">- Chronic or recurrent tonsillitis or sinusitis requiring any continuous treatment</div>
+<div class="line raw">- Has a diagnosis of plaque-type psoriasis at baseline</div>
+<div class="line raw">- Has the presence of pustular psoriasis on any part of the body other than the palms and soles</div>
+<div class="line raw">- Has evidence of skin conditions of hand and feet at baseline that would interfere with evaluations of the effect of Investigational Product</div>
+<div class="line raw">- Unstable cardiovascular disease, defined as a recent clinical deterioration or a cardiac hospitalization within 12 weeks prior to screening</div>
+<div class="line raw">- Malignancy or history of malignancy</div>
+<div class="line raw">- Participant has received any procedures for focal infection within 24 weeks of baseline</div>
+<div class="line raw">- Female participants who are breastfeeding or who plan to breastfeed while on study</div>
+<div class="line raw">- Female participants of childbearing potential with a positive pregnancy test</div>
+<div class="line raw">- Had prior treatment with apremilast</div>
+<div class="line raw">- Has a prior medical history of suicide attempt at any time in the participant&#x27;s lifetime prior to signing of informed consent or randomization, or major psychiatric illness requiring hospitalization within the last 3 years prior to signing of informed consent</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Key Inclusion CriteriaJapanese participants ≥ 18 years of age upon entry into initial screeningPalmoplantar pustulosis diagnosis with or without pustulotic arthro-osteitis (PAO) for no less than 24 weeksPPPASI total score of ≥12 at screening and at baselineModerate or severe pustules/vesicles on palms or soles (PPPASI severity score ≥2) at screening and at baselineInadequate response (defined as repeated relapsing-remitting in the same location for a 24-week period) to topical treatments prior to or at screeningKey Exclusion CriteriaChanges in disease severity during screening (PPPASI total score change ≥ 5 improvement, from screening to baseline)Periodontitis requiring treatmentChronic or recurrent tonsillitis or sinusitis requiring any continuous treatmentHas a diagnosis of plaque-type psoriasis at baselineHas the presence of pustular psoriasis on any part of the body other than the palms and solesHas evidence of skin conditions of hand and feet at baseline that would interfere with evaluations of the effect of Investigational ProductHas unstable cardiovascular disease, defined as a recent clinical deterioration or a cardiac hospitalization within 12 weeks prior to screeningMalignancy or history of malignancyParticipant has received any procedures for focal infection within 24 weeks of baselineFemale participants who are breastfeeding or who plan to breastfeed while on studyFemale participants of childbearing potential with a positive pregnancy testHad prior treatment with apremilastHas a prior medical history of suicide attempt at any time in the participant&#x27;s lifetime prior to signing of informed consent or randomization, or major psychiatric illness requiring hospitalization within the last 3 years prior to signing of informed consent</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Key Inclusion Criteria</div>
+<div class="line criterion">2. Japanese participants ≥ 18 years of age upon entry into initial screening</div>
+<div class="line criterion">3. Palmoplantar pustulosis diagnosis with or without pustulotic arthro-osteitis (PAO) for no less than 24 weeks</div>
+<div class="line criterion">4. PPPASI total score of ≥12 at screening and at baseline</div>
+<div class="line criterion">5. Moderate or severe pustules/vesicles on palms or soles (PPPASI severity score ≥2) at screening and at baseline</div>
+<div class="line criterion">6. Inadequate response to topical treatments prior to or at screening</div>
+<div class="line criterion">7. Key Exclusion Criteria</div>
+<div class="line criterion">8. Changes in disease severity during screening (PPPASI total score change ≥ 5 improvement, from screening to baseline)</div>
+<div class="line criterion">9. Periodontitis requiring treatment</div>
+<div class="line criterion">10. Chronic or recurrent tonsillitis or sinusitis requiring any continuous treatment</div>
+<div class="line criterion">11. Has a diagnosis of plaque-type psoriasis at baseline</div>
+<div class="line criterion">12. Has the presence of pustular psoriasis on any part of the body other than the palms and soles</div>
+<div class="line criterion">13. Has evidence of skin conditions of hand and feet at baseline that would interfere with evaluations of the effect of Investigational Product</div>
+<div class="line criterion">14. Unstable cardiovascular disease, defined as a recent clinical deterioration or a cardiac hospitalization within 12 weeks prior to screening</div>
+<div class="line criterion">15. Malignancy or history of malignancy</div>
+<div class="line criterion">16. Participant has received any procedures for focal infection within 24 weeks of baseline</div>
+<div class="line criterion">17. Female participants who are breastfeeding or who plan to breastfeed while on study</div>
+<div class="line criterion">18. Female participants of childbearing potential with a positive pregnancy test</div>
+<div class="line criterion">19. Had prior treatment with apremilast</div>
+<div class="line criterion">20. Has a prior medical history of suicide attempt at any time in the participant&#x27;s lifetime prior to signing of informed consent or randomization, or major psychiatric illness requiring hospitalization within the last 3 years prior to signing of informed consent</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_123.html">&larr; Sample 123</a> | <a href="index.html">Index</a> | <a href="sample_125.html">Sample 125 &rarr;</a>
+</div>
+</body>
+</html>

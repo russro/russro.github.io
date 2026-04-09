@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 139 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 139</h1>
+    <div class="meta">
+        <span>NCT: NCT02394028</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Moderately to severely active CD as determined by the CDAI, patient reported outcomes and endoscopically defined disease activity in the ileum and&amp;#x2F;or colonIntolerance, refractory disease, or no response to CS, IS, or anti-TNF therapy within 5 years from screening. Participants who have not previously demonstrated inadequate response or intolerance to one or more anti-TNF therapies are eligible to participate in the study provided they are intolerant or refractory to CS or IS therapyUse of effective contraception as defined by the protocolExclusion Criteria:A history of, or current conditions affecting the digestive tract, such as ulcerative colitis, indeterminate colitis, fistulizing disease, abdominal or perianal abscess, adenomatous colonic polyps not excised, colonic mucosal dysplasia, and short bowel syndromePlanned surgery for CDIleostomy or colostomyHas received non-permitted inflammatory bowel disease (IBD) therapies (including natalizumab, vedolizumab, and efalizumab, as stated in the protocol)Any prior treatment with ustekinumab within 14 weeks prior to randomizationChronic hepatitis B or C infection, human immunodeficiency virus (HIV), active or latent tuberculosis (participants with prior history of Bacillus Calmette-Guérin [BCG] vaccination must pass protocol-defined screening criteria)Sinus tract with evidence for infection (e.g., purulent discharge) in the clinical judgment of the investigator. Fistulas related to CD are not exclusionaryAny prior treatment with anti-adhesion molecules (e.g., anti-mucosal addressin cell adhesion molecule [anti-MAdCAM-1])Any major episode of infection requiring treatment with intravenous antibiotics &amp;lt;&amp;#x2F;=8 weeks prior to screening or oral antibiotics &amp;lt;&amp;#x2F;=4 weeks prior to screening. Treatment with antibiotics as adjunctive therapy for CD in the absence of documented infection is not exclusionaryHospitalization (other than for elective reasons) within 4 weeks prior to randomization</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Modified Eligibility Criteria (version 23):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- 18-80 years of age (inclusive)</div>
+<div class="line raw">- Moderately to severely active Crohn&#x27;s disease as determined by the Crohn&#x27;s Disease Activity Index (CDAI), patient-reported outcomes, and endoscopically defined disease activity in the ileum and/or colon, with a CDAI score between ≥220 and ≤480, and either an average stool frequency (SF) ≥6 or an average SF &gt;3 and average abdominal pain (AP) &gt;1, calculated using electronic diary (e-diary) PRO data from the 7 days prior to randomization. Active inflammation defined as a Simple Endoscopic Score for Crohn’s Disease (SES-CD) of ≥7, or ≥4 in cases of isolated ileitis or post-ileocecal resection.</div>
+<div class="line raw">- Intolerance, loss of response, or failure to respond to corticosteroids (CS), immunosuppressants (IS), or TNF inhibitors within the previous 5 years, with specific criteria for refractory and intolerance as defined in the protocol.</div>
+<div class="line raw">- Use of effective contraception as defined by the protocol, including agreement to remain abstinent or use a highly effective method of contraception for the duration of the study and for at least 24 weeks after the last dose of study drug.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- A history of, or current conditions affecting the digestive tract, such as ulcerative colitis, indeterminate colitis, fistulizing disease, abdominal or perianal abscess, adenomatous colonic polyps not excised, colonic mucosal dysplasia, and short bowel syndrome.</div>
+<div class="line raw">- Planned surgery for Crohn&#x27;s Disease.</div>
+<div class="line raw">- Ileostomy or colostomy.</div>
+<div class="line raw">- Has received non-permitted inflammatory bowel disease (IBD) therapies (including natalizumab, vedolizumab, and efalizumab, as stated in the protocol).</div>
+<div class="line raw">- Chronic hepatitis B or C infection, HIV, active or latent tuberculosis (patients with prior history of BCG vaccination must pass protocol-defined screening criteria).</div>
+<div class="line raw">- Positive stool test result for ova or parasites or positive stool culture for pathogens at time of screening.</div>
+<div class="line raw">- Evidence of infection with and/or treatment for Clostridium difficile or other intestinal pathogen treatment within 8 weeks prior to randomization.</div>
+<div class="line raw">- History of recurrent opportunistic infections and/or history of severe or disseminated viral infections.</div>
+<div class="line raw">- Any major episode of infection requiring treatment with IV antibiotics ≤8 weeks prior to screening or oral antibiotics ≤4 weeks prior to screening.</div>
+<div class="line raw">- Significant uncontrolled comorbidity such as neurological, cardiac (e.g., moderate to severe heart failure New York Heart Association Class III/IV), pulmonary, renal, hepatic, endocrine, or GI disorders (other than Crohn&#x27;s Disease).</div>
+<div class="line raw">- Neurological conditions or diseases that may interfere with monitoring for progressive multifocal leukoencephalopathy (PML).</div>
+<div class="line raw">- History of demyelinating disease.</div>
+<div class="line raw">- History of major neurological disorders, including stroke, multiple sclerosis, brain tumor, neurodegenerative disease, or poorly controlled epilepsy.</div>
+<div class="line raw">- History of alcohol, drug, or chemical abuse ≤6 months prior to screening.</div>
+<div class="line raw">- Conditions other than Crohn&#x27;s Disease that could require treatment with &gt;20 mg/day of prednisone (or equivalent) during the course of the study.</div>
+<div class="line raw">- History of cancer, including hematologic malignancy, solid tumors, and carcinoma in situ within 5 years before screening, with specific exceptions as defined in the protocol.</div>
+<div class="line raw">- History of cervical smear result at any time that indicated the presence of adenocarcinoma in situ (AIS), high-grade squamous intraepithelial lesions (HSIL), or cervical intraepithelial neoplasia (CIN) of Grade &gt;1.</div>
+<div class="line raw">- History of organ transplant or cell transplantation.</div>
+<div class="line raw">- Presence of metal in the body that could pose a hazard during any potential scanning in patients for whom a magnetic resonance imaging (MRI) scan is considered unsafe.</div>
+<div class="line raw">- Impaired hepatic function defined by specific laboratory values as outlined in the protocol.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Moderately to severely active CD as determined by the CDAI, patient reported outcomes and endoscopically defined disease activity in the ileum and/or colonIntolerance, refractory disease, or no response to CS, IS, or anti-TNF therapy within 5 years from screening. Participants who have not previously demonstrated inadequate response or intolerance to one or more anti-TNF therapies are eligible to participate in the study provided they are intolerant or refractory to CS or IS therapyUse of effective contraception as defined by the protocolExclusion Criteria:A history of, or current conditions affecting the digestive tract, such as ulcerative colitis, indeterminate colitis, fistulizing disease, abdominal or perianal abscess, adenomatous colonic polyps not excised, colonic mucosal dysplasia, and short bowel syndromePlanned surgery for CDIleostomy or colostomyHas received non-permitted inflammatory bowel disease (IBD) therapies (including natalizumab, vedolizumab, and efalizumab, as stated in the protocol)Any prior treatment with ustekinumab within 14 weeks prior to randomizationChronic hepatitis B or C infection, human immunodeficiency virus (HIV), active or latent tuberculosis (participants with prior history of Bacillus Calmette-Guérin [BCG] vaccination must pass protocol-defined screening criteria)Sinus tract with evidence for infection (e.g., purulent discharge) in the clinical judgment of the investigator. Fistulas related to CD are not exclusionaryAny prior treatment with anti-adhesion molecules (e.g., anti-mucosal addressin cell adhesion molecule [anti-MAdCAM-1])Any major episode of infection requiring treatment with intravenous antibiotics &lt;/=8 weeks prior to screening or oral antibiotics &lt;/=4 weeks prior to screening. Treatment with antibiotics as adjunctive therapy for CD in the absence of documented infection is not exclusionaryHospitalization (other than for elective reasons) within 4 weeks prior to randomization</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Eligibility Criteria (version 23):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. 18-80 years of age (inclusive)</div>
+<div class="line criterion">2. Moderately to severely active Crohn&#x27;s disease as determined by the Crohn&#x27;s Disease Activity Index (CDAI), patient-reported outcomes, and endoscopically defined disease activity in the ileum and/or colon, with a CDAI score between ≥220 and ≤480, and either an average stool frequency (SF) ≥6 or an average SF &gt;3 and average abdominal pain (AP) &gt;1, calculated using electronic diary (e-diary) PRO data from the 7 days prior to randomization. Active inflammation defined as a Simple Endoscopic Score for Crohn’s Disease (SES-CD) of ≥7, or ≥4 in cases of isolated ileitis or post-ileocecal resection.</div>
+<div class="line criterion">3. Intolerance, loss of response, or failure to respond to corticosteroids (CS), immunosuppressants (IS), or TNF inhibitors within the previous 5 years, with specific criteria for refractory and intolerance as defined in the protocol.</div>
+<div class="line criterion">4. Use of effective contraception as defined by the protocol, including agreement to remain abstinent or use a highly effective method of contraception for the duration of the study and for at least 24 weeks after the last dose of study drug.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. A history of, or current conditions affecting the digestive tract, such as ulcerative colitis, indeterminate colitis, fistulizing disease, abdominal or perianal abscess, adenomatous colonic polyps not excised, colonic mucosal dysplasia, and short bowel syndrome.</div>
+<div class="line criterion">2. Planned surgery for Crohn&#x27;s Disease.</div>
+<div class="line criterion">3. Ileostomy or colostomy.</div>
+<div class="line criterion">4. Has received non-permitted inflammatory bowel disease (IBD) therapies (including natalizumab, vedolizumab, and efalizumab, as stated in the protocol).</div>
+<div class="line criterion">5. Chronic hepatitis B or C infection, HIV, active or latent tuberculosis (patients with prior history of BCG vaccination must pass protocol-defined screening criteria).</div>
+<div class="line criterion">6. Positive stool test result for ova or parasites or positive stool culture for pathogens at time of screening.</div>
+<div class="line criterion">7. Evidence of infection with and/or treatment for Clostridium difficile or other intestinal pathogen treatment within 8 weeks prior to randomization.</div>
+<div class="line criterion">8. History of recurrent opportunistic infections and/or history of severe or disseminated viral infections.</div>
+<div class="line criterion">9. Any major episode of infection requiring treatment with IV antibiotics ≤8 weeks prior to screening or oral antibiotics ≤4 weeks prior to screening.</div>
+<div class="line criterion">10. Significant uncontrolled comorbidity such as neurological, cardiac (e.g., moderate to severe heart failure New York Heart Association Class III/IV), pulmonary, renal, hepatic, endocrine, or GI disorders (other than Crohn&#x27;s Disease).</div>
+<div class="line criterion">11. Neurological conditions or diseases that may interfere with monitoring for progressive multifocal leukoencephalopathy (PML).</div>
+<div class="line criterion">12. History of demyelinating disease.</div>
+<div class="line criterion">13. History of major neurological disorders, including stroke, multiple sclerosis, brain tumor, neurodegenerative disease, or poorly controlled epilepsy.</div>
+<div class="line criterion">14. History of alcohol, drug, or chemical abuse ≤6 months prior to screening.</div>
+<div class="line criterion">15. Conditions other than Crohn&#x27;s Disease that could require treatment with &gt;20 mg/day of prednisone (or equivalent) during the course of the study.</div>
+<div class="line criterion">16. History of cancer, including hematologic malignancy, solid tumors, and carcinoma in situ within 5 years before screening, with specific exceptions as defined in the protocol.</div>
+<div class="line criterion">17. History of cervical smear result at any time that indicated the presence of adenocarcinoma in situ (AIS), high-grade squamous intraepithelial lesions (HSIL), or cervical intraepithelial neoplasia (CIN) of Grade &gt;1.</div>
+<div class="line criterion">18. History of organ transplant or cell transplantation.</div>
+<div class="line criterion">19. Presence of metal in the body that could pose a hazard during any potential scanning in patients for whom a magnetic resonance imaging (MRI) scan is considered unsafe.</div>
+<div class="line criterion">20. Impaired hepatic function defined by specific laboratory values as outlined in the protocol.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_138.html">&larr; Sample 138</a> | <a href="index.html">Index</a> | <a href="sample_140.html">Sample 140 &rarr;</a>
+</div>
+</body>
+</html>

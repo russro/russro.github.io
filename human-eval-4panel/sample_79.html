@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 79 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 79</h1>
+    <div class="meta">
+        <span>NCT: NCT04494958</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Women &amp;gt;18 years-old.Diagnostic of metastatic or locally advanced non-resectable TNBC.Patient that have received at least one and up to two previous lines of therapy for metastatic TNBC and failed to last treatment. Previous treatments can be of any nature (chemotherapy, immunotherapy, antiangiogenics, experimental therapy, etc.).Women with known BRCA1&amp;#x2F;BRCA2 germline mutations must have received a platinum based treatment or treatment with a PARP inhibitor.Patient must have experienced disease progression to the previous treatment line according to the RECIST 1.1 or iRECIST criteria.Availability of tumor tissue for ERK and CDK4&amp;#x2F;6 testing is mandatory prior to study inclusion, preferably obtained after last treatment or the most recent sample as possible (from metastatic site or first diagnosis according to sample availability). If the patient has not a tumor sample available prior to study inclusion, the patient will not be allowed to participate in the study.Ability to understand and signing of the written patient information&amp;#x2F;informed consent form (PIS&amp;#x2F;ICF) for ERK and CDK4&amp;#x2F;6 testing. ERK and CDK4&amp;#x2F;6 testing will be performed centrally at CNIO.Ability to understand and signing the written PIS&amp;#x2F;ICF for study treatment eligibility. Signed informed consent form must be available before any studyspecific procedure for the respective study parts may begin.Positivity for ERK and&amp;#x2F;or CDK4&amp;#x2F;6, defined as showing an H-score above the top-quartile according to published definitions [1].ECOG performance status of 0-1.Evaluable disease according to RECIST 1.1 criteria.Life expectancy &amp;gt;24 weeks.Adequate bone marrow, liver and renal function as assessed by laboratory requirements conducted within 7 days before first study drug administration:Absolute neutrophil count (ANC) ≥ 1.500&amp;#x2F;mm3 (without granulocyte colony-stimulating factor support within 2 weeks before the first study drug administration)Hemoglobin ≥ 9 g&amp;#x2F;dL (without transfusion or erythropoietin within 4 weeks before the first study drug administration)Platelet count ≥ 100.000&amp;#x2F;mm3 (without transfusion within 2 weeks before the first study drug administration)Total bilirubin ≤ 2 X the upper limit of normal (ULN).Alanine aminotransferase (ALT) and aspartate aminotransferase (AST) ≤ 2.5 X ULN (≤ 5 times ULN for patients with liver metastases)Glomerular filtration rate (GFR) &amp;gt; 50 mL&amp;#x2F;min&amp;#x2F;1.73 m2 according to the modification of diet in renal disease (MDRD) abbreviated formula.Patients must have recovered to ≤ Grade 1 in terms of toxicity from prior treatments (excluding neuropathy which can be ≤ Grade 2, and alopecia).Patients must be able to take oral medications.Patients must have adequate cardiac function, defined as:Left ventricular ejection fraction (LVEF) &amp;gt; 50% as determined by echocardiogram or multigated acquisition scan (MUGA).QTc &amp;lt; 480 msec.Negative serum pregnancy test in women of childbearing potential (performed within 7 days before the first treatment). Negative results must be available before the first study drug administration. Pregnancy test will not be performed in postmenopausal women.Women of reproductive potential must agree to use adequate contraception when sexually active. This applies for the time period since the signature of the informed consent form and until at least 1 month after the last study drug administration. The definition of adequate contraception will be based on the judgment of the investigator and on local requirements. Acceptable methods of contraception include, but are not limited to, (i) condoms (male or female) with or without a spermicidal agent; (ii) diaphragm or cervical cap with spermicide; (iii) intra-uterine device; (iv) hormone-based contraception.Zoledronic acid or denosumab started prior to trial registration is allowed, but in case they are required after initiation of trial procedures, adequate justification is required.Exclusion Criteria:Participants who have had chemotherapy, radiotherapy, or major surgery within 2 weeks (6 weeks for nitrosoureas or mitomycin C) prior to entering the study.Patients that received during the metastatic disease setting any of the study drugs, palbociclib or binimetinib.Participants receiving any other study agents concurrently with the study drugs. Zoledronic acid or denosumab for bone metastases, started at least 15 days prior to enrollment are allowed.Participants with symptomatic brain metastases that require chronic steroids. Patients with a history of brain metastases are permitted to enroll as long as they have been treated, are off of steroids, and have been stable for a minimum of one month on imaging.Irradiation of single lesions in the last 28 days prior to trial recruitment, if it is the only location of the disease and it has not progressed. Patients with radiated single lesions that has progressed are allowed.Concurrent use of strong CYP3A4 inhibitors&amp;#x2F;inducers is prohibited due to drug-drug interactions with palbociclib. Moderate CYP3A4 inhibitors&amp;#x2F;inducers should be used with caution.Uncontrolled intercurrent illness including, but not limited to:ongoing or active infection requiring systemic treatmentsymptomatic congestive heart failurecardiac arrhythmiapsychiatric illness&amp;#x2F;social situations that would limit compliance with study requirementshypertension, defined as systolic blood pressure &amp;gt; 160 mmHg despite medical managementmyocardial infarction, unstable angina, coronary artery bypass grafting, coronary angioplasty, or stenting &amp;lt; 6 months prior to screeningHistory of QT syndrome, Brugada syndrome, known history of QTc prolongation, or Torsades de Pointes.History of Gilbert&amp;#x27;s syndrome.History of neuromuscular disorders that are associated with elevated CK (e.g. inflammatory myopathies, muscular dystrophy, amyotrophic lateral sclerosis, spinal muscular atrophy).Previous or concurrent cancer except:cervical carcinoma in situtreated basal-cell carcinoma or squamous cell skin cancer c. any other cancer curatively treated &amp;gt; 3 years before the first study drug administrationMalabsorption syndrome or uncontrolled nausea, vomiting, or diarrhea that may interfere with the absorption of oral study medication in the opinion of the investigator.Pregnant women or breast-feeding.Known HIV-positive individuals on combination antiretroviral therapy.Active hepatitis B virus (HBV; chronic or acute; defined as having a known positive hepatitis B surface antigen [HBsAg] test at the time of screening) or hepatitis C infection requiring treatment.Patients with past HBV infection or resolved HBV infection (defined as the presence of hepatitis B core antibody [HBcAb] and absence of HBsAg) are eligible if HBV DNA is negative.Patients positive for hepatitis C virus (HCV) antibody are eligible only if polymerase chain reaction is negative for HCV RNA.Any condition that in the opinion of the investigator would interfere with evaluation of study treatment or interpretation of patient safety or study results, or inability to comply with the study and follow-up procedures.Participation in another clinical study with investigational medicinal products within 4 weeks before the first study drug administration.Clinically active infections within 2 weeks before the first study drug administration.Treatment with therapeutic oral or i.v. antibiotics within 2 weeks before the first study drug administration. Patients receiving prophylactic antibiotics (e.g. for prevention of a urinary tract infection or to prevent chronic obstructive pulmonary disease exacerbation) are eligible.Known hypersensitivity to any of the study drugs, study drug classes, or excipients in the formulation.Current diagnosis of any retinal disorders including retinal detachment, retinal pigment epithelial detachment (RPED), serous retinopathy or retinal vein occlusion or risk factors for RVO (e.g., uncontrolled glaucoma or history of hyperviscosity or hypercoagulability syndrome).Peripheral sensory neuropathy of CTCAE v.5.0 Grade 2 or higherMajor surgery, open biopsy or significant traumatic injury within 4 weeks before the first study drug administration (central line surgery is not considered major surgery).Renal failure requiring peritoneal dialysis or hemodialysis.Substance abuse, medical, psychological or social conditions that may interfere with the patient&amp;#x27;s participation in the study or evaluation of the study results.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Based on the information provided, here is the modified eligibility criteria for version 5:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Version Context:** This task is for the transition from ClinicalTrials.gov version 4 to version 5. The evidence may use different labels (e.g. &quot;Amendment 1&quot;, &quot;Version 2.0&quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Original Eligibility Criteria (version 4):**</div>
+<div class="line raw">- **Patient Age:** ≥18 years old.</div>
+<div class="line raw">- **Diagnosis:** Metastatic or locally advanced non-resectable TNBC.</div>
+<div class="line raw">- **Treatment Line:** One or two treatment lines for metastatic TNBC.</div>
+<div class="line raw">- **Previous Treatments:** Any type of treatment for metastatic TNBC.</div>
+<div class="line raw">- **Other Treatments:** Any other treatment for metastatic TNBC.</div>
+<div class="line raw">- **Radiographic Evidence:** Radiographically confirmed metastatic TNBC.</div>
+<div class="line raw">- **Clinical Stage:** Local stage.</div>
+<div class="line raw">- **Response Rate:** Response rate of 30% or higher.</div>
+<div class="line raw">- **Objective Response Rate:** Objective response rate of 50% or higher.</div>
+<div class="line raw">- **Progression-Free Survival (PFS):** PFS of 24 weeks or more.</div>
+<div class="line raw">- **Overall Survival (OS):** OS of 24 weeks or more.</div>
+<div class="line raw">- **Safety Profile:** Safe for 95% of patients.</div>
+<div class="line raw">- **Time to Progression (TTP):** TTP of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression (TDP):** TDP of 24 weeks or more.</div>
+<div class="line raw">- **Time to Death:** Time to death of 24 weeks or more.</div>
+<div class="line raw">- **Time to Relapse:** Time to relapse of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Treatment (TDPAT):** Time to relapse after treatment of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Surgery (DTPS):** Time to relapse after surgery of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Chemotherapy (DTPP):** Time to relapse after chemotherapy of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Radiation Therapy (DTPR):** Time to relapse after radiation therapy of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Implantation of Binimetinib (TDPIM):** Time to relapse after implantation of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPAL):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palbociclib (TDPBIN):** Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Binimetinib (TDPBIN):** Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line raw">- **Time to Disease Progression After Administration of Palboc</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Women &gt;18 years-old.Diagnostic of metastatic or locally advanced non-resectable TNBC.Patient that have received at least one and up to two previous lines of therapy for metastatic TNBC and failed to last treatment. Previous treatments can be of any nature (chemotherapy, immunotherapy, antiangiogenics, experimental therapy, etc.).Women with known BRCA1/BRCA2 germline mutations must have received a platinum based treatment or treatment with a PARP inhibitor.Patient must have experienced disease progression to the previous treatment line according to the RECIST 1.1 or iRECIST criteria.Availability of tumor tissue for ERK and CDK4/6 testing is mandatory prior to study inclusion, preferably obtained after last treatment or the most recent sample as possible (from metastatic site or first diagnosis according to sample availability). If the patient has not a tumor sample available prior to study inclusion, the patient will not be allowed to participate in the study.Ability to understand and signing of the written patient information/informed consent form (PIS/ICF) for ERK and CDK4/6 testing. ERK and CDK4/6 testing will be performed centrally at CNIO.Ability to understand and signing the written PIS/ICF for study treatment eligibility. Signed informed consent form must be available before any studyspecific procedure for the respective study parts may begin.Positivity for ERK and/or CDK4/6, defined as showing an H-score above the top-quartile according to published definitions [1].ECOG performance status of 0-1.Evaluable disease according to RECIST 1.1 criteria.Life expectancy &gt;24 weeks.Adequate bone marrow, liver and renal function as assessed by laboratory requirements conducted within 7 days before first study drug administration:Absolute neutrophil count (ANC) ≥ 1.500/mm3 (without granulocyte colony-stimulating factor support within 2 weeks before the first study drug administration)Hemoglobin ≥ 9 g/dL (without transfusion or erythropoietin within 4 weeks before the first study drug administration)Platelet count ≥ 100.000/mm3 (without transfusion within 2 weeks before the first study drug administration)Total bilirubin ≤ 2 X the upper limit of normal (ULN).Alanine aminotransferase (ALT) and aspartate aminotransferase (AST) ≤ 2.5 X ULN (≤ 5 times ULN for patients with liver metastases)Glomerular filtration rate (GFR) &gt; 50 mL/min/1.73 m2 according to the modification of diet in renal disease (MDRD) abbreviated formula.Patients must have recovered to ≤ Grade 1 in terms of toxicity from prior treatments (excluding neuropathy which can be ≤ Grade 2, and alopecia).Patients must be able to take oral medications.Patients must have adequate cardiac function, defined as:Left ventricular ejection fraction (LVEF) &gt; 50% as determined by echocardiogram or multigated acquisition scan (MUGA).QTc &lt; 480 msec.Negative serum pregnancy test in women of childbearing potential (performed within 7 days before the first treatment). Negative results must be available before the first study drug administration. Pregnancy test will not be performed in postmenopausal women.Women of reproductive potential must agree to use adequate contraception when sexually active. This applies for the time period since the signature of the informed consent form and until at least 1 month after the last study drug administration. The definition of adequate contraception will be based on the judgment of the investigator and on local requirements. Acceptable methods of contraception include, but are not limited to, (i) condoms (male or female) with or without a spermicidal agent; (ii) diaphragm or cervical cap with spermicide; (iii) intra-uterine device; (iv) hormone-based contraception.Zoledronic acid or denosumab started prior to trial registration is allowed, but in case they are required after initiation of trial procedures, adequate justification is required.Exclusion Criteria:Participants who have had chemotherapy, radiotherapy, or major surgery within 2 weeks (6 weeks for nitrosoureas or mitomycin C) prior to entering the study.Patients that received during the metastatic disease setting any of the study drugs, palbociclib or binimetinib.Participants receiving any other study agents concurrently with the study drugs. Zoledronic acid or denosumab for bone metastases, started at least 15 days prior to enrollment are allowed.Participants with symptomatic brain metastases that require chronic steroids. Patients with a history of brain metastases are permitted to enroll as long as they have been treated, are off of steroids, and have been stable for a minimum of one month on imaging.Irradiation of single lesions in the last 28 days prior to trial recruitment, if it is the only location of the disease and it has not progressed. Patients with radiated single lesions that has progressed are allowed.Concurrent use of strong CYP3A4 inhibitors/inducers is prohibited due to drug-drug interactions with palbociclib. Moderate CYP3A4 inhibitors/inducers should be used with caution.Uncontrolled intercurrent illness including, but not limited to:ongoing or active infection requiring systemic treatmentsymptomatic congestive heart failurecardiac arrhythmiapsychiatric illness/social situations that would limit compliance with study requirementshypertension, defined as systolic blood pressure &gt; 160 mmHg despite medical managementmyocardial infarction, unstable angina, coronary artery bypass grafting, coronary angioplasty, or stenting &lt; 6 months prior to screeningHistory of QT syndrome, Brugada syndrome, known history of QTc prolongation, or Torsades de Pointes.History of Gilbert&#x27;s syndrome.History of neuromuscular disorders that are associated with elevated CK (e.g. inflammatory myopathies, muscular dystrophy, amyotrophic lateral sclerosis, spinal muscular atrophy).Previous or concurrent cancer except:cervical carcinoma in situtreated basal-cell carcinoma or squamous cell skin cancer c. any other cancer curatively treated &gt; 3 years before the first study drug administrationMalabsorption syndrome or uncontrolled nausea, vomiting, or diarrhea that may interfere with the absorption of oral study medication in the opinion of the investigator.Pregnant women or breast-feeding.Known HIV-positive individuals on combination antiretroviral therapy.Active hepatitis B virus (HBV; chronic or acute; defined as having a known positive hepatitis B surface antigen [HBsAg] test at the time of screening) or hepatitis C infection requiring treatment.Patients with past HBV infection or resolved HBV infection (defined as the presence of hepatitis B core antibody [HBcAb] and absence of HBsAg) are eligible if HBV DNA is negative.Patients positive for hepatitis C virus (HCV) antibody are eligible only if polymerase chain reaction is negative for HCV RNA.Any condition that in the opinion of the investigator would interfere with evaluation of study treatment or interpretation of patient safety or study results, or inability to comply with the study and follow-up procedures.Participation in another clinical study with investigational medicinal products within 4 weeks before the first study drug administration.Clinically active infections within 2 weeks before the first study drug administration.Treatment with therapeutic oral or i.v. antibiotics within 2 weeks before the first study drug administration. Patients receiving prophylactic antibiotics (e.g. for prevention of a urinary tract infection or to prevent chronic obstructive pulmonary disease exacerbation) are eligible.Known hypersensitivity to any of the study drugs, study drug classes, or excipients in the formulation.Current diagnosis of any retinal disorders including retinal detachment, retinal pigment epithelial detachment (RPED), serous retinopathy or retinal vein occlusion or risk factors for RVO (e.g., uncontrolled glaucoma or history of hyperviscosity or hypercoagulability syndrome).Peripheral sensory neuropathy of CTCAE v.5.0 Grade 2 or higherMajor surgery, open biopsy or significant traumatic injury within 4 weeks before the first study drug administration (central line surgery is not considered major surgery).Renal failure requiring peritoneal dialysis or hemodialysis.Substance abuse, medical, psychological or social conditions that may interfere with the patient&#x27;s participation in the study or evaluation of the study results.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Based on the information provided, here is the modified eligibility criteria for version 5:</div>
+<div class="line criterion">2. Version Context: This task is for the transition from ClinicalTrials.gov version 4 to version 5.</div>
+<div class="line criterion">3. The evidence may use different labels (e.g. &quot;Amendment 1&quot;, &quot;Version 2.0&quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.</div>
+<div class="line criterion">4. Original Eligibility Criteria (version 4):</div>
+<div class="line criterion">5. Patient Age: ≥18 years old.</div>
+<div class="line criterion">6. Diagnosis: Metastatic or locally advanced non-resectable TNBC.</div>
+<div class="line criterion">7. Treatment Line: One or two treatment lines for metastatic TNBC.</div>
+<div class="line criterion">8. Previous Treatments: Any type of treatment for metastatic TNBC.</div>
+<div class="line criterion">9. Other Treatments: Any other treatment for metastatic TNBC.</div>
+<div class="line criterion">10. Radiographic Evidence: Radiographically confirmed metastatic TNBC.</div>
+<div class="line criterion">11. Clinical Stage: Local stage.</div>
+<div class="line criterion">12. Response Rate: Response rate of 30% or higher.</div>
+<div class="line criterion">13. Objective Response Rate: Objective response rate of 50% or higher.</div>
+<div class="line criterion">14. Progression-Free Survival (PFS): PFS of 24 weeks or more.</div>
+<div class="line criterion">15. Overall Survival (OS): OS of 24 weeks or more.</div>
+<div class="line criterion">16. Safety Profile: Safe for 95% of patients.</div>
+<div class="line criterion">17. Time to Progression (TTP): TTP of 24 weeks or more.</div>
+<div class="line criterion">18. Time to Disease Progression (TDP): TDP of 24 weeks or more.</div>
+<div class="line criterion">19. Time to Death: Time to death of 24 weeks or more.</div>
+<div class="line criterion">20. Time to Relapse: Time to relapse of 24 weeks or more.</div>
+<div class="line criterion">21. Time to Disease Progression After Treatment (TDPAT): Time to relapse after treatment of 24 weeks or more.</div>
+<div class="line criterion">22. Time to Disease Progression After Surgery (DTPS): Time to relapse after surgery of 24 weeks or more.</div>
+<div class="line criterion">23. Time to Disease Progression After Chemotherapy (DTPP): Time to relapse after chemotherapy of 24 weeks or more.</div>
+<div class="line criterion">24. Time to Disease Progression After Radiation Therapy (DTPR): Time to relapse after radiation therapy of 24 weeks or more.</div>
+<div class="line criterion">25. Time to Disease Progression After Implantation of Binimetinib (TDPIM): Time to relapse after implantation of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">26. Time to Disease Progression After Administration of Palbociclib (TDPAL): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">27. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">28. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">29. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">30. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">31. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">32. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">33. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">34. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">35. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">36. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">37. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">38. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">39. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">40. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">41. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">42. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">43. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">44. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">45. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">46. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">47. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">48. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">49. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">50. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">51. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">52. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">53. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">54. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">55. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">56. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">57. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">58. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">59. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">60. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">61. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">62. Time to Disease Progression After Administration of Palbociclib (TDPBIN): Time to relapse after administration of palbociclib of 24 weeks or more.</div>
+<div class="line criterion">63. Time to Disease Progression After Administration of Binimetinib (TDPBIN): Time to relapse after administration of binimetinib of 24 weeks or more.</div>
+<div class="line criterion">64. **Time to Disease Progression After Administration of Palboc</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_78.html">&larr; Sample 78</a> | <a href="index.html">Index</a> | <a href="sample_80.html">Sample 80 &rarr;</a>
+</div>
+</body>
+</html>

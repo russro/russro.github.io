@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 64 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 64</h1>
+    <div class="meta">
+        <span>NCT: NCT01908699</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion CriteriaThe following are inclusion criteria to be enrolled in this study:Male or female, age 18 to 80 years (inclusive).Established diagnosis of pulmonary arterial hypertension that is either idiopathic or familial PAH, collagen vascular disease associated PAH, PAH associated with HIV infection, PAH induced by anorexigens&amp;#x2F;toxins, or PAH associated with repaired congenital systemic-to-pulmonary shunts (repaired ≥1 years).If HIV positive, has a CD4 lymphocyte count ≥200 cells&amp;#x2F;mm3 within 30 days of Baseline Visit and is receiving current standard of care antiretroviral or other effective medication.At the Screening Visit, WHO functional class III or IV and who have declining or unsatisfactory clinical response to current PAH therapy.At the Baseline Visit, WHO functional class III or IV and who have declining or unsatisfactory clinical response to inhaled treprostinil therapy.Able to walk unassisted (oxygen use allowed).A 6-Minute Walk distance (6MWD) of ≥ 100 meters at the Screening Visit.Previous (within five years prior to the Baseline Visit) right heart cardiac catheterization (RHC) with findings consistent with PAH, specifically mean Pulmonary Arterial Pressure (PAPm) ≥25 mmHg (at rest), Pulmonary Capillary Wedge Pressure (PCWP) (or left ventricular end diastolic pressure) ≤15 mmHg, and Pulmonary Vascular Resistance (PVR) &amp;gt;3 mmHg&amp;#x2F;L&amp;#x2F;min.Echocardiography excluding any clinically significant left heart disease (e.g. left sided valve disease, wall motion abnormality suggesting of myocardial infarction, left ventricular hypertrophy, etc).Pulmonary function tests conducted within 12 months before or during the Screening period to confirm the following:Total lung capacity (TLC) is at least 60% (predicted value) andForced expiratory volume at one second (FEV1) of at least 50% (predicted value).Subjects receiving additional FDA approved PAH therapies must be stable on their current dose for at least 30 days prior to the Baseline Visit, apart from modification of anticoagulant or diuretic dosages.Must have completed 90 days of uninterrupted inhaled treprostinil treatment and received a stable dose of inhaled treprostinil for at least 30 days prior to Baseline to be eligible for randomization into the study.Women of child-bearing potential (defined as less than 1 year post-menopausal and not surgically sterile) must be practicing abstinence or using two highly effective methods of contraception (defined as a method of birth control that result in a low failure rate, i.e., less than 1% per year, such as approved hormonal contraceptives, barrier methods [such as a condom or diaphragm] used with a spermicide, or an intrauterine device). Subject must have a negative pregnancy test at the Screening and Baseline Visits.Willing and able to comply with study requirements and restrictions.Exclusion CriteriaPatients who meet any of the following criteria will be excluded from the study:Pregnant or lactating.Has previous experience with beraprost or BPS-314d (i.e., BPS-IR, BPS-MR or BPS-314d- MR).PAH related to any condition not covered under inclusion criteria, including but not limited to pulmonary venous hypertension, pulmonary veno-occlusive disease, pulmonary capillary hemangiomatosis, or chronic thromboembolic pulmonary hypertension.History of interstitial lung disease, unless subject has collagen vascular disease and has had pulmonary function testing conducted within 12 months of the Baseline Visit demonstrating a total lung capacity ≥60% of predicted.Has active hemorrhagic condition (e.g., upper digestive tract hemorrhage, hemoptysis, etc), or has a pre-existing condition that, in the Investigator&amp;#x27;s judgment, may increase the risk for developing hemorrhage during the study (e.g., hemophilia). Transient hemorrhage (e.g., epistaxis, normal menstrual bleeding, gingival bleeding, hemorrhoidal bleeding, etc) will not preclude enrollment.Has received any investigational drug, device or therapy within 30 days prior to the Baseline Visit or is scheduled to receive another investigational drug, device or therapy during the course of the study.Has any musculoskeletal disease or any other disease that would significantly limit ambulation.Has any form of unrepaired or recently repaired (&amp;lt; 1 year) congenital systemic-to-pulmonary shunt other than patent foramen ovale.Evidence of significant coronary arterial disease with symptoms, such as angina.Left sided myocardial disease as evidenced by left ventricular ejection fraction &amp;lt; 40%, or shortening fraction &amp;lt;22%.Has creatinine clearance &amp;lt;30 (using the Cockroft-Gault formula) or requires hemodialysis.Has Childs-Pugh class C liver cirrhosis.Has had previous atrial septostomy.Any other clinically significant illness or abnormal laboratory values (measured during the Screening period) that, in the opinion of the Investigator, might put the subject at risk of harm during the study or might adversely affect the interpretation of the study data.Anticipated survival less than 1 year due to concomitant disease.The Sponsor recognizes that the pulmonary hypertension population is complex and diverse. In order to facilitate enrollment of appropriate subjects to this pivotal trial, Investigators are strongly encouraged to contact the medical director or study team to discuss potential study subjects who have comorbid conditions before enrollment into this study. See Appendix 9 for additional details.No waivers to entry criteria are allowable in this study. Subjects who are initially ineligible for this study may be reassessed for eligibility after consultation with the Sponsor.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Based on the revised eligibility criteria provided, here&#x27;s the summary:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Original Eligibility Criteria (version 17):**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">1. **Age:** 18 to 80 years (inclusive)</div>
+<div class="line raw">2. **Diagnosis:** Pulmonary arterial hypertension (PAH)</div>
+<div class="line raw">3. **Treatment Status:** Currently on PAH therapy</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Updated Eligibility Criteria (version 18):**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">1. **Age:** 18 to 80 years (inclusive)</div>
+<div class="line raw">2. **Diagnosis:** Pulmonary arterial hypertension (PAH)</div>
+<div class="line raw">3. **Treatment Status:** Paired with PAH therapy (treprostinil, inhaled)</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Key Changes:**</div>
+<div class="line raw">- Added &quot;Paired with PAH therapy&quot; to the diagnosis section.</div>
+<div class="line raw">- Changed &quot;Currently on PAH therapy&quot; to &quot;Paired with PAH therapy.&quot;</div>
+<div class="line raw">- Updated the age range to &quot;All ages.&quot;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">This revision ensures consistency and clarity in the eligibility criteria while accommodating the update to the treatment status.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Inclusion CriteriaThe following are inclusion criteria to be enrolled in this study:Male or female, age 18 to 80 years (inclusive).</div>
+<div class="line criterion">2. Established diagnosis of pulmonary arterial hypertension that is either idiopathic or familial PAH, collagen vascular disease associated PAH, PAH associated with HIV infection, PAH induced by anorexigens/toxins, or PAH associated with repaired congenital systemic-to-pulmonary shunts (repaired ≥1 years).</div>
+<div class="line criterion">3. If HIV positive, has a CD4 lymphocyte count ≥200 cells/mm3 within 30 days of Baseline Visit and is receiving current standard of care antiretroviral or other effective medication.</div>
+<div class="line criterion">4. At the Screening Visit, WHO functional class III or IV and who have declining or unsatisfactory clinical response to current PAH therapy.</div>
+<div class="line criterion">5. At the Baseline Visit, WHO functional class III or IV and who have declining or unsatisfactory clinical response to inhaled treprostinil therapy.</div>
+<div class="line criterion">6. Able to walk unassisted (oxygen use allowed).A 6-Minute Walk distance (6MWD) of ≥ 100 meters at the Screening Visit.</div>
+<div class="line criterion">7. Previous (within five years prior to the Baseline Visit) right heart cardiac catheterization (RHC) with findings consistent with PAH, specifically mean Pulmonary Arterial Pressure (PAPm) ≥25 mmHg (at rest), Pulmonary Capillary Wedge Pressure (PCWP) (or left ventricular end diastolic pressure) ≤15 mmHg, and Pulmonary Vascular Resistance (PVR) &gt;3 mmHg/L/min.</div>
+<div class="line criterion">8. Echocardiography excluding any clinically significant left heart disease (e.g. left sided valve disease, wall motion abnormality suggesting of myocardial infarction, left ventricular hypertrophy, etc).</div>
+<div class="line criterion">9. Pulmonary function tests conducted within 12 months before or during the Screening period to confirm the following:Total lung capacity (TLC) is at least 60% (predicted value) andForced expiratory volume at one second (FEV1) of at least 50% (predicted value).</div>
+<div class="line criterion">10. Subjects receiving additional FDA approved PAH therapies must be stable on their current dose for at least 30 days prior to the Baseline Visit, apart from modification of anticoagulant or diuretic dosages.</div>
+<div class="line criterion">11. Must have completed 90 days of uninterrupted inhaled treprostinil treatment and received a stable dose of inhaled treprostinil for at least 30 days prior to Baseline to be eligible for randomization into the study.</div>
+<div class="line criterion">12. Women of child-bearing potential (defined as less than 1 year post-menopausal and not surgically sterile) must be practicing abstinence or using two highly effective methods of contraception (defined as a method of birth control that result in a low failure rate, i.e., less than 1% per year, such as approved hormonal contraceptives, barrier methods [such as a condom or diaphragm] used with a spermicide, or an intrauterine device).</div>
+<div class="line criterion">13. Subject must have a negative pregnancy test at the Screening and Baseline Visits.</div>
+<div class="line criterion">14. Willing and able to comply with study requirements and restrictions.</div>
+<div class="line criterion">15. Exclusion CriteriaPatients who meet any of the following criteria will be excluded from the study:Pregnant or lactating.</div>
+<div class="line criterion">16. Has previous experience with beraprost or BPS-314d (i.e., BPS-IR, BPS-MR or BPS-314d- MR).PAH related to any condition not covered under inclusion criteria, including but not limited to pulmonary venous hypertension, pulmonary veno-occlusive disease, pulmonary capillary hemangiomatosis, or chronic thromboembolic pulmonary hypertension.</div>
+<div class="line criterion">17. History of interstitial lung disease, unless subject has collagen vascular disease and has had pulmonary function testing conducted within 12 months of the Baseline Visit demonstrating a total lung capacity ≥60% of predicted.</div>
+<div class="line criterion">18. Has active hemorrhagic condition (e.g., upper digestive tract hemorrhage, hemoptysis, etc), or has a pre-existing condition that, in the Investigator&#x27;s judgment, may increase the risk for developing hemorrhage during the study (e.g., hemophilia).</div>
+<div class="line criterion">19. Transient hemorrhage (e.g., epistaxis, normal menstrual bleeding, gingival bleeding, hemorrhoidal bleeding, etc) will not preclude enrollment.</div>
+<div class="line criterion">20. Has received any investigational drug, device or therapy within 30 days prior to the Baseline Visit or is scheduled to receive another investigational drug, device or therapy during the course of the study.</div>
+<div class="line criterion">21. Has any musculoskeletal disease or any other disease that would significantly limit ambulation.</div>
+<div class="line criterion">22. Has any form of unrepaired or recently repaired (&lt; 1 year) congenital systemic-to-pulmonary shunt other than patent foramen ovale.</div>
+<div class="line criterion">23. Evidence of significant coronary arterial disease with symptoms, such as angina.</div>
+<div class="line criterion">24. Left sided myocardial disease as evidenced by left ventricular ejection fraction &lt; 40%, or shortening fraction &lt;22%.</div>
+<div class="line criterion">25. Has creatinine clearance &lt;30 (using the Cockroft-Gault formula) or requires hemodialysis.</div>
+<div class="line criterion">26. Has Childs-Pugh class C liver cirrhosis.</div>
+<div class="line criterion">27. Has had previous atrial septostomy.</div>
+<div class="line criterion">28. Any other clinically significant illness or abnormal laboratory values (measured during the Screening period) that, in the opinion of the Investigator, might put the subject at risk of harm during the study or might adversely affect the interpretation of the study data.</div>
+<div class="line criterion">29. Anticipated survival less than 1 year due to concomitant disease.</div>
+<div class="line criterion">30. The Sponsor recognizes that the pulmonary hypertension population is complex and diverse.</div>
+<div class="line criterion">31. In order to facilitate enrollment of appropriate subjects to this pivotal trial, Investigators are strongly encouraged to contact the medical director or study team to discuss potential study subjects who have comorbid conditions before enrollment into this study.</div>
+<div class="line criterion">32. See Appendix 9 for additional details.</div>
+<div class="line criterion">33. No waivers to entry criteria are allowable in this study.</div>
+<div class="line criterion">34. Subjects who are initially ineligible for this study may be reassessed for eligibility after consultation with the Sponsor.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Based on the revised eligibility criteria provided, here&#x27;s the summary:</div>
+<div class="line criterion">2. Original Eligibility Criteria (version 17):</div>
+<div class="line criterion">3. Age: 18 to 80 years (inclusive)</div>
+<div class="line criterion">4. Diagnosis: Pulmonary arterial hypertension (PAH)</div>
+<div class="line criterion">5. Treatment Status: Currently on PAH therapy</div>
+<div class="line criterion">6. Updated Eligibility Criteria (version 18):</div>
+<div class="line criterion">7. Age: 18 to 80 years (inclusive)</div>
+<div class="line criterion">8. Diagnosis: Pulmonary arterial hypertension (PAH)</div>
+<div class="line criterion">9. Treatment Status: Paired with PAH therapy (treprostinil, inhaled)</div>
+<div class="line criterion">10. Key Changes:</div>
+<div class="line criterion">11. Added &quot;Paired with PAH therapy&quot; to the diagnosis section.</div>
+<div class="line criterion">12. Changed &quot;Currently on PAH therapy&quot; to &quot;Paired with PAH therapy.&quot;</div>
+<div class="line criterion">13. Updated the age range to &quot;All ages.&quot;</div>
+<div class="line criterion">14. This revision ensures consistency and clarity in the eligibility criteria while accommodating the update to the treatment status.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_63.html">&larr; Sample 63</a> | <a href="index.html">Index</a> | <a href="sample_65.html">Sample 65 &rarr;</a>
+</div>
+</body>
+</html>

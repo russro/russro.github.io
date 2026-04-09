@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 142 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 142</h1>
+    <div class="meta">
+        <span>NCT: NCT03437447</span>
+        <span>Model: versa-4o-mini</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:A male participant must agree to use and to have their female partners willing to use additional non-hormonal contraception (for example, condoms or occlusive cap with spermicide, non-hormonal intra-uterine device [IUD], previous sterilization of participant or his partner, being sexually inactive) from Day of randomization up to final end of treatment (EOT) visitGave written informed consent prior to any trial related procedureHave a body weight (BW) of greater than (&amp;gt;) 55.0 kilogram (kg) to less than (&amp;lt;) 95 kg and a body mass index (BMI) between 18.0 and 27.0 kg&amp;#x2F;meter square (m^2)Able to communicate well with the Investigator, understanding the protocol requirements and restrictions, and willing to comply with the requirements of the entire trialNon-smoker (= 0 cigarettes, pipes, cigars or others) since at least three monthsElectrocardiogram recording (12-lead) without signs of clinically relevant pathology in particular heart-rate corrected [QTc] (Bazett) &amp;lt;450 milliseconds (ms)Vital signs should be in normal range (systolic blood pressure: 90 to 140 millimeters of mercury [mmHg]; diastolic blood pressure: 50 to 90 mmHg; pulse rate: 45 to 90 beats per minute [bpm]; oral body temperature between 35.0 degree centigrade [°C] to 37.5°C)All values for biochemistry, liver function test and hematology tests of blood and urine within the normal range or showing no clinically relevant deviation as judged by the Investigator. Hematocrit and hemoglobin must be above the lower limit; upper limit may range up to 15 percent (%). Remaining results, including white blood cells may range +&amp;#x2F;- 15%, if participant is asymptomaticNegative screen for alcohol and drugs of abuse (opiate class, barbiturates, cocaine and metabolites, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) at screening and on each admissionNegative screen for Hepatitis B surface (HBs) antigens, Hepatitis C Virus (HCV) antibodies, Hepatitis A Virus (HAV) antibodies and Human Immunodeficiency Virus (HIV) 1 and 2 antibodiesOther protocol defined inclusion criteria could applyExclusion Criteria:Any surgical or medical condition, including findings in the medical history or in the pre-study assessments, or any other significant disease, that in the opinion of the Investigator, constitutes a risk or a contraindication for the participation of the participant in the study or that could interfere with the study objectives, conduct or evaluationHistory of surgery of the gastrointestinal (GI) tract, history of other GI tract diseases, or acute GI tract infections in the last 2 weeks, which could influence the gastrointestinal absorption and&amp;#x2F;or motility according to the Investigator&amp;#x27;s opinionAny clinically relevant abnormality in the safety laboratory parameters as judged by the InvestigatorHave positive results from serology examination for Hepatitis B surface (HBs) antigen, Hepatitis C Virus (HCV) or Human Immunodeficiency Virus (HIV)Allergy: ascertained or presumptive hypersensitivity to the active drug substance and&amp;#x2F;or formulations&amp;#x27; ingredients; history of anaphylaxis to drugs or allergic reactions in general, which the Investigator considers may affect the outcome of the trialHistory or presence of drug abuse (opiate class, barbiturates, cocaine and its main metabolite, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) or alcohol abuse at screening and on each admission. Alcohol abuse is defined by the assessment of the InvestigatorLoss or donation of more than 400 milliliter (mL) of blood within 90 days prior to first Praziquantel (PZQ) administrationAdministration of any investigational product or use of any investigational device in any clinical study within 30 days prior to first PZQ administration. Participants who have used drugs that may affect the pharmacokinetics of PZQ from 14 days before dosing until the last pharmacokinetic (PK) sample, for example, phenytoin, barbiturates, primidone, carbamazapine, oxcarbazepine, topiramate, felbamate, rifampicin, nelfinavir, ritonavir, griseofulvin, oral ketoconazoleConsumption of substances known to be potent inhibitors or inducers of Cytochrome P450s (CYP P450s) such as grapefruit, orange, cranberry or juices of these fruits, herbal remedies or dietary supplements containing St. John&amp;#x27;s Wort, poppy seeds, cruciferic vegetables, in the two weeks before dosing until last PK sampleUnlikely to comply with the protocol requirements, instructions and trial-related restrictions, for example, uncooperative attitude, inability to return for follow-up visits, and improbability of completing the trialNon-acceptance or non-compliance with the study breakfast (for example, vegetarians, vegans and participants who follow special diets)Excessive consumption of beverages containing xanthine (&amp;gt;5 cups of coffee a day or equivalent) or inability to stop consuming caffeine from 48 hours prior to drug administration until discharge from the clinicParticipant is the Investigator or any Sub-Investigator, research assistant, pharmacist, trial coordinator, other staff or relative thereof directly involved in the conduct of the trialVulnerable participants (for example, persons kept in detention)Legal incapacity or limited legal capacityOther protocol defined exclusion criteria could apply</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- A male participant must agree to use and to have their female partners willing to use additional non-hormonal contraception (for example, condoms or occlusive cap with spermicide, non-hormonal intra-uterine device [IUD], previous sterilization of subject or his partner, being sexually inactive) from Day of randomization up to final end of treatment (EOT) visit.</div>
+<div class="line raw">- Gave written informed consent prior to any trial related procedure.</div>
+<div class="line raw">- Have a body weight (BW) of greater than (&gt;) 55.0 kilogram (kg) to less than (&lt;) 95 kg and a body mass index (BMI) between 18.0 and 27.0 kg/m^2.</div>
+<div class="line raw">- Able to communicate well with the Investigator, understanding the protocol requirements and restrictions, and willing to comply with the requirements of the entire trial.</div>
+<div class="line raw">- Non-smoker (= 0 cigarettes, pipes, cigars or others) since at least three months.</div>
+<div class="line raw">- Electrocardiogram recording (12-lead) without signs of clinically relevant pathology in particular heart-rate corrected [QTc] (Bazett) &lt;450 milliseconds (ms).</div>
+<div class="line raw">- Vital signs should be in normal range (systolic blood pressure: 90 to 140 millimeters of mercury [mmHg]; diastolic blood pressure: 50 to 90 mmHg; pulse rate: 45 to 90 beats per minute [bpm]; oral body temperature between 35.0 degree centigrade [°C] to 37.5°C).</div>
+<div class="line raw">- All values for biochemistry, liver function test and hematology tests of blood and urine within the normal range or showing no clinically relevant deviation as judged by the Investigator. Hematocrit and hemoglobin must be above the lower limit; upper limit may range up to 15 percent (%). Remaining results, including white blood cells may range +/- 15%, if subject is asymptomatic.</div>
+<div class="line raw">- Negative screen for alcohol and drugs of abuse (opiate class, barbiturates, cocaine and metabolites, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) at screening and on each admission.</div>
+<div class="line raw">- Negative screen for Hepatitis B surface (HBs) antigens, Hepatitis C Virus (HCV) antibodies, Hepatitis A Virus (HAV) antibodies and Human Immunodeficiency Virus (HIV) 1 and 2 antibodies.</div>
+<div class="line raw">- Other protocol defined inclusion criteria could apply.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- Any surgical or medical condition, including findings in the medical history or in the pre-study assessments, or any other significant disease, that in the opinion of the Investigator, constitutes a risk or a contraindication for the participation of the subject in the study or that could interfere with the study objectives, conduct or evaluation.</div>
+<div class="line raw">- History of surgery of the gastrointestinal (GI) tract, history of other GI tract diseases, or acute GI tract infections in the last 2 weeks, which could influence the gastrointestinal absorption and/or motility according to the Investigator&#x27;s opinion.</div>
+<div class="line raw">- Any clinically relevant abnormality in the safety laboratory parameters as judged by the Investigator.</div>
+<div class="line raw">- Have positive results from serology examination for Hepatitis B surface (HBs) antigen, Hepatitis C Virus (HCV) or Human Immunodeficiency Virus (HIV).</div>
+<div class="line raw">- Allergy: ascertained or presumptive hypersensitivity to the active drug substance and/or formulations&#x27; ingredients; history of anaphylaxis to drugs or allergic reactions in general, which the Investigator considers may affect the outcome of the trial.</div>
+<div class="line raw">- History or presence of drug abuse (opiate class, barbiturates, cocaine and its main metabolite, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) or alcohol abuse at screening and on each admission. Alcohol abuse is defined by the assessment of the Investigator.</div>
+<div class="line raw">- Loss or donation of more than 400 milliliter (mL) of blood within 90 days prior to first Praziquantel (PZQ) administration.</div>
+<div class="line raw">- Administration of any investigational product or use of any investigational device in any clinical study within 30 days prior to first PZQ administration. Subjects who have used drugs that may affect the pharmacokinetics of PZQ from 14 days before dosing until the last pharmacokinetic (PK) sample, for example, phenytoin, barbiturates, primidone, carbamazepine, oxcarbazepine, topiramate, felbamate, rifampicin, nelfinavir, ritonavir, griseofulvin, oral ketoconazole.</div>
+<div class="line raw">- Consumption of substances known to be potent inhibitors or inducers of Cytochrome P450s (CYP P450s) such as grapefruit, orange, cranberry or juices of these fruits, herbal remedies or dietary supplements containing St. John’s Wort, poppy seeds, cruciferous vegetables, in the two weeks before dosing until last PK sample.</div>
+<div class="line raw">- Unlikely to comply with the protocol requirements, instructions and trial-related restrictions, for example, uncooperative attitude, inability to return for follow-up visits, and improbability of completing the trial.</div>
+<div class="line raw">- Non-acceptance or non-compliance with the study breakfast (for example, vegetarians, vegans and subjects who follow special diets).</div>
+<div class="line raw">- Excessive consumption of beverages containing xanthine (&gt;5 cups of coffee a day or equivalent) or inability to stop consuming caffeine from 48 hours prior to drug administration until discharge from the clinic.</div>
+<div class="line raw">- Subject is the Investigator or any Sub-Investigator, research assistant, pharmacist, trial coordinator, other staff or relative thereof directly involved in the conduct of the trial.</div>
+<div class="line raw">- Vulnerable subjects (for example, persons kept in detention).</div>
+<div class="line raw">- Legal incapacity or limited legal capacity.</div>
+<div class="line raw">- Other protocol defined exclusion criteria could apply.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. A male participant must agree to use and to have their female partners willing to use additional non-hormonal contraception (for example, condoms or occlusive cap with spermicide, non-hormonal intra-uterine device [IUD], previous sterilization of participant or his partner, being sexually inactive) from Day of randomization up to final end of treatment (EOT) visitGave written informed consent prior to any trial related procedureHave a body weight (BW) of greater than (&gt;) 55.0 kilogram (kg) to less than (&lt;) 95 kg and a body mass index (BMI) between 18.0 and 27.0 kg/meter square (m^2)Able to communicate well with the Investigator, understanding the protocol requirements and restrictions, and willing to comply with the requirements of the entire trialNon-smoker (= 0 cigarettes, pipes, cigars or others) since at least three monthsElectrocardiogram recording (12-lead) without signs of clinically relevant pathology in particular heart-rate corrected [QTc] (Bazett) &lt;450 milliseconds (ms)Vital signs should be in normal range (systolic blood pressure: 90 to 140 millimeters of mercury [mmHg]; diastolic blood pressure: 50 to 90 mmHg; pulse rate: 45 to 90 beats per minute [bpm]; oral body temperature between 35.0 degree centigrade [°C] to 37.5°C)All values for biochemistry, liver function test and hematology tests of blood and urine within the normal range or showing no clinically relevant deviation as judged by the Investigator. Hematocrit and hemoglobin must be above the lower limit; upper limit may range up to 15 percent (%). Remaining results, including white blood cells may range +/- 15%, if participant is asymptomaticNegative screen for alcohol and drugs of abuse (opiate class, barbiturates, cocaine and metabolites, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) at screening and on each admissionNegative screen for Hepatitis B surface (HBs) antigens, Hepatitis C Virus (HCV) antibodies, Hepatitis A Virus (HAV) antibodies and Human Immunodeficiency Virus (HIV) 1 and 2 antibodiesOther protocol defined inclusion criteria could applyExclusion Criteria:Any surgical or medical condition, including findings in the medical history or in the pre-study assessments, or any other significant disease, that in the opinion of the Investigator, constitutes a risk or a contraindication for the participation of the participant in the study or that could interfere with the study objectives, conduct or evaluationHistory of surgery of the gastrointestinal (GI) tract, history of other GI tract diseases, or acute GI tract infections in the last 2 weeks, which could influence the gastrointestinal absorption and/or motility according to the Investigator&#x27;s opinionAny clinically relevant abnormality in the safety laboratory parameters as judged by the InvestigatorHave positive results from serology examination for Hepatitis B surface (HBs) antigen, Hepatitis C Virus (HCV) or Human Immunodeficiency Virus (HIV)Allergy: ascertained or presumptive hypersensitivity to the active drug substance and/or formulations&#x27; ingredients; history of anaphylaxis to drugs or allergic reactions in general, which the Investigator considers may affect the outcome of the trialHistory or presence of drug abuse (opiate class, barbiturates, cocaine and its main metabolite, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) or alcohol abuse at screening and on each admission. Alcohol abuse is defined by the assessment of the InvestigatorLoss or donation of more than 400 milliliter (mL) of blood within 90 days prior to first Praziquantel (PZQ) administrationAdministration of any investigational product or use of any investigational device in any clinical study within 30 days prior to first PZQ administration. Participants who have used drugs that may affect the pharmacokinetics of PZQ from 14 days before dosing until the last pharmacokinetic (PK) sample, for example, phenytoin, barbiturates, primidone, carbamazapine, oxcarbazepine, topiramate, felbamate, rifampicin, nelfinavir, ritonavir, griseofulvin, oral ketoconazoleConsumption of substances known to be potent inhibitors or inducers of Cytochrome P450s (CYP P450s) such as grapefruit, orange, cranberry or juices of these fruits, herbal remedies or dietary supplements containing St. John&#x27;s Wort, poppy seeds, cruciferic vegetables, in the two weeks before dosing until last PK sampleUnlikely to comply with the protocol requirements, instructions and trial-related restrictions, for example, uncooperative attitude, inability to return for follow-up visits, and improbability of completing the trialNon-acceptance or non-compliance with the study breakfast (for example, vegetarians, vegans and participants who follow special diets)Excessive consumption of beverages containing xanthine (&gt;5 cups of coffee a day or equivalent) or inability to stop consuming caffeine from 48 hours prior to drug administration until discharge from the clinicParticipant is the Investigator or any Sub-Investigator, research assistant, pharmacist, trial coordinator, other staff or relative thereof directly involved in the conduct of the trialVulnerable participants (for example, persons kept in detention)Legal incapacity or limited legal capacityOther protocol defined exclusion criteria could apply</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. A male participant must agree to use and to have their female partners willing to use additional non-hormonal contraception (for example, condoms or occlusive cap with spermicide, non-hormonal intra-uterine device [IUD], previous sterilization of subject or his partner, being sexually inactive) from Day of randomization up to final end of treatment (EOT) visit.</div>
+<div class="line criterion">2. Gave written informed consent prior to any trial related procedure.</div>
+<div class="line criterion">3. Have a body weight (BW) of greater than (&gt;) 55.0 kilogram (kg) to less than (&lt;) 95 kg and a body mass index (BMI) between 18.0 and 27.0 kg/m^2.</div>
+<div class="line criterion">4. Able to communicate well with the Investigator, understanding the protocol requirements and restrictions, and willing to comply with the requirements of the entire trial.</div>
+<div class="line criterion">5. Non-smoker (= 0 cigarettes, pipes, cigars or others) since at least three months.</div>
+<div class="line criterion">6. Electrocardiogram recording (12-lead) without signs of clinically relevant pathology in particular heart-rate corrected [QTc] (Bazett) &lt;450 milliseconds (ms).</div>
+<div class="line criterion">7. Vital signs should be in normal range (systolic blood pressure: 90 to 140 millimeters of mercury [mmHg]; diastolic blood pressure: 50 to 90 mmHg; pulse rate: 45 to 90 beats per minute [bpm]; oral body temperature between 35.0 degree centigrade [°C] to 37.5°C).</div>
+<div class="line criterion">8. All values for biochemistry, liver function test and hematology tests of blood and urine within the normal range or showing no clinically relevant deviation as judged by the Investigator. Hematocrit and hemoglobin must be above the lower limit; upper limit may range up to 15 percent (%). Remaining results, including white blood cells may range +/- 15%, if subject is asymptomatic.</div>
+<div class="line criterion">9. Negative screen for alcohol and drugs of abuse (opiate class, barbiturates, cocaine and metabolites, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) at screening and on each admission.</div>
+<div class="line criterion">10. Negative screen for Hepatitis B surface (HBs) antigens, Hepatitis C Virus (HCV) antibodies, Hepatitis A Virus (HAV) antibodies and Human Immunodeficiency Virus (HIV) 1 and 2 antibodies.</div>
+<div class="line criterion">11. Other protocol defined inclusion criteria could apply.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Any surgical or medical condition, including findings in the medical history or in the pre-study assessments, or any other significant disease, that in the opinion of the Investigator, constitutes a risk or a contraindication for the participation of the subject in the study or that could interfere with the study objectives, conduct or evaluation.</div>
+<div class="line criterion">2. History of surgery of the gastrointestinal (GI) tract, history of other GI tract diseases, or acute GI tract infections in the last 2 weeks, which could influence the gastrointestinal absorption and/or motility according to the Investigator&#x27;s opinion.</div>
+<div class="line criterion">3. Any clinically relevant abnormality in the safety laboratory parameters as judged by the Investigator.</div>
+<div class="line criterion">4. Have positive results from serology examination for Hepatitis B surface (HBs) antigen, Hepatitis C Virus (HCV) or Human Immunodeficiency Virus (HIV).</div>
+<div class="line criterion">5. Allergy: ascertained or presumptive hypersensitivity to the active drug substance and/or formulations&#x27; ingredients; history of anaphylaxis to drugs or allergic reactions in general, which the Investigator considers may affect the outcome of the trial.</div>
+<div class="line criterion">6. History or presence of drug abuse (opiate class, barbiturates, cocaine and its main metabolite, amphetamines, cannabinoids, benzodiazepines and tricyclic antidepressants) or alcohol abuse at screening and on each admission. Alcohol abuse is defined by the assessment of the Investigator.</div>
+<div class="line criterion">7. Loss or donation of more than 400 milliliter (mL) of blood within 90 days prior to first Praziquantel (PZQ) administration.</div>
+<div class="line criterion">8. Administration of any investigational product or use of any investigational device in any clinical study within 30 days prior to first PZQ administration. Subjects who have used drugs that may affect the pharmacokinetics of PZQ from 14 days before dosing until the last pharmacokinetic (PK) sample, for example, phenytoin, barbiturates, primidone, carbamazepine, oxcarbazepine, topiramate, felbamate, rifampicin, nelfinavir, ritonavir, griseofulvin, oral ketoconazole.</div>
+<div class="line criterion">9. Consumption of substances known to be potent inhibitors or inducers of Cytochrome P450s (CYP P450s) such as grapefruit, orange, cranberry or juices of these fruits, herbal remedies or dietary supplements containing St. John’s Wort, poppy seeds, cruciferous vegetables, in the two weeks before dosing until last PK sample.</div>
+<div class="line criterion">10. Unlikely to comply with the protocol requirements, instructions and trial-related restrictions, for example, uncooperative attitude, inability to return for follow-up visits, and improbability of completing the trial.</div>
+<div class="line criterion">11. Non-acceptance or non-compliance with the study breakfast (for example, vegetarians, vegans and subjects who follow special diets).</div>
+<div class="line criterion">12. Excessive consumption of beverages containing xanthine (&gt;5 cups of coffee a day or equivalent) or inability to stop consuming caffeine from 48 hours prior to drug administration until discharge from the clinic.</div>
+<div class="line criterion">13. Subject is the Investigator or any Sub-Investigator, research assistant, pharmacist, trial coordinator, other staff or relative thereof directly involved in the conduct of the trial.</div>
+<div class="line criterion">14. Vulnerable subjects (for example, persons kept in detention).</div>
+<div class="line criterion">15. Legal incapacity or limited legal capacity.</div>
+<div class="line criterion">16. Other protocol defined exclusion criteria could apply.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_141.html">&larr; Sample 141</a> | <a href="index.html">Index</a> | <a href="sample_143.html">Sample 143 &rarr;</a>
+</div>
+</body>
+</html>

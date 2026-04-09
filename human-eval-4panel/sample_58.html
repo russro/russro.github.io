@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 58 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 58</h1>
+    <div class="meta">
+        <span>NCT: NCT02730169</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Adult male subject aged 18 to 65 years inclusiveBMI &amp;gt; 30 kg&amp;#x2F;m2 and &amp;lt; 50 kg&amp;#x2F;m2Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normalOestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunctionExclusion Criteria:Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessmentsOther types of hypogonadotropic hypogonadism or primary hypogonadismAny other pituitary or hypothalamic disease</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Week 21). Pre-dose and 1h post-dose. Visit 10 (Week 24). Pre-dose and 1h post-dose. Visit 11 (Week 24). Pre-dose and 1h post-dose. Visit 12 (Week 24). Pre-dose and 1h post-dose. Visit 13 (FU Visit 8). Pre-dose and 1h post-dose. Visit 14 (FU Visit 10). Pre-dose and 1h post-dose. Visit 15 (FU Visit 12). Pre-dose and 1h post-dose. Visit 16 (FU Visit 16). Pre-dose and 1h post-dose. Visit 17 (FU Visit 18). Pre-dose and 1h post-dose. Visit 18 (FU Visit 20). Pre-dose and 1h post-dose. Visit 19 (FU Visit 22). Pre-dose and 1h post-dose. Visit 20 (FU Visit 24). Pre-dose and 1h post-dose. Visit 21 (EOT). Pre-dose and 1h post-dose. 11.4.1 PK Parameters Assessed Plasma concentrations of BGS649 will be measured using standardised methods. The primary PK parameters are: 1. Total plasma concentration 2. Bioavailable testosterone (BhT) 3. Percentage unchanged plasma (PUP) 4. Percentage unchanged serum (PUS) 5. Percentage unchanged plasma and serum (PUPS) 6. Percentage unchanged serum (PUS) 7. Percentage unchanged plasma (PUP) 8. Percentage unchanged plasma and serum (PUPS) 9. Percentage unchanged serum (PUS) 10. Percentage unchanged plasma (PUP) 11. Percentage unchanged plasma and serum (PUPS) 12. Percentage unchanged serum (PUS) 13. Percentage unchanged plasma (PUP) 13. Percentage unchanged plasma and serum (PUPS) 14. Percentage unchanged serum (PUS) 15. Percentage unchanged plasma (PUP) 16. Percentage unchanged plasma and serum (PUPS) 17. Percentage unchanged serum (PUS) 17. Percentage unchanged plasma (PUP) 18. Percentage unchanged plasma and serum (PUPS) 19. Percentage unchanged serum (PUS) 20. Percentage unchanged plasma (PUP) 21. Percentage unchanged plasma and serum (PUPS) 22. Percentage unchanged serum (PUS) 23. Percentage unchanged plasma (PUP) 24. Percentage unchanged plasma and serum (PUPS) 25. Percentage unchanged serum (PUS) 26. Percentage unchanged plasma (PUP) 27. Percentage unchanged plasma and serum (PUPS) 28. Percentage unchanged serum (PUS) 29. Percentage unchanged plasma (PUP) 30. Percentage unchanged plasma and serum (PUPS) 31. Percentage unchanged serum (PUS) 32. Percentage unchanged plasma (PUP) 33. Percentage unchanged plasma and serum (PUPS) 34. Percentage unchanged serum (PUS) 35. Percentage unchanged plasma (PUP) 36. Percentage unchanged plasma and serum (PUPS) 37. Percentage unchanged serum (PUS) 38. Percentage unchanged plasma (PUP) 39. Percentage unchanged plasma and serum (PUPS) 40. Percentage unchanged serum (PUS) 41. Percentage unchanged plasma (PUP) 42. Percentage unchanged plasma and serum (PUPS) 43. Percentage unchanged serum (PUS) 44. Percentage unchanged plasma (PUP) 45. Percentage unchanged plasma and serum (PUPS) 46. Percentage unchanged serum (PUS) 47. Percentage unchanged plasma (PUP) 48. Percentage unchanged plasma and serum (PUPS) 49. Percentage unchanged serum (PUS) 50. Percentage unchanged plasma (PUP) 51. Percentage unchanged plasma and serum (PUPS) 52. Percentage unchanged serum (PUS) 53. Percentage unchanged plasma (PUP) 54. Percentage unchanged plasma and serum (PUPS) 55. Percentage unchanged serum (PUS) 56. Percentage unchanged plasma (PUP) 57. Percentage unchanged plasma and serum (PUPS) 58. Percentage unchanged serum (PUS) 59. Percentage unchanged plasma (PUP) 60. Percentage unchanged plasma and serum (PUPS) 61. Percentage unchanged serum (PUS) 62. Percentage unchanged plasma (PUP) 63. Percentage unchanged plasma and serum (PUPS) 64. Percentage unchanged serum (PUS) 65. Percentage unchanged plasma (PUP) 66. Percentage unchanged plasma and serum (PUPS) 67. Percentage unchanged serum (PUS) 68. Percentage unchanged plasma (PUP) 69. Percentage unchanged plasma and serum (PUPS) 70. Percentage unchanged serum (PUS) 71. Percentage unchanged plasma (PUP) 72. Percentage unchanged plasma and serum (PUPS) 73. Percentage unchanged serum (PUS) 74. Percentage unchanged plasma (PUP) 75. Percentage unchanged plasma and serum (PUPS) 76. Percentage unchanged serum (PUS) 77. Percentage unchanged plasma (PUP) 78. Percentage unchanged plasma and serum (PUPS) 79. Percentage unchanged serum (PUS) 80. Percentage unchanged plasma (PUP) 81. Percentage unchanged plasma and serum (PUPS) 82. Percentage unchanged serum (PUS) 83. Percentage unchanged plasma (PUP) 84. Percentage unchanged plasma and serum (PUPS) 85. Percentage unchanged serum (PUS) 86. Percentage unchanged plasma (PUP) 87. Percentage unchanged plasma and serum (PUPS) 88. Percentage unchanged serum (PUS) 89. Percentage unchanged plasma (PUP) 90. Percentage unchanged plasma and serum (PUPS) 91. Percentage unchanged serum (PUS) 92. Percentage unchanged plasma (PUP) 93. Percentage unchanged plasma and serum (PUPS) 94. Percentage unchanged serum (PUS) 95. Percentage unchanged plasma (PUP) 96. Percentage unchanged plasma and serum (PUPS) 97. Percentage unchanged serum (PUS) 98. Percentage unchanged plasma (PUP) 99. Percentage unchanged plasma and serum (PUPS) 100. Percentage unchanged serum (PUS) 101. Percentage unchanged plasma (PUP) 102. Percentage unchanged plasma and serum (PUPS) 103. Percentage unchanged serum (PUS) 104. Percentage unchanged plasma (PUP) 105. Percentage unchanged plasma and serum (PUPS) 106. Percentage unchanged serum (PUS) 107. Percentage unchanged plasma (PUP) 108. Percentage unchanged plasma and serum (PUPS) 109. Percentage unchanged serum (PUS) 1010. Percentage unchanged plasma (PUP) 1011. Percentage unchanged plasma and serum (PUPS) 1012. Percentage unchanged serum (PUS) 1013. Percentage unchanged plasma (PUP) 1014. Percentage unchanged plasma and serum (PUPS) 1015. Percentage unchanged serum (PUS) 1016. Percentage unchanged plasma (PUP) 1017. Percentage unchanged plasma and serum (PUPS) 1018. Percentage unchanged serum (PUS) 1019. Percentage unchanged plasma (PUP) 1020. Percentage unchanged plasma and serum (PUPS) 1021. Percentage unchanged serum (PUS) 1022. Percentage unchanged plasma (PUP) 1023. Percentage unchanged plasma and serum (PUPS) 1024. Percentage unchanged serum (PUS) 1025. Percentage unchanged plasma (PUP) 1026. Percentage unchanged plasma and serum (PUPS) 1027. Percentage unchanged serum (PUS) 1028. Percentage unchanged plasma (PUP) 1029. Percentage unchanged plasma and serum (PUPS) 1030. Percentage unchanged serum (PUS) 1031. Percentage unchanged plasma (PUP) 1032. Percentage unchanged plasma and serum (PUPS) 1033. Percentage unchanged serum (PUS) 1034. Percentage unchanged plasma (PUP) 1035. Percentage unchanged plasma and serum (PUPS) 1036. Percentage unchanged serum (PUS) 1037. Percentage unchanged plasma (PUP) 1038. Percentage unchanged plasma and serum (PUPS) 1039. Percentage unchanged serum (PUS) 1040. Percentage unchanged plasma (PUP) 1041. Percentage unchanged plasma and serum (PUPS) 1042. Percentage unchanged serum (PUS)</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Adult male subject aged 18 to 65 years inclusiveBMI &gt; 30 kg/m2 and &lt; 50 kg/m2Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normalOestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunctionExclusion Criteria:Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessmentsOther types of hypogonadotropic hypogonadism or primary hypogonadismAny other pituitary or hypothalamic disease</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Week 21).</div>
+<div class="line criterion">2. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">3. Visit 10 (Week 24).</div>
+<div class="line criterion">4. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">5. Visit 11 (Week 24).</div>
+<div class="line criterion">6. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">7. Visit 12 (Week 24).</div>
+<div class="line criterion">8. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">9. Visit 13 (FU Visit 8).</div>
+<div class="line criterion">10. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">11. Visit 14 (FU Visit 10).</div>
+<div class="line criterion">12. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">13. Visit 15 (FU Visit 12).</div>
+<div class="line criterion">14. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">15. Visit 16 (FU Visit 16).</div>
+<div class="line criterion">16. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">17. Visit 17 (FU Visit 18).</div>
+<div class="line criterion">18. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">19. Visit 18 (FU Visit 20).</div>
+<div class="line criterion">20. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">21. Visit 19 (FU Visit 22).</div>
+<div class="line criterion">22. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">23. Visit 20 (FU Visit 24).</div>
+<div class="line criterion">24. Pre-dose and 1h post-dose.</div>
+<div class="line criterion">25. Visit 21 (EOT).</div>
+<div class="line criterion">26. Pre-dose and 1h post-dose. 11.4.1 PK Parameters Assessed Plasma concentrations of BGS649 will be measured using standardised methods.</div>
+<div class="line criterion">27. The primary PK parameters are: 1.</div>
+<div class="line criterion">28. Total plasma concentration 2.</div>
+<div class="line criterion">29. Bioavailable testosterone (BhT) 3.</div>
+<div class="line criterion">30. Percentage unchanged plasma (PUP) 4.</div>
+<div class="line criterion">31. Percentage unchanged serum (PUS) 5.</div>
+<div class="line criterion">32. Percentage unchanged plasma and serum (PUPS) 6.</div>
+<div class="line criterion">33. Percentage unchanged serum (PUS) 7.</div>
+<div class="line criterion">34. Percentage unchanged plasma (PUP) 8.</div>
+<div class="line criterion">35. Percentage unchanged plasma and serum (PUPS) 9.</div>
+<div class="line criterion">36. Percentage unchanged serum (PUS) 10.</div>
+<div class="line criterion">37. Percentage unchanged plasma (PUP) 11.</div>
+<div class="line criterion">38. Percentage unchanged plasma and serum (PUPS) 12.</div>
+<div class="line criterion">39. Percentage unchanged serum (PUS) 13.</div>
+<div class="line criterion">40. Percentage unchanged plasma (PUP) 13.</div>
+<div class="line criterion">41. Percentage unchanged plasma and serum (PUPS) 14.</div>
+<div class="line criterion">42. Percentage unchanged serum (PUS) 15.</div>
+<div class="line criterion">43. Percentage unchanged plasma (PUP) 16.</div>
+<div class="line criterion">44. Percentage unchanged plasma and serum (PUPS) 17.</div>
+<div class="line criterion">45. Percentage unchanged serum (PUS) 17.</div>
+<div class="line criterion">46. Percentage unchanged plasma (PUP) 18.</div>
+<div class="line criterion">47. Percentage unchanged plasma and serum (PUPS) 19.</div>
+<div class="line criterion">48. Percentage unchanged serum (PUS) 20.</div>
+<div class="line criterion">49. Percentage unchanged plasma (PUP) 21.</div>
+<div class="line criterion">50. Percentage unchanged plasma and serum (PUPS) 22.</div>
+<div class="line criterion">51. Percentage unchanged serum (PUS) 23.</div>
+<div class="line criterion">52. Percentage unchanged plasma (PUP) 24.</div>
+<div class="line criterion">53. Percentage unchanged plasma and serum (PUPS) 25.</div>
+<div class="line criterion">54. Percentage unchanged serum (PUS) 26.</div>
+<div class="line criterion">55. Percentage unchanged plasma (PUP) 27.</div>
+<div class="line criterion">56. Percentage unchanged plasma and serum (PUPS) 28.</div>
+<div class="line criterion">57. Percentage unchanged serum (PUS) 29.</div>
+<div class="line criterion">58. Percentage unchanged plasma (PUP) 30.</div>
+<div class="line criterion">59. Percentage unchanged plasma and serum (PUPS) 31.</div>
+<div class="line criterion">60. Percentage unchanged serum (PUS) 32.</div>
+<div class="line criterion">61. Percentage unchanged plasma (PUP) 33.</div>
+<div class="line criterion">62. Percentage unchanged plasma and serum (PUPS) 34.</div>
+<div class="line criterion">63. Percentage unchanged serum (PUS) 35.</div>
+<div class="line criterion">64. Percentage unchanged plasma (PUP) 36.</div>
+<div class="line criterion">65. Percentage unchanged plasma and serum (PUPS) 37.</div>
+<div class="line criterion">66. Percentage unchanged serum (PUS) 38.</div>
+<div class="line criterion">67. Percentage unchanged plasma (PUP) 39.</div>
+<div class="line criterion">68. Percentage unchanged plasma and serum (PUPS) 40.</div>
+<div class="line criterion">69. Percentage unchanged serum (PUS) 41.</div>
+<div class="line criterion">70. Percentage unchanged plasma (PUP) 42.</div>
+<div class="line criterion">71. Percentage unchanged plasma and serum (PUPS) 43.</div>
+<div class="line criterion">72. Percentage unchanged serum (PUS) 44.</div>
+<div class="line criterion">73. Percentage unchanged plasma (PUP) 45.</div>
+<div class="line criterion">74. Percentage unchanged plasma and serum (PUPS) 46.</div>
+<div class="line criterion">75. Percentage unchanged serum (PUS) 47.</div>
+<div class="line criterion">76. Percentage unchanged plasma (PUP) 48.</div>
+<div class="line criterion">77. Percentage unchanged plasma and serum (PUPS) 49.</div>
+<div class="line criterion">78. Percentage unchanged serum (PUS) 50.</div>
+<div class="line criterion">79. Percentage unchanged plasma (PUP) 51.</div>
+<div class="line criterion">80. Percentage unchanged plasma and serum (PUPS) 52.</div>
+<div class="line criterion">81. Percentage unchanged serum (PUS) 53.</div>
+<div class="line criterion">82. Percentage unchanged plasma (PUP) 54.</div>
+<div class="line criterion">83. Percentage unchanged plasma and serum (PUPS) 55.</div>
+<div class="line criterion">84. Percentage unchanged serum (PUS) 56.</div>
+<div class="line criterion">85. Percentage unchanged plasma (PUP) 57.</div>
+<div class="line criterion">86. Percentage unchanged plasma and serum (PUPS) 58.</div>
+<div class="line criterion">87. Percentage unchanged serum (PUS) 59.</div>
+<div class="line criterion">88. Percentage unchanged plasma (PUP) 60.</div>
+<div class="line criterion">89. Percentage unchanged plasma and serum (PUPS) 61.</div>
+<div class="line criterion">90. Percentage unchanged serum (PUS) 62.</div>
+<div class="line criterion">91. Percentage unchanged plasma (PUP) 63.</div>
+<div class="line criterion">92. Percentage unchanged plasma and serum (PUPS) 64.</div>
+<div class="line criterion">93. Percentage unchanged serum (PUS) 65.</div>
+<div class="line criterion">94. Percentage unchanged plasma (PUP) 66.</div>
+<div class="line criterion">95. Percentage unchanged plasma and serum (PUPS) 67.</div>
+<div class="line criterion">96. Percentage unchanged serum (PUS) 68.</div>
+<div class="line criterion">97. Percentage unchanged plasma (PUP) 69.</div>
+<div class="line criterion">98. Percentage unchanged plasma and serum (PUPS) 70.</div>
+<div class="line criterion">99. Percentage unchanged serum (PUS) 71.</div>
+<div class="line criterion">100. Percentage unchanged plasma (PUP) 72.</div>
+<div class="line criterion">101. Percentage unchanged plasma and serum (PUPS) 73.</div>
+<div class="line criterion">102. Percentage unchanged serum (PUS) 74.</div>
+<div class="line criterion">103. Percentage unchanged plasma (PUP) 75.</div>
+<div class="line criterion">104. Percentage unchanged plasma and serum (PUPS) 76.</div>
+<div class="line criterion">105. Percentage unchanged serum (PUS) 77.</div>
+<div class="line criterion">106. Percentage unchanged plasma (PUP) 78.</div>
+<div class="line criterion">107. Percentage unchanged plasma and serum (PUPS) 79.</div>
+<div class="line criterion">108. Percentage unchanged serum (PUS) 80.</div>
+<div class="line criterion">109. Percentage unchanged plasma (PUP) 81.</div>
+<div class="line criterion">110. Percentage unchanged plasma and serum (PUPS) 82.</div>
+<div class="line criterion">111. Percentage unchanged serum (PUS) 83.</div>
+<div class="line criterion">112. Percentage unchanged plasma (PUP) 84.</div>
+<div class="line criterion">113. Percentage unchanged plasma and serum (PUPS) 85.</div>
+<div class="line criterion">114. Percentage unchanged serum (PUS) 86.</div>
+<div class="line criterion">115. Percentage unchanged plasma (PUP) 87.</div>
+<div class="line criterion">116. Percentage unchanged plasma and serum (PUPS) 88.</div>
+<div class="line criterion">117. Percentage unchanged serum (PUS) 89.</div>
+<div class="line criterion">118. Percentage unchanged plasma (PUP) 90.</div>
+<div class="line criterion">119. Percentage unchanged plasma and serum (PUPS) 91.</div>
+<div class="line criterion">120. Percentage unchanged serum (PUS) 92.</div>
+<div class="line criterion">121. Percentage unchanged plasma (PUP) 93.</div>
+<div class="line criterion">122. Percentage unchanged plasma and serum (PUPS) 94.</div>
+<div class="line criterion">123. Percentage unchanged serum (PUS) 95.</div>
+<div class="line criterion">124. Percentage unchanged plasma (PUP) 96.</div>
+<div class="line criterion">125. Percentage unchanged plasma and serum (PUPS) 97.</div>
+<div class="line criterion">126. Percentage unchanged serum (PUS) 98.</div>
+<div class="line criterion">127. Percentage unchanged plasma (PUP) 99.</div>
+<div class="line criterion">128. Percentage unchanged plasma and serum (PUPS) 100.</div>
+<div class="line criterion">129. Percentage unchanged serum (PUS) 101.</div>
+<div class="line criterion">130. Percentage unchanged plasma (PUP) 102.</div>
+<div class="line criterion">131. Percentage unchanged plasma and serum (PUPS) 103.</div>
+<div class="line criterion">132. Percentage unchanged serum (PUS) 104.</div>
+<div class="line criterion">133. Percentage unchanged plasma (PUP) 105.</div>
+<div class="line criterion">134. Percentage unchanged plasma and serum (PUPS) 106.</div>
+<div class="line criterion">135. Percentage unchanged serum (PUS) 107.</div>
+<div class="line criterion">136. Percentage unchanged plasma (PUP) 108.</div>
+<div class="line criterion">137. Percentage unchanged plasma and serum (PUPS) 109.</div>
+<div class="line criterion">138. Percentage unchanged serum (PUS) 1010.</div>
+<div class="line criterion">139. Percentage unchanged plasma (PUP) 1011.</div>
+<div class="line criterion">140. Percentage unchanged plasma and serum (PUPS) 1012.</div>
+<div class="line criterion">141. Percentage unchanged serum (PUS) 1013.</div>
+<div class="line criterion">142. Percentage unchanged plasma (PUP) 1014.</div>
+<div class="line criterion">143. Percentage unchanged plasma and serum (PUPS) 1015.</div>
+<div class="line criterion">144. Percentage unchanged serum (PUS) 1016.</div>
+<div class="line criterion">145. Percentage unchanged plasma (PUP) 1017.</div>
+<div class="line criterion">146. Percentage unchanged plasma and serum (PUPS) 1018.</div>
+<div class="line criterion">147. Percentage unchanged serum (PUS) 1019.</div>
+<div class="line criterion">148. Percentage unchanged plasma (PUP) 1020.</div>
+<div class="line criterion">149. Percentage unchanged plasma and serum (PUPS) 1021.</div>
+<div class="line criterion">150. Percentage unchanged serum (PUS) 1022.</div>
+<div class="line criterion">151. Percentage unchanged plasma (PUP) 1023.</div>
+<div class="line criterion">152. Percentage unchanged plasma and serum (PUPS) 1024.</div>
+<div class="line criterion">153. Percentage unchanged serum (PUS) 1025.</div>
+<div class="line criterion">154. Percentage unchanged plasma (PUP) 1026.</div>
+<div class="line criterion">155. Percentage unchanged plasma and serum (PUPS) 1027.</div>
+<div class="line criterion">156. Percentage unchanged serum (PUS) 1028.</div>
+<div class="line criterion">157. Percentage unchanged plasma (PUP) 1029.</div>
+<div class="line criterion">158. Percentage unchanged plasma and serum (PUPS) 1030.</div>
+<div class="line criterion">159. Percentage unchanged serum (PUS) 1031.</div>
+<div class="line criterion">160. Percentage unchanged plasma (PUP) 1032.</div>
+<div class="line criterion">161. Percentage unchanged plasma and serum (PUPS) 1033.</div>
+<div class="line criterion">162. Percentage unchanged serum (PUS) 1034.</div>
+<div class="line criterion">163. Percentage unchanged plasma (PUP) 1035.</div>
+<div class="line criterion">164. Percentage unchanged plasma and serum (PUPS) 1036.</div>
+<div class="line criterion">165. Percentage unchanged serum (PUS) 1037.</div>
+<div class="line criterion">166. Percentage unchanged plasma (PUP) 1038.</div>
+<div class="line criterion">167. Percentage unchanged plasma and serum (PUPS) 1039.</div>
+<div class="line criterion">168. Percentage unchanged serum (PUS) 1040.</div>
+<div class="line criterion">169. Percentage unchanged plasma (PUP) 1041.</div>
+<div class="line criterion">170. Percentage unchanged plasma and serum (PUPS) 1042.</div>
+<div class="line criterion">171. Percentage unchanged serum (PUS)</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_57.html">&larr; Sample 57</a> | <a href="index.html">Index</a> | <a href="sample_59.html">Sample 59 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 3 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 3</h1>
+    <div class="meta">
+        <span>NCT: NCT04557189</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Participants undergoing elective surgery under general anesthesia, expected to last for at least 1 hour from induction of anesthesia to wound closure.Participants are expected to require or have agreed to stay, at least 1 overnight in the hospital.Participants American Society of Anesthesiologists (ASA) physical status is ASA I-III.Participants with 3 or more Apfel risk factors defined as:Female sex.Nonsmoking status (never smoked or stopped smoking ≥12 months ago).History of PONV or motion sickness.Planned use of postoperative opioid analgesics.Exclusion Criteria:Participants who are expected to remain intubated post-anesthesia.Participants who experience nausea or vomiting within 24 hours before surgery or are diagnosed with gastroparesis, cyclic vomiting syndrome, or other condition associated with acute or chronic nausea and vomiting.Participants who have received, or are expected to receive, any excluded drug preoperatively within 24 hours before induction, during surgery, or within 24 hours after surgery.Participants scheduled to receive neuraxial anesthesia (e.g., epidural, spinal, or caudal anesthesia), regional blocks, or total IV anesthesia, and&amp;#x2F;or planned to receive different drugs for premedication, induction, maintenance, or reversal of anesthesia than those specified in the protocol.Participants who have an allergy or contraindication to the recommended and available rescue therapy for the treatment of PONV.Circumstance that, in the investigator&amp;#x27;s opinion, make participation in this clinical study inappropriate.Participants found at the screening to have a QT interval with Fridericia correction method (QTcF) ≥450 msec or other factors that increase the risk of QT prolongation or arrhythmic events. Assessments showing bundle branch block and a prolonged QTcF should be discussed with the study monitor and the sponsor for potential inclusion.Participants who have a direct family history of premature sudden death or channelopathy, personal history of Brugada syndrome (right bundle branch block pattern with ST elevation in leads V1-V3), long QT, short QT, arrhythmogenic right ventricular dysplasia, hypertrophic cardiomyopathy or catecholaminergic polymorphic ventricular tachycardia (VT).Participants who have had 3 incidents of vasovagal syncope within the last 5 years.Participants with an average heart rate (HR) &amp;lt;55 or &amp;gt;100 bpm or systolic blood pressure (SBP) &amp;lt;90 mm Hg or Diastolic blood pressure (DBP) &amp;lt;60 mm Hg during screening or prior to randomization on the day of surgery.Participants with a clinically significant ECG abnormality indicative of acute cardiac instability as determined by the investigator at screening, including more than first-degree atrioventricular block, nonsustained or sustained VT, or ECG changes consistent with acute myocardial ischemia or infarction.Participants with a history of acute myocardial ischemia within the last 12 months.Participants receiving beta-blockers chronically or between screening and surgery that cannot be safely withheld on the day of surgery in the investigator&amp;#x27;s judgment. Participants receiving certain other cardiovascular medications, such as vasodilators for hypertension, chronically or between screening and surgery that in the investigator&amp;#x27;s judgment cannot be adequately managed in the perioperative setting considering the potential vasodilatory effects of TAK-951 and anesthesia standard of care. The investigators must consult with the medical monitor regarding the eligibility of participants who are receiving beta-blockers, vasodilators, and other classes of medications that act on HR or BP.Participants with alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &amp;gt;2 times the upper limit of normal (ULN) or total bilirubin &amp;gt;1.5 times the ULN.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">## Modified Eligibility Criteria for Version 13 of Clinical Trial</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Based on the provided text from the Amendment 4 of the TAK-951 study protocol, here are the modified eligibility criteria for Version 13:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Participants undergoing elective surgery under general anesthesia:** This remains unchanged from previous versions.</div>
+<div class="line raw">* **Expected surgery duration of at least 1 hour from induction of anesthesia to wound closure:** This remains unchanged.</div>
+<div class="line raw">* **Expected to require at least 1 overnight stay in the hospital:** This remains unchanged.</div>
+<div class="line raw">* **American Society of Anesthesiologists (ASA) physical status of ASA I-III:** This remains unchanged.</div>
+<div class="line raw">* **Female sex:** This remains unchanged.</div>
+<div class="line raw">* **Non-smoker:** This remains unchanged.</div>
+<div class="line raw">* **History of PONV or motion sickness:** This remains unchanged.</div>
+<div class="line raw">* **Use of postoperative opioid analgesics:** This remains unchanged.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Intubated post-anesthesia:** This is likely referring to patients who are expected to remain intubated post-surgery.</div>
+<div class="line raw">* **Experiencing nausea or vomiting within 24 hours before surgery or diagnosis of gastroparesis, cyclic vomiting syndrome, or other conditions associated with acute or chronic nausea and vomiting:** This is a significant change.</div>
+<div class="line raw">* **Pre-existing conditions that may increase the risk of QT prolongation or arrhythmias:** This is a significant change.</div>
+<div class="line raw">* **History of QT prolongation or other factors that increase the risk of QT prolongation or arrhythmias:** This is a significant change.</div>
+<div class="line raw">* **Patients with a history of Brugada syndrome, long QT syndrome, or other channelopathies:** This is a significant change.</div>
+<div class="line raw">* **Patients with a family history of premature sudden death or channelopathies:** This is a significant change.</div>
+<div class="line raw">* **Patients with a history of myocardial ischemia within the last 12 months:** This is a significant change.</div>
+<div class="line raw">* **Patients currently receiving beta-blockers chronically or between screening and surgery:** This is a significant change.</div>
+<div class="line raw">* **Patients currently receiving vasodilators for hypertension chronically or between screening and surgery:** This is a significant change.</div>
+<div class="line raw">* **Patients with a history of cardiovascular medications that may interact with TAK-951 or anesthesia:** This is a significant change.</div>
+<div class="line raw">* **Patients with a history of severe liver disease or elevated liver enzymes:** This is a significant change.</div>
+<div class="line raw">* **Patients with a history of allergic reactions to TAK-951 or any of the study medications:** This is a significant change.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Important Notes:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Specific details regarding the criteria for QT prolongation and arrhythmias are not provided in the text.**  </div>
+<div class="line raw">* **The inclusion and exclusion criteria have been significantly modified to reflect the specific requirements of the study protocol.** </div>
+<div class="line raw">* **The inclusion and exclusion criteria should be reviewed in conjunction with the full protocol for complete details.** </div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Disclaimer:** This information is based on the provided text and may not be exhaustive. It is crucial to consult the full protocol for complete and accurate information.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants undergoing elective surgery under general anesthesia, expected to last for at least 1 hour from induction of anesthesia to wound closure.Participants are expected to require or have agreed to stay, at least 1 overnight in the hospital.Participants American Society of Anesthesiologists (ASA) physical status is ASA I-III.Participants with 3 or more Apfel risk factors defined as:Female sex.Nonsmoking status (never smoked or stopped smoking ≥12 months ago).History of PONV or motion sickness.Planned use of postoperative opioid analgesics.Exclusion Criteria:Participants who are expected to remain intubated post-anesthesia.Participants who experience nausea or vomiting within 24 hours before surgery or are diagnosed with gastroparesis, cyclic vomiting syndrome, or other condition associated with acute or chronic nausea and vomiting.Participants who have received, or are expected to receive, any excluded drug preoperatively within 24 hours before induction, during surgery, or within 24 hours after surgery.Participants scheduled to receive neuraxial anesthesia (e.g., epidural, spinal, or caudal anesthesia), regional blocks, or total IV anesthesia, and/or planned to receive different drugs for premedication, induction, maintenance, or reversal of anesthesia than those specified in the protocol.Participants who have an allergy or contraindication to the recommended and available rescue therapy for the treatment of PONV.Circumstance that, in the investigator&#x27;s opinion, make participation in this clinical study inappropriate.Participants found at the screening to have a QT interval with Fridericia correction method (QTcF) ≥450 msec or other factors that increase the risk of QT prolongation or arrhythmic events. Assessments showing bundle branch block and a prolonged QTcF should be discussed with the study monitor and the sponsor for potential inclusion.Participants who have a direct family history of premature sudden death or channelopathy, personal history of Brugada syndrome (right bundle branch block pattern with ST elevation in leads V1-V3), long QT, short QT, arrhythmogenic right ventricular dysplasia, hypertrophic cardiomyopathy or catecholaminergic polymorphic ventricular tachycardia (VT).Participants who have had 3 incidents of vasovagal syncope within the last 5 years.Participants with an average heart rate (HR) &lt;55 or &gt;100 bpm or systolic blood pressure (SBP) &lt;90 mm Hg or Diastolic blood pressure (DBP) &lt;60 mm Hg during screening or prior to randomization on the day of surgery.Participants with a clinically significant ECG abnormality indicative of acute cardiac instability as determined by the investigator at screening, including more than first-degree atrioventricular block, nonsustained or sustained VT, or ECG changes consistent with acute myocardial ischemia or infarction.Participants with a history of acute myocardial ischemia within the last 12 months.Participants receiving beta-blockers chronically or between screening and surgery that cannot be safely withheld on the day of surgery in the investigator&#x27;s judgment. Participants receiving certain other cardiovascular medications, such as vasodilators for hypertension, chronically or between screening and surgery that in the investigator&#x27;s judgment cannot be adequately managed in the perioperative setting considering the potential vasodilatory effects of TAK-951 and anesthesia standard of care. The investigators must consult with the medical monitor regarding the eligibility of participants who are receiving beta-blockers, vasodilators, and other classes of medications that act on HR or BP.Participants with alanine aminotransferase (ALT) or aspartate aminotransferase (AST) &gt;2 times the upper limit of normal (ULN) or total bilirubin &gt;1.5 times the ULN.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Eligibility Criteria for Version 13 of Clinical Trial</div>
+<div class="line criterion">2. Based on the provided text from the Amendment 4 of the TAK-951 study protocol, here are the modified eligibility criteria for Version 13:</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants undergoing elective surgery under general anesthesia: This remains unchanged from previous versions.</div>
+<div class="line criterion">2. Expected surgery duration of at least 1 hour from induction of anesthesia to wound closure: This remains unchanged.</div>
+<div class="line criterion">3. Expected to require at least 1 overnight stay in the hospital: This remains unchanged.</div>
+<div class="line criterion">4. American Society of Anesthesiologists (ASA) physical status of ASA I-III: This remains unchanged.</div>
+<div class="line criterion">5. Female sex: This remains unchanged.</div>
+<div class="line criterion">6. Non-smoker: This remains unchanged.</div>
+<div class="line criterion">7. History of PONV or motion sickness: This remains unchanged.</div>
+<div class="line criterion">8. Use of postoperative opioid analgesics: This remains unchanged.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Intubated post-anesthesia: This is likely referring to patients who are expected to remain intubated post-surgery.</div>
+<div class="line criterion">2. Experiencing nausea or vomiting within 24 hours before surgery or diagnosis of gastroparesis, cyclic vomiting syndrome, or other conditions associated with acute or chronic nausea and vomiting: This is a significant change.</div>
+<div class="line criterion">3. Pre-existing conditions that may increase the risk of QT prolongation or arrhythmias: This is a significant change.</div>
+<div class="line criterion">4. History of QT prolongation or other factors that increase the risk of QT prolongation or arrhythmias: This is a significant change.</div>
+<div class="line criterion">5. Patients with a history of Brugada syndrome, long QT syndrome, or other channelopathies: This is a significant change.</div>
+<div class="line criterion">6. Patients with a family history of premature sudden death or channelopathies: This is a significant change.</div>
+<div class="line criterion">7. Patients with a history of myocardial ischemia within the last 12 months: This is a significant change.</div>
+<div class="line criterion">8. Patients currently receiving beta-blockers chronically or between screening and surgery: This is a significant change.</div>
+<div class="line criterion">9. Patients currently receiving vasodilators for hypertension chronically or between screening and surgery: This is a significant change.</div>
+<div class="line criterion">10. Patients with a history of cardiovascular medications that may interact with TAK-951 or anesthesia: This is a significant change.</div>
+<div class="line criterion">11. Patients with a history of severe liver disease or elevated liver enzymes: This is a significant change.</div>
+<div class="line criterion">12. Patients with a history of allergic reactions to TAK-951 or any of the study medications: This is a significant change.</div>
+<div class="line criterion">13. Important Notes:</div>
+<div class="line criterion">14. Specific details regarding the criteria for QT prolongation and arrhythmias are not provided in the text.</div>
+<div class="line criterion">15. The inclusion and exclusion criteria have been significantly modified to reflect the specific requirements of the study protocol.</div>
+<div class="line criterion">16. The inclusion and exclusion criteria should be reviewed in conjunction with the full protocol for complete details.</div>
+<div class="line criterion">17. Disclaimer: This information is based on the provided text and may not be exhaustive.</div>
+<div class="line criterion">18. It is crucial to consult the full protocol for complete and accurate information.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_2.html">&larr; Sample 2</a> | <a href="index.html">Index</a> | <a href="sample_4.html">Sample 4 &rarr;</a>
+</div>
+</body>
+</html>

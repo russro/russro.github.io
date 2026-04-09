@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 157 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 157</h1>
+    <div class="meta">
+        <span>NCT: NCT02956122</span>
+        <span>Model: versa-4o-mini</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Male or female participants aged ≥18 years at the time of screeningRecipient of an hematopoietic stem cell transplantation (HSCT)The disease indication for which the participant required HSCT must be in remissionNewly diagnosed acute graft-versus-host disease (GvHD), including lower Gastrointestinal (GI) involvement (modified International Bone Marrow Transplant Registry [IBMTR] Severity Stage 1 to 4 [&amp;gt;500 mL diarrhea&amp;#x2F;day]), with or without other organ system involvement.Willing to undergo or must have had a lower GI biopsy within 7 days of informed consent to confirm GI GvHD. Biopsy results are not needed to initiate treatment; however, if biopsy results are not consistent with aGvHD, treatment with GLASSIA will be discontinued.Participants must be receiving systemic corticosteroids. Treatment with methylprednisolone&amp;#x2F;systemic steroids must have been initiated within 72 hours prior to the first dose of study treatment after enrollmentEvidence of myeloid engraftment (absolute neutrophil count ≥0.5 x 10^9&amp;#x2F;L)Lower GI GvHD manifested by diarrhea must have other causes of diarrhea ruled out (eg, negative for Clostridium difficile or cytomegalovirus [CMV] infection or oral magnesium administration)Karnofsky Performance Score ≥50%If female of childbearing potential, participant presents with a negative blood pregnancy testFemales of childbearing potential with a fertile male sexual partner must agree to employ adequate contraception for the duration of the study.Males must use adequate contraception and must not donate sperm for the duration of the study.Participant is willing and able to comply with the requirements of the protocolExclusion Criteria:Participant with manifestations of chronic GvHDParticipant with acute&amp;#x2F;chronic GvHD overlap syndromeParticipant whose GvHD developed after donor lymphocyte infusionParticipant with myocardial infarction within 6 months prior to enrollment or New York Heart Association Class III or IV heart failure, uncontrolled angina, severe uncontrolled ventricular arrhythmias or electrocardiographic evidence of acute ischemia or active conduction system abnormalities. Prior to the first dose of study treatment, any electrocardiogram (ECG) abnormality at screening must be documented by the investigator as not medically relevantParticipant with evidence of recurrent malignancyParticipant with veno-occlusive disease (ie, sinusoidal obstruction syndrome)Participant receiving GvHD treatment other than continued prophylaxis (eg, cyclosporine and&amp;#x2F;or mycophenolate mofetil, etc) or corticosteroid therapy. In addition, a participant who received the first dose of corticosteroid therapy for acute GvHD with lower GI involvement more than 72 hours before the first dose of study treatment is not eligible for the studyParticipant with severe sepsis involving at least 1 organ failureParticipant who is seropositive or positive in the nucleic acid test for human immunodeficiency virus (HIV)Participant with active hepatitis B or CParticipant has participated in another clinical study involving an investigational product (IP) or investigational device within 30 days prior to enrollment or is scheduled to participate in another clinical study involving an IP or investigational device during the course of this studyIf female, participant is pregnant or lactating at the time of enrollment, or has plans to become pregnant during the studyParticipant with a serious medical or psychiatric illness likely to interfere with participation in the studyParticipant is a family member or employee of the investigator</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">**Amended Eligibility Criteria (Version 3)**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw">1. Male or female participants aged ≥18 years at the time of screening.</div>
+<div class="line raw">2. Recipient of an allogeneic hematopoietic stem cell transplantation (HSCT).</div>
+<div class="line raw">3. The disease indication for which the participant required HSCT must be in remission.</div>
+<div class="line raw">4. Newly diagnosed acute graft-versus-host disease (GvHD) with lower gastrointestinal (GI) involvement (modified International Bone Marrow Transplant Registry [IBMTR] Severity Stage 1 to 4, defined as diarrhea &gt;500 mL/day), with or without other organ system involvement.</div>
+<div class="line raw">5. Willing to undergo or must have had a lower GI biopsy within 7 days of informed consent to confirm GI GvHD. Biopsy results are not needed to initiate treatment; however, if biopsy results are not consistent with acute GvHD, treatment with GLASSIA will be discontinued.</div>
+<div class="line raw">6. Subjects must be receiving systemic corticosteroids. Treatment with methylprednisolone/systemic steroids must have been initiated within 72 hours prior to the first dose of study treatment after enrollment.</div>
+<div class="line raw">7. Evidence of myeloid engraftment (absolute neutrophil count ≥0.5 x 10^9/L).</div>
+<div class="line raw">8. Lower GI GvHD manifested by diarrhea must have other causes of diarrhea ruled out (e.g., negative for Clostridium difficile or cytomegalovirus [CMV] infection or oral magnesium administration).</div>
+<div class="line raw">9. Karnofsky Performance Score ≥50%.</div>
+<div class="line raw">10. If female of childbearing potential, subject presents with a negative blood pregnancy test.</div>
+<div class="line raw">11. Females of childbearing potential with a fertile male sexual partner must agree to employ adequate contraception for the duration of the study. Adequate contraception is defined as using hormonal contraceptives or an intrauterine device combined with at least one of the following forms of contraception: a diaphragm, cervical cap, or a condom.</div>
+<div class="line raw">12. Males must use adequate contraception and must not donate sperm for the duration of the study. Adequate contraception for the male subject and his female partner is defined as using hormonal contraceptives or an intrauterine device combined with at least one of the following forms of contraception: a diaphragm, cervical cap, or a condom.</div>
+<div class="line raw">13. Subject is willing and able to comply with the requirements of the protocol.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw">1. Subject with manifestations of chronic GvHD.</div>
+<div class="line raw">2. Subject with acute/chronic GvHD overlap syndrome.</div>
+<div class="line raw">3. Subject whose GvHD developed after donor lymphocyte infusion.</div>
+<div class="line raw">4. Subject with myocardial infarction within 6 months prior to enrollment or New York Heart Association Class III or IV heart failure, uncontrolled angina, severe uncontrolled ventricular arrhythmias, or electrocardiographic evidence of acute ischemia or active conduction system abnormalities. Prior to the first dose of study treatment, any electrocardiogram (ECG) abnormality at screening must be documented by the investigator as not medically relevant.</div>
+<div class="line raw">5. Subject with evidence of recurrent malignancy.</div>
+<div class="line raw">6. Subject with veno-occlusive disease (i.e., sinusoidal obstruction syndrome).</div>
+<div class="line raw">7. Subject receiving GvHD treatment other than continued prophylaxis (e.g., cyclosporine and/or mycophenolate mofetil, etc.) or corticosteroid therapy. In addition, a subject who received the first dose of corticosteroid therapy for acute GvHD with lower GI involvement more than 72 hours before the first dose of study treatment is not eligible for the study.</div>
+<div class="line raw">8. Subject with severe sepsis involving at least one organ failure.</div>
+<div class="line raw">9. Subject who is seropositive or positive in the nucleic acid test for human immunodeficiency virus (HIV).</div>
+<div class="line raw">10. Subject with active hepatitis B or C.</div>
+<div class="line raw">11. Subject has participated in another clinical study involving an investigational product (IP) or investigational device within 30 days prior to enrollment or is scheduled to participate in another clinical study involving an IP or investigational device during the course of this study.</div>
+<div class="line raw">12. If female, subject is pregnant or lactating at the time of enrollment, or has plans to become pregnant during the study.</div>
+<div class="line raw">13. Subject with a serious medical or psychiatric illness likely to interfere with participation in the study.</div>
+<div class="line raw">14. Subject is a family member or employee of the investigator.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male or female participants aged ≥18 years at the time of screeningRecipient of an hematopoietic stem cell transplantation (HSCT)The disease indication for which the participant required HSCT must be in remissionNewly diagnosed acute graft-versus-host disease (GvHD), including lower Gastrointestinal (GI) involvement (modified International Bone Marrow Transplant Registry [IBMTR] Severity Stage 1 to 4 [&gt;500 mL diarrhea/day]), with or without other organ system involvement.Willing to undergo or must have had a lower GI biopsy within 7 days of informed consent to confirm GI GvHD. Biopsy results are not needed to initiate treatment; however, if biopsy results are not consistent with aGvHD, treatment with GLASSIA will be discontinued.Participants must be receiving systemic corticosteroids. Treatment with methylprednisolone/systemic steroids must have been initiated within 72 hours prior to the first dose of study treatment after enrollmentEvidence of myeloid engraftment (absolute neutrophil count ≥0.5 x 10^9/L)Lower GI GvHD manifested by diarrhea must have other causes of diarrhea ruled out (eg, negative for Clostridium difficile or cytomegalovirus [CMV] infection or oral magnesium administration)Karnofsky Performance Score ≥50%If female of childbearing potential, participant presents with a negative blood pregnancy testFemales of childbearing potential with a fertile male sexual partner must agree to employ adequate contraception for the duration of the study.Males must use adequate contraception and must not donate sperm for the duration of the study.Participant is willing and able to comply with the requirements of the protocolExclusion Criteria:Participant with manifestations of chronic GvHDParticipant with acute/chronic GvHD overlap syndromeParticipant whose GvHD developed after donor lymphocyte infusionParticipant with myocardial infarction within 6 months prior to enrollment or New York Heart Association Class III or IV heart failure, uncontrolled angina, severe uncontrolled ventricular arrhythmias or electrocardiographic evidence of acute ischemia or active conduction system abnormalities. Prior to the first dose of study treatment, any electrocardiogram (ECG) abnormality at screening must be documented by the investigator as not medically relevantParticipant with evidence of recurrent malignancyParticipant with veno-occlusive disease (ie, sinusoidal obstruction syndrome)Participant receiving GvHD treatment other than continued prophylaxis (eg, cyclosporine and/or mycophenolate mofetil, etc) or corticosteroid therapy. In addition, a participant who received the first dose of corticosteroid therapy for acute GvHD with lower GI involvement more than 72 hours before the first dose of study treatment is not eligible for the studyParticipant with severe sepsis involving at least 1 organ failureParticipant who is seropositive or positive in the nucleic acid test for human immunodeficiency virus (HIV)Participant with active hepatitis B or CParticipant has participated in another clinical study involving an investigational product (IP) or investigational device within 30 days prior to enrollment or is scheduled to participate in another clinical study involving an IP or investigational device during the course of this studyIf female, participant is pregnant or lactating at the time of enrollment, or has plans to become pregnant during the studyParticipant with a serious medical or psychiatric illness likely to interfere with participation in the studyParticipant is a family member or employee of the investigator</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Amended Eligibility Criteria (Version 3)</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male or female participants aged ≥18 years at the time of screening.</div>
+<div class="line criterion">2. Recipient of an allogeneic hematopoietic stem cell transplantation (HSCT).</div>
+<div class="line criterion">3. The disease indication for which the participant required HSCT must be in remission.</div>
+<div class="line criterion">4. Newly diagnosed acute graft-versus-host disease (GvHD) with lower gastrointestinal (GI) involvement (modified International Bone Marrow Transplant Registry [IBMTR] Severity Stage 1 to 4, defined as diarrhea &gt;500 mL/day), with or without other organ system involvement.</div>
+<div class="line criterion">5. Willing to undergo or must have had a lower GI biopsy within 7 days of informed consent to confirm GI GvHD. Biopsy results are not needed to initiate treatment; however, if biopsy results are not consistent with acute GvHD, treatment with GLASSIA will be discontinued.</div>
+<div class="line criterion">6. Subjects must be receiving systemic corticosteroids. Treatment with methylprednisolone/systemic steroids must have been initiated within 72 hours prior to the first dose of study treatment after enrollment.</div>
+<div class="line criterion">7. Evidence of myeloid engraftment (absolute neutrophil count ≥0.5 x 10^9/L).</div>
+<div class="line criterion">8. Lower GI GvHD manifested by diarrhea must have other causes of diarrhea ruled out (e.g., negative for Clostridium difficile or cytomegalovirus [CMV] infection or oral magnesium administration).</div>
+<div class="line criterion">9. Karnofsky Performance Score ≥50%.</div>
+<div class="line criterion">10. If female of childbearing potential, subject presents with a negative blood pregnancy test.</div>
+<div class="line criterion">11. Females of childbearing potential with a fertile male sexual partner must agree to employ adequate contraception for the duration of the study. Adequate contraception is defined as using hormonal contraceptives or an intrauterine device combined with at least one of the following forms of contraception: a diaphragm, cervical cap, or a condom.</div>
+<div class="line criterion">12. Males must use adequate contraception and must not donate sperm for the duration of the study. Adequate contraception for the male subject and his female partner is defined as using hormonal contraceptives or an intrauterine device combined with at least one of the following forms of contraception: a diaphragm, cervical cap, or a condom.</div>
+<div class="line criterion">13. Subject is willing and able to comply with the requirements of the protocol.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Subject with manifestations of chronic GvHD.</div>
+<div class="line criterion">2. Subject with acute/chronic GvHD overlap syndrome.</div>
+<div class="line criterion">3. Subject whose GvHD developed after donor lymphocyte infusion.</div>
+<div class="line criterion">4. Subject with myocardial infarction within 6 months prior to enrollment or New York Heart Association Class III or IV heart failure, uncontrolled angina, severe uncontrolled ventricular arrhythmias, or electrocardiographic evidence of acute ischemia or active conduction system abnormalities. Prior to the first dose of study treatment, any electrocardiogram (ECG) abnormality at screening must be documented by the investigator as not medically relevant.</div>
+<div class="line criterion">5. Subject with evidence of recurrent malignancy.</div>
+<div class="line criterion">6. Subject with veno-occlusive disease (i.e., sinusoidal obstruction syndrome).</div>
+<div class="line criterion">7. Subject receiving GvHD treatment other than continued prophylaxis (e.g., cyclosporine and/or mycophenolate mofetil, etc.) or corticosteroid therapy. In addition, a subject who received the first dose of corticosteroid therapy for acute GvHD with lower GI involvement more than 72 hours before the first dose of study treatment is not eligible for the study.</div>
+<div class="line criterion">8. Subject with severe sepsis involving at least one organ failure.</div>
+<div class="line criterion">9. Subject who is seropositive or positive in the nucleic acid test for human immunodeficiency virus (HIV).</div>
+<div class="line criterion">10. Subject with active hepatitis B or C.</div>
+<div class="line criterion">11. Subject has participated in another clinical study involving an investigational product (IP) or investigational device within 30 days prior to enrollment or is scheduled to participate in another clinical study involving an IP or investigational device during the course of this study.</div>
+<div class="line criterion">12. If female, subject is pregnant or lactating at the time of enrollment, or has plans to become pregnant during the study.</div>
+<div class="line criterion">13. Subject with a serious medical or psychiatric illness likely to interfere with participation in the study.</div>
+<div class="line criterion">14. Subject is a family member or employee of the investigator.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_156.html">&larr; Sample 156</a> | <a href="index.html">Index</a> | <a href="sample_158.html">Sample 158 &rarr;</a>
+</div>
+</body>
+</html>

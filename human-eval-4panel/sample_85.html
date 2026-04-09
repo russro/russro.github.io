@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 85 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 85</h1>
+    <div class="meta">
+        <span>NCT: NCT02831387</span>
+        <span>Model: local-qwen-3b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Provide written informed consentMale or female subjects aged 18 to 80 years, inclusiveHave a history of dry eye disease (DED) in both eyesBe on stable regimens of other needed medicationsHave a BCVA of +0.7 or better as assessed by Early Treatment of Diabetic Retinopathy Study (ETDRS)Have reported symptomsHave the following sings in at least one eye: Schirmer score without anesthesia of &amp;gt;1 and &amp;lt;10 mm at 5 minutes and staining of conjunctival and corneal areas of the eye.Have normal lid anatomyExclusion Criteria:Have undergone refractive eye surgery in the past 12 monthsHave undergone previous eyelid surgery in either eye (External blepharoplasty not resulting in exposure or abnormal blinking is allowed)Have lid irregularities or deformitiesHave a history of glaucoma, a history of an elevated lOP within the past year, or an lOP in either eye &amp;gt; 25 mmHg at the Screening Visit (Visit 1)Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participateHave permanent punctal plugs, punctal occlusion, or history of nasolacrimal duct obstruction. Removable punctal plugs are allowed if they have been used regularly for at least 60 days prior to the screening visit. However, if a plug comes out during the study it must be promptly replaced.Have clinical findings of severe Meibomian Gland Dysfunction (MGD) in the Study EyeAre pregnant or breast feedingUse of any investigational product or device within 28 days prior to the Screening Visit or during the study</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Amended Eligibility Criteria (version 3):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- Provide written informed consent</div>
+<div class="line raw">- Male or female subjects aged 18 to 80 years, inclusive</div>
+<div class="line raw">- Have a history of dry eye disease (DED) in both eyes</div>
+<div class="line raw">- Be on stable regimens of other needed medications</div>
+<div class="line raw">- Have a BCVA of +0.7 or better as assessed by Early Treatment of Diabetic Retinopathy Study (ETDRS)</div>
+<div class="line raw">- Report symptoms</div>
+<div class="line raw">- Have a Schirmer score without anesthesia of &gt;1 and &lt;10 mm at 5 minutes in both eyes and have staining of conjunctival and corneal areas of the eye</div>
+<div class="line raw">- Have normal lid anatomy</div>
+<div class="line raw">- Have a serum potassium level at Screening Visit (Visit 1) of 1.1 times the normal upper limit</div>
+<div class="line raw">- Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participate in the study or potentially compromise his or her well-being during the study</div>
+<div class="line raw">- Have not taken any of the excluded medications within 14 days of Screening or during the study</div>
+<div class="line raw">- Are not pregnant or breast feeding</div>
+<div class="line raw">- Use of any investigational product or device within 28 days prior to the Screening Visit or during the study</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- Have undergone refractive eye surgery</div>
+<div class="line raw">- Have undergone previous eyelid surgery in either eye</div>
+<div class="line raw">- Have lid irregularities or deformities</div>
+<div class="line raw">- Have a history of glaucoma, a history of an elevated IOP within the past year, or an IOP in either eye &gt; 25 mmHg at the Screening Visit (Visit 1)</div>
+<div class="line raw">- Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participate in the study</div>
+<div class="line raw">- Have permanent punctal plugs, punctal occlusion, or history of nasolacrimal duct obstruction. Removable punctal plugs are allowed if they have been used regularly for at least 60 days prior to the screening visit. However, if a plug comes out during the study it must be promptly replaced.</div>
+<div class="line raw">- Have clinical findings of severe Meibomian Gland Dysfunction (MGD) in the Study Eye</div>
+<div class="line raw">- Have required treatment with LipiFlow®, MeiboFlow®, or Blephex™ use within the past 3 months</div>
+<div class="line raw">- Have a history of Stevens-Johnson syndrome, ocular cicatricial pemphigoid (OCP), or other ocular cicatrizing disorders</div>
+<div class="line raw">- Have a history of exposure keratopathy, neurotrophic keratopathy, lagophthalmos, or trichiasis</div>
+<div class="line raw">- Have used contact lenses within 28 days of Visit 1 or anticipate needing to use contacts during the study</div>
+<div class="line raw">- Have used lid scrubs (including baby shampoos) in the past 28 days</div>
+<div class="line raw">- Have a known hypersensitivity or allergy to the study investigational medicinal product, or formulation excipients, including amiloride or related drugs</div>
+<div class="line raw">- Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line raw">  - Any topical prescription or over-the-counter (OTC) ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line raw">  - Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line raw">  - Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line raw">  - Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line raw">  - Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+<div class="line raw">  - The following medications are explicitly excluded for 14 days prior to Randomization Visit and throughout the study:</div>
+<div class="line raw">    - Nasal, ocular, or oral antihistamines</div>
+<div class="line raw">    - NSAIDs (non-steroidal anti-inflammatory drugs) or aspirin use with the exception of low dose (81mg) aspirin per day</div>
+<div class="line raw">    - Topical autologous serum</div>
+<div class="line raw">    - Lubricant eye drops</div>
+<div class="line raw">- Are an employee of the site that is directly involved in the management, administration, or support of this study or be an immediate family member of the same</div>
+<div class="line raw">- Are unable in the opinion of the PI to comply fully with the study requirements or to complete the study</div>
+<div class="line raw">- Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line raw">  - Any topical prescription or OTC ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line raw">  - Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line raw">  - Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line raw">  - Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line raw">  - Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+<div class="line raw">- Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line raw">  - Any topical prescription or OTC ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line raw">  - Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line raw">  - Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line raw">  - Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line raw">  - Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Provide written informed consentMale or female subjects aged 18 to 80 years, inclusiveHave a history of dry eye disease (DED) in both eyesBe on stable regimens of other needed medicationsHave a BCVA of +0.7 or better as assessed by Early Treatment of Diabetic Retinopathy Study (ETDRS)Have reported symptomsHave the following sings in at least one eye: Schirmer score without anesthesia of &gt;1 and &lt;10 mm at 5 minutes and staining of conjunctival and corneal areas of the eye.Have normal lid anatomyExclusion Criteria:Have undergone refractive eye surgery in the past 12 monthsHave undergone previous eyelid surgery in either eye (External blepharoplasty not resulting in exposure or abnormal blinking is allowed)Have lid irregularities or deformitiesHave a history of glaucoma, a history of an elevated lOP within the past year, or an lOP in either eye &gt; 25 mmHg at the Screening Visit (Visit 1)Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participateHave permanent punctal plugs, punctal occlusion, or history of nasolacrimal duct obstruction. Removable punctal plugs are allowed if they have been used regularly for at least 60 days prior to the screening visit. However, if a plug comes out during the study it must be promptly replaced.Have clinical findings of severe Meibomian Gland Dysfunction (MGD) in the Study EyeAre pregnant or breast feedingUse of any investigational product or device within 28 days prior to the Screening Visit or during the study</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Amended Eligibility Criteria (version 3):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Provide written informed consent</div>
+<div class="line criterion">2. Male or female subjects aged 18 to 80 years, inclusive</div>
+<div class="line criterion">3. Have a history of dry eye disease (DED) in both eyes</div>
+<div class="line criterion">4. Be on stable regimens of other needed medications</div>
+<div class="line criterion">5. Have a BCVA of +0.7 or better as assessed by Early Treatment of Diabetic Retinopathy Study (ETDRS)</div>
+<div class="line criterion">6. Report symptoms</div>
+<div class="line criterion">7. Have a Schirmer score without anesthesia of &gt;1 and &lt;10 mm at 5 minutes in both eyes and have staining of conjunctival and corneal areas of the eye</div>
+<div class="line criterion">8. Have normal lid anatomy</div>
+<div class="line criterion">9. Have a serum potassium level at Screening Visit (Visit 1) of 1.1 times the normal upper limit</div>
+<div class="line criterion">10. Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participate in the study or potentially compromise his or her well-being during the study</div>
+<div class="line criterion">11. Have not taken any of the excluded medications within 14 days of Screening or during the study</div>
+<div class="line criterion">12. Are not pregnant or breast feeding</div>
+<div class="line criterion">13. Use of any investigational product or device within 28 days prior to the Screening Visit or during the study</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Have undergone refractive eye surgery</div>
+<div class="line criterion">2. Have undergone previous eyelid surgery in either eye</div>
+<div class="line criterion">3. Have lid irregularities or deformities</div>
+<div class="line criterion">4. Have a history of glaucoma, a history of an elevated IOP within the past year, or an IOP in either eye &gt; 25 mmHg at the Screening Visit (Visit 1)</div>
+<div class="line criterion">5. Have any clinically significant, uncontrolled, or unstable medical or surgical conditions that could affect his or her ability to participate in the study</div>
+<div class="line criterion">6. Have permanent punctal plugs, punctal occlusion, or history of nasolacrimal duct obstruction. Removable punctal plugs are allowed if they have been used regularly for at least 60 days prior to the screening visit. However, if a plug comes out during the study it must be promptly replaced.</div>
+<div class="line criterion">7. Have clinical findings of severe Meibomian Gland Dysfunction (MGD) in the Study Eye</div>
+<div class="line criterion">8. Have required treatment with LipiFlow®, MeiboFlow®, or Blephex™ use within the past 3 months</div>
+<div class="line criterion">9. Have a history of Stevens-Johnson syndrome, ocular cicatricial pemphigoid (OCP), or other ocular cicatrizing disorders</div>
+<div class="line criterion">10. Have a history of exposure keratopathy, neurotrophic keratopathy, lagophthalmos, or trichiasis</div>
+<div class="line criterion">11. Have used contact lenses within 28 days of Visit 1 or anticipate needing to use contacts during the study</div>
+<div class="line criterion">12. Have used lid scrubs (including baby shampoos) in the past 28 days</div>
+<div class="line criterion">13. Have a known hypersensitivity or allergy to the study investigational medicinal product, or formulation excipients, including amiloride or related drugs</div>
+<div class="line criterion">14. Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line criterion">15. Any topical prescription or over-the-counter (OTC) ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line criterion">16. Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line criterion">17. Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line criterion">18. Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line criterion">19. Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+<div class="line criterion">20. The following medications are explicitly excluded for 14 days prior to Randomization Visit and throughout the study:</div>
+<div class="line criterion">21. Nasal, ocular, or oral antihistamines</div>
+<div class="line criterion">22. NSAIDs (non-steroidal anti-inflammatory drugs) or aspirin use with the exception of low dose (81mg) aspirin per day</div>
+<div class="line criterion">23. Topical autologous serum</div>
+<div class="line criterion">24. Lubricant eye drops</div>
+<div class="line criterion">25. Are an employee of the site that is directly involved in the management, administration, or support of this study or be an immediate family member of the same</div>
+<div class="line criterion">26. Are unable in the opinion of the PI to comply fully with the study requirements or to complete the study</div>
+<div class="line criterion">27. Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line criterion">28. Any topical prescription or OTC ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line criterion">29. Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line criterion">30. Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line criterion">31. Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line criterion">32. Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+<div class="line criterion">33. Have taken within 14 days of Screening or will need to take any of the following medications during the study:</div>
+<div class="line criterion">34. Any topical prescription or OTC ocular medication including topical cyclosporine (e.g. Restasis®), lifitegrast (Xiidra®), or topical anti-glaucoma medications</div>
+<div class="line criterion">35. Ocular, intranasal or systemic corticosteroids or other immunomodulatory or immunosuppressive medications</div>
+<div class="line criterion">36. Topical ocular or systemic antibiotics, including doxycycline or tetracycline analogs</div>
+<div class="line criterion">37. Oral or topical secretagogues such as pilocarpine and cevimeline (Evoxac®)</div>
+<div class="line criterion">38. Systemic medications with known significant anticholinergic pharmacologic activity as referenced in the Prohibited Medication List for the study, such as tricyclic antidepressants. Selective Serotonin Re-uptake Inhibitors (SSRIs) are permitted if patient is on stable dose for 28 days prior to Visit 1 and during the study</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_84.html">&larr; Sample 84</a> | <a href="index.html">Index</a> | <a href="sample_86.html">Sample 86 &rarr;</a>
+</div>
+</body>
+</html>

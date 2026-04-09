@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 74 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 74</h1>
+    <div class="meta">
+        <span>NCT: NCT04456673</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion criteria:Participants with a physician diagnosis of COPD who meet the following criteria at screening:Current or former smokers with a smoking history of ≥10 pack-years.Moderate-to-severe COPD (post-bronchodilator FEV1&amp;#x2F; forced vital capacity [FVC] ratio &amp;lt;0.70 and post-bronchodilator FEV1 % predicted &amp;gt;30% and ≤70%).Medical Research Council (MRC) Dyspnea Scale grade ≥2.Patient-reported history of signs and symptoms of chronic bronchitis (chronic productive cough) for 3 months in the year up to screening in the absence of other known causes of chronic cough.Documented history of high exacerbation risk defined as exacerbation history of ≥2 moderate or ≥1 severe within the year prior to inclusion. At least one exacerbation should have occurred while the patient was taking inhaled corticosteroid (ICS)&amp;#x2F;long acting beta agonist (LABA)&amp;#x2F;long acting muscarinic antagonist (LAMA) (or LABA&amp;#x2F;LAMA if ICS is contraindicated). Moderate exacerbations are recorded by the investigator and defined as AECOPD that require either systemic corticosteroids (intramuscular, intravenous, or oral) and&amp;#x2F;or antibiotics. One of the two required moderate exacerbations has to require the use of systemic corticosteroids. Severe exacerbations are recorded by the investigator and defined as AECOPD requiring hospitalization or observation &amp;gt; 24 hours in emergency department&amp;#x2F;urgent care facility.Background triple therapy (ICS + LABA + LAMA) for 3 months prior to randomization with a stable dose of medication for ≥1 month prior to Visit 1; Double therapy (LABA + LAMA) allowed if ICS is contraindicated.Evidence of Type 2 inflammation: Patients with blood eosinophils ≥300 cells&amp;#x2F;microliter at Visit 1.Exclusion criteria:COPD diagnosis for less than 12 months prior to randomization.A current diagnosis of asthma or history of asthma according to the 2018 Global Initiative for Asthma (GINA) guidelines or other accepted guidelines.Significant pulmonary disease other than COPD (e.g., lung fibrosis, sarcoidosis, interstitial lung disease, pulmonary hypertension, bronchiectasis, Churg-Strauss Syndrome etc) or another diagnosed pulmonary or systemic disease associated with elevated peripheral eosinophil counts.Cor pulmonale, evidence of right cardiac failure.Treatment with oxygen of more than 12 hours per day.Hypercapnia requiring Bi-level ventilation.AECOPD as defined in inclusion criteria within 4 weeks prior to screening, or during the screening period.Respiratory tract infection within 4 weeks prior to screening, or during the screening period.History of, or planned pneumonectomy or lung volume reduction surgery. Patients who are participating in the acute phase of a pulmonary rehabilitation program, ie, who started rehabilitation &amp;lt;4 weeks prior to screening (Note: patients in the maintenance phase of a rehabilitation program can be included).Diagnosis of α-1 anti-trypsin deficiency.The above information is not intended to contain all considerations relevant to a patient&amp;#x27;s potential participation in a clinical trial.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Based on the revised eligibility criteria, here are the key modifications:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">1. **Age**: </div>
+<div class="line raw">   - **New Criterion**: Age 40 or younger.</div>
+<div class="line raw">   - **Older Criterion**: Age 85 or older.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">2. **Type of Participant**:</div>
+<div class="line raw">   - **New Criterion**: Current smoker.</div>
+<div class="line raw">   - **Older Criterion**: Current smoker ≥10 pack-years.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">3. **Exclusion Criteria**:</div>
+<div class="line raw">   - **New Criterion**: Current diagnosis of asthma or history of asthma according to the Global Initiative for Asthma (GINA) guidelines, or other accepted guidelines.</div>
+<div class="line raw">   - **Older Criterion**: Significant pulmonary disease other than COPD (eg, lung fibrosis, sarcoidosis, interstitial lung disease, pulmonary hypertension, bronchiectasis, Churg-Strauss Syndrome, etc).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">4. **Background Medication**:</div>
+<div class="line raw">   - **New Criterion**: Evidence of Type 2 inflammation: Blood eosinophils ≥300 cells/microgram at Visit 1 (Screening).</div>
+<div class="line raw">   - **Older Criterion**: Evidence of Type 2 inflammation: Blood eosinophils ≥300 cells/microgram at Visit 1 (Screening).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">5. **Screen Failures**:</div>
+<div class="line raw">   - **New Criterion**: Participants who consent to participate in the clinical study but are not subsequently randomly assigned to IMP.</div>
+<div class="line raw">   - **Older Criterion**: Participants who withdraw from the study prematurely.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">6. **Reliever Medication**:</div>
+<div class="line raw">   - **New Criterion**: Patients may use albuterol/salbutamol or levalbuterol/levosalbutamol (including ipratropium or ipratropium/short-acting β-agonist [SABA] combinations or terbutaline) as reliever medications as needed during the study.</div>
+<div class="line raw">   - **Older Criterion**: Patients may use albuterol/salbutamol or levalbuterol/levosalbutamol as reliever medications as needed during the study.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">7. **Concomitant Medications**:</div>
+<div class="line raw">   - **New Criterion**: Concomitant medications that the participant is receiving at the time of enrollment or receives during the study must be recorded along with: Reason for use, Dates of administration, Dosage information, and Frequency.</div>
+<div class="line raw">   - **Older Criterion**: Concomitant medications that the participant is receiving at the time of enrollment or receives during the study must be recorded along with: Reason for use, Dates of administration, Dosage information, and Frequency.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">8. **Withdrawal of Consent**:</div>
+<div class="line raw">   - **New Criterion**: Participants who discontinue the study treatment prematurely (prior to completing the 52-week treatment period) will perform, as soon as possible, the ETD visit with all assessments normally planned for the end of treatment (EOT) visit, to assure a complete clinical assessment in close temporal proximity to the premature termination of study treatment is available.</div>
+<div class="line raw">   - **Older Criterion**: Participants who discontinue the study treatment prematurely (prior to completing the 52-week treatment period) will perform, as soon as possible, the ETD visit with all assessments normally planned for the end of treatment (EOT) visit, to assure a complete clinical assessment in close temporal proximity to the premature termination of study treatment is available.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">These modifications aim to align the eligibility criteria with the new study design and objectives, ensuring that the study is suitable for the participants&#x27; needs and the study protocol is clear and easy to follow.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants with a physician diagnosis of COPD who meet the following criteria at screening:Current or former smokers with a smoking history of ≥10 pack-years.Moderate-to-severe COPD (post-bronchodilator FEV1/ forced vital capacity [FVC] ratio &lt;0.70 and post-bronchodilator FEV1 % predicted &gt;30% and ≤70%).Medical Research Council (MRC) Dyspnea Scale grade ≥2.Patient-reported history of signs and symptoms of chronic bronchitis (chronic productive cough) for 3 months in the year up to screening in the absence of other known causes of chronic cough.Documented history of high exacerbation risk defined as exacerbation history of ≥2 moderate or ≥1 severe within the year prior to inclusion. At least one exacerbation should have occurred while the patient was taking inhaled corticosteroid (ICS)/long acting beta agonist (LABA)/long acting muscarinic antagonist (LAMA) (or LABA/LAMA if ICS is contraindicated). Moderate exacerbations are recorded by the investigator and defined as AECOPD that require either systemic corticosteroids (intramuscular, intravenous, or oral) and/or antibiotics. One of the two required moderate exacerbations has to require the use of systemic corticosteroids. Severe exacerbations are recorded by the investigator and defined as AECOPD requiring hospitalization or observation &gt; 24 hours in emergency department/urgent care facility.Background triple therapy (ICS + LABA + LAMA) for 3 months prior to randomization with a stable dose of medication for ≥1 month prior to Visit 1; Double therapy (LABA + LAMA) allowed if ICS is contraindicated.Evidence of Type 2 inflammation: Patients with blood eosinophils ≥300 cells/microliter at Visit 1.Exclusion criteria:COPD diagnosis for less than 12 months prior to randomization.A current diagnosis of asthma or history of asthma according to the 2018 Global Initiative for Asthma (GINA) guidelines or other accepted guidelines.Significant pulmonary disease other than COPD (e.g., lung fibrosis, sarcoidosis, interstitial lung disease, pulmonary hypertension, bronchiectasis, Churg-Strauss Syndrome etc) or another diagnosed pulmonary or systemic disease associated with elevated peripheral eosinophil counts.Cor pulmonale, evidence of right cardiac failure.Treatment with oxygen of more than 12 hours per day.Hypercapnia requiring Bi-level ventilation.AECOPD as defined in inclusion criteria within 4 weeks prior to screening, or during the screening period.Respiratory tract infection within 4 weeks prior to screening, or during the screening period.History of, or planned pneumonectomy or lung volume reduction surgery. Patients who are participating in the acute phase of a pulmonary rehabilitation program, ie, who started rehabilitation &lt;4 weeks prior to screening (Note: patients in the maintenance phase of a rehabilitation program can be included).Diagnosis of α-1 anti-trypsin deficiency.The above information is not intended to contain all considerations relevant to a patient&#x27;s potential participation in a clinical trial.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Based on the revised eligibility criteria, here are the key modifications:</div>
+<div class="line criterion">2. Age:</div>
+<div class="line criterion">3. New Criterion: Age 40 or younger.</div>
+<div class="line criterion">4. Older Criterion: Age 85 or older.</div>
+<div class="line criterion">5. Type of Participant:</div>
+<div class="line criterion">6. New Criterion: Current smoker.</div>
+<div class="line criterion">7. Older Criterion: Current smoker ≥10 pack-years.</div>
+<div class="line criterion">8. Exclusion Criteria:</div>
+<div class="line criterion">9. New Criterion: Current diagnosis of asthma or history of asthma according to the Global Initiative for Asthma (GINA) guidelines, or other accepted guidelines.</div>
+<div class="line criterion">10. Older Criterion: Significant pulmonary disease other than COPD (eg, lung fibrosis, sarcoidosis, interstitial lung disease, pulmonary hypertension, bronchiectasis, Churg-Strauss Syndrome, etc).</div>
+<div class="line criterion">11. Background Medication:</div>
+<div class="line criterion">12. New Criterion: Evidence of Type 2 inflammation: Blood eosinophils ≥300 cells/microgram at Visit 1 (Screening).</div>
+<div class="line criterion">13. Older Criterion: Evidence of Type 2 inflammation: Blood eosinophils ≥300 cells/microgram at Visit 1 (Screening).</div>
+<div class="line criterion">14. Screen Failures:</div>
+<div class="line criterion">15. New Criterion: Participants who consent to participate in the clinical study but are not subsequently randomly assigned to IMP.</div>
+<div class="line criterion">16. Older Criterion: Participants who withdraw from the study prematurely.</div>
+<div class="line criterion">17. Reliever Medication:</div>
+<div class="line criterion">18. New Criterion: Patients may use albuterol/salbutamol or levalbuterol/levosalbutamol (including ipratropium or ipratropium/short-acting β-agonist [SABA] combinations or terbutaline) as reliever medications as needed during the study.</div>
+<div class="line criterion">19. Older Criterion: Patients may use albuterol/salbutamol or levalbuterol/levosalbutamol as reliever medications as needed during the study.</div>
+<div class="line criterion">20. Concomitant Medications:</div>
+<div class="line criterion">21. New Criterion: Concomitant medications that the participant is receiving at the time of enrollment or receives during the study must be recorded along with: Reason for use, Dates of administration, Dosage information, and Frequency.</div>
+<div class="line criterion">22. Older Criterion: Concomitant medications that the participant is receiving at the time of enrollment or receives during the study must be recorded along with: Reason for use, Dates of administration, Dosage information, and Frequency.</div>
+<div class="line criterion">23. Withdrawal of Consent:</div>
+<div class="line criterion">24. New Criterion: Participants who discontinue the study treatment prematurely (prior to completing the 52-week treatment period) will perform, as soon as possible, the ETD visit with all assessments normally planned for the end of treatment (EOT) visit, to assure a complete clinical assessment in close temporal proximity to the premature termination of study treatment is available.</div>
+<div class="line criterion">25. Older Criterion: Participants who discontinue the study treatment prematurely (prior to completing the 52-week treatment period) will perform, as soon as possible, the ETD visit with all assessments normally planned for the end of treatment (EOT) visit, to assure a complete clinical assessment in close temporal proximity to the premature termination of study treatment is available.</div>
+<div class="line criterion">26. These modifications aim to align the eligibility criteria with the new study design and objectives, ensuring that the study is suitable for the participants&#x27; needs and the study protocol is clear and easy to follow.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_73.html">&larr; Sample 73</a> | <a href="index.html">Index</a> | <a href="sample_75.html">Sample 75 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 137 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 137</h1>
+    <div class="meta">
+        <span>NCT: NCT02963766</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Have type 2 diabetes, treated with diet and exercise, with or without metformin and&amp;#x2F;or basal insulin. Metformin and&amp;#x2F;or basal insulin dose must be stable for at least 8 weeks prior to study screening.Have HbA1c &amp;gt;6.5% to ≤11% at screening visit. If newly diagnosed and not on medicine for diabetes, HbA1c must be between &amp;gt;6.5 % to ≤9%.Have a BMI (body mass index) &amp;gt;85 percentile for age, gender and body weight ≥50 kilograms (110 pounds).Exclusion Criteria:Known type 1 diabetes, or positive GAD65 or IA2 antibodies, or history of diabetic ketoacidosis or hyperglycemic hyperosmolar syndrome.A history of, or at risk for pancreatitis.Self or family history of Multiple Endocrine Neoplasia (MEN) type 2A or B, thyroid C-cell hyperplasia or medullary thyroid cancer, or a blood calcitonin result ≥20 picograms per milliliter (pg&amp;#x2F;ml) at screening.A systolic blood pressure of ≥160 millimeters of mercury (mmHg) or diastolic ≥100 mmHg.Active or treated cancer.A blood disorder where an accurate HbA1c may not be obtainable.A female of childbearing age, sexually active and not on birth control.Pregnant or plan to be pregnant during the study, or breastfeeding.Taking any diabetic medication other than metformin or basal insulin and have not stopped it 3 months prior to the screening visit (6 weeks for bolus or mealtime insulin).Have taken oral steroids within the last 60 days or more than 20 days use within the past year or 1000 micrograms fluticasone propionate per day.Using prescription weight loss medications in the last 30 days, or plan to use.Taking psychiatric medications for depression or illness or attention deficit hyperactivity disorder (ADHD) if, the doses has changed within the last 3 months.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- Have type 2 diabetes, treated with diet and exercise, with or without metformin (≥1000 mg/day) and/or basal insulin. Metformin and/or basal insulin dose must be stable for at least 8 weeks prior to study screening.</div>
+<div class="line raw">- Have HbA1c &gt;6.5% to ≤11% at screening visit. If newly diagnosed and not on medicine for diabetes, HbA1c must be between &gt;6.5% to ≤9%.</div>
+<div class="line raw">- Have a BMI &gt;85 percentile for age, gender, and body weight ≥50 kilograms (110 pounds).</div>
+<div class="line raw">- Both the child or adolescent with T2DM and a parent or legal guardian are able to understand and fully participate in the activities of the clinical trial and sign their assent and consent, respectively.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- Known type 1 diabetes, or positive GAD65 or IA2 antibodies, or history of diabetic ketoacidosis or hyperglycemic hyperosmolar syndrome.</div>
+<div class="line raw">- A history of, or at risk for pancreatitis, or known gallbladder disease, or clinical hypertriglyceridemia associated with pancreatitis (&gt;11.2 mmol/L or &gt;1000 mg/dL).</div>
+<div class="line raw">- Self or family history of Multiple Endocrine Neoplasia (MEN) type 2A or B, thyroid C-cell hyperplasia, or medullary thyroid cancer, or a blood calcitonin result ≥20 picograms per milliliter (pg/ml) at screening.</div>
+<div class="line raw">- A systolic blood pressure of ≥160 millimeters of mercury (mmHg) or diastolic ≥100mmHg.</div>
+<div class="line raw">- Active or treated cancer.</div>
+<div class="line raw">- A blood disorder where an accurate HbA1c may not be obtainable.</div>
+<div class="line raw">- A female of childbearing age, sexually active and not on birth control.</div>
+<div class="line raw">- Pregnant or plan to be pregnant during the study, or breastfeeding.</div>
+<div class="line raw">- Taking any diabetic medication other than metformin or basal insulin and have not stopped it 3 months prior to the screening visit.</div>
+<div class="line raw">- Have taken oral steroids within the last 60 days or more than 20 days use within the past year or 1000 micrograms fluticasone propionate per day.</div>
+<div class="line raw">- Using prescription weight loss medications in the last 30 days, or plan to use.</div>
+<div class="line raw">- Taking psychiatric medications for depression or illness or attention deficit hyperactivity disorder (ADHD) if the doses have changed within the last 3 months.</div>
+<div class="line raw">- Have a clinically significant gastric emptying abnormality, in the opinion of the investigator, or previous gastric bypass.</div>
+<div class="line raw">- Have an estimated glomerular filtration rate (eGFR) &lt;60 mL/min/1.73 m².</div>
+<div class="line raw">- Are currently enrolled in any other clinical trial involving an investigational product (IP) or any other type of medical research judged not to be scientifically or medically compatible with this study.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Have type 2 diabetes, treated with diet and exercise, with or without metformin and/or basal insulin. Metformin and/or basal insulin dose must be stable for at least 8 weeks prior to study screening.Have HbA1c &gt;6.5% to ≤11% at screening visit. If newly diagnosed and not on medicine for diabetes, HbA1c must be between &gt;6.5 % to ≤9%.Have a BMI (body mass index) &gt;85 percentile for age, gender and body weight ≥50 kilograms (110 pounds).Exclusion Criteria:Known type 1 diabetes, or positive GAD65 or IA2 antibodies, or history of diabetic ketoacidosis or hyperglycemic hyperosmolar syndrome.A history of, or at risk for pancreatitis.Self or family history of Multiple Endocrine Neoplasia (MEN) type 2A or B, thyroid C-cell hyperplasia or medullary thyroid cancer, or a blood calcitonin result ≥20 picograms per milliliter (pg/ml) at screening.A systolic blood pressure of ≥160 millimeters of mercury (mmHg) or diastolic ≥100 mmHg.Active or treated cancer.A blood disorder where an accurate HbA1c may not be obtainable.A female of childbearing age, sexually active and not on birth control.Pregnant or plan to be pregnant during the study, or breastfeeding.Taking any diabetic medication other than metformin or basal insulin and have not stopped it 3 months prior to the screening visit (6 weeks for bolus or mealtime insulin).Have taken oral steroids within the last 60 days or more than 20 days use within the past year or 1000 micrograms fluticasone propionate per day.Using prescription weight loss medications in the last 30 days, or plan to use.Taking psychiatric medications for depression or illness or attention deficit hyperactivity disorder (ADHD) if, the doses has changed within the last 3 months.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Have type 2 diabetes, treated with diet and exercise, with or without metformin (≥1000 mg/day) and/or basal insulin. Metformin and/or basal insulin dose must be stable for at least 8 weeks prior to study screening.</div>
+<div class="line criterion">2. Have HbA1c &gt;6.5% to ≤11% at screening visit. If newly diagnosed and not on medicine for diabetes, HbA1c must be between &gt;6.5% to ≤9%.</div>
+<div class="line criterion">3. Have a BMI &gt;85 percentile for age, gender, and body weight ≥50 kilograms (110 pounds).</div>
+<div class="line criterion">4. Both the child or adolescent with T2DM and a parent or legal guardian are able to understand and fully participate in the activities of the clinical trial and sign their assent and consent, respectively.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Known type 1 diabetes, or positive GAD65 or IA2 antibodies, or history of diabetic ketoacidosis or hyperglycemic hyperosmolar syndrome.</div>
+<div class="line criterion">2. A history of, or at risk for pancreatitis, or known gallbladder disease, or clinical hypertriglyceridemia associated with pancreatitis (&gt;11.2 mmol/L or &gt;1000 mg/dL).</div>
+<div class="line criterion">3. Self or family history of Multiple Endocrine Neoplasia (MEN) type 2A or B, thyroid C-cell hyperplasia, or medullary thyroid cancer, or a blood calcitonin result ≥20 picograms per milliliter (pg/ml) at screening.</div>
+<div class="line criterion">4. A systolic blood pressure of ≥160 millimeters of mercury (mmHg) or diastolic ≥100mmHg.</div>
+<div class="line criterion">5. Active or treated cancer.</div>
+<div class="line criterion">6. A blood disorder where an accurate HbA1c may not be obtainable.</div>
+<div class="line criterion">7. A female of childbearing age, sexually active and not on birth control.</div>
+<div class="line criterion">8. Pregnant or plan to be pregnant during the study, or breastfeeding.</div>
+<div class="line criterion">9. Taking any diabetic medication other than metformin or basal insulin and have not stopped it 3 months prior to the screening visit.</div>
+<div class="line criterion">10. Have taken oral steroids within the last 60 days or more than 20 days use within the past year or 1000 micrograms fluticasone propionate per day.</div>
+<div class="line criterion">11. Using prescription weight loss medications in the last 30 days, or plan to use.</div>
+<div class="line criterion">12. Taking psychiatric medications for depression or illness or attention deficit hyperactivity disorder (ADHD) if the doses have changed within the last 3 months.</div>
+<div class="line criterion">13. Have a clinically significant gastric emptying abnormality, in the opinion of the investigator, or previous gastric bypass.</div>
+<div class="line criterion">14. Have an estimated glomerular filtration rate (eGFR) &lt;60 mL/min/1.73 m².</div>
+<div class="line criterion">15. Are currently enrolled in any other clinical trial involving an investigational product (IP) or any other type of medical research judged not to be scientifically or medically compatible with this study.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_136.html">&larr; Sample 136</a> | <a href="index.html">Index</a> | <a href="sample_138.html">Sample 138 &rarr;</a>
+</div>
+</body>
+</html>

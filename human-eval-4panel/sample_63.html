@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 63 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 63</h1>
+    <div class="meta">
+        <span>NCT: NCT04602390</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Diagnosed with RRMS per revised McDonald criteria (2017) with an EDSS score ≤ 6.5 at screeningNeurologically stable with no evidence of relapse within the 28 days before signing the informed consent form (ICF)Either not currently receiving disease modifying MS therapy, or currently using fumarate drugs (dimethyl fumarate or diroximel fumarate)Patients must use a highly effective method of birth control or are sterile or postmenopausal as confirmed by study InvestigatorPatient has signed and understands the ICFExclusion Criteria:Diagnosis of primary progressive MS or secondary progressive MSUncontrolled or significant medical conditions (including active infection or chronic hepatitis) which, in the opinion of the Investigator, preclude participationPatients treated with glatiramer acetate, parenteral steroids or adrenocorticotropic hormone, β-interferon, plasma exchange within the 3 months prior to first dosePatients treated with sphingosine-1-phospate receptor modulators such as fingolimod, ozanimod, or siponimod within 6 months prior to first dosePatients treated with cytotoxic agents (including, but not limited to, cladribine, mitoxantrone, cyclophosphamide, azathioprine, and methotrexate), laquinimod, teriflunomide, or IV gamma globulin within 12 months prior to first dosePatients treated with monoclonal antibody therapy (including natalizumab, daclizumab, rituximab, ofatumumab, and ocrelizumab) within 24 months prior to first dosePatients previously treated with alemtuzumab, total lymphoid irradiation, mesenchymal stem cell or hematopoietic stem cell transplantation, or tolerance-inducing therapies for MSContraindication to or inability to undergo gadolinium-enhanced magnetic resonance imaging (MRI) scanUse of any investigational drug or experimental procedure within previous 6 months that would interfere with the assessment of ANK-700Patients who are pregnant or breastfeedingPatients receiving any vaccination within 28 days prior to first dosePatient does not agree to limit alcohol intake to 2 drink equivalents or less per day during the study</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">### Revised Eligibility Criteria for Version 8 Clinical Trial</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">#### Original Eligibility Criteria (Version 7):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw">- Diagnosed with RRMS per revised McDonald criteria (2017)</div>
+<div class="line raw">- With an EDSS score ≤ 6.5 at screening</div>
+<div class="line raw">- Neurologically stable with no evidence of relapse within the 28 days before signing the informed consent form (ICF)</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw">- Diagnosis of primary progressive MS or secondary progressive MS</div>
+<div class="line raw">- Uncontrolled or significant medical conditions (including active infection or chronic hepatitis)</div>
+<div class="line raw">- Which, in the opinion of the Investigator, preclude participation</div>
+<div class="line raw">- Treatment with glatiramer acetate, parenteral steroids, or adrenocorticotropic hormone, β-interferon, plasma exchange within the 3 months prior to first dose</div>
+<div class="line raw">- Treatment with sphingosine-1-phosphate receptor modulators such as fingolimod, ozanimod, or siponimod within 6 months prior to first dose</div>
+<div class="line raw">- Treatment with cytotoxic agents (including, but not limited to, cladribine, mitoxantrone, cyclophosphamide, azathioprine, and methotrexate), laquinimod, teriflunomide, or IV gamma globulin within 12 months prior to first dose</div>
+<div class="line raw">- Treatment with monoclonal antibody therapy (including natalizumab, daclizumab, rituximab, ofatumumab, and ocrelizumab) within 24 months prior to first dose</div>
+<div class="line raw">- Previous treatment with alemtuzumab, total lymphoid irradiation, mesenchymal stem cells or hematopoietic stem cells transplantation, or tolerance-inducing therapies for MS</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">#### Updated Eligibility Criteria (Version 8):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw">- Male or female adults aged 18 to 60 years inclusive at screening</div>
+<div class="line raw">- Diagnosed with RRMS per revised McDonald criteria (2017) with an EDSS score ≤ 6.5 at screening</div>
+<div class="line raw">- Neurologically stable with no evidence of relapse within the 28 days prior to signing the informed consent form (ICF)</div>
+<div class="line raw">- Either not currently receiving disease modifying MS therapy, or currently using fumarate drugs (i.e., dimethyl fumarate, diroximel fumarate)</div>
+<div class="line raw">- Patients must use a highly effective method of birth control or are sterile or postmenopausal as confirmed by study investigator for the first 3 months (through D90) of the study</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has signed and understood the ICF</div>
+<div class="line raw">- Patient has</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Diagnosed with RRMS per revised McDonald criteria (2017) with an EDSS score ≤ 6.5 at screeningNeurologically stable with no evidence of relapse within the 28 days before signing the informed consent form (ICF)Either not currently receiving disease modifying MS therapy, or currently using fumarate drugs (dimethyl fumarate or diroximel fumarate)Patients must use a highly effective method of birth control or are sterile or postmenopausal as confirmed by study InvestigatorPatient has signed and understands the ICFExclusion Criteria:Diagnosis of primary progressive MS or secondary progressive MSUncontrolled or significant medical conditions (including active infection or chronic hepatitis) which, in the opinion of the Investigator, preclude participationPatients treated with glatiramer acetate, parenteral steroids or adrenocorticotropic hormone, β-interferon, plasma exchange within the 3 months prior to first dosePatients treated with sphingosine-1-phospate receptor modulators such as fingolimod, ozanimod, or siponimod within 6 months prior to first dosePatients treated with cytotoxic agents (including, but not limited to, cladribine, mitoxantrone, cyclophosphamide, azathioprine, and methotrexate), laquinimod, teriflunomide, or IV gamma globulin within 12 months prior to first dosePatients treated with monoclonal antibody therapy (including natalizumab, daclizumab, rituximab, ofatumumab, and ocrelizumab) within 24 months prior to first dosePatients previously treated with alemtuzumab, total lymphoid irradiation, mesenchymal stem cell or hematopoietic stem cell transplantation, or tolerance-inducing therapies for MSContraindication to or inability to undergo gadolinium-enhanced magnetic resonance imaging (MRI) scanUse of any investigational drug or experimental procedure within previous 6 months that would interfere with the assessment of ANK-700Patients who are pregnant or breastfeedingPatients receiving any vaccination within 28 days prior to first dosePatient does not agree to limit alcohol intake to 2 drink equivalents or less per day during the study</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Revised Eligibility Criteria for Version 8 Clinical Trial</div>
+<div class="line criterion">2. Original Eligibility Criteria (Version 7):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Diagnosed with RRMS per revised McDonald criteria (2017)</div>
+<div class="line criterion">2. With an EDSS score ≤ 6.5 at screening</div>
+<div class="line criterion">3. Neurologically stable with no evidence of relapse within the 28 days before signing the informed consent form (ICF)</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Diagnosis of primary progressive MS or secondary progressive MS</div>
+<div class="line criterion">2. Uncontrolled or significant medical conditions (including active infection or chronic hepatitis)</div>
+<div class="line criterion">3. Which, in the opinion of the Investigator, preclude participation</div>
+<div class="line criterion">4. Treatment with glatiramer acetate, parenteral steroids, or adrenocorticotropic hormone, β-interferon, plasma exchange within the 3 months prior to first dose</div>
+<div class="line criterion">5. Treatment with sphingosine-1-phosphate receptor modulators such as fingolimod, ozanimod, or siponimod within 6 months prior to first dose</div>
+<div class="line criterion">6. Treatment with cytotoxic agents (including, but not limited to, cladribine, mitoxantrone, cyclophosphamide, azathioprine, and methotrexate), laquinimod, teriflunomide, or IV gamma globulin within 12 months prior to first dose</div>
+<div class="line criterion">7. Treatment with monoclonal antibody therapy (including natalizumab, daclizumab, rituximab, ofatumumab, and ocrelizumab) within 24 months prior to first dose</div>
+<div class="line criterion">8. Previous treatment with alemtuzumab, total lymphoid irradiation, mesenchymal stem cells or hematopoietic stem cells transplantation, or tolerance-inducing therapies for MS</div>
+<div class="line criterion">9. Updated Eligibility Criteria (Version 8):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male or female adults aged 18 to 60 years inclusive at screening</div>
+<div class="line criterion">2. Diagnosed with RRMS per revised McDonald criteria (2017) with an EDSS score ≤ 6.5 at screening</div>
+<div class="line criterion">3. Neurologically stable with no evidence of relapse within the 28 days prior to signing the informed consent form (ICF)</div>
+<div class="line criterion">4. Either not currently receiving disease modifying MS therapy, or currently using fumarate drugs (i.e., dimethyl fumarate, diroximel fumarate)</div>
+<div class="line criterion">5. Patients must use a highly effective method of birth control or are sterile or postmenopausal as confirmed by study investigator for the first 3 months (through D90) of the study</div>
+<div class="line criterion">6. Patient has signed and understood the ICF</div>
+<div class="line criterion">7. Patient has signed and understood the ICF</div>
+<div class="line criterion">8. Patient has signed and understood the ICF</div>
+<div class="line criterion">9. Patient has signed and understood the ICF</div>
+<div class="line criterion">10. Patient has signed and understood the ICF</div>
+<div class="line criterion">11. Patient has signed and understood the ICF</div>
+<div class="line criterion">12. Patient has signed and understood the ICF</div>
+<div class="line criterion">13. Patient has signed and understood the ICF</div>
+<div class="line criterion">14. Patient has signed and understood the ICF</div>
+<div class="line criterion">15. Patient has signed and understood the ICF</div>
+<div class="line criterion">16. Patient has signed and understood the ICF</div>
+<div class="line criterion">17. Patient has signed and understood the ICF</div>
+<div class="line criterion">18. Patient has signed and understood the ICF</div>
+<div class="line criterion">19. Patient has signed and understood the ICF</div>
+<div class="line criterion">20. Patient has signed and understood the ICF</div>
+<div class="line criterion">21. Patient has signed and understood the ICF</div>
+<div class="line criterion">22. Patient has signed and understood the ICF</div>
+<div class="line criterion">23. Patient has signed and understood the ICF</div>
+<div class="line criterion">24. Patient has signed and understood the ICF</div>
+<div class="line criterion">25. Patient has signed and understood the ICF</div>
+<div class="line criterion">26. Patient has signed and understood the ICF</div>
+<div class="line criterion">27. Patient has signed and understood the ICF</div>
+<div class="line criterion">28. Patient has signed and understood the ICF</div>
+<div class="line criterion">29. Patient has signed and understood the ICF</div>
+<div class="line criterion">30. Patient has signed and understood the ICF</div>
+<div class="line criterion">31. Patient has signed and understood the ICF</div>
+<div class="line criterion">32. Patient has signed and understood the ICF</div>
+<div class="line criterion">33. Patient has signed and understood the ICF</div>
+<div class="line criterion">34. Patient has signed and understood the ICF</div>
+<div class="line criterion">35. Patient has signed and understood the ICF</div>
+<div class="line criterion">36. Patient has signed and understood the ICF</div>
+<div class="line criterion">37. Patient has signed and understood the ICF</div>
+<div class="line criterion">38. Patient has signed and understood the ICF</div>
+<div class="line criterion">39. Patient has signed and understood the ICF</div>
+<div class="line criterion">40. Patient has signed and understood the ICF</div>
+<div class="line criterion">41. Patient has signed and understood the ICF</div>
+<div class="line criterion">42. Patient has signed and understood the ICF</div>
+<div class="line criterion">43. Patient has signed and understood the ICF</div>
+<div class="line criterion">44. Patient has signed and understood the ICF</div>
+<div class="line criterion">45. Patient has signed and understood the ICF</div>
+<div class="line criterion">46. Patient has signed and understood the ICF</div>
+<div class="line criterion">47. Patient has signed and understood the ICF</div>
+<div class="line criterion">48. Patient has signed and understood the ICF</div>
+<div class="line criterion">49. Patient has signed and understood the ICF</div>
+<div class="line criterion">50. Patient has signed and understood the ICF</div>
+<div class="line criterion">51. Patient has signed and understood the ICF</div>
+<div class="line criterion">52. Patient has signed and understood the ICF</div>
+<div class="line criterion">53. Patient has signed and understood the ICF</div>
+<div class="line criterion">54. Patient has signed and understood the ICF</div>
+<div class="line criterion">55. Patient has signed and understood the ICF</div>
+<div class="line criterion">56. Patient has signed and understood the ICF</div>
+<div class="line criterion">57. Patient has signed and understood the ICF</div>
+<div class="line criterion">58. Patient has signed and understood the ICF</div>
+<div class="line criterion">59. Patient has signed and understood the ICF</div>
+<div class="line criterion">60. Patient has signed and understood the ICF</div>
+<div class="line criterion">61. Patient has signed and understood the ICF</div>
+<div class="line criterion">62. Patient has signed and understood the ICF</div>
+<div class="line criterion">63. Patient has signed and understood the ICF</div>
+<div class="line criterion">64. Patient has signed and understood the ICF</div>
+<div class="line criterion">65. Patient has signed and understood the ICF</div>
+<div class="line criterion">66. Patient has signed and understood the ICF</div>
+<div class="line criterion">67. Patient has signed and understood the ICF</div>
+<div class="line criterion">68. Patient has signed and understood the ICF</div>
+<div class="line criterion">69. Patient has signed and understood the ICF</div>
+<div class="line criterion">70. Patient has signed and understood the ICF</div>
+<div class="line criterion">71. Patient has signed and understood the ICF</div>
+<div class="line criterion">72. Patient has signed and understood the ICF</div>
+<div class="line criterion">73. Patient has signed and understood the ICF</div>
+<div class="line criterion">74. Patient has signed and understood the ICF</div>
+<div class="line criterion">75. Patient has signed and understood the ICF</div>
+<div class="line criterion">76. Patient has signed and understood the ICF</div>
+<div class="line criterion">77. Patient has signed and understood the ICF</div>
+<div class="line criterion">78. Patient has signed and understood the ICF</div>
+<div class="line criterion">79. Patient has signed and understood the ICF</div>
+<div class="line criterion">80. Patient has signed and understood the ICF</div>
+<div class="line criterion">81. Patient has signed and understood the ICF</div>
+<div class="line criterion">82. Patient has signed and understood the ICF</div>
+<div class="line criterion">83. Patient has signed and understood the ICF</div>
+<div class="line criterion">84. Patient has signed and understood the ICF</div>
+<div class="line criterion">85. Patient has signed and understood the ICF</div>
+<div class="line criterion">86. Patient has signed and understood the ICF</div>
+<div class="line criterion">87. Patient has signed and understood the ICF</div>
+<div class="line criterion">88. Patient has signed and understood the ICF</div>
+<div class="line criterion">89. Patient has signed and understood the ICF</div>
+<div class="line criterion">90. Patient has signed and understood the ICF</div>
+<div class="line criterion">91. Patient has signed and understood the ICF</div>
+<div class="line criterion">92. Patient has signed and understood the ICF</div>
+<div class="line criterion">93. Patient has signed and understood the ICF</div>
+<div class="line criterion">94. Patient has signed and understood the ICF</div>
+<div class="line criterion">95. Patient has signed and understood the ICF</div>
+<div class="line criterion">96. Patient has signed and understood the ICF</div>
+<div class="line criterion">97. Patient has signed and understood the ICF</div>
+<div class="line criterion">98. Patient has signed and understood the ICF</div>
+<div class="line criterion">99. Patient has signed and understood the ICF</div>
+<div class="line criterion">100. Patient has signed and understood the ICF</div>
+<div class="line criterion">101. Patient has signed and understood the ICF</div>
+<div class="line criterion">102. Patient has signed and understood the ICF</div>
+<div class="line criterion">103. Patient has signed and understood the ICF</div>
+<div class="line criterion">104. Patient has signed and understood the ICF</div>
+<div class="line criterion">105. Patient has signed and understood the ICF</div>
+<div class="line criterion">106. Patient has signed and understood the ICF</div>
+<div class="line criterion">107. Patient has signed and understood the ICF</div>
+<div class="line criterion">108. Patient has signed and understood the ICF</div>
+<div class="line criterion">109. Patient has signed and understood the ICF</div>
+<div class="line criterion">110. Patient has signed and understood the ICF</div>
+<div class="line criterion">111. Patient has signed and understood the ICF</div>
+<div class="line criterion">112. Patient has signed and understood the ICF</div>
+<div class="line criterion">113. Patient has signed and understood the ICF</div>
+<div class="line criterion">114. Patient has signed and understood the ICF</div>
+<div class="line criterion">115. Patient has signed and understood the ICF</div>
+<div class="line criterion">116. Patient has signed and understood the ICF</div>
+<div class="line criterion">117. Patient has signed and understood the ICF</div>
+<div class="line criterion">118. Patient has signed and understood the ICF</div>
+<div class="line criterion">119. Patient has signed and understood the ICF</div>
+<div class="line criterion">120. Patient has signed and understood the ICF</div>
+<div class="line criterion">121. Patient has signed and understood the ICF</div>
+<div class="line criterion">122. Patient has signed and understood the ICF</div>
+<div class="line criterion">123. Patient has signed and understood the ICF</div>
+<div class="line criterion">124. Patient has signed and understood the ICF</div>
+<div class="line criterion">125. Patient has signed and understood the ICF</div>
+<div class="line criterion">126. Patient has signed and understood the ICF</div>
+<div class="line criterion">127. Patient has signed and understood the ICF</div>
+<div class="line criterion">128. Patient has signed and understood the ICF</div>
+<div class="line criterion">129. Patient has signed and understood the ICF</div>
+<div class="line criterion">130. Patient has signed and understood the ICF</div>
+<div class="line criterion">131. Patient has signed and understood the ICF</div>
+<div class="line criterion">132. Patient has signed and understood the ICF</div>
+<div class="line criterion">133. Patient has signed and understood the ICF</div>
+<div class="line criterion">134. Patient has signed and understood the ICF</div>
+<div class="line criterion">135. Patient has signed and understood the ICF</div>
+<div class="line criterion">136. Patient has signed and understood the ICF</div>
+<div class="line criterion">137. Patient has signed and understood the ICF</div>
+<div class="line criterion">138. Patient has signed and understood the ICF</div>
+<div class="line criterion">139. Patient has signed and understood the ICF</div>
+<div class="line criterion">140. Patient has signed and understood the ICF</div>
+<div class="line criterion">141. Patient has signed and understood the ICF</div>
+<div class="line criterion">142. Patient has signed and understood the ICF</div>
+<div class="line criterion">143. Patient has signed and understood the ICF</div>
+<div class="line criterion">144. Patient has signed and understood the ICF</div>
+<div class="line criterion">145. Patient has signed and understood the ICF</div>
+<div class="line criterion">146. Patient has signed and understood the ICF</div>
+<div class="line criterion">147. Patient has signed and understood the ICF</div>
+<div class="line criterion">148. Patient has signed and understood the ICF</div>
+<div class="line criterion">149. Patient has signed and understood the ICF</div>
+<div class="line criterion">150. Patient has signed and understood the ICF</div>
+<div class="line criterion">151. Patient has signed and understood the ICF</div>
+<div class="line criterion">152. Patient has signed and understood the ICF</div>
+<div class="line criterion">153. Patient has signed and understood the ICF</div>
+<div class="line criterion">154. Patient has signed and understood the ICF</div>
+<div class="line criterion">155. Patient has signed and understood the ICF</div>
+<div class="line criterion">156. Patient has signed and understood the ICF</div>
+<div class="line criterion">157. Patient has</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_62.html">&larr; Sample 62</a> | <a href="index.html">Index</a> | <a href="sample_64.html">Sample 64 &rarr;</a>
+</div>
+</body>
+</html>

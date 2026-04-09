@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 131 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 131</h1>
+    <div class="meta">
+        <span>NCT: NCT03608397</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Major Inclusion Criteria:Adults, 18 to 80 years of ageMeets diagnostic criteria for isolated CD (idiopathic; dystonic symptoms localized to the head, neck, shoulder areas) with at least moderate severity at Baseline (Day 1), defined as a TWSTRS-total score of at least 20, with at least 15 on the TWSTRS-Severity subscale, at least 3 on the TWSTRS-Disability subscale, and at least 1 on the TWSTRS-Pain subscaleMajor Exclusion Criteria:Cervical dystonia attributable to an underlying etiology, (e.g., traumatic torticollis or tardive torticollis)Predominant retrocollis or anterocollis CDSignificant dystonia in other body areas, or is currently being treated with BoNT for dystonia in areas other than those associated with isolated CDSevere dysphagia (Grade 3 or 4 on the Dysphagia Severity Scale) at Screening or Baseline (prior to study treatment)Any neuromuscular neurological conditions that may place the subject at increased risk of morbidity with exposure to BoNT, including peripheral motor neuropathic diseases (e.g., amyotrophic lateral sclerosis and motor neuropathy, and neuromuscular junctional disorders such as Lambert-Eaton syndrome and myasthenia gravis)Previous treatment with any BoNT product for any condition within the 14 weeks prior to ScreeningBotulinum Neurotoxin Type A (BoNTA), except the investigational daxibotulinumtoxinA, treatment-experienced subjects who had suboptimal or no treatment response to the most recent BoNTA injection for CD, as determined by the investigator, or history of primary or secondary non-response to BoNTA injections, known to have neutralizing antibodies to BoNTA; or have a history of botulinum toxin type B (rimabotulinumtoxinB [Myobloc&amp;#x2F;Neurobloc]) injection for CD due to non-response or suboptimal response to BoNTA</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- Adults, 18 to 80 years of age</div>
+<div class="line raw">- Meets diagnostic criteria for isolated CD (idiopathic; dystonic symptoms localized to the head, neck, shoulder areas) with at least moderate severity at Baseline (Day 1), defined as a TWSTRS-total score of at least 20, with at least 15 on the TWSTRS-Severity subscale, at least 3 on the TWSTRS-Disability subscale, and at least 1 on the TWSTRS-Pain subscale</div>
+<div class="line raw">- Written informed consent including authorization to release health information</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- Cervical dystonia attributable to an underlying etiology, (e.g., traumatic torticollis or tardive torticollis)</div>
+<div class="line raw">- Predominant retrocollis or anterocollis CD</div>
+<div class="line raw">- Significant dystonia in other body areas, or is currently being treated with BoNT for dystonia in areas other than those associated with isolated CD</div>
+<div class="line raw">- Severe dysphagia (Grade 3 or 4 on the Dysphagia Severity Scale) at Screening or Baseline (prior to study treatment)</div>
+<div class="line raw">- Any neuromuscular neurological conditions that may place the subject at increased risk of morbidity with exposure to BoNT, including peripheral motor neuropathic diseases (e.g., amyotrophic lateral sclerosis and motor neuropathy, and neuromuscular junctional disorders such as Lambert-Eaton syndrome and myasthenia gravis)</div>
+<div class="line raw">- Previous treatment with any BoNT product for any condition within the 14 weeks prior to Screening</div>
+<div class="line raw">- Botulinum Neurotoxin Type A (BoNTA), except the investigational daxibotulinumtoxinA, treatment-experienced subjects who had suboptimal or no treatment response to the most recent BoNTA injection for CD, as determined by the investigator, or history of primary or secondary non-response to BoNTA injections, known to have neutralizing antibodies to BoNTA; or have a history of botulinum toxin type B (rimabotulinumtoxinB [Myobloc/Neurobloc]) injection for CD due to non-response or suboptimal response to BoNTA</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Major Inclusion Criteria:Adults, 18 to 80 years of ageMeets diagnostic criteria for isolated CD (idiopathic; dystonic symptoms localized to the head, neck, shoulder areas) with at least moderate severity at Baseline (Day 1), defined as a TWSTRS-total score of at least 20, with at least 15 on the TWSTRS-Severity subscale, at least 3 on the TWSTRS-Disability subscale, and at least 1 on the TWSTRS-Pain subscaleMajor Exclusion Criteria:Cervical dystonia attributable to an underlying etiology, (e.g., traumatic torticollis or tardive torticollis)Predominant retrocollis or anterocollis CDSignificant dystonia in other body areas, or is currently being treated with BoNT for dystonia in areas other than those associated with isolated CDSevere dysphagia (Grade 3 or 4 on the Dysphagia Severity Scale) at Screening or Baseline (prior to study treatment)Any neuromuscular neurological conditions that may place the subject at increased risk of morbidity with exposure to BoNT, including peripheral motor neuropathic diseases (e.g., amyotrophic lateral sclerosis and motor neuropathy, and neuromuscular junctional disorders such as Lambert-Eaton syndrome and myasthenia gravis)Previous treatment with any BoNT product for any condition within the 14 weeks prior to ScreeningBotulinum Neurotoxin Type A (BoNTA), except the investigational daxibotulinumtoxinA, treatment-experienced subjects who had suboptimal or no treatment response to the most recent BoNTA injection for CD, as determined by the investigator, or history of primary or secondary non-response to BoNTA injections, known to have neutralizing antibodies to BoNTA; or have a history of botulinum toxin type B (rimabotulinumtoxinB [Myobloc/Neurobloc]) injection for CD due to non-response or suboptimal response to BoNTA</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Adults, 18 to 80 years of age</div>
+<div class="line criterion">2. Meets diagnostic criteria for isolated CD (idiopathic; dystonic symptoms localized to the head, neck, shoulder areas) with at least moderate severity at Baseline (Day 1), defined as a TWSTRS-total score of at least 20, with at least 15 on the TWSTRS-Severity subscale, at least 3 on the TWSTRS-Disability subscale, and at least 1 on the TWSTRS-Pain subscale</div>
+<div class="line criterion">3. Written informed consent including authorization to release health information</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Cervical dystonia attributable to an underlying etiology, (e.g., traumatic torticollis or tardive torticollis)</div>
+<div class="line criterion">2. Predominant retrocollis or anterocollis CD</div>
+<div class="line criterion">3. Significant dystonia in other body areas, or is currently being treated with BoNT for dystonia in areas other than those associated with isolated CD</div>
+<div class="line criterion">4. Severe dysphagia (Grade 3 or 4 on the Dysphagia Severity Scale) at Screening or Baseline (prior to study treatment)</div>
+<div class="line criterion">5. Any neuromuscular neurological conditions that may place the subject at increased risk of morbidity with exposure to BoNT, including peripheral motor neuropathic diseases (e.g., amyotrophic lateral sclerosis and motor neuropathy, and neuromuscular junctional disorders such as Lambert-Eaton syndrome and myasthenia gravis)</div>
+<div class="line criterion">6. Previous treatment with any BoNT product for any condition within the 14 weeks prior to Screening</div>
+<div class="line criterion">7. Botulinum Neurotoxin Type A (BoNTA), except the investigational daxibotulinumtoxinA, treatment-experienced subjects who had suboptimal or no treatment response to the most recent BoNTA injection for CD, as determined by the investigator, or history of primary or secondary non-response to BoNTA injections, known to have neutralizing antibodies to BoNTA; or have a history of botulinum toxin type B (rimabotulinumtoxinB [Myobloc/Neurobloc]) injection for CD due to non-response or suboptimal response to BoNTA</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_130.html">&larr; Sample 130</a> | <a href="index.html">Index</a> | <a href="sample_132.html">Sample 132 &rarr;</a>
+</div>
+</body>
+</html>

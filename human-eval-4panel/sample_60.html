@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 60 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 60</h1>
+    <div class="meta">
+        <span>NCT: NCT04124614</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.Participants who have PTSD, diagnosed according to the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5), and confirmed by the Mini International Neuropsychiatric Interview (MINI).Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.Exclusion Criteria:The index traumatic event that led to the develop of PTSD took place &amp;gt; 9 years before screening.The index traumatic event occurred before age 16.Participants who have experienced a traumatic event within 3 months of screening.Participants who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">331-201-00071 31 Confidential - Proprietary Information Amendment 4 Approval: 04 Jan 2023 20. Subjects who have a history of alcohol or substance abuse (binge drinking or other substance abuse) that is currently active or that would be expected to abate within 3 months prior to the screening visit. 20.1.1 Note: The use of alcohol or other substances is strictly prohibited in the IMP. 21. Subjects who have a history of abuse of controlled substances (other than alcohol) that is currently active or that would be expected to abate within 3 months prior to the screening visit. 21.1.1 Note: The use of controlled substances other than alcohol is strictly prohibited in the IMP. 22. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 23. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 24. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 25. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 26. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 27. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 28. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 29. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 30. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 31. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 32. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 33. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 34. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 35. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 36. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 37. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 38. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 39. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 40. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 32 Protocol 331-201-00071 32 Confidential - Proprietary Information Amendment 4 Approval: 04 Jan 2023 41. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 42. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 43. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 44. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 45. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 46. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 47. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 48. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 49. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 50. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 51. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 52. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 53. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 54. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 55. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 56. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 57. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 58. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 59. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 60. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 61. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 62. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 63. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 64. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 65. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 66. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 67. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 68. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 69. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 70. Subjects who have a history of abuse of alcohol</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male and female outpatients 18 to 65 years of age, inclusive, at the time of informed consent.Participants who have PTSD, diagnosed according to the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5), and confirmed by the Mini International Neuropsychiatric Interview (MINI).Onset of symptoms meeting the DSM-5 criteria for PTSD symptoms for a minimum of 6 months prior to screening.Exclusion Criteria:The index traumatic event that led to the develop of PTSD took place &gt; 9 years before screening.The index traumatic event occurred before age 16.Participants who have experienced a traumatic event within 3 months of screening.Participants who are receiving disability payments because of PTSD or any other psychiatric disorder; unless the disability payments will not be impacted by potential improvements demonstrated in the trial.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. 331-201-00071 31 Confidential - Proprietary Information Amendment 4 Approval: 04 Jan 2023 20.</div>
+<div class="line criterion">2. Subjects who have a history of alcohol or substance abuse (binge drinking or other substance abuse) that is currently active or that would be expected to abate within 3 months prior to the screening visit. 20.1.1 Note: The use of alcohol or other substances is strictly prohibited in the IMP. 21.</div>
+<div class="line criterion">3. Subjects who have a history of abuse of controlled substances (other than alcohol) that is currently active or that would be expected to abate within 3 months prior to the screening visit. 21.1.1 Note: The use of controlled substances other than alcohol is strictly prohibited in the IMP. 22.</div>
+<div class="line criterion">4. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 23.</div>
+<div class="line criterion">5. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 24.</div>
+<div class="line criterion">6. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 25.</div>
+<div class="line criterion">7. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 26.</div>
+<div class="line criterion">8. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 27.</div>
+<div class="line criterion">9. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 28.</div>
+<div class="line criterion">10. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 29.</div>
+<div class="line criterion">11. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 30.</div>
+<div class="line criterion">12. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 31.</div>
+<div class="line criterion">13. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 32.</div>
+<div class="line criterion">14. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 33.</div>
+<div class="line criterion">15. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 34.</div>
+<div class="line criterion">16. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 35.</div>
+<div class="line criterion">17. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 36.</div>
+<div class="line criterion">18. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 37.</div>
+<div class="line criterion">19. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 38.</div>
+<div class="line criterion">20. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 39.</div>
+<div class="line criterion">21. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 40.</div>
+<div class="line criterion">22. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 32 Protocol 331-201-00071 32 Confidential - Proprietary Information Amendment 4 Approval: 04 Jan 2023 41.</div>
+<div class="line criterion">23. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 42.</div>
+<div class="line criterion">24. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 43.</div>
+<div class="line criterion">25. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 44.</div>
+<div class="line criterion">26. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 45.</div>
+<div class="line criterion">27. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 46.</div>
+<div class="line criterion">28. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 47.</div>
+<div class="line criterion">29. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 48.</div>
+<div class="line criterion">30. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 49.</div>
+<div class="line criterion">31. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 50.</div>
+<div class="line criterion">32. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 51.</div>
+<div class="line criterion">33. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 52.</div>
+<div class="line criterion">34. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 53.</div>
+<div class="line criterion">35. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 54.</div>
+<div class="line criterion">36. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 55.</div>
+<div class="line criterion">37. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 56.</div>
+<div class="line criterion">38. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 57.</div>
+<div class="line criterion">39. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 58.</div>
+<div class="line criterion">40. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 59.</div>
+<div class="line criterion">41. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 60.</div>
+<div class="line criterion">42. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 61.</div>
+<div class="line criterion">43. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 62.</div>
+<div class="line criterion">44. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 63.</div>
+<div class="line criterion">45. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 64.</div>
+<div class="line criterion">46. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 65.</div>
+<div class="line criterion">47. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 66.</div>
+<div class="line criterion">48. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 67.</div>
+<div class="line criterion">49. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 68.</div>
+<div class="line criterion">50. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 69.</div>
+<div class="line criterion">51. Subjects who have a history of abuse of alcohol or other substances that is currently active or that would be expected to abate within 3 months prior to the screening visit. 70.</div>
+<div class="line criterion">52. Subjects who have a history of abuse of alcohol</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_59.html">&larr; Sample 59</a> | <a href="index.html">Index</a> | <a href="sample_61.html">Sample 61 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 104 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 104</h1>
+    <div class="meta">
+        <span>NCT: NCT03762265</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Male or female participants, aged 18 to 80 years old with moderate to severe, newly diagnosed or relapsing PV or PF, with a clinical presentation and histopathology consistent with PV or PF.Positive circulating anti-desmoglein 1 (anti-dsg1) or 3 autoantibody titer.At screening, pemphigus disease area index score of at least 9 points for relapsing participants or at least 15 points for newly diagnosed participants.Adequate hematologic, hepatic, and renal function.Effective means of contraception.Exclusion Criteria:Suspected paraneoplastic pemphigus and other forms of pemphigus that were not PV or PF.Previous use of a Bruton tyrosine kinase inhibitor.Pregnant or lactating women.Electrocardiogram clinically significant abnormalities.A history of malignancy of any type within 5 years before Day 1, other than surgically excised non-melanoma skin cancers or in situ cervical cancer.Use of immunologic response modifiers as concomitant medication and with the washout period.Use of proton pump inhibitor drugs such as omeprazole and esomeprazole within 3 days of Day 1.Concomitant use of known strong-to-moderate inducers or inhibitors of cytochrome P450 3A (CYP3A) within 3 days or 5 half-lives (whichever is longer) of Day 1Use of CYP3A-sensitive substrate drugs.Had received any investigational drug within the 30 days before Day 1.History of drug abuse within the previous 12 months.Alcoholism or excessive alcohol use.Any other clinically significant disease, condition or medical history that, in the opinion of the Investigator, would interfere with participant safety, trial evaluations, and&amp;#x2F;or trial procedures.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Amended Eligibility Criteria (version 22):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw">1. Male or female participants, aged 18 to 80 years old with moderate to severe, newly diagnosed or relapsing pemphigus vulgaris (PV) or pemphigus foliaceus (PF), with a clinical presentation and histopathology consistent with PV or PF.</div>
+<div class="line raw">2. Positive circulating anti-dsg1 or 3 autoantibody titer.</div>
+<div class="line raw">3. At Screening, Pemphigus disease area index (PDAI) score of at least 9 points for relapsing participants or at least 15 points for newly diagnosed participants.</div>
+<div class="line raw">4. Adequate hematologic, hepatic, and renal function (including but not limited to absolute neutrophil count ≥1.5 × 10^9/L, hemoglobin [Hgb] &gt;9 g/dL, platelet count ≥100 × 10^9/L, aspartate aminotransferase [AST] and/or alanine aminotransferase [ALT] ≤1.5 × upper limit of normal [ULN], albumin ≥3 g/dL, creatinine ≤1.5 × ULN).</div>
+<div class="line raw">5. Female patients who are of reproductive potential must agree for the duration of the study to use an effective means of contraception (e.g., hormonal contraception methods that inhibit ovulation, intrauterine device, intrauterine hormone-releasing system, bilateral tubal ligation, vasectomized partner, or condoms). For females considered not to have reproductive potential: Any woman of age ≥55 years with amenorrhea for &gt;1 year, will be considered as having confirmed menopause and will not need follicle-stimulating hormone (FSH) or pregnancy testing. Postmenopausal females &lt;1 year) must have menopause confirmed by elevated FSH levels at screening. Surgically sterile females do not require any further confirmation of menopause and will not be considered to have reproductive potential.</div>
+<div class="line raw">6. Able to provide written informed consent and agreeable to the schedule of assessments.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw">1. Suspected paraneoplastic pemphigus and other forms of pemphigus that are not pemphigus vulgaris or pemphigus foliaceus.</div>
+<div class="line raw">2. Previous use of a Bruton tyrosine kinase (BTK) inhibitor.</div>
+<div class="line raw">3. Pregnant or lactating women.</div>
+<div class="line raw">4. Electrocardiogram (ECG) findings of QT corrected for heart rate (QTc) &gt;450 msec (males) or &gt;470 msec (females), poorly controlled atrial fibrillation (i.e., symptomatic patients or a ventricular rate above 100 beats/min on ECG), or other clinically significant abnormalities.</div>
+<div class="line raw">5. A history of malignancy of any type within 5 years before Day 1, other than surgically excised non-melanoma skin cancers or in situ cervical cancer.</div>
+<div class="line raw">6. Use of immunologic response modifiers as concomitant medication and with the following washout periods:</div>
+<div class="line raw">   - A) Stop at least 2 weeks prior to Screening: mycophenolate mofetil, azathioprine, methotrexate, cyclosporine, dapsone, intravenous immunoglobulin (IVIG), Kinaret (anakinra), Enbrel (etanercept), or any other immunosuppressant not mentioned in this exclusion criterion.</div>
+<div class="line raw">   - B) 12 weeks prior to Screening: Remicade (infliximab), Humira (adalimumab), Simponi (golimumab), Orencia (abatercept), Actemra (tocilizumab), Cimzia (certolizumab), Cosentyx (secukinumab), plasmapheresis.</div>
+<div class="line raw">   - C) 6 months prior to Screening (or shorter if there is documented B cell reconstitution for anti-CD20 drugs): anti-CD20 drugs such as rituximab, ofatumumab, other long-acting biologics.</div>
+<div class="line raw">7. Use of proton pump inhibitor drugs such as omeprazole and esomeprazole within 3 days of Day 1 (it is acceptable to change patient to H2 receptor blocking drugs prior to Day 1).</div>
+<div class="line raw">8. Concomitant use of known strong-to-moderate inducers or inhibitors of CYP3A within 3 days or 5 half-lives (whichever is longer) of Day 1 (Appendix 7 Section 12.7).</div>
+<div class="line raw">9. Use of CYP3A-sensitive substrate drugs with a narrow therapeutic index within 3 days or 5 half-lives (whichever is longer) of Day 1 and for the remainder of the trial including, but not limited to alfentanil, astemizole, cisapride, cyclosporine, dihydroergotamine, ergotamine, fentanyl, pimozide, quinidine, sirolimus, tacrolimus (topical and oral), or terfenadine.</div>
+<div class="line raw">10. Has received any investigational drug (or is currently using an investigational device) within the 30 days before Day 1, or at least 5 times the respective elimination half-life time (whichever is longer).</div>
+<div class="line raw">11. History of drug abuse within the previous 12 months.</div>
+<div class="line raw">12. Alcoholism or excessive alcohol use, defined as regular consumption of more than approximately 3 standard drinks per day.</div>
+<div class="line raw">13. Refractory nausea and vomiting, malabsorption, external biliary shunt, or significant bowel resection that would preclude adequate rilzabrutinib/placebo absorption.</div>
+<div class="line raw">14. Donation of a unit or more of blood or blood products within 4 weeks prior to Day 1.</div>
+<div class="line raw">15. History of solid organ transplant.</div>
+<div class="line raw">16. Positive at Screening for human immunodeficiency virus (HIV), hepatitis B (surface antigen and/or core antibodies), or hepatitis C (anti-HCV antibody confirmed with Hep C RNA).</div>
+<div class="line raw">17. Positive interferon-gamma release assay (IGRA) (e.g., T-spot TB Test, QuantiFERON®-TB Gold, or QuantiFERON®-TB Gold Plus (QFT Plus), at Screening. Unless, the patient has latent tuberculosis (TB) and all of the following 3 conditions are true:</div>
+<div class="line raw">   - a) Chest X-ray does not show evidence suggestive of active TB disease</div>
+<div class="line raw">   - b) There are no clinical signs and symptoms of pulmonary and/or extra-pulmonary TB disease</div>
+<div class="line raw">   - c) Documented receipt of one of the following prophylactic treatment regimens:</div>
+<div class="line raw">     - i. Oral daily Isoniazid for 6 months</div>
+<div class="line raw">     - ii. Oral daily Rifampin (RIF) for 4 months</div>
+<div class="line raw">     - iii. Isoniazid and Rifapentine weekly for 3 months (3HP)</div>
+<div class="line raw">   On a case-by-case basis, after discussion and approval by the Sponsor, a local TB test that is negative and is considered equivalent to 1 of the above tests may be used for eligibility. For example, if a QuantiFERON®-TB Gold, or QuantiFERON-TB Gold Plus (QFT Plus) is indeterminate for any reason and a local blood test or T-Spot TB test is negative, the patient may be enrolled using the local result upon approval of the Sponsor.</div>
+<div class="line raw">18. History of serious infections requiring intravenous therapy with the potential for recurrence or currently active moderate to severe infection at Screening (Grade 2 or higher).</div>
+<div class="line raw">19. Live vaccine within 28 days prior to Day 1 or plan to receive one during the trial.</div>
+<div class="line raw">20. Any other clinically significant disease, condition (including contraindication to corticosteroids and/or inability to follow corticosteroid dosing as outlined in the protocol [see Table 1 for more details]), or medical history that, in the opinion of the Investigator, would interfere with patient safety, trial evaluations, and/or trial procedures. In areas endemic for Chagas disease, screening is recommended prior to enrollment. For participants in Germany, please see specific instructions in Appendix 10 Section 12.10.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male or female participants, aged 18 to 80 years old with moderate to severe, newly diagnosed or relapsing PV or PF, with a clinical presentation and histopathology consistent with PV or PF.Positive circulating anti-desmoglein 1 (anti-dsg1) or 3 autoantibody titer.At screening, pemphigus disease area index score of at least 9 points for relapsing participants or at least 15 points for newly diagnosed participants.Adequate hematologic, hepatic, and renal function.Effective means of contraception.Exclusion Criteria:Suspected paraneoplastic pemphigus and other forms of pemphigus that were not PV or PF.Previous use of a Bruton tyrosine kinase inhibitor.Pregnant or lactating women.Electrocardiogram clinically significant abnormalities.A history of malignancy of any type within 5 years before Day 1, other than surgically excised non-melanoma skin cancers or in situ cervical cancer.Use of immunologic response modifiers as concomitant medication and with the washout period.Use of proton pump inhibitor drugs such as omeprazole and esomeprazole within 3 days of Day 1.Concomitant use of known strong-to-moderate inducers or inhibitors of cytochrome P450 3A (CYP3A) within 3 days or 5 half-lives (whichever is longer) of Day 1Use of CYP3A-sensitive substrate drugs.Had received any investigational drug within the 30 days before Day 1.History of drug abuse within the previous 12 months.Alcoholism or excessive alcohol use.Any other clinically significant disease, condition or medical history that, in the opinion of the Investigator, would interfere with participant safety, trial evaluations, and/or trial procedures.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Amended Eligibility Criteria (version 22):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Male or female participants, aged 18 to 80 years old with moderate to severe, newly diagnosed or relapsing pemphigus vulgaris (PV) or pemphigus foliaceus (PF), with a clinical presentation and histopathology consistent with PV or PF.</div>
+<div class="line criterion">2. Positive circulating anti-dsg1 or 3 autoantibody titer.</div>
+<div class="line criterion">3. At Screening, Pemphigus disease area index (PDAI) score of at least 9 points for relapsing participants or at least 15 points for newly diagnosed participants.</div>
+<div class="line criterion">4. Adequate hematologic, hepatic, and renal function (including but not limited to absolute neutrophil count ≥1.5 × 10^9/L, hemoglobin [Hgb] &gt;9 g/dL, platelet count ≥100 × 10^9/L, aspartate aminotransferase [AST] and/or alanine aminotransferase [ALT] ≤1.5 × upper limit of normal [ULN], albumin ≥3 g/dL, creatinine ≤1.5 × ULN).</div>
+<div class="line criterion">5. Female patients who are of reproductive potential must agree for the duration of the study to use an effective means of contraception (e.g., hormonal contraception methods that inhibit ovulation, intrauterine device, intrauterine hormone-releasing system, bilateral tubal ligation, vasectomized partner, or condoms). For females considered not to have reproductive potential: Any woman of age ≥55 years with amenorrhea for &gt;1 year, will be considered as having confirmed menopause and will not need follicle-stimulating hormone (FSH) or pregnancy testing. Postmenopausal females &lt;1 year) must have menopause confirmed by elevated FSH levels at screening. Surgically sterile females do not require any further confirmation of menopause and will not be considered to have reproductive potential.</div>
+<div class="line criterion">6. Able to provide written informed consent and agreeable to the schedule of assessments.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Suspected paraneoplastic pemphigus and other forms of pemphigus that are not pemphigus vulgaris or pemphigus foliaceus.</div>
+<div class="line criterion">2. Previous use of a Bruton tyrosine kinase (BTK) inhibitor.</div>
+<div class="line criterion">3. Pregnant or lactating women.</div>
+<div class="line criterion">4. Electrocardiogram (ECG) findings of QT corrected for heart rate (QTc) &gt;450 msec (males) or &gt;470 msec (females), poorly controlled atrial fibrillation (i.e., symptomatic patients or a ventricular rate above 100 beats/min on ECG), or other clinically significant abnormalities.</div>
+<div class="line criterion">5. A history of malignancy of any type within 5 years before Day 1, other than surgically excised non-melanoma skin cancers or in situ cervical cancer.</div>
+<div class="line criterion">6. Use of immunologic response modifiers as concomitant medication and with the following washout periods:</div>
+<div class="line criterion">7. A) Stop at least 2 weeks prior to Screening: mycophenolate mofetil, azathioprine, methotrexate, cyclosporine, dapsone, intravenous immunoglobulin (IVIG), Kinaret (anakinra), Enbrel (etanercept), or any other immunosuppressant not mentioned in this exclusion criterion.</div>
+<div class="line criterion">8. B) 12 weeks prior to Screening: Remicade (infliximab), Humira (adalimumab), Simponi (golimumab), Orencia (abatercept), Actemra (tocilizumab), Cimzia (certolizumab), Cosentyx (secukinumab), plasmapheresis.</div>
+<div class="line criterion">9. C) 6 months prior to Screening (or shorter if there is documented B cell reconstitution for anti-CD20 drugs): anti-CD20 drugs such as rituximab, ofatumumab, other long-acting biologics.</div>
+<div class="line criterion">10. Use of proton pump inhibitor drugs such as omeprazole and esomeprazole within 3 days of Day 1 (it is acceptable to change patient to H2 receptor blocking drugs prior to Day 1).</div>
+<div class="line criterion">11. Concomitant use of known strong-to-moderate inducers or inhibitors of CYP3A within 3 days or 5 half-lives (whichever is longer) of Day 1 (Appendix 7 Section 12.7).</div>
+<div class="line criterion">12. Use of CYP3A-sensitive substrate drugs with a narrow therapeutic index within 3 days or 5 half-lives (whichever is longer) of Day 1 and for the remainder of the trial including, but not limited to alfentanil, astemizole, cisapride, cyclosporine, dihydroergotamine, ergotamine, fentanyl, pimozide, quinidine, sirolimus, tacrolimus (topical and oral), or terfenadine.</div>
+<div class="line criterion">13. Has received any investigational drug (or is currently using an investigational device) within the 30 days before Day 1, or at least 5 times the respective elimination half-life time (whichever is longer).</div>
+<div class="line criterion">14. History of drug abuse within the previous 12 months.</div>
+<div class="line criterion">15. Alcoholism or excessive alcohol use, defined as regular consumption of more than approximately 3 standard drinks per day.</div>
+<div class="line criterion">16. Refractory nausea and vomiting, malabsorption, external biliary shunt, or significant bowel resection that would preclude adequate rilzabrutinib/placebo absorption.</div>
+<div class="line criterion">17. Donation of a unit or more of blood or blood products within 4 weeks prior to Day 1.</div>
+<div class="line criterion">18. History of solid organ transplant.</div>
+<div class="line criterion">19. Positive at Screening for human immunodeficiency virus (HIV), hepatitis B (surface antigen and/or core antibodies), or hepatitis C (anti-HCV antibody confirmed with Hep C RNA).</div>
+<div class="line criterion">20. Positive interferon-gamma release assay (IGRA) (e.g., T-spot TB Test, QuantiFERON®-TB Gold, or QuantiFERON®-TB Gold Plus (QFT Plus), at Screening. Unless, the patient has latent tuberculosis (TB) and all of the following 3 conditions are true:</div>
+<div class="line criterion">21. a) Chest X-ray does not show evidence suggestive of active TB disease</div>
+<div class="line criterion">22. b) There are no clinical signs and symptoms of pulmonary and/or extra-pulmonary TB disease</div>
+<div class="line criterion">23. c) Documented receipt of one of the following prophylactic treatment regimens:</div>
+<div class="line criterion">24. i. Oral daily Isoniazid for 6 months</div>
+<div class="line criterion">25. ii. Oral daily Rifampin (RIF) for 4 months</div>
+<div class="line criterion">26. iii. Isoniazid and Rifapentine weekly for 3 months (3HP)</div>
+<div class="line criterion">27. On a case-by-case basis, after discussion and approval by the Sponsor, a local TB test that is negative and is considered equivalent to 1 of the above tests may be used for eligibility.</div>
+<div class="line criterion">28. For example, if a QuantiFERON®-TB Gold, or QuantiFERON-TB Gold Plus (QFT Plus) is indeterminate for any reason and a local blood test or T-Spot TB test is negative, the patient may be enrolled using the local result upon approval of the Sponsor.</div>
+<div class="line criterion">29. History of serious infections requiring intravenous therapy with the potential for recurrence or currently active moderate to severe infection at Screening (Grade 2 or higher).</div>
+<div class="line criterion">30. Live vaccine within 28 days prior to Day 1 or plan to receive one during the trial.</div>
+<div class="line criterion">31. Any other clinically significant disease, condition (including contraindication to corticosteroids and/or inability to follow corticosteroid dosing as outlined in the protocol [see Table 1 for more details]), or medical history that, in the opinion of the Investigator, would interfere with patient safety, trial evaluations, and/or trial procedures. In areas endemic for Chagas disease, screening is recommended prior to enrollment. For participants in Germany, please see specific instructions in Appendix 10 Section 12.10.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_103.html">&larr; Sample 103</a> | <a href="index.html">Index</a> | <a href="sample_105.html">Sample 105 &rarr;</a>
+</div>
+</body>
+</html>

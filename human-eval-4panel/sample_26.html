@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 26 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 26</h1>
+    <div class="meta">
+        <span>NCT: NCT04423757</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Established diagnosis of Major Depressive Disorder, single episode or recurrent, as confirmed at the time of screening by the Structured Clinical Interview for Diagnostic and Statistical Manual of Mental Disorders v5 (DSM-5, SCID-5), with a duration of current depressive episode ≥ 8 weeks and ≤ 12 months at the time of screening visit.Montgomery-Åsberg Depression Rating Scale (MADRS) total score ≥ 22 at screening, as confirmed by a trained rater. In addition, trial participants must have a score of ≥ 3 on the Reported Sadness item on MADRS.A documented ongoing monotherapy treatment of ≥ 8 weeks at the screening visit, with a protocol specified SSRI or SNRI (refer to the ISF) at adequate dose (at least minimum effective dose as per prescribing information and as confirmed per detectable drug levels in the screening blood or urine sampling).Male and female participants, 18 to 65 years of age, both inclusively at the time of consent.Women of child-bearing potential (WOCBP)2 able and willing to use two methods of contraception, which include one highly effective method of birth control per ICH M3 (R2) that results in a low failure rate of less than 1%, plus one barrier method.Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trial.Able to communicate well, and to understand and comply with trial requirements.Exclusion Criteria:Per DSM-5, had ever met diagnostic criteria for schizophrenia, schizoaffective disorder, schizophreniform disorder, bipolar disorder, delusional disorder or MDD with psychotic features as assessed by the Structured Clinical Interview for DSM -5 (SCID-5) at the time of screening.Diagnosis of any other mental disorder (in addition to those as described in Exclusion Criterion #1) that was the primary focus of treatment within 6 months prior to screening or at baseline (as per clinical discretion of the investigator).Diagnosis with antisocial, paranoid, schizoid or schizotypal personality disorder as per DSM-5 criteria, at the time of screening visit. Any other personality disorder at screening visit that significantly affects current psychiatric status and likely to impact trial participation, as per the judgement of investigator.Diagnosis of a substance related disorder within 3 months prior to screening visit (with exception of caffeine and tobacco).History of seizure disorders, stroke, brain tumor or any other major neurological illness that can impact participation in the trial.History of 4 or more unsuccessful monotherapy treatments (at adequate dosage and duration, per local prescribing information of the product) with an approved antidepressant medication for the current ongoing major depressive episode. These include ongoing monotherapy treatment with a protocol specified SSRI or SNRI as described in Inclusion Criterion #3.Any suicidal behavior in the past 12 months prior to screening (per investigator judgement including an actual attempt, interrupted attempt, aborted attempt, or preparatory acts or behaviour).Any suicidal ideation of type 4 or 5 in the Columbia Suicide Severity Rating Scale (CSSRS) in the past 3 months prior to screening or at screening or baseline visit (i.e. active suicidal thought with method and intent but without specific plan, or active suicidal thought with method, intent and plan).Further exclusion criteria apply</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Inclusion Criteria:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">1. Established diagnosis of Major Depressive Disorder, single episode or recurrent, as confirmed at the time of screening by the Structured Clinical Interview for DSM-5 (SCID-5), with a duration of current depressive episode ≥ 8 weeks and ≤ 18 months at the time of screening visit.</div>
+<div class="line raw">2. Montgomery-Åsberg Depression Rating Scale (MADRS) total score ≥ 22 at screening, as confirmed by a trained rater. In addition, trial participants must have a score of ≥ 3 on the Reported Sadness item on MADRS.</div>
+<div class="line raw">3. A documented ongoing monotherapy treatment of ≥ 8 weeks at the screening visit, with a protocol specified SSRI or SNRI at adequate dose (at least minimum effective dose as per prescribing information and as confirmed per detectable drug levels in the screening blood or urine sampling).</div>
+<div class="line raw">4. Male and female participants, 18 to 65 years of age, both inclusively at the time of consent.</div>
+<div class="line raw">5. Women of child-bearing potential (WOCBP)1 able and willing to use two methods of contraception, which include one highly effective method of birth control per ICH M3 (R2) that results in a low failure rate of less than 1%, plus one barrier method.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">1. Per DSM-5, had ever met diagnostic criteria for schizophrenia, schizoaffective disorder, schizophreniform disorder, bipolar disorder, delusional disorder or MDD with psychotic features as assessed by the SCID-5 at the time of screening.</div>
+<div class="line raw">2. Diagnosis of any other mental disorder (in addition to those as described in Exclusion Criterion #1) that was the primary focus of treatment within 6 months prior to screening or at baseline (as per clinical discretion of the investigator).</div>
+<div class="line raw">3. Diagnosis with antisocial, paranoid, schizoid or schizotypal personality disorder as per DSM-5 criteria, at the time of screening visit. Any other personality disorder at screening visit that significantly affects current psychiatric status and likely to impact trial participation, as per the judgement of investigator.</div>
+<div class="line raw">4. Diagnosis of a substance related disorder within 3 months prior to screening visit (with exception of caffeine and tobacco).</div>
+<div class="line raw">5. History of seizure disorders, stroke, brain tumor or any other major neurological illness that can impact participation in the trial.</div>
+<div class="line raw">6. History of 4 or more unsuccessful monotherapy treatments (at adequate dosage and duration, per local prescribing information of the product) with an approved antidepressant medication for the current ongoing major depressive episode. These include ongoing monotherapy treatment with a protocol specified SSRI or SNRI as described in Inclusion Criterion #3.</div>
+<div class="line raw">7. Any suicidal behavior in the past 12 months prior to screening (per investigator judgement including an actual attempt, interrupted attempt, aborted attempt, or preparatory acts or behaviour).</div>
+<div class="line raw">8. Any suicidal ideation of type 4 or 5 in the Columbia Suicide Severity Rating Scale (C-SSRS) in the past 3 months prior to screening or at screening or baseline visit (i.e. active suicidal thought with method and intent but without specific plan, or active suicidal thought with method, intent and plan).</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Established diagnosis of Major Depressive Disorder, single episode or recurrent, as confirmed at the time of screening by the Structured Clinical Interview for Diagnostic and Statistical Manual of Mental Disorders v5 (DSM-5, SCID-5), with a duration of current depressive episode ≥ 8 weeks and ≤ 12 months at the time of screening visit.Montgomery-Åsberg Depression Rating Scale (MADRS) total score ≥ 22 at screening, as confirmed by a trained rater. In addition, trial participants must have a score of ≥ 3 on the Reported Sadness item on MADRS.A documented ongoing monotherapy treatment of ≥ 8 weeks at the screening visit, with a protocol specified SSRI or SNRI (refer to the ISF) at adequate dose (at least minimum effective dose as per prescribing information and as confirmed per detectable drug levels in the screening blood or urine sampling).Male and female participants, 18 to 65 years of age, both inclusively at the time of consent.Women of child-bearing potential (WOCBP)2 able and willing to use two methods of contraception, which include one highly effective method of birth control per ICH M3 (R2) that results in a low failure rate of less than 1%, plus one barrier method.Signed and dated written informed consent in accordance with ICH-GCP and local legislation prior to admission to the trial.Able to communicate well, and to understand and comply with trial requirements.Exclusion Criteria:Per DSM-5, had ever met diagnostic criteria for schizophrenia, schizoaffective disorder, schizophreniform disorder, bipolar disorder, delusional disorder or MDD with psychotic features as assessed by the Structured Clinical Interview for DSM -5 (SCID-5) at the time of screening.Diagnosis of any other mental disorder (in addition to those as described in Exclusion Criterion 1) that was the primary focus of treatment within 6 months prior to screening or at baseline (as per clinical discretion of the investigator).Diagnosis with antisocial, paranoid, schizoid or schizotypal personality disorder as per DSM-5 criteria, at the time of screening visit. Any other personality disorder at screening visit that significantly affects current psychiatric status and likely to impact trial participation, as per the judgement of investigator.Diagnosis of a substance related disorder within 3 months prior to screening visit (with exception of caffeine and tobacco).History of seizure disorders, stroke, brain tumor or any other major neurological illness that can impact participation in the trial.History of 4 or more unsuccessful monotherapy treatments (at adequate dosage and duration, per local prescribing information of the product) with an approved antidepressant medication for the current ongoing major depressive episode. These include ongoing monotherapy treatment with a protocol specified SSRI or SNRI as described in Inclusion Criterion 3.Any suicidal behavior in the past 12 months prior to screening (per investigator judgement including an actual attempt, interrupted attempt, aborted attempt, or preparatory acts or behaviour).Any suicidal ideation of type 4 or 5 in the Columbia Suicide Severity Rating Scale (CSSRS) in the past 3 months prior to screening or at screening or baseline visit (i.e. active suicidal thought with method and intent but without specific plan, or active suicidal thought with method, intent and plan).Further exclusion criteria apply</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Established diagnosis of Major Depressive Disorder, single episode or recurrent, as confirmed at the time of screening by the Structured Clinical Interview for DSM-5 (SCID-5), with a duration of current depressive episode ≥ 8 weeks and ≤ 18 months at the time of screening visit.</div>
+<div class="line criterion">2. Montgomery-Åsberg Depression Rating Scale (MADRS) total score ≥ 22 at screening, as confirmed by a trained rater. In addition, trial participants must have a score of ≥ 3 on the Reported Sadness item on MADRS.</div>
+<div class="line criterion">3. A documented ongoing monotherapy treatment of ≥ 8 weeks at the screening visit, with a protocol specified SSRI or SNRI at adequate dose (at least minimum effective dose as per prescribing information and as confirmed per detectable drug levels in the screening blood or urine sampling).</div>
+<div class="line criterion">4. Male and female participants, 18 to 65 years of age, both inclusively at the time of consent.</div>
+<div class="line criterion">5. Women of child-bearing potential (WOCBP)1 able and willing to use two methods of contraception, which include one highly effective method of birth control per ICH M3 (R2) that results in a low failure rate of less than 1%, plus one barrier method.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Per DSM-5, had ever met diagnostic criteria for schizophrenia, schizoaffective disorder, schizophreniform disorder, bipolar disorder, delusional disorder or MDD with psychotic features as assessed by the SCID-5 at the time of screening.</div>
+<div class="line criterion">2. Diagnosis of any other mental disorder (in addition to those as described in Exclusion Criterion 1) that was the primary focus of treatment within 6 months prior to screening or at baseline (as per clinical discretion of the investigator).</div>
+<div class="line criterion">3. Diagnosis with antisocial, paranoid, schizoid or schizotypal personality disorder as per DSM-5 criteria, at the time of screening visit. Any other personality disorder at screening visit that significantly affects current psychiatric status and likely to impact trial participation, as per the judgement of investigator.</div>
+<div class="line criterion">4. Diagnosis of a substance related disorder within 3 months prior to screening visit (with exception of caffeine and tobacco).</div>
+<div class="line criterion">5. History of seizure disorders, stroke, brain tumor or any other major neurological illness that can impact participation in the trial.</div>
+<div class="line criterion">6. History of 4 or more unsuccessful monotherapy treatments (at adequate dosage and duration, per local prescribing information of the product) with an approved antidepressant medication for the current ongoing major depressive episode. These include ongoing monotherapy treatment with a protocol specified SSRI or SNRI as described in Inclusion Criterion 3.</div>
+<div class="line criterion">7. Any suicidal behavior in the past 12 months prior to screening (per investigator judgement including an actual attempt, interrupted attempt, aborted attempt, or preparatory acts or behaviour).</div>
+<div class="line criterion">8. Any suicidal ideation of type 4 or 5 in the Columbia Suicide Severity Rating Scale (C-SSRS) in the past 3 months prior to screening or at screening or baseline visit (i.e. active suicidal thought with method and intent but without specific plan, or active suicidal thought with method, intent and plan).</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_25.html">&larr; Sample 25</a> | <a href="index.html">Index</a> | <a href="sample_27.html">Sample 27 &rarr;</a>
+</div>
+</body>
+</html>

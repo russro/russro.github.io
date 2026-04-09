@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 94 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 94</h1>
+    <div class="meta">
+        <span>NCT: NCT02688647</span>
+        <span>Model: local-qwen-3b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Adult male and postmenopausal&amp;#x2F;surgically sterilized female subjects at least 18 years of age (if female, is surgically sterilized [ie, total hysterectomy, or bilateral salpingo-oophorectomy]).Able to provide written informed consent before the performance of any study specific procedures.IPF diagnosis within 5 years before study entry, proven according to the American Thoracic Society&amp;#x2F;European Respiratory Society consensus conference criteria, with surgical lung biopsy. In the absence of a surgical lung biopsy, HRCT must be consistent with usual interstitial pneumonitis.Resting state SpO2 ≥ 88% with or without supplemental oxygen, FVC % ≥ 50% normal predicted value, and DLCO ≥ 30% normal predicted value at baseline.Men with partners of childbearing potential must be willing to use 2 medically acceptable methods of contraception during the trial and for 3 months after the last dose of study drug. Effective birth control includes (a) intrauterine device (IUD) plus 1 barrier method; (b) stable doses of hormonal contraception for at least 3 months (eg, oral, injectable, implant, transdermal) plus 1 barrier method; (c) 2 barrier methods. Effective barrier methods are male or female condoms, diaphragms, and spermicides (creams or gels that contain a chemical to kill sperm); or (d) vasectomy.Have adequate bone marrow function:ANC &amp;gt; 1500&amp;#x2F;mm3Hemoglobin &amp;gt; 9.0 g&amp;#x2F;LPlatelets &amp;gt; 100,000&amp;#x2F;mm3Willing to complete all study measurements and assessments in compliance with the protocolHas either received pirfenidone and&amp;#x2F;or nintedanib or has been offered both treatments (with last dose administered at least 1 month before the expected start of study drug dosing). If either or both pirfenidone and nintedanib treatment has not been given, then documentation that the patient was offered both treatments must be documented.Exclusion Criteria:Interstitial lung disease caused by conditions other than IPFSevere concomitant illness limiting life expectancy (&amp;lt; 1 year)Diffusing capacity of the lung for carbon monoxide (DLCO) &amp;lt; 30% predictedResidual volume ≥ 120% predictedObstructive lung disease: FEV1&amp;#x2F; FVC ratio &amp;lt; 0.70Documented sustained improvement of the subject&amp;#x27;s IPF condition up to 12 months before study entry with or without IPF-specific therapyPulmonary or upper respiratory tract infection within 4 weeks before study entryAcute or chronic impairment (other than dyspnea) limiting the ability to comply with study requirements (eg, pulmonary function tests)Chronic heart failure with New York Heart Association class III&amp;#x2F;IV or known left ventricular ejection fraction &amp;lt; 25%Moderate to severe hepatic impairment (ie, Child-Pugh Class B or C)Estimated creatinine clearance &amp;lt; 30 mL&amp;#x2F;minAspartate aminotransferase (AST) and&amp;#x2F;or ALT &amp;gt; 2.0 × upper limit of normal (ULN)Hemoglobin &amp;lt; 75% of the lower limit of normalSystolic blood pressure &amp;lt; 100 mmHgMen whose partner is pregnant or breastfeedingCurrent drug or alcohol dependenceChronic treatment with the following drugs (within 4 weeks of study entry and during the study)Immunosuppressive or cytotoxic drugs including cyclophosphamide and azathioprineAntifibrotic drugs including pirfenidone, nintedanib, D penicillamine, colchicine, tumor necrosis factor α blockers, imatinib and interferon-γChronic use of N-acetylcysteine prescribed for IPF (&amp;gt; 600 mg&amp;#x2F;day)Oral anticoagulants prescribed for IPFTreatment with endothelin receptor antagonists within 4 weeks before study entrySystemic treatment within 4 weeks before study entry with cyclosporine A or tacrolimus, everolimus, or sirolimus (calcineurin or mammalian target of rapamycin inhibitors)Previous exposure to KD025 or known allergy&amp;#x2F;sensitivity to KD025 or any other ROCK2 inhibitorPlanned treatment, or treatment with another investigational drug within 4 weeks before study entrySubject is taking a medication that has the potential for QTc prolongation (see Appendix A)Subject is taking a drug that is a sensitive substrate of CYP enzymesSubject is taking an inhibitor or inducer of CYP3A4Subject has consumed an herbal medication (eg, St. John&amp;#x27;s Wort) or grapefruit&amp;#x2F;grapefruit juice within 14 days prior to the Week 1, Day 1 visit</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Amended Eligibility Criteria (version 10):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Inclusion Criteria:</div>
+<div class="line raw">- Adult male and postmenopausal or surgically sterilized female subjects at least 18 years of age (if female, is surgically sterilized [ie, total hysterectomy, or bilateral salpingo-oophorectomy])</div>
+<div class="line raw">- Able to provide written informed consent before the performance of any study specific procedures</div>
+<div class="line raw">- IPF diagnosis within 5 years before study entry, proven according to the American Thoracic Society/European Respiratory Society consensus conference criteria, with surgical lung biopsy. In the absence of a surgical lung biopsy, HRCT must be consistent with usual interstitial pneumonitis.</div>
+<div class="line raw">- Resting state SpO2 ≥ 88% with or without supplemental oxygen, FVC % ≥ 50% normal predicted value, and DLCO ≥ 30% normal predicted value at baseline</div>
+<div class="line raw">- Men with partners of childbearing potential must be willing to use 2 medically acceptable methods of contraception during the trial and for 3 months after the last dose of study drug. Effective birth control includes (a) intrauterine device (IUD) plus 1 barrier method; (b) stable doses of hormonal contraception for at least 3 months (eg, oral, injectable, implant, transdermal) plus 1 barrier method; (c) 2 barrier methods. Effective barrier methods are male or female condoms, diaphragms, and spermicides (creams or gels that contain a chemical to kill sperm); or (d) vasectomy.</div>
+<div class="line raw">- Have adequate bone marrow function: ANC &gt; 1500/mm³, Hemoglobin &gt; 9.0 g/L, Platelets &gt; 100,000/mm³</div>
+<div class="line raw">- Willing to complete all study measurements and assessments in compliance with the protocol</div>
+<div class="line raw">- Has either received pirfenidone and/or nintedanib or has been offered both treatments (with last dose administered at least 1 month before the expected start of study drug dosing). If either or both pirfenidone and nintedanib treatment has not been given, then documentation that the patient was offered both treatments must be documented.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Exclusion Criteria:</div>
+<div class="line raw">- Interstitial lung disease caused by conditions other than IPF</div>
+<div class="line raw">- Severe concomitant illness limiting life expectancy (≥ 2 × upper limit of normal (ULN))</div>
+<div class="line raw">- Diffusing capacity of the lung for carbon monoxide (DLCO) &lt; 30% predicted</div>
+<div class="line raw">- Residual volume ≥ 120% predicted</div>
+<div class="line raw">- Obstructive lung disease: FEV1/FVC ratio &lt; 0.70</div>
+<div class="line raw">- Documented sustained improvement of the subject&#x27;s IPF condition up to 12 months before study entry with or without IPF-specific therapy</div>
+<div class="line raw">- Acute or chronic impairment (other than dyspnea) limiting the ability to comply with study requirements (eg, pulmonary function tests)</div>
+<div class="line raw">- Pulmonary or upper respiratory tract infection within 4 weeks before study entry</div>
+<div class="line raw">- Moderate to severe hepatic impairment (ie, Child-Pugh Class B or C)</div>
+<div class="line raw">- Estimated creatinine clearance &lt; 30 mL/min</div>
+<div class="line raw">- Aspartate aminotransferase (AST) and/or ALT &gt; 2.0 × upper limit of normal (ULN)</div>
+<div class="line raw">- Hemoglobin &lt; 75% of the lower limit of normal</div>
+<div class="line raw">- Systolic blood pressure &lt; 100 mmHg</div>
+<div class="line raw">- Men whose partner is pregnant or breastfeeding</div>
+<div class="line raw">- Current drug or alcohol dependence</div>
+<div class="line raw">- Chronic treatment with the following drugs (within 4 weeks of study entry and during the study) </div>
+<div class="line raw">  - Immunosuppressive or cytotoxic drugs including cyclophosphamide and azathioprine</div>
+<div class="line raw">  - Antifibrotic drugs including pirfenidone, nintedanib, D penicillamine, colchicine, tumor necrosis factor α blockers, imatinib and interferon-γ</div>
+<div class="line raw">  - Chronic use of N-acetylcysteine prescribed for IPF (&gt; 600 mg/day)</div>
+<div class="line raw">  - Oral anticoagulants prescribed for IPF</div>
+<div class="line raw">  - Treatment with endothelin receptor antagonists within 4 weeks before study entry</div>
+<div class="line raw">  - Systemic treatment within 4 weeks before study entry with cyclosporine A or tacrolimus, everolimus, or sirolimus (calcineurin or mammalian target of rapamycin inhibitors)</div>
+<div class="line raw">  - Previous exposure to KD025 or known allergy/sensitivity to KD025 or any other ROCK2 inhibitor</div>
+<div class="line raw">  - Planned treatment, or treatment with another investigational drug within 4 weeks before study entry</div>
+<div class="line raw">  - Subject is taking a medication that has the potential for QTc prolongation (see Appendix H)</div>
+<div class="line raw">  - Subject is taking a drug that is a sensitive substrate of CYP enzymes</div>
+<div class="line raw">  - Subject is taking a strong inducer of CYP3A4 (see Appendix F)</div>
+<div class="line raw">  - Subject has consumed an herbal medication (eg, St. John’s Wort) or grapefruit/grapefruit juice within 14 days prior to the Week 1, Day 1 visit</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Test Drug: Oral KD025. KD025 will be provided as 200-mg tablets. Dosage and Administration: KD025 400 mg (two 200-mg tablets) will be administered orally QD. Subjects should take KD025 within 5 minutes of completing a meal.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Adult male and postmenopausal/surgically sterilized female subjects at least 18 years of age (if female, is surgically sterilized [ie, total hysterectomy, or bilateral salpingo-oophorectomy]).Able to provide written informed consent before the performance of any study specific procedures.IPF diagnosis within 5 years before study entry, proven according to the American Thoracic Society/European Respiratory Society consensus conference criteria, with surgical lung biopsy. In the absence of a surgical lung biopsy, HRCT must be consistent with usual interstitial pneumonitis.Resting state SpO2 ≥ 88% with or without supplemental oxygen, FVC % ≥ 50% normal predicted value, and DLCO ≥ 30% normal predicted value at baseline.Men with partners of childbearing potential must be willing to use 2 medically acceptable methods of contraception during the trial and for 3 months after the last dose of study drug. Effective birth control includes (a) intrauterine device (IUD) plus 1 barrier method; (b) stable doses of hormonal contraception for at least 3 months (eg, oral, injectable, implant, transdermal) plus 1 barrier method; (c) 2 barrier methods. Effective barrier methods are male or female condoms, diaphragms, and spermicides (creams or gels that contain a chemical to kill sperm); or (d) vasectomy.Have adequate bone marrow function:ANC &gt; 1500/mm3Hemoglobin &gt; 9.0 g/LPlatelets &gt; 100,000/mm3Willing to complete all study measurements and assessments in compliance with the protocolHas either received pirfenidone and/or nintedanib or has been offered both treatments (with last dose administered at least 1 month before the expected start of study drug dosing). If either or both pirfenidone and nintedanib treatment has not been given, then documentation that the patient was offered both treatments must be documented.Exclusion Criteria:Interstitial lung disease caused by conditions other than IPFSevere concomitant illness limiting life expectancy (&lt; 1 year)Diffusing capacity of the lung for carbon monoxide (DLCO) &lt; 30% predictedResidual volume ≥ 120% predictedObstructive lung disease: FEV1/ FVC ratio &lt; 0.70Documented sustained improvement of the subject&#x27;s IPF condition up to 12 months before study entry with or without IPF-specific therapyPulmonary or upper respiratory tract infection within 4 weeks before study entryAcute or chronic impairment (other than dyspnea) limiting the ability to comply with study requirements (eg, pulmonary function tests)Chronic heart failure with New York Heart Association class III/IV or known left ventricular ejection fraction &lt; 25%Moderate to severe hepatic impairment (ie, Child-Pugh Class B or C)Estimated creatinine clearance &lt; 30 mL/minAspartate aminotransferase (AST) and/or ALT &gt; 2.0 × upper limit of normal (ULN)Hemoglobin &lt; 75% of the lower limit of normalSystolic blood pressure &lt; 100 mmHgMen whose partner is pregnant or breastfeedingCurrent drug or alcohol dependenceChronic treatment with the following drugs (within 4 weeks of study entry and during the study)Immunosuppressive or cytotoxic drugs including cyclophosphamide and azathioprineAntifibrotic drugs including pirfenidone, nintedanib, D penicillamine, colchicine, tumor necrosis factor α blockers, imatinib and interferon-γChronic use of N-acetylcysteine prescribed for IPF (&gt; 600 mg/day)Oral anticoagulants prescribed for IPFTreatment with endothelin receptor antagonists within 4 weeks before study entrySystemic treatment within 4 weeks before study entry with cyclosporine A or tacrolimus, everolimus, or sirolimus (calcineurin or mammalian target of rapamycin inhibitors)Previous exposure to KD025 or known allergy/sensitivity to KD025 or any other ROCK2 inhibitorPlanned treatment, or treatment with another investigational drug within 4 weeks before study entrySubject is taking a medication that has the potential for QTc prolongation (see Appendix A)Subject is taking a drug that is a sensitive substrate of CYP enzymesSubject is taking an inhibitor or inducer of CYP3A4Subject has consumed an herbal medication (eg, St. John&#x27;s Wort) or grapefruit/grapefruit juice within 14 days prior to the Week 1, Day 1 visit</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Amended Eligibility Criteria (version 10):</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Adult male and postmenopausal or surgically sterilized female subjects at least 18 years of age (if female, is surgically sterilized [ie, total hysterectomy, or bilateral salpingo-oophorectomy])</div>
+<div class="line criterion">2. Able to provide written informed consent before the performance of any study specific procedures</div>
+<div class="line criterion">3. IPF diagnosis within 5 years before study entry, proven according to the American Thoracic Society/European Respiratory Society consensus conference criteria, with surgical lung biopsy. In the absence of a surgical lung biopsy, HRCT must be consistent with usual interstitial pneumonitis.</div>
+<div class="line criterion">4. Resting state SpO2 ≥ 88% with or without supplemental oxygen, FVC % ≥ 50% normal predicted value, and DLCO ≥ 30% normal predicted value at baseline</div>
+<div class="line criterion">5. Men with partners of childbearing potential must be willing to use 2 medically acceptable methods of contraception during the trial and for 3 months after the last dose of study drug. Effective birth control includes (a) intrauterine device (IUD) plus 1 barrier method; (b) stable doses of hormonal contraception for at least 3 months (eg, oral, injectable, implant, transdermal) plus 1 barrier method; (c) 2 barrier methods. Effective barrier methods are male or female condoms, diaphragms, and spermicides (creams or gels that contain a chemical to kill sperm); or (d) vasectomy.</div>
+<div class="line criterion">6. Have adequate bone marrow function: ANC &gt; 1500/mm³, Hemoglobin &gt; 9.0 g/L, Platelets &gt; 100,000/mm³</div>
+<div class="line criterion">7. Willing to complete all study measurements and assessments in compliance with the protocol</div>
+<div class="line criterion">8. Has either received pirfenidone and/or nintedanib or has been offered both treatments (with last dose administered at least 1 month before the expected start of study drug dosing). If either or both pirfenidone and nintedanib treatment has not been given, then documentation that the patient was offered both treatments must be documented.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Interstitial lung disease caused by conditions other than IPF</div>
+<div class="line criterion">2. Severe concomitant illness limiting life expectancy (≥ 2 × upper limit of normal (ULN))</div>
+<div class="line criterion">3. Diffusing capacity of the lung for carbon monoxide (DLCO) &lt; 30% predicted</div>
+<div class="line criterion">4. Residual volume ≥ 120% predicted</div>
+<div class="line criterion">5. Obstructive lung disease: FEV1/FVC ratio &lt; 0.70</div>
+<div class="line criterion">6. Documented sustained improvement of the subject&#x27;s IPF condition up to 12 months before study entry with or without IPF-specific therapy</div>
+<div class="line criterion">7. Acute or chronic impairment (other than dyspnea) limiting the ability to comply with study requirements (eg, pulmonary function tests)</div>
+<div class="line criterion">8. Pulmonary or upper respiratory tract infection within 4 weeks before study entry</div>
+<div class="line criterion">9. Moderate to severe hepatic impairment (ie, Child-Pugh Class B or C)</div>
+<div class="line criterion">10. Estimated creatinine clearance &lt; 30 mL/min</div>
+<div class="line criterion">11. Aspartate aminotransferase (AST) and/or ALT &gt; 2.0 × upper limit of normal (ULN)</div>
+<div class="line criterion">12. Hemoglobin &lt; 75% of the lower limit of normal</div>
+<div class="line criterion">13. Systolic blood pressure &lt; 100 mmHg</div>
+<div class="line criterion">14. Men whose partner is pregnant or breastfeeding</div>
+<div class="line criterion">15. Current drug or alcohol dependence</div>
+<div class="line criterion">16. Chronic treatment with the following drugs (within 4 weeks of study entry and during the study)</div>
+<div class="line criterion">17. Immunosuppressive or cytotoxic drugs including cyclophosphamide and azathioprine</div>
+<div class="line criterion">18. Antifibrotic drugs including pirfenidone, nintedanib, D penicillamine, colchicine, tumor necrosis factor α blockers, imatinib and interferon-γ</div>
+<div class="line criterion">19. Chronic use of N-acetylcysteine prescribed for IPF (&gt; 600 mg/day)</div>
+<div class="line criterion">20. Oral anticoagulants prescribed for IPF</div>
+<div class="line criterion">21. Treatment with endothelin receptor antagonists within 4 weeks before study entry</div>
+<div class="line criterion">22. Systemic treatment within 4 weeks before study entry with cyclosporine A or tacrolimus, everolimus, or sirolimus (calcineurin or mammalian target of rapamycin inhibitors)</div>
+<div class="line criterion">23. Previous exposure to KD025 or known allergy/sensitivity to KD025 or any other ROCK2 inhibitor</div>
+<div class="line criterion">24. Planned treatment, or treatment with another investigational drug within 4 weeks before study entry</div>
+<div class="line criterion">25. Subject is taking a medication that has the potential for QTc prolongation (see Appendix H)</div>
+<div class="line criterion">26. Subject is taking a drug that is a sensitive substrate of CYP enzymes</div>
+<div class="line criterion">27. Subject is taking a strong inducer of CYP3A4 (see Appendix F)</div>
+<div class="line criterion">28. Subject has consumed an herbal medication (eg, St. John’s Wort) or grapefruit/grapefruit juice within 14 days prior to the Week 1, Day 1 visit</div>
+<div class="line criterion">29. Test Drug: Oral KD025. KD025 will be provided as 200-mg tablets.</div>
+<div class="line criterion">30. Dosage and Administration: KD025 400 mg (two 200-mg tablets) will be administered orally QD.</div>
+<div class="line criterion">31. Subjects should take KD025 within 5 minutes of completing a meal.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_93.html">&larr; Sample 93</a> | <a href="index.html">Index</a> | <a href="sample_95.html">Sample 95 &rarr;</a>
+</div>
+</body>
+</html>

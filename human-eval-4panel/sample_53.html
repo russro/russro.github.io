@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 53 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 53</h1>
+    <div class="meta">
+        <span>NCT: NCT02605967</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Histologically documented non-keratinizing locally advanced recurrent or metastatic NPC.Must be resistant to platinum-based chemotherapy (defined as progression on or after platinum-based chemotherapy given in the recurrent&amp;#x2F;metastatic setting).May have received at least 1 prior therapy for recurrent or metastatic disease, up to 2 prior systemic therapies.An archival tumor specimen or newly obtained tumor sample may be submitted at screening&amp;#x2F;baseline (a fresh tumor sample is preferred), unless agreed differently between Novartis and the Investigator.At least 1 measurable lesion (as per RECIST v1.1) progressing or new since last anti-tumor therapy.Prior treated brain or meningeal metastases must be without MRI evidence of progression for at least 8 weeks and off systemic steroids for at least 2 weeks prior to screening&amp;#x2F;baseline.Patient must be willing to undergo testing for human immunodeficiency virus (HIV) if not tested within the past 6 months. If HIV+ positive, patient will be eligible if: his&amp;#x2F; her CD4+ count ≥ 300&amp;#x2F;μL; his&amp;#x2F;her viral load is undetectable; he&amp;#x2F;she is currently receiving highly active antiretroviral therapy (HAART).Exclusion Criteria:History of severe hypersensitivity reactions to other mAbsActive autoimmune disease or a documented history of autoimmune disease, except vitiligo or resolved asthma&amp;#x2F;atopy that is treated with broncho-dilators.Active HBV or HCV infections requiring therapy.Prior PD-1- or PD-L1-directed therapy or any therapeutic cancer vaccine.Patients receiving systemic treatment with any immunosuppressive medication.Use of any vaccines against infectious diseases (e.g. varicella, pneumococcus) within 4 weeks of initiation of study treatment.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">1 toxicity. 12. Previous use of any immunotherapy (monoclonal antibodies) for cancer, excluding prior use of anti-PD-1 or anti-PD-L1 antibodies. 13. Any prior exposure to experimental or investigational agents (including those under development) that are not part of standard treatment regimens. 14. Any prior exposure to radioactive substances (e.g., X-rays, positron emission tomography (PET), or radiotracemers) within the last 6 months. 15. Any prior exposure to non-steroidal anti-inflammatory drugs (NSAIDs) within the last 6 months. 14. Any prior exposure to other non-steroidal anti-inflammatory drugs (e.g., ibuprofen, naproxen, etc.) within the last 6 months. 16. Any prior exposure to corticosteroids within the last 6 months. 17. Any prior exposure to other corticosteroids (e.g., dexamethasone, hydrocortisone) within the last 6 months. 18. Any prior exposure to non-steroidal anti-inflammatory agents (e.g., ibuprofen, naproxen, etc.) within the last 6 months. 19. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 20. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 15. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 21. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 22. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 23. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 24. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 25. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 26. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 27. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 28. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 29. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 30. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 31. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 32. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 33. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 34. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 35. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 36. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 37. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 38. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 39. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 40. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 41. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 42. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 43. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 44. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 45. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 46. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 47. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 48. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 49. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 50. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 51. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 52. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 53. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 54. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 55. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 56. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 57. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 58. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 59. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 60. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 61. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 62. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Histologically documented non-keratinizing locally advanced recurrent or metastatic NPC.Must be resistant to platinum-based chemotherapy (defined as progression on or after platinum-based chemotherapy given in the recurrent/metastatic setting).May have received at least 1 prior therapy for recurrent or metastatic disease, up to 2 prior systemic therapies.An archival tumor specimen or newly obtained tumor sample may be submitted at screening/baseline (a fresh tumor sample is preferred), unless agreed differently between Novartis and the Investigator.At least 1 measurable lesion (as per RECIST v1.1) progressing or new since last anti-tumor therapy.Prior treated brain or meningeal metastases must be without MRI evidence of progression for at least 8 weeks and off systemic steroids for at least 2 weeks prior to screening/baseline.Patient must be willing to undergo testing for human immunodeficiency virus (HIV) if not tested within the past 6 months. If HIV+ positive, patient will be eligible if: his/ her CD4+ count ≥ 300/μL; his/her viral load is undetectable; he/she is currently receiving highly active antiretroviral therapy (HAART).Exclusion Criteria:History of severe hypersensitivity reactions to other mAbsActive autoimmune disease or a documented history of autoimmune disease, except vitiligo or resolved asthma/atopy that is treated with broncho-dilators.Active HBV or HCV infections requiring therapy.Prior PD-1- or PD-L1-directed therapy or any therapeutic cancer vaccine.Patients receiving systemic treatment with any immunosuppressive medication.Use of any vaccines against infectious diseases (e.g. varicella, pneumococcus) within 4 weeks of initiation of study treatment.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. 1 toxicity. 12.</div>
+<div class="line criterion">2. Previous use of any immunotherapy (monoclonal antibodies) for cancer, excluding prior use of anti-PD-1 or anti-PD-L1 antibodies. 13.</div>
+<div class="line criterion">3. Any prior exposure to experimental or investigational agents (including those under development) that are not part of standard treatment regimens. 14.</div>
+<div class="line criterion">4. Any prior exposure to radioactive substances (e.g., X-rays, positron emission tomography (PET), or radiotracemers) within the last 6 months. 15.</div>
+<div class="line criterion">5. Any prior exposure to non-steroidal anti-inflammatory drugs (NSAIDs) within the last 6 months. 14.</div>
+<div class="line criterion">6. Any prior exposure to other non-steroidal anti-inflammatory drugs (e.g., ibuprofen, naproxen, etc.) within the last 6 months. 16.</div>
+<div class="line criterion">7. Any prior exposure to corticosteroids within the last 6 months. 17.</div>
+<div class="line criterion">8. Any prior exposure to other corticosteroids (e.g., dexamethasone, hydrocortisone) within the last 6 months. 18.</div>
+<div class="line criterion">9. Any prior exposure to non-steroidal anti-inflammatory agents (e.g., ibuprofen, naproxen, etc.) within the last 6 months. 19.</div>
+<div class="line criterion">10. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 20.</div>
+<div class="line criterion">11. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 15.</div>
+<div class="line criterion">12. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 21.</div>
+<div class="line criterion">13. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 22.</div>
+<div class="line criterion">14. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 23.</div>
+<div class="line criterion">15. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 24.</div>
+<div class="line criterion">16. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 25.</div>
+<div class="line criterion">17. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 26.</div>
+<div class="line criterion">18. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 27.</div>
+<div class="line criterion">19. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 28.</div>
+<div class="line criterion">20. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 29.</div>
+<div class="line criterion">21. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 30.</div>
+<div class="line criterion">22. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 31.</div>
+<div class="line criterion">23. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 32.</div>
+<div class="line criterion">24. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 33.</div>
+<div class="line criterion">25. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 34.</div>
+<div class="line criterion">26. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 35.</div>
+<div class="line criterion">27. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 36.</div>
+<div class="line criterion">28. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 37.</div>
+<div class="line criterion">29. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 38.</div>
+<div class="line criterion">30. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 39.</div>
+<div class="line criterion">31. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 40.</div>
+<div class="line criterion">32. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 41.</div>
+<div class="line criterion">33. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 42.</div>
+<div class="line criterion">34. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 43.</div>
+<div class="line criterion">35. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 44.</div>
+<div class="line criterion">36. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 45.</div>
+<div class="line criterion">37. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 46.</div>
+<div class="line criterion">38. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 47.</div>
+<div class="line criterion">39. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 48.</div>
+<div class="line criterion">40. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 49.</div>
+<div class="line criterion">41. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 50.</div>
+<div class="line criterion">42. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 51.</div>
+<div class="line criterion">43. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 52.</div>
+<div class="line criterion">44. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 53.</div>
+<div class="line criterion">45. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 54.</div>
+<div class="line criterion">46. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 55.</div>
+<div class="line criterion">47. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 56.</div>
+<div class="line criterion">48. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 57.</div>
+<div class="line criterion">49. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 58.</div>
+<div class="line criterion">50. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 59.</div>
+<div class="line criterion">51. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 60.</div>
+<div class="line criterion">52. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 61.</div>
+<div class="line criterion">53. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept, darbepenem, etc.) within the last 6 months. 62.</div>
+<div class="line criterion">54. Any prior exposure to other non-steroidal anti-inflammatory agents (e.g., etanercept</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_52.html">&larr; Sample 52</a> | <a href="index.html">Index</a> | <a href="sample_54.html">Sample 54 &rarr;</a>
+</div>
+</body>
+</html>

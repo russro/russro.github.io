@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 6 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 6</h1>
+    <div class="meta">
+        <span>NCT: NCT00318643</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Participants with initial presentation or recurrence of Stage Ta, T1 or Tis, any grade, bladder cancer after transurethral resection of bladder tumor (TURBT).TURBT within 42 days prior to Day 1&amp;#x2F;Week 1Karnofsky Performance Status greater than or equal to 80%Life expectancy at least 3 years18 years or olderA negative pregnancy test (if female of child-bearing potential)Acceptable liver function within 7 days defined as: bilirubin less than or equal to 1.5 times upper limit of normal, and aspartate aminotransferase (AST) Glutamic-oxalacetic transaminase (SGOT), alanine aminotransferase (ALT), glutamic-pyruvic transaminase (SGPT), and alkaline phosphatase &amp;lt;= 2.5 times upper limit of normalAcceptable renal function within 7 days defined as: serum creatinine less than or equal to 1.5 times upper limit of normal, or calculated creatinine clearance greater than or equal to 40 milliliter (mL)&amp;#x2F;minute&amp;#x2F;1.73 meter^2Acceptable hematologic status within 7 days defined as: absolute neutrophil count (ANC) greater than or equal to 2,500 cells&amp;#x2F;millimeter^3, platelet count greater than or equal to 150,000&amp;#x2F;millileter^3, and hemoglobin greater than or equal to 10.0 grams&amp;#x2F;deciliter.Urinalysis showing no clinically significant abnormalities except those attributable to bladder cancer.For men and women of child-producing potential, agreement to use an effective contraceptive method during the treatment period of the study.Signed, written Institutional Review Board (IRB)-approved informed consentExclusion Criteria:History or previous diagnosis of bladder fibrosisTotal bladder capacity estimated at cystoscopy to be less than 150 mLUrinary incontinence of a severity that would compromise the ability of the participant to retain the study drug intravesical instillation for two hours.Severe irritative voiding symptoms such as urgency, frequency, or nocturiaKnown other malignant disease except squamous or basal cell skin cancer unless the malignancy has been in complete remission off therapy for at least 5 years.Major surgery, other than TURBT and diagnostic surgery, within 28 days prior to Day 1&amp;#x2F;Week 1.Active, uncontrolled bacterial, viral, or fungal infections, including urinary tract infection.Treatment with radiation therapy, surgery, chemotherapy, or investigational therapy within one month prior to Day 1&amp;#x2F;Week 1 on study (two months for nitrosureas or MMC), unless given as standard treatment for bladder cancer and provided that patient is free of all treatment-related toxicities as of Day 1&amp;#x2F;Week 1.Known infection with human immunodeficiency virus (HIV)Known active infection with hepatitis B or hepatitis CSerious disease (e.g., hydronephrosis, liver failure, or other conditions) that could compromise protocol objectives in the opinion of the Investigator and&amp;#x2F;or the Sponsor (Halozyme).History of a hypersensitivity or idiosyncratic reaction to, or other contraindication to, mitomycin.Known allergy to bee or vespid venomKnown coagulation disorder or bleeding tendencyTreatment with heparin or anticipation of heparin treatment during the treatment period in this study.Unwillingness or inability to comply with procedures required in this protocol.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">##  Modified Inclusion/Exclusion Criteria for Version 10 of the Protocol:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Patients with initial presentation or recurrence of Stage Ta, T1, or Tis, any grade, bladder cancer after transurethral resection of bladder tumor (TURBT).**</div>
+<div class="line raw">* **TURBT within 42 days prior to Day 1.**</div>
+<div class="line raw">* **Age ≥ 18 years.**</div>
+<div class="line raw">* **Karnofsky Performance Status (KPS) ≥ 80%.**</div>
+<div class="line raw">* **Life expectancy at least 3 years.**</div>
+<div class="line raw">* **Negative pregnancy test (if female of child-bearing potential).**</div>
+<div class="line raw">* **Acceptable liver function (bilirubin ≤ 1.5 times upper limit of normal, AST/SGOT ≤ 2.5 times upper limit of normal, and alkaline phosphatase ≤ 2.5 times upper limit of normal).**</div>
+<div class="line raw">* **Acceptable renal function (serum creatinine ≤ 1.5 times upper limit of normal, or calculated creatinine clearance ≥ 40 mL/min/1.73 m2).**</div>
+<div class="line raw">* **Hemoglobin ≥ 10.0 g/dL.**</div>
+<div class="line raw">* **Absolute neutrophil count (ANC) ≥ 2,500 cells/mm3.**</div>
+<div class="line raw">* **Platelet count ≥ 150,000/mm3.**</div>
+<div class="line raw">* **Urinalysis showing no clinically significant abnormalities except those attributable to bladder cancer.**</div>
+<div class="line raw">* **Agreement to use an effective contraceptive method during the treatment period of the study.**</div>
+<div class="line raw">* **Signed, written IRB-approved informed consent.**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **History or previous diagnosis of bladder fibrosis.**</div>
+<div class="line raw">* **Total bladder capacity estimated at cystoscopy to be &lt; 150 mL.**</div>
+<div class="line raw">* **Severe irritative voiding symptoms (urgency, frequency, or nocturia) that would compromise the ability to retain the study drug for two hours.**</div>
+<div class="line raw">* **Known active infection with human immunodeficiency virus (HIV).**</div>
+<div class="line raw">* **Known active infection with hepatitis B or hepatitis C.**</div>
+<div class="line raw">* **Major surgery, other than TURBT, within 28 days prior to Day 1.**</div>
+<div class="line raw">* **Active, uncontrolled bacterial, viral, or fungal infections.**</div>
+<div class="line raw">* **Treatment with radiation therapy, surgery, chemotherapy, or investigational therapy within one (1) month prior to Day 1.**</div>
+<div class="line raw">* **Known allergy to bee or vespid venom.**</div>
+<div class="line raw">* **Coagulation disorder or bleeding tendency.**</div>
+<div class="line raw">* **Treatment with heparin or anticipation of heparin treatment during the treatment period.**</div>
+<div class="line raw">* **Unwillingness or inability to comply with procedures required in this protocol.**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Explanation of Changes:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Clarified language:**  The text has been revised to improve clarity and consistency.</div>
+<div class="line raw">* **Specificity:**  The inclusion criteria have been made more specific, particularly regarding bladder capacity and the presence of irritative voiding symptoms.</div>
+<div class="line raw">* **Removed outdated terms:**  Terms like &quot;total bladder capacity&quot; have been replaced with more modern terminology.</div>
+<div class="line raw">* **Added clarity:**  The exclusion criteria have been clarified to be more specific and easier to understand. </div>
+<div class="line raw">* **Consistency:**  The text has been formatted consistently throughout. </div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Note:** This is a general interpretation of the changes based on the provided text.  It is important to consult the full protocol for the most accurate and up-to-date information.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participants with initial presentation or recurrence of Stage Ta, T1 or Tis, any grade, bladder cancer after transurethral resection of bladder tumor (TURBT).TURBT within 42 days prior to Day 1/Week 1Karnofsky Performance Status greater than or equal to 80%Life expectancy at least 3 years18 years or olderA negative pregnancy test (if female of child-bearing potential)Acceptable liver function within 7 days defined as: bilirubin less than or equal to 1.5 times upper limit of normal, and aspartate aminotransferase (AST) Glutamic-oxalacetic transaminase (SGOT), alanine aminotransferase (ALT), glutamic-pyruvic transaminase (SGPT), and alkaline phosphatase &lt;= 2.5 times upper limit of normalAcceptable renal function within 7 days defined as: serum creatinine less than or equal to 1.5 times upper limit of normal, or calculated creatinine clearance greater than or equal to 40 milliliter (mL)/minute/1.73 meter^2Acceptable hematologic status within 7 days defined as: absolute neutrophil count (ANC) greater than or equal to 2,500 cells/millimeter^3, platelet count greater than or equal to 150,000/millileter^3, and hemoglobin greater than or equal to 10.0 grams/deciliter.Urinalysis showing no clinically significant abnormalities except those attributable to bladder cancer.For men and women of child-producing potential, agreement to use an effective contraceptive method during the treatment period of the study.Signed, written Institutional Review Board (IRB)-approved informed consentExclusion Criteria:History or previous diagnosis of bladder fibrosisTotal bladder capacity estimated at cystoscopy to be less than 150 mLUrinary incontinence of a severity that would compromise the ability of the participant to retain the study drug intravesical instillation for two hours.Severe irritative voiding symptoms such as urgency, frequency, or nocturiaKnown other malignant disease except squamous or basal cell skin cancer unless the malignancy has been in complete remission off therapy for at least 5 years.Major surgery, other than TURBT and diagnostic surgery, within 28 days prior to Day 1/Week 1.Active, uncontrolled bacterial, viral, or fungal infections, including urinary tract infection.Treatment with radiation therapy, surgery, chemotherapy, or investigational therapy within one month prior to Day 1/Week 1 on study (two months for nitrosureas or MMC), unless given as standard treatment for bladder cancer and provided that patient is free of all treatment-related toxicities as of Day 1/Week 1.Known infection with human immunodeficiency virus (HIV)Known active infection with hepatitis B or hepatitis CSerious disease (e.g., hydronephrosis, liver failure, or other conditions) that could compromise protocol objectives in the opinion of the Investigator and/or the Sponsor (Halozyme).History of a hypersensitivity or idiosyncratic reaction to, or other contraindication to, mitomycin.Known allergy to bee or vespid venomKnown coagulation disorder or bleeding tendencyTreatment with heparin or anticipation of heparin treatment during the treatment period in this study.Unwillingness or inability to comply with procedures required in this protocol.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Inclusion/Exclusion Criteria for Version 10 of the Protocol:</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Patients with initial presentation or recurrence of Stage Ta, T1, or Tis, any grade, bladder cancer after transurethral resection of bladder tumor (TURBT).</div>
+<div class="line criterion">2. TURBT within 42 days prior to Day 1.</div>
+<div class="line criterion">3. Age ≥ 18 years.</div>
+<div class="line criterion">4. Karnofsky Performance Status (KPS) ≥ 80%.</div>
+<div class="line criterion">5. Life expectancy at least 3 years.</div>
+<div class="line criterion">6. Negative pregnancy test (if female of child-bearing potential).</div>
+<div class="line criterion">7. Acceptable liver function (bilirubin ≤ 1.5 times upper limit of normal, AST/SGOT ≤ 2.5 times upper limit of normal, and alkaline phosphatase ≤ 2.5 times upper limit of normal).</div>
+<div class="line criterion">8. Acceptable renal function (serum creatinine ≤ 1.5 times upper limit of normal, or calculated creatinine clearance ≥ 40 mL/min/1.73 m2).</div>
+<div class="line criterion">9. Hemoglobin ≥ 10.0 g/dL.</div>
+<div class="line criterion">10. Absolute neutrophil count (ANC) ≥ 2,500 cells/mm3.</div>
+<div class="line criterion">11. Platelet count ≥ 150,000/mm3.</div>
+<div class="line criterion">12. Urinalysis showing no clinically significant abnormalities except those attributable to bladder cancer.</div>
+<div class="line criterion">13. Agreement to use an effective contraceptive method during the treatment period of the study.</div>
+<div class="line criterion">14. Signed, written IRB-approved informed consent.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. History or previous diagnosis of bladder fibrosis.</div>
+<div class="line criterion">2. Total bladder capacity estimated at cystoscopy to be &lt; 150 mL.</div>
+<div class="line criterion">3. Severe irritative voiding symptoms (urgency, frequency, or nocturia) that would compromise the ability to retain the study drug for two hours.</div>
+<div class="line criterion">4. Known active infection with human immunodeficiency virus (HIV).</div>
+<div class="line criterion">5. Known active infection with hepatitis B or hepatitis C.</div>
+<div class="line criterion">6. Major surgery, other than TURBT, within 28 days prior to Day 1.</div>
+<div class="line criterion">7. Active, uncontrolled bacterial, viral, or fungal infections.</div>
+<div class="line criterion">8. Treatment with radiation therapy, surgery, chemotherapy, or investigational therapy within one (1) month prior to Day 1.</div>
+<div class="line criterion">9. Known allergy to bee or vespid venom.</div>
+<div class="line criterion">10. Coagulation disorder or bleeding tendency.</div>
+<div class="line criterion">11. Treatment with heparin or anticipation of heparin treatment during the treatment period.</div>
+<div class="line criterion">12. Unwillingness or inability to comply with procedures required in this protocol.</div>
+<div class="line criterion">13. Explanation of Changes:</div>
+<div class="line criterion">14. Clarified language: The text has been revised to improve clarity and consistency.</div>
+<div class="line criterion">15. Specificity: The inclusion criteria have been made more specific, particularly regarding bladder capacity and the presence of irritative voiding symptoms.</div>
+<div class="line criterion">16. Removed outdated terms: Terms like &quot;total bladder capacity&quot; have been replaced with more modern terminology.</div>
+<div class="line criterion">17. Added clarity: The exclusion criteria have been clarified to be more specific and easier to understand.</div>
+<div class="line criterion">18. Consistency: The text has been formatted consistently throughout.</div>
+<div class="line criterion">19. Note: This is a general interpretation of the changes based on the provided text.</div>
+<div class="line criterion">20. It is important to consult the full protocol for the most accurate and up-to-date information.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_5.html">&larr; Sample 5</a> | <a href="index.html">Index</a> | <a href="sample_7.html">Sample 7 &rarr;</a>
+</div>
+</body>
+</html>

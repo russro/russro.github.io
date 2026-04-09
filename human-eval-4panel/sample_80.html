@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 80 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 80</h1>
+    <div class="meta">
+        <span>NCT: NCT05888103</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Written informed consent must be obtained before any assessment is performed.Fasting LDL-C of ≥ 130 mg&amp;#x2F;dL but &amp;lt; 190 mg&amp;#x2F;dLTriglycerides ≤ 400 mg&amp;#x2F;dLCategorized as low or moderate ASCVD risk by the 2016 Chinese GuidelineExclusion Criteria:Use of any LLT within 90 days prior to screening visitHistory of ASCVDDiabetes mellitus or fasting plasma glucose of ≥ 7.0 mmol&amp;#x2F;L or HbA1c ≥ 6.5%Secondary hypercholesterolemia, e.g. hypothyroidism or nephrotic syndromeOther protocol-defined inclusion&amp;#x2F;exclusion criteria may apply.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">**Version Context:** This task is for the transition from ClinicalTrials.gov version 10 to version 11. The evidence provided pertains to the inclusion and exclusion criteria for the study, specifically focusing on the eligibility criteria for participants. Here is the revised version of the eligibility criteria:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">---</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">### Original Eligibility Criteria (version 10):</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">#### Objectives and Endpoints</div>
+<div class="line raw">- **Primary goal**: Demonstrate the superiority of inclisiran as monotherapy, compared to placebo, in reducing LDL-C.</div>
+<div class="line raw">- **Secondary goals**: </div>
+<div class="line raw">  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C.</div>
+<div class="line raw">  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage change from baseline in LDL-C.</div>
+<div class="line raw">  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.</div>
+<div class="line raw">  - Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">- **Secondary endpoints**: </div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line raw">  - Demonstrate the safety and tolerability of inclisiran as monotherapy during extension</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Written informed consent must be obtained before any assessment is performed.Fasting LDL-C of ≥ 130 mg/dL but &lt; 190 mg/dLTriglycerides ≤ 400 mg/dLCategorized as low or moderate ASCVD risk by the 2016 Chinese GuidelineExclusion Criteria:Use of any LLT within 90 days prior to screening visitHistory of ASCVDDiabetes mellitus or fasting plasma glucose of ≥ 7.0 mmol/L or HbA1c ≥ 6.5%Secondary hypercholesterolemia, e.g. hypothyroidism or nephrotic syndromeOther protocol-defined inclusion/exclusion criteria may apply.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Version Context: This task is for the transition from ClinicalTrials.gov version 10 to version 11.</div>
+<div class="line criterion">2. The evidence provided pertains to the inclusion and exclusion criteria for the study, specifically focusing on the eligibility criteria for participants.</div>
+<div class="line criterion">3. Here is the revised version of the eligibility criteria:</div>
+<div class="line criterion">4. --</div>
+<div class="line criterion">5. Original Eligibility Criteria (version 10):</div>
+<div class="line criterion">6. Objectives and Endpoints</div>
+<div class="line criterion">7. Primary goal: Demonstrate the superiority of inclisiran as monotherapy, compared to placebo, in reducing LDL-C.</div>
+<div class="line criterion">8. Secondary goals:</div>
+<div class="line criterion">9. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C.</div>
+<div class="line criterion">10. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage change from baseline in LDL-C.</div>
+<div class="line criterion">11. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in percentage and absolute change from baseline in PCSK9, TC, HDL-C, non-HDL-C, ApoB, ApoA-1, Lp(a) and TG at Day 150.</div>
+<div class="line criterion">12. Demonstrate the efficacy of inclisiran as monotherapy, compared to placebo, in absolute change from baseline in LDL-C at Day 150.</div>
+<div class="line criterion">13. Demonstrate the safety and tolerability of inclisiran as monotherapy compared to placebo during core part.</div>
+<div class="line criterion">14. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">15. Secondary endpoints:</div>
+<div class="line criterion">16. Demonstrate the safety and tolerability of inclisiran as monotherapy during core part.</div>
+<div class="line criterion">17. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">18. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">19. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">20. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">21. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">22. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">23. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">24. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">25. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">26. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">27. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">28. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">29. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">30. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">31. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">32. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">33. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">34. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">35. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">36. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">37. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">38. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">39. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">40. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">41. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">42. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">43. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">44. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">45. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">46. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">47. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">48. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">49. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">50. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">51. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">52. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">53. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">54. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">55. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">56. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">57. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">58. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">59. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">60. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">61. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">62. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">63. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">64. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">65. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">66. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">67. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">68. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">69. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">70. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">71. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">72. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">73. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">74. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">75. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">76. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">77. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">78. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">79. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">80. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">81. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">82. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">83. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">84. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">85. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">86. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">87. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">88. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">89. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">90. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">91. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">92. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">93. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">94. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">95. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">96. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">97. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">98. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">99. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">100. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">101. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension part.</div>
+<div class="line criterion">102. Demonstrate the safety and tolerability of inclisiran as monotherapy during extension</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_79.html">&larr; Sample 79</a> | <a href="index.html">Index</a> | <a href="sample_81.html">Sample 81 &rarr;</a>
+</div>
+</body>
+</html>

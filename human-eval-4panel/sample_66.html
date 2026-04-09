@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 66 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 66</h1>
+    <div class="meta">
+        <span>NCT: NCT02549209</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Written informed consent and Health Insurance Portability and Accountability Act of 1996 (HIPAA) authorization for release of personal health information prior to registration for protocol therapy. NOTE: HIPAA authorization may be included in the informed consent or obtained separately.Age ≥ 18 years at the time of consent.Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 or 1 within 28 days prior to registration for protocol therapy.Histological evidence of primary Stage III or IV or recurrent endometrial carcinoma who have had definitive surgery for endometrial cancer. Pathologic documentation of the recurrence is required if there is only a single site of disease on imaging and that site is less than 2cm. If a subject with recurrence is undergoing a biopsy for clinical indications and is willing and able, an optional collection of 3 frozen tissue cores of the recurrence site is requested for correlative analysis.Measurable disease according to RECIST v1.1 and obtained by imaging within 28 days prior to registration for protocol therapy. Disease in an irradiated field as the only site of measurable disease is acceptable only if there has been clear progression since completion of radiation treatment.The subject must have recovered (&amp;lt;&amp;#x2F;= grade 1) from the acute toxic effects of prior therapy. NOTES: Subjects may have received a single platinum-based cytotoxic chemotherapy regimen. Subjects having received prior cytotoxic chemotherapy must have completed their treatment more than 6 months prior to registration. Subjects may have received prior therapy with hormones or biologic agents, but such therapies must be discontinued at least 28 days prior to registration for protocol therapy.The subject must have completed prior radiation therapy at least 28 days prior to registration for protocol therapy. NOTES: Subjects may have received prior radiation therapy for treatment of endometrial carcinoma. Prior radiation therapy may have included pelvic radiation therapy, extended field pelvic&amp;#x2F;para-aortic radiation therapy, and&amp;#x2F;or intravaginal brachytherapy. Chemotherapy used for radiation sensitization is allowed. Chemotherapy used for radiation sensitization will not count as second chemotherapy regimen.Subjects with recurrence, subjects must have a documented complete response upon completion of initial definitive therapy.No prior malignancy is allowed except for adequately treated basal cell or squamous cell skin cancer, in situ cervical cancer, or other cancer for which the subject has been disease-free for at least 5 years.Female subjects must be of non-childbearing potential. Women of childbearing potential are those who have not been surgically sterilized or have not been free from menses for ≥1 year.Exclusion Criteria:Subjects with carcinosarcoma.Subjects who have a solitary central pelvic recurrence which can be curatively resected.Hypersensitivity to pembrolizumab or any of its excipients.Has had a prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to registration for protocol therapy or who has not recovered (i.e., ≤Grade 1 or at baseline) from adverse events due to agents administered more than 4 weeks earlier.Has known active central nervous system (CNS) metastases and&amp;#x2F;or carcinomatous meningitis. Subjects with previously treated brain metastases may participate provided they are stable (without evidence of progression by imaging for at least four weeks prior to registration for protocol therapy and any neurologic symptoms have returned to baseline), have no evidence of new or enlarging brain metastases, and are not using steroids for at least 7 days prior registration for protocol therapy. This exception does not include carcinomatous meningitis, which is excluded regardless of clinical stability. NOTE: Subjects with neurological symptoms must undergo a head CT scan or brain MRI to exclude brain metastasis.Treatment with any investigational agent within 28 days prior to registration for protocol therapy.Has known history of Human Immunodeficiency Virus (HIV) (HIV 1&amp;#x2F;2 antibodies).Active autoimmune disease that has required systemic treatment in past 2 years (i.e., with use of disease modifying agents, corticosteroids or immunosuppressive drugs). Replacement therapy (e.g., thyroxine, insulin, or physiologic corticosteroid replacement therapy for adrenal or pituitary insufficiency, etc.) is not considered a form of systemic treatment.Has received systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to registration for protocol therapy.Has a known history of active TB (Bacillus Tuberculosis)Pulmonary conditions such as sarcoidosis, silicosis, idiopathic pulmonary fibrosis, or hypersensitivity pneumonitis.Has a history of (non-infectious) pneumonitis that required steroids or active, non-infectious pneumonitis.Evidence of interstitial lung disease.Has an active infection requiring systemic therapy with the exception of an uncomplicated urinary tract infection.Pre-existing peripheral neuropathy that is ≥ Grade 2 by CTCAE v 4 criteria.Has received prior therapy with an anti-PD-1, anti-PD-L1 or anti-PD-L2 agent.Has a known active Hepatitis B (e.g., HBsAg reactive) or Hepatitis C (e.g., HVC RNA [quantitative] is detected).Has received a live vaccine within 30 days prior to registration for protocol therapy. NOTE: Seasonal influenza vaccines for injection are generally inactivated flu vaccines and are allowed; however intranasal influenza vaccines (e.g., Flu-Mist®) are live attenuated vaccines, and are not allowed.History of solid organ or stem cell transplant requiring immunosuppressive medications.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">Based on the information provided, here is the modified eligibility criteria for version 6:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Version Context:** This task is for the transition from ClinicalTrials.gov version 5 to version 6. The evidence may use different labels (e.g. &quot;Amendment 1&quot;, &quot;Version 2.0&quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Original Eligibility Criteria (version 5):**</div>
+<div class="line raw">- **Age ≥ 18 years at the time of consent.**</div>
+<div class="line raw">- **Economic status (income)**: </div>
+<div class="line raw">  - **Not Submitting to IRB Approval**: </div>
+<div class="line raw">    - **Expected IRB Approval Date**: </div>
+<div class="line raw">      - **Please Complete and Email to BTCRC ADMINISTRATIVE HEADQUARTERS Instructions to the site investigator:**</div>
+<div class="line raw">        - **Please SIGN and DATE this signature page.**</div>
+<div class="line raw">        - **PRINT your name and title, the name and location of the facility in which the study will be conducted, and the expected IRB approval date.**</div>
+<div class="line raw">        - **Scan and email the completed form to BTCRC Administrative Headquarters and keep a record for your files.**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">- **Exclusion Criteria:**</div>
+<div class="line raw">  - **Carcinosarcoma**.</div>
+<div class="line raw">  - **Hyper-Sensitivity to pembrolizumab or any of its excipients**.</div>
+<div class="line raw">  - **History of prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to registration for protocol therapy**.</div>
+<div class="line raw">  - **Previous anti-cancer monoclonal antibody (mAb) with prior cytotoxic chemotherapy regimen**.</div>
+<div class="line raw">  - **Prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Recurrent endometrial carcinoma**.</div>
+<div class="line raw">  - **Patient with a single platinum-based cytotoxic chemotherapy regimen**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic chemotherapy with hormones or biologic agents**.</div>
+<div class="line raw">  - **Patient with a prior cytotoxic</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Written informed consent and Health Insurance Portability and Accountability Act of 1996 (HIPAA) authorization for release of personal health information prior to registration for protocol therapy. NOTE: HIPAA authorization may be included in the informed consent or obtained separately.Age ≥ 18 years at the time of consent.Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 or 1 within 28 days prior to registration for protocol therapy.Histological evidence of primary Stage III or IV or recurrent endometrial carcinoma who have had definitive surgery for endometrial cancer. Pathologic documentation of the recurrence is required if there is only a single site of disease on imaging and that site is less than 2cm. If a subject with recurrence is undergoing a biopsy for clinical indications and is willing and able, an optional collection of 3 frozen tissue cores of the recurrence site is requested for correlative analysis.Measurable disease according to RECIST v1.1 and obtained by imaging within 28 days prior to registration for protocol therapy. Disease in an irradiated field as the only site of measurable disease is acceptable only if there has been clear progression since completion of radiation treatment.The subject must have recovered (&lt;/= grade 1) from the acute toxic effects of prior therapy. NOTES: Subjects may have received a single platinum-based cytotoxic chemotherapy regimen. Subjects having received prior cytotoxic chemotherapy must have completed their treatment more than 6 months prior to registration. Subjects may have received prior therapy with hormones or biologic agents, but such therapies must be discontinued at least 28 days prior to registration for protocol therapy.The subject must have completed prior radiation therapy at least 28 days prior to registration for protocol therapy. NOTES: Subjects may have received prior radiation therapy for treatment of endometrial carcinoma. Prior radiation therapy may have included pelvic radiation therapy, extended field pelvic/para-aortic radiation therapy, and/or intravaginal brachytherapy. Chemotherapy used for radiation sensitization is allowed. Chemotherapy used for radiation sensitization will not count as second chemotherapy regimen.Subjects with recurrence, subjects must have a documented complete response upon completion of initial definitive therapy.No prior malignancy is allowed except for adequately treated basal cell or squamous cell skin cancer, in situ cervical cancer, or other cancer for which the subject has been disease-free for at least 5 years.Female subjects must be of non-childbearing potential. Women of childbearing potential are those who have not been surgically sterilized or have not been free from menses for ≥1 year.Exclusion Criteria:Subjects with carcinosarcoma.Subjects who have a solitary central pelvic recurrence which can be curatively resected.Hypersensitivity to pembrolizumab or any of its excipients.Has had a prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to registration for protocol therapy or who has not recovered (i.e., ≤Grade 1 or at baseline) from adverse events due to agents administered more than 4 weeks earlier.Has known active central nervous system (CNS) metastases and/or carcinomatous meningitis. Subjects with previously treated brain metastases may participate provided they are stable (without evidence of progression by imaging for at least four weeks prior to registration for protocol therapy and any neurologic symptoms have returned to baseline), have no evidence of new or enlarging brain metastases, and are not using steroids for at least 7 days prior registration for protocol therapy. This exception does not include carcinomatous meningitis, which is excluded regardless of clinical stability. NOTE: Subjects with neurological symptoms must undergo a head CT scan or brain MRI to exclude brain metastasis.Treatment with any investigational agent within 28 days prior to registration for protocol therapy.Has known history of Human Immunodeficiency Virus (HIV) (HIV 1/2 antibodies).Active autoimmune disease that has required systemic treatment in past 2 years (i.e., with use of disease modifying agents, corticosteroids or immunosuppressive drugs). Replacement therapy (e.g., thyroxine, insulin, or physiologic corticosteroid replacement therapy for adrenal or pituitary insufficiency, etc.) is not considered a form of systemic treatment.Has received systemic steroid therapy or any other form of immunosuppressive therapy within 7 days prior to registration for protocol therapy.Has a known history of active TB (Bacillus Tuberculosis)Pulmonary conditions such as sarcoidosis, silicosis, idiopathic pulmonary fibrosis, or hypersensitivity pneumonitis.Has a history of (non-infectious) pneumonitis that required steroids or active, non-infectious pneumonitis.Evidence of interstitial lung disease.Has an active infection requiring systemic therapy with the exception of an uncomplicated urinary tract infection.Pre-existing peripheral neuropathy that is ≥ Grade 2 by CTCAE v 4 criteria.Has received prior therapy with an anti-PD-1, anti-PD-L1 or anti-PD-L2 agent.Has a known active Hepatitis B (e.g., HBsAg reactive) or Hepatitis C (e.g., HVC RNA [quantitative] is detected).Has received a live vaccine within 30 days prior to registration for protocol therapy. NOTE: Seasonal influenza vaccines for injection are generally inactivated flu vaccines and are allowed; however intranasal influenza vaccines (e.g., Flu-Mist®) are live attenuated vaccines, and are not allowed.History of solid organ or stem cell transplant requiring immunosuppressive medications.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Based on the information provided, here is the modified eligibility criteria for version 6:</div>
+<div class="line criterion">2. Version Context: This task is for the transition from ClinicalTrials.gov version 5 to version 6.</div>
+<div class="line criterion">3. The evidence may use different labels (e.g. &quot;Amendment 1&quot;, &quot;Version 2.0&quot;) that do not always match our version numbers 1:1; use the evidence to infer the intended change.</div>
+<div class="line criterion">4. Original Eligibility Criteria (version 5):</div>
+<div class="line criterion">5. Age ≥ 18 years at the time of consent.</div>
+<div class="line criterion">6. Economic status (income):</div>
+<div class="line criterion">7. Not Submitting to IRB Approval:</div>
+<div class="line criterion">8. Expected IRB Approval Date:</div>
+<div class="line criterion">9. Please Complete and Email to BTCRC ADMINISTRATIVE HEADQUARTERS Instructions to the site investigator:</div>
+<div class="line criterion">10. Please SIGN and DATE this signature page.</div>
+<div class="line criterion">11. PRINT your name and title, the name and location of the facility in which the study will be conducted, and the expected IRB approval date.</div>
+<div class="line criterion">12. Scan and email the completed form to BTCRC Administrative Headquarters and keep a record for your files.</div>
+<div class="line criterion">13. Exclusion Criteria:</div>
+<div class="line criterion">14. Carcinosarcoma.</div>
+<div class="line criterion">15. Hyper-Sensitivity to pembrolizumab or any of its excipients.</div>
+<div class="line criterion">16. History of prior anti-cancer monoclonal antibody (mAb) within 4 weeks prior to registration for protocol therapy.</div>
+<div class="line criterion">17. Previous anti-cancer monoclonal antibody (mAb) with prior cytotoxic chemotherapy regimen.</div>
+<div class="line criterion">18. Prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">19. Recurrent endometrial carcinoma.</div>
+<div class="line criterion">20. Patient with a single platinum-based cytotoxic chemotherapy regimen.</div>
+<div class="line criterion">21. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">22. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">23. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">24. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">25. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">26. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">27. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">28. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">29. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">30. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">31. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">32. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">33. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">34. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">35. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">36. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">37. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">38. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">39. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">40. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">41. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">42. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">43. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">44. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">45. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">46. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">47. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">48. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">49. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">50. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">51. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">52. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">53. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">54. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">55. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">56. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">57. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">58. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">59. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">60. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">61. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">62. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">63. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">64. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">65. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">66. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">67. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">68. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">69. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">70. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">71. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">72. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">73. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">74. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">75. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">76. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">77. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">78. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">79. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">80. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">81. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">82. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">83. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">84. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">85. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">86. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">87. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">88. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">89. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">90. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">91. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">92. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">93. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">94. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">95. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">96. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">97. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">98. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">99. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">100. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">101. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">102. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">103. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">104. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">105. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">106. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">107. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">108. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">109. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">110. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">111. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">112. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">113. Patient with a prior cytotoxic chemotherapy with hormones or biologic agents.</div>
+<div class="line criterion">114. **Patient with a prior cytotoxic</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_65.html">&larr; Sample 65</a> | <a href="index.html">Index</a> | <a href="sample_67.html">Sample 67 &rarr;</a>
+</div>
+</body>
+</html>

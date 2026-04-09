@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 15 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 15</h1>
+    <div class="meta">
+        <span>NCT: NCT03886220</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Participant at the time of screening has a diagnosis of uterine fibroids documented by a pelvic ultrasound [transabdominal ultrasound (TAU) and transvaginal ultrasound (TVU)].Participant has HMB associated with uterine fibroids as evidenced by menstrual blood loss (MBL) &amp;gt; 80 mL during 1 menses in screening as measured by the alkaline hematin method.Participant has negative urine and&amp;#x2F;or serum pregnancy test in Washout (if applicable) and&amp;#x2F;or Screening and just prior to first dose.Participant has an adequate endometrial biopsy performed during Screening, the results of which show no clinical significant endometrial pathology.Exclusion Criteria:Participant has screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a clinically significant gynecological disorder.Participant has history of osteoporosis, osteopenia, or other metabolic bone disease.Participant has clinically significant abnormalities in clinical chemistry, hematology, or urinalysis.Participant has a history of major depression or post-traumatic stress disorder (PTSD) episode within 2 years of screening, OR a history of other major psychiatric disorder at any time (e.g., schizophrenia, bipolar disorder).Participant is using any systemic corticosteroids for over 14 days within 3 months prior to Screening or is likely to require treatment with systemic corticosteroids during the course of the study. Over the counter and prescription topical, inhaled, intranasal or intra-articular injectable (for occasional use) corticosteroids are allowed.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">##  Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Age:** 18 to 51 years old at the time of Screening.</div>
+<div class="line raw">* **Diagnosis:**  Documented uterine fibroids by pelvic ultrasound (transabdominal ultrasound [TAU], transvaginal ultrasound [TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.</div>
+<div class="line raw">* **Menstrual Blood Loss (MBL):**  HMB associated with uterine fibroids as evidenced by MBL &gt; 80 mL during 1 menses in Screening as measured by the alkaline hematin method.</div>
+<div class="line raw">* **Hormonal Status:**</div>
+<div class="line raw">    * **Premenopausal:**  Not currently pregnant or breastfeeding.</div>
+<div class="line raw">    * **Contraception:**  Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.</div>
+<div class="line raw">* **Medical History:**</div>
+<div class="line raw">    * **Exclusionary Medications:**  Must meet the criteria outlined in Table 1 for washout periods.</div>
+<div class="line raw">    * **Medical Conditions:**  No history of:</div>
+<div class="line raw">        * Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).</div>
+<div class="line raw">        * History of surgery-related severe bleeding or severe and prolonged bleeding associated with dental work.</div>
+<div class="line raw">        * Two separate events of blood transfusions within 9 months prior to Screening (with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.</div>
+<div class="line raw">        * Active malignancy or history of malignancy (except basal cell carcinoma of the skin) with or without systemic chemotherapy.</div>
+<div class="line raw">        * Documented history of a severe, life-threatening, or other significant sensitivity to any drug.</div>
+<div class="line raw">        * Newly diagnosed, clinically significant medical condition requiring therapeutic intervention (e.g., new onset hypertension) that has not been stabilized prior to Day 1.</div>
+<div class="line raw">        * Clinically significant medical condition anticipated to require intervention during the course of the study participation (e.g., anticipated major elective surgery).</div>
+<div class="line raw">        * An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.</div>
+<div class="line raw">        * Any suicide attempts &quot;ever&quot; or subject answers &quot;yes&quot; to questions 4 or 5 on the suicidal ideation portion (referring to within the last year) of the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.</div>
+<div class="line raw">        * Drug abuse and/or alcohol abuse within 12 months prior to Screening.</div>
+<div class="line raw">        * Major depression or post-traumatic stress disorder (PTSD) episode within 2 years prior to Screening.</div>
+<div class="line raw">        * Other major psychiatric disorders at any time (e.g., schizophrenia, bipolar disorder).</div>
+<div class="line raw">        * Surgical history of:</div>
+<div class="line raw">            * Hysterectomy (with or without oophorectomy).</div>
+<div class="line raw">            * Bilateral oophorectomy.</div>
+<div class="line raw">            * Bariatric surgical procedures of any type within 6 months prior to Screening.</div>
+<div class="line raw">* **Laboratory Values:**</div>
+<div class="line raw">    * Hemoglobin ≥ 7 g/dL at Screening.</div>
+<div class="line raw">    * Other laboratory values must meet the criteria at Screening (unless otherwise specified).</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Pregnancy or Breastfeeding:**  Pregnant or breastfeeding at the time of Screening or during the study.</div>
+<div class="line raw">* **Other:**  Any other medical condition that would make the subject unsuitable for the study in the opinion of the investigator.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Important Notes:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* This is a summary of the modified eligibility criteria based on the provided text. </div>
+<div class="line raw">* The complete and official eligibility criteria should be found in the full protocol document.</div>
+<div class="line raw">* It is crucial to consult the full protocol for the most accurate and up-to-date information. </div>
+<div class="line raw">* This information is for educational purposes only and should not be considered medical advice. </div>
+<div class="line raw">* Always consult with a healthcare professional for any health concerns or before making any decisions related to your health or treatment.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Participant at the time of screening has a diagnosis of uterine fibroids documented by a pelvic ultrasound [transabdominal ultrasound (TAU) and transvaginal ultrasound (TVU)].Participant has HMB associated with uterine fibroids as evidenced by menstrual blood loss (MBL) &gt; 80 mL during 1 menses in screening as measured by the alkaline hematin method.Participant has negative urine and/or serum pregnancy test in Washout (if applicable) and/or Screening and just prior to first dose.Participant has an adequate endometrial biopsy performed during Screening, the results of which show no clinical significant endometrial pathology.Exclusion Criteria:Participant has screening pelvic ultrasound or saline infusion sonohysterography (SIS) or magnetic resonance imaging (MRI; if SIS is unevaluable), results that show a clinically significant gynecological disorder.Participant has history of osteoporosis, osteopenia, or other metabolic bone disease.Participant has clinically significant abnormalities in clinical chemistry, hematology, or urinalysis.Participant has a history of major depression or post-traumatic stress disorder (PTSD) episode within 2 years of screening, OR a history of other major psychiatric disorder at any time (e.g., schizophrenia, bipolar disorder).Participant is using any systemic corticosteroids for over 14 days within 3 months prior to Screening or is likely to require treatment with systemic corticosteroids during the course of the study. Over the counter and prescription topical, inhaled, intranasal or intra-articular injectable (for occasional use) corticosteroids are allowed.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Eligibility Criteria for Version 18 of ClinicalTrials.gov</div>
+<div class="line criterion">2. Based on the provided text, here are the modified eligibility criteria for Version 18 of ClinicalTrials.gov, incorporating the evidence and addressing potential inconsistencies:</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Age: 18 to 51 years old at the time of Screening.</div>
+<div class="line criterion">2. Diagnosis: Documented uterine fibroids by pelvic ultrasound (transabdominal ultrasound [TAU], transvaginal ultrasound [TVU]) with a minimum diameter of 2 cm (longest diameter) or a total uterine volume of ≥ 200 cm3 to ≤ 2,500 cm3.</div>
+<div class="line criterion">3. Menstrual Blood Loss (MBL): HMB associated with uterine fibroids as evidenced by MBL &gt; 80 mL during 1 menses in Screening as measured by the alkaline hematin method.</div>
+<div class="line criterion">4. Hormonal Status:</div>
+<div class="line criterion">5. Premenopausal: Not currently pregnant or breastfeeding.</div>
+<div class="line criterion">6. Contraception: Must be using at least 2 forms of non-hormonal contraception (dual contraception) consistently throughout the Washout, Screening, Treatment, and PTFU periods.</div>
+<div class="line criterion">7. Medical History:</div>
+<div class="line criterion">8. Exclusionary Medications: Must meet the criteria outlined in Table 1 for washout periods.</div>
+<div class="line criterion">9. Medical Conditions: No history of:</div>
+<div class="line criterion">10. Hereditary blood coagulation disorder (e.g., Von Willebrand disease, Factor V Leiden).</div>
+<div class="line criterion">11. History of surgery-related severe bleeding or severe and prolonged bleeding associated with dental work.</div>
+<div class="line criterion">12. Two separate events of blood transfusions within 9 months prior to Screening (with exception of transfusions associated with low hemoglobin or low hematocrit due to uterine fibroids) or blood transfusions within 60 days prior to Day 1.</div>
+<div class="line criterion">13. Active malignancy or history of malignancy (except basal cell carcinoma of the skin) with or without systemic chemotherapy.</div>
+<div class="line criterion">14. Documented history of a severe, life-threatening, or other significant sensitivity to any drug.</div>
+<div class="line criterion">15. Newly diagnosed, clinically significant medical condition requiring therapeutic intervention (e.g., new onset hypertension) that has not been stabilized prior to Day 1.</div>
+<div class="line criterion">16. Clinically significant medical condition anticipated to require intervention during the course of the study participation (e.g., anticipated major elective surgery).</div>
+<div class="line criterion">17. An unstable medical condition making the subject an unsuitable candidate for the study in the opinion of the investigator.</div>
+<div class="line criterion">18. Any suicide attempts &quot;ever&quot; or subject answers &quot;yes&quot; to questions 4 or 5 on the suicidal ideation portion (referring to within the last year) of the Columbia-Suicide Severity Rating Scale (C-SSRS) when administered during Screening or prior to dosing on Study Day 1.</div>
+<div class="line criterion">19. Drug abuse and/or alcohol abuse within 12 months prior to Screening.</div>
+<div class="line criterion">20. Major depression or post-traumatic stress disorder (PTSD) episode within 2 years prior to Screening.</div>
+<div class="line criterion">21. Other major psychiatric disorders at any time (e.g., schizophrenia, bipolar disorder).</div>
+<div class="line criterion">22. Surgical history of:</div>
+<div class="line criterion">23. Hysterectomy (with or without oophorectomy).</div>
+<div class="line criterion">24. Bilateral oophorectomy.</div>
+<div class="line criterion">25. Bariatric surgical procedures of any type within 6 months prior to Screening.</div>
+<div class="line criterion">26. Laboratory Values:</div>
+<div class="line criterion">27. Hemoglobin ≥ 7 g/dL at Screening.</div>
+<div class="line criterion">28. Other laboratory values must meet the criteria at Screening (unless otherwise specified).</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Pregnancy or Breastfeeding: Pregnant or breastfeeding at the time of Screening or during the study.</div>
+<div class="line criterion">2. Other: Any other medical condition that would make the subject unsuitable for the study in the opinion of the investigator.</div>
+<div class="line criterion">3. Important Notes:</div>
+<div class="line criterion">4. This is a summary of the modified eligibility criteria based on the provided text.</div>
+<div class="line criterion">5. The complete and official eligibility criteria should be found in the full protocol document.</div>
+<div class="line criterion">6. It is crucial to consult the full protocol for the most accurate and up-to-date information.</div>
+<div class="line criterion">7. This information is for educational purposes only and should not be considered medical advice.</div>
+<div class="line criterion">8. Always consult with a healthcare professional for any health concerns or before making any decisions related to your health or treatment.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_14.html">&larr; Sample 14</a> | <a href="index.html">Index</a> | <a href="sample_16.html">Sample 16 &rarr;</a>
+</div>
+</body>
+</html>

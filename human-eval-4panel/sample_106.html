@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 106 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 106</h1>
+    <div class="meta">
+        <span>NCT: NCT02135614</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Key Inclusion Criteria:Current inpatientNew onset of acute respiratory infectious symptoms, or acute worsening of chronic symptoms related to ongoing respiratory disease for ≤ 5 days prior to screening:Upper respiratory tract symptoms: nasal congestion, runny nose, sore throat, or earacheLower respiratory tract symptoms: cough, sputum production, wheezing, dyspnea, or chest tightnessDocumented to be RSV-positive at the current admission within 72 hours of screening, or as evaluated at screeningKey Exclusion Criteria:Related to concomitant or previous medication use:Use of oral prednisone or other corticosteroid equivalent to:&amp;gt; 20 mg&amp;#x2F;day for &amp;gt; 14 days prior to screening is not permitted.&amp;gt; 20 mg&amp;#x2F;day for ≤ 14 days, including corticosteroids received during current hospitalization (ie, bolus doses), is permitted.≤ 20 mg&amp;#x2F;day, regardless of duration, is permitted.Individuals taking a moderate or strong cytochrome P450 enzyme (CYP) inducer including but not limited to rifampin, St John&amp;#x27;s Wort, carbamazepine, phenytoin, efavirenz, bosentan, etracirine, modafinil, and nafcillin within 2 weeks prior to the first dose of study drugRelated to medical history:Pregnant, breastfeeding, or lactating femalesIndividuals requiring &amp;gt; 50% supplemental oxygen (while the individual is awake) at screeningIndividuals with a Clinical Frailty Scale (CFS) &amp;gt; 7 at BaselineKnown significant abnormality altering the anatomy of the nose or nasopharynx that in, the opinion of the investigator, will preclude obtaining adequate nasal swab sampling in either nasal passageWaiting for or recently (within the past 12 months) received a bone marrow, stem cell, or solid organ transplant, or who have received radiation or chemotherapy within 12 months prior to ScreeningIndividuals with HIV&amp;#x2F;AIDS and a known CD4 count &amp;lt; 200 cells&amp;#x2F;uLHistory of severe dementia or Alzheimer&amp;#x27;s diseaseHistory of drug and&amp;#x2F;or alcohol abuse that, in the opinion of the investigator, may prevent adherence to study activitiesRelated to medical condition at screening:Influenza-positive as determined by local diagnostic testKnown Middle East Respiratory Syndrome coronavirus (MERS-CoV) infection or known coinfection with other coronavirusUse of mechanical ventilation during the current admission, not including noninvasive ventilationClinically significant bacteremia or fungemia that has not been adequately treated prior to Screening, as determined by the investigatorInadequate treatment of confirmed bacterial, fungal, or non-RSV pneumonia, as determined by the investigatorExcessive nausea&amp;#x2F;vomiting at admission, as determined by the investigator, that precludes administration of an orally administered study drugRelated to allergies:Known allergy to components of the study drug (microcrystalline cellulose, mannitol, croscarmellose sodium, magnesium stearate, polyvinyl alcohol, titanium dioxide, polyethylene glycol and talc)Documented history of acute (anaphylaxis) or delayed (Stevens-Johnson syndrome or epidermal necrolysis) allergy to sulfa drugsNote: Other protocol defined Inclusion&amp;#x2F;Exclusion criteria may apply.</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">**Amended Eligibility Criteria (Version 33):**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Key Inclusion Criteria:</div>
+<div class="line raw">- Current inpatient</div>
+<div class="line raw">- New onset of acute respiratory infectious symptoms, or acute worsening of chronic symptoms related to ongoing respiratory disease for ≤ 5 days prior to screening</div>
+<div class="line raw">  - **Upper respiratory tract symptoms:** Nasal congestion, runny nose, sore throat, or earache</div>
+<div class="line raw">  - **Lower respiratory tract symptoms:** Cough, sputum production, wheezing, dyspnea, or chest tightness</div>
+<div class="line raw">- Documented to be RSV-positive at the current admission within 72 hours of screening, or as evaluated at screening</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Key Exclusion Criteria:</div>
+<div class="line raw">- Related to medical history:</div>
+<div class="line raw">  - Pregnant, breastfeeding, or lactating females</div>
+<div class="line raw">  - Individuals requiring &gt; 50% supplemental oxygen (while the individual is awake) at screening</div>
+<div class="line raw">  - Individuals with a Clinical Frailty Scale (CFS) &gt; 7 at Baseline</div>
+<div class="line raw">  - Known significant abnormality altering the anatomy of the nose or nasopharynx that, in the opinion of the investigator, will preclude obtaining adequate nasal swab sampling in either nasal passage</div>
+<div class="line raw">  - Waiting for or recently (within the past 12 months) received a bone marrow, stem cell, or solid organ transplant, or who have received radiation or chemotherapy within 12 months prior to Screening</div>
+<div class="line raw">  - Individuals with HIV/AIDS and a known CD4 count &lt; 200 cells/uL</div>
+<div class="line raw">  - History of severe dementia or Alzheimer&#x27;s disease</div>
+<div class="line raw">  - History of drug and/or alcohol abuse that, in the opinion of the investigator, may prevent adherence to study activities</div>
+<div class="line raw">- Related to medical condition at screening:</div>
+<div class="line raw">  - Influenza-positive as determined by local diagnostic test</div>
+<div class="line raw">  - Known Middle East Respiratory Syndrome coronavirus (MERS-CoV) infection or known coinfection with other coronavirus</div>
+<div class="line raw">  - Use of mechanical ventilation during the current admission, not including noninvasive ventilation</div>
+<div class="line raw">  - Clinically significant bacteremia or fungemia that has not been adequately treated prior to Screening, as determined by the investigator</div>
+<div class="line raw">  - Inadequate treatment of confirmed bacterial, fungal, or non-RSV pneumonia, as determined by the investigator</div>
+<div class="line raw">  - Excessive nausea/vomiting at admission, as determined by the investigator, that precludes administration of an orally administered study drug</div>
+<div class="line raw">- Related to allergies:</div>
+<div class="line raw">  - Known allergy to components of the study drug (microcrystalline cellulose, mannitol, croscarmellose sodium, magnesium stearate, polyvinyl alcohol, titanium dioxide, polyethylene glycol, and talc)</div>
+<div class="line raw">  - Documented history of acute (anaphylaxis) or delayed (Stevens-Johnson syndrome or epidermal necrolysis) allergy to sulfa drugs</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">Note: Other protocol-defined inclusion/exclusion criteria may apply.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Key Inclusion Criteria:Current inpatientNew onset of acute respiratory infectious symptoms, or acute worsening of chronic symptoms related to ongoing respiratory disease for ≤ 5 days prior to screening:Upper respiratory tract symptoms: nasal congestion, runny nose, sore throat, or earacheLower respiratory tract symptoms: cough, sputum production, wheezing, dyspnea, or chest tightnessDocumented to be RSV-positive at the current admission within 72 hours of screening, or as evaluated at screeningKey Exclusion Criteria:Related to concomitant or previous medication use:Use of oral prednisone or other corticosteroid equivalent to:&gt; 20 mg/day for &gt; 14 days prior to screening is not permitted.&gt; 20 mg/day for ≤ 14 days, including corticosteroids received during current hospitalization (ie, bolus doses), is permitted.≤ 20 mg/day, regardless of duration, is permitted.</div>
+<div class="line criterion">2. Individuals taking a moderate or strong cytochrome P450 enzyme (CYP) inducer including but not limited to rifampin, St John&#x27;s Wort, carbamazepine, phenytoin, efavirenz, bosentan, etracirine, modafinil, and nafcillin within 2 weeks prior to the first dose of study drugRelated to medical history:Pregnant, breastfeeding, or lactating femalesIndividuals requiring &gt; 50% supplemental oxygen (while the individual is awake) at screeningIndividuals with a Clinical Frailty Scale (CFS) &gt; 7 at BaselineKnown significant abnormality altering the anatomy of the nose or nasopharynx that in, the opinion of the investigator, will preclude obtaining adequate nasal swab sampling in either nasal passageWaiting for or recently (within the past 12 months) received a bone marrow, stem cell, or solid organ transplant, or who have received radiation or chemotherapy within 12 months prior to ScreeningIndividuals with HIV/AIDS and a known CD4 count &lt; 200 cells/uLHistory of severe dementia or Alzheimer&#x27;s diseaseHistory of drug and/or alcohol abuse that, in the opinion of the investigator, may prevent adherence to study activitiesRelated to medical condition at screening:Influenza-positive as determined by local diagnostic testKnown Middle East Respiratory Syndrome coronavirus (MERS-CoV) infection or known coinfection with other coronavirusUse of mechanical ventilation during the current admission, not including noninvasive ventilationClinically significant bacteremia or fungemia that has not been adequately treated prior to Screening, as determined by the investigatorInadequate treatment of confirmed bacterial, fungal, or non-RSV pneumonia, as determined by the investigatorExcessive nausea/vomiting at admission, as determined by the investigator, that precludes administration of an orally administered study drugRelated to allergies:Known allergy to components of the study drug (microcrystalline cellulose, mannitol, croscarmellose sodium, magnesium stearate, polyvinyl alcohol, titanium dioxide, polyethylene glycol and talc)Documented history of acute (anaphylaxis) or delayed (Stevens-Johnson syndrome or epidermal necrolysis) allergy to sulfa drugsNote: Other protocol defined Inclusion/Exclusion criteria may apply.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Amended Eligibility Criteria (Version 33):</div>
+<div class="line criterion">2. Key Inclusion Criteria:</div>
+<div class="line criterion">3. Current inpatient</div>
+<div class="line criterion">4. New onset of acute respiratory infectious symptoms, or acute worsening of chronic symptoms related to ongoing respiratory disease for ≤ 5 days prior to screening</div>
+<div class="line criterion">5. Upper respiratory tract symptoms: Nasal congestion, runny nose, sore throat, or earache</div>
+<div class="line criterion">6. Lower respiratory tract symptoms: Cough, sputum production, wheezing, dyspnea, or chest tightness</div>
+<div class="line criterion">7. Documented to be RSV-positive at the current admission within 72 hours of screening, or as evaluated at screening</div>
+<div class="line criterion">8. Key Exclusion Criteria:</div>
+<div class="line criterion">9. Related to medical history:</div>
+<div class="line criterion">10. Pregnant, breastfeeding, or lactating females</div>
+<div class="line criterion">11. Individuals requiring &gt; 50% supplemental oxygen (while the individual is awake) at screening</div>
+<div class="line criterion">12. Individuals with a Clinical Frailty Scale (CFS) &gt; 7 at Baseline</div>
+<div class="line criterion">13. Known significant abnormality altering the anatomy of the nose or nasopharynx that, in the opinion of the investigator, will preclude obtaining adequate nasal swab sampling in either nasal passage</div>
+<div class="line criterion">14. Waiting for or recently (within the past 12 months) received a bone marrow, stem cell, or solid organ transplant, or who have received radiation or chemotherapy within 12 months prior to Screening</div>
+<div class="line criterion">15. Individuals with HIV/AIDS and a known CD4 count &lt; 200 cells/uL</div>
+<div class="line criterion">16. History of severe dementia or Alzheimer&#x27;s disease</div>
+<div class="line criterion">17. History of drug and/or alcohol abuse that, in the opinion of the investigator, may prevent adherence to study activities</div>
+<div class="line criterion">18. Related to medical condition at screening:</div>
+<div class="line criterion">19. Influenza-positive as determined by local diagnostic test</div>
+<div class="line criterion">20. Known Middle East Respiratory Syndrome coronavirus (MERS-CoV) infection or known coinfection with other coronavirus</div>
+<div class="line criterion">21. Use of mechanical ventilation during the current admission, not including noninvasive ventilation</div>
+<div class="line criterion">22. Clinically significant bacteremia or fungemia that has not been adequately treated prior to Screening, as determined by the investigator</div>
+<div class="line criterion">23. Inadequate treatment of confirmed bacterial, fungal, or non-RSV pneumonia, as determined by the investigator</div>
+<div class="line criterion">24. Excessive nausea/vomiting at admission, as determined by the investigator, that precludes administration of an orally administered study drug</div>
+<div class="line criterion">25. Related to allergies:</div>
+<div class="line criterion">26. Known allergy to components of the study drug (microcrystalline cellulose, mannitol, croscarmellose sodium, magnesium stearate, polyvinyl alcohol, titanium dioxide, polyethylene glycol, and talc)</div>
+<div class="line criterion">27. Documented history of acute (anaphylaxis) or delayed (Stevens-Johnson syndrome or epidermal necrolysis) allergy to sulfa drugs</div>
+<div class="line criterion">28. Note: Other protocol-defined inclusion/exclusion criteria may apply.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_105.html">&larr; Sample 105</a> | <a href="index.html">Index</a> | <a href="sample_107.html">Sample 107 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 1 — 4-Panel Human Eval</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+.panel { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; min-height: 200px; }
+.panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.panel.raw { background: #fff; }
+.panel.processed { background: #f0f7ff; }
+.column-label { text-align: center; font-size: 0.8em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.82em; line-height: 1.4; word-wrap: break-word; }
+.raw { background: #fafafa; }
+.raw-blank { min-height: 8px; }
+.section-header { font-weight: 700; color: #1a5276; background: #d4e6f1; padding: 4px 8px; margin-top: 8px; }
+.criterion { background: #f8f9fa; border-left: 3px solid #5dade2; padding-left: 10px; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+.legend .lg-raw { background: #fff; border: 1px solid #ddd; }
+.legend .lg-proc { background: #f0f7ff; border: 1px solid #c8dff5; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .line { font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 1</h1>
+    <div class="meta">
+        <span>NCT: NCT02296918</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="lg-raw">Raw (original text)</span>
+        <span class="lg-proc">Processed (cleaned &amp; structured)</span>
+    </div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:4px;">
+    <div class="column-label">Ground Truth</div>
+    <div class="column-label">Prediction</div>
+</div>
+<div class="grid">
+    <div class="panel raw">
+        <h2>Raw Ground Truth</h2>
+        <div class="line raw">Inclusion Criteria:Patients with a diagnosis of intermediate or high risk CLL (or variant immunophenotype), SLL, or B-PLL by IWCLL 2008 criteria (48) who have:Previously received at least one therapy for their disease.Previously untreated disease and 65 years old OR under 65 years old and or refuse or are ineligible for chemoimmunotherapyAll patients must satisfy one of the following criteria for active disease requiring therapy:Evidence of marrow failure as manifested by the development or worsening of anemia or thrombocytopeniaMassive (≥ 6 cm below the costal margin), progressive or symptomatic splenomegalyMassive nodes (≥ 10 cm) or progressive or symptomatic lymphadenopathyConstitutional symptoms, which include any of the following:Unintentional weight loss of 10% or more within 6 monthsSignificant fatigue limiting activityFevers ≥100.5 degrees F for 2 weeks or more without evidence of infectionNight sweats &amp;gt;1 month without evidence of infectionPatients with a history of Richter&amp;#x27;s transformation are eligible if they now have evidence of CLL only, with &amp;lt;10% large cells in the bone marrow.ECOG performance status ≤ 2Life expectancy of &amp;lt; 2 years or that would confound assessment of toxicity in this studyMust be ≥ 18 years of ageSubject must have completed all CLL therapies ≥ 4 weeks prior to first study dose.Exclusion Criteria:Any life-threatening illness, medical condition, or organ dysfunction which, in the investigator&amp;#x27;s opinion, could compromise the patients&amp;#x27; safety, interfere with the absorption or metabolism of acalabrutinib, or put the study outcomes at undue risk.Female subjects who are pregnant or breastfeeding.Subjects with active cardiovascular disease not medically controlled or those who have had myocardial infarction in the past 6 months.Malabsorption syndrome, disease significantly affecting gastrointestinal function, or resection of the stomach or small bowel or ulcerative colitis, symptomatic inflammatory bowel disease, or partial or complete bowel obstructionMajor surgery within 4 weeks before first dose of study drug.History of stroke or intracranial hemorrhage within 6 months before the first dose of study drug.Subjects with human immunodeficiency virus (HIV) or active infection with hepatitis C virus (HCV) or hepatitis B virus (HBV) or any uncontrolled active systemic infectionRequires treatment with long-acting proton pump inhibitors (eg, omeprazole, esomeprazole, lansoprazole, dexlansoprazole, rabeprazole, or pantoprazole)</div>
+    </div>
+    <div class="panel raw">
+        <h2>Raw Prediction</h2>
+        <div class="line raw">##  Modified Inclusion Criteria for Clinical Trial Eligibility (Version 6)</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Based on the provided evidence and the updated protocol, the following modified inclusion criteria are proposed for version 6 of the clinical trial:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Inclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">* **Diagnosis:**</div>
+<div class="line raw">    *  Patients with a diagnosis of intermediate or high-risk CLL (or variant immunophenotype), SLL, or B-PLL, as defined by the IWCLL 2008 criteria.</div>
+<div class="line raw">* **Prior Treatment:**</div>
+<div class="line raw">    *  Patients who have received at least one prior therapy for their disease.</div>
+<div class="line raw">* **Age:**</div>
+<div class="line raw">    *  Patients aged 18 years or older.</div>
+<div class="line raw">* **Performance Status:**</div>
+<div class="line raw">    *  Patients with a performance status of ECOG 0-2.</div>
+<div class="line raw">* **Life Expectancy:**</div>
+<div class="line raw">    *  Patients with a life expectancy of at least 6 months.</div>
+<div class="line raw">* **Constitutional Symptoms:**</div>
+<div class="line raw">    *  Patients with evidence of constitutional symptoms, including:</div>
+<div class="line raw">        *  Unintentional weight loss of 10% or more within 6 months.</div>
+<div class="line raw">        *  Significant fatigue limiting activity.</div>
+<div class="line raw">        *  Fever ≥100.5°F for 2 weeks or more without evidence of infection.</div>
+<div class="line raw">        *  Night sweats ≥1 month without evidence of infection.</div>
+<div class="line raw">* **Lymphadenopathy:**</div>
+<div class="line raw">    *  Patients with evidence of lymphadenopathy, including:</div>
+<div class="line raw">        *  Lymphadenopathy ≥10 cm in diameter.</div>
+<div class="line raw">        *  Progressive or symptomatic lymphadenopathy.</div>
+<div class="line raw">* **Bone Marrow Involvement:**</div>
+<div class="line raw">    *  Patients with evidence of bone marrow involvement, including:</div>
+<div class="line raw">        *  Presence of ≥ 6 cm below the costal margin, progressive or symptomatic splenomegaly.</div>
+<div class="line raw">        *  Presence of ≥ 10 cm of lymphadenopathy.</div>
+<div class="line raw">* ** Richter&#x27;s Transformation:**</div>
+<div class="line raw">    *  Patients with a history of Richter&#x27;s transformation are eligible if they now have evidence of CLL only, with &lt;10% large cells in the bone marrow.</div>
+<div class="line raw">* **Other:**</div>
+<div class="line raw">    *  Patients with a history of prior treatment with chemotherapy and/or immunotherapy options.</div>
+<div class="line raw">    *  Patients who are willing to undergo a bone marrow biopsy and/or peripheral blood analysis.</div>
+<div class="line raw">    *  Patients who are willing to comply with the study protocol and adhere to the treatment plan.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Exclusion Criteria:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">*  Patients with active cardiovascular disease not medically controlled.</div>
+<div class="line raw">*  Patients with a history of myocardial infarction in the past 6 months.</div>
+<div class="line raw">*  Patients with active gastrointestinal disease.</div>
+<div class="line raw">*  Patients with a history of major surgery within 4 weeks prior to the study.</div>
+<div class="line raw">*  Patients with a history of stroke or intracranial hemorrhage.</div>
+<div class="line raw">*  Patients with human immunodeficiency virus (HIV) or active infection with hepatitis C virus (HCV) or hepatitis B virus (HBV).</div>
+<div class="line raw">*  Patients with uncontrolled active systemic infections.</div>
+<div class="line raw">*  Patients with a history of severe allergic reactions to any of the study drugs.</div>
+<div class="line raw">*  Patients with pregnancy or breastfeeding.</div>
+<div class="line raw">*  Patients with a history of hypersensitivity to any of the study drugs.</div>
+<div class="line raw">*  Patients with a history of severe liver disease.</div>
+<div class="line raw">*  Patients with a history of severe renal disease.</div>
+<div class="line raw">*  Patients with a history of severe hematologic disorders.</div>
+<div class="line raw">*  Patients with a history of other malignancies.</div>
+<div class="line raw">*  Patients with a history of other significant medical conditions that may interfere with the study.</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Note:** This is a general summary of the proposed changes. The specific inclusion and exclusion criteria may vary depending on the specific study design and the individual patient characteristics. </div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">**Important Considerations:**</div>
+<div class="line raw-blank">&nbsp;</div>
+<div class="line raw">*  The specific inclusion and exclusion criteria should be carefully reviewed and updated based on the latest evidence and guidelines.</div>
+<div class="line raw">*  The rationale for each inclusion and exclusion criterion should be clearly documented in the protocol.</div>
+<div class="line raw">*  The study team should be trained on the updated inclusion and exclusion criteria and be able to apply them consistently.</div>
+<div class="line raw">*  The study team should be prepared to address any questions or concerns from potential participants. </div>
+<div class="line raw">*  The study team should be prepared to make adjustments to the inclusion and exclusion criteria as needed.</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Ground Truth</h2>
+        <div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Patients with a diagnosis of intermediate or high risk CLL (or variant immunophenotype), SLL, or B-PLL by IWCLL 2008 criteria (48) who have:Previously received at least one therapy for their disease.Previously untreated disease and 65 years old OR under 65 years old and or refuse or are ineligible for chemoimmunotherapyAll patients must satisfy one of the following criteria for active disease requiring therapy:Evidence of marrow failure as manifested by the development or worsening of anemia or thrombocytopeniaMassive (≥ 6 cm below the costal margin), progressive or symptomatic splenomegalyMassive nodes (≥ 10 cm) or progressive or symptomatic lymphadenopathyConstitutional symptoms, which include any of the following:Unintentional weight loss of 10% or more within 6 monthsSignificant fatigue limiting activityFevers ≥100.5 degrees F for 2 weeks or more without evidence of infectionNight sweats &gt;1 month without evidence of infectionPatients with a history of Richter&#x27;s transformation are eligible if they now have evidence of CLL only, with &lt;10% large cells in the bone marrow.ECOG performance status ≤ 2Life expectancy of &lt; 2 years or that would confound assessment of toxicity in this studyMust be ≥ 18 years of ageSubject must have completed all CLL therapies ≥ 4 weeks prior to first study dose.Exclusion Criteria:Any life-threatening illness, medical condition, or organ dysfunction which, in the investigator&#x27;s opinion, could compromise the patients&#x27; safety, interfere with the absorption or metabolism of acalabrutinib, or put the study outcomes at undue risk.Female subjects who are pregnant or breastfeeding.Subjects with active cardiovascular disease not medically controlled or those who have had myocardial infarction in the past 6 months.Malabsorption syndrome, disease significantly affecting gastrointestinal function, or resection of the stomach or small bowel or ulcerative colitis, symptomatic inflammatory bowel disease, or partial or complete bowel obstructionMajor surgery within 4 weeks before first dose of study drug.History of stroke or intracranial hemorrhage within 6 months before the first dose of study drug.Subjects with human immunodeficiency virus (HIV) or active infection with hepatitis C virus (HCV) or hepatitis B virus (HBV) or any uncontrolled active systemic infectionRequires treatment with long-acting proton pump inhibitors (eg, omeprazole, esomeprazole, lansoprazole, dexlansoprazole, rabeprazole, or pantoprazole)</div>
+    </div>
+    <div class="panel processed">
+        <h2>Processed Prediction</h2>
+        <div class="line criterion">1. Modified Inclusion Criteria for Clinical Trial Eligibility (Version 6)</div>
+<div class="line criterion">2. Based on the provided evidence and the updated protocol, the following modified inclusion criteria are proposed for version 6 of the clinical trial:</div>
+<div class="line section-header">INCLUSION CRITERIA:</div>
+<div class="line criterion">1. Diagnosis:</div>
+<div class="line criterion">2. Patients with a diagnosis of intermediate or high-risk CLL (or variant immunophenotype), SLL, or B-PLL, as defined by the IWCLL 2008 criteria.</div>
+<div class="line criterion">3. Prior Treatment:</div>
+<div class="line criterion">4. Patients who have received at least one prior therapy for their disease.</div>
+<div class="line criterion">5. Age:</div>
+<div class="line criterion">6. Patients aged 18 years or older.</div>
+<div class="line criterion">7. Performance Status:</div>
+<div class="line criterion">8. Patients with a performance status of ECOG 0-2.</div>
+<div class="line criterion">9. Life Expectancy:</div>
+<div class="line criterion">10. Patients with a life expectancy of at least 6 months.</div>
+<div class="line criterion">11. Constitutional Symptoms:</div>
+<div class="line criterion">12. Patients with evidence of constitutional symptoms, including:</div>
+<div class="line criterion">13. Unintentional weight loss of 10% or more within 6 months.</div>
+<div class="line criterion">14. Significant fatigue limiting activity.</div>
+<div class="line criterion">15. Fever ≥100.5°F for 2 weeks or more without evidence of infection.</div>
+<div class="line criterion">16. Night sweats ≥1 month without evidence of infection.</div>
+<div class="line criterion">17. Lymphadenopathy:</div>
+<div class="line criterion">18. Patients with evidence of lymphadenopathy, including:</div>
+<div class="line criterion">19. Lymphadenopathy ≥10 cm in diameter.</div>
+<div class="line criterion">20. Progressive or symptomatic lymphadenopathy.</div>
+<div class="line criterion">21. Bone Marrow Involvement:</div>
+<div class="line criterion">22. Patients with evidence of bone marrow involvement, including:</div>
+<div class="line criterion">23. Presence of ≥ 6 cm below the costal margin, progressive or symptomatic splenomegaly.</div>
+<div class="line criterion">24. Presence of ≥ 10 cm of lymphadenopathy.</div>
+<div class="line criterion">25. Richter&#x27;s Transformation:</div>
+<div class="line criterion">26. Patients with a history of Richter&#x27;s transformation are eligible if they now have evidence of CLL only, with &lt;10% large cells in the bone marrow.</div>
+<div class="line criterion">27. Other:</div>
+<div class="line criterion">28. Patients with a history of prior treatment with chemotherapy and/or immunotherapy options.</div>
+<div class="line criterion">29. Patients who are willing to undergo a bone marrow biopsy and/or peripheral blood analysis.</div>
+<div class="line criterion">30. Patients who are willing to comply with the study protocol and adhere to the treatment plan.</div>
+<div class="line section-header">EXCLUSION CRITERIA:</div>
+<div class="line criterion">1. Patients with active cardiovascular disease not medically controlled.</div>
+<div class="line criterion">2. Patients with a history of myocardial infarction in the past 6 months.</div>
+<div class="line criterion">3. Patients with active gastrointestinal disease.</div>
+<div class="line criterion">4. Patients with a history of major surgery within 4 weeks prior to the study.</div>
+<div class="line criterion">5. Patients with a history of stroke or intracranial hemorrhage.</div>
+<div class="line criterion">6. Patients with human immunodeficiency virus (HIV) or active infection with hepatitis C virus (HCV) or hepatitis B virus (HBV).</div>
+<div class="line criterion">7. Patients with uncontrolled active systemic infections.</div>
+<div class="line criterion">8. Patients with a history of severe allergic reactions to any of the study drugs.</div>
+<div class="line criterion">9. Patients with pregnancy or breastfeeding.</div>
+<div class="line criterion">10. Patients with a history of hypersensitivity to any of the study drugs.</div>
+<div class="line criterion">11. Patients with a history of severe liver disease.</div>
+<div class="line criterion">12. Patients with a history of severe renal disease.</div>
+<div class="line criterion">13. Patients with a history of severe hematologic disorders.</div>
+<div class="line criterion">14. Patients with a history of other malignancies.</div>
+<div class="line criterion">15. Patients with a history of other significant medical conditions that may interfere with the study.</div>
+<div class="line criterion">16. Note: This is a general summary of the proposed changes.</div>
+<div class="line criterion">17. The specific inclusion and exclusion criteria may vary depending on the specific study design and the individual patient characteristics.</div>
+<div class="line criterion">18. Important Considerations:</div>
+<div class="line criterion">19. The specific inclusion and exclusion criteria should be carefully reviewed and updated based on the latest evidence and guidelines.</div>
+<div class="line criterion">20. The rationale for each inclusion and exclusion criterion should be clearly documented in the protocol.</div>
+<div class="line criterion">21. The study team should be trained on the updated inclusion and exclusion criteria and be able to apply them consistently.</div>
+<div class="line criterion">22. The study team should be prepared to address any questions or concerns from potential participants.</div>
+<div class="line criterion">23. The study team should be prepared to make adjustments to the inclusion and exclusion criteria as needed.</div>
+    </div>
+</div>
+<div class="nav">
+    <span style="color:#ccc">&larr; Prev</span> | <a href="index.html">Index</a> | <a href="sample_2.html">Sample 2 &rarr;</a>
+</div>
+</body>
+</html>
