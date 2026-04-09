@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 72 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 72</h1>
+    <div class="meta">
+        <span>NCT: NCT02180711</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Men and women ≥ 18 years of age.Part 1: A confirmed diagnosis of FL Grade 1, 2, or 3a, which has relapsed after, or been refractory to ≥ 1 prior therapy for FL, or subjects who have not previously received systemic anticancer therapy for FL., and which requires treatment.Part 2: For subject with relapsed or refractory MZL:Histologically confirmed MZL including splenic, nodal, and extranodal sub-typesSubjects with splenic MZL must have an additional measurable lesion, nodal or extranodal, as described in inclusion criterion #4;Subjects with gastric mucosa-associated lymphoid tissue (MALT) lymphoma must be Helicobacter pylori (HP)-negativePart 3: For subjects with FL: Pathologically confirmed diagnosis of FL Grade 1, 2, or 3a, which has relapsed after, or been refractory to ≥ 1 prior therapy for FL and which requires treatment per National Cancer Institute or ESMO clinical practice guidelines.Eastern Cooperative Oncology Group (ECOG) performance status of ≤ 2.Agreement to use contraception during the study and for 30 days after the last dose of study drugs if sexually active and able to bear or beget children.Exclusion Criteria:•A life-threatening illness, medical condition or organ system dysfunction which, in the investigator&amp;#x27;s opinion, could compromise the subject&amp;#x27;s safety, interfere with the absorption or metabolism of acalabrutinib, or put the study outcomes at undue riskSignificant cardiovascular disease such as uncontrolled or symptomatic arrhythmias, congestive heart failure, or myocardial infarction within 6 months of screening, or any Class 3 or 4 cardiac disease as defined by the New York Heart Association Functional Classification, or Qtc &amp;gt;480 msecMalabsorption syndrome, disease significantly affecting gastrointestinal function, or resection of the stomach or small bowel, gastric bypass, symptomatic inflammatory bowel disease, or partial or complete bowel obstruction.Breast feeding or pregnant</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the information provided, here&#x27;s the revised eligibility criteria for the Acalabrutinib Protocol:</div>
+<div class="line added"></div>
+<div class="line added">**Background Information**</div>
+<div class="line added"></div>
+<div class="line added">- **Role of BTK in Lymphoid Cancers**: BTK is a non-receptor enzyme involved in the signaling pathways of the Tec kinase family.</div>
+<div class="line added">- **Nonclonal B-cell Neoplasms**: Indolent lymphomas are the most common type of B-cell lymphoma, comprising approximately 40% of all NHLs.</div>
+<div class="line added">- **Indolent Non-Hodgkin Lymphomas (R/R)**: These are the most common subtype of indolent lymphomas, accounting for 25% of all NHLs.</div>
+<div class="line added"></div>
+<div class="line added">**Eligibility Criteria**</div>
+<div class="line added"></div>
+<div class="line added">- **Age Range**: Men and women ≥18 years of age.</div>
+<div class="line added">- **History of Previous Treatments**:</div>
+<div class="line added">- **Fluorescence Glucose Breath Test (FGTB)**: Positive for ≥1 prior therapy for FL, or ≥1 prior therapy for R/R FL.</div>
+<div class="line added">- **Radiographic Evidence of FL**: Positive for ≥1 prior therapy for FL, or ≥1 prior therapy for R/R FL.</div>
+<div class="line added">- **Previous Therapy**:</div>
+<div class="line added">- **Fluorescence Glucose Breath Test (FGTB)**: Negative for ≥1 prior therapy for FL, or ≥1 prior therapy for R/R FL.</div>
+<div class="line added">- **Radiographic Evidence of FL**: Negative for ≥1 prior therapy for FL, or ≥1 prior therapy for R/R FL.</div>
+<div class="line added">- **Presence of Radiographically Measurable Lymphadenopathy or Extranodal Lymphoid Malignancy (defined as the presence of ≥1 lesion measuring ≥2.0 cm in the longest dimension and ≥1.0 cm in the longest perpendicular dimension as assessed by CT Scan)**:</div>
+<div class="line added">- **FL**: Pathologically confirmed diagnosis of FL Grade 1, 2, or 3a that has relapsed after, or been refractory to ≥1 prior therapy for FL and which requires treatment per National Cancer Institute or ESMO clinical practice guidelines.</div>
+<div class="line added">- **MZL**: Pathologically confirmed diagnosis of MZL including splenic, nodal, and extranodal sub-types, including gastric MALT lymphoma, which is further categorized into gastric MALT and nodal MZL.</div>
+<div class="line added">- **DLBCL**: Pathologically confirmed diagnosis of DLBCL, including splenic, nodal, and extranodal sub-types, including gastric MALT and nodal MZL.</div>
+<div class="line added">- **Clinical Experience with Acalabrutinib**:</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Available in 100 mg/10 mL single-use vials and 500 mg/50 mL single-use vials.</div>
+<div class="line added">- **Acualabrutinib Capsules**: Available in white, high-density polyethylene bottles.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Bioequivalent to Acualabrutinib Capsules.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Administered orally with 8 ounces (approximately 240 mL) of water.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutinib Maleate Tablets**: Pre-medicated according to Rituxan/MabThera package insert and institutional practices.</div>
+<div class="line added">- **Acualabrutin</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_71.html">&larr; Sample 71</a> | <a href="index.html">Index</a> | <a href="sample_73.html">Sample 73 &rarr;</a>
+</div>
+</body>
+</html>

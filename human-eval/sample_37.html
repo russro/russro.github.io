@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 37 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 37</h1>
+    <div class="meta">
+        <span>NCT: NCT04916002</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Key Inclusion Criteria:Participants enrolled in the study must meet all of the following inclusion criteria to be eligible.Histopathologically-confirmed diagnosis of cancer, as defined by the protocol.Measurable disease, as defined by RECIST v1.1 and as defined in the protocol.Adequate organ function based on most recent laboratory values within 3 weeks before first dose of study treatment on Week 1 Day 1 (W1D1), as defined in the protocol.Eastern Cooperative Oncology Group (ECOG) Performance Status of 0 to 1 at Screening.Key Exclusion Criteria:Participants presenting with any of the following will not qualify for entry into the study:Received radiation therapy (or other non-systemic therapy) within 2 weeks before first dose of study treatment on W1D1.</div>
+<div class="line deleted">Participants should have recovered (i.e.</div>
+<div class="line deleted">Grade ≤ 1 or at baseline) from radiation-related toxicities.Received systemic pharmacologic doses of corticosteroids &amp;gt; 10 mg&amp;#x2F;day prednisone within 30 days before first dose of study treatment on W1D1, as defined in the protocol.History of immune-mediated AE leading to permanent discontinuation due to prior PD-1-blocking antibody.Not fully recovered from AEs due to prior treatment (to Grade 1 or less, per Common Terminology Criteria for Adverse Events (CTCAE), with the exception of persistent vitiligo, alopecia, hypothyroidism, diabetes mellitus, and adrenal and&amp;#x2F;or pituitary insufficiency.Active pneumonitis or history of noninfectious pneumonitis that required steroids.Severe uncontrolled medical disease within 12 months of screening, including but not limited to poorly controlled hypertension, unstable angina, myocardial infarction, congestive heart failure (New York Heart Association Class II or greater), pericarditis, cerebrovascular accident, or implanted or continuous use of a pacemaker or defibrillator, or emphysema with FEV1 ≤ 50% predicted.Known history of immunodeficiency.Known additional malignancy that is progressing or required active treatment within the past 3 years, as defined in the protocol.Active autoimmune disease that required systemic treatment in past 2 years; replacement therapy is not considered a form of systemic treatment.Untreated, symptomatic, or enlarging central nervous system metastases or carcinomatous meningitis (including leptomeningeal metastases from solid tumors).NOTE: Other protocol defined Inclusion&amp;#x2F;Exclusion Criteria apply</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">## Amended Eligibility Criteria (Version 15):</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">Subjects enrolled in the study must meet all of the following inclusion criteria to be eligible.</div>
+<div class="line added"></div>
+<div class="line added">* **Histopathologically-confirmed diagnosis:**</div>
+<div class="line added">* Metastatic or unresectable cancer.</div>
+<div class="line added">* Metastatic or locally and/or regionally advanced unresectable cutaneous squamous cell carcinoma (CSCC).</div>
+<div class="line added">Note 1: CSCC subjects without radiographically measurable disease are not excluded if there is at least one lesion ≥ 10 mm in at least one dimension documented by color photography.</div>
+<div class="line added">Note 2: Subjects with tumors that arise in the setting of chronic inflammation (Marjolin&#x27;s ulcer) such as chronic wounds and/or scars are excluded.</div>
+<div class="line added">* Metastatic or locally and/or regionally advanced unresectable Merkel cell carcinoma (MCC).</div>
+<div class="line added">Note: MCC subjects without radiographically measurable disease are not excluded if there is at least one lesion ≥ 10 mm in at least one dimension documented by color photography.</div>
+<div class="line added">* **Cohort A1:** Subjects who have not received prior systemic therapy for CSCC.</div>
+<div class="line added">* **Cohort A2:** Subjects who have progressed while receiving a PD-1-blocking antibody or within 3 months of discontinuation.</div>
+<div class="line added">PD-1-blocking antibody treatment may have been administered in the adjuvant, neoadjuvant, and/or metastatic setting.</div>
+<div class="line added">The PD-1-blocking antibody must have been the most recent therapy received.</div>
+<div class="line added">* **Cohort B1:** Subjects who have not received prior systemic therapy for MCC.</div>
+<div class="line added">* **Cohort B2:** Subjects who have progressed while receiving a PD-1-blocking antibody or within 3 months of discontinuation.</div>
+<div class="line added">PD-1-blocking antibody treatment may have been administered in the adjuvant, neoadjuvant, and/or metastatic setting.</div>
+<div class="line added">The PD-1-blocking antibody must have been the most recent therapy received.</div>
+<div class="line added">* **Cohort C1:** Subjects who have not received prior treatment with immune checkpoint inhibitors (ICIs).</div>
+<div class="line added">* **Cohort C2:** Subjects who have received prior treatment with a PD-1-blocking antibody.</div>
+<div class="line added">* **Cohort D:** Subjects with advanced or metastatic basal cell carcinoma (BCC) who are not candidates for curative surgery or curative radiation therapy and have not received prior hedgehog pathway inhibitor therapy and do not wish to receive or are not candidates for a hedgehog inhibitor.</div>
+<div class="line added">* **Cohort E:** Subjects with advanced or metastatic non-small cell lung cancer (NSCLC) whose tumors have high PD-L1 expression (≥50%) and are not eligible for chemotherapy.</div>
+<div class="line added">* **Cohort F:** Subjects with recurrent/metastatic HPV-positive, PD-L1 with CPS ≥ 1 oropharynx squamous cell carcinoma (OPSCC) who have not received prior systemic therapy in the recurrent/metastatic setting.</div>
+<div class="line added">* **Measurable disease:** As defined by RECIST v1.1 and all of the following:</div>
+<div class="line added">* At least one accessible lesion amenable to repeated IT injection.</div>
+<div class="line added">* A previously irradiated lesion may be used as a target lesion if subsequent disease progression in that lesion (at least 20% increase in dimensions with a 5 mm absolute increase) was documented.</div>
+<div class="line added">* Able to provide tissue from a core or excisional/incisional biopsy (fine needle aspirate is not sufficient).</div>
+<div class="line added">A newly obtained biopsy (within 90 days before the start of study treatment) is preferred but an archival sample is acceptable if no intervening therapy was received.</div>
+<div class="line added">* **Adequate organ function:** Based on most recent laboratory values within 3 weeks before first dose of study treatment on W1D1:</div>
+<div class="line added">* Bone marrow function:</div>
+<div class="line added">* Neutrophil count ≥ 1500/mm3</div>
+<div class="line added">* Platelet count ≥ 100,000/mm3</div>
+<div class="line added">* Hemoglobin concentration ≥ 9 g/dL</div>
+<div class="line added">* Liver function:</div>
+<div class="line added">* Total bilirubin ≤ 1.5 times the upper limit of normal (ULN) with the following exception: subjects with Gilbert&#x27;s disease total serum bilirubin ≤ 3 times ULN</div>
+<div class="line added">* Aspartate aminotransferase (AST) and alanine aminotransferase (ALT) ≤ 3 times the ULN</div>
+<div class="line added">* Renal function:</div>
+<div class="line added">* Estimated creatinine clearance ≥ 30 mL/min (Cockcroft-Gault) or measured creatinine clearance</div>
+<div class="line added">* Coagulation:</div>
+<div class="line added">* International normalized ratio (INR) or prothrombin time (PT) ≤ 1.5 times ULN unless subject is receiving anticoagulant therapy, in which case PT or partial thromboplastin time (PTT) is within the therapeutic range.</div>
+<div class="line added">* Partial thromboplastin time (PTT) ≤ 1.5 times ULN unless subject is receiving anticoagulant therapy, in which case PT or PTT is within the therapeutic range.</div>
+<div class="line added">* **Age:** ≥ 18 years at the time of consent.</div>
+<div class="line added">* **Eastern Cooperative Oncology Group (ECOG) Performance Status:** 0 to 1 at Screening.</div>
+<div class="line added">* **Ability to understand and comply:** With protocol requirements.</div>
+<div class="line added">* **Women of childbearing potential:** Must have negative serum pregnancy test during Screening and be willing to use an adequate method of contraception from the time of consent until at least 150 days after the last dose of study treatment.</div>
+<div class="line added">* **Subjects unable to provide written informed consent:** Are not eligible for the study.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">Subjects presenting with any of the following will not qualify for entry into the study:</div>
+<div class="line added"></div>
+<div class="line added">* **Received radiation therapy (or other non-systemic therapy) to the target lesion(s) within 2 weeks before the first dose of study treatment on W1D1.** Subjects should have recovered (i.e., Grade ≤ 1 or at baseline) from radiation-related toxicities.</div>
+<div class="line added">* **Received systemic pharmacologic doses of corticosteroids &gt; 10 mg prednisone equivalent daily within 15 days before the first dose of study treatment on W1D1.** Replacement doses, topical, ophthalmic, and inhalational corticosteroids are permitted.</div>
+<div class="line added">Stress-dose corticosteroids will be required in subjects with adrenal insufficiency.</div>
+<div class="line added">* **Active pneumonitis or history of noninfectious pneumonitis requiring systemic therapy.**</div>
+<div class="line added">* **Severe uncontrolled cardiac disease within 6 months of Screening, including but not limited to poorly controlled hypertension, unstable angina, myocardial infarction, congestive heart failure (New York Heart Association Class II or greater), pericarditis within the previous 6 months, cerebrovascular accident, or implanted or continuous use of a pacemaker or defibrillator.**</div>
+<div class="line added">* **Known history of immunodeficiency.**</div>
+<div class="line added">* **Known history of other malignancy that is progressing or requires active treatment within the past 3 years, except for the following:**</div>
+<div class="line added">* Basal cell carcinoma of the skin, squamous cell carcinoma of the skin, localized prostate cancer with prostate-specific antigen (PSA) level below 4.0 ng/mL, in situ cervical cancer on biopsy or a squamous intraepithelial lesion on Papanicolaou smear, and thyroid cancer (except anaplastic).</div>
+<div class="line added">* **Active infection requiring systemic therapy.**</div>
+<div class="line added">* **Known or suspected active infection with severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).**</div>
+<div class="line added">* **Known or suspected active infection with human immunodeficiency virus (HIV), hepatitis B virus (HBV), or hepatitis C virus (HCV).**</div>
+<div class="line added">* **Received a live attenuated vaccine within 30 days before the first dose of study treatment on W1D1.**</div>
+<div class="line added">* **Major surgery (including complete oncologic resection) within 4 weeks prior to enrollment, or have not recovered adequately from the toxicities and/or complications from the intervention.** Minor surgeries (including routine resections of early stage CSCCs and BCCs that may be due to field cancerization) require a 7-day washout.</div>
+<div class="line added">* **Pregnancy or breastfeeding or expecting to conceive children within the projected duration of the study, from the time of consent until at least 150 days after the last dose of study treatment.**</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_36.html">&larr; Sample 36</a> | <a href="index.html">Index</a> | <a href="sample_38.html">Sample 38 &rarr;</a>
+</div>
+</body>
+</html>

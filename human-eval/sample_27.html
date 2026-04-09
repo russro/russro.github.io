@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 27 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 27</h1>
+    <div class="meta">
+        <span>NCT: NCT01993186</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Diagnosis of Glut1 DS confirmed by SLC2A1 mutationMales and females, aged 1 - 35 years (inclusive) at the time of informed consentAverage of at least 4 observable seizures (generalized [except absence] or partial-onset [simple partial motor, complex partial, or secondarily generalized] seizures) in 4 weeks over the last 24 weeks, by subject or caregiver reportAt least 4 observable seizures (generalized [except absence] or partial-onset [simple partial motor, complex partial, or secondarily generalized] seizures) in 4 weeks during the baseline period, with no 3-week seizure-free period during the Baseline PeriodContinuing to have seizures despite a prior or current use of at least 1 AEDAllowed to be on 1 - 3 concomitant AEDs that must have been stable in dose at least 2 weeks prior to the beginning of screening and anticipated to remain stable in dose through the end of the 8-week, placebo-controlled Treatment PeriodNot on, or not fully compliant with a prescribed diet plan (e.g.</div>
+<div class="line deleted">ketogenic diet) comprised of at least 60% total daily caloric intake from fat during previous 14 days (confirmed by 3-day diet diary at Screening), or at any time during the course of the trialPlasma level of beta-hydroxybutyrate (BHB) ≤ 1 mmol&amp;#x2F;L (non-fasting) at ScreeningNaïve to triheptanoinProvide written or verbal assent (if possible) and written informed consent by a legally authorized representative after the nature of the study has been explained, and prior to any research-related proceduresMust, in the opinion of the investigator, be willing and able to complete all aspects of the study, comply with accurate completion of the seizures diary, and likely to complete the 8-week, placebo-controlled, Treatment PeriodFemales of childbearing potential must have a negative pregnancy test at Screening, be willing to use an acceptable method of contraception, and have additional pregnancy tests during the study.</div>
+<div class="line deleted">Females considered not of childbearing potential include those who have not reached menarche, had total hysterectomy, have been in menopause for at least two years, or have had tubal ligation at least one year prior to Screening.Exclusion Criteria:Serum ALT or AST levels exceeding 2X the upper limit of normal at ScreeningAny known hypersensitivity to triheptanoin or safflower oil that, in the judgment of the investigator, places the subject at increased risk for adverse effectsHistory of, or current suicidal ideation, behavior and&amp;#x2F;or attemptsBreastfeeding an infant at ScreeningParticipants unwilling or unable to discontinue use of a prohibited medication or other substance that may confound study objectivesUse of any investigational product (drug or supplement, including MCT oil) within 30 days prior to Screening, or at any time during the studyHas a condition of such severity and acuity, in the opinion of the investigator, that it warrants immediate surgical intervention or other treatmentHas a concurrent disease or condition, or laboratory abnormality that, in the view of the investigator, places the subject at high risk of poor treatment compliance or of not completing the study, or would interfere with study participation or introduces additional safety concerns (e.g., diabetes mellitus, other concurrent neurological or psychiatric disorders)</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:Diagnosis of Glut1 DS confirmed by SLC2A1 mutationMales and females, aged 3 - 17 years (inclusive) at the time of informed consentAverage of at least 5 observable seizures (generalized [except absence] or partial-onset [simple partial motor, complex partial, or secondarily generalized] seizures) per month over the last 6 months, by subject or caregiver reportAt least 4 observable seizures (generalized [except absence] or partial-onset seizures) per month during the Baseline Period, with no 3-week seizure-free period during the Baseline PeriodContinuing to have seizures despite a prior or current use of at least 1 AEDAllowed to be on 1 - 3 concomitant AEDs that must have been stable in dose at least 2 weeks prior to the beginning of screening and anticipated to remain stable in dose through the end of the 8-week, placebo-controlled Treatment PeriodNot on, or not fully compliant with a prescribed diet plan (e.g.</div>
+<div class="line added">ketogenic diet) comprised of at least 50% total daily caloric intake from fat during previous 60 days (confirmed by 3-day diet diary at Screening), or at any time during the course of the trialPlasma level of beta-hydroxybutyrate (BHB) ≤ 1 mmol&amp;#x2F;L (non-fasting) at ScreeningNaïve to triheptanoinExclusion Criteria:Serum alanine aminotransferase (ALT) or aspartate aminotransferase (AST) levels exceeding 2X the upper limit of normal at ScreeningHistory of, or current suicidal ideation, behavior and&amp;#x2F;or attemptsParticipants unwilling or unable to discontinue use of a prohibited medication or other substance that may confound study objectivesUse of any investigational product (drug or supplement, including medium chain triglyceride [MCT] oil) within 30 days prior to Screening, or at any time during the studyHas a condition of such severity and acuity, in the opinion of the investigator, that it warrants immediate surgical intervention or other treatmentHas a concurrent disease or condition, or laboratory abnormality that, in the view of the investigator, places the subject at high risk of poor treatment compliance or of not completing the study, or would interfere with study participation or introduces additional safety concerns (e.g., diabetes mellitus, other concurrent neurological or psychiatric disorders)</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_26.html">&larr; Sample 26</a> | <a href="index.html">Index</a> | <a href="sample_28.html">Sample 28 &rarr;</a>
+</div>
+</body>
+</html>

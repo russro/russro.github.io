@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 42 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 42</h1>
+    <div class="meta">
+        <span>NCT: NCT05156073</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:This study has two cohorts: A Mild Cognitive Impairment (MCI)&amp;#x2F;Dementia cohort and a non-dementia cohort.MCI&amp;#x2F;Dementia cohort:Age 65 or greaterDiagnosis of MCI or dementia from International Classification of Diseases ICD-9 and ICD-10 codesAt least one other chronic conditionFive or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit)Non-dementia cohort:Age 75 or olderNo MCI or dementia diagnosisAt least two chronic conditions documented5 or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit).Care partners:Family or other companions age 21 years or greater who regularly help the patient with managing medicationsThe patient can identify a care partner who assists with medication management to complete the enrollment dyad.Patient or care partner must be able to hear well enough to participate in interviews on the telephone.Patient agrees to answer &amp;quot;Older Adult Screening Questions&amp;quot; as detailed on the Patient Screening Script.Patient&amp;#x27;s care partner must be willing to participate in the study with the patient and answer the FCMAHS at the baseline visit and at the 3-month visit.Primary care physicians:• All primary care physicians at the pilot site will be included.Exclusion Criteria:Patient&amp;#x2F;Care partner dyads:Individuals residing in long term care facilities or enrolled in hospice care at baseline will be excluded.The patient does not have a care partner that assists with medication management.The patient takes 4 or fewer different medications for all his&amp;#x2F;her health needsThe patient declines to identify his&amp;#x2F;her care partnerFor the MCI&amp;#x2F;Dementia cohort: Answers all memory questions correctly, thus receiving a score of &amp;quot;0&amp;quot; for the screening assessmentIf the patient has a designated Legal Authorized Representative (LAR) but the patient&amp;#x27;s LAR is unreachable or declines to have the patient involved in the study.The care partner declines to participate in the study as part of the patient&amp;#x2F;care partner dyad.Primary care physicians:• Physicians who only provide urgent care will be excluded.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Okay, so I need to help modify the eligibility criteria for the clinical trial based on the supporting evidence provided.</div>
+<div class="line added">The original eligibility criteria were from Version 3 of the OptiMize trial, but now there&#x27;s new supporting evidence from a study called Shared Responsibility for Medication Use for People with Dementia and General Health Conditions (SRMUDGHC).</div>
+<div class="line added"></div>
+<div class="line added">First, I should read through the provided supporting evidence to understand the key points.</div>
+<div class="line added">The SRMUDGHC study emphasizes patient-centered care, involves the patient and caregiver in medication management, and focuses on deprescribing.</div>
+<div class="line added">It found that patients and caregivers are enthusiastic about deprescribing, and it&#x27;s scalable across different primary care settings.</div>
+<div class="line added"></div>
+<div class="line added">Looking at the original eligibility criteria, they include a lot of standard patient characteristics, like age, cognitive status, medication count, etc.</div>
+<div class="line added">But the new evidence suggests that the intervention is more effective when patients and caregivers are actively involved, and the setting is a primary care clinic.</div>
+<div class="line added">So, the modified criteria should reflect these changes.</div>
+<div class="line added"></div>
+<div class="line added">I should consider updating the inclusion criteria to focus more on the patient&#x27;s willingness to engage in deprescribing, perhaps by including a question about their preference for medication management.</div>
+<div class="line added">Also, the exclusion criteria might need to be adjusted to better reflect the study&#x27;s focus on primary care settings and patient engagement.</div>
+<div class="line added"></div>
+<div class="line added">I also notice that the original criteria mention a MCI/dementia cohort and a non-dementia cohort, which is good.</div>
+<div class="line added">I should ensure that the new criteria maintain this distinction but perhaps refine the inclusion/exclusion based on the SRMUDGHC findings.</div>
+<div class="line added"></div>
+<div class="line added">Another point is the need to ensure that the study complies with the updated IRB number, which is IRB00253480.</div>
+<div class="line added">I should check if the criteria need to reference this number or if it&#x27;s sufficient to mention the updated version.</div>
+<div class="line added"></div>
+<div class="line added">I should also make sure that the criteria are clear and that all necessary documentation is included, like EHR records and letters from general practice physicians.</div>
+<div class="line added">This ensures that the study can be conducted effectively.</div>
+<div class="line added"></div>
+<div class="line added">Finally, I need to present the modified criteria in a clear, organized manner, using the same structure as the original but updated with the new evidence.</div>
+<div class="line added">This includes patient inclusion, caregiver eligibility, and exclusion criteria, all aligned with the SRMUDGHC study&#x27;s approach.</div>
+<div class="line added">&lt;/think&gt;</div>
+<div class="line added"></div>
+<div class="line added">**Modified Eligibility Criteria for the OptiMize Trial (Version 4)**</div>
+<div class="line added"></div>
+<div class="line added">**Patient Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Age:** Patients must be 65 years of age or older.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Cognitive Impairment or Dementia:** Patients must have a diagnosis of dementia, Alzheimer&#x27;s disease, or other forms of cognitive impairment, as confirmed by ICD-10 or ICD-11 codes on their problem list or through a cognitive impairment assessment.</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Medication Use:** Patients must currently be taking 5 or more different medications for all their health conditions, documented in their electronic medical records (EMR).</div>
+<div class="line added"></div>
+<div class="line added">4.</div>
+<div class="line added">**Primary Care Visit:** Patients must have a scheduled primary care visit at the pilot clinic within the study period.</div>
+<div class="line added"></div>
+<div class="line added">5.</div>
+<div class="line added">**Willingness to Engage in Deprescribing:** Patients must be willing to discuss medication discontinuation with their primary care physician and caregivers, as supported by the SRMUDGHC study.</div>
+<div class="line added"></div>
+<div class="line added">6.</div>
+<div class="line added">**Documentation:** Eligible patients must have documentation from their general practice physician or primary care physician attesting to their ability to manage their medication use.</div>
+<div class="line added"></div>
+<div class="line added">**Caregiver Eligibility Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Age:** Caregivers must be 21 years of age or older.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Willingness to Engage in Deprescribing:** Caregivers must be willing to discuss medication discontinuation with their primary care physician, as supported by the SRMUDGHC study.</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Documentation:** Caregivers must have documentation from their primary care physician attesting to their willingness to engage in deprescribing.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Residential Care Facilities or Hospice Care:** Patients or caregivers currently residing in long-term care facilities or enrolled in hospice care will be excluded.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Fewer Than 5 Medications:** Patients or caregivers with fewer than 5 different medications for all their health needs will be excluded.</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Medical Eligibility Issues:** Patients or caregivers with significant medical issues that preclude participation in the study, as determined by the research team.</div>
+<div class="line added"></div>
+<div class="line added">4.</div>
+<div class="line added">**Cognitive Impairment or Dementia:** Caregivers or patients with cognitive impairment or dementia will be excluded.</div>
+<div class="line added"></div>
+<div class="line added">5.</div>
+<div class="line added">**Primary Care Provider Restrictions:** Primary care physicians or medical assistants who have been excluded from the study will not be eligible to participate.</div>
+<div class="line added"></div>
+<div class="line added">**Study Compliance:**</div>
+<div class="line added"></div>
+<div class="line added">- The study must be conducted under the updated IRB number (IRB00253480) to ensure compliance with institutional review board guidelines.</div>
+<div class="line added"></div>
+<div class="line added">**Additional Considerations:**</div>
+<div class="line added"></div>
+<div class="line added">- **Patient-Centered Care:** The criteria emphasize patient and caregiver engagement, aligning with the SRMUDGHC study&#x27;s focus on shared decision-making for medication management.</div>
+<div class="line added"></div>
+<div class="line added">- **Primary Care Focus:** The study is designed to be scalable across diverse primary care settings, ensuring broad applicability.</div>
+<div class="line added"></div>
+<div class="line added">- **Documentation Requirements:** Detailed documentation from primary care providers is required to ensure eligibility and compliance with study standards.</div>
+<div class="line added"></div>
+<div class="line added">This updated criteria ensures that the study aligns with the SRMUDGHC study&#x27;s approach, focusing on patient-centered deprescribing and scalable implementation in primary care.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_41.html">&larr; Sample 41</a> | <a href="index.html">Index</a> | <a href="sample_43.html">Sample 43 &rarr;</a>
+</div>
+</body>
+</html>

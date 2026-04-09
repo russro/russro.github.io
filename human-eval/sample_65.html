@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 65 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 65</h1>
+    <div class="meta">
+        <span>NCT: NCT02568046</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Main inclusion Criteria:Male or female, at least 18 years of age at the time of informed consentEastern Cooperative Oncology Group (ECOG) performance status (PS) of 0 or 1Histologically or cytologically confirmed, locally advanced or metastatic colorectal cancer (CRC) that is documented to be without Kirsten rat sarcoma (KRAS) or neuroblastoma rat sarcoma (NRAS) gene mutations (i.e., tumors must express the KRAS and NRAS wild type [WT], exon 2, 3 and 4).Failed (defined as radiologic progression) treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab, during treatment or &amp;lt; 3 months after the last dose of first-line therapy and within &amp;lt; 3 months of C1&amp;#x2F;D1.</div>
+<div class="line deleted">Patients who discontinued first-line therapy due to toxicity may be enrolled provided progression occurred &amp;lt; 6 months after the last dose of the first-line therapy regimen.or Failed (defined as radiologic progression) adjuvant therapy with combination therapy of oxaliplatin and a fluoropyrimidine during treatment or within &amp;lt; 6 months after the last dose of oxaliplatin and within &amp;lt; 6 months of C1&amp;#x2F;D1.Eligible for FOLFIRIMeasurable disease according to RECIST v1.1Main exclusion Criteria:Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1&amp;#x2F;D1Significant gastrointestinal abnormalitiesPatients with a significant cardiovascular disease or conditionAbnormal hematologic, renal or hepatic function</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the information provided, here is the revised Eligibility Criteria for the Symphogen Clinical Trial Protocol:</div>
+<div class="line added"></div>
+<div class="line added">**Main Inclusion Criteria:**</div>
+<div class="line added">- **Male or Female**, at least 18 years of age at the time of informed consent.</div>
+<div class="line added">- **Eastern Cooperative Oncology Group (ECOG)** performance status of 0 or 1</div>
+<div class="line added">- **Local Advanced or Metastatic CRC (CRC)** that is documented to be without KRAS or NRAS gene mutations (i.e.</div>
+<div class="line added">tumors must express the KRAS and NRAS wild type (WT), exon 2, 3, 4)</div>
+<div class="line added">- **Failed** prior adjuvant therapy or prior therapy for treatment for locally advanced or metastatic disease with first-line combination therapy of oxaliplatin and a fluoropyrimidine, with or without bevacizumab</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added">- **Prior therapy with anti-EGFR antibodies, anti-EGFR small molecule inhibitors or irinotecan (CPT-11)**</div>
+<div class="line added">- **Discontinuation of prior therapy with oxaliplatin and a fluoropyrimidine due to diarrhea ≥ Grade 3**</div>
+<div class="line added">- **Any antineoplastic agent (standard or investigational) within 4 weeks prior to C1/D1**</div>
+<div class="line added"></div>
+<div class="line added">**Dose-Related Criteria:**</div>
+<div class="line added">- **Dose-Escalation (Phase 1b)**:</div>
+<div class="line added">- **Primary Objective**: To determine the MTD and/or RP2D of Sym004 when administered by intravenous (iv) infusion every second week in combination with a standard dosing regimen of FOLFIRI (folinic acid, 5-fluorouracil, irinotecan) to patients with locally advanced or metastatic colorectal cancer (CRC).</div>
+<div class="line added">- **Secondary Objective**: To evaluate the antineoplastic effect of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.</div>
+<div class="line added"></div>
+<div class="line added">- **Dose-Expansion (Phase 2a)**:</div>
+<div class="line added">- **Primary Objective**: To evaluate the antitumor response of Sym004 when administered at the RP2D in combination with FOLFIRI to patients with locally advanced or metastatic CRC.</div>
+<div class="line added">- **Secondary Objective**: To confirm objective antitumor response.</div>
+<div class="line added"></div>
+<div class="line added">**Safety Assessed:**</div>
+<div class="line added">- **Pharmacokinetic (PK) Assessments (Dose-Escalation Only)**:</div>
+<div class="line added">- **AUC Norm 0-336h Dose-normalized area under the concentration-time curve from end of infusion to 336 hours**</div>
+<div class="line added">- **Anti-Drug Antibody (ADA) Testing**:</div>
+<div class="line added">- **Monitoring of Adverse Event (AE) surveys and DLT evaluation during Cycle 1 with final assessment 14 days after the last dose of Cycle 1 or on the scheduled first day of Cycle 2, prior to dosing**</div>
+<div class="line added">- **Dose-Expansion (Phase 2a)**:</div>
+<div class="line added">- **Dose-Reduction for Grade 3 Skin Toxicities**:</div>
+<div class="line added">- **Reporting of Dose-Reduction for Grade 3 Skin Toxicities**</div>
+<div class="line added">- **Safety Reporting to Health Authorities, Independent Ethics Committees/Institutional Review Boards and Investigators**:</div>
+<div class="line added">- **Reporting of Serious Adverse Event and Follow-up**</div>
+<div class="line added"></div>
+<div class="line added">This revised Eligibility Criteria ensures that the trial is feasible and safe for participants, aligning with the original version while incorporating the key eligibility criteria for the Symphogen Clinical Trial Protocol.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_64.html">&larr; Sample 64</a> | <a href="index.html">Index</a> | <a href="sample_66.html">Sample 66 &rarr;</a>
+</div>
+</body>
+</html>

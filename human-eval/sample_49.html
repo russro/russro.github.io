@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 49 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 49</h1>
+    <div class="meta">
+        <span>NCT: NCT02915302</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Aged 6 to &amp;lt; 36 months of age on the day of first study vaccination (study product administration).Born at full term of pregnancy (≥ 37 weeks) and&amp;#x2F;or with a birth weight ≥ 2.5 kg.Note: This inclusion criterion only applies to subjects 6 to &amp;lt; 12 months of age on the day of the first study visit.Informed consent form has been signed and dated by the parent(s) or guardian(s).Subject and parent&amp;#x2F;guardian are able to attend all scheduled visits and to comply with all trial procedures.Exclusion Criteria:Participation at the time of study enrollment (or in the 30 days preceding the first trial vaccination) or planned participation during the present trial period in another clinical trial investigating a vaccine, drug, medical device, or medical procedure.Receipt of any vaccine in the 30 days preceding the first trial vaccination, or planned receipt of any vaccine before Visit 2 for subjects receiving 1 dose of influenza vaccine or Visit 3 for subjects receiving 2 doses of influenza vaccine.Previous vaccination against influenza (in the 2016-2017 season) with either the trial vaccine or another vaccine.Receipt of immune globulins, blood, or blood-derived products in the past 3 months.Known or suspected congenital or acquired immunodeficiency; or receipt of immunosuppressive therapy, such as anti-cancer chemotherapy or radiation therapy, within the preceding 6 months; or long-term systemic corticosteroid therapy (prednisone or equivalent for more than 2 consecutive weeks within the past 3 months).Known systemic hypersensitivity to any of the vaccine components, or history of a life-threatening reaction to the vaccine used in the trial or to a vaccine containing any of the same substances.Thrombocytopenia, which may be a contraindication for intramuscular vaccination, at the discretion of the Investigator.Bleeding disorder, or receipt of anticoagulants in the 3 weeks preceding inclusion, contraindicating intramuscular vaccination.Deprived of freedom by an administrative or court order, or in an emergency setting, or hospitalized involuntarily.Chronic illness that, in the opinion of the Investigator, is at a stage where it might interfere with trial conduct or completion.Moderate or severe acute illness&amp;#x2F;infection (according to Investigator judgment) on the day of planned vaccination or febrile illness (temperature ≥ 100.4°F [38.0°C]).</div>
+<div class="line deleted">A prospective subject should not be included in the study until the condition has resolved or the febrile event has subsided.Identified as a natural or adopted child of either the Investigator or an employee with direct involvement in the proposed study.History of serious adverse reactions to any influenza vaccine.Personal history of Guillain-Barré Syndrome.Any condition that in the opinion of the Investigator would pose a health risk to the subject if enrolled or could interfere with the evaluation of the vaccine.Personal history of clinically significant developmental delay (at the discretion of the Investigator), neurologic disorder, or seizure disorder.Known seropositivity for human immunodeficiency virus, hepatitis B, or hepatitis C.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Okay, so I need to help modify the clinical trial&#x27;s inclusion and exclusion criteria based on the supporting evidence provided.</div>
+<div class="line added">Let me start by understanding what the original criteria are and what the evidence is saying.</div>
+<div class="line added"></div>
+<div class="line added">The original inclusion criteria are:</div>
+<div class="line added">1.</div>
+<div class="line added">Aged 6 to &lt;36 months on the day of first study vaccination.</div>
+<div class="line added">2.</div>
+<div class="line added">Born at full term ≥37 weeks or with a birth weight ≥2.5 kg.</div>
+<div class="line added">3.</div>
+<div class="line added">Informed consent from the parent(s) or guardian(s).</div>
+<div class="line added">4.</div>
+<div class="line added">Ability to attend all scheduled visits and comply with all trial procedures.</div>
+<div class="line added"></div>
+<div class="line added">The original exclusion criteria are:</div>
+<div class="line added">1.</div>
+<div class="line added">Participation at the time of study enrollment or planned participation in another clinical trial involving a vaccine, drug, medical device, or medical procedure within 30 days.</div>
+<div class="line added">2.</div>
+<div class="line added">Receipt of any vaccine in the 30 days before first trial vaccination or within 3 months for subjects &lt;12 months.</div>
+<div class="line added">3.</div>
+<div class="line added">Previous vaccination against influenza (in the 2016-2017 season) with any vaccine.</div>
+<div class="line added">4.</div>
+<div class="line added">Known or suspected congenital or acquired immunodeficiency.</div>
+<div class="line added">5.</div>
+<div class="line added">Receipt of immunosuppressive therapy, such as anti-cancer chemotherapy or radiation therapy, within the past 6 months.</div>
+<div class="line added">6.</div>
+<div class="line added">Development of immunogenicity, such as allergic reactions or an allergic reaction to a vaccine.</div>
+<div class="line added">7.</div>
+<div class="line added">Severe acute illness, fever ≥100.4°F (40.4°C) on the day of planned vaccination or within 7 days.</div>
+<div class="line added">8.</div>
+<div class="line added">Seizure or developmental delay.</div>
+<div class="line added">9.</div>
+<div class="line added">Congenital or acquired immunodeficiency.</div>
+<div class="line added">10.</div>
+<div class="line added">History of serious ARs to any influenza vaccine.</div>
+<div class="line added">11.</div>
+<div class="line added">Personal history of Guillain-Barré Syndrome.</div>
+<div class="line added">12.</div>
+<div class="line added">Known seropositivity for HIV, hepatitis B, or hepatitis C.</div>
+<div class="line added"></div>
+<div class="line added">Now, looking at the supporting evidence, the key points are from the Sanofi Pasteur protocol version 2.0, which includes information about safety, immunogenicity, and adverse events.</div>
+<div class="line added">The protocol mentions that the study is transitioning from version 0 to 1, so the criteria might be updated to reflect the latest version.</div>
+<div class="line added"></div>
+<div class="line added">One important point from the evidence is that the inclusion criteria now specify that subjects must be 6 to &lt;12 months of age on the day of the first study vaccination.</div>
+<div class="line added">This is a change from the original 6 to &lt;36 months.</div>
+<div class="line added">So, I should adjust the first inclusion criterion accordingly.</div>
+<div class="line added"></div>
+<div class="line added">Another point is about the adverse events.</div>
+<div class="line added">The protocol mentions that there are no primary objectives for safety, but there are secondary objectives related to immunogenicity.</div>
+<div class="line added">It also lists adverse events of special interest, including new onset of GBS, encephalitis/myelitis, etc.</div>
+<div class="line added">However, since these are adverse events, they might not directly change the inclusion or exclusion criteria but could affect how safety is managed.</div>
+<div class="line added"></div>
+<div class="line added">Looking at the exclusion criteria, the original mentions previous vaccination against influenza in the 2016-2017 season.</div>
+<div class="line added">The evidence doesn&#x27;t mention any changes to this, so that exclusion criterion remains.</div>
+<div class="line added"></div>
+<div class="line added">However, the protocol does mention that the study is transitioning, so I should check if there are any other changes.</div>
+<div class="line added">The supporting evidence doesn&#x27;t indicate any changes to other inclusion or exclusion criteria beyond the age range in the first point.</div>
+<div class="line added"></div>
+<div class="line added">Therefore, the modified inclusion criteria should have the age restricted to 6 to &lt;12 months, while the rest of the criteria remain the same.</div>
+<div class="line added">The exclusion criteria don&#x27;t need to be changed based on the provided evidence.</div>
+<div class="line added"></div>
+<div class="line added">I should also ensure that the language is clear and precise, avoiding any potential ambiguities.</div>
+<div class="line added">For example, in the original inclusion criteria, the age is specified as 6 to &lt;36 months, but the evidence suggests it should be 6 to &lt;12 months.</div>
+<div class="line added">So, I&#x27;ll update that part.</div>
+<div class="line added"></div>
+<div class="line added">Additionally, I should make sure that the criteria are presented in a structured and readable format, possibly using bullet points for clarity, but since the user requested the text without additional explanation, I&#x27;ll just provide the modified text.</div>
+<div class="line added"></div>
+<div class="line added">I should also check if there are any other implicit changes, such as the definition of &quot;onset&quot; for fever or the handling of temperatures, but since the user provided specific supporting evidence, I&#x27;ll focus on that.</div>
+<div class="line added"></div>
+<div class="line added">In summary, the key modification is changing the age range in the inclusion criteria from 6 to &lt;36 months to 6 to &lt;12 months.</div>
+<div class="line added">All other criteria remain unchanged.</div>
+<div class="line added">&lt;/think&gt;</div>
+<div class="line added"></div>
+<div class="line added">**Modified Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Age:** Subjects must be 6 to &lt;12 months of age on the day of the first study vaccination.</div>
+<div class="line added">2.</div>
+<div class="line added">**Birth:** Subjects must be born at full term ≥37 weeks or have a birth weight ≥2.5 kg.</div>
+<div class="line added">3.</div>
+<div class="line added">**Consent:** Informed consent from the parent(s) or guardian(s) must be obtained.</div>
+<div class="line added">4.</div>
+<div class="line added">**Attendance:** Subjects must be able to attend all scheduled visits and comply with all trial procedures.</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria Remain Unchanged:**</div>
+<div class="line added"></div>
+<div class="line added">- The criteria regarding the history of serious ARs, immunogenicity, and other health conditions remain the same as in the original criteria.</div>
+<div class="line added"></div>
+<div class="line added">This modification ensures that the study adheres to the updated protocol version, focusing on the age range specified in the supporting evidence.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_48.html">&larr; Sample 48</a> | <a href="index.html">Index</a> | <a href="sample_50.html">Sample 50 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 107 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 107</h1>
+    <div class="meta">
+        <span>NCT: NCT02931539</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:The participant must be able to provide written, personally signed, and dated informed consent to participate in the study before completing any study-related procedures.</div>
+<div class="line deleted">As applicable, a parent&amp;#x2F;both parents or legally authorized representative (LAR) must provide signature of informed consent and there must be documentation of assent by the participant before completing any study-related procedures.The participant must be a recipient of hematopoietic stem cell or solid organ transplant.The participant must have a documented CMV infection in whole blood or plasma, with a screening value of greater than or equal to (&amp;gt;=) 2730 international units per milliliter (IU&amp;#x2F;mL) in whole blood or &amp;gt;= 910 IU&amp;#x2F;mL in plasma in 2 consecutive assessments, separated by at least 1 day, as determined by local or central specialty laboratory quantitative polymerase chain reaction (qPCR) or comparable quantitative CMV DNA results.</div>
+<div class="line deleted">Both samples should be taken within 14 days prior to randomization with second sample obtained within 5 days prior to randomization.</div>
+<div class="line deleted">The same laboratory and same sample type (whole blood or plasma) must be used for these assessments.The participant must have a current CMV infection that is refractory to the most recently administered of the four anti-CMV treatment agents.</div>
+<div class="line deleted">Refractory is defined as documented failure to achieve greater than (&amp;gt;) 1 log10 (common logarithm to base 10) decrease in CMV DNA level in whole blood or plasma after a 14 day or longer treatment period with intravenous (IV) ganciclovir&amp;#x2F;oral valganciclovir, IV foscarnet, or IV cidofovir.a.</div>
+<div class="line deleted">Participants with documentation of 1 or more CMV genetic mutations associated with resistance to ganciclovir&amp;#x2F;valganciclovir, foscarnet, and&amp;#x2F;or cidofovir must also meet the definition of refractory CMV infection.The Investigator must be willing to treat the participant with at least one of the available anti-CMV drugs (ganciclovir, valganciclovir, foscarnet, or cidofovir).</div>
+<div class="line deleted">Note: Combination therapy with foscarnet and cidofovir is not permitted in the investigator-assigned anti-CMV treatment (IAT) arm due to the potential for serious nephrotoxicity.The participant must be &amp;gt;= 12 years of age at the time of consent.The participant must weigh &amp;gt;= 35 kilogram (kg).The participant must have all of the following results as part of screening laboratory assessments (results from either the central laboratory or a local laboratory can be used for qualification):Absolute neutrophil count (ANC) &amp;gt;= 1000&amp;#x2F; millimeter cube (mm^3) (1.0 x 10^9&amp;#x2F;liter [L])Platelet count &amp;gt;= 25,000&amp;#x2F;mm^3 [25 x 10^9&amp;#x2F;L],Hemoglobin &amp;gt;= 8 grams per deciliter (g&amp;#x2F;dL).Estimated glomerular filtration rate (eGFR) &amp;gt; 30 (milliliters per minute (mL&amp;#x2F;min) &amp;#x2F;1.73 square meter (m^2) as assessed by Modification of Diet in Renal Disease (MDRD) formula for participants &amp;gt;= 18 years of age or Schwartz formula for participants less than (&amp;lt;) 18 years of age.The participant must have a negative serum beta-human chorionic gonadotropin (beta-HCG) pregnancy test at screening, if a female of child bearing potential.</div>
+<div class="line unchanged">Additional urine pregnancy tests may be done per institutional requirements.</div>
+<div class="line deleted">Sexually active females of child bearing potential must agree to comply with any applicable contraceptive requirements of the protocol.</div>
+<div class="line deleted">If male, must agree to use an acceptable method of birth control, as defined in the protocol, during the study treatment administration period and for 90 days afterward if treated with maribavir, ganciclovir, valganciclovir, or cidofovir and for 180 days afterward if treated with foscarnet.The participant must be able to swallow tablets, or receive tablets crushed and&amp;#x2F;or dispensed in water via nasogastric or orogastric tube.The participant must be willing and have an understanding and ability to fully comply with study procedures and restrictions defined in the protocol.The participant must be willing to provide necessary samples (example [e.g,] biopsy) for the diagnosis of tissue invasive CMV disease at baseline as determined by the Investigator.The participant must have a life expectancy of &amp;gt;= 8 weeks.Exclusion Criteria:Have a current CMV infection that is considered refractory or resistant due to inadequate adherence to prior anti-CMV treatment, to the best knowledge of the Investigator.Require ganciclovir, valganciclovir, foscarnet, or cidofovir administration for conditions other than CMV when study treatment is initiated (example: herpes simplex virus (HSV) coinfection requiring use of any of these agents after the randomization) or would need a coadministration with maribavir for CMV infection.</div>
+<div class="line deleted">NOTE: A participant who is not continuing with the same anti-CMV drug(s) (ganciclovir, valganciclovir or foscarnet) for the study treatment (if randomized to the investigator assigned anti-CMV treatment arm), must discontinue their use before the first dose of study drug.</div>
+<div class="line deleted">If participant is currently being treated with cidofovir and is assigned another anti-CMV therapy by the investigator, the participant must discontinue its use at least 14 days prior to randomization at Visit 2&amp;#x2F;Day 0 and the first dose of study treatment.Be receiving leflunomide, letermovir, or artesunate when study treatment is initiated.</div>
+<div class="line deleted">NOTE: Participants receiving leflunomide must discontinue the use at least 14 days prior to randomization at Visit 2&amp;#x2F;Day 0 and the first dose of study treatment.</div>
+<div class="line deleted">Participants receiving letermovir must discontinue use at least 3 days prior to the first dose of study treatment.</div>
+<div class="line deleted">Participants receiving artesunate must discontinue the use prior to the first dose of study treatment.Have severe vomiting, diarrhea, or other severe gastrointestinal illness within 24 hours prior to the first dose of study treatment that would preclude administration of oral&amp;#x2F;enteral medication.Have known hypersensitivity to the active substance or to an excipient for a study treatment.Have tissue invasive CMV disease with central nervous system involvement including the retina (example, CMV retinitis).Have serum aspartate aminotransferase (AST) &amp;gt; 5 times upper limit of normal (ULN) at screening, or serum alanine aminotransferase (ALT) &amp;gt; 5 times ULN at screening, or total bilirubin &amp;gt;= 3.0 x ULN at screening (except for documented Gilbert&amp;#x27;s syndrome), by local or central lab.</div>
+<div class="line deleted">Participants with biopsy confirmed CMV hepatitis will not be excluded from study participation despite AST or ALT &amp;gt; 5 times ULN at screening.Have known positive results for human immunodeficiency virus (HIV).</div>
+<div class="line deleted">Participants must have a confirmed negative HIV test result within 3 months of study entry or, if unavailable, be tested by a local laboratory during the screening period.Require mechanical ventilation or vasopressors for hemodynamic support at the time of enrollment.Be female and pregnant or breast feeding.Have previously received maribavir.Have received any investigational agent with known anti-CMV activity within 30 days before initiation of study treatment or investigational CMV vaccine at any time.Have received any unapproved agent or device within 30 days before initiation of study treatment.Have active malignancy with the exception of nonmelanoma skin cancer.</div>
+<div class="line deleted">Participants who have had a hematopoietic stem cell transplant (HSCT) and who experience relapse or progression of the malignancy as per investigator&amp;#x27;s opinion are not to be enrolled.Be undergoing treatment for acute or chronic hepatitis C.Have any clinically significant medical or surgical condition that, in the investigator&amp;#x27;s opinion, could interfere with the interpretation of study results, contraindicate the administration of the assigned study treatment, or compromise the safety or well-being of the participant.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the provided evidence and the need to incorporate the changes from Amendment 6, here are the amended eligibility criteria for version 15:</div>
+<div class="line added"></div>
+<div class="line added">### Inclusion Criteria:</div>
+<div class="line added">1.</div>
+<div class="line added">The subject must be able to provide written, personally signed, and dated informed consent to participate in the study before completing any study-related procedures.</div>
+<div class="line added">As applicable, a parent/both parents or legally authorized representative (LAR) must provide signature of informed consent and there must be documentation of assent by the subject before completing any study-related procedures.</div>
+<div class="line added">2.</div>
+<div class="line added">The subject must be a recipient of hematopoietic stem cell or solid organ transplant.</div>
+<div class="line added">3.</div>
+<div class="line added">The subject must have a documented CMV infection in whole blood or plasma, with a screening value of ≥2730 IU/mL in whole blood or ≥910 IU/mL in plasma in 2 consecutive assessments, separated by at least 1 day, as determined by local or central specialty laboratory quantitative polymerase chain reaction (qPCR) or comparable quantitative CMV DNA results.</div>
+<div class="line added">Both samples should be taken within 14 days prior to randomization with the second sample obtained within 5 days prior to randomization.</div>
+<div class="line added">The same laboratory and same sample type (whole blood or plasma) must be used for these assessments.</div>
+<div class="line added">4.</div>
+<div class="line added">The subject must have a current CMV infection that is refractory to the most recently administered of the four anti-CMV treatment agents.</div>
+<div class="line added">Refractory is defined as documented failure to achieve &gt;1 log10 (common logarithm to base 10) decrease in CMV DNA level in whole blood or plasma after a 14-day or longer treatment period with intravenous (IV) ganciclovir/oral valganciclovir, IV foscarnet, or IV cidofovir.</div>
+<div class="line added">Subjects with documentation of 1 or more CMV genetic mutations associated with resistance to ganciclovir/valganciclovir, foscarnet, and/or cidofovir must also meet the definition of refractory CMV infection.</div>
+<div class="line added">5.</div>
+<div class="line added">The investigator must be willing to treat the subject with at least one of the available anti-CMV drugs (ganciclovir, valganciclovir, foscarnet, or cidofovir).</div>
+<div class="line added">Note: Combination therapy with foscarnet and cidofovir is not permitted in the investigator-assigned anti-CMV treatment (IAT) arm due to the potential for serious nephrotoxicity.</div>
+<div class="line added">6.</div>
+<div class="line added">The subject must be ≥12 years of age at the time of consent.</div>
+<div class="line added">7.</div>
+<div class="line added">The subject must weigh ≥35 kg.</div>
+<div class="line added">8.</div>
+<div class="line added">The subject must have all of the following results as part of screening laboratory assessments (results from either the central laboratory or a local laboratory can be used for qualification):</div>
+<div class="line added">- Absolute neutrophil count (ANC) ≥1000/mm³ [1.0 x 10⁹/L]</div>
+<div class="line added">- Platelet count ≥25,000/mm³ [25 x 10⁹/L]</div>
+<div class="line added">- Hemoglobin ≥8 g/dL</div>
+<div class="line added">- Estimated glomerular filtration rate (eGFR) &gt;30 mL/min/1.73m² as assessed by Modification of Diet in Renal Disease (MDRD) formula for subjects ≥18 years of age or Schwartz formula for subjects &lt;18 years of age.</div>
+<div class="line added">9.</div>
+<div class="line added">The subject must have a negative serum β-human chorionic gonadotropin (β-HCG) pregnancy test at screening, if a female of child-bearing potential.</div>
+<div class="line unchanged">Additional urine pregnancy tests may be done per institutional requirements.</div>
+<div class="line added">Sexually active females of child-bearing potential must agree to comply with any applicable contraceptive requirements of the protocol.</div>
+<div class="line added">If male, must agree to use an acceptable method of birth control, as defined in the protocol, during the study treatment administration period and for 90 days afterward if treated with maribavir, ganciclovir, valganciclovir, or cidofovir and for 180 days afterward if treated with foscarnet.</div>
+<div class="line added">10.</div>
+<div class="line added">The subject must be able to swallow tablets, or receive tablets crushed and/or dispensed in water via nasogastric or orogastric tube.</div>
+<div class="line added">11.</div>
+<div class="line added">The subject must be willing and have an understanding and ability to fully comply with study procedures and restrictions defined in the protocol.</div>
+<div class="line added">12.</div>
+<div class="line added">The subject must be willing to provide necessary samples (e.g., biopsy) for the diagnosis of tissue invasive CMV disease at baseline as determined by the Investigator.</div>
+<div class="line added">13.</div>
+<div class="line added">The subject must have a life expectancy of ≥8 weeks.</div>
+<div class="line added"></div>
+<div class="line added">### Exclusion Criteria:</div>
+<div class="line added">1.</div>
+<div class="line added">The subject has a current CMV infection that is considered refractory or resistant due to inadequate adherence to prior anti-CMV treatment, to the best knowledge of the Investigator.</div>
+<div class="line added">2.</div>
+<div class="line added">The subject requires ganciclovir, valganciclovir, foscarnet, or cidofovir administration for conditions other than CMV when study treatment is initiated (e.g., herpes simplex virus (HSV) coinfection requiring use of any of these agents after the randomization) or would need a coadministration with maribavir for CMV infection.</div>
+<div class="line added">Note: A participant who is not continuing with the same anti-CMV drug(s) (ganciclovir, valganciclovir or foscarnet) for the study treatment (if randomized to the investigator assigned anti-CMV treatment arm), must discontinue their use before the first dose of study drug.</div>
+<div class="line added">If the participant is currently being treated with cidofovir and is assigned another anti-CMV therapy by the investigator, the participant must discontinue its use at least 14 days prior to randomization at Visit 2/Day 0 and the first dose of study treatment.</div>
+<div class="line added">3.</div>
+<div class="line added">The subject is receiving leflunomide, letermovir, or artesunate when study treatment is initiated.</div>
+<div class="line added">Note: Participants who may be receiving leflunomide or letermovir must discontinue the use at least 3 days prior to randomization at Visit 2/Day 0 and the first dose of study treatment.</div>
+<div class="line added">Participants receiving artesunate must discontinue the use prior to the first dose of study treatment.</div>
+<div class="line added">4.</div>
+<div class="line added">The subject has severe vomiting, diarrhea, or other severe gastrointestinal illness within 24 hours prior to the first dose of study treatment that would preclude administration of oral/enteral medication.</div>
+<div class="line added">5.</div>
+<div class="line added">The subject has known hypersensitivity to the active substance or to an excipient for a study treatment.</div>
+<div class="line added">6.</div>
+<div class="line added">The subject has tissue invasive CMV disease with central nervous system involvement including the retina (e.g., CMV retinitis).</div>
+<div class="line added">7.</div>
+<div class="line added">The subject has serum aspartate aminotransferase (AST) &gt;5 times upper limit of normal (ULN) at screening, or serum alanine aminotransferase (ALT) &gt;5 times ULN at screening, or total bilirubin ≥3.0 x ULN at screening (except for documented Gilbert’s syndrome), by local or central lab.</div>
+<div class="line added">Participants with biopsy-confirmed CMV hepatitis will not be excluded from study participation despite AST or ALT &gt;5 times ULN at screening.</div>
+<div class="line added">8.</div>
+<div class="line added">The subject has known (previously documented) positive results for human immunodeficiency virus (HIV).</div>
+<div class="line added">Subjects must have a confirmed negative HIV test result within 3 months of study entry or, if unavailable, be tested by a local laboratory during the screening period.</div>
+<div class="line added">9.</div>
+<div class="line added">The subject requires mechanical ventilation or vasopressors for hemodynamic support at the time of enrollment.</div>
+<div class="line added">10.</div>
+<div class="line added">The subject is female and pregnant or breastfeeding.</div>
+<div class="line added">11.</div>
+<div class="line added">The subject has previously received maribavir.</div>
+<div class="line added">12.</div>
+<div class="line added">The subject has received any investigational agent with known anti-CMV activity within 30 days before initiation of study treatment or investigational CMV vaccine at any time.</div>
+<div class="line added">13.</div>
+<div class="line added">The subject has received any unapproved agent or device within 30 days before initiation of study treatment.</div>
+<div class="line added">14.</div>
+<div class="line added">The subject has active malignancy with the exception of nonmelanoma skin cancer.</div>
+<div class="line added">Subjects who have had a hematopoietic stem cell transplant (HSCT) and who experience relapse or progression of the malignancy, as per investigator’s opinion, are not to be enrolled.</div>
+<div class="line added">15.</div>
+<div class="line added">The subject is undergoing treatment for acute or chronic hepatitis C.</div>
+<div class="line added">16.</div>
+<div class="line added">The subject has any clinically significant medical or surgical condition that, in the investigator’s opinion, could interfere with the interpretation of study results, contraindicate the administration of the assigned study treatment, or compromise the safety or well-being of the subject.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_106.html">&larr; Sample 106</a> | <a href="index.html">Index</a> | <a href="sample_108.html">Sample 108 &rarr;</a>
+</div>
+</body>
+</html>

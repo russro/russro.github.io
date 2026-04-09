@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 67 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 67</h1>
+    <div class="meta">
+        <span>NCT: NCT01467271</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Patients with moderate to severe and end stage renal impairment or dialysis, scheduled for a contrast enhanced MRI with DOTAREMExclusion Criteria:Patient who has received a Gadolinium Based Contrast Agent within the past 12 months prior to inclusion in this study except if the GBCA received is Dotarem</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">**Modified Eligibility Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">### **Study Design and Methods:**</div>
+<div class="line added">The study is designed as a prospective transversal observational study with longitudinal safety follow-ups.</div>
+<div class="line added">The primary objective is to estimate the incidence of NSF in patients with moderate to severe renal impairment following DOTAREM® administration.</div>
+<div class="line added">Secondary objectives include collecting data on the general safety profile of DOTAREM®, MRI indication, and conditions of use/administration of the product in this specific population of patients.</div>
+<div class="line added">Additionally, efficacy data will be recorded and described.</div>
+<div class="line added"></div>
+<div class="line added">### **Safety Follow-Up and Procedures for Reporting Serious Adverse Events (SAE):**</div>
+<div class="line added">For any patient included in this study, the radiologist will notify any adverse event occurring during the MRI examination or during the time of usual follow-up post DOTAREM® administration.</div>
+<div class="line added">A Serious Adverse Event (SAE) is any untoward medical occurrence or effect that at any dose:</div>
+<div class="line added">- Results in death</div>
+<div class="line added">- Is life-threatening</div>
+<div class="line added">- Requires hospitalization or prolongation of existing inpatients&#x27; hospitalization,</div>
+<div class="line added">- Results in persistent or significant disability or incapacity</div>
+<div class="line added">- Is a congenital anomaly or birth defect</div>
+<div class="line added">- Is medically significant</div>
+<div class="line added"></div>
+<div class="line added">### **Statistics / Data Analysis:**</div>
+<div class="line added">Quantitative variables will be summarized in tables including sample sizes, means, standard deviations and extreme values as well as medians and percentiles when appropriate.</div>
+<div class="line added">Qualitative variables will be described in terms of frequencies and percentages of the number of individuals considered.</div>
+<div class="line added"></div>
+<div class="line added">### **Population Definitions:**</div>
+<div class="line added">All-included-Patients (AIP):</div>
+<div class="line added">- Includes all patients enrolled in the study and having a questionnaire partially or fully filled in.</div>
+<div class="line added">- Used for describing demographic data and medical history of patients and the indication for MRI.</div>
+<div class="line added"></div>
+<div class="line added">Safety Population (SP):</div>
+<div class="line added">- Includes all patients exposed to the contrast product and having received at least one injection of contrast agent, regardless of the quantity.</div>
+<div class="line added">- Described for all safety parameters, administration modalities, adverse events and laboratory data.</div>
+<div class="line added"></div>
+<div class="line added">Efficacy Population (EP):</div>
+<div class="line added">- Includes all patients who have been imaged and who have an available diagnostic assessment.</div>
+<div class="line added">- Described for image quality and diagnostic quality.</div>
+<div class="line added"></div>
+<div class="line added">### **Data Analysis:**</div>
+<div class="line added">- All the data will be collected in electronic format.</div>
+<div class="line added">- Any electronic database provided will be compatible with an SAS format for statistical analysis.</div>
+<div class="line added">- The following section summarizes the statistical analysis method which will be fully described in the Statistical Analysis Plan.</div>
+<div class="line added"></div>
+<div class="line added">### **Potential Number of Patients Lost to Follow-Up:**</div>
+<div class="line added">The potential number of patients lost to follow-up was estimated by considering that a loss of 10% of the sample size would be acceptable (100 subjects), corresponding to a minimum observable frequency of 0.111%.</div>
+<div class="line added">If the number of patients lost to follow-up exceeds 100 subjects, the protocol will be amended to revise the sample size.</div>
+<div class="line added"></div>
+<div class="line added">### **Information About the Study Results:**</div>
+<div class="line added">The study report will include all the study analysis performed and will be provided to the participating investigators if needed.</div>
+<div class="line added"></div>
+<div class="line added">### **Publication Requirements:**</div>
+<div class="line added">The study data are the exclusive property of the Sponsor.</div>
+<div class="line added">No data can be published by the physician without prior approval by the Sponsor in writing.</div>
+<div class="line added">The modalities concerning the publications and the presentations about the study results will be defined by the Sponsor.</div>
+<div class="line added"></div>
+<div class="line added">### **References:**</div>
+<div class="line added">1.</div>
+<div class="line added">**Christopher U.</div>
+<div class="line added">Herborn, Elmar Honold, Michael Wolf, Jörn Kemper, Sonja Kinner, Gerhard Adam and Jörg Barkhausen:** Clinical Safety and diagnostic value of the Gadolinium chelate Gadoterate Meglumine (Gd-DOTA).</div>
+<div class="line added">Inves Radiol 2007;42: 58-62</div>
+<div class="line added">2.</div>
+<div class="line added">**Henrik S.</div>
+<div class="line added">Thomsen:** How to avoid CIN: guidelines from the european society of urogenital radiology.</div>
+<div class="line added">Nephrol Dial Transplant 2005;20[suppl 1]: i18-i22</div>
+<div class="line added">3.</div>
+<div class="line added">**Ihsan Ergün, Kenan Keven, Irfan Uruç, Yakup Ekmekçi, Basol Canbakan, Ilhan Erden, Oktay Karatan:** The safety of gadolinium in patients with stage 3 and 4 renal failure.</div>
+<div class="line added">Nephrol Dial Transplant 2006; 21:697-700</div>
+<div class="line added">4.</div>
+<div class="line added">**Phillip H.</div>
+<div class="line added">Kuo, Emmanuel Kanal, Ali K.</div>
+<div class="line added">Abu-Alfa, Shawn E.</div>
+<div class="line added">Cowper:** Gadolinium-based MR Contrast Agents and Nephrogenic Systemic Fibrosis.</div>
+<div class="line added">Radiology online January 9, 2007, 10.1148/radiol.2423061640</div>
+<div class="line added">5.</div>
+<div class="line added">**K.</div>
+<div class="line added">Morcos:** Nephrogenic systemic fibrosis following the administration of extracellular gadolinium based contrast agents: is the stability of the contrast agent molecule an important factor in the pathogenesis of this condition?</div>
+<div class="line added">The British Journal of Radiology DOI:10.1259/bjr/17111243</div>
+<div class="line added">6.</div>
+<div class="line added">**Cowper SE, Robin HS, Steinberg SM, Su LD, Gupta S, LeBoit PE (2000).</div>
+<div class="line added">&quot;Scleromyxoedema-like cutaneous diseases in renal-dialysis patients&quot;.</div>
+<div class="line added">Lancet 356 (9234): 1000–1.**</div>
+<div class="line added">7.</div>
+<div class="line added">**Grobner T (2006).</div>
+<div class="line added">&quot;Gadolinium--a specific trigger for the development of nephrogenic fibrosing dermopathy and nephrogenic systemic fibrosis?&quot;.</div>
+<div class="line added">Nephrol.</div>
+<div class="line added">Dial.</div>
+<div class="line added">Transplant.</div>
+<div class="line added">8 Marckmann P, Skov L, Rossen K, et al (2006).</div>
+<div class="line added">&quot;Nephrogenic systemic fibrosis: suspected causative role of gadodiamide used for contrast-enhanced magnetic resonance imaging&quot;.</div>
+<div class="line added">J.</div>
+<div class="line added">Am.</div>
+<div class="line added">Soc.</div>
+<div class="line added">Nephrol.</div>
+<div class="line added">17 (9): 2359–62.**</div>
+<div class="line added">8.</div>
+<div class="line added">**Nephrogenic fibrosing dermopathy associated with exposure to gadolinium-containing contrast agents--St.</div>
+<div class="line added">Louis, Missouri, 2002-2006&quot;.</div>
+<div class="line added">MMWR Morb.</div>
+<div class="line added">Mortal.</div>
+<div class="line added">Wkly.</div>
+<div class="line added">Rep.</div>
+<div class="line added">56 (7): 137–41.**</div>
+<div class="line added">9.</div>
+<div class="line added">**2007**</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_66.html">&larr; Sample 66</a> | <a href="index.html">Index</a> | <a href="sample_68.html">Sample 68 &rarr;</a>
+</div>
+</body>
+</html>

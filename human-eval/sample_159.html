@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 159 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 159</h1>
+    <div class="meta">
+        <span>NCT: NCT04087720</span>
+        <span>Model: versa-4o-mini</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Willing and able to give informed consent;Willing and able to comply with the prescribed treatment protocol and evaluations for the duration of the study;Adult men or women ≥ 18 years of age;Is a recipient of a de novo kidney from a living or deceased donor and is &amp;gt;1 year post transplant prior to screening;Is on a stable standard of care immunosuppression therapy for at least 3 months prior to screening;Kidney allograft is functional at entry, based on an estimated glomerular filtration rate (eGFR) ≥ 15 mL&amp;#x2F;min&amp;#x2F;1.73m²;Women of childbearing potential have a negative screening serum pregnancy test and will be required to use a medically approved form of birth control during their participation in the study;Uncontrolled gout, defined as:Hyperuricemia during screening as documented by sUA ≥ 7 mg&amp;#x2F;dL during Screening and prior to entry into the Treatment Period (Note: the sUA may be repeated up to 3 times during the Screening Period to confirm eligibility), andInability to maintain sUA &amp;lt;6 mg&amp;#x2F;dL on other urate-lowering therapy or intolerable side effects or contraindicated with conventional urate-lowering therapy, andAt least 1 of the following:i.</div>
+<div class="line deleted">Evidence of tophaceous deposits; ii.</div>
+<div class="line deleted">Recurrent gout flares defined as 2 or more flares in the 12 months prior to Screening; iii.</div>
+<div class="line deleted">Presence of chronic gouty arthritis;Able to tolerate low-dose prednisone (&amp;lt; 10 mg&amp;#x2F;day) as part of the required standard gout flare prophylaxis regimen for ≥ 1 week before the first infusion.Exclusion Criteria:Any other organ transplant beside kidney;Any severe infection, unless treated and completely resolved at least 2 weeks prior to Day 1;Chronic or active hepatitis B virus infection;Known history of hepatitis C virus ribonucleic acid (RNA) positivity unless treated and viral load is negative;Known history of human immunodeficiency virus (HIV) positivity;Glucose-6-phosphate dehydrogenase (G6PD) deficiency (tested at the Screening Visit);Decompensated congestive heart failure or hospitalization for congestive heart failure within 3 months of the Screening Visit, uncontrolled arrhythmia, treatment for acute coronary syndrome (myocardial infarction or unstable angina), or uncontrolled blood pressure (&amp;gt; 160&amp;#x2F;100 mm Hg) at the end of the Screening Period (Day 1 prior to infusion);Pregnant, planning to become pregnant, breastfeeding, planning to impregnate female partner, or not using an effective form of birth control, as determined by the Investigator;Prior treatment with pegloticase, another recombinant uricase (rasburicase), or concomitant therapy with a polyethylene glycol-conjugated drug;Known allergy to pegylated products or history of anaphylactic reaction to a recombinant protein or porcine product;Receipt of an investigational drug within 4 weeks or 5 half-lives, whichever is longer, prior to Day 1, or plans to take an investigational drug during the study;Currently receiving systemic or radiologic treatment for ongoing cancer;History of malignancy within 5 years other than non-melanoma skin cancer, in situ carcinoma of cervix, early stage renal cell cancer or early stage prostate cancer that has been completely resected &amp;gt; 2 years prior to screening;Uncontrolled hyperglycemia with a plasma glucose value &amp;gt; 240 mg&amp;#x2F;dL at Screening that is not subsequently controlled by the end of the Screening Period;Diagnosis of osteomyelitis;Known history of hypoxanthine-guanine phosphoribosyl-transferase deficiency, such as Lesch-Nyhan and Kelley-Seegmiller syndrome;Unsuitable candidate for the study, based on the opinion of the Investigator (e.g., cognitive impairment), such that participation might create undue risk to the subject or interfere with the subject&amp;#x27;s ability to comply with the protocol requirements or complete the study;Currently receiving allopurinol, febuxostat or other urate lowering medications and unable to discontinue medication 7 days prior to Day 1; orCurrently receiving probenecid and unable to discontinue medication within 3 days, prior to Day 1.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">**Amended Eligibility Criteria (version 8)**</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Willing and able to give informed consent.</div>
+<div class="line added">2.</div>
+<div class="line added">Willing and able to comply with the prescribed treatment protocol and evaluations for the duration of the study.</div>
+<div class="line added">3.</div>
+<div class="line added">Adult men or women ≥ 18 years of age.</div>
+<div class="line added">4.</div>
+<div class="line added">Is a recipient of a de novo kidney from a living or deceased donor and is &gt;1 year post-transplant prior to screening.</div>
+<div class="line added">5.</div>
+<div class="line added">Is on a stable standard of care immunosuppression therapy for at least 3 months prior to screening.</div>
+<div class="line added">6.</div>
+<div class="line added">Kidney allograft is functional at entry, based on an estimated GFR (eGFR) ≥ 15 mL/min/1.73m².</div>
+<div class="line added">7.</div>
+<div class="line added">Women of childbearing potential have a negative screening serum pregnancy test and will be required to use a medically approved form of birth control during their participation in the study.</div>
+<div class="line added">8.</div>
+<div class="line added">Uncontrolled gout, defined as:</div>
+<div class="line added">- Hyperuricemia during screening as documented by sUA ≥ 7 mg/dL during Screening and prior to entry into the Treatment Period (Note: the sUA may be repeated up to 3 times during the Screening Period to confirm eligibility), and</div>
+<div class="line added">- Inability to maintain sUA &lt;6 mg/dL on other urate-lowering therapy or intolerable side effects or contraindicated with conventional urate-lowering therapy, and</div>
+<div class="line added">- At least 1 of the following:</div>
+<div class="line added">i.</div>
+<div class="line added">Evidence of tophaceous deposits</div>
+<div class="line added">ii.</div>
+<div class="line added">Recurrent gout flares defined as 2 or more flares in the 12 months prior to Screening</div>
+<div class="line added">iii.</div>
+<div class="line added">Presence of chronic gouty arthritis.</div>
+<div class="line added">9.</div>
+<div class="line added">Able to tolerate low-dose prednisone (&lt;10 mg/day) as part of the required standard gout flare prophylaxis regimen for ≥ 1 week before the first infusion.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Any other organ transplant beside kidney.</div>
+<div class="line added">2.</div>
+<div class="line added">Any severe infection, unless treated and completely resolved at least 2 weeks prior to Day 1.</div>
+<div class="line added">3.</div>
+<div class="line added">Chronic or active hepatitis B (HBV) infection.</div>
+<div class="line added">4.</div>
+<div class="line added">Known history of hepatitis C virus RNA positivity unless treated and viral load is negative.</div>
+<div class="line added">5.</div>
+<div class="line added">Known history of Human Immunodeficiency Virus (HIV) positivity.</div>
+<div class="line added">6.</div>
+<div class="line added">Glucose-6-phosphate dehydrogenase (G6PD) deficiency (tested at the Screening Visit).</div>
+<div class="line added">7.</div>
+<div class="line added">Decompensated congestive heart failure or hospitalization for congestive heart failure within 3 months of the Screening Visit, uncontrolled arrhythmia, treatment for acute coronary syndrome (myocardial infarction or unstable angina), or uncontrolled blood pressure (&gt;160/100 mmHg) at the end of the Screening Period (Day 1 prior to infusion).</div>
+<div class="line added">8.</div>
+<div class="line added">Pregnant, planning to become pregnant, breastfeeding, planning to impregnate female partner, or not using an effective form of birth control, as determined by the Investigator.</div>
+<div class="line added">9.</div>
+<div class="line added">Prior treatment with pegloticase, another recombinant uricase (rasburicase), or concomitant therapy with a polyethylene glycol-conjugated drug.</div>
+<div class="line added">10.</div>
+<div class="line added">Known allergy to pegylated products or history of anaphylactic reaction to a recombinant protein or porcine product.</div>
+<div class="line added">11.</div>
+<div class="line added">Receipt of an investigational drug within 4 weeks or 5 half-lives, whichever is longer, prior to Day 1, or plans to take an investigational drug during the study.</div>
+<div class="line added">12.</div>
+<div class="line added">Currently receiving systemic or radiologic treatment for ongoing cancer.</div>
+<div class="line added">13.</div>
+<div class="line added">History of malignancy within 5 years other than non-melanoma skin cancer, in situ carcinoma of cervix, early stage renal cell cancer or early stage prostate cancer that has been completely resected &gt;2 years prior to screening.</div>
+<div class="line added">14.</div>
+<div class="line added">Uncontrolled hyperglycemia with a plasma glucose value &gt;240 mg/dL at Screening that is not subsequently controlled by the end of the Screening Period.</div>
+<div class="line added">15.</div>
+<div class="line added">Diagnosis of osteomyelitis.</div>
+<div class="line added">16.</div>
+<div class="line added">Known history of hypoxanthine-guanine phosphoribosyl-transferase deficiency, such as Lesch-Nyhan and Kelley-Seegmiller syndrome.</div>
+<div class="line added">17.</div>
+<div class="line added">Unsuitable candidate for the study, based on the opinion of the Investigator (e.g., cognitive impairment), such that participation might create undue risk to the subject or interfere with the subject&#x27;s ability to comply with the protocol requirements or complete the study.</div>
+<div class="line added">18.</div>
+<div class="line added">Currently receiving allopurinol, febuxostat or other urate lowering medications and unable to discontinue medication 7 days prior to Day 1; or</div>
+<div class="line added">19.</div>
+<div class="line added">Currently receiving probenecid and unable to discontinue medication within 3 days, prior to Day 1.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_158.html">&larr; Sample 158</a> | <a href="index.html">Index</a> | <a href="sample_160.html">Sample 160 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 44 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 44</h1>
+    <div class="meta">
+        <span>NCT: NCT04992442</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Weighs at least 50 kg and body mass index (BMI) ≥18.0 and ˂32.0 kg&amp;#x2F;m^2 at Screening Visit.Continuous nonsmoker who has not used nicotine-containing products (including vaping) for at least 3 months prior to the first dosing and throughout the study, based on participant self-reporting.Medically healthy with no clinically significant medical history, physical examination, laboratory profiles, vital signs or ECGs, as deemed by the Investigator or designee.Exclusion Criteria:History or presence of cataracts or other clinically significant vision disturbances.Abnormal and clinically significant ECG abnormality at Screening visit:QT interval with Fridericia&amp;#x27;s correction method (QTcF) &amp;gt;450 milliseconds (ms) confirmed with one repeat testing.History or presence of gastritis, gastrointestinal tract, gastric bypass surgery, or hepatic disorder or other clinical condition which, in the opinion of the Investigator or designee, may affect the absorption, distribution, metabolism, or elimination of study drug.Has a risk of suicide according to the Investigator&amp;#x27;s clinical judgment [e.g., per Columbia-Suicide Severity Rating Scale (C-SSRS)] or has made a suicide attempt in the previous year prior to Screening Visit.Positive urine drug or alcohol results at screening or first check-in.Positive results at screening for human immunodeficiency virus (HIV), hepatitis B surface antigen (HBsAg), hepatitis C virus (HCV) or novel coronavirus 2019 (COVID-19).Seated blood pressure is less than 90&amp;#x2F;40 millimeter of mercury (mmHg) or greater than 140&amp;#x2F;90 mmHg at Screening.Seated HR is lower than 40 beats per minute (bpm) or higher than 99 bpm at Screening Visit.Estimated creatinine clearance &amp;lt;80 mL&amp;#x2F;min at Screening Visit.Has tattoo(s) or scarring at or near the site of IV infusion or any other condition which may interfere with infusion site examination, in the opinion of the Investigator.Has infrequent bowel movements (less than approximately once per day) within 30 days prior to first dosing.Recent history of abnormal bowel movements, such as diarrhea, loose stools, or constipation, within 2 weeks prior to first dosing.Has received radiolabeled substances or has been exposed to radiation sources within 12 months of first dosing or is likely to receive radiation exposure or radioisotopes within 12 months of first dosing such that participation in this study would increase their total exposure beyond the recommended levels considered safe [i.e., weighted annual limit recommended by the International Commission on Radiological Protection (ICRP) of 3000 milli roentgen equivalent man (mrem)].Unable to refrain from or anticipates the use of:Any drug, including prescription and nonprescription medications, herbal remedies, or vitamin supplements within 14 days prior to the first dosing and throughout the study, including the Follow-up Period.</div>
+<div class="line deleted">Thyroid hormone replacement medication may be permitted if the participant has been on the same stable dose for the immediate 3 months prior to first study drug administration.</div>
+<div class="line deleted">After the first dose of study drug, ibuprofen (up to 1.2 g per 24 hours) may be administered at the discretion of the Investigator or designee.</div>
+<div class="line deleted">Milk of Magnesia (i.e., magnesium hydroxide) (≤60 mL per day) may be administered to ensure defecation, at discretion of the Investigator or designee.Any drugs known to be significant inducers of cytochrome P450 (CYP)3A4, CYP2C19 or uridine diphosphate glucuronosyltransferase (UGT), including St.</div>
+<div class="line deleted">John&amp;#x27;s Wort, within 28 days prior to the first dosing and throughout the study, including the Follow-up Period.</div>
+<div class="line deleted">Appropriate sources (e.g., Flockhart Table^TM) will be consulted to confirm lack of PK&amp;#x2F;pharmacodynamic interaction with study drug(s).AlcoholHas been on a diet incompatible with the on-study diet, in the opinion of the Investigator or designee, within the 30 days prior to the first dosing and throughout the study.Donation of blood or significant blood loss within 56 days prior to the first dosing.Plasma donation within 7 days prior to the first dosing.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">the results of the study, including: a.</div>
+<div class="line added">History of cancer, including any type of cancer, unless the tumor is in a nonmetastatic, non-invasive stage and is no longer involved.</div>
+<div class="line added">b.</div>
+<div class="line added">History of infectious disease, including TB, HIV/AIDS, or other sexually transmitted infections, unless the participant is considered free of infection at the time of the Screening visit.</div>
+<div class="line added">c.</div>
+<div class="line added">History of cardiovascular disease, including heart failure, angina pectoralis, or prior MI.</div>
+<div class="line added">8.</div>
+<div class="line added">History of any condition that impairs the ability to perform the study procedures, including inability to stand, sit, or crawl, or inability to walk or climb stairs, or inability to read, write, or type.</div>
+<div class="line added">9.</div>
+<div class="line added">History of chronic alcohol use (≥1000 drinks/month), or use of any other substance that impairs the Central Nervous System (CNS) (e.g., illicit drugs, alcohol, or other CNS-depressants).</div>
+<div class="line added">10.</div>
+<div class="line added">History of recent (within 30 days) or ongoing (within 12 weeks) substance use other than alcohol or abstinence from smoking.</div>
+<div class="line added">10.a.</div>
+<div class="line added">Participants who are currently using any illicit or experimental drugs, including but not limited to: a.</div>
+<div class="line added">Opioids (including heroin, methadone, or bup norting) b.</div>
+<div class="line added">Stimulants (including amphetamines, cocaine, methadone, or other synthetic or natural analogs) c.</div>
+<div class="line added">Psychostimulants (including amphetamine, cocaine, or other synthetic or natural analogs) d.</div>
+<div class="line added">depressants (including alcohol, benzos, or other synthetic or natural analogs) e.</div>
+<div class="line added">Analguezes (including but not limited to: 5-MP, 5-MeP, 5-Hydroxytryptophan, 5-MeTH, 5-MeDOPA, 5-MeNA, 5-MP, 5-MeR, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5-MeF, 5-MeG, 5-MeH, 5-MeI, 5-MeJ, 5-MeK, 5-MeL, 5-MeN, 5-MeO, 5-MeP, 5-MeQ, 5-MeR, 5-MeS, 5-MeT, 5-MeU, 5-MeX, 5-MeY, 5-MeZ, 5-MeA, 5-MeB, 5-MeC, 5-MeD, 5</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_43.html">&larr; Sample 43</a> | <a href="index.html">Index</a> | <a href="sample_45.html">Sample 45 &rarr;</a>
+</div>
+</body>
+</html>

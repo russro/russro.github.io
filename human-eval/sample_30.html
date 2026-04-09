@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 30 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 30</h1>
+    <div class="meta">
+        <span>NCT: NCT03266588</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Subjects with 2-8 moderate to severe migraines&amp;#x2F;monthAge of onset of migraines prior to 50 years of ageMigraine attacks, on average, lasting 4-72 hours if untreatedAbility to distinguish migraine attacks from tension&amp;#x2F;cluster headachesPatients with contraindications for use of triptans may be included provided they meet all other study entry criteriaExclusion Criteria:History of basilar migraine or hemiplegic migraineHistory of HIV diseaseHistory with current evidence of uncontrolled, unstable or recently diagnosed cardiovascular disease, such as ischemic heart disease, coronary artery vasospasm, and cerebral ischemia.Uncontrolled hypertension or uncontrolled diabetes (however, patients can be included who have stable hypertension and &amp;#x2F;or diabetes for 3 months prior to screeningHistory of gastric or small intestinal surgery or has a disease that causes malabsorptionBMI ≥ 30HbA1c ≥ 6.5%</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">## Amended Eligibility Criteria (Version 24)</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">* Subjects with 4-14 moderate to severe migraines/month</div>
+<div class="line added">* Age of onset of migraines prior to 50 years of age</div>
+<div class="line added">* Migraine attacks, on average, lasting 4-72 hours if untreated</div>
+<div class="line added">* Ability to distinguish migraine attacks from tension/cluster headaches</div>
+<div class="line added">* Patients with contraindications for use of triptans may be included provided they meet all other study entry criteria</div>
+<div class="line added">* Patients on prophylactic migraine medication are permitted to remain on therapy if the dose has been stable for at least 2 months prior to the Baseline Visit, and the regimen should not change during the course of the study.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">* History of basilar migraine or hemiplegic migraine</div>
+<div class="line added">* History of HIV disease</div>
+<div class="line added">* History with current evidence of uncontrolled, unstable or recently diagnosed cardiovascular disease, such as ischemic heart disease, coronary artery vasospasm, and cerebral ischemia.</div>
+<div class="line added">Patients with myocardial infarction (MI), acute coronary syndrome (ACS), percutaneous coronary intervention (PCI), cardiac surgery, stroke or transient ischemic attack (TIA) during 6 months prior to screening.</div>
+<div class="line added">* Uncontrolled hypertension or uncontrolled diabetes (however, patients can be included who have stable hypertension and /or diabetes for 3 months prior to screening).</div>
+<div class="line added">Blood pressure greater than 150 mm Hg systolic or 100 mm Hg diastolic after 10 minutes of rest is exclusionary.</div>
+<div class="line added">* Current diagnosis of major depressive disorder or has had a major depressive episode within the last 12 months, other pain syndromes, psychiatric conditions, dementia, or significant neurological disorders (other than migraine) that, in the Investigator’s opinion, might interfere with study assessments</div>
+<div class="line added">* History of gastric or small intestinal surgery, or has a disease that causes malabsorption</div>
+<div class="line added">* History or diagnosis of Gilbert’s Syndrome or any other active hepatic or biliary disorder</div>
+<div class="line added">* History or current evidence of any unstable medical conditions (e.g., history of congenital heart disease or arrhythmia, known or suspected infection, hepatitis B or C, or cancer) that, in the investigator’s opinion, would expose them to undue risk of a significant adverse event (AE) or interfere with assessments of safety or efficacy during the course of the trial</div>
+<div class="line added">* History of, treatment for, or evidence of, alcohol or drug abuse within the past 12 months or patients who have met DSM-V criteria [15] for any significant substance use disorder within the past 12 months from the date of the screening visit</div>
+<div class="line added">* Detectable levels of cocaine, amphetamine and phencyclidine (PCP) in the drug screen are exclusionary.</div>
+<div class="line added">Patients who are positive for amphetamines on the urine drug screen may have their urine samples evaluated for further analysis at the investigator’s discretion to rule out a false positive result</div>
+<div class="line added">* Detectable levels of marijuana in the drug screen are not exclusionary, if in the investigator’s documented opinion the patient does not meet DSM- V criteria [15] for substance abuse or dependence; in the investigator’s documented opinion, the positive test does not signal a clinical condition that would impact the safety of the patient or interpretation of the study results.</div>
+<div class="line added">* Hematologic or solid malignancy diagnosis within 5 years prior to screening.</div>
+<div class="line added">Subjects with a history of localized basal cell or squamous cell skin cancer are eligible for the study if they are cancer-free prior to the screening visit in this study.</div>
+<div class="line added">* Current diagnosis of schizophrenia, major depressive disorder requiring treatment with atypical antipsychotics, bipolar disorder, or borderline personality disorder</div>
+<div class="line added">* Body mass index &gt; 30 kg/m2</div>
+<div class="line added">* History of gallstones or cholecystectomy</div>
+<div class="line added">* History of drug or other allergy which, in the opinion of the investigator, makes the subject unsuitable for participation in the study</div>
+<div class="line added">* Women of childbearing potential (WOCBP) who are unwilling or unable to use an acceptable contraceptive method or abstinence to avoid pregnancy for the entire study period and for up to 8 weeks after last dose of study medication</div>
+<div class="line added">* Women who are pregnant or breastfeeding</div>
+<div class="line added">* Women with a positive pregnancy test at screening or prior to study drug administration</div>
+<div class="line added">* Estimated glomerular filtration rate (eGFR) according to the re-expressed abbreviated (four-variable) Modification of Diet in Renal Disease (MDRD) Study equation ≤ 40 ml/min/1.73m 2</div>
+<div class="line added">* Corrected QT interval &gt; 470 msec (QTc by method of Frederica), at Screening</div>
+<div class="line added">* Left Bundle Branch block</div>
+<div class="line added">* Right Bundle Branch Block with a QRS duration ≥ 150 msec.</div>
+<div class="line added">* Intraventricular Conduction Defect with a QRS duration ≥ 150 msec.</div>
+<div class="line added">* Serum bilirubin (Total, Direct or Indirect) bilirubin &gt; 1 x ULN (Only abnormal values of between 1-1.5x ULN may be repeated once for assessment of eligibility during the screening period.)</div>
+<div class="line added">* Neutrophil count ≤ 1000/µL (or equivalent).</div>
+<div class="line added">* AST or ALT &gt; 1 x ULN (Only abnormal values of between 1-1.5x ULN may be repeated once for assessment of eligibility during screening period.)</div>
+<div class="line added">* HbA1c &gt; 6.5%</div>
+<div class="line added">* Prisoners or subjects who are involuntarily incarcerated</div>
+<div class="line added">* Subjects who are compulsorily detained for treatment of either a psychiatric or physical (e.g., infectious disease) illness</div>
+<div class="line added">* Non-compliance with or inability to complete eDiary during Observation Period.</div>
+<div class="line added">Non-compliance is more than 4 missed evening reports during the Observation Period.</div>
+<div class="line added">* Exposure to non-biological investigational agents (other than rimegepant) within the 30 days prior to Screening visit.</div>
+<div class="line added">* Exposure to biological investigational agents within the 90 days prior to Screening visit.</div>
+<div class="line added">* Score of &gt; 0 on the Sheehan Suicidality Tracking Scale (See Section 6.2.5) for the period of 30 days prior to screening.</div>
+<div class="line added">* Previous enrollment in study BHV3000-201.</div>
+<div class="line added">* Participation in any other investigational clinical trial while participating in this clinical trial.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_29.html">&larr; Sample 29</a> | <a href="index.html">Index</a> | <a href="sample_31.html">Sample 31 &rarr;</a>
+</div>
+</body>
+</html>

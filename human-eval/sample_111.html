@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 111 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 111</h1>
+    <div class="meta">
+        <span>NCT: NCT03643562</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:To be included in the study, a participant must meet the following criteria:Is male or female and at least 4 years of age at time of screening.Has a confirmed diagnosis of NPC and exhibits neurologic symptoms.Has written informed consent&amp;#x2F;assent to participate.Has the ability to undergo LP and IT drug administration.If taking miglustat (Zavesca®), must have been on a stable dose for the past 6 weeks and be willing to remain on a stable dose for the duration of participation in the study, or discontinue miglustat use at least 6 weeks before entry into the study (Day 1).If has a history of seizures, the condition is adequately controlled as per protocol requirements.Agrees to discontinue any investigational treatments (other than adrabetadex) for at least 1 month before first dose on Day 1.If engaging in heterosexual sex, agrees to use a protocol-defined method of contraception throughout the study, and until 30 days after completing the study.Has a responsible adult who the investigator determines is able and willing to comply with study requirements and a parent&amp;#x2F;guardian who will accompany the participant to study visits.Exclusion Criteria:Participants will be excluded from the study if they meet any of the following criteria:Weighs less than 15 kg.Has a history of hypersensitivity reactions to any product containing 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) or has a history of hypersensitivity reactions or allergy to anesthesia&amp;#x2F;sedation.Has received treatment with any investigational product (other than adrabetadex) within 1 month prior to Day 1 of treatment.Is pregnant or nursing.Has systemic infection or uncontrolled psychosis.Has known history of a bleeding disorder.Has used anticoagulants within 2 months of entry into the study.Per protocol, or in the opinion of the investigator:has laboratory values that would preclude participationhas suspected infection of the central nervous system (CNS)has a spinal deformity that could impact performance of repeated LPshas a serious skin infection in the lumbar region or evidence of obstructive or normal pressure hydrocephalusis unable to comply with the study requirementshas a medical condition that might increase the risk of participation</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">**Amended Eligibility Criteria (Version 17):**</div>
+<div class="line added"></div>
+<div class="line added">Inclusion Criteria:</div>
+<div class="line added">- To be included in the study, a participant must meet the following criteria:</div>
+<div class="line added">- Male or female and at least 4 years of age at time of screening.</div>
+<div class="line added">- Has a confirmed diagnosis of NPC and exhibits neurologic symptoms.</div>
+<div class="line added">- Patient or parent/guardian must provide written informed consent/assent to participate.</div>
+<div class="line added">- Has the ability to undergo lumbar puncture (LP) and intra-thecal (IT) drug administration.</div>
+<div class="line added">- If taking miglustat (Zavesca®), must have been on a stable dose for the past 6 weeks and be willing to remain on a stable dose for the duration of participation in the study, or discontinue miglustat use at least 6 weeks before entry into the study (Day 1).</div>
+<div class="line added">- If there is a history of seizures, the condition must be adequately controlled, i.e., the pattern of seizure activity must be stable and the subject must be on a stable dose and regimen of antiepileptic medication during the 1 month prior to Screening, with no change in dose or regimen up to and including the day of the first dose of adrabetadex (Day 1).</div>
+<div class="line added">- If not currently receiving adrabetadex, agrees to discontinue any other investigational treatments for at least 1 month prior to first dose of adrabetadex (Day 1); subjects who are currently receiving intrathecal adrabetadex are eligible to participate.</div>
+<div class="line added">- Sexually active females and males must use a medically acceptable method of contraception and must agree to continue use of this method for the duration of the study and for 30 days after participation in the study.</div>
+<div class="line added">Acceptable methods of contraception include barrier method with spermicide, intrauterine device, steroidal contraceptive in conjunction with a barrier method, abstinence, or same-sex partner.</div>
+<div class="line added">- Patient or parent/guardian must possess the ability, in the clinician’s opinion, to understand and comply with study requirements, including clinical outcome measurements and instructions, for the entire duration of the study.</div>
+<div class="line added">- Caregiver, parent, guardian, or responsible adult must be able and willing to accompany the subject to study visits.</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">- Weighs less than 15 kg.</div>
+<div class="line added">- Has uncontrolled psychosis.</div>
+<div class="line added">- Has a history of hypersensitivity reactions to any product containing 2-hydroxypropyl-β-cyclodextrin (HP-β-CD) or has a history of hypersensitivity reactions or allergy to anesthesia/sedation.</div>
+<div class="line added">- Has received treatment with any investigational product (other than adrabetadex) within 1 month prior to Day 1 of treatment.</div>
+<div class="line added">- Is a female who is pregnant or nursing.</div>
+<div class="line added">- Has a suspected infection of the central nervous system (CNS) or any systemic infection.</div>
+<div class="line added">- Has a spinal deformity that, in the opinion of the clinician, is likely to impact the ability to perform repeated LPs.</div>
+<div class="line added">- In the opinion of the clinician, has a serious skin infection in the lumbar region within 2 months of entry into the study.</div>
+<div class="line added">- Has neutropenia, defined as an absolute neutrophil count of less than 1.0 × 10^9/L.</div>
+<div class="line added">- Has thrombocytopenia (platelet count less than 75 × 10^9/L).</div>
+<div class="line added">- Has an activated partial thromboplastin time (aPTT) or prothrombin time (PT) prolonged by greater than 1.5 times the upper limit of normal (ULN) or a known history of a bleeding disorder.</div>
+<div class="line added">- Has evidence of obstructive hydrocephalus or normal pressure hydrocephalus.</div>
+<div class="line added">- Has recently used anticoagulants (in the 2 weeks prior to first dose of adrabetadex [Day 1]).</div>
+<div class="line added">- In the opinion of the clinician, is unable to comply with the protocol or has a medical condition (e.g., cardiovascular, respiratory, hematologic, neurologic, renal) that would potentially increase the risk of participation.</div>
+<div class="line added"></div>
+<div class="line added">After 21 June 2021, subjects must be discontinued from the study if the investigator does not consider them to be benefiting from treatment with intrathecal adrabetadex and/or they do not understand the risks associated with adrabetadex, including hearing loss.</div>
+<div class="line added">This discussion with the subject should be documented in the subject’s medical record, and only those subjects (or legally authorized representatives) who have demonstrated an understanding of the risk/benefit of adrabetadex treatment should be permitted to continue in the study.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_110.html">&larr; Sample 110</a> | <a href="index.html">Index</a> | <a href="sample_112.html">Sample 112 &rarr;</a>
+</div>
+</body>
+</html>

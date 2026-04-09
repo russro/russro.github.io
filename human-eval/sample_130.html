@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 130 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 130</h1>
+    <div class="meta">
+        <span>NCT: NCT03680521</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Imaging results consistent with locally-advanced RCCCandidate for partial or complete nephrectomy as part of treatment plan.Measurable disease per RECIST version 1.1.ECOG performance status 0 or 1.Adequate bone marrow and organ function.Exclusion Criteria:Prior systemic anti-tumor treatment for RCC.Patients who are receiving any other investigational agents.Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.Inability to undergo baseline tumor biopsy.Active or prior documented autoimmune or immunocompromising conditions.Uncontrolled hypertension.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:</div>
+<div class="line added">1.</div>
+<div class="line added">Imaging results consistent with locally-advanced RCC without evidence of metastatic disease and absence of adjacent organ invasion or retroperitoneal adenopathy (cT2-T3b, N0, M0).</div>
+<div class="line added">2.</div>
+<div class="line added">Candidate for partial or complete nephrectomy that extirpates all tumor tissue as part of treatment plan.</div>
+<div class="line added">3.</div>
+<div class="line added">Measurable disease as per RECIST version 1.1.</div>
+<div class="line added">4.</div>
+<div class="line added">Eastern Cooperative Oncology Group (ECOG) performance status 0 or 1.</div>
+<div class="line added">5.</div>
+<div class="line added">Adequate bone marrow and organ function demonstrated by:</div>
+<div class="line added">a.</div>
+<div class="line added">Absolute neutrophil count ≥ 1,000/mm3 (≥ 1.0 × 10^9/L);</div>
+<div class="line added">b.</div>
+<div class="line added">Platelet count ≥ 100 × 10^9/L (≥ 100,000 per mm3);</div>
+<div class="line added">c.</div>
+<div class="line added">ALT and AST ≤ 2.5 × ULN;</div>
+<div class="line added">d.</div>
+<div class="line added">Serum bilirubin ≤ 1.5 × ULN, or ≤ 3.0 × ULN for patients with Gilbert Syndrome;</div>
+<div class="line added">e.</div>
+<div class="line added">Serum creatinine ≤ 1.5 × ULN, or creatinine clearance (CrCl) ≥ 50 mL/min.</div>
+<div class="line added">6.</div>
+<div class="line added">≥ 18 years of age.</div>
+<div class="line added">7.</div>
+<div class="line added">Women of child-bearing potential (WOCBP) or men whose partner is a WOCBP agrees to use contraception while participating in this study, and for a period of 6 months following termination of study treatment.</div>
+<div class="line added">8.</div>
+<div class="line added">Completed informed consent process, including signing Institutional Review Board/Ethics Committee/Research Ethics Board (IRB/EC/REB) approved informed consent form.</div>
+<div class="line added">9.</div>
+<div class="line added">Willing to comply with clinical trial instructions and requirements.</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">1.</div>
+<div class="line added">Prior systemic anti-tumor treatment for RCC.</div>
+<div class="line added">2.</div>
+<div class="line added">Patients who are receiving any other investigational agents.</div>
+<div class="line added">3.</div>
+<div class="line added">Clinical status indicating that immediate surgery (within 6 weeks) is warranted regardless of whether neoadjuvant therapy is to be administered, as assessed by the treating surgeon.</div>
+<div class="line added">4.</div>
+<div class="line added">Inability to undergo baseline tumor biopsy.</div>
+<div class="line added">5.</div>
+<div class="line added">Active or prior documented autoimmune disease, except for patients with Type I diabetes, vitiligo, Grave’s disease, residual hypothyroidism due to autoimmune condition only requiring hormone replacement, or psoriasis not requiring systemic treatment.</div>
+<div class="line added">6.</div>
+<div class="line added">Active or prior immunocompromising conditions, including:</div>
+<div class="line added">a.</div>
+<div class="line added">Current or prior use of immunosuppressive medication within 28 days before the first dose of study treatment, with exceptions for intranasal and inhaled corticosteroids or systemic corticosteroids at physiological doses not exceeding 10 mg/day of prednisone or equivalent;</div>
+<div class="line added">b.</div>
+<div class="line added">Known acute or chronic human immunodeficiency virus (HIV);</div>
+<div class="line added">c.</div>
+<div class="line added">History of primary immunodeficiency;</div>
+<div class="line added">d.</div>
+<div class="line added">History of allogeneic transplant.</div>
+<div class="line added">7.</div>
+<div class="line added">Known acute or chronic hepatitis B or hepatitis C.</div>
+<div class="line added">8.</div>
+<div class="line added">History of hypersensitivity to study treatment excipient.</div>
+<div class="line added">9.</div>
+<div class="line added">History of severe hypersensitivity reaction to any monoclonal antibody.</div>
+<div class="line added">10.</div>
+<div class="line added">Use of live vaccines against infectious disease within 28 days of initiation of study therapy; killed vaccinations are allowed at any appropriate time before and during the study.</div>
+<div class="line added">11.</div>
+<div class="line added">Uncontrolled arterial hypertension (&gt; 150 mm Hg systolic or &gt; 100 mm Hg diastolic) on multiple observations despite standard of care treatment.</div>
+<div class="line added">12.</div>
+<div class="line added">History of stroke or transient ischemic attack within the previous 6 months.</div>
+<div class="line added">13.</div>
+<div class="line added">Any of the following cardiac abnormalities:</div>
+<div class="line added">a.</div>
+<div class="line added">Unstable angina pectoris;</div>
+<div class="line added">b.</div>
+<div class="line added">Congestive heart failure ≥ NYHA Class 3;</div>
+<div class="line added">c.</div>
+<div class="line added">QTc &gt; 480 milliseconds;</div>
+<div class="line added">d.</div>
+<div class="line added">Left ventricular ejection fraction (LVEF) ≤ 40%.</div>
+<div class="line added">14.</div>
+<div class="line added">Concomitant medication known to cause prolonged QT which cannot be discontinued or changed to a different medication prior to enrollment.</div>
+<div class="line added">15.</div>
+<div class="line added">Known or suspected presence of another malignancy that could be mistaken for the malignancy under study during disease assessments.</div>
+<div class="line added">16.</div>
+<div class="line added">Pregnancy.</div>
+<div class="line added">WOCBP must have a negative serum or urine pregnancy test documented within the screening period prior to start of study drug.</div>
+<div class="line added">17.</div>
+<div class="line added">Breast-feeding or planning to breast feed during the study or within 6 months after study treatment.</div>
+<div class="line added">18.</div>
+<div class="line added">Any serious illness, uncontrolled inter-current illness, psychiatric illness, active or uncontrolled infection, or other medical history, including laboratory results, which, in the Investigator’s opinion, would be likely to interfere with the patient’s participation in the study, or with the interpretation of the results.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_129.html">&larr; Sample 129</a> | <a href="index.html">Index</a> | <a href="sample_131.html">Sample 131 &rarr;</a>
+</div>
+</body>
+</html>

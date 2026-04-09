@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 95 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 95</h1>
+    <div class="meta">
+        <span>NCT: NCT00804856</span>
+        <span>Model: local-qwen-3b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Male or female adult with relapsed&amp;#x2F;refractory AML ineligible for intensive treatment (phase I part only)Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)Patient is eligible for LD-Ara-C treatmentLife expectancy &amp;gt; 3 monthsEastern co-operative oncology group (ECOG, R01-0787) performance score &amp;gt;=2 at screeningSigned written informed consent consistent with international conference on harmonisation, good clinical practice (ICH-GCP) and local legislationExclusion Criteria:Previously untreated AML (phase I part only)Relapsed or treatment refractory AML (phase IIa part only)Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)Hypersensitivity to one of the trial drugs or the excipientsOther malignancy requiring treatmentSymptomatic central nervous system involvementClinically relevant QT prolongation (e.g.</div>
+<div class="line deleted">long QT syndrome)Aspartate amino transferase (AST) or alanine amino transferase (ALT) greater than 2.5 times the upper limit of normal (ULN), or AST or ALT greater than 5 times the ULN in case of known leukaemia liver involvementProthrombin time (PT) &amp;gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)Bilirubin greater than 1.5 mg&amp;#x2F;dl (&amp;gt; 26 mcmol&amp;#x2F;L)Serum creatinine greater than 2.0 mg&amp;#x2F;dlConcomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g.</div>
+<div class="line deleted">active severe infection, unstable angina pectoris or cardiac arrhythmiaPsychiatric illness or social situation that would limit compliance with trial requirementsConcomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drugContraindications for cytarabine treatment according to the SPCFemale patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e.</div>
+<div class="line deleted">combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.).Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trialPregnant or nursing female patientsPatient unable to comply with the protocol</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Amended Eligibility Criteria (version 3):</div>
+<div class="line added"></div>
+<div class="line added">Inclusion Criteria:</div>
+<div class="line added">- Male or female adult with relapsed/refractory AML ineligible for intensive treatment (phase I part only)</div>
+<div class="line added">- Male or female adult with previously untreated AML ineligible for intensive treatment (phase IIa part only)</div>
+<div class="line added">- Confirmed diagnosis of AML according to the WHO definition (except for acute promyelocytic leukaemia, APL)</div>
+<div class="line added">- Patient is eligible for LD-Ara-C treatment</div>
+<div class="line added">- Life expectancy ≥ 3 months</div>
+<div class="line added">- Eastern Cooperative Oncology Group (ECOG) performance score ≥ 2 at screening</div>
+<div class="line added">- Signed written informed consent consistent with international conference on harmonization, good clinical practice (ICH-GCP) and local legislation</div>
+<div class="line added">- No hypersensitivity to one of the trial drugs or the excipients</div>
+<div class="line added">- No other malignancy requiring treatment</div>
+<div class="line added">- No symptomatic central nervous system involvement</div>
+<div class="line added">- No clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &gt; 470 ms)</div>
+<div class="line added">- Aspartate amino transferase (AST) or alanine amino transferase (ALT) ≤ 2.5 times the upper limit of normal (ULN), or AST or ALT ≤ 5 times the ULN in case of known leukaemia liver involvement</div>
+<div class="line added">- Prothrombin time (PT) ≤ 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)</div>
+<div class="line added">- Bilirubin ≤ 1.5 mg/dL (≤ 26 #mol/L)</div>
+<div class="line added">- Serum creatinine ≤ 2.0 mg/dL</div>
+<div class="line added">- No concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g.</div>
+<div class="line added">active severe infection, unstable angina pectoris or cardiac arrhythmia, or severe heart failure/cardiac insufficiency</div>
+<div class="line added">- No psychiatric illness or social situation that would limit compliance with trial requirements</div>
+<div class="line added">- No concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug</div>
+<div class="line added">- No contraindications for cytarabine treatment according to the SPC</div>
+<div class="line added">- Female patients of childbearing potential who are sexually active and unwilling to use a medically acceptable method of contraception during the trial, i.e.</div>
+<div class="line added">combination of two forms of effective contraception (hormonal contraception, intrauterine device, condom with spermicide, etc.)</div>
+<div class="line added">- Male patients with partners of childbearing potential who are unwilling to use condoms in combination with a second medically acceptable method of contraception during the trial</div>
+<div class="line added">- Not pregnant or nursing</div>
+<div class="line added">- Patient able to comply with the protocol</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">- Previously untreated AML (phase I part only)</div>
+<div class="line added">- Relapsed or treatment refractory AML (phase IIa part only)</div>
+<div class="line added">- Patient with APL (AML subtype M3 according to the French-American-British (FAB) classification)</div>
+<div class="line added">- Hypersensitivity to one of the trial drugs or the excipients</div>
+<div class="line added">- Other malignancy requiring treatment</div>
+<div class="line added">- Symptomatic central nervous system involvement</div>
+<div class="line added">- Clinically relevant QT prolongation (e.g., long QT syndrome, QTcF &gt; 470 ms)</div>
+<div class="line added">- Aspartate amino transferase (AST) or alanine amino transferase (ALT) &gt; 2.5 times the upper limit of normal (ULN), or AST or ALT &gt; 5 times the ULN in case of known leukaemia liver involvement</div>
+<div class="line added">- Prothrombin time (PT) &gt; 1.5 x ULN for subjects not on therapeutic vitamin K antagonists (phenprocoumon, warfarin)</div>
+<div class="line added">- Bilirubin &gt; 1.5 mg/dL (&gt; 26 #mol/L)</div>
+<div class="line added">- Serum creatinine &gt; 2.0 mg/dL</div>
+<div class="line added">- Concomitant intercurrent illness, which would compromise the evaluation of efficacy or safety of the trial drug, e.g.</div>
+<div class="line added">active severe infection, unstable angina pectoris, cardiac arrhythmia, or severe heart failure/cardiac insufficiency</div>
+<div class="line added">- Psychiatric illness or social situation that would limit compliance with trial requirements</div>
+<div class="line added">- Concomitant therapy, which is considered relevant for the evaluation of the efficacy or safety of the trial drug</div>
+<div class="line added">- Contraindications for cytarabine treatment according to the SPC</div>
+<div class="line added">- Patient unable to comply with the protocol</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_94.html">&larr; Sample 94</a> | <a href="index.html">Index</a> | <a href="sample_96.html">Sample 96 &rarr;</a>
+</div>
+</body>
+</html>

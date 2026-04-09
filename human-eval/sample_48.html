@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 48 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 48</h1>
+    <div class="meta">
+        <span>NCT: NCT02836470</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Scheduled to undergo an elective (non-emergent) bowel resection with or without a planned stoma via laparotomy or minimally invasive technique.</div>
+<div class="line deleted">This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.Exclusion Criteria:Subjects will not be eligible for participation in the study if they meet ANY of the following exclusion criteria:&amp;lt;18 or &amp;gt;80 years of age.Requires emergency bowel surgery.Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis.</div>
+<div class="line deleted">Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.American Society of Anesthesiologists (ASA) Class 4 or 5.Insulin dependent diabetes mellitus.Known inability to take the study drug orally (i.e.</div>
+<div class="line deleted">complete small bowel obstruction).Has contraindications or potential risk factors to taking TXA.</div>
+<div class="line deleted">These include subjects with:Known sensitivity to TXA;Recent craniotomy (past 30 days);Active cerebrovascular bleed;Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome);Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction, orContinuing use of a combined hormonal contraceptive and or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).Has the following risk factors for thromboembolic disease:Known medical history of congenital or acquired thrombophilia such as, but not limited to patients with:Sickle cell disease;Nephrotic syndrome;Factor V Leiden;Prothrombin gene mutation;Protein C or S deficiency;Antithrombin III deficiency;Antiphospholipid syndrome.Stage IV malignant neoplasm;Neurologic paresis, partial paralysis, or paralysis;Pacemaker;History of pulmonary embolism, deep vein thrombosis, cerebrovascular accident, or rental venous&amp;#x2F;arterial occlusion;History of or current seizure disorder.Patients with myeloproliferative disorders.Body Mass Index (BMI) &amp;gt;40.Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.Planned treatment with alvimopan (Entereg®) during study participation period.Received any other investigational therapy within 4 weeks prior to RandomizationChronic opioid usage, defined by the American Pain Society as daily or near-daily use of opioids for at least 90 days.Female subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30.</div>
+<div class="line deleted">Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.Known history of radiation enteritis.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Okay, so I need to help modify the clinical trial eligibility criteria based on the provided supporting evidence.</div>
+<div class="line added">The original criteria are from Version 0, and I need to adjust them to Version 1, incorporating the new information from the study protocol amendments.</div>
+<div class="line added"></div>
+<div class="line added">First, I&#x27;ll look at the original inclusion criteria.</div>
+<div class="line added">It mentions elective bowel resection with or without a planned stoma via laparotomy or minimally invasive technique.</div>
+<div class="line added">The supporting evidence includes a Protocol Amendment #6 from 26 August 2022, which adds a new inclusion criterion: subjects willing to perform and comply with all study procedures, including attending clinic visits and undergoing a second surgery for stoma takedown or detecting intra-abdominal adhesions.</div>
+<div class="line added"></div>
+<div class="line added">So, I should add this as a new point in the inclusion criteria.</div>
+<div class="line added">It&#x27;s important to note that this is a new requirement, so it should be clearly stated.</div>
+<div class="line added"></div>
+<div class="line added">Next, looking at the exclusion criteria, the original Version 0 had several points, including age, prior surgery, ASA class, IBD, etc.</div>
+<div class="line added">The Protocol Amendment #6 adds a new exclusion: peritoneal carcinomatosis.</div>
+<div class="line added">I need to include this under exclusion criteria.</div>
+<div class="line added"></div>
+<div class="line added">Also, in the supporting evidence, there&#x27;s a mention of listing abbreviations and definitions.</div>
+<div class="line added">However, the task is to modify the eligibility criteria, not to add new sections.</div>
+<div class="line added">So, I might not need to include that unless it&#x27;s relevant to the criteria itself.</div>
+<div class="line added"></div>
+<div class="line added">I should also check if any other criteria have been updated.</div>
+<div class="line added">The original Version 0 had exclusion criteria about emergency surgery, prior IBD surgeries, ASA class, etc.</div>
+<div class="line added">The new version adds peritoneal carcinomatosis, so that&#x27;s a new exclusion.</div>
+<div class="line added"></div>
+<div class="line added">Additionally, the supporting evidence mentions that LB1148 is the investigational product, formulated with PEG, glucose, electrolytes, and water.</div>
+<div class="line added">But this seems more like a drug description rather than an eligibility criterion.</div>
+<div class="line added">So, maybe it&#x27;s not necessary to include it unless it affects the inclusion or exclusion criteria, which doesn&#x27;t seem to be the case here.</div>
+<div class="line added"></div>
+<div class="line added">I should also consider if any new inclusion or exclusion criteria were added in the Protocol Amendment #6 that weren&#x27;t present in Version 0.</div>
+<div class="line added">Yes, the willingness to perform additional surgery and the new exclusion for peritoneal carcinomatosis.</div>
+<div class="line added"></div>
+<div class="line added">So, to summarize, the modifications needed are:</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">Add a new inclusion criterion about performing and complying with study procedures, including attending clinic visits and undergoing a second surgery for stoma takedown or detecting intra-abdominal adhesions.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">Add a new exclusion criterion for peritoneal carcinomatosis.</div>
+<div class="line added"></div>
+<div class="line added">I need to ensure that the new inclusion is clearly stated and that the exclusion is properly categorized under the exclusion criteria.</div>
+<div class="line added"></div>
+<div class="line added">Also, I should make sure that the language is clear and concise, maintaining clinical accuracy and relevance.</div>
+<div class="line added"></div>
+<div class="line added">Let me draft the modified inclusion and exclusion criteria accordingly.</div>
+<div class="line added">&lt;/think&gt;</div>
+<div class="line added"></div>
+<div class="line added">**Modified Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">Scheduled to undergo an elective (non-emergent) bowel resection with or without a planned stoma via laparotomy or minimally invasive technique.</div>
+<div class="line added">This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">Willing to perform and comply with all study procedures, including attending scheduled clinic visits and completion of a second surgery for stoma takedown or other planned abdominal surgery to determine the presence of intra-abdominal adhesions.</div>
+<div class="line added"></div>
+<div class="line added">**Modified Exclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">Exclusions based on age (≥80 years), emergency bowel surgery, prior IBD-related surgeries (excluding current), ASA Class 4 or 5, known inability to take the study drug orally (complete small bowel obstruction), contraindications to TXA, and other conditions as specified.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">New exclusion: Peritoneal carcinomatosis.</div>
+<div class="line added"></div>
+<div class="line added">These modifications incorporate the new criteria from the study protocol amendments, ensuring clarity and relevance in the clinical trial&#x27;s eligibility requirements.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_47.html">&larr; Sample 47</a> | <a href="index.html">Index</a> | <a href="sample_49.html">Sample 49 &rarr;</a>
+</div>
+</body>
+</html>

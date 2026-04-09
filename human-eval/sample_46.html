@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 46 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 46</h1>
+    <div class="meta">
+        <span>NCT: NCT03703310</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:The participant must be age at least 18 years of age at the Screening Visit.The participant must provide written informed consent prior to any study procedures.The participant must meet diagnostic criteria for the basal cell nevus (Gorlin) syndrome including major criterion #3a plus 1 additional major criterion or plus 2 additional minor criteria listed below.Major criteria:&amp;gt;2 histologically confirmed BCCs or 1 for participant under age 20.Odontogenic keratocysts of the jaw confirmed histologically.≥3 palmar and&amp;#x2F;or plantar pits seen at the Screening Visit.Bilamellar calcification of the falx cerebri present at less than 20 years of age.Fused, bifid, or markedly splayed ribs.First degree relative with Gorlin syndrome.Patched protein 1 (PTCH1) mutation predicted to be of functional significance in normal tissue.Minor criteria:Macrocephaly.Congenital malformations including frontal bossing, cleft lip or palate, &amp;quot;coarse face&amp;quot;, moderate to severe hypertelorism.Skeletal abnormalities detectable clinically: Sprengel deformity, marked pectus deformity, or marked finger syndactyly.Skeletal abnormalities detectable radiographically: bridging of the sella turcica; vertebral abnormalities such as hemivertebrae, fusion or elongation of the vertebral bodies; modeling defects of the hands and feet; flame shaped lucencies of the hands or feet.Ovarian fibroma.Medulloblastoma (Modification of criteria of V Kimonis et al Am J Med Genet 69: 299-308, 1997).The participant must have 10 (with at least 3 on the face) clinically typical BCCs present within 24 months prior to Randomization (Baseline&amp;#x2F;Day 1).</div>
+<div class="line deleted">Additionally, the subject must have at least 2 BCCs with longest diameter &amp;lt;5 mm present on the face prior to Randomization (Baseline&amp;#x2F;Day 1).The participant is willing to have blood collected to measure circulating drug levels.The participant is willing to abstain from application of a non-study topical medication (prescription or over the counter) to facial skin for the duration of the trial except as prescribed by the Investigator.</div>
+<div class="line deleted">Moisturizers and emollients are allowed.</div>
+<div class="line deleted">Participant will be encouraged to use their preferred sunscreen with a sun protector factor (SPF) of at least 30 daily on all exposed skin sites.If the participant is a woman of childbearing potential (WOCBP), she must be willing to use complete abstinence from sexual intercourse and&amp;#x2F;or she and her partner must be willing to use at least 2 highly-effective forms of birth control starting prior to Baseline, through the duration of the study, and for 12 months after last application of IP.If the participant is a male with a female sex partner who is a WOCBP, the participant must be willing to use condoms, even after a vasectomy, starting prior to Baseline, through the duration of the study, and for at least 8 months after the last application of IP.The participant is willing for all facial BCCs to be evaluated and treatment recommendations made only by the Investigator.The participant is willing to forego treatment of facial BCCs with anything other than the study IP except when the Investigator believes that delay of treatment of a facial BCC potentially might compromise the health of the subject.</div>
+<div class="line deleted">During the trial the only allowed form of treatment is surgical.</div>
+<div class="line deleted">Non-facial BCCs may be removed at the discretion of the Investigator or Primary Skin Care Physician (PSCP).Exclusion Criteria:The subject has previously participated in a clinical trial evaluating patidegib topical gel.The participant has used topical treatment to the face or systemic therapies that might interfere with the evaluation of the study IP.</div>
+<div class="line deleted">Among these are use of the following:5-fluorouracil, imiquimod, diclofenac, or Ingenol mebutate (except as topical treatment to discrete non-facial BCCs) systemically or topically to the skin within the 2 months prior to the Screening Visit.Systemic chemotherapy within 1 year prior to the Screening Visit.Known inhibitors of the Hedgehog signaling pathway (such as vismodegib, sonidegib, itraconazole) topically or systemically within 3 months prior to the Screening Visit.Photodynamic therapy (PDT) except to localized non-facial, individual BCCs within 2 months prior to the Screening Visit.The participant is known to have a hypersensitivity to any of the ingredients in the study medication formulation.The participant is unable or unwilling to make a good faith effort to return to the study site for all study visits and tests.The participant has uncontrolled systemic disease.The participant has been treated for invasive cancer within the past 5 years excluding non-melanoma skin cancer, Stage I cervical cancer, ductal carcinoma in situ of the breast, or chronic lymphocytic leukemia (CLL) Stage 0.The participant has current, recent (within five half-lives of the experimental drug or if half-life not known, within the past 6 months prior to the Screening Visit), or planned participation in an experimental drug study while enrolled in this study.The participant is a WOCBP who is unwilling or unable to comply with pregnancy prevention measures.The participant is pregnant or breastfeeding.The participant has any condition or situation which, in the Investigator&amp;#x27;s opinion, may put the subject at significant risk, could confound the study results, or could interfere significantly with the subject&amp;#x27;s participation in the study.</div>
+<div class="line deleted">This may include a history of other skin conditions (such as severe facial eczema) or diseases, metabolic dysfunction, physical examination findings, or clinical laboratory findings giving reasonable suspicion of a disease or condition that contraindicates use of an investigational drug or that might affect interpretation of the results of the study or render the participant at high risk from treatment complications.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">visit.</div>
+<div class="line added">The Investigator must ensure that all AEs/SAEs are recorded in the eCRF, including the date, time, and description.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The Investigator must also document the date and time of each AE/SAE and the subject’s response to the AE/SAE.</div>
+<div class="line added">The</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_45.html">&larr; Sample 45</a> | <a href="index.html">Index</a> | <a href="sample_47.html">Sample 47 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 9 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 9</h1>
+    <div class="meta">
+        <span>NCT: NCT02963766</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Have type 2 diabetes, treated with diet and exercise, with or without metformin and&amp;#x2F;or basal insulin.</div>
+<div class="line deleted">Metformin and&amp;#x2F;or basal insulin dose must be stable for at least 8 weeks prior to study screening.Have HbA1c &amp;gt;6.5% to ≤11% at screening visit.</div>
+<div class="line deleted">If newly diagnosed and not on medicine for diabetes, HbA1c must be between &amp;gt;6.5 % to ≤9%.Have a BMI (body mass index) &amp;gt;85 percentile for age, gender and body weight ≥50 kilograms (110 pounds).Exclusion Criteria:Known type 1 diabetes, or positive GAD65 or IA2 antibodies, or history of diabetic ketoacidosis or hyperglycemic hyperosmolar syndrome.A history of, or at risk for pancreatitis.Self or family history of Multiple Endocrine Neoplasia (MEN) type 2A or B, thyroid C-cell hyperplasia or medullary thyroid cancer, or a blood calcitonin result ≥20 picograms per milliliter (pg&amp;#x2F;ml) at screening.A systolic blood pressure of ≥160 millimeters of mercury (mmHg) or diastolic ≥100 mmHg.Active or treated cancer.A blood disorder where an accurate HbA1c may not be obtainable.A female of childbearing age, sexually active and not on birth control.Pregnant or plan to be pregnant during the study, or breastfeeding.Taking any diabetic medication other than metformin or basal insulin and have not stopped it 3 months prior to the screening visit (6 weeks for bolus or mealtime insulin).Have taken oral steroids within the last 60 days or more than 20 days use within the past year or 1000 micrograms fluticasone propionate per day.Using prescription weight loss medications in the last 30 days, or plan to use.Taking psychiatric medications for depression or illness or attention deficit hyperactivity disorder (ADHD) if, the doses has changed within the last 3 months.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">## Amended Eligibility Criteria for Version 87 of ClinicalTrials.gov</div>
+<div class="line added"></div>
+<div class="line added">Based on the provided text from the protocol, here are the amended eligibility criteria for version 87 of ClinicalTrials.gov:</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">* **Type 2 Diabetes Mellitus (T2DM):**</div>
+<div class="line added">* Have type 2 diabetes mellitus (T2DM) as defined by the IDF-ISPAD criteria (see Attachment 5).</div>
+<div class="line added">* Have a HbA1c ≥6.5% to ≤11% at screening.</div>
+<div class="line added">* Have a BMI &gt;85% percentile of the general age- and gender-matched population for that country or region at screening.</div>
+<div class="line added">* Body weight ≥50 kg.</div>
+<div class="line added">* **Treatment History:**</div>
+<div class="line added">* Currently receiving diet and exercise as part of their diabetes management.</div>
+<div class="line added">* May be on metformin and/or basal insulin, with stable doses for at least 8 weeks prior to screening.</div>
+<div class="line added">*  Must not have received bolus insulin within 6 weeks of the screening visit, except as rescue treatment for management of acute medical conditions for a maximum of 14 days.</div>
+<div class="line added">*  Any other antihyperglycemic drugs must be discontinued for at least 3 months prior to screening.</div>
+<div class="line added">* **Age and Gender:**</div>
+<div class="line added">* Must be aged 10 years or older.</div>
+<div class="line added">* **Other:**</div>
+<div class="line added">* Must have a parent or legal guardian who understands and fully participates in the clinical trial activities.</div>
+<div class="line added">* Must be able to provide informed consent.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">* **Known Type 1 Diabetes:**</div>
+<div class="line added">* Have a history of type 1 diabetes (T1DM).</div>
+<div class="line added">* **Autoantibodies:**</div>
+<div class="line added">* Have a history of diabetes-associated autoantibodies (GAD65 or IA2) for T1DM.</div>
+<div class="line added">* **Pancreatitis:**</div>
+<div class="line added">* Have a history of pancreatitis, clinically significant gastric emptying abnormality, or previous gastric bypass.</div>
+<div class="line added">* **Thyroid Conditions:**</div>
+<div class="line added">* Have a known self or family history of multiple endocrine neoplasia (MEN) type 2A or type 2B, thyroid C-cell hyperplasia, or medullary thyroid carcinoma.</div>
+<div class="line added">* **Elevated Calcitonin:**</div>
+<div class="line added">* Have a serum calcitonin ≥20 pg/mL at screening.</div>
+<div class="line added">* **Kidney Function:**</div>
+<div class="line added">* Have an estimated glomerular filtration rate (eGFR) &lt; 60 mL/min/1.73 m2.</div>
+<div class="line added">* **Psychiatric Medications:**</div>
+<div class="line added">* Are currently taking any psychiatric medications (including, but not limited to depression, anxiety, bipolar disease, attention deficit hyperactivity disorder [ADHD], and schizophrenia).</div>
+<div class="line added">* Have doses of these medications not been stable (10%) for at least 3 months prior to screening.</div>
+<div class="line added">* Have an intention to change or add new medications during the trial.</div>
+<div class="line added">* **Weight Loss Medications:**</div>
+<div class="line added">* Have used any prescription weight loss medication(s) within 30 days of screening or intend to use chronically during the clinical trial.</div>
+<div class="line added">* **Pregnancy or Breastfeeding:**</div>
+<div class="line added">* Are pregnant or plan to become pregnant during the study.</div>
+<div class="line added">* Are breastfeeding.</div>
+<div class="line added">* **Other:**</div>
+<div class="line added">* Are investigator site personnel directly affiliated with this study or their immediate families.</div>
+<div class="line added">* Are Lilly employees or employees of third-party organizations (TPOs) involved in the study.</div>
+<div class="line added">* Have participated within the last 30 days in a clinical trial involving an investigational product (IP) or any other type of medical research judged not to be scientifically or medically compatible with this study.</div>
+<div class="line added">* Have previously completed or withdrawn from this study or any other study investigating dulaglutide.</div>
+<div class="line added">* Have a hemoglobinopathy or other disorder that interferes with the accurate determination of the primary endpoint.</div>
+<div class="line added">* Have a history of severe or serious allergic reaction to study drug or other serious safety concerns.</div>
+<div class="line added"></div>
+<div class="line added">**Important Notes:**</div>
+<div class="line added"></div>
+<div class="line added">* This is a summary of the amended eligibility criteria based on the provided text.</div>
+<div class="line added">* The full protocol should be consulted for complete and accurate information.</div>
+<div class="line added">* The specific inclusion and exclusion criteria may vary depending on the version of the protocol.</div>
+<div class="line added">* Always consult the most up-to-date version of the protocol for the most accurate information.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_8.html">&larr; Sample 8</a> | <a href="index.html">Index</a> | <a href="sample_10.html">Sample 10 &rarr;</a>
+</div>
+</body>
+</html>

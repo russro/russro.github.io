@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 51 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 51</h1>
+    <div class="meta">
+        <span>NCT: NCT04718961</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Female aged ≥18 and ≤45 years with a viable pregnancy.Provide signed informed consent as described in the protocol and willing to comply with all study visits and requirements.Diagnosis of ICP.Qualified level of pruritus associated with ICP, during screening.Exclusion Criteria:At the time of either the screening or baseline visit, decision has already been made to deliver within the next 7 days, for any indication.Known non-reassuring fetal status based upon antepartum testing (e.g., NST&amp;#x2F;CTG or BPP) at or within 7 days before the baseline visit.Known fetal anomaly likely to result in intrauterine fetal demise or neonatal death within the first 30 days of life.Participating in another ongoing interventional clinical study at screening or planning to participate in another contemporaneous interventional clinical study while participating in this study.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">with the expected mechanism of action (Bicocca et al.</div>
+<div class="line added">2018).</div>
+<div class="line added">2.2.2.</div>
+<div class="line added">Pathophysiology of ICP and Mechanism of Action of Volixibat Intrahepatic cholestasis of pregnancy (ICP) is characterized by the presence of elevated maternal sBA levels, which are associated with the development of pruritus in the expectant mother.</div>
+<div class="line added">The mechanism of action of Volixibat involves selective inhibition of the uptake of bile acids into the maternal bloodstream, leading to a reduction in maternal sBA levels.</div>
+<div class="line added">This reduction in maternal sBA levels is expected to improve maternal symptoms (pruritus) and reduce the risk of adverse perinatal outcomes.</div>
+<div class="line added">Volixibat is a bile acid lowering agent that inhibits the uptake of bile acids from the mother’s bile ducts into the maternal bloodstream, thereby reducing maternal sBA levels.</div>
+<div class="line added">The mechanism of action involves inhibition of the ATP-binding cassette transporter (ATP-BCT) in the liver, which is responsible for transporting bile acids into the bloodstream.</div>
+<div class="line added">By inhibiting this transporter, Volixibat prevents the mother’s sBA levels from rising, which in turn reduces the severity of pruritus and the risk of adverse perinatal outcomes.</div>
+<div class="line added">Volixibat’s mechanism of action is not only effective in reducing maternal sBA levels but also has the potential to improve fetal outcomes by reducing the accumulation of bile acids in the fetal compartment.</div>
+<div class="line added">Volixibat is approved for the treatment of primary biliary cirrhosis (PBC) and primary sclerosing cholangitis (PSC) in adults, and it is being studied for its potential benefits in the management of ICP in pregnancy.</div>
+<div class="line added">2.2.3.</div>
+<div class="line added">Clinical Efficacy and Safety of Volixibat in ICP Management The primary efficacy measure for Volixibat in ICP is the reduction of maternal sBA levels.</div>
+<div class="line added">Secondary efficacy measures include reduction in pruritus severity and improvement in maternal and fetal outcomes.</div>
+<div class="line added">The safety profile of Volixibat in ICP is generally favorable, with the primary safety endpoints being the absence of hepatotoxicity, which is rare (Bicocca et al.</div>
+<div class="line added">2018).</div>
+<div class="line added">However, the safety profile in pregnancy has not been extensively studied, and potential risks such as increased risk of hepatotoxicity and fetal toxicity must be considered.</div>
+<div class="line added">Volixibat is generally well-tolerated in pregnancy, but its use in ICP is still under investigation.</div>
+<div class="line added">2.2.4.</div>
+<div class="line added">Rationale for Use in ICP Management of Pregnancy The primary goal of Volixibat in ICP is to reduce maternal sBA levels, thereby improving maternal symptoms and reducing the risk of adverse perinatal outcomes.</div>
+<div class="line added">The secondary goal is to improve fetal outcomes by reducing the accumulation of bile acids in the fetal compartment.</div>
+<div class="line added">Volixibat’s mechanism of action, which inhibits the uptake of bile acids into the maternal bloodstream, directly addresses the underlying pathophysiology of ICP, making it a more targeted and effective treatment option compared to off-label agents like UDCA.</div>
+<div class="line added">Volixibat’s efficacy in reducing maternal sBA levels has been demonstrated in multiple studies, including a recent meta-analysis of 13 studies that showed a statistically significant reduction in maternal sBA levels (Bicocca et al.</div>
+<div class="line added">2018).</div>
+<div class="line added">In addition, Volixibat has shown promise in reducing adverse perinatal outcomes, such as stillbirth and preterm delivery, in women with ICP.</div>
+<div class="line added">However, the safety profile in pregnancy has not been thoroughly studied, and potential risks such as hepatotoxicity and fetal toxicity must be carefully considered before initiating Volixibat in ICP pregnancies.</div>
+<div class="line added">2.3.</div>
+<div class="line added">Summary of the Study Design The study is designed to evaluate the efficacy and safety of Volixibat in the management of ICP in pregnancy.</div>
+<div class="line added">The primary endpoint is the reduction of maternal sBA levels, with secondary endpoints including reduction in pruritus severity and improvement in maternal and fetal outcomes.</div>
+<div class="line added">The study will be conducted in two phases: Part 1 (randomized, double-blind, placebo-controlled) and Part 2 (open-label, extended follow-up).</div>
+<div class="line added">The inclusion and exclusion criteria are based on maternal and fetal characteristics, with a focus on women with ICP and appropriate sBA levels.</div>
+<div class="line added">The study will utilize a 24-hour urine collection method to measure sBA levels, and adverse events will be monitored and reported as per standard clinical practices.</div>
+<div class="line added">The safety and efficacy data will be analyzed using SAS software, with specific statistical methods for each endpoint.</div>
+<div class="line added">2.4.</div>
+<div class="line added">Key Considerations for the Study Protocol 2.4.1.</div>
+<div class="line added">Inclusion and Exclusion Criteria Inclusion criteria for Part 1: • Women of any parity who are ≥18 years of age and ≤38 weeks of gestation.</div>
+<div class="line added">• Women with ICP, as confirmed by validated criteria.</div>
+<div class="line added">• Women with maternal sBA levels ≥10 μmol/L, as determined by 24-hour urine collection.</div>
+<div class="line added">• Women with a history of normal delivery (not undergoing ICP or PSC treatment) in the last 24 months.</div>
+<div class="line added">• Women with no prior history of adverse perinatal outcomes (stillbirth, preterm delivery, or maternal death) in the last 24 months.</div>
+<div class="line added">• Women with no prior exposure to Volixibat or any other bile acid-lowering agents in the last 12 months.</div>
+<div class="line added">Exclusion criteria: • Women with ICP who are not candidates for delivery (e.g., due to medical contraindications or maternal contraindications).</div>
+<div class="line added">• Women with prior ICP-related complications, such as severe pruritus, intrahepatic cholestasis, or maternal death.</div>
+<div class="line added">• Women with prior history of maternal or fetal death.</div>
+<div class="line added">• Women with prior exposure to any other agents that may affect sBA levels, such as warfarin, estrogens, or other systemic medications.</div>
+<div class="line added">• Women with contraindications for Volixibat, including lactation, pregnancy, or use of certain medications.</div>
+<div class="line added">• Women who are not able to provide written informed consent.</div>
+<div class="line added">2.4.2.</div>
+<div class="line added">Randomization and Allocation • Randomization will be to 3 groups: Volixibat 20 mg orally once daily (QD), Volixibat 40 mg QD, and placebo.</div>
+<div class="line added">The allocation ratio is 1:1:1.</div>
+<div class="line added">• Participants are randomized to each group using a computer-generated random sequence.</div>
+<div class="line added">• The randomization must be concealed until the end of the study to prevent bias.</div>
+<div class="line added">2.4.3.</div>
+<div class="line added">Treatment Protocol • Participants receive either Volixibat 20 mg or 40 mg orally once daily for 8 weeks, followed by a 2-week observation period (Part 1).</div>
+<div class="line added">• In Part 2, participants continue Volixibat therapy for up to 21 weeks, with the option of discontinuation based on tolerability.</div>
+<div class="line added">• Participants are to take their assigned dose at the same time each day, with the same regimen throughout the study.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned dose on the same schedule as their usual regimen.</div>
+<div class="line added">• Participants are to take their assigned</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_50.html">&larr; Sample 50</a> | <a href="index.html">Index</a> | <a href="sample_52.html">Sample 52 &rarr;</a>
+</div>
+</body>
+</html>

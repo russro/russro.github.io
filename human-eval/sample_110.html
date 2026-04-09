@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 110 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 110</h1>
+    <div class="meta">
+        <span>NCT: NCT03571516</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Informed consent by the parent or legal guardian.Male or female infant 4 to 12 months corrected gestational age at screening.Weight at least 5 kilogram (kg) and weight-for-length Z-score greater than -2 at screening and baseline.Short bowel syndrome with dependence on parenteral support to provide at least 50% of fluid or caloric needs.Stable PN requirements for at least 1 month prior to screening, defined as a less than or equal to (&amp;lt;=) 10% change in the weight-normalized PN total fluid and caloric intake, despite attempts to wean PN, not withstanding transient instability for events such as sepsis or interruption of central venous access.Parent or legal guardian understands and is willing and able to fully adhere to study requirements as defined in this protocol.Exclusion Criteria:Previous treatment with teduglutide.Intestinal malabsorption due to a genetic condition, such as cystic fibrosis, microvillus inclusion disease, etc.Severe, known dysmotility syndrome, such as pseudo-obstruction or persistent, severe, active gastroschisis-related dysmotility, that is the primary contributing factor to feeding intolerance and inability to reduce PN support, prior to screening.</div>
+<div class="line deleted">Dysmotility is defined as severe if it is expected to limit the advancement of enteral feeding.Inability to advance oral or enteral feeding due to lack of access to the gut, such as oral aversion in the absence of a feeding tube.Intestinal obstruction or clinically significant intestinal stenosis.Major gastrointestinal surgical intervention, such as serial transverse enteroplasty or major intestinal resection or anastomosis, within 3 months prior to screening or planned during the study period.Unstable cardiac disease.Renal dysfunction, defined as estimated glomerular filtration rate less than (&amp;lt;) 50 milliliter per minute (mL&amp;#x2F;min) per 1.73 square meter (m^2).Biliary obstruction, stenosis, or malformation.Clinically significant pancreatic disease.Severe hepatic dysfunction or portal hypertension, defined by at least 2 of the following parameters:International normalized ratio (INR) greater than (&amp;gt;) 1.5 not corrected with PN vitamin KPlatelet count &amp;lt;100×10^3&amp;#x2F; microliter (mcL) due to portal hypertensionPresence of clinically significant gastric or esophageal varicesDocumented cirrhosisPersistent cholestasis defined as conjugated bilirubin &amp;gt;4 milligram per deciliter (mg&amp;#x2F;dL) (&amp;gt;68 micromoles per liter [mcmol&amp;#x2F;L]) over a 2 week period.More than 3 serious complications of intestinal failure (example [e.g.], catheter-associated bloodstream infections, interruption of nutrition due to feeding intolerance, catheter-associated thrombosis, severe fluid or electrolyte disturbances) within 1 month prior to or during screening.A history of cancer or a known cancer predisposition syndrome, such as juvenile polyposis or Beckwith-Wiedemann syndrome, or first degree relative with early onset of gastrointestinal cancer (including hepatobiliary and pancreatic cancers).Concurrent treatment with glucagon-like peptide-1 (GLP-1); glucagon-like peptide-2 (GLP-2); insulin-like growth factor-1 (IGF-1); growth hormone, somatostatin, or analogs of these hormones; or glutamine.Participation in a clinical study using an experimental drug within 3 months or 5.5 half-lives of the experimental drug, whichever is longer.Known or suspected intolerance or hypersensitivity to the investigational product, closely-related compounds, or any of the stated ingredients.Any condition, disease, illness, or circumstance that, in the investigator&amp;#x27;s opinion, puts the participant at any undue risk, prevents completion of the study, or interferes with analysis of the study results.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the provided evidence and the context of the clinical trial, here are the amended eligibility criteria for version 7:</div>
+<div class="line added"></div>
+<div class="line added">**Eligibility Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Informed consent by the parent or legal guardian.</div>
+<div class="line added">2.</div>
+<div class="line added">Male or female infant 4 to 12 months corrected gestational age.</div>
+<div class="line added">3.</div>
+<div class="line added">Weight at least 5 kilograms (kg) and weight-for-length Z-score greater than -2 at screening and baseline.</div>
+<div class="line added">4.</div>
+<div class="line added">Short bowel syndrome with dependence on parenteral support to provide at least 50% of fluid or caloric needs.</div>
+<div class="line added">5.</div>
+<div class="line added">Stable parenteral nutrition (PN) requirements for at least 1 month prior to screening, defined as a ≤10% change in the weight-normalized PN total fluid and caloric intake, despite attempts to wean PN, notwithstanding transient instability for events such as sepsis or interruption of central venous access.</div>
+<div class="line added">6.</div>
+<div class="line added">Lack of terminal ileum and ileocecal valve.</div>
+<div class="line added">7.</div>
+<div class="line added">Parent or legal guardian understands and is willing and able to fully adhere to study requirements as defined in this protocol.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Previous treatment with teduglutide.</div>
+<div class="line added">2.</div>
+<div class="line added">Intestinal malabsorption due to a genetic condition, such as cystic fibrosis, microvillus inclusion disease, etc.</div>
+<div class="line added">3.</div>
+<div class="line added">Severe, known dysmotility syndrome, such as pseudo-obstruction or persistent, severe, active gastroschisis-related dysmotility, that is the primary contributing factor to feeding intolerance and inability to reduce parenteral support, prior to screening.</div>
+<div class="line added">Dysmotility is defined as severe if it is expected to limit the advancement of enteral feeding.</div>
+<div class="line added">4.</div>
+<div class="line added">Inability to advance oral or enteral feeding due to lack of access to the gut, such as oral aversion in the absence of a feeding tube.</div>
+<div class="line added">5.</div>
+<div class="line added">Intestinal obstruction or clinically significant intestinal stenosis.</div>
+<div class="line added">6.</div>
+<div class="line added">Major gastrointestinal surgical intervention, such as serial transverse enteroplasty or major intestinal resection or anastomosis, within 3 months prior to screening or planned during the study period.</div>
+<div class="line added">7.</div>
+<div class="line added">Unstable cardiac disease.</div>
+<div class="line added">8.</div>
+<div class="line added">Renal dysfunction, defined as estimated glomerular filtration rate (eGFR) &lt;50 mL/min/1.73 m², not corrected with parenteral vitamin K.</div>
+<div class="line added">9.</div>
+<div class="line added">More than 3 serious complications of intestinal failure (e.g., catheter-associated bloodstream infections, interruption of nutrition due to feeding intolerance, catheter-associated thrombosis, severe fluid or electrolyte disturbances) within 1 month prior to or during screening.</div>
+<div class="line added">10.</div>
+<div class="line added">A history of cancer or a known cancer predisposition syndrome, such as juvenile polyposis or Beckwith-Wiedemann syndrome, or first-degree relative with early-onset gastrointestinal cancer (including hepatobiliary and pancreatic cancers).</div>
+<div class="line added">11.</div>
+<div class="line added">Concurrent treatment with glucagon-like peptide-1 (GLP-1); glucagon-like peptide-2 (GLP-2); insulin-like growth factor-1 (IGF-1); growth hormone, somatostatin, or analogs of these hormones; or glutamine.</div>
+<div class="line added">12.</div>
+<div class="line added">Participation in a clinical study using an experimental drug within 3 months or 5.5 half-lives of the experimental drug, whichever is longer.</div>
+<div class="line added">13.</div>
+<div class="line added">Known or suspected intolerance or hypersensitivity to the investigational product, closely-related compounds, or any of the stated ingredients.</div>
+<div class="line added">14.</div>
+<div class="line added">Any condition, disease, illness, or circumstance that, in the investigator’s opinion, puts the subject at any undue risk, prevents completion of the study, or interferes with analysis of the study results.</div>
+<div class="line added"></div>
+<div class="line added">These amendments aim to align the criteria with the evidence provided, ensuring that the inclusion and exclusion criteria are clear, relevant, and maintain clinical accuracy.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_109.html">&larr; Sample 109</a> | <a href="index.html">Index</a> | <a href="sample_111.html">Sample 111 &rarr;</a>
+</div>
+</body>
+</html>

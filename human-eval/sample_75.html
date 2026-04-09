@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 75 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 75</h1>
+    <div class="meta">
+        <span>NCT: NCT03183141</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Cohort 1 Main Inclusion Criteria:Previously enrolled in Study SERES-012, had CDI recurrence within 8 weeks after receipt of a treatment regimen of SER-109 or placeboSigned informed consent prior to initiation of any study-specific procedure or treatment.</div>
+<div class="line deleted">The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.The CDI recurrence in Study SERES-012 must have met the protocol definition of ≥ 3 unformed stools per day over 2 consecutive days, a positive C.</div>
+<div class="line deleted">difficile stool toxin assay, and the requirement of CDI SOC antibiotic therapy, and an adequate clinical response following antibiotic therapy (&amp;lt;3 unformed stools in 24 hours for 2 or more consecutive days).Cohort 1 Main Exclusion Criteria:Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study.Known or suspected toxic megacolon and&amp;#x2F;or known small bowel ileus.Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding).</div>
+<div class="line deleted">Note: nursing homes, rehabilitation, assisted living centers and acute care hospitals are acceptable.Absolute neutrophil count of &amp;lt;500 cells&amp;#x2F;ml^3.Major gastrointestinal surgery (e.g.</div>
+<div class="line deleted">significant bowel resection or diversion) within 3 months before enrollment (this does not include appendectomy or cholecystectomy), or any history of total colectomy or bariatric surgery (bariatric surgery which does not disrupt the gastrointestinal lumen, i.e., restrictive procedures such as banding, are permitted).History of active inflammatory bowel disease (ulcerative colitis, Crohn&amp;#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months.Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor).Any history of fecal microbiota transplantation (FMT) in the past 3 months.Cohort 2 Main Inclusion Criteria:Subjects 18 years of age or older who had one or more CDI recurrence (as confirmed by a C.</div>
+<div class="line deleted">difficile stool toxin or PCR test) and have responded to a course of antibiotic treatment.Signed informed consent prior to initiation of any study-specific procedure or treatment.</div>
+<div class="line deleted">The subject, or their legally authorized representative, must be able to provide written informed consent and understand the potential risks and benefits from study enrollment and treatment.Cohort 2 Main Exclusion Criteria:(all Cohort 1 exclusion criteria [#1-8 above] plus the below addition criterion)9.</div>
+<div class="line deleted">Previously enrolled in a Seres Therapeutics clinical study.</div>
+<div class="line deleted">An exception is made for subjects who screened in SERES-012 who did not receive SER-109 and did not previously roll-over to SERES-013.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the revised eligibility criteria provided in the version 9 of the ClinicalTrials.gov version 9, here are the key modifications:</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Inclusion Criteria**:</div>
+<div class="line added">- **Recurrent CDI**: Previously enrolled in Study SERES-012 and experienced a CDI recurrence within 8 weeks after receipt of SER-109 or placebo.</div>
+<div class="line added">- **Serum C.</div>
+<div class="line added">difficile toxin or PCR test positivity**: Positive C.</div>
+<div class="line added">difficile stool toxin assay or PCR algorithm.</div>
+<div class="line added">- **≥ 3 unformed stools per day over 2 consecutive days**</div>
+<div class="line added">- **Positive C.</div>
+<div class="line added">difficile stool toxin assay on a stool sample determined by a toxin assay**</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Exclusion Criteria**:</div>
+<div class="line added">- **Female subjects who are pregnant, breastfeeding, lactating, or planning to become pregnant during the study**</div>
+<div class="line added">- **Known or suspected toxic megacolon and/or known small bowel ileus**</div>
+<div class="line added">- **Admitted to or expected to be admitted to an intensive care unit for medical reasons (not just boarding)**</div>
+<div class="line added">- **History of active inflammatory bowel disease (ulcerative colitis, Crohn&#x27;s disease, microscopic colitis) with diarrhea believed to be caused by active inflammatory bowel disease in the past 3 months**</div>
+<div class="line added">- **Concurrent intensive induction chemotherapy, radiotherapy, or biologic treatment for active malignancy (subjects on maintenance chemotherapy may only be enrolled after consultation with the study medical monitor)**</div>
+<div class="line added"></div>
+<div class="line added">These modifications reflect the updated understanding of the eligibility criteria for the study, focusing on the specific conditions that would qualify a subject for participation.</div>
+<div class="line added">The inclusion criteria now specify that subjects must have a CDI recurrence within 8 weeks of receiving SER-109 or placebo, and must have a positive C.</div>
+<div class="line added">difficile stool toxin or PCR test on a stool sample.</div>
+<div class="line added">The exclusion criteria have been adjusted to exclude individuals who are not suitable for the study based on their medical history and current health status.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_74.html">&larr; Sample 74</a> | <a href="index.html">Index</a> | <a href="sample_76.html">Sample 76 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 78 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 78</h1>
+    <div class="meta">
+        <span>NCT: NCT02570308</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Male or female participants age ≥ 18 years of age at the time of informed consent.Ability to provide and understand written informed consent prior to any study procedures.Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.Human leukocyte antigen (HLA)-A*0201 positive.ECOG Performance Status of 0 or 1 at Screening.Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.Exclusion Criteria:Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.Participants with any out-of-range laboratory values.Clinically significant cardiac disease or impaired cardiac function.Active infection requiring systemic antibiotic therapy.Known history of HIV infection.Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.Malignant disease, other than that being treated in this study.Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.Pregnant, likely to become pregnant, or lactating women.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Based on the revised eligibility criteria, here are the key modifications:</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Study Duration**:</div>
+<div class="line added">- From 20 to 40 patients in the RP2D-IE expansion cohort.</div>
+<div class="line added">- From 20 to 40 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Dose Level Adjustment**:</div>
+<div class="line added">- From 20 mcg to 30 mcg in the RP2D-IE expansion cohort.</div>
+<div class="line added">- From 20 mcg to 30 mcg in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 18 August 2015 to 18 August 2015.</div>
+<div class="line added">- From 18 August 2015 to 18 August 2015.</div>
+<div class="line added"></div>
+<div class="line added">4.</div>
+<div class="line added">**Dose Escalation Rules**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">5.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">6.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">7.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">8.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">9.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">10.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">11.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">12.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">13.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">14.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">15.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">16.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">17.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">18.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">19.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">20.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">21.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">22.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">23.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">24.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">25.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">26.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">27.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">28.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">29.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">30.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">31.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">32.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">33.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">34.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">35.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">36.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">37.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">38.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">39.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">40.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation cohort.</div>
+<div class="line added">- From 1 to 6 patients in the Phase 2 dose expansion cohort.</div>
+<div class="line added"></div>
+<div class="line added">41.</div>
+<div class="line added">**Dose Limiting Toxicity Observation Period**:</div>
+<div class="line added">- From 1 to 6 patients in the Phase 1 dose escalation</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_77.html">&larr; Sample 77</a> | <a href="index.html">Index</a> | <a href="sample_79.html">Sample 79 &rarr;</a>
+</div>
+</body>
+</html>

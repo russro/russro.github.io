@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 141 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 141</h1>
+    <div class="meta">
+        <span>NCT: NCT03614728</span>
+        <span>Model: versa-4o-mini</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Males and females greater than or equal to (&amp;gt;=)18 years of age (at the time consent is obtained).Diagnosis of MDS, CMML or AMLEastern Cooperative Oncology Group (ECOG) performance status score of 0 or 1 or 2Adequate organ functionA woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.Exclusion Criteria:History of, or known, central nervous system (CNS) involvementPrior solid organ transplantationKnown allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipientPrior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitorHistory of a second malignancy, excluding non-melanoma skin cell cancer, within the last three yearsActive severe or uncontrolled infectionHistory of optic nerve neuropathy or neuritis.History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:</div>
+<div class="line added">- Males and females greater than or equal to (&gt;=) 18 years of age (at the time consent is obtained).</div>
+<div class="line added">- Diagnosis of MDS, CMML, or AML.</div>
+<div class="line added">- Eastern Cooperative Oncology Group (ECOG) performance status score of 0, 1, or 2.</div>
+<div class="line added">- Adequate organ function.</div>
+<div class="line added">- A woman of childbearing potential (WOCBP) must have a negative highly sensitive serum pregnancy test within 7 days before the first dose of study intervention.</div>
+<div class="line added">- Treatment naïve MDS and CMML participants are now included in the Part 2 Dose Expansion cohorts.</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">- History of, or known, central nervous system (CNS) involvement.</div>
+<div class="line added">- Prior solid organ transplantation.</div>
+<div class="line added">- Known allergies, hypersensitivity, or intolerance to GSK3326595 or 5-Azacitidine or its excipient.</div>
+<div class="line added">- Prior therapy with any Protein arginine methyl transferase 5 (PRMT5) inhibitor.</div>
+<div class="line added">- History of a second malignancy, excluding non-melanoma skin cell cancer, within the last three years.</div>
+<div class="line added">- Active severe or uncontrolled infection.</div>
+<div class="line added">- History of optic nerve neuropathy or neuritis.</div>
+<div class="line added">- History of sensitivity to any of the study medications, or components thereof, or a history of drug or other allergy that, in the opinion of the investigator or Medical Monitor, contraindicates their participation.</div>
+<div class="line added">- Additional prohibited medications (strong/moderate inhibitors or inducers of MATE2-K, OAT3, and OCT2 transporters) as identified in the latest supplement to the Investigator Brochure.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_140.html">&larr; Sample 140</a> | <a href="index.html">Index</a> | <a href="sample_142.html">Sample 142 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 45 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 45</h1>
+    <div class="meta">
+        <span>NCT: NCT01887600</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion criteria:Subject has a diagnosis of chronic kidney disease, with Kidney Disease Outcomes Quality Initiative (KDOQI) Stage 3, 4 or 5, not receiving dialysis; with an Estimated Glomerular Filtration Rate (eGFR) &amp;lt;60 mL&amp;#x2F;min&amp;#x2F;1.73 m^2 estimated using the abbreviated 4-variable Modification of Diet in Renal Disease (MDRD) equation.The mean of the subject&amp;#x27;s three most recent Hb values during the Screening period, obtained at least 4 days apart, must be less than or equal to 10.0 g&amp;#x2F;dL, with a difference of less than or equal to 1.0 g&amp;#x2F;dL between the highest and the lowest values.</div>
+<div class="line deleted">The last Hb value must be within 10 days prior to randomization.Subject has a ferritin level greater than or equal to 30 ng&amp;#x2F;mL (greater than or equal to 67.4 pmol&amp;#x2F;L) at screening.Subject has a transferrin saturation (TSAT) level greater than or equal to 5% at screening.Subject has a serum folate level greater than or equal to lower limit of normal at screening.Subject has a serum vitamin B12 level greater than or equal to lower limit of normal at screening.Subject&amp;#x27;s alanine aminotransferase (ALT), aspartate aminotransferase (AST) levels are less than or equal to 3 x upper limit of normal (ULN), and total bilirubin (TBL) is less than or equal to 1.5 x ULN.Subject&amp;#x27;s body weight is 45.0 kg up to a maximum of 160.0 kg.Exclusion criteria:Subject has received any ESA treatment within 12 weeks prior to randomization.Subject has had more than one dose of IV iron within 12 weeks prior to randomization.Subject has received a RBC transfusion within 8 weeks prior to randomization.Subject has a known history of myelodysplastic syndrome or multiple myeloma.Subject has a known hereditary hematologic disease such as thalassemia or sickle cell anemia, pure red cell aplasia, or other known causes for anemia other than CKD.Subject has a known hemosiderosis, hemochromatosis, coagulation disorder, or hypercoagulable condition.Subject has chronic inflammatory disease that could impact erythropoiesis (e.g., systemic lupus erythematosus, rheumatoid arthritis, celiac disease) even if it is currently in remission.Subject is anticipated to have elective surgery that is expected to lead to significant blood loss or anticipated elective coronary revascularization.Subject has active or chronic gastrointestinal bleeding.Subject has received any prior treatment with roxadustat or a hypoxia-inducible factor Prolyl Hydroxylase Inhibitor (HIF-PHI).Subject has been treated with iron-chelating agents within 4 weeks prior to randomization.Subject has a history of chronic liver disease (e.g., cirrhosis or fibrosis of the liver)Subject has a known New York Heart Association Class III or Intravenous (IV) congestive heart failure.Subject has had a myocardial infarction, acute coronary syndrome, stroke, seizure, or a thrombotic&amp;#x2F;thromboembolic event (e.g., pulmonary embolism) within 12 weeks prior to randomization.Uncontrolled hypertension or two or more blood pressure (BP) values of systolic BP (SBP) greater than or equal to 160 mmHg or diastolic BP (DBP) greater than or equal to 95 mmHg confirmed by repeat measurement within 2 weeks prior to randomization.Subject has a diagnosis or suspicion (e.g., complex kidney cyst of Bosniak Category 2F or higher) of renal cell carcinoma on renal ultrasound within 12 weeks prior to randomization.Subject has a history of malignancy, except the following: cancers determined to be cured or in remission for greater than or equal to 5 years, curatively resected basal cell or squamous cell skin cancers, cervical cancer in situ, or resected colonic polyps.Subject is positive for any of the following: Human Immunodeficiency Virus (HIV); hepatitis B surface antigen (HBsAg); or anti-hepatitis C virus antibody (anti-HCV Ab).Subject has an active clinically significant infection manifested by White Blood Count (WBC) &amp;gt; ULN, and&amp;#x2F;or fever, in conjunction with clinical signs or symptoms of infection within one week prior to randomization.Subject has a known untreated proliferative diabetic retinopathy, diabetic macular edema, macular degeneration and retinal vein occlusion.Subject has had any prior organ transplant (that has not been explanted) or a scheduled organ transplantation.Subject has participated in any interventional clinical study or has been treated with any investigational drugs within 30 days or 5 half lives or limit set by national law, whichever is longer, prior to the initiation of Screening.Subject has an anticipated use of dapsone in any dose amount or chronic use of acetaminophen (paracetamol) &amp;gt; 2.0 g&amp;#x2F;day during the treatment or follow-up period of the study.Subject has a history of alcohol or drug abuse within 2 years prior to randomization.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">, and safety data.</div>
+<div class="line added">Safety Data: The primary safety endpoints are: 1.</div>
+<div class="line added">Incidence of Dose-Related Adverse Events (DRAEs) 2.</div>
+<div class="line added">Incidence of Death or serious AEs (SAEs) 3.</div>
+<div class="line added">Incidence of Non-Disproportionate AEs (NDAEs) 4.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 5.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 6.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 7.</div>
+<div class="line added">Incidence of Transferring to another study site 8.</div>
+<div class="line added">Incidence of Treatment-Related Death (TRD) 9.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 10.</div>
+<div class="line added">Incidence of TRD due to other causes 11.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 12.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 13.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 14.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 15.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 16.</div>
+<div class="line added">Incidence of TRD 17.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 18.</div>
+<div class="line added">Incidence of TRD due to other causes 19.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 20.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 21.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 22.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 23.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 24.</div>
+<div class="line added">Incidence of TRD 25.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 26.</div>
+<div class="line added">Incidence of TRD due to other causes 27.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 28.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 29.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 30.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 31.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 32.</div>
+<div class="line added">Incidence of TRD 33.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 34.</div>
+<div class="line added">Incidence of TRD due to other causes 35.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 36.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 37.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 38.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 39.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 40.</div>
+<div class="line added">Incidence of TRD 41.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 42.</div>
+<div class="line added">Incidence of TRD due to other causes 43.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 44.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 45.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 46.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 47.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 48.</div>
+<div class="line added">Incidence of TRD 49.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 50.</div>
+<div class="line added">Incidence of TRD due to other causes 51.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 52.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 53.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 54.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 55.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 56.</div>
+<div class="line added">Incidence of TRD 57.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 58.</div>
+<div class="line added">Incidence of TRD due to other causes 59.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 60.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 61.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 62.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 63.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 64.</div>
+<div class="line added">Incidence of TRD 65.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 66.</div>
+<div class="line added">Incidence of TRD due to other causes 67.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 68.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 69.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 70.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 71.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 72.</div>
+<div class="line added">Incidence of TRD 73.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 74.</div>
+<div class="line added">Incidence of TRD due to other causes 75.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 76.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 77.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 78.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 79.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 80.</div>
+<div class="line added">Incidence of TRD 81.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 82.</div>
+<div class="line added">Incidence of TRD due to other causes 83.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 84.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 85.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 86.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 87.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 88.</div>
+<div class="line added">Incidence of TRD 89.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 90.</div>
+<div class="line added">Incidence of TRD due to other causes 91.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 92.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 93.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 94.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 95.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 96.</div>
+<div class="line added">Incidence of TRD 97.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 98.</div>
+<div class="line added">Incidence of TRD due to other causes 99.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 100.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 101.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 102.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 103.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 104.</div>
+<div class="line added">Incidence of TRD 105.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 106.</div>
+<div class="line added">Incidence of TRD due to other causes 107.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 108.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 109.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 110.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 111.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 112.</div>
+<div class="line added">Incidence of TRD 113.</div>
+<div class="line added">Incidence of TRD due to Hb-related causes 114.</div>
+<div class="line added">Incidence of TRD due to other causes 115.</div>
+<div class="line added">Incidence of Hb-related adverse events (HbAEs) 116.</div>
+<div class="line added">Incidence of Other Adverse Events (OAEs) 117.</div>
+<div class="line added">Incidence of Hb rebound (Hb &gt;16.0 g/dL) 118.</div>
+<div class="line added">Incidence of Hb decrease (Hb &lt;8.0 g/dL) 119.</div>
+<div class="line added">Incidence of Other Non-Serious Adverse Events (ONSAEs) 120.</div>
+<div class="line added">Incidence of TR</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_44.html">&larr; Sample 44</a> | <a href="index.html">Index</a> | <a href="sample_46.html">Sample 46 &rarr;</a>
+</div>
+</body>
+</html>

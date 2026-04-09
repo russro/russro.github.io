@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 23 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 23</h1>
+    <div class="meta">
+        <span>NCT: NCT04697069</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Participant has cancerParticipant is treated with an oral or injectable Food and Drug Administration (FDA)-approved EGFRi or MEKi therapyParticipant has EGFRi&amp;#x2F;MEKi-related acneiform rash of Grade ≥ 2 as per common terminology criteria for adverse events (CTCAE) version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.Exclusion Criteria:Participant has infected EGFRi&amp;#x2F;MEKi-associated acneiform rash according to investigator&amp;#x27;s evaluation.Note: Other protocol defined Inclusion&amp;#x2F;Exclusion criteria may apply.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:</div>
+<div class="line added">Subject has cancer</div>
+<div class="line added">Subject is treated with an oral or injectable FDA-approved EGFRi or MEKi therapy</div>
+<div class="line added">Subject has EGFRi/MEKi-related acneiform rash of Grade ≥ 2 as per CTCAE Version 5.0, and ≥ 20 inflammatory lesions on the face at screening and Day 1.</div>
+<div class="line added">Subject is screened for inclusion.</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">Subject has infected EGFRi/MEKi-associated acneiform rash according to Investigator&#x27;s evaluation.</div>
+<div class="line added">Subject is unable to comply with study procedures due to COVID-19 related center closures.</div>
+<div class="line added">Note: Other protocol defined Inclusion/Exclusion criteria may apply.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_22.html">&larr; Sample 22</a> | <a href="index.html">Index</a> | <a href="sample_24.html">Sample 24 &rarr;</a>
+</div>
+</body>
+</html>

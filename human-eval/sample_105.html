@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 105 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 105</h1>
+    <div class="meta">
+        <span>NCT: NCT02836470</span>
+        <span>Model: local-qwen-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Subjects will be eligible for participation in the study only if they meet ALL of the following inclusion criteria:Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique.</div>
+<div class="line deleted">This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.Exclusion Criteria:Subjects will not be eligible for participation in the study if they meet ANY of the following exclusion criteria:&amp;lt;18 or &amp;gt;80 years of age.Requires emergency bowel surgery.Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&amp;#x27;s Disease, or ulcerative colitis.Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.American Society of Anesthesiologists (ASA) Class 4 or 5.Known inability to take the study drug orally (i.e.</div>
+<div class="line deleted">complete small bowel obstruction).Has contraindications or potential risk factors to taking TXA.</div>
+<div class="line deleted">These include subjects with:Known sensitivity to TXA;Recent craniotomy (past 30 days);Active cerebrovascular bleed;Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome);Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction, orContinuing use of a combined hormonal contraceptive and or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).Has peritoneal carcinomatosisHistory of or current seizure disorder.Patients with myeloproliferative disorders.Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.Planned treatment with alvimopan (Entereg®) during study participation period.Planned use of 4% icodextrin (Adept®) or SEPRAFILM during the first surgery.Received any other investigational therapy within 4 weeks prior to RandomizationFemale subjects of childbearing potential with a positive urine or serum pregnancy test or who are not taking (or not willing to take) acceptable birth control measures (abstinence, intrauterine devices, contraceptive implants or barrier methods) through Day 30.</div>
+<div class="line deleted">Additionally, those women who are lactating and insist on breast feeding within 5 days of the last dose of study drug.Known history of radiation enteritis.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:</div>
+<div class="line added">- Subjects will be eligible for participation in the study only if they meet ALL of the following inclusion criteria:</div>
+<div class="line added">- Scheduled to undergo an elective (non-emergent) bowel resection with a planned stoma via laparotomy or minimally invasive technique.</div>
+<div class="line added">This includes any subject in which a resection of the small intestine, colon, or rectum is performed for any elected indication.</div>
+<div class="line added">- Planned stoma takedown or other planned abdominal surgery within 8 months of the initial surgery.</div>
+<div class="line added">- Willing to perform and comply with all study procedures including attending clinic visit as scheduled and completion of a second surgery for stoma takedown or other abdominal surgery and to determine the presence of intra-abdominal adhesions.</div>
+<div class="line added">- Has been informed of the nature of the study (either the subject or their legal representative), agrees to its provisions, and has provided written informed consent.</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">- Subjects will not be eligible for participation in the study if they meet ANY of the following exclusion criteria:</div>
+<div class="line added">- Age &amp;lt; 18 or &amp;gt; 80 years.</div>
+<div class="line added">- Requires emergency bowel surgery.</div>
+<div class="line added">- Has had 1 or more abdominal surgeries, excluding the current, for inflammatory bowel disease, including, but not limited to, inflammatory bowel disease (IBD), Crohn&#x27;s Disease, or ulcerative colitis.</div>
+<div class="line added">Note: This does not apply to previous surgery such as hernia repair unrelated to IBD.</div>
+<div class="line added">- American Society of Anesthesiologists (ASA) Class 4 or 5.</div>
+<div class="line added">- Known inability to take the study drug orally (i.e., complete small bowel obstruction).</div>
+<div class="line added">- Has contraindications or potential risk factors to taking TXA.</div>
+<div class="line added">These include subjects with:</div>
+<div class="line added">- Known sensitivity to TXA.</div>
+<div class="line added">- Recent craniotomy (past 30 days).</div>
+<div class="line added">- Active cerebrovascular bleed.</div>
+<div class="line added">- Active thromboembolic disease (such as deep vein thrombosis, pulmonary embolism, cerebral thrombosis, ischemic stroke, or acute coronary syndrome).</div>
+<div class="line added">- Acute promyelocytic leukemia taking all-trans retinoic acid for remission induction.</div>
+<div class="line added">- Continuing use of a combined hormonal contraceptive and/or combined hormonal replacement therapy (including combined hormonal pill, patch, or vaginal ring).</div>
+<div class="line added">- Has peritoneal carcinomatosis.</div>
+<div class="line added">- History of or current seizure disorder.</div>
+<div class="line added">- Patients with myeloproliferative disorders.</div>
+<div class="line added">- Any other condition that, in the opinion of the Investigator, would preclude the subject from being an appropriate candidate for the study, including severe renal or hepatic impairment.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_104.html">&larr; Sample 104</a> | <a href="index.html">Index</a> | <a href="sample_106.html">Sample 106 &rarr;</a>
+</div>
+</body>
+</html>

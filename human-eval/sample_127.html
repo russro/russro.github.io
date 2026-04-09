@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 127 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 127</h1>
+    <div class="meta">
+        <span>NCT: NCT02999854</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Any of the following hematologic malignancies:Acute myeloid leukemia (AML) in first cytomorphological remission (&amp;lt; 5% blasts in the bone marrow) with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remissionAcute lymphoblastic leukemia (ALL) in first or higher remission (&amp;lt; 5% blasts in the bone marrow)Myelodysplastic syndrome (MDS): transfusion-dependent (requiring at least one transfusion per month), or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk groupClinical justification of allogeneic stem cell transplantation where a suitable HLA matched sibling or unrelated donor is unavailable in a timely manner.</div>
+<div class="line unchanged">An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation.</div>
+<div class="line deleted">Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donorAvailability of a related haploidentical donor with ≥ 4&amp;#x2F;8 but &amp;lt; 7&amp;#x2F;8, or ≥ 5&amp;#x2F;10 but &amp;lt; 9&amp;#x2F;10 matches at the HLA-A, -B, -C, -DRB1, and&amp;#x2F;or -DQB1 loci, as determined by high resolution human leukocyte antigen (HLA)-typingKarnofsky Performance Status (KPS) ≥ 70%Male or female, age ≥ 18 years and ≤ 70 years.</div>
+<div class="line deleted">Patients aged ≥ 65 years must have a Sorror score ≤ 3Availability of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulationsFor females of childbearing potential who are sexually active and males who have sexual contact with a female of childbearing potential: willingness to use of reliable methods of contraception (oral contraceptives, intrauterine device, hormone implants, contraceptive injection or abstinence) during study participationGiven written informed consent (patient and donor)Exclusion Criteria:Availability of a suitable HLA-matched sibling or unrelated donor in a donor searchPrior allogeneic hematopoietic stem cell transplantationDiffusing capacity for carbon monoxide (hemoglobin corrected DLCO) &amp;lt; 50% predictedLeft ventricular ejection fraction &amp;lt; 45% (evaluated by echocardiogram or MUGA scan)Aspartate aminotransferase (AST) and&amp;#x2F;or alanine aminotransferase (ALT) &amp;gt; 2.5 × upper limit of normal (CTCAE grade 2)Bilirubin &amp;gt; 1.5 × upper limit of normal (CTCAE grade 2)Creatinine clearance &amp;lt; 50 ml&amp;#x2F;min (calculated or measured)Positive pregnancy test or breastfeeding of patient or donor (women of childbearing age only)Estimated probability of surviving less than 3 monthsKnown allergy to any of the components of ATIR101 (e.g., dimethyl sulfoxide)Known hypersensitivity to cyclophosphamide or any of its metabolitesAny contraindication for GVHD prophylaxis with mycophenolate mofetil, cyclosporine A, or tacrolimusKnown presence of HLA antibodies against the non-shared donor haplotypePositive human immunodeficiency virus (HIV) testPositive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)Any other condition that, in the opinion of the investigator, makes the patient or donor ineligible for the study</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Inclusion Criteria:</div>
+<div class="line added">- Any of the following hematologic malignancies:</div>
+<div class="line added">- Acute myeloid leukemia (AML) in first cytomorphological remission with Disease Risk Index (DRI) intermediate or above, or in second or higher cytomorphological remission</div>
+<div class="line added">- Acute lymphoblastic leukemia (ALL) in first or higher remission</div>
+<div class="line added">- Myelodysplastic syndrome (MDS): transfusion-dependent (requiring at least one transfusion per month), or intermediate or higher Revised International Prognostic Scoring System (IPSS-R) risk group</div>
+<div class="line added">- Clinical justification of allogeneic stem cell transplantation where a suitable HLA matched sibling or unrelated donor is unavailable in a timely manner.</div>
+<div class="line unchanged">An unrelated donor search is not required for a patient to be eligible if the clinical situation dictates an urgent transplantation.</div>
+<div class="line added">Clinical urgency is defined as 6-8 weeks from referral to transplant center or low likelihood of finding a matched unrelated donor</div>
+<div class="line added">- Availability of a related haploidentical donor with ≥ 4/8 but &lt; 8/8, or ≥ 5/10 but &lt; 10/10 matches at the HLA-A, -B, -C, -DRB1, and/or -DQB1 loci, as determined by high resolution human leukocyte antigen (HLA)-typing</div>
+<div class="line added">- Karnofsky Performance Status (KPS) ≥ 70%</div>
+<div class="line added">- Male or female, age ≥ 18 years and ≤ 70 years.</div>
+<div class="line added">Patients aged ≥ 65 years must have a Sorror score ≤ 3</div>
+<div class="line added">- Availability of a donor aged ≥ 16 years and ≤ 75 years who is eligible according to local requirements and regulations</div>
+<div class="line added">- For females of childbearing potential who are sexually active and males who have sexual contact with a female of childbearing potential: use of reliable methods of contraception during study participation</div>
+<div class="line added">- Given written informed consent (patient and donor)</div>
+<div class="line added"></div>
+<div class="line added">Exclusion Criteria:</div>
+<div class="line added">- Availability of a suitable fully matched related or unrelated donor in a donor search</div>
+<div class="line added">- Prior allogeneic hematopoietic stem cell transplantation</div>
+<div class="line added">- Diffusing capacity for carbon monoxide (DLCO) &lt; 50% predicted</div>
+<div class="line added">- Left ventricular ejection fraction &lt; 50% (evaluated by echocardiogram or MUGA)</div>
+<div class="line added">- Aspartate aminotransferase (AST) and/or alanine aminotransferase (ALT) &gt; 2.5 × upper limit of normal (CTCAE grade 2)</div>
+<div class="line added">- Bilirubin &gt; 1.5 × upper limit of normal (CTCAE grade 2)</div>
+<div class="line added">- Creatinine clearance &lt; 50 ml/min (calculated or measured)</div>
+<div class="line added">- Positive pregnancy test or breastfeeding of patient or donor (women of childbearing age only)</div>
+<div class="line added">- Estimated probability of surviving less than 3 months</div>
+<div class="line added">- Known allergy to any of the components of ATIR101 (e.g., dimethyl sulfoxide)</div>
+<div class="line added">- Known hypersensitivity to cyclophosphamide or any of its metabolites</div>
+<div class="line added">- Known presence of HLA antibodies against the non-shared donor haplotype</div>
+<div class="line added">- Positive human immunodeficiency virus (HIV) test</div>
+<div class="line added">- Positive CMV test of the patient and negative cytomegalovirus (CMV) test of the donor</div>
+<div class="line added">- Positive viral test of the donor for HIV-1, HIV-2, hepatitis B virus (HBV), hepatitis C virus (HCV), Treponema pallidum, human T-lymphotropic virus (HTLV) 1 (if tested), HTLV-2 (if tested), West Nile virus (WNV; if tested), or Zika virus (if tested)</div>
+<div class="line added">- Any other condition that, in the opinion of the investigator, makes the patient or donor ineligible for the study</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_126.html">&larr; Sample 126</a> | <a href="index.html">Index</a> | <a href="sample_128.html">Sample 128 &rarr;</a>
+</div>
+</body>
+</html>

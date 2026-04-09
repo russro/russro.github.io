@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 43 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 43</h1>
+    <div class="meta">
+        <span>NCT: NCT02745145</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Subjects are eligible for this trial if they fulfill all of the following inclusion criteria:Female or male subjects aged between 18 and 75 years of age who provide informed written consent.Subjects fulfilling the 2013 American College of Rheumatology (ACR) &amp;#x2F;European League Against Rheumatism criteria for classification of systemic sclerosis (SSc).Disease duration of less than (&amp;lt;) 7 years from first non-Raynaud&amp;#x27;s symptom.Subjects who have been taking the same mycophenolate regimen (stable dose) in a range of 1.5 to 3 gram (g)&amp;#x2F;day of Mycophenolate mofetil (MMF) or 1080 to 2160 milligram&amp;#x2F;day (mg&amp;#x2F;day) of MPS for at least 2 months prior to the Screening Visit and continued through Day 1 of the Treatment Period, of the lung on HRCT according to central reading.According to central readings: Diffusion capacity of the lung for carbon monoxide (DLCO) greater than or equal to (&amp;gt;=) 30 percent (%) predicted, Forced vital capacity (FVC) 40% to 85% predicted, and a ratio of FVC % predicted to DLCO % predicted &amp;gt;=1.8 is acceptable if right heart catheterization within 3 months of screening revealed no pulmonary hypertension.</div>
+<div class="line deleted">If these criteria are met, then High-resolution computed tomography (HRCT) of lungs will be performed, and must show at least 5% fibrosis for subjects to be eligible.Female subjects of childbearing potential must use a highly effective method of contraception to prevent pregnancy for 4 weeks before randomization and must agree to continue to practice adequate contraception for the duration of their participation in the trial (up to the last Safety Follow-Up Visit).</div>
+<div class="line deleted">For the purposes of this trial, women of childbearing potential are defined as &amp;quot;All female subjects after puberty unless they are post-menopausal for at least 2 years or are surgically sterile.&amp;quot; Highly effective contraception is defined as 2 barrier methods (eg, female diaphragm and male condoms); or 1 barrier method with at least one of the following: spermicide, a hormonal method, or an intrauterine device.</div>
+<div class="line deleted">Note that because mycophenolate affects the metabolism of oral contraceptives and may reduce their effectiveness, women receiving mycophenolate who are using oral contraceptives for birth control should employ an additional contraceptive method (for example, male or female barrier method).Exclusion Criteria:Any condition that in the Investigator&amp;#x27;s opinion constitutes an inappropriate risk or a contraindication for participation in the trial or that could interfere with the trial objectives, conduct, or evaluation.Renal impairment (glomerular filtration rate [GFR] &amp;lt;45 mL&amp;#x2F;minute (min)&amp;#x2F;1.73 square meter (m^2) as calculated by the Modification of Diet in Renal Disease equation) calculated as follows: GFR (mL&amp;#x2F;min per 1.73 m^2) = 175*(standardized serum creatinine)^-1.154 * (age)^-0.203 * 1.212 (if black) * 0.742 (if female)Urine dipstick with &amp;gt;=3 plus protein and urine protein:creatinine ratio more than (&amp;gt;)2 mg&amp;#x2F;mg.Known diagnosis of obstructive lung disease&amp;#x2F;emphysema (Forced Expiratory Volume [FEV1]&amp;#x2F;FVC ratio &amp;lt;0.65) and&amp;#x2F;or significant emphysematous change on screening HRCT.Other clinically significant abnormalities on HRCT not attributable to scleroderma or emphysema as defined above.Known diagnosis of other significant respiratory disorders.Pulmonary hypertension that fulfills at least one of the following:Current&amp;#x2F;planned treatment with systemic therapy targeted to Pulmonary arterial hypertension (PAH) or pulmonary hypertension;History of transthoracic echocardiography showing at least one of the following: tricuspid regurgitation jet &amp;gt;2.8 m&amp;#x2F;sec, right atrial enlargement (major dimension &amp;gt;53 mm), right ventricular enlargement (mid cavity dimension &amp;gt;35 mm), moderate to severe left ventricular dysfunction;N-terminal prohormone brain natriuretic peptide &amp;gt;3*Upper limit of normal (ULN)Considered by the investigator to require initiation of systemic targeted PAH therapy.Current clinical diagnosis of another inflammatory connective tissue disease (eg, systemic lupus erythematosus, rheumatoid arthritis, ankylosing spondylitis, or dermato&amp;#x2F;polymyositis).</div>
+<div class="line deleted">Concomitant scleroderma-associated myopathy, fibromyalgia, and secondary Sjögren&amp;#x27;s are allowed.Suspected&amp;#x2F;confirmed significant aspiration within the previous 6 months, for example.viral&amp;#x2F;bacterial&amp;#x2F;fungal infectioninfection requiring hospitalizationTreatment with parenteral anti-infectives within 4 weeks prior&amp;#x2F;during Screening PeriodCompletion of oral anti-infectives within 2 weeks of ScreeningUse of oral anti-infectives during Screening PeriodVaginal candidiasisonychomycosischronically suppressed oral herpes simplex virusProphylaxis for Pneumocystis jiroveci pneumoniaHistory of&amp;#x2F;positive Human immunodeficiency virus, hepatitis C antibody and&amp;#x2F;or polymerase chain reaction or Hepatitis B surface antigen and&amp;#x2F;or hepatitis B core antibody (total and&amp;#x2F;or Immunoglobulin M) antibody at screening.History of&amp;#x2F;current diagnosis of active tuberculosis (TB), or untreated latent TB infection (LTBI).Presence of uncontrolled or New York Heart Association Class 3 or 4 congestive heart failure.History of cancer, except adequately treated (ie, no evidence of recurrence within 5 years prior screening) basal cell&amp;#x2F;squamous cell carcinomas of the skin (≤3 total in lifetime) or carcinoma in situ of the cervix.Known hypersensitivity to abituzumab DS or DP.Current smoker (incl.</div>
+<div class="line deleted">e-cigarettes) &amp;#x2F; smoking within 4 weeks of screening.Use of agents other than mycophenolate considered by the Investigator to have immunomodulating, immunosuppressive, or potential scleroderma disease-modifying properties within 2 months of screening visit is not allowed (or 5 months prior to the Screening Visit for cyclophosphamide).</div>
+<div class="line deleted">Hydroxychloroquine or chloroquine are permitted if dose has been stable for at least 4 weeks before the screening visit.Use of systemic corticosteroids above 10 mg&amp;#x2F;day prednisone equivalent within 4 weeks prior until last dose of study drug.</div>
+<div class="line deleted">Inhaled and topical corticosteroids are permitted.Use of any biologic agent within 12 weeks or 5 half-lives, whichever is longer, of screening.History of anti-CD20 B-cell depleting therapy, eg, rituximab or ocrelizumab within 6 months prior to screening visit.Use of anticoagulant or antiplatelet agent (aspirin =&amp;lt;350 mg daily is permitted).Clinically significant or predefined abnormalities in lab tests:Aspartate aminotransferase, Alanine aminotransferase or alkaline phosphatase level &amp;gt;2.5*ULN;Total bilirubin &amp;gt;1.5*ULN (other than that due to known Gilbert&amp;#x27;s disease);Hemoglobin &amp;lt;5.0 mmol&amp;#x2F;L (9 g&amp;#x2F;dL), white blood cell count &amp;lt;2.5*10^9&amp;#x2F;L, or platelets &amp;lt;100*10^9&amp;#x2F;L);International normalized ratio or partial thromboplastin time &amp;gt;2.0*ULN;Thyroid-stimulating hormone &amp;lt;0.01 or &amp;gt;=7.1 milli international units per litre (mIU&amp;#x2F;L).Inability to receive IV infusions.History of alcohol&amp;#x2F;drug abuse for 1 year prior screening.Pregnancy&amp;#x2F;breastfeeding&amp;#x2F;lactation within 3 months prior screening.History of thrombotic, thromboembolic, or abnormal bleeding events including concomitant antiphospholipid antibody syndrome.</div>
+<div class="line deleted">Subjects with known lupus anticoagulant and&amp;#x2F;or anticardiolipin and&amp;#x2F;or anti-b2 glycoprotein antibodies alone should not be excluded.Legal incapacity&amp;#x2F;limited legal capacity.Receipt&amp;#x2F;planned live&amp;#x2F;attenuated vaccination within 12 weeks prior screening until 3 months after last dose of study drug.</div>
+<div class="line deleted">Seasonal influenza vaccination with inactivated vaccine formulation is permitted.Major surgery requiring hospitalization within 4 weeks prior screening, planned major surgery for the duration of the trial.</div>
+<div class="line deleted">Subjects with lung resection.History of&amp;#x2F;planned major organ or hematopoietic stem cell&amp;#x2F;marrow transplant.Severe gastrointestinal disease requiring parenteral nutrition.</div>
+<div class="line deleted">Other protocol defined exclusion criteria could apply.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">159/159</div>
+<div class="line added"></div>
+<div class="line added">**Final Answer**</div>
+<div class="line added">The modified eligibility criteria for the IL-13/IL-24 trial are as follows, incorporating the amendment to the study protocol:</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Inclusion Criteria**:</div>
+<div class="line added">- All previously stated inclusion criteria remain unchanged.</div>
+<div class="line added">- **Additional Eligibility**:</div>
+<div class="line added">- Exclude subjects with a history of prior anti-CD20 B cell depletion or anti-CD22 B cell depletion.</div>
+<div class="line added">- Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (corrected to exclude anti-CD22 B cell depletion twice).</div>
+<div class="line added">- Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (redundant, as it&#x27;s the same condition).</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Exclusion Criteria**:</div>
+<div class="line added">- All previously stated exclusion criteria remain unchanged.</div>
+<div class="line added">- **Additional Exclusions**:</div>
+<div class="line added">- Exclude subjects with a history of anti-CD20 B cell depletion or anti-CD22 B cell depletion.</div>
+<div class="line added">- Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (redundant, as it&#x27;s the same condition).</div>
+<div class="line added">- Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (redundant, as it&#x27;s the same condition).</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Other Changes**:</div>
+<div class="line added">- The trial period for the double-blind treatment has been extended to 12 weeks from 10 weeks.</div>
+<div class="line added">- The last visit for safety follow-up is extended to 104 weeks from 96 weeks.</div>
+<div class="line added">- The last visit for survival follow-up remains unchanged at 120 weeks.</div>
+<div class="line added"></div>
+<div class="line added">4.</div>
+<div class="line added">**Pharmacokinetic Sampling**:</div>
+<div class="line added">- Rich PK sampling is performed only for subjects who have received at least one dose of abituzumab.</div>
+<div class="line added">- PK sampling is performed at baseline for subjects who have not received abituzumab.</div>
+<div class="line added"></div>
+<div class="line added">5.</div>
+<div class="line added">**Adverse Events**:</div>
+<div class="line added">- Adverse events are monitored and documented, with a focus on those related to the study drug.</div>
+<div class="line added"></div>
+<div class="line added">6.</div>
+<div class="line added">**Randomization and Blinding**:</div>
+<div class="line added">- Randomization is stratified by baseline FVC% predicted and duration of prior mycophenolate use at baseline.</div>
+<div class="line added">- The trial is conducted in permuted blocks, with stratification factors including baseline FVC% predicted and duration of prior mycophenolate use at baseline.</div>
+<div class="line added"></div>
+<div class="line added">7.</div>
+<div class="line added">**Monitoring and Data Collection**:</div>
+<div class="line added">- The primary endpoint is the change in 12-week predicted mRSS.</div>
+<div class="line added">- Secondary endpoints include overall efficacy, safety, and other efficacy and safety endpoints.</div>
+<div class="line added">- Data collection includes detailed adverse event reporting and PK data.</div>
+<div class="line added"></div>
+<div class="line added">8.</div>
+<div class="line added">**Analysis**:</div>
+<div class="line added">- The primary analysis focuses on the change in predicted mRSS at 12 weeks.</div>
+<div class="line added">- Secondary analyses include overall efficacy, safety, and other efficacy and safety endpoints.</div>
+<div class="line added"></div>
+<div class="line added">9.</div>
+<div class="line added">**Operational Adjustments**:</div>
+<div class="line added">- The sponsor&#x27;s protocol lead has been amended to reflect the new criteria and procedures.</div>
+<div class="line added">- The final date for the last visit for safety follow-up is extended to 104 weeks.</div>
+<div class="line added"></div>
+<div class="line added">10.</div>
+<div class="line added">**Reporting**:</div>
+<div class="line added">- The sponsor is responsible for compiling and submitting the final results to the FDA and EMA within the specified timeframe.</div>
+<div class="line added"></div>
+<div class="line added">These modifications ensure that the trial adheres to the updated criteria and incorporates the necessary amendments to the study protocol.</div>
+<div class="line added">&lt;/think&gt;</div>
+<div class="line added"></div>
+<div class="line added">The modified eligibility criteria for the IL-13/IL-24 ILSSC-ILD EmGluconide Trial have been updated to incorporate the changes from the IL-13/IL-24 Amendment to the study protocol.</div>
+<div class="line added">The key updates include:</div>
+<div class="line added"></div>
+<div class="line added">1.</div>
+<div class="line added">**Inclusion Criteria**:</div>
+<div class="line added">- **Additional Eligibility**: Exclude subjects with a history of anti-CD20 B cell depletion or anti-CD22 B cell depletion.</div>
+<div class="line added">Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (redundant, as it&#x27;s the same condition).</div>
+<div class="line added"></div>
+<div class="line added">2.</div>
+<div class="line added">**Exclusion Criteria**:</div>
+<div class="line added">- **Additional Exclusions**: Exclude subjects with a history of anti-CD20 B cell depletion or anti-CD22 B cell depletion.</div>
+<div class="line added">Exclude subjects with a history of anti-CD22 B cell depletion or anti-CD22 B cell depletion (redundant, as it&#x27;s the same condition).</div>
+<div class="line added"></div>
+<div class="line added">3.</div>
+<div class="line added">**Pharmacokinetic Sampling**:</div>
+<div class="line added">- Rich PK sampling is performed only for subjects who have received at least one dose of abituzumab.</div>
+<div class="line added">Routine hematology, clinical chemistry, and urinalysis are performed at baseline for subjects who have not received abituzumab.</div>
+<div class="line added"></div>
+<div class="line added">4.</div>
+<div class="line added">**Pharmacodynamics**:</div>
+<div class="line added">- The trial period for the double-blind treatment has been extended to 12 weeks from 10 weeks.</div>
+<div class="line added">The last visit for safety follow-up is extended to 104 weeks from 96 weeks.</div>
+<div class="line added">The last visit for survival follow-up remains unchanged at 120 weeks.</div>
+<div class="line added"></div>
+<div class="line added">5.</div>
+<div class="line added">**Randomization and Stratification**:</div>
+<div class="line added">- Randomization is stratified by baseline FVC% predicted and duration of prior mycophenolate use at baseline.</div>
+<div class="line added">The trial is conducted in permuted blocks, stratified by baseline FVC% predicted and duration of prior mycophenolate use at baseline.</div>
+<div class="line added"></div>
+<div class="line added">6.</div>
+<div class="line added">**Adverse Events and PK Sampling**:</div>
+<div class="line added">- Adverse events are monitored and documented.</div>
+<div class="line added">Routine hematology, clinical chemistry, and urinalysis are performed at baseline for subjects who have not received abituzumab.</div>
+<div class="line added"></div>
+<div class="line added">7.</div>
+<div class="line added">**Analysis**:</div>
+<div class="line added">- The primary endpoint is the change in 12-week predicted mRSS.</div>
+<div class="line added">Secondary endpoints include overall efficacy, safety, and other efficacy and safety endpoints.</div>
+<div class="line added"></div>
+<div class="line added">8.</div>
+<div class="line added">**Operational Adjustments**:</div>
+<div class="line added">- The sponsor&#x27;s protocol lead has been amended to reflect the new criteria and procedures.</div>
+<div class="line added">The final date for the last visit for safety follow-up is extended to 104 weeks.</div>
+<div class="line added"></div>
+<div class="line added">These modifications ensure that the trial adheres to the updated criteria and incorporates the necessary amendments to the study protocol.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_42.html">&larr; Sample 42</a> | <a href="index.html">Index</a> | <a href="sample_44.html">Sample 44 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 138 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 138</h1>
+    <div class="meta">
+        <span>NCT: NCT02570308</span>
+        <span>Model: versa-4o</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Male or female participants age ≥ 18 years of age at the time of informed consent.Ability to provide and understand written informed consent prior to any study procedures.Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).Surgically sterile participants or participants of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after last dose of study drug.Human leukocyte antigen (HLA)-A*0201 positive.ECOG Performance Status of 0 or 1 at Screening.Phase 2 will include participants with previously treated uveal melanoma in the metastatic setting.Exclusion Criteria:Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids.History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.Participants with any out-of-range laboratory values.Clinically significant cardiac disease or impaired cardiac function.Active infection requiring systemic antibiotic therapy.Known history of HIV infection.Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.Participants receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.Malignant disease, other than that being treated in this study.Any medical condition that would, in the investigator&amp;#x27;s judgment, prevent participation in the clinical study due to safety concerns, compliance with clinical study procedures or interpretation of study results.Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.Pregnant, likely to become pregnant, or lactating women.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">**Modified Eligibility Criteria (version 34):**</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Male or female patients age ≥ 18 years at the time of informed consent.</div>
+<div class="line added">2.</div>
+<div class="line added">Ability to provide and understand written informed consent prior to any study procedures.</div>
+<div class="line added">3.</div>
+<div class="line added">Histologically or cytologically confirmed diagnosis of metastatic uveal melanoma (mUM).</div>
+<div class="line added">4.</div>
+<div class="line added">Surgically sterile patients or patients of child-bearing potential who agree to use highly effective methods of contraception during study dosing and for 6 months after the last dose of study drug, consistent with Clinical Trial Facilitation Group recommendations.</div>
+<div class="line added">5.</div>
+<div class="line added">Life expectancy of &gt; 3 months as estimated by the investigator.</div>
+<div class="line added">6.</div>
+<div class="line added">Human leukocyte antigen (HLA)-A*0201 positive by central assay.</div>
+<div class="line added">7.</div>
+<div class="line added">ECOG Performance Status of 0 or 1 at Screening.</div>
+<div class="line added">8.</div>
+<div class="line added">Patients must have measurable disease according to RECIST v.1.1 criteria in the Phase 2 dose expansion cohorts.</div>
+<div class="line added">9.</div>
+<div class="line added">Phase 1 dose escalation cohorts only: any prior therapy is acceptable.</div>
+<div class="line added">10.</div>
+<div class="line added">Phase 2 dose expansion cohorts:</div>
+<div class="line added">- Cohort A: Patients will have experienced disease progression with 1 systemic treatment regimen containing a checkpoint inhibitor, including either a CTLA4 inhibitor (ipilimumab or tremelimumab) and/or a PD-1/PD-L1 inhibitor.</div>
+<div class="line added">Any prior liver-directed therapy (LDT) is acceptable in this cohort.</div>
+<div class="line added">- Cohort B: Patients will have experienced disease progression with 1 or 2 prior lines of therapy in the metastatic or advanced setting including chemotherapy, immunotherapy, or targeted therapy.</div>
+<div class="line added">Only a single line of local LDT is allowed.</div>
+<div class="line added">Prior checkpoint inhibitor therapy is acceptable but not required in this cohort.</div>
+<div class="line added">11.</div>
+<div class="line added">All other relevant medical conditions must be well-managed and stable, in the opinion of the investigator, for at least 28 days prior to first administration of study drug.</div>
+<div class="line added"></div>
+<div class="line added">**Exclusion Criteria:**</div>
+<div class="line added">1.</div>
+<div class="line added">Presence of symptomatic or untreated central nervous system (CNS) metastases, or CNS metastases that require doses of corticosteroids within the prior 3 weeks to Study Day 1.</div>
+<div class="line added">Asymptomatic and adequately treated CNS metastases are not exclusionary.</div>
+<div class="line added">2.</div>
+<div class="line added">History of severe hypersensitivity reactions to other biologic drugs or monoclonal antibodies.</div>
+<div class="line added">3.</div>
+<div class="line added">Patient with any out-of-range laboratory values defined as:</div>
+<div class="line added">- Serum creatinine &gt; 1.5 x upper limit of normal (ULN) and/or creatinine clearance &lt; 60 mL/min.</div>
+<div class="line added">- Total bilirubin &gt; 1.5 x ULN, except for patients with Gilbert’s syndrome who are excluded if total bilirubin &gt; 3.0 x ULN or direct bilirubin &gt; 1.5 x ULN.</div>
+<div class="line added">- Alanine aminotransferase (ALT) &gt; 3 x ULN.</div>
+<div class="line added">- Aspartate aminotransferase (AST) &gt; 3 x ULN.</div>
+<div class="line added">- Absolute neutrophil count &lt; 1.5 x 10^9/L.</div>
+<div class="line added">4.</div>
+<div class="line added">Phase 1 dose escalation only: Presence of high tumor burden, defined as liver replacement of &gt; 60% hepatic organ volume with tumor.</div>
+<div class="line added">5.</div>
+<div class="line added">Clinically significant cardiac disease or impaired cardiac function, including any of the following:</div>
+<div class="line added">- Clinically significant and/or uncontrolled heart disease such as congestive heart failure (New York Heart Association grade ≥ 2), uncontrolled hypertension, or clinically significant arrhythmia currently requiring medical treatment.</div>
+<div class="line added">- QTc &gt; 470 msec on screening electrocardiogram (ECG) or congenital long QT syndrome.</div>
+<div class="line added">- Acute myocardial infarction or unstable angina pectoris &lt; 3 months prior to study entry.</div>
+<div class="line added">6.</div>
+<div class="line added">Active infection requiring systemic antibiotic therapy.</div>
+<div class="line added">7.</div>
+<div class="line added">Known history of HIV infection.</div>
+<div class="line added">8.</div>
+<div class="line added">Active hepatitis B virus (HBV) or hepatitis C virus (HCV) infection per institutional protocol.</div>
+<div class="line added">Screening for HIV and Hepatitis B and C will be done if required by local regulations.</div>
+<div class="line added">9.</div>
+<div class="line added">Patients receiving systemic treatment with systemic steroid therapy or any other immunosuppressive medication at any dose level that would interfere with the action of the study drugs in the opinion of the investigator.</div>
+<div class="line added">10.</div>
+<div class="line added">Malignant disease, other than that being treated in this study.</div>
+<div class="line added">11.</div>
+<div class="line added">Any medical condition that would, in the investigator&#x27;s judgment, prevent the patient&#x27;s participation in the clinical study due to safety concerns, compliance with clinical study procedures, or interpretation of study results.</div>
+<div class="line added">12.</div>
+<div class="line added">Presence of NCI CTCAE ≥ grade 2 toxicity (except alopecia, peripheral neuropathy, and ototoxicity, which are excluded if ≥ NCI CTCAE grade 3) due to prior cancer therapy.</div>
+<div class="line added">13.</div>
+<div class="line added">Pregnant, likely to become pregnant, or lactating women.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_137.html">&larr; Sample 137</a> | <a href="index.html">Index</a> | <a href="sample_139.html">Sample 139 &rarr;</a>
+</div>
+</body>
+</html>

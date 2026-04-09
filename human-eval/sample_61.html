@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 61 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 61</h1>
+    <div class="meta">
+        <span>NCT: NCT05156073</span>
+        <span>Model: local-qwen-0_5b</span>
+        <span>RAG: rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:This study has two cohorts: A Mild Cognitive Impairment (MCI)&amp;#x2F;Dementia cohort and a non-dementia cohort.MCI&amp;#x2F;Dementia cohort:Age 65 or greaterDiagnosis of MCI or dementia from International Classification of Diseases ICD-9 and ICD-10 codesAt least one other chronic conditionFive or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit)Non-dementia cohort:Age 75 or olderNo MCI or dementia diagnosisAt least two chronic conditions documented5 or more chronic medications (to include all prescription and over-the-counter medications, both scheduled and as needed)Have a primary care physician at the pilot clinic who has enrolled in the studyHave a routine, scheduled visit with a primary care physician during the pilot study period (not an urgent, acute or pre-op visit).Care partners:Family or other companions age 21 years or greater who regularly help the patient with managing medicationsThe patient can identify a care partner who assists with medication management to complete the enrollment dyad.Patient or care partner must be able to hear well enough to participate in interviews on the telephone.Patient agrees to answer &amp;quot;Older Adult Screening Questions&amp;quot; as detailed on the Patient Screening Script.Patient&amp;#x27;s care partner must be willing to participate in the study with the patient and answer the FCMAHS at the baseline visit and at the 3-month visit.Primary care physicians:• All primary care physicians at the pilot site will be included.Exclusion Criteria:Patient&amp;#x2F;Care partner dyads:Individuals residing in long term care facilities or enrolled in hospice care at baseline will be excluded.The patient does not have a care partner that assists with medication management.The patient takes 4 or fewer different medications for all his&amp;#x2F;her health needsThe patient declines to identify his&amp;#x2F;her care partnerFor the MCI&amp;#x2F;Dementia cohort: Answers all memory questions correctly, thus receiving a score of &amp;quot;0&amp;quot; for the screening assessmentIf the patient has a designated Legal Authorized Representative (LAR) but the patient&amp;#x27;s LAR is unreachable or declines to have the patient involved in the study.The care partner declines to participate in the study as part of the patient&amp;#x2F;care partner dyad.Primary care physicians:• Physicians who only provide urgent care will be excluded.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">**Eligibility Criteria for the Pilot Trial**</div>
+<div class="line added"></div>
+<div class="line added">### **1.</div>
+<div class="line added">Patient and Care Partner Dyad**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Eligibility Criteria**</div>
+<div class="line added">- **Age**: 65 or older.</div>
+<div class="line added">- **Diagnosis**: MCI or dementia from ICD-9 and ICD-10 codes.</div>
+<div class="line added">- **Chronic Conditions**: At least one other chronic condition documented on the problem list.</div>
+<div class="line added">- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.</div>
+<div class="line added">- **Primary Care Physician**: At the pilot clinic.</div>
+<div class="line added">- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.</div>
+<div class="line added">- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Eligibility Criteria for the MCI/Dementia Cohort**</div>
+<div class="line added">- **Age**: 65 or older.</div>
+<div class="line added">- **Diagnosis**: MCI or dementia from ICD-9 and ICD-10 codes.</div>
+<div class="line added">- **Chronic Conditions**: At least one other chronic condition documented on the problem list.</div>
+<div class="line added">- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.</div>
+<div class="line added">- **Primary Care Physician**: At the pilot clinic.</div>
+<div class="line added">- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.</div>
+<div class="line added">- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.</div>
+<div class="line added"></div>
+<div class="line added">#### **c.</div>
+<div class="line added">Eligibility Criteria for the Non-Dementia Cohort**</div>
+<div class="line added">- **Age**: 75 or older.</div>
+<div class="line added">- **No MCI or dementia diagnosis**.</div>
+<div class="line added">- **Chronic Conditions**: At least two chronic conditions documented on the problem list.</div>
+<div class="line added">- **Medication List**: Documentation of all prescriptions and over-the-counter medications, both scheduled and as needed.</div>
+<div class="line added">- **Primary Care Physician**: At the pilot clinic.</div>
+<div class="line added">- **Routine Visit**: Scheduled visit with a primary care physician during the pilot study period.</div>
+<div class="line added">- **Care Partners**: Family or other companions age 21 years or older who regularly help the patient with managing medications.</div>
+<div class="line added"></div>
+<div class="line added">### **2.</div>
+<div class="line added">Drug/ Substance/ Device**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Rationale for Choosing the Drug and Dose**</div>
+<div class="line added">- **FDA Approved Drugs**: Only selected for non-FDA approved indications or if doses or routes of administration or participant populations are changed.</div>
+<div class="line added">- **Non-FDA Approved Indications**: Not available for FDA approval.</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Justification and Safety Information**</div>
+<div class="line added">- **Indications**: Non-FDA approved indications.</div>
+<div class="line added">- **Dosages**: Based on clinical guidelines and patient preference.</div>
+<div class="line added">- **Routes of Administration**: Oral, intravenous, subcutaneous, etc.</div>
+<div class="line added">- **Participant Populations**: Long-term care facilities or hospice care at baseline.</div>
+<div class="line added"></div>
+<div class="line added">### **3.</div>
+<div class="line added">Study Statistics**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Primary Outcome Variable**</div>
+<div class="line added">- **Feasibility and Acceptability of the Interventions Among Patients, Care Partners, Clinicians**</div>
+<div class="line added">- **Secondary Outcomes Variables**</div>
+<div class="line added">- Proportion of patients who deprescribe 1+ medicine</div>
+<div class="line added">- Proportion of patients who add 1+ new medicine</div>
+<div class="line added">- Clinical documentation of deprescribing</div>
+<div class="line added">- Clinical documentation of a discussion about medication appropriateness, safety or effectiveness (yes/possible vs.</div>
+<div class="line added">no/absent)</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Secondary Outcomes Variables**</div>
+<div class="line added">- **Prevalence of Deprescribing**</div>
+<div class="line added">- **Proportion of Patients Who Add New Medicines**</div>
+<div class="line added">- **Clinical Documentation of Deprescribing**</div>
+<div class="line added">- **Discussion about Medication Appropriateness, Safety, or Effectiveness**</div>
+<div class="line added"></div>
+<div class="line added">### **4.</div>
+<div class="line added">Risks**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Medical Risks**</div>
+<div class="line added">- **Procedure Details**: Detailed list of procedures, major and minor risks, and expected frequency.</div>
+<div class="line added">- **Steps Taken to Minimize Risks**: Emphasis on shared-decision-making between patients, care partners, and their primary care physician.</div>
+<div class="line added">- **Plan for Reporting Unanticipated Problems**: Immediate reporting to the Principal Investigator (Dr.</div>
+<div class="line added">Green).</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Steps Taken to Minimize Risks**</div>
+<div class="line added">- **Emphasis on Shared-Decision-Making Between Patients, Care Partners, and Their Primary Care Physician**</div>
+<div class="line added">- **Patient-Centered Education**: Encouraging dialogue about medication management.</div>
+<div class="line added">- **Use of Language and Approaches for Discussing Deprescribing**: Recommended by patients and care partners.</div>
+<div class="line added"></div>
+<div class="line added">#### **c.</div>
+<div class="line added">Plan for Reporting Unanticipated Problems or Study Deviations**</div>
+<div class="line added">- **Introduction of Gift Cards**: $25 gift cards for participating in the 45-60 minute debriefing interview.</div>
+<div class="line added">- **Clinicians, Residents, and Medical Assistants**: $25 gift cards for participating in the 30-45 minute debriefing interviews.</div>
+<div class="line added"></div>
+<div class="line added">#### **d.</div>
+<div class="line added">Legal Risks**</div>
+<div class="line added">- **Risk of Breach of Confidentiality**: Small risk of breach of confidentiality.</div>
+<div class="line added"></div>
+<div class="line added">### **5.</div>
+<div class="line added">Benefits**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Probable Benefits for the Participant and Society**</div>
+<div class="line added">- **Patient-Centered, Clinician-Guided Deprescribing**: Safe and effective method for older patients.</div>
+<div class="line added">- **Improved Outcomes for Older Individuals with Cognitive Impairment**: Taking more medications is associated with greater risk of adverse drug events, drug interactions, treatment burden, and cognitive changes from medication side effects.</div>
+<div class="line added">- **Educational Brochure**: Provides information on optimal medication management and increases patient/care partner engagement in deprescribing.</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Potential Benefits for Society**</div>
+<div class="line added">- **Improvement in Health Outcomes**: Improved health outcomes for older individuals with cognitive impairment.</div>
+<div class="line added">- **Enhanced Quality of Life**: Increased quality of life for patients with cognitive impairment and MCC.</div>
+<div class="line added">- **Reduced Healthcare Costs**: Reduced healthcare costs for patients with cognitive impairment and MCC.</div>
+<div class="line added"></div>
+<div class="line added">### **6.</div>
+<div class="line added">Payment and Remuneration**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol**</div>
+<div class="line added">- **Participants**: $25 gift card for participating in the 45-60 minute debriefing interview.</div>
+<div class="line added">- **Clinicians, Residents, and Medical Assistants**: $25 gift card for participating in the 30-45 minute debriefing interviews.</div>
+<div class="line added"></div>
+<div class="line added">### **7.</div>
+<div class="line added">Costs**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Cost of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**</div>
+<div class="line added">- **No Cost to Participants**.</div>
+<div class="line added"></div>
+<div class="line added">### **8.</div>
+<div class="line added">Costs**</div>
+<div class="line added"></div>
+<div class="line added">#### **b.</div>
+<div class="line added">Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**</div>
+<div class="line added">- **No Cost to Participants**.</div>
+<div class="line added"></div>
+<div class="line added">### **9.</div>
+<div class="line added">Costs**</div>
+<div class="line added"></div>
+<div class="line added">#### **c.</div>
+<div class="line added">Costs of Study Procedure(s) or Drug (s) or Substance(s) to Participants and Identify Who Will Pay for Them**</div>
+<div class="line added">- **No Cost to Participants**.</div>
+<div class="line added"></div>
+<div class="line added">### **10.</div>
+<div class="line added">Payments and Remuneration**</div>
+<div class="line added"></div>
+<div class="line added">#### **a.</div>
+<div class="line added">Detail Compensation for Participants Including Possible Total Compensation, Proposed Bonus, and Any Proposed Reductions or Penalties for Not Completing the Protocol**</div>
+<div class="line added">- **Participants**: $25 gift card for participating in the 45-60 minute debriefing interview.</div>
+<div class="line added">- **Clinicians, Residents, and Medical Assistants**: $25 gift card for participating in the 30-45 minute debriefing interviews.</div>
+<div class="line added"></div>
+<div class="line added">This revised eligibility criteria incorporates the evidence provided, ensuring clinical accuracy and relevance while adhering to the original version.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_60.html">&larr; Sample 60</a> | <a href="index.html">Index</a> | <a href="sample_62.html">Sample 62 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 58 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 58</h1>
+    <div class="meta">
+        <span>NCT: NCT02730169</span>
+        <span>Model: local-longctx-7b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Adult male subject aged 18 to 65 years inclusiveBMI &amp;gt; 30 kg&amp;#x2F;m2 and &amp;lt; 50 kg&amp;#x2F;m2Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normalOestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunctionExclusion Criteria:Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessmentsOther types of hypogonadotropic hypogonadism or primary hypogonadismAny other pituitary or hypothalamic disease</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">Week 21).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 10 (Week 24).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 11 (Week 24).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 12 (Week 24).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 13 (FU Visit 8).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 14 (FU Visit 10).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 15 (FU Visit 12).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 16 (FU Visit 16).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 17 (FU Visit 18).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 18 (FU Visit 20).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 19 (FU Visit 22).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 20 (FU Visit 24).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">Visit 21 (EOT).</div>
+<div class="line added">Pre-dose and 1h post-dose.</div>
+<div class="line added">11.4.1 PK Parameters Assessed Plasma concentrations of BGS649 will be measured using standardised methods.</div>
+<div class="line added">The primary PK parameters are: 1.</div>
+<div class="line added">Total plasma concentration 2.</div>
+<div class="line added">Bioavailable testosterone (BhT) 3.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 4.</div>
+<div class="line added">Percentage unchanged serum (PUS) 5.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 6.</div>
+<div class="line added">Percentage unchanged serum (PUS) 7.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 8.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 9.</div>
+<div class="line added">Percentage unchanged serum (PUS) 10.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 11.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 12.</div>
+<div class="line added">Percentage unchanged serum (PUS) 13.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 13.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 14.</div>
+<div class="line added">Percentage unchanged serum (PUS) 15.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 16.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 17.</div>
+<div class="line added">Percentage unchanged serum (PUS) 17.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 18.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 19.</div>
+<div class="line added">Percentage unchanged serum (PUS) 20.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 21.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 22.</div>
+<div class="line added">Percentage unchanged serum (PUS) 23.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 24.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 25.</div>
+<div class="line added">Percentage unchanged serum (PUS) 26.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 27.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 28.</div>
+<div class="line added">Percentage unchanged serum (PUS) 29.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 30.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 31.</div>
+<div class="line added">Percentage unchanged serum (PUS) 32.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 33.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 34.</div>
+<div class="line added">Percentage unchanged serum (PUS) 35.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 36.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 37.</div>
+<div class="line added">Percentage unchanged serum (PUS) 38.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 39.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 40.</div>
+<div class="line added">Percentage unchanged serum (PUS) 41.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 42.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 43.</div>
+<div class="line added">Percentage unchanged serum (PUS) 44.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 45.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 46.</div>
+<div class="line added">Percentage unchanged serum (PUS) 47.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 48.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 49.</div>
+<div class="line added">Percentage unchanged serum (PUS) 50.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 51.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 52.</div>
+<div class="line added">Percentage unchanged serum (PUS) 53.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 54.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 55.</div>
+<div class="line added">Percentage unchanged serum (PUS) 56.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 57.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 58.</div>
+<div class="line added">Percentage unchanged serum (PUS) 59.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 60.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 61.</div>
+<div class="line added">Percentage unchanged serum (PUS) 62.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 63.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 64.</div>
+<div class="line added">Percentage unchanged serum (PUS) 65.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 66.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 67.</div>
+<div class="line added">Percentage unchanged serum (PUS) 68.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 69.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 70.</div>
+<div class="line added">Percentage unchanged serum (PUS) 71.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 72.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 73.</div>
+<div class="line added">Percentage unchanged serum (PUS) 74.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 75.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 76.</div>
+<div class="line added">Percentage unchanged serum (PUS) 77.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 78.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 79.</div>
+<div class="line added">Percentage unchanged serum (PUS) 80.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 81.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 82.</div>
+<div class="line added">Percentage unchanged serum (PUS) 83.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 84.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 85.</div>
+<div class="line added">Percentage unchanged serum (PUS) 86.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 87.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 88.</div>
+<div class="line added">Percentage unchanged serum (PUS) 89.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 90.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 91.</div>
+<div class="line added">Percentage unchanged serum (PUS) 92.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 93.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 94.</div>
+<div class="line added">Percentage unchanged serum (PUS) 95.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 96.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 97.</div>
+<div class="line added">Percentage unchanged serum (PUS) 98.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 99.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 100.</div>
+<div class="line added">Percentage unchanged serum (PUS) 101.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 102.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 103.</div>
+<div class="line added">Percentage unchanged serum (PUS) 104.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 105.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 106.</div>
+<div class="line added">Percentage unchanged serum (PUS) 107.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 108.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 109.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1010.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1011.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1012.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1013.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1014.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1015.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1016.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1017.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1018.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1019.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1020.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1021.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1022.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1023.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1024.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1025.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1026.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1027.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1028.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1029.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1030.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1031.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1032.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1033.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1034.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1035.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1036.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1037.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1038.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1039.</div>
+<div class="line added">Percentage unchanged serum (PUS) 1040.</div>
+<div class="line added">Percentage unchanged plasma (PUP) 1041.</div>
+<div class="line added">Percentage unchanged plasma and serum (PUPS) 1042.</div>
+<div class="line added">Percentage unchanged serum (PUS)</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_57.html">&larr; Sample 57</a> | <a href="index.html">Index</a> | <a href="sample_59.html">Sample 59 &rarr;</a>
+</div>
+</body>
+</html>

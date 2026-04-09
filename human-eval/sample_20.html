@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 20 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 20</h1>
+    <div class="meta">
+        <span>NCT: NCT02730169</span>
+        <span>Model: local-gemma2-2b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">Inclusion Criteria:Adult male subject aged 18 to 65 years inclusiveBMI &amp;gt; 30 kg&amp;#x2F;m2 and &amp;lt; 50 kg&amp;#x2F;m2Serum total testosterone concentration below the normal rangeLH levels below the upper limit of normalOestradiol levels within or above the normal range of approved assayAt least two symptoms of androgen deficiency present for at least 2 months prior to the first Screening Visit, with at least one of these being a sexual dysfunctionExclusion Criteria:Evidence of clinically significant endocrinopathy at screening that may interfere with the study assessmentsOther types of hypogonadotropic hypogonadism or primary hypogonadismAny other pituitary or hypothalamic disease</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">##  Modified Eligibility Criteria for Clinical Trial Version 10</div>
+<div class="line added"></div>
+<div class="line added">**Inclusion Criteria:**</div>
+<div class="line added"></div>
+<div class="line added">* **Age:** Adult male, aged 18 to 65 years inclusive.</div>
+<div class="line added">* **BMI:**  BMI &gt; 30 kg/m2</div>
+<div class="line added">* **HbA1c:** HbA1c ≤ 10.5% at Screening.</div>
+<div class="line added">* **Type 2 Diabetes:**</div>
+<div class="line added">* HbA1c ≤ 10.5% at Screening.</div>
+<div class="line added">* Anti-diabetic medication regimen (excluding insulin) has been stable for ≥ 8 weeks before the first Screening visit.</div>
+<div class="line added">* **Other Exclusion Criteria:**</div>
+<div class="line added">*  History of monoclonal antibodies, insulin, or other medications known to affect sex hormone production within the 4 weeks prior to the first Screening Visit.</div>
+<div class="line added">*  Weight loss or weight gain (gain or loss &gt; 5% body weight) OR weight reduction surgery or procedure within the 3 months prior to first Screening Visit.</div>
+<div class="line added">*  Participation in any clinical trial using clinical investigational product intervention within 3 months before first Screening Visit or 5 half-lives of investigational product administration, whichever is longer.</div>
+<div class="line added">*  Medical history of Long QT syndrome.</div>
+<div class="line added">*  History of thromboembolic disease.</div>
+<div class="line added">*  Grade ≥3 lower extremity oedema.</div>
+<div class="line added">*  Use of cardiac pacemaker or other medical electronic devices that can be affected by bioimpedance assessment.</div>
+<div class="line added">*  Medical diagnosis of any of the following cardiovascular conditions within the 6 months prior to first Screening Visit:</div>
+<div class="line added">* Myocardial infarction or unstable angina.</div>
+<div class="line added">* Coronary artery bypass surgery, balloon angioplasty, percutaneous coronary intervention or carotid revascularisation procedure.</div>
+<div class="line added">* Uncontrolled hypertension within the 3 months prior to first Screening Visit.</div>
+<div class="line added">* Significant cardiac arrhythmia (as determined by the investigator).</div>
+<div class="line added">* Endovascular procedure or surgical intervention for peripheral vascular disease within the 3 months prior to first Screening Visit.</div>
+<div class="line added">* Advanced ischemic heart disease.</div>
+<div class="line added"></div>
+<div class="line added">**Note:**  The specific inclusion and exclusion criteria may vary depending on the version of the protocol.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_19.html">&larr; Sample 19</a> | <a href="index.html">Index</a> | <a href="sample_21.html">Sample 21 &rarr;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample 38 — Human Eval Diff</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 12px; }
+.header { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header h1 { font-size: 1.2em; margin-bottom: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; color: #666; }
+.meta span { background: #eef; padding: 2px 8px; border-radius: 4px; }
+.diff-container { display: flex; gap: 8px; }
+.diff-panel { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-x: auto; }
+.diff-panel h2 { font-size: 0.95em; color: #555; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.line { padding: 3px 6px; margin: 2px 0; border-radius: 3px; font-size: 0.85em; line-height: 1.4; word-wrap: break-word; }
+.unchanged { background: #f8f8f8; color: #555; }
+.deleted { background: #fdd; color: #900; }
+.added { background: #dfd; color: #060; }
+.spacer { background: #f0f0f0; min-height: 4px; }
+.nav { text-align: center; margin-top: 12px; font-size: 0.85em; }
+.nav a { color: #0066cc; text-decoration: none; margin: 0 8px; }
+.nav a:hover { text-decoration: underline; }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: 0.8em; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+@media (max-width: 768px) {
+    .diff-container { flex-direction: column; }
+    .line { font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Sample 38</h1>
+    <div class="meta">
+        <span>NCT: NCT02317887</span>
+        <span>Model: local-gemma2-9b</span>
+        <span>RAG: no_rag</span>
+    </div>
+    <div class="legend">
+        <span class="deleted">Deleted (in GT only)</span>
+        <span class="added">Added (in prediction only)</span>
+        <span class="unchanged">Unchanged</span>
+    </div>
+</div>
+<div class="diff-container">
+    <div class="diff-panel">
+        <h2>Ground Truth</h2>
+        <div class="line deleted">INCLUSION CRITERIA:Participant is male with a mutation in the RS1 gene identified by genotyping.Participant must be 18 years of age or older.Participant must be able to understand and sign the informed consent.Participant must be medically able to comply with the study treatment, study testing and procedures and follow-up visits.Participant has at least one eye that meets the study eye criteria listed below.Participant must agree to use effective barrier (male or female condom) of contraception starting two weeks before and continuing one year after gene transfer.If the participant&amp;#x27;s partner is able to become pregnant, a second form of effective contraception will be required starting two weeks before and continuing one year after gene transfer.Effective methods of contraception for this study include:hormonal contraception (birth control pills, injected hormones or vaginal ring),intrauterine device,barrier methods (condom or diaphragm) combined with spermicide,surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy).EXCLUSION CRITERIA:Participant is actively receiving another study medication&amp;#x2F;investigational product (IP).Participant has previously enrolled in another gene therapy trial.Participant is currently taking, or has taken in the last three months, a systemic carbonic anhydrase inhibitor prior to enrollment&amp;#x2F;baseline 1 testing.Participant has any condition that significantly increases risk of systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).Participant has an underlying serious illness that impairs regular follow-up during the study.Participant has had diagnosis or treatment of a malignancy (excluding non-melanoma skin cancer) within the previous five years.Participant has pre-existing ocular tumors (excluding non-suspicious nevi).Participant has a known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.Participant is on a medication that prevents safe administration of study related drugs.Participant has uncontrolled hypertension.</div>
+<div class="line deleted">(Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)Participant has compromised renal function such that cyclosporine or Cellcept, which could be used to treat any manifest ocular inflammation, would be contraindicated.Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times upper limit of normal [ULN]).Participant has low absolute neutrophil count (ANC&amp;lt;1.3 x 10(3)&amp;#x2F;micro liters).Participant has used any biologic immunosuppressive agents within the last three months (within the last six months for rituximab or cyclophosphamide).STUDY EYE ELIGIBILITY CRITERIA:The participant must have at least one eye meeting all inclusion criteria and none of the exclusion criteria listed below.STUDY EYE INCLUSION CRITERIA:The study eye must have a best-corrected E-ETDRS visual acuity letterscore of less than or equal to 63 (i.e., worse than or equal to 20&amp;#x2F;63).</div>
+<div class="line deleted">The visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).Electroretinogram in the study eye with a scotopic combined response demonstrating a subnormal b wave, consistent with retinoschisis.STUDY EYE EXCLUSION CRITERIA:The study eye has a history of other ocular disease likely to contribute significantly to visual loss or likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).The study eye has lens, cornea, or other media opacities precluding adequate visualization and testing of the retina.The study eye has undergone intraocular surgery within six months prior to enrollment.The study eye is receiving topical carbonic anhydrase inhibitor, or has received topical carbonic anhydrase inhibitors in the past three months.STUDY EYE SELECTION CRITERIA:If both eyes of a participant meet the study eye eligibility criteria, the choice of study eye will be determined as follows:The eye with the worse visual acuity will be selected as the study eye.If both eyes have visual acuities within five letter differences of one another, the choice of study eye will be determined at the discretion of the Investigator in consultation with the participant.</div>
+    </div>
+    <div class="diff-panel">
+        <h2>Prediction</h2>
+        <div class="line added">## Amended Eligibility Criteria (Version 108)</div>
+<div class="line added"></div>
+<div class="line added">**INCLUSION CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">* Participant is male with a mutation in the RS1 gene identified by genotyping.</div>
+<div class="line added">* Participant must be 18 years of age or older.</div>
+<div class="line added">* Participant must be able to understand and sign the informed consent.</div>
+<div class="line added">* Participant must be medically able to comply with the study treatment, study testing and procedures and follow-up visits.</div>
+<div class="line added">* Participant has at least one eye that meets the study eye criteria listed below.</div>
+<div class="line added">* Participant agrees not to receive live (attenuated) vaccines prior to dosing and for some duration following dosing.</div>
+<div class="line added">* Participant agrees to use effective barrier (male or female condom) of contraception before dosing and continuing one year after gene transfer.</div>
+<div class="line added">* If the participant&#x27;s partner is able to become pregnant, a second form of effective contraception will be required before dosing and continuing one year after gene transfer.</div>
+<div class="line added">* Effective methods of contraception for this study include:</div>
+<div class="line added">* Hormonal contraception (birth control pills, injected hormones or vaginal ring)</div>
+<div class="line added">* Intrauterine device</div>
+<div class="line added">* Barrier methods (condom or diaphragm) combined with spermicide</div>
+<div class="line added">* Surgical sterilization (hysterectomy or tubal ligation in partner or vasectomy)</div>
+<div class="line added">* Participant agrees to use appropriate sun protection when on immunomodulatory agents.</div>
+<div class="line added"></div>
+<div class="line added">**EXCLUSION CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">* Participant is actively receiving another study medication/investigational product (IP).</div>
+<div class="line added">* Participant has previously enrolled in another gene therapy trial.</div>
+<div class="line added">* Participant is currently taking, or has taken in the last three months, a systemic carbonic anhydrase inhibitor prior to enrollment/baseline 1 testing.</div>
+<div class="line added">* Participant has any condition that significantly increases risk of systemic corticosteroids or systemic steroid-sparing immuno-modulatory agents, such as HIV, syphilis, tuberculosis, hepatitis B, hepatitis C, or diabetes mellitus (DM).</div>
+<div class="line added">* Participant has an underlying serious illness that impairs regular follow-up during the study.</div>
+<div class="line added">* Participant has had a diagnosis or treatment of a malignancy (excluding non-melanoma skin cancer) within the previous five years.</div>
+<div class="line added">* Participant has pre-existing ocular tumors (excluding non-suspicious nevi).</div>
+<div class="line added">* Participant has a known allergy to fluorescein dye or other contraindications to obtaining a fluorescein angiogram.</div>
+<div class="line added">* Participant is on a medication that prevents safe administration of study-related drugs.</div>
+<div class="line added">* Participant has uncontrolled hypertension.</div>
+<div class="line added">(Hypertension judged to be adequately controlled at baseline medical evaluation is not exclusionary.)</div>
+<div class="line added">* Participant has compromised renal function such that cyclosporine or cellcept would be contraindicated.</div>
+<div class="line added">* Participant has significant liver disease with elevated liver enzymes (greater than or equal to 2.5 times ULN).</div>
+<div class="line added">* Participant has a low absolute neutrophil count (ANC &lt; 1.3 x 10(3)/micro liters).</div>
+<div class="line added">* Participant has used any biologic immunosuppressive agents within the last three months (within the last six months for rituximab or cyclophosphamide).</div>
+<div class="line added"></div>
+<div class="line added">**STUDY EYE ELIGIBILITY CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">**STUDY EYE INCLUSION CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">* The study eye must have a best-corrected E-ETDRS visual acuity letter score of less than or equal to 63 (i.e., worse than or equal to 20/63).</div>
+<div class="line added">The visual acuity from the first baseline visit (Baseline 1) will be used for eligibility determination in case of a change in visual acuity at the second baseline visit (Baseline 2).</div>
+<div class="line added">* Electroretinogram in the study eye with a scotopic combined response demonstrating a subnormal b-wave, consistent with retinoschisis.</div>
+<div class="line added"></div>
+<div class="line added">**STUDY EYE EXCLUSION CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">* The study eye has a history of other ocular disease likely to contribute significantly to visual loss or likely to present special risks (e.g., optic neuropathy, advanced glaucoma, uveitis, large bullous schisis cavities or bullous retinal detachment precluding safe intravitreal injection).</div>
+<div class="line added">* The study eye has lens, cornea, or other media opacities precluding adequate visualization and testing of the retina.</div>
+<div class="line added">* The study eye has undergone intraocular surgery within six months prior to enrollment.</div>
+<div class="line added">* The study eye is receiving topical carbonic anhydrase inhibitor, or has received topical carbonic anhydrase inhibitors in the past three months.</div>
+<div class="line added"></div>
+<div class="line added">**STUDY EYE SELECTION CRITERIA:**</div>
+<div class="line added"></div>
+<div class="line added">* If both eyes of a participant meet the study eye eligibility criteria, the choice of study eye will be determined as follows:</div>
+<div class="line added">* The eye with the worse visual acuity will be selected as the study eye.</div>
+<div class="line added">* If both eyes have the same visual acuity, the choice of study eye will be determined at the discretion of the investigator in consultation with the participant.</div>
+    </div>
+</div>
+<div class="nav">
+    <a href="sample_37.html">&larr; Sample 37</a> | <a href="index.html">Index</a> | <a href="sample_39.html">Sample 39 &rarr;</a>
+</div>
+</body>
+</html>
