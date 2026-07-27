@@ -11,7 +11,7 @@ PhD student, [UC Berkeley Bioengineering](https://bioegrad.berkeley.edu/). Advis
 
 I build production ML and agentic systems for NLP, retrieval, and forecasting.
 
-Please feel free to contact me at rro [at] berkeley.edu or my [LinkedIn](https://www.linkedin.com/in/russell-ro).
+Please feel free to contact me at *rro [at] berkeley.edu* or my [LinkedIn](https://www.linkedin.com/in/russell-ro).
 
 **News:**
 
@@ -27,10 +27,6 @@ Please feel free to contact me at rro [at] berkeley.edu or my [LinkedIn](https:/
 * [ScanAlert](/publication/2019-scanalert): electronic medication adherence monitor
 * Satellite test engineering at [Amazon](https://www.aboutamazon.com/what-we-do/devices-services/project-kuiper) (Project Kuiper)
 
-**Smaller projects:**
-* jp-bot — adaptive Japanese tutoring agent; furigana suppression driven by Anki card maturity
-* [anime-staff-scraper](https://github.com/russro/anime-staff-scraper) / [allcinema-scraper](https://github.com/russro/allcinema-scraper) — anime staff-credit and filmography datasets from AniList and allcinema.net
-
 **Honors:** [NSF GRFP](https://www.nsfgrfp.org/), [Jacobs Scholar](https://jacobsschool.ucsd.edu/idea/jacobs-scholar), [Tau Beta Pi](https://www.tbp.org/), [Intel ISEF Finalist](https://www.societyforscience.org/isef/)
 
-**Contact:** rro [at] berkeley.edu \| [GitHub](https://github.com/russro) \| [LinkedIn](https://www.linkedin.com/in/russell-ro)
+**Contact:** *rro [at] berkeley.edu* \| [GitHub](https://github.com/russro) \| [LinkedIn](https://www.linkedin.com/in/russell-ro)
