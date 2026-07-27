@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-PhD student, [UC Berkeley Bioengineering](https://bioegrad.berkeley.edu/). Advised by [Reza Abbasi-Asl](https://abbasilab.org/). [NSF GRFP](https://www.nsfgrfp.org/) fellow.
+ML PhD candidate, [UC Berkeley Bioengineering](https://bioegrad.berkeley.edu/). Advised by [Reza Abbasi-Asl](https://abbasilab.org/). [NSF GRFP](https://www.nsfgrfp.org/) fellow.
 
 I build production ML and agentic systems for NLP, retrieval, and forecasting.
 
