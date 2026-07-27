@@ -5,6 +5,6 @@ excerpt: <b>2024</b><br>Testing how medical AI models fail under challenging cli
 collection: portfolio
 ---
 
-**2024** \| [arXiv: 2402.10527](https://arxiv.org/abs/2402.10527)
+**2024** \| Accepted by TMLR \| [arXiv: 2402.10527](https://arxiv.org/abs/2402.10527)
 
 Systematic methods for probing failure modes in medical AI. Perturbing clinical entities in medical text reveals vulnerabilities in models used for clinical decision support.

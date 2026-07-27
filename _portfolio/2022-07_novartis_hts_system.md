@@ -6,7 +6,7 @@ collection: portfolio
 image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
 ---
 
-**Oct 2020 – Jul 2022** \| [Novartis article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/intro)
+**Oct 2020 – Jul 2022** \| [Novartis article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/technology-for-the-heart)
 
 Designed and built an electrical stimulation system for cardiovascular drug screening on 96-well plates. Previous system only used 8 of 96 wells due to stimulator size and electrode limitations.
 

@@ -13,7 +13,9 @@ I build production ML and agentic systems for NLP, retrieval, and forecasting.
 
 Please feel free to contact me at rro [at] berkeley.edu or my [LinkedIn](https://www.linkedin.com/in/russell-ro).
 
-**News:** Our paper [RECITE: Revising Eligibility Criteria Incorporating Textual Evidence](https://github.com/abbasilab/RECITE) was accepted to **KDD 2026** (AI4Sciences track) — I'll be presenting in Jeju this August. RECITE is a benchmark for evaluating LLMs on revising clinical trial eligibility criteria using evidence from protocol amendments.
+**News:**
+
+*07/26/2026*: Our paper [RECITE: Revising Eligibility Criteria Incorporating Textual Evidence](/publication/2026-recite) was accepted to **KDD 2026** (AI4Sciences track). I'll be presenting in Jeju this August. RECITE is a benchmark for evaluating LLMs on revising clinical trial eligibility criteria using evidence from protocol amendments.
 
 **Currently building:**
 * [Evidence-guided clinical trial design](/portfolio/2025_clintrial_eligibility/) — benchmarks and retrieval systems over 500K+ clinical trials, plus large-scale studies of how eligibility criteria evolve (and whether trials adopt published recommendations)

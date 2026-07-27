@@ -5,7 +5,7 @@ excerpt: <b>2025 – present</b><br>Measuring whether clinical trials adopt publ
 collection: portfolio
 ---
 
-**2025 – present** \| Advisor: [Reza Abbasi-Asl](https://abbasilab.org/) (UCSF / UC Berkeley)
+**2025 – present** \| Advisor: [Reza Abbasi-Asl](https://abbasilab.org/) (UCSF / UC Berkeley) \| Related: [RECITE benchmark](https://github.com/abbasilab/RECITE)
 
 Measuring whether clinical trials adopt published recommendations for broadening patient eligibility across 500K+ trials. Combines automated paper discovery, recommendation extraction, trial matching, and adoption assessment.
 
