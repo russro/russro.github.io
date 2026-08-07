@@ -24,7 +24,7 @@ I research and build ML and agentic systems. Currently focused on:
 
 ### News:
 
-*07/26/2026*: Our paper [RECITE: Revising Eligibility Criteria Incorporating Textual Evidence](/publication/2026-recite) was accepted to **KDD 2026** (AI4Sciences track). I'll be presenting in Jeju this August. RECITE is a benchmark for evaluating LLMs on revising clinical trial eligibility criteria using evidence from protocol amendments.
+*07/26/2026*: Our paper [RECITE: Revising Eligibility Criteria Incorporating Textual Evidence](https://dl.acm.org/doi/10.1145/3770855.3819027) was accepted to **KDD 2026** (AI4Sciences track). I'll be presenting in Jeju this August. RECITE is a benchmark for evaluating LLMs on revising clinical trial eligibility criteria using evidence from protocol amendments.
 
 ---
 
