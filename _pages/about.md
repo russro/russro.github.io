@@ -7,6 +7,11 @@ redirect_from:
   - /about.html
 ---
 
+<div style="margin: 1.5em 0; padding: 1em 1.25em; border: 1px solid #cfe0ff; border-left: 5px solid #2e6fce; border-radius: 8px; background: #f7fbff; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+  <strong>Contact</strong><br>
+  Please feel free to contact me at <em>rro [at] berkeley.edu</em> or on <a href="https://www.linkedin.com/in/russell-ro">LinkedIn</a>.
+</div>
+
 ML researcher. PhD candidate @ [UC Berkeley Bioengineering](https://bioegrad.berkeley.edu/). Advised by [Reza Abbasi-Asl](https://abbasilab.org/). [NSF GRFP](https://www.nsfgrfp.org/) fellow.
 
 I research and build ML and agentic systems. Currently focused on:
@@ -14,11 +19,6 @@ I research and build ML and agentic systems. Currently focused on:
 * ML for clinical trial design,
 * meta-learning for multi-agent systems,
 * and deploying production-grade agentic systems for clients in ecommerce/logistics.
-
-<div style="margin: 1.5em 0; padding: 1em 1.25em; border: 1px solid #cfe0ff; border-left: 5px solid #2e6fce; border-radius: 8px; background: #f7fbff; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-  <strong>Contact</strong><br>
-  Please feel free to contact me at <em>rro [at] berkeley.edu</em> or on <a href="https://www.linkedin.com/in/russell-ro">LinkedIn</a>.
-</div>
 
 ---
 
