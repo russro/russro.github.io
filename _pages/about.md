@@ -40,4 +40,3 @@ I research and build ML and agentic systems. Currently focused on:
 
 **Honors:** [NSF GRFP](https://www.nsfgrfp.org/), [Jacobs Scholar](https://jacobsschool.ucsd.edu/idea/jacobs-scholar), [Tau Beta Pi](https://www.tbp.org/), [Intel ISEF Finalist](https://www.societyforscience.org/isef/)
 
-**Contact:** *rro [at] berkeley.edu* \| [GitHub](https://github.com/russro) \| [LinkedIn](https://www.linkedin.com/in/russell-ro)
