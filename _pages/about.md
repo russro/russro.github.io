@@ -33,8 +33,7 @@ I research and build ML and agentic systems. Currently focused on:
 ---
 
 ### Currently building:
-* [Evidence-guided clinical trial design](/portfolio/2025_clintrial_eligibility/): benchmarks and retrieval systems over 500K+ clinical trials, plus large-scale studies of how eligibility criteria evolve (and whether trials adopt published recommendations)
-* clintriaLM: an LLM pipeline for patient–trial matching and eligibility criteria analysis
+* [Evidence-guided clinical trial design](/portfolio/2025_clintrial_eligibility/): LLM pipelines and retrieval over 500K+ trials for eligibility criteria analysis and patient–trial matching, plus large-scale studies of how criteria evolve and whether trials adopt published recommendations
 * [BULLPEN](/portfolio/2026_bullpen/): multi-channel model-zoo embeddings for sample-efficient LLM profiling (under review at ICLR 2027)
 * [Multi-agent orchestration for industry and research](/portfolio/2025_agentic_workflow/): a framework of messaging-interfaced agents with multi-model routing and subagent deployment that runs my research operations day-to-day
 
