@@ -1,7 +1,7 @@
 ---
-title: "Agentic Workflow Manager"
+title: "Multi-Agent Orchestration for Industry and Research"
 year: 2025
-excerpt: <b>2025 – present</b><br>Multi-agent orchestration framework for industry and research.
+excerpt: <b>2025 – present</b><br>A framework of messaging-interfaced agents with multi-model routing and subagent deployment.
 collection: portfolio
 ---
 
