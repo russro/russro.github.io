@@ -3,7 +3,7 @@ title: "AI Platform for an E-commerce Client"
 year: 2025
 excerpt: <b>Feb – Mar 2025</b><br>One engineer + AI agents built 4 production systems in 14 days.
 collection: portfolio
-published: false
+published: true
 ---
 
 **Feb – Mar 2025**
