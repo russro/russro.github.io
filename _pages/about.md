@@ -17,7 +17,7 @@ ML researcher. PhD candidate @ [UC Berkeley Bioengineering](https://bioegrad.ber
 I research and build ML and agentic systems. Currently focused on:
 
 * agentic workflows and search/retrieval for clinical trial design,
-* LLM profiling and distillation detection across open- and closed-source models,
+* representation learning on model zoos for sample-efficient LLM profiling and model selection (distillation detection next),
 * and production agentic systems for internal operations, plus causal inference harnesses for client-facing services, as an ML Engineer (consultant).
 
 ---
