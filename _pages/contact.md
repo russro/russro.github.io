@@ -3,10 +3,7 @@ permalink: /contact/
 title: "Contact"
 author_profile: true
 ---
-Below are ways you can contact me!
 
-* Email: hirsqrd [at] gmail.com
-* Twitter: [russr0](http://twitter.com/russr0)
-* Personal Website: [russro.com](https://russro.com)
-
-Search terms: "Russell Ro email", "Russell Ro Twitter", "Russell Ro website"
+* Email: rro [at] berkeley.edu
+* LinkedIn: [russell-ro](https://www.linkedin.com/in/russell-ro)
+* GitHub: [russro](https://github.com/russro)
