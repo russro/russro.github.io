@@ -18,7 +18,7 @@ I research and build ML and agentic systems. Currently focused on:
 
 * agentic workflows and search/retrieval for clinical trial design,
 * LLM profiling and distillation detection across open- and closed-source models,
-* and production agentic systems for internal operations, plus causal inference harnesses for client-facing services, as an ML Engineer (consultant) at [FenixCommerce](https://www.fenixcommerce.com/).
+* and production agentic systems for internal operations, plus causal inference harnesses for client-facing services, as an ML Engineer (consultant).
 
 ---
 
