@@ -24,7 +24,7 @@ I research and build ML and agentic systems. Currently focused on:
 
 ### News:
 
-*10/2026*: Our paper "From the Zoo to the BULLPEN: Sample-Efficient LLM Profiling via Multi-Channel Model Embeddings" is under review at **ICLR 2027**. I'm also reviewing for ICLR 2027.
+*10/2026*: Our paper ["From the Zoo to the BULLPEN: Sample-Efficient LLM Profiling via Multi-Channel Model Embeddings"](/files/bullpen.pdf) is under review at **ICLR 2027**. I'm also reviewing for ICLR 2027.
 
 *07/26/2026*: Our paper [RECITE: Revising Eligibility Criteria Incorporating Textual Evidence](https://dl.acm.org/doi/10.1145/3770855.3819027) was accepted to **KDD 2026** (AI4Sciences track). I presented it in Jeju in August. RECITE is a benchmark for evaluating LLMs on revising clinical trial eligibility criteria using evidence from protocol amendments.
 
