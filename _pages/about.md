@@ -24,7 +24,7 @@ I research and build ML and agentic systems. Currently focused on:
 
 ### News:
 
-*10/2026*: Our paper ["From the Zoo to the BULLPEN: Sample-Efficient LLM Profiling via Multi-Channel Model Embeddings"](/files/bullpen.pdf) is under review at **ICLR 2027**.
+*10/2026*: Our paper ["From the Zoo to the BULLPEN: Sample-Efficient LLM Profiling via Multi-Channel Model Embeddings"](https://arxiv.org/abs/2610.41375) is under review at **ICLR 2027**.
 
 *10/01/2026*: I gave a talk, ["eval ∝ d: evaluating evals before they dictate deployment decisions"](/files/eval2_2026oct01.pdf), at an AI Decisioning Working Group, a small cross-disciplinary meetup of tech professionals. [Slides (PDF)](/files/eval2_2026oct01.pdf)
 
