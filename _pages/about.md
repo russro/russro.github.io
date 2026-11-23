@@ -43,7 +43,7 @@ I research and build ML and agentic systems. Currently focused on:
 * [ScanAlert](/publication/2019-scanalert): electronic medication adherence monitor
 * Satellite test engineering at [Amazon](https://www.aboutamazon.com/what-we-do/devices-services/project-kuiper) (Project Kuiper)
 
-**Honors:** [NSF GRFP](https://www.nsfgrfp.org/), [Jacobs Scholar](https://jacobsschool.ucsd.edu/idea/jacobs-scholar), [Tau Beta Pi](https://www.tbp.org/), [Intel ISEF Finalist](https://www.societyforscience.org/isef/)
+**Honors:** [NSF GRFP](https://www.nsfgrfp.org/), [Jacobs Scholar](https://jacobsschool.ucsd.edu/idea/admitted-undergraduates/jacobs-scholars), [Tau Beta Pi](https://www.tbp.org/), [Intel ISEF Finalist](https://www.societyforscience.org/isef/)
 
 ---
 
