@@ -1,12 +1,12 @@
 ---
 title: "High-Throughput Screening System @ Novartis"
 year: 2022
-excerpt: <b>Oct 2020 – Jul 2022</b><br>Designed and built a system to scale cardiovascular drug phenotyping from 8 to 96 channels.
+excerpt: <b>Oct 2020 – Jun 2022</b><br>Designed and built a system to scale cardiovascular drug phenotyping from 8 to 96 channels.
 collection: portfolio
 image: '../images/portfolio/2022-07_novartis_hts_system/scientist_expt_rig.avif'
 ---
 
-**Oct 2020 – Jul 2022** \| [Novartis article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/technology-for-the-heart)
+**Oct 2020 – Jun 2022** \| [Novartis article](https://live.novartis.com/article/how-a-drug-target-challenge-gave-rise-to-a-powerful-technology-platform/technology-for-the-heart)
 
 Designed and built an electrical stimulation system for cardiovascular drug screening on 96-well plates. Previous system only used 8 of 96 wells due to stimulator size and electrode limitations.
 
